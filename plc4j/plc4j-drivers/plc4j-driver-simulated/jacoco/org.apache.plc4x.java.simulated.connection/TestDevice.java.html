@@ -18,9 +18,15 @@
  */
 package org.apache.plc4x.java.simulated.connection;
 
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.plc4x.java.api.model.PlcSubscriptionHandle;
 import org.apache.plc4x.java.base.messages.items.BaseDefaultFieldItem;
+import org.apache.plc4x.java.base.model.InternalPlcSubscriptionHandle;
 
+import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.Consumer;
 
 /**
  * Test device storing its state in memory.
@@ -28,92 +34,167 @@ import java.util.*;
  */
 public class TestDevice {
 
-<span class="fc" id="L31">    private final Random random = new Random();</span>
-    private final String name;
-<span class="fc" id="L33">    private final Map&lt;TestField, BaseDefaultFieldItem&gt; state = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L37">    private final Random random = new Random();</span>
 
-<span class="fc" id="L35">    public TestDevice(String name) {</span>
-<span class="fc" id="L36">        this.name = name;</span>
-<span class="fc" id="L37">    }</span>
+    private final String name;
+
+<span class="fc" id="L41">    private final Map&lt;TestField, BaseDefaultFieldItem&gt; state = new HashMap&lt;&gt;();</span>
+
+<span class="fc" id="L43">    private final Map&lt;PlcSubscriptionHandle, ScheduledFuture&lt;?&gt;&gt; cyclicSubscriptions = new HashMap&lt;&gt;();</span>
+
+<span class="fc" id="L45">    private final Map&lt;PlcSubscriptionHandle, Future&lt;?&gt;&gt; eventSubscriptions = new HashMap&lt;&gt;();</span>
+
+<span class="fc" id="L47">    private final IdentityHashMap&lt;PlcSubscriptionHandle, Pair&lt;TestField, Consumer&lt;BaseDefaultFieldItem&gt;&gt;&gt; changeOfStateSubscriptions = new IdentityHashMap&lt;&gt;();</span>
+
+<span class="fc" id="L49">    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);</span>
+
+<span class="fc" id="L51">    private final ExecutorService pool = Executors.newCachedThreadPool();</span>
+
+<span class="fc" id="L53">    public TestDevice(String name) {</span>
+<span class="fc" id="L54">        this.name = name;</span>
+<span class="fc" id="L55">    }</span>
 
     public Optional&lt;BaseDefaultFieldItem&gt; get(TestField field) {
-<span class="fc" id="L40">        Objects.requireNonNull(field);</span>
-<span class="pc bpc" id="L41" title="2 of 4 branches missed.">        switch(field.getType()) {</span>
+<span class="fc" id="L58">        Objects.requireNonNull(field);</span>
+<span class="pc bpc" id="L59" title="2 of 4 branches missed.">        switch (field.getType()) {</span>
             case STATE:
-<span class="fc" id="L43">                return Optional.ofNullable(state.get(field));</span>
+<span class="fc" id="L61">                return Optional.ofNullable(state.get(field));</span>
             case RANDOM:
-<span class="fc" id="L45">                return Optional.of(randomValue(field.getDataType()));</span>
+<span class="fc" id="L63">                return Optional.of(randomValue(field.getDataType()));</span>
             case STDOUT:
-<span class="nc" id="L47">                return Optional.empty();</span>
+<span class="nc" id="L65">                return Optional.empty();</span>
         }
-<span class="nc" id="L49">        throw new IllegalArgumentException(&quot;Unsupported field type: &quot; + field.getType().name());</span>
+<span class="nc" id="L67">        throw new IllegalArgumentException(&quot;Unsupported field type: &quot; + field.getType().name());</span>
     }
 
     public void set(TestField field, BaseDefaultFieldItem value) {
-<span class="fc" id="L53">        Objects.requireNonNull(field);</span>
-<span class="pc bpc" id="L54" title="3 of 4 branches missed.">        switch (field.getType()) {</span>
+<span class="fc" id="L71">        Objects.requireNonNull(field);</span>
+<span class="pc bpc" id="L72" title="3 of 4 branches missed.">        switch (field.getType()) {</span>
             case STATE:
-<span class="fc" id="L56">                state.put(field, value);</span>
-<span class="fc" id="L57">                return;</span>
+<span class="fc" id="L74">                changeOfStateSubscriptions.values().stream()</span>
+<span class="fc" id="L75">                    .filter(pair -&gt; pair.getKey().equals(field))</span>
+<span class="fc" id="L76">                    .map(Pair::getValue)</span>
+<span class="fc" id="L77">                    .forEach(baseDefaultFieldItemConsumer -&gt; baseDefaultFieldItemConsumer.accept(value));</span>
+<span class="fc" id="L78">                state.put(field, value);</span>
+<span class="fc" id="L79">                return;</span>
             case STDOUT:
-<span class="nc" id="L59">                System.out.printf(&quot;TEST PLC STDOUT [%s]: %s%n&quot;, field.getName(), Objects.toString(value.getValues()[0]));</span>
-<span class="nc" id="L60">                return;</span>
+<span class="nc" id="L81">                System.out.printf(&quot;TEST PLC STDOUT [%s]: %s%n&quot;, field.getName(), Objects.toString(value.getValues()[0]));</span>
+<span class="nc" id="L82">                return;</span>
             case RANDOM:
-<span class="nc" id="L62">                System.out.printf(&quot;TEST PLC RANDOM [%s]: %s%n&quot;, field.getName(), Objects.toString(value.getValues()[0]));</span>
-<span class="nc" id="L63">                return;</span>
+<span class="nc" id="L84">                System.out.printf(&quot;TEST PLC RANDOM [%s]: %s%n&quot;, field.getName(), Objects.toString(value.getValues()[0]));</span>
+<span class="nc" id="L85">                return;</span>
         }
-<span class="nc" id="L65">        throw new IllegalArgumentException(&quot;Unsupported field type: &quot; + field.getType().name());</span>
+<span class="nc" id="L87">        throw new IllegalArgumentException(&quot;Unsupported field type: &quot; + field.getType().name());</span>
     }
 
     @SuppressWarnings(&quot;unchecked&quot;)
     private BaseDefaultFieldItem randomValue(Class&lt;?&gt; type) {
-<span class="fc" id="L70">        Object result = null;</span>
+<span class="fc" id="L92">        Object result = null;</span>
 
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (type.equals(Byte.class))</span>
-<span class="nc" id="L73">            result = (byte) random.nextInt(1 &lt;&lt; 8);</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (type.equals(Byte.class)) {</span>
+<span class="nc" id="L95">            result = (byte) random.nextInt(1 &lt;&lt; 8);</span>
+        }
 
-<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (type.equals(Short.class))</span>
-<span class="nc" id="L76">            result = (short) random.nextInt(1 &lt;&lt; 16);</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (type.equals(Short.class)) {</span>
+<span class="nc" id="L99">            result = (short) random.nextInt(1 &lt;&lt; 16);</span>
+        }
 
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (type.equals(Integer.class))</span>
-<span class="fc" id="L79">            result = random.nextInt();</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (type.equals(Integer.class)) {</span>
+<span class="fc" id="L103">            result = random.nextInt();</span>
+        }
 
-<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (type.equals(Long.class))</span>
-<span class="nc" id="L82">            result = random.nextLong();</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if (type.equals(Long.class)) {</span>
+<span class="nc" id="L107">            result = random.nextLong();</span>
+        }
 
-<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (type.equals(Float.class))</span>
-<span class="nc" id="L85">            result = random.nextFloat();</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if (type.equals(Float.class)) {</span>
+<span class="nc" id="L111">            result = random.nextFloat();</span>
+        }
 
-<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (type.equals(Double.class))</span>
-<span class="nc" id="L88">            result = random.nextDouble();</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        if (type.equals(Double.class)) {</span>
+<span class="nc" id="L115">            result = random.nextDouble();</span>
+        }
 
-<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        if (type.equals(Boolean.class))</span>
-<span class="nc" id="L91">            result = random.nextBoolean();</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (type.equals(Boolean.class)) {</span>
+<span class="nc" id="L119">            result = random.nextBoolean();</span>
+        }
 
-<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (type.equals(String.class)) {</span>
-<span class="nc" id="L94">            int length = random.nextInt(100);</span>
-<span class="nc" id="L95">            StringBuilder sb = new StringBuilder(length);</span>
-<span class="nc bnc" id="L96" title="All 2 branches missed.">            for (int i = 0; i &lt; length; i++) {</span>
-<span class="nc" id="L97">                char c = (char)('a' + random.nextInt(26));</span>
-<span class="nc" id="L98">                sb.append(c);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (type.equals(String.class)) {</span>
+<span class="nc" id="L123">            int length = random.nextInt(100);</span>
+<span class="nc" id="L124">            StringBuilder sb = new StringBuilder(length);</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">            for (int i = 0; i &lt; length; i++) {</span>
+<span class="nc" id="L126">                char c = (char) ('a' + random.nextInt(26));</span>
+<span class="nc" id="L127">                sb.append(c);</span>
             }
-<span class="nc" id="L100">            result = sb.toString();</span>
+<span class="nc" id="L129">            result = sb.toString();</span>
         }
 
-<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        if (type.equals(byte[].class)) {</span>
-<span class="nc" id="L104">            int length = random.nextInt(100);</span>
-<span class="nc" id="L105">            byte[] bytes = new byte[length];</span>
-<span class="nc" id="L106">            random.nextBytes(bytes);</span>
-<span class="nc" id="L107">            result = bytes;</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        if (type.equals(byte[].class)) {</span>
+<span class="nc" id="L133">            int length = random.nextInt(100);</span>
+<span class="nc" id="L134">            byte[] bytes = new byte[length];</span>
+<span class="nc" id="L135">            random.nextBytes(bytes);</span>
+<span class="nc" id="L136">            result = bytes;</span>
         }
 
-<span class="fc" id="L110">        return new TestFieldItem(new Object[] { result });</span>
+<span class="fc" id="L139">        return new TestFieldItem(new Object[]{result});</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L115">        return name;</span>
+<span class="nc" id="L144">        return name;</span>
     }
 
+    public void addCyclicSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, TestField plcField, Duration duration) {
+<span class="fc" id="L148">        ScheduledFuture&lt;?&gt; scheduledFuture = scheduler.scheduleAtFixedRate(() -&gt; {</span>
+<span class="fc" id="L149">            BaseDefaultFieldItem baseDefaultFieldItem = state.get(plcField);</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">            if (baseDefaultFieldItem == null) {</span>
+<span class="nc" id="L151">                return;</span>
+            }
+<span class="fc" id="L153">            consumer.accept(baseDefaultFieldItem);</span>
+<span class="fc" id="L154">        }, duration.toMillis(), duration.toMillis(), TimeUnit.MILLISECONDS);</span>
+<span class="fc" id="L155">        cyclicSubscriptions.put(handle, scheduledFuture);</span>
+<span class="fc" id="L156">    }</span>
+
+    public void addChangeOfStateSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, TestField plcField) {
+<span class="fc" id="L159">        changeOfStateSubscriptions.put(handle, Pair.of(plcField, consumer));</span>
+<span class="fc" id="L160">    }</span>
+
+    public void addEventSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, TestField plcField) {
+<span class="fc" id="L163">        Future&lt;?&gt; submit = pool.submit(() -&gt; {</span>
+<span class="pc bpc" id="L164" title="1 of 2 branches missed.">            while (!Thread.currentThread().isInterrupted()) {</span>
+<span class="fc" id="L165">                BaseDefaultFieldItem baseDefaultFieldItem = state.get(plcField);</span>
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">                if (baseDefaultFieldItem == null) {</span>
+<span class="nc" id="L167">                    continue;</span>
+                }
+<span class="fc" id="L169">                consumer.accept(baseDefaultFieldItem);</span>
+                try {
+<span class="fc" id="L171">                    TimeUnit.SECONDS.sleep((long) (Math.random() * 10));</span>
+<span class="fc" id="L172">                } catch (InterruptedException ignore) {</span>
+<span class="fc" id="L173">                    Thread.currentThread().interrupt();</span>
+<span class="fc" id="L174">                    return;</span>
+<span class="fc" id="L175">                }</span>
+<span class="fc" id="L176">            }</span>
+<span class="nc" id="L177">        });</span>
+
+<span class="fc" id="L179">        eventSubscriptions.put(handle, submit);</span>
+<span class="fc" id="L180">    }</span>
+
+    public void removeHandles(Collection&lt;? extends InternalPlcSubscriptionHandle&gt; internalPlcSubscriptionHandles) {
+<span class="fc" id="L183">        internalPlcSubscriptionHandles.forEach(handle -&gt; {</span>
+<span class="fc" id="L184">            ScheduledFuture&lt;?&gt; remove = cyclicSubscriptions.remove(handle);</span>
+<span class="fc bfc" id="L185" title="All 2 branches covered.">            if (remove == null) {</span>
+<span class="fc" id="L186">                return;</span>
+            }
+<span class="fc" id="L188">            remove.cancel(true);</span>
+<span class="fc" id="L189">        });</span>
+<span class="fc" id="L190">        internalPlcSubscriptionHandles.forEach(handle -&gt; {</span>
+<span class="fc" id="L191">            Future&lt;?&gt; remove = eventSubscriptions.remove(handle);</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">            if (remove == null) {</span>
+<span class="fc" id="L193">                return;</span>
+            }
+<span class="fc" id="L195">            remove.cancel(true);</span>
+<span class="fc" id="L196">        });</span>
+<span class="fc" id="L197">        internalPlcSubscriptionHandles.forEach(changeOfStateSubscriptions::remove);</span>
+<span class="fc" id="L198">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

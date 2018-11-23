@@ -24,9 +24,9 @@ import org.apache.plc4x.java.api.model.PlcConsumerRegistration;
 import org.apache.plc4x.java.base.messages.PlcSubscriber;
 
 import java.util.Collections;
-import java.util.Objects;
 import java.util.function.Consumer;
 
+// Warning: do not override equals and hashCode as these should not include the plcSubscriber.
 public class DefaultPlcSubscriptionHandle implements InternalPlcSubscriptionHandle {
 
     private final PlcSubscriber plcSubscriber;
@@ -41,25 +41,20 @@ public class DefaultPlcSubscriptionHandle implements InternalPlcSubscriptionHand
     }
 
     @Override
-    public boolean equals(Object o) {
-<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (this == o) {</span>
-<span class="fc" id="L46">            return true;</span>
-        }
-<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (!(o instanceof DefaultPlcSubscriptionHandle)) {</span>
-<span class="fc" id="L49">            return false;</span>
-        }
-<span class="fc" id="L51">        DefaultPlcSubscriptionHandle that = (DefaultPlcSubscriptionHandle) o;</span>
-<span class="fc" id="L52">        return Objects.equals(plcSubscriber, that.plcSubscriber);</span>
+    public boolean equals(Object obj) {
+        // A handle is unique therefore we use the default implementation from Object
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        return (this == obj);</span>
     }
 
     @Override
     public int hashCode() {
-<span class="fc" id="L57">        return Objects.hash(plcSubscriber);</span>
+        // A handle is unique therefore we use the default implementation from Object
+<span class="fc" id="L52">        return System.identityHashCode(this);</span>
     }
 
     @Override
     public String toString() {
-<span class="fc" id="L62">        return &quot;DefaultPlcSubscriptionHandle{&quot; +</span>
+<span class="fc" id="L57">        return &quot;DefaultPlcSubscriptionHandle{&quot; +</span>
             &quot;plcSubscriber=&quot; + plcSubscriber +
             '}';
     }

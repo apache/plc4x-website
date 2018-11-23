@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -172,22 +172,29 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#canWrite--">canWrite</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>protected &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#checkInternal-java.lang.Object-java.lang.Class-">checkInternal</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;o,
+             <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;T&gt;&nbsp;clazz)</code>
+<div class="block">Can be used to check and cast a parameter to its required internal type (can be used for general type checking too).</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/metadata/PlcConnectionMetadata.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.metadata">PlcConnectionMetadata</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#getMetadata--">getMetadata</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcReadRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcReadRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#readRequestBuilder--">readRequestBuilder</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#subscriptionRequestBuilder--">subscriptionRequestBuilder</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcUnsubscriptionRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#unsubscriptionRequestBuilder--">unsubscriptionRequestBuilder</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#writeRequestBuilder--">writeRequestBuilder</a></span>()</code>&nbsp;</td>
 </tr>
@@ -331,13 +338,33 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/
 <a name="unsubscriptionRequestBuilder--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>unsubscriptionRequestBuilder</h4>
 <pre>public&nbsp;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcUnsubscriptionRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionRequest.Builder</a>&nbsp;unsubscriptionRequestBuilder()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true#unsubscriptionRequestBuilder--" title="class or interface in org.apache.plc4x.java.api">unsubscriptionRequestBuilder</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.api">PlcConnection</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="checkInternal-java.lang.Object-java.lang.Class-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>checkInternal</h4>
+<pre>protected&nbsp;&lt;T&gt;&nbsp;T&nbsp;checkInternal(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;o,
+                              <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;T&gt;&nbsp;clazz)</pre>
+<div class="block">Can be used to check and cast a parameter to its required internal type (can be used for general type checking too).</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the type of the expected <code>clazz</code>.</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>o</code> - the object to be checked against target <code>clazz</code>.</dd>
+<dd><code>clazz</code> - the expected <code>clazz</code>.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the cast type of <code>clazz</code>.</dd>
 </dl>
 </li>
 </ul>

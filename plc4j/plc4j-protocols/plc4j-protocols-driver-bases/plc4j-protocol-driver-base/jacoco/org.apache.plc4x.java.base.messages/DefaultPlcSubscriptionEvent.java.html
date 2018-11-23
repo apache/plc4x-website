@@ -19,7 +19,6 @@
 
 package org.apache.plc4x.java.base.messages;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.plc4x.java.api.model.PlcField;
 import org.apache.plc4x.java.api.types.PlcResponseCode;
@@ -34,23 +33,23 @@ public class DefaultPlcSubscriptionEvent extends DefaultPlcReadResponse implemen
     public final Instant timestamp;
 
     public DefaultPlcSubscriptionEvent(Instant timestamp, Map&lt;String, Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt;&gt; fields) {
-<span class="fc" id="L37">        super(null, fields);</span>
-<span class="fc" id="L38">        this.timestamp = timestamp;</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L36">        super(null, fields);</span>
+<span class="fc" id="L37">        this.timestamp = timestamp;</span>
+<span class="fc" id="L38">    }</span>
 
     @Override
     public Collection&lt;String&gt; getFieldNames() {
-<span class="fc" id="L43">        throw new NotImplementedException(&quot;not implemented&quot;);</span>
+<span class="fc" id="L42">        return getValues().keySet();</span>
     }
 
     @Override
     public PlcField getField(String name) {
-<span class="fc" id="L48">        throw new NotImplementedException(&quot;not implemented&quot;);</span>
+<span class="fc" id="L47">        throw new UnsupportedOperationException(&quot;getField('&quot; + name + &quot;') not supported on &quot; + this.getClass());</span>
     }
 
     @Override
     public Instant getTimestamp() {
-<span class="fc" id="L53">        return timestamp;</span>
+<span class="fc" id="L52">        return timestamp;</span>
     }
 
 }

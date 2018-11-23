@@ -110,22 +110,5 @@ public abstract class NettyPlcConnection extends AbstractPlcConnection {
         // Implemented in sub-classes, if needed.
 <span class="nc" id="L111">    }</span>
 
-    /**
-     * Can be used to check and cast a parameter to its required internal type (can be used for general type checking too).
-     *
-     * @param o     the object to be checked against target {@code clazz}.
-     * @param clazz the expected {@code clazz}.
-     * @param &lt;T&gt;   the type of the expected {@code clazz}.
-     * @return the cast type of {@code clazz}.
-     */
-    protected &lt;T&gt; T checkInternal(Object o, Class&lt;T&gt; clazz) {
-<span class="nc" id="L122">        Objects.requireNonNull(o);</span>
-<span class="nc" id="L123">        Objects.requireNonNull(clazz);</span>
-<span class="nc bnc" id="L124" title="All 2 branches missed.">        if (!clazz.isInstance(o)) {</span>
-<span class="nc" id="L125">            throw new IllegalArgumentException(&quot;illegal type &quot; + o.getClass() + &quot;. Expected &quot; + clazz);</span>
-        }
-<span class="nc" id="L127">        return clazz.cast(o);</span>
-    }
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

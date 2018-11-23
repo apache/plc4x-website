@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -114,13 +114,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html?is-external=true" title="class or interface in java.lang">AutoCloseable</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/metadata/PlcConnectionMetadata.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.metadata">PlcConnectionMetadata</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.api">PlcConnection</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcReader.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcReader</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcWriter.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcWriter</a></dd>
+<dd><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html?is-external=true" title="class or interface in java.lang">AutoCloseable</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/metadata/PlcConnectionMetadata.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.metadata">PlcConnectionMetadata</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.api">PlcConnection</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcReader.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcReader</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcSubscriber</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcWriter.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcWriter</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">SimulatedPlcConnection</span>
 extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.connection">AbstractPlcConnection</a>
-implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcReader.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcReader</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcWriter.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcWriter</a></pre>
+implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcReader.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcReader</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcWriter.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcWriter</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcSubscriber</a></pre>
 <div class="block">Connection to a test device.
  This class is not thread-safe.</div>
 </li>
@@ -164,37 +164,66 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protoco
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#canWrite--">canWrite</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#canSubscribe--">canSubscribe</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#close--">close</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#canWrite--">canWrite</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#connect--">connect</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#close--">close</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#connect--">connect</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#isConnected--">isConnected</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html?is-external=true" title="class or interface in java.util.concurrent">CompletableFuture</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcReadResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcReadResponse</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#read-org.apache.plc4x.java.api.messages.PlcReadRequest-">read</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcReadRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcReadRequest</a>&nbsp;readRequest)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcReadRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcReadRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#readRequestBuilder--">readRequestBuilder</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcConsumerRegistration.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcConsumerRegistration</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#register-java.util.function.Consumer-java.util.Collection-">register</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html?is-external=true" title="class or interface in java.util.function">Consumer</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionEvent.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionEvent</a>&gt;&nbsp;consumer,
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcSubscriptionHandle.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcSubscriptionHandle</a>&gt;&nbsp;handles)</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html?is-external=true" title="class or interface in java.util.concurrent">CompletableFuture</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionResponse</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#subscribe-org.apache.plc4x.java.api.messages.PlcSubscriptionRequest-">subscribe</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionRequest</a>&nbsp;subscriptionRequest)</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionRequest.Builder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#subscriptionRequestBuilder--">subscriptionRequestBuilder</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#unregister-org.apache.plc4x.java.api.model.PlcConsumerRegistration-">unregister</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcConsumerRegistration.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcConsumerRegistration</a>&nbsp;registration)</code>&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html?is-external=true" title="class or interface in java.util.concurrent">CompletableFuture</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcUnsubscriptionResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionResponse</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#unsubscribe-org.apache.plc4x.java.api.messages.PlcUnsubscriptionRequest-">unsubscribe</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcUnsubscriptionRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionRequest</a>&nbsp;unsubscriptionRequest)</code>&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcUnsubscriptionRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionRequest.Builder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#unsubscriptionRequestBuilder--">unsubscriptionRequestBuilder</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html?is-external=true" title="class or interface in java.util.concurrent">CompletableFuture</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteResponse</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#write-org.apache.plc4x.java.api.messages.PlcWriteRequest-">write</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteRequest</a>&nbsp;writeRequest)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#writeRequestBuilder--">writeRequestBuilder</a></span>()</code>&nbsp;</td>
 </tr>
@@ -204,7 +233,7 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protoco
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.plc4x.java.base.connection.<a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.connection">AbstractPlcConnection</a></h3>
-<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#canSubscribe--" title="class or interface in org.apache.plc4x.java.base.connection">canSubscribe</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#getMetadata--" title="class or interface in org.apache.plc4x.java.base.connection">getMetadata</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#subscriptionRequestBuilder--" title="class or interface in org.apache.plc4x.java.base.connection">subscriptionRequestBuilder</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#unsubscriptionRequestBuilder--" title="class or interface in org.apache.plc4x.java.base.connection">unsubscriptionRequestBuilder</a></code></li>
+<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#checkInternal-java.lang.Object-java.lang.Class-" title="class or interface in org.apache.plc4x.java.base.connection">checkInternal</a>, <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#getMetadata--" title="class or interface in org.apache.plc4x.java.base.connection">getMetadata</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -315,6 +344,21 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protoco
 </dl>
 </li>
 </ul>
+<a name="canSubscribe--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>canSubscribe</h4>
+<pre>public&nbsp;boolean&nbsp;canSubscribe()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/metadata/PlcConnectionMetadata.html?is-external=true#canSubscribe--" title="class or interface in org.apache.plc4x.java.api.metadata">canSubscribe</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/metadata/PlcConnectionMetadata.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.metadata">PlcConnectionMetadata</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#canSubscribe--" title="class or interface in org.apache.plc4x.java.base.connection">canSubscribe</a></code>&nbsp;in class&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.connection">AbstractPlcConnection</a></code></dd>
+</dl>
+</li>
+</ul>
 <a name="readRequestBuilder--">
 <!--   -->
 </a>
@@ -342,6 +386,36 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protoco
 <dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true#writeRequestBuilder--" title="class or interface in org.apache.plc4x.java.api">writeRequestBuilder</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.api">PlcConnection</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#writeRequestBuilder--" title="class or interface in org.apache.plc4x.java.base.connection">writeRequestBuilder</a></code>&nbsp;in class&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.connection">AbstractPlcConnection</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="subscriptionRequestBuilder--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>subscriptionRequestBuilder</h4>
+<pre>public&nbsp;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionRequest.Builder</a>&nbsp;subscriptionRequestBuilder()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true#subscriptionRequestBuilder--" title="class or interface in org.apache.plc4x.java.api">subscriptionRequestBuilder</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.api">PlcConnection</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#subscriptionRequestBuilder--" title="class or interface in org.apache.plc4x.java.base.connection">subscriptionRequestBuilder</a></code>&nbsp;in class&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.connection">AbstractPlcConnection</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="unsubscriptionRequestBuilder--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>unsubscriptionRequestBuilder</h4>
+<pre>public&nbsp;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcUnsubscriptionRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionRequest.Builder</a>&nbsp;unsubscriptionRequestBuilder()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true#unsubscriptionRequestBuilder--" title="class or interface in org.apache.plc4x.java.api">unsubscriptionRequestBuilder</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.api">PlcConnection</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true#unsubscriptionRequestBuilder--" title="class or interface in org.apache.plc4x.java.base.connection">unsubscriptionRequestBuilder</a></code>&nbsp;in class&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/AbstractPlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.connection">AbstractPlcConnection</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -374,13 +448,66 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protoco
 <a name="toString--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>toString</h4>
 <pre>public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;toString()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true#toString--" title="class or interface in java.lang">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="subscribe-org.apache.plc4x.java.api.messages.PlcSubscriptionRequest-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>subscribe</h4>
+<pre>public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html?is-external=true" title="class or interface in java.util.concurrent">CompletableFuture</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionResponse</a>&gt;&nbsp;subscribe(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionRequest</a>&nbsp;subscriptionRequest)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true#subscribe-org.apache.plc4x.java.api.messages.PlcSubscriptionRequest-" title="class or interface in org.apache.plc4x.java.base.messages">subscribe</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcSubscriber</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="unsubscribe-org.apache.plc4x.java.api.messages.PlcUnsubscriptionRequest-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>unsubscribe</h4>
+<pre>public&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html?is-external=true" title="class or interface in java.util.concurrent">CompletableFuture</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcUnsubscriptionResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionResponse</a>&gt;&nbsp;unsubscribe(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcUnsubscriptionRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionRequest</a>&nbsp;unsubscriptionRequest)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true#unsubscribe-org.apache.plc4x.java.api.messages.PlcUnsubscriptionRequest-" title="class or interface in org.apache.plc4x.java.base.messages">unsubscribe</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcSubscriber</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="register-java.util.function.Consumer-java.util.Collection-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>register</h4>
+<pre>public&nbsp;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcConsumerRegistration.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcConsumerRegistration</a>&nbsp;register(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html?is-external=true" title="class or interface in java.util.function">Consumer</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionEvent.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionEvent</a>&gt;&nbsp;consumer,
+                                        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcSubscriptionHandle.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcSubscriptionHandle</a>&gt;&nbsp;handles)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true#register-java.util.function.Consumer-java.util.Collection-" title="class or interface in org.apache.plc4x.java.base.messages">register</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcSubscriber</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="unregister-org.apache.plc4x.java.api.model.PlcConsumerRegistration-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>unregister</h4>
+<pre>public&nbsp;void&nbsp;unregister(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcConsumerRegistration.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcConsumerRegistration</a>&nbsp;registration)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true#unregister-org.apache.plc4x.java.api.model.PlcConsumerRegistration-" title="class or interface in org.apache.plc4x.java.base.messages">unregister</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/PlcSubscriber.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages">PlcSubscriber</a></code></dd>
 </dl>
 </li>
 </ul>

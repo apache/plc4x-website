@@ -73,11 +73,12 @@
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>  
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>      @Test
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>      <strong class="jxr_keyword">void</strong> equals() {
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>          EqualsVerifier.forClass(DefaultPlcSubscriptionHandle.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>              .suppress(Warning.STRICT_INHERITANCE).verify();
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>      }
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>  
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>  }
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>          EqualsVerifier.forClass(DefaultPlcSubscriptionHandle.<strong class="jxr_keyword">class</strong>).usingGetClass()
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>              .suppress(Warning.STRICT_INHERITANCE).suppress(Warning.IDENTICAL_COPY)
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>              .suppress(Warning.ALL_FIELDS_SHOULD_BE_USED).verify();
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>      }
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>  
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017&#x2013;2018 <a href="https://www.apache.org/">The Apache Software Foundation</a>. All rights reserved.</div>

@@ -32,12 +32,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 
-<span class="nc" id="L35">public class TestFieldHandler implements PlcFieldHandler {</span>
+<span class="fc" id="L35">public class TestFieldHandler implements PlcFieldHandler {</span>
 
     @Override
     public PlcField createField(String fieldQuery) throws PlcInvalidFieldException {
-<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (TestField.matches(fieldQuery)) {</span>
-<span class="nc" id="L40">            return TestField.of(fieldQuery);</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">        if (TestField.matches(fieldQuery)) {</span>
+<span class="fc" id="L40">            return TestField.of(fieldQuery);</span>
         }
 <span class="nc" id="L42">        throw new PlcInvalidFieldException(fieldQuery);</span>
     }
@@ -125,9 +125,9 @@ import java.util.Arrays;
 
     @Override
     public BaseDefaultFieldItem encodeString(PlcField field, Object[] values) {
-<span class="nc" id="L128">        TestField testField = (TestField) field;</span>
-<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (testField.getDataType() == String.class) {</span>
-<span class="nc" id="L130">            return new DefaultStringFieldItem((String[]) values);</span>
+<span class="fc" id="L128">        TestField testField = (TestField) field;</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        if (testField.getDataType() == String.class) {</span>
+<span class="fc" id="L130">            return new DefaultStringFieldItem((String[]) values);</span>
         }
 <span class="nc" id="L132">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
     }

@@ -30,14 +30,14 @@ import java.util.*;
     // -----------------------------------------
     // Single bit
     // -----------------------------------------
-<span class="fc" id="L33">    BOOL(0x01, &quot;X&quot;, 1, null, DataTransportSize.BIT, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L33">    BOOL(0x01, &quot;X&quot;, 1, null, DataTransportSize.BIT, S7ControllerType.ANY),</span>
 
     // -----------------------------------------
     // Bit strings
     // -----------------------------------------
-<span class="fc" id="L38">    BYTE(0x02, &quot;B&quot;, 1, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
-<span class="fc" id="L39">    WORD(0x04, &quot;W&quot;, 2, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
-<span class="fc" id="L40">    DWORD(0x06, &quot;D&quot;, 4, WORD, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L38">    BYTE(0x02, &quot;B&quot;, 1, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.ANY),</span>
+<span class="fc" id="L39">    WORD(0x04, &quot;W&quot;, 2, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.ANY),</span>
+<span class="fc" id="L40">    DWORD(0x06, &quot;D&quot;, 4, WORD, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.ANY),</span>
     // Only got a basic TIA license (S7-1500 needed to find this out)
     // TODO: Find the code
 <span class="fc" id="L43">    LWORD(0x00, &quot;X&quot;, 8, null, null, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
@@ -46,7 +46,7 @@ import java.util.*;
     // Integers
     // -----------------------------------------
     // Signed Int
-<span class="fc" id="L49">    INT(0x05, &quot;W&quot;, 2, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L49">    INT(0x05, &quot;W&quot;, 2, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.ANY),</span>
     // Unsigned Int
 <span class="fc" id="L51">    UINT(0x05, &quot;W&quot;, 2, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
     // (Signed) Small Int
@@ -54,7 +54,7 @@ import java.util.*;
     // Unsigned Small Int
 <span class="fc" id="L55">    USINT(0x02, &quot;B&quot;, 1, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
     // Double Precision Int
-<span class="fc" id="L57">    DINT(0x07, &quot;D&quot;, 4, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L57">    DINT(0x07, &quot;D&quot;, 4, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.ANY),</span>
     // Unsigned Double Precision Int
 <span class="fc" id="L59">    UDINT(0x07, &quot;D&quot;, 4, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
     // Only got a basic TIA license (S7-1500 needed to find this out)
@@ -67,7 +67,7 @@ import java.util.*;
     // -----------------------------------------
     // Reals
     // -----------------------------------------
-<span class="fc" id="L70">    REAL(0x08, &quot;D&quot;, 4, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L70">    REAL(0x08, &quot;D&quot;, 4, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.ANY),</span>
     // TODO: Find the code
 <span class="fc" id="L72">    LREAL(0x00, &quot;X&quot;, 8, REAL, null, S7ControllerType.S7_1200, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
 
@@ -75,7 +75,7 @@ import java.util.*;
     // Durations
     // -----------------------------------------
     // IEC time
-<span class="fc" id="L78">    TIME(0x0B, &quot;X&quot;, 4, null, null, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L78">    TIME(0x0B, &quot;X&quot;, 4, null, null, S7ControllerType.ANY),</span>
     // TODO: Find the code
 <span class="fc" id="L80">    LTIME(0x00, &quot;X&quot;, 8, TIME, null, S7ControllerType.S7_1500),</span>
 
@@ -84,29 +84,29 @@ import java.util.*;
     // -----------------------------------------
     // IEC date (yyyy-m-d)
     // TODO: Find the code
-<span class="fc" id="L87">    DATE(0x00, &quot;X&quot;, 2, null, null, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L87">    DATE(0x00, &quot;X&quot;, 2, null, null, S7ControllerType.ANY),</span>
 
     // -----------------------------------------
     // Time of day
     // -----------------------------------------
     // Time (hh:mm:ss.S)
-<span class="fc" id="L93">    TIME_OF_DAY(0x0A, &quot;X&quot;, 4, null, null, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L93">    TIME_OF_DAY(0x0A, &quot;X&quot;, 4, null, null, S7ControllerType.ANY),</span>
 
     // -----------------------------------------
     // Date and time of day
     // -----------------------------------------
-<span class="fc" id="L98">    DATE_AND_TIME(0x0F, &quot;X&quot;, 8, null, null, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L98">    DATE_AND_TIME(0x0F, &quot;X&quot;, 8, null, null, S7ControllerType.ANY),</span>
 
     // -----------------------------------------
     // ASCII Strings
     // -----------------------------------------
     // Single-byte character
-<span class="fc" id="L104">    CHAR(0x03, &quot;B&quot;, 1, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L104">    CHAR(0x03, &quot;B&quot;, 1, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.ANY),</span>
     // Double-byte character
 <span class="fc" id="L106">    WCHAR(0x13, &quot;X&quot;, 2, null, null, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
     // Variable-length single-byte character string
     // TODO: Find the code (Eventually 0x03)
-<span class="fc" id="L109">    STRING(0x00, &quot;X&quot;, -1, null, null, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L109">    STRING(0x00, &quot;X&quot;, -1, null, null, S7ControllerType.ANY),</span>
     // Variable-length double-byte character string
     // TODO: Find the code (Eventually 0x13)
 <span class="fc" id="L112">    WSTRING(0x00, &quot;X&quot;, -1, null, null, S7ControllerType.S7_1200, S7ControllerType.S7_1500);</span>
