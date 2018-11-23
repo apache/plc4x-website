@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultBigDecimalFieldItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Driver-Base: Base</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.base.messages.items</a> &gt; <span class="el_source">DefaultBigDecimalFieldItem.java</span></div><h1>DefaultBigDecimalFieldItem.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.base.messages.items;
+
+import org.apache.plc4x.java.api.exceptions.PlcIncompatibleDatatypeException;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+public class DefaultBigDecimalFieldItem extends BaseDefaultFieldItem&lt;BigDecimal&gt; {
+
+    public DefaultBigDecimalFieldItem(BigDecimal... values) {
+<span class="fc" id="L29">        super(values);</span>
+<span class="fc" id="L30">    }</span>
+
+    @Override
+    public Object getObject(int index) {
+<span class="fc" id="L34">        return getValue(index);</span>
+    }
+
+    @Override
+    public boolean isValidBoolean(int index) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        return getValue(index) != null;</span>
+    }
+
+    @Override
+    public Boolean getBoolean(int index) {
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (!isValidBoolean(index)) {</span>
+<span class="fc" id="L45">            throw new PlcIncompatibleDatatypeException(Boolean.class, index);</span>
+        }
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        return getValue(index).compareTo(BigDecimal.ZERO) != 0;</span>
+    }
+
+    @Override
+    public boolean isValidByte(int index) {
+<span class="fc" id="L52">        BigDecimal value = getValue(index);</span>
+<span class="fc" id="L53">        BigDecimal min = BigDecimal.valueOf(Byte.MIN_VALUE);</span>
+<span class="fc" id="L54">        BigDecimal max = BigDecimal.valueOf(Byte.MAX_VALUE);</span>
+<span class="fc bfc" id="L55" title="All 6 branches covered.">        return (value != null) &amp;&amp; (value.compareTo(min) &gt;= 0) &amp;&amp; (value.compareTo(max) &lt;= 0);</span>
+    }
+
+    @Override
+    public Byte getByte(int index) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!isValidByte(index)) {</span>
+<span class="fc" id="L61">            throw new PlcIncompatibleDatatypeException(Byte.class, index);</span>
+        }
+<span class="fc" id="L63">        return getValue(index).byteValue();</span>
+    }
+
+    @Override
+    public boolean isValidShort(int index) {
+<span class="fc" id="L68">        BigDecimal value = getValue(index);</span>
+<span class="fc" id="L69">        BigDecimal min = BigDecimal.valueOf(Short.MIN_VALUE);</span>
+<span class="fc" id="L70">        BigDecimal max = BigDecimal.valueOf(Short.MAX_VALUE);</span>
+<span class="fc bfc" id="L71" title="All 6 branches covered.">        return (value != null) &amp;&amp; (value.compareTo(min) &gt;= 0) &amp;&amp; (value.compareTo(max) &lt;= 0);</span>
+    }
+
+    @Override
+    public Short getShort(int index) {
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        if (!isValidShort(index)) {</span>
+<span class="fc" id="L77">            throw new PlcIncompatibleDatatypeException(Short.class, index);</span>
+        }
+<span class="fc" id="L79">        return getValue(index).shortValue();</span>
+    }
+
+    @Override
+    public boolean isValidInteger(int index) {
+<span class="fc" id="L84">        BigDecimal value = getValue(index);</span>
+<span class="fc" id="L85">        BigDecimal min = BigDecimal.valueOf(Integer.MIN_VALUE);</span>
+<span class="fc" id="L86">        BigDecimal max = BigDecimal.valueOf(Integer.MAX_VALUE);</span>
+<span class="fc bfc" id="L87" title="All 6 branches covered.">        return (value != null) &amp;&amp; (value.compareTo(min) &gt;= 0) &amp;&amp; (value.compareTo(max) &lt;= 0);</span>
+    }
+
+    @Override
+    public Integer getInteger(int index) {
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (!isValidInteger(index)) {</span>
+<span class="fc" id="L93">            throw new PlcIncompatibleDatatypeException(Integer.class, index);</span>
+        }
+<span class="fc" id="L95">        return getValue(index).intValue();</span>
+    }
+
+    @Override
+    public boolean isValidLong(int index) {
+<span class="fc" id="L100">        BigDecimal value = getValue(index);</span>
+<span class="fc" id="L101">        BigDecimal min = BigDecimal.valueOf(Long.MIN_VALUE);</span>
+<span class="fc" id="L102">        BigDecimal max = BigDecimal.valueOf(Long.MAX_VALUE);</span>
+<span class="fc bfc" id="L103" title="All 6 branches covered.">        return (value != null) &amp;&amp; (value.compareTo(min) &gt;= 0) &amp;&amp; (value.compareTo(max) &lt;= 0);</span>
+    }
+
+    @Override
+    public Long getLong(int index) {
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        if (!isValidLong(index)) {</span>
+<span class="fc" id="L109">            throw new PlcIncompatibleDatatypeException(Long.class, index);</span>
+        }
+<span class="fc" id="L111">        return getValue(index).longValue();</span>
+    }
+
+    public boolean isValidBigInteger(int index) {
+<span class="fc" id="L115">        BigDecimal value = getValue(index);</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        return value != null;</span>
+    }
+
+    public BigInteger getBigInteger(int index) {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (!isValidBigInteger(index)) {</span>
+<span class="fc" id="L121">            throw new PlcIncompatibleDatatypeException(BigInteger.class, index);</span>
+        }
+<span class="fc" id="L123">        return getValue(index).toBigInteger();</span>
+    }
+
+    @Override
+    public boolean isValidFloat(int index) {
+<span class="fc" id="L128">        BigDecimal value = getValue(index);</span>
+<span class="fc" id="L129">        BigDecimal min = BigDecimal.valueOf(-Float.MAX_VALUE);</span>
+<span class="fc" id="L130">        BigDecimal max = BigDecimal.valueOf(Float.MAX_VALUE);</span>
+<span class="fc bfc" id="L131" title="All 6 branches covered.">        return (value != null) &amp;&amp; (value.compareTo(min) &gt;= 0) &amp;&amp; (value.compareTo(max) &lt;= 0);</span>
+    }
+
+    @Override
+    public Float getFloat(int index) {
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (!isValidFloat(index)) {</span>
+<span class="fc" id="L137">            throw new PlcIncompatibleDatatypeException(Float.class, index);</span>
+        }
+<span class="fc" id="L139">        return getValue(index).floatValue();</span>
+    }
+
+    @Override
+    public boolean isValidDouble(int index) {
+<span class="fc" id="L144">        BigDecimal value = getValue(index);</span>
+<span class="fc" id="L145">        BigDecimal min = BigDecimal.valueOf(-Double.MAX_VALUE);</span>
+<span class="fc" id="L146">        BigDecimal max = BigDecimal.valueOf(Double.MAX_VALUE);</span>
+<span class="pc bpc" id="L147" title="2 of 6 branches missed.">        return (value != null) &amp;&amp; (value.compareTo(min) &gt;= 0) &amp;&amp; (value.compareTo(max) &lt;= 0);</span>
+    }
+
+    @Override
+    public Double getDouble(int index) {
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (!isValidDouble(index)) {</span>
+<span class="fc" id="L153">            throw new PlcIncompatibleDatatypeException(Double.class, index);</span>
+        }
+<span class="fc" id="L155">        return getValue(index).doubleValue();</span>
+    }
+
+    public boolean isValidBigDecimal(int index) {
+<span class="fc bfc" id="L159" title="All 2 branches covered.">        return getValue(index) != null;</span>
+    }
+
+    public BigDecimal getBigDecimal(int index) {
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        if(!isValidBigDecimal(index)) {</span>
+<span class="fc" id="L164">            throw new PlcIncompatibleDatatypeException(BigDecimal.class, index);</span>
+        }
+<span class="fc" id="L166">        return getValue(index);</span>
+    }
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnknownCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.api.commands</a> &gt; <span class="el_source">UnknownCommand.java</span></div><h1>UnknownCommand.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.api.commands;
+
+import io.netty.buffer.ByteBuf;
+import org.apache.plc4x.java.ads.api.generic.AdsData;
+import org.apache.plc4x.java.ads.api.generic.AmsHeader;
+import org.apache.plc4x.java.ads.api.generic.AmsPacket;
+import org.apache.plc4x.java.ads.api.generic.types.*;
+
+import static java.util.Objects.requireNonNull;
+
+/**
+ * Unknown ADS Package
+ */
+@AdsCommandType(Command.UNKNOWN)
+public class UnknownCommand extends AmsPacket {
+
+    private final transient ByteBuf remainingBytes;
+
+    private UnknownCommand(AmsHeader amsHeader, ByteBuf remainingBytes) {
+<span class="fc" id="L38">        super(amsHeader);</span>
+<span class="fc" id="L39">        this.remainingBytes = requireNonNull(remainingBytes);</span>
+<span class="fc" id="L40">    }</span>
+
+    private UnknownCommand(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, State stateId, Invoke invokeId, ByteBuf remainingBytes) {
+<span class="fc" id="L43">        super(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, stateId, invokeId);</span>
+<span class="fc" id="L44">        this.remainingBytes = requireNonNull(remainingBytes);</span>
+<span class="fc" id="L45">    }</span>
+
+    @Override
+    public AdsData getAdsData() {
+<span class="pc" id="L49">        return () -&gt; remainingBytes;</span>
+    }
+
+    public static UnknownCommand of(AmsHeader amsHeader, ByteBuf remainingBytes) {
+<span class="fc" id="L53">        return new UnknownCommand(amsHeader, remainingBytes);</span>
+    }
+
+    public static UnknownCommand of(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, State stateId, Invoke invokeId, ByteBuf remainingBytes) {
+<span class="fc" id="L57">        return new UnknownCommand(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, stateId, invokeId, remainingBytes);</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L63">            return true;</span>
+        }
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (!(o instanceof UnknownCommand)) {</span>
+<span class="nc" id="L66">            return false;</span>
+        }
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (!super.equals(o)) {</span>
+<span class="nc" id="L69">            return false;</span>
+        }
+
+<span class="nc" id="L72">        UnknownCommand that = (UnknownCommand) o;</span>
+
+<span class="nc" id="L74">        return remainingBytes.equals(that.remainingBytes);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L79">        int result = super.hashCode();</span>
+<span class="nc" id="L80">        result = 31 * result + remainingBytes.hashCode();</span>
+<span class="nc" id="L81">        return result;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L86">        return &quot;UnknownCommand&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

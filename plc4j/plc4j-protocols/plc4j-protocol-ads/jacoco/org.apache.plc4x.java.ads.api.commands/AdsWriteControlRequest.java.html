@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsWriteControlRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.api.commands</a> &gt; <span class="el_source">AdsWriteControlRequest.java</span></div><h1>AdsWriteControlRequest.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.api.commands;
+
+import org.apache.plc4x.java.ads.api.commands.types.AdsState;
+import org.apache.plc4x.java.ads.api.commands.types.Data;
+import org.apache.plc4x.java.ads.api.commands.types.DeviceState;
+import org.apache.plc4x.java.ads.api.commands.types.Length;
+import org.apache.plc4x.java.ads.api.generic.AdsData;
+import org.apache.plc4x.java.ads.api.generic.AmsHeader;
+import org.apache.plc4x.java.ads.api.generic.types.AmsNetId;
+import org.apache.plc4x.java.ads.api.generic.types.AmsPort;
+import org.apache.plc4x.java.ads.api.generic.types.Command;
+import org.apache.plc4x.java.ads.api.generic.types.Invoke;
+import org.apache.plc4x.java.ads.api.util.LengthSupplier;
+
+import static java.util.Objects.requireNonNull;
+
+/**
+ * Changes the ADS status and the device status of an ADS device.
+ * Additionally it is possible to send data to the ADS device to transfer further information.
+ * These data were not analysed from the current ADS devices (PLC, NC, ...)
+ */
+@AdsCommandType(Command.ADS_WRITE_CONTROL)
+public class AdsWriteControlRequest extends AdsAbstractRequest {
+
+    /**
+     * 2 bytes	New ADS status (see data type ADSSTATE of the ADS-DLL).
+     */
+    private final AdsState adsState;
+    /**
+     * 2 bytes	New device status.
+     */
+    private final DeviceState deviceState;
+    /**
+     * 4 bytes	Length of data in byte.
+     */
+    private final Length length;
+    /**
+     * n bytes	Additional data which are sent to the ADS device
+     */
+    private final Data data;
+
+    private final transient LengthSupplier lengthSupplier;
+
+    private AdsWriteControlRequest(AmsHeader amsHeader, AdsState adsState, DeviceState deviceState, Length length, Data data) {
+<span class="fc" id="L63">        super(amsHeader);</span>
+<span class="fc" id="L64">        this.adsState = requireNonNull(adsState);</span>
+<span class="fc" id="L65">        this.deviceState = requireNonNull(deviceState);</span>
+<span class="fc" id="L66">        this.length = requireNonNull(length);</span>
+<span class="fc" id="L67">        this.data = requireNonNull(data);</span>
+<span class="fc" id="L68">        this.lengthSupplier = null;</span>
+<span class="fc" id="L69">    }</span>
+
+    private AdsWriteControlRequest(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, Invoke invokeId, AdsState adsState, DeviceState deviceState, Data data) {
+<span class="fc" id="L72">        super(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, invokeId);</span>
+<span class="fc" id="L73">        this.adsState = requireNonNull(adsState);</span>
+<span class="fc" id="L74">        this.deviceState = requireNonNull(deviceState);</span>
+<span class="fc" id="L75">        this.length = null;</span>
+<span class="fc" id="L76">        this.data = requireNonNull(data);</span>
+<span class="fc" id="L77">        this.lengthSupplier = data;</span>
+<span class="fc" id="L78">    }</span>
+
+    public static AdsWriteControlRequest of(AmsHeader amsHeader, AdsState adsState, DeviceState deviceState, Length length, Data data) {
+<span class="fc" id="L81">        return new AdsWriteControlRequest(amsHeader, adsState, deviceState, length, data);</span>
+    }
+
+    public static AdsWriteControlRequest of(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, Invoke invokeId, AdsState adsState, DeviceState deviceState, Data data) {
+<span class="fc" id="L85">        return new AdsWriteControlRequest(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, invokeId, adsState, deviceState, data);</span>
+    }
+
+    public AdsState getAdsState() {
+<span class="fc" id="L89">        return adsState;</span>
+    }
+
+    public DeviceState getDeviceState() {
+<span class="fc" id="L93">        return deviceState;</span>
+    }
+
+    public Length getLength() {
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        return lengthSupplier == null ? length : Length.of(lengthSupplier);</span>
+    }
+
+    public Data getData() {
+<span class="fc" id="L101">        return data;</span>
+    }
+
+    @Override
+    public AdsData getAdsData() {
+<span class="fc" id="L106">        return buildADSData(adsState, deviceState, getLength(), data);</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if (this == o)</span>
+<span class="nc" id="L112">            return true;</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if (!(o instanceof AdsWriteControlRequest))</span>
+<span class="nc" id="L114">            return false;</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (!super.equals(o))</span>
+<span class="nc" id="L116">            return false;</span>
+
+<span class="fc" id="L118">        AdsWriteControlRequest that = (AdsWriteControlRequest) o;</span>
+
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (!adsState.equals(that.adsState))</span>
+<span class="nc" id="L121">            return false;</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (!deviceState.equals(that.deviceState))</span>
+<span class="nc" id="L123">            return false;</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">        if (!getLength().equals(that.getLength()))</span>
+<span class="nc" id="L125">            return false;</span>
+
+<span class="fc" id="L127">        return data.equals(that.data);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L132">        int result = super.hashCode();</span>
+<span class="nc" id="L133">        result = 31 * result + adsState.hashCode();</span>
+<span class="nc" id="L134">        result = 31 * result + deviceState.hashCode();</span>
+<span class="nc" id="L135">        result = 31 * result + getLength().hashCode();</span>
+<span class="nc" id="L136">        result = 31 * result + data.hashCode();</span>
+<span class="nc" id="L137">        return result;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L142">        return &quot;AdsWriteControlRequest{&quot; +</span>
+            &quot;adsState=&quot; + adsState +
+            &quot;, deviceState=&quot; + deviceState +
+<span class="fc" id="L145">            &quot;, length=&quot; + getLength() +</span>
+            &quot;, data=&quot; + data +
+<span class="fc" id="L147">            &quot;} &quot; + super.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IndexGroup.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.api.commands.types</a> &gt; <span class="el_source">IndexGroup.java</span></div><h1>IndexGroup.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.api.commands.types;
+
+import io.netty.buffer.ByteBuf;
+import org.apache.plc4x.java.ads.api.util.UnsignedIntLEByteValue;
+
+@SuppressWarnings(&quot;unused&quot;) // Due to predefined IndexGroups
+public class IndexGroup extends UnsignedIntLEByteValue {
+
+    public static final int NUM_BYTES = UnsignedIntLEByteValue.UNSIGNED_INT_LE_NUM_BYTES;
+
+    private IndexGroup(byte... values) {
+<span class="fc" id="L30">        super(values);</span>
+<span class="fc" id="L31">    }</span>
+
+    private IndexGroup(long value) {
+<span class="fc" id="L34">        super(value);</span>
+<span class="fc" id="L35">    }</span>
+
+    private IndexGroup(String value) {
+<span class="fc" id="L38">        super(value);</span>
+<span class="fc" id="L39">    }</span>
+
+    private IndexGroup(ByteBuf byteBuf) {
+<span class="fc" id="L42">        super(byteBuf);</span>
+<span class="fc" id="L43">    }</span>
+
+    public static IndexGroup of(byte... values) {
+<span class="fc" id="L46">        return new IndexGroup(values);</span>
+    }
+
+    public static IndexGroup of(long value) {
+<span class="fc" id="L50">        return new IndexGroup(value);</span>
+    }
+
+    public static IndexGroup of(String value) {
+<span class="fc" id="L54">        return new IndexGroup(value);</span>
+    }
+
+    public static IndexGroup of(ByteBuf byteBuf) {
+<span class="fc" id="L58">        return new IndexGroup(byteBuf);</span>
+    }
+
+    public static final class ReservedGroups {
+<span class="fc" id="L62">        public static final IndexGroup ADSIGRP_SYMTAB = IndexGroup.of(0xF000);</span>
+<span class="fc" id="L63">        public static final IndexGroup ADSIGRP_SYMNAME = IndexGroup.of(0xF001);</span>
+<span class="fc" id="L64">        public static final IndexGroup ADSIGRP_SYMVAL = IndexGroup.of(0xF002);</span>
+<span class="fc" id="L65">        public static final IndexGroup ADSIGRP_SYM_HNDBYNAME = IndexGroup.of(0xF003);</span>
+<span class="fc" id="L66">        public static final IndexGroup ADSIGRP_SYM_VALBYNAME = IndexGroup.of(0xF004);</span>
+<span class="fc" id="L67">        public static final IndexGroup ADSIGRP_SYM_VALBYHND = IndexGroup.of(0xF005);</span>
+<span class="fc" id="L68">        public static final IndexGroup ADSIGRP_SYM_RELEASEHND = IndexGroup.of(0xF006);</span>
+<span class="fc" id="L69">        public static final IndexGroup ADSIGRP_SYM_INFOBYNAME = IndexGroup.of(0xF007);</span>
+<span class="fc" id="L70">        public static final IndexGroup ADSIGRP_SYM_VERSION = IndexGroup.of(0xF008);</span>
+<span class="fc" id="L71">        public static final IndexGroup ADSIGRP_SYM_INFOBYNAMEEX = IndexGroup.of(0xF009);</span>
+<span class="fc" id="L72">        public static final IndexGroup ADSIGRP_SYM_DOWNLOAD = IndexGroup.of(0xF00A);</span>
+<span class="fc" id="L73">        public static final IndexGroup ADSIGRP_SYM_UPLOAD = IndexGroup.of(0xF00B);</span>
+<span class="fc" id="L74">        public static final IndexGroup ADSIGRP_SYM_UPLOADINFO = IndexGroup.of(0xF00C);</span>
+<span class="fc" id="L75">        public static final IndexGroup ADSIGRP_SYMNOTE = IndexGroup.of(0xF010);</span>
+<span class="fc" id="L76">        public static final IndexGroup ADSIGRP_IOIMAGE_RWIB = IndexGroup.of(0xF020);</span>
+<span class="fc" id="L77">        public static final IndexGroup ADSIGRP_IOIMAGE_RWIX = IndexGroup.of(0xF021);</span>
+<span class="fc" id="L78">        public static final IndexGroup ADSIGRP_IOIMAGE_RISIZE = IndexGroup.of(0xF025);</span>
+<span class="fc" id="L79">        public static final IndexGroup ADSIGRP_IOIMAGE_RWOB = IndexGroup.of(0xF030);</span>
+<span class="fc" id="L80">        public static final IndexGroup ADSIGRP_IOIMAGE_RWOX = IndexGroup.of(0xF031);</span>
+<span class="fc" id="L81">        public static final IndexGroup ADSIGRP_IOIMAGE_RWOSIZE = IndexGroup.of(0xF035);</span>
+<span class="fc" id="L82">        public static final IndexGroup ADSIGRP_IOIMAGE_CLEARI = IndexGroup.of(0xF040);</span>
+<span class="fc" id="L83">        public static final IndexGroup ADSIGRP_IOIMAGE_CLEARO = IndexGroup.of(0xF050);</span>
+<span class="fc" id="L84">        public static final IndexGroup ADSIGRP_IOIMAGE_RWIOB = IndexGroup.of(0xF060);</span>
+<span class="fc" id="L85">        public static final IndexGroup ADSIGRP_DEVICE_DATA = IndexGroup.of(0xF100);</span>
+<span class="fc" id="L86">        public static final IndexGroup ADSIOFFS_DEVDATA_ADSSTATE = IndexGroup.of(0x0000);</span>
+<span class="fc" id="L87">        public static final IndexGroup ADSIOFFS_DEVDATA_DEVSTATE = IndexGroup.of(0x0002);</span>
+
+        private ReservedGroups() {
+            // Container class
+        }
+    }
+
+    public static final class SystemServiceGroups {
+<span class="fc" id="L95">        public static final IndexGroup SYSTEMSERVICE_OPENCREATE = IndexGroup.of(100);</span>
+<span class="fc" id="L96">        public static final IndexGroup SYSTEMSERVICE_OPENREAD = IndexGroup.of(101);</span>
+<span class="fc" id="L97">        public static final IndexGroup SYSTEMSERVICE_OPENWRITE = IndexGroup.of(102);</span>
+<span class="fc" id="L98">        public static final IndexGroup SYSTEMSERVICE_CREATEFILE = IndexGroup.of(110);</span>
+<span class="fc" id="L99">        public static final IndexGroup SYSTEMSERVICE_CLOSEHANDLE = IndexGroup.of(111);</span>
+<span class="fc" id="L100">        public static final IndexGroup SYSTEMSERVICE_FOPEN = IndexGroup.of(120);</span>
+<span class="fc" id="L101">        public static final IndexGroup SYSTEMSERVICE_FCLOSE = IndexGroup.of(121);</span>
+<span class="fc" id="L102">        public static final IndexGroup SYSTEMSERVICE_FREAD = IndexGroup.of(122);</span>
+<span class="fc" id="L103">        public static final IndexGroup SYSTEMSERVICE_FWRITE = IndexGroup.of(123);</span>
+<span class="fc" id="L104">        public static final IndexGroup SYSTEMSERVICE_FSEEK = IndexGroup.of(124);</span>
+<span class="fc" id="L105">        public static final IndexGroup SYSTEMSERVICE_FTELL = IndexGroup.of(125);</span>
+<span class="fc" id="L106">        public static final IndexGroup SYSTEMSERVICE_FGETS = IndexGroup.of(126);</span>
+<span class="fc" id="L107">        public static final IndexGroup SYSTEMSERVICE_FPUTS = IndexGroup.of(127);</span>
+<span class="fc" id="L108">        public static final IndexGroup SYSTEMSERVICE_FSCANF = IndexGroup.of(128);</span>
+<span class="fc" id="L109">        public static final IndexGroup SYSTEMSERVICE_FPRINTF = IndexGroup.of(129);</span>
+<span class="fc" id="L110">        public static final IndexGroup SYSTEMSERVICE_FEOF = IndexGroup.of(130);</span>
+<span class="fc" id="L111">        public static final IndexGroup SYSTEMSERVICE_FDELETE = IndexGroup.of(131);</span>
+<span class="fc" id="L112">        public static final IndexGroup SYSTEMSERVICE_FRENAME = IndexGroup.of(132);</span>
+<span class="fc" id="L113">        public static final IndexGroup SYSTEMSERVICE_REG_HKEYLOCALMACHINE = IndexGroup.of(200);</span>
+<span class="fc" id="L114">        public static final IndexGroup SYSTEMSERVICE_SENDEMAIL = IndexGroup.of(300);</span>
+<span class="fc" id="L115">        public static final IndexGroup SYSTEMSERVICE_TIMESERVICES = IndexGroup.of(400);</span>
+<span class="fc" id="L116">        public static final IndexGroup SYSTEMSERVICE_STARTPROCESS = IndexGroup.of(500);</span>
+<span class="fc" id="L117">        public static final IndexGroup SYSTEMSERVICE_CHANGENETID = IndexGroup.of(600);</span>
+
+        private SystemServiceGroups() {
+            // Container class
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

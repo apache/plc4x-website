@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OpmUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Utils: Object PLC Mapping</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.opm</a> &gt; <span class="el_source">OpmUtils.java</span></div><h1>OpmUtils.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+
+package org.apache.plc4x.java.opm;
+
+import org.apache.commons.lang3.Validate;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Utility methods for usage with OPM.
+ */
+final class OpmUtils {
+
+    private static final String ADDRESS = &quot;address&quot;;
+<span class="fc" id="L33">    static final Pattern pattern = Pattern.compile(&quot;^\\$\\{(?&lt;&quot; + ADDRESS + &quot;&gt;.*)}$&quot;);</span>
+
+    private OpmUtils() {
+        // Util class
+    }
+
+    static &lt;T&gt; PlcEntity getPlcEntityAndCheckPreconditions(Class&lt;T&gt; clazz) {
+<span class="fc" id="L40">        PlcEntity annotation = clazz.getAnnotation(PlcEntity.class);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (annotation == null) {</span>
+<span class="fc" id="L42">            throw new IllegalArgumentException(&quot;Given Class is no Plc Entity, i.e., not annotated with @PlcEntity&quot;);</span>
+        }
+        // Check if default constructor exists
+        try {
+<span class="fc" id="L46">            clazz.getConstructor();</span>
+<span class="fc" id="L47">        } catch (NoSuchMethodException e) {</span>
+<span class="fc" id="L48">            throw new IllegalArgumentException(&quot;Cannot use PlcEntity without default constructor&quot;, e);</span>
+<span class="fc" id="L49">        }</span>
+<span class="fc" id="L50">        return annotation;</span>
+    }
+
+    static String getOrResolveAddress(AliasRegistry registry, String addressString) {
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (!isValidExpression(addressString)) {</span>
+<span class="fc" id="L55">            throw new IllegalArgumentException(&quot;Invalid Syntax, either use field address (no starting $) &quot; +</span>
+                &quot;or an alias with Syntax ${xxx}. But given was '&quot; + addressString + &quot;'&quot;);
+        }
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (!isAlias(addressString)) {</span>
+<span class="fc" id="L59">            return addressString;</span>
+        }
+<span class="fc" id="L61">        String alias = getAlias(addressString);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (registry.canResolve(alias)) {</span>
+<span class="fc" id="L63">            return registry.resolve(alias);</span>
+        } else {
+<span class="fc" id="L65">            throw new IllegalArgumentException(&quot;Unable to resolve Alias '&quot; + alias + &quot;' in Schema Registry&quot;);</span>
+        }
+
+    }
+
+    /**
+     * Checks whether a given String is a valid OPM Expression, this means
+     * either an Address or an alias ${xxx}.
+     */
+    static boolean isValidExpression(String s) {
+<span class="fc" id="L75">        Validate.notNull(s);</span>
+<span class="fc bfc" id="L76" title="All 4 branches covered.">        return !s.startsWith(&quot;$&quot;) || pattern.matcher(s).matches();</span>
+    }
+
+    static boolean isAlias(String s) {
+<span class="fc" id="L80">        Validate.notNull(s);</span>
+<span class="fc bfc" id="L81" title="All 4 branches covered.">        return s.startsWith(&quot;$&quot;) &amp;&amp; pattern.matcher(s).matches();</span>
+    }
+
+    static String getAlias(String s) {
+<span class="fc" id="L85">        Matcher matcher = pattern.matcher(s);</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (!matcher.matches()) {</span>
+<span class="fc" id="L87">            throw new IllegalArgumentException(&quot;Invalid Syntax, no Alias found in String '&quot; + s + &quot;'. Syntax is ${xxx}&quot;);</span>
+        }
+<span class="fc" id="L89">        return matcher.group(ADDRESS);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

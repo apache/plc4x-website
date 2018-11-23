@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ModbusPlcDriver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Modbus</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.modbus</a> &gt; <span class="el_source">ModbusPlcDriver.java</span></div><h1>ModbusPlcDriver.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.modbus;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.plc4x.java.spi.PlcDriver;
+import org.apache.plc4x.java.api.authentication.PlcAuthentication;
+import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.modbus.connection.ModbusConnectionFactory;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Implementation of the Modbus protocol, based on:
+ * - Modbus Protocol (http://www.modbus.org/docs/Modbus_Application_Protocol_V1_1b3.pdf)
+ */
+public class ModbusPlcDriver implements PlcDriver {
+
+<span class="fc" id="L39">    public static final Pattern INET_ADDRESS_PATTERN = Pattern.compile(&quot;tcp://(?&lt;host&gt;[\\w.]+)(:(?&lt;port&gt;\\d*))?&quot;);</span>
+<span class="fc" id="L40">    public static final Pattern SERIAL_PATTERN = Pattern.compile(&quot;serial://(?&lt;serialDefinition&gt;((?!/\\d).)*)&quot;);</span>
+<span class="fc" id="L41">    public static final Pattern MODBUS_URI_PATTERN = Pattern.compile(&quot;^modbus:(&quot; + INET_ADDRESS_PATTERN + &quot;|&quot; + SERIAL_PATTERN + &quot;)/?&quot; + &quot;(?&lt;params&gt;\\?.*)?&quot;);</span>
+
+    private ModbusConnectionFactory modbusConnectionFactory;
+
+<span class="fc" id="L45">    public ModbusPlcDriver() {</span>
+<span class="fc" id="L46">        this.modbusConnectionFactory = new ModbusConnectionFactory();</span>
+<span class="fc" id="L47">    }</span>
+
+<span class="fc" id="L49">    public ModbusPlcDriver(ModbusConnectionFactory modbusConnectionFactory) {</span>
+<span class="fc" id="L50">        this.modbusConnectionFactory = modbusConnectionFactory;</span>
+<span class="fc" id="L51">    }</span>
+
+    @Override
+    public String getProtocolCode() {
+<span class="fc" id="L55">        return &quot;modbus&quot;;</span>
+    }
+
+    @Override
+    public String getProtocolName() {
+<span class="fc" id="L60">        return &quot;Modbus (TCP / Serial)&quot;;</span>
+    }
+
+    @Override
+    public PlcConnection connect(String url) throws PlcConnectionException {
+<span class="fc" id="L65">        Matcher matcher = MODBUS_URI_PATTERN.matcher(url);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (!matcher.matches()) {</span>
+<span class="fc" id="L67">            throw new PlcConnectionException(</span>
+                &quot;Connection url doesn't match the format 'modbus:{type}//{port|host}'&quot;);
+        }
+
+<span class="fc" id="L71">        String host = matcher.group(&quot;host&quot;);</span>
+<span class="fc" id="L72">        String serialDefinition = matcher.group(&quot;serialDefinition&quot;);</span>
+<span class="fc" id="L73">        String portString = matcher.group(&quot;port&quot;);</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        Integer port = StringUtils.isNotBlank(portString) ? Integer.parseInt(portString) : null;</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        String params = matcher.group(&quot;params&quot;) != null ? matcher.group(&quot;params&quot;).substring(1) : null;</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (serialDefinition != null) {</span>
+<span class="fc" id="L78">            return modbusConnectionFactory.modbusSerialPlcConnectionOf(serialDefinition, params);</span>
+        } else {
+            try {
+<span class="fc" id="L81">                return modbusConnectionFactory.modbusTcpPlcConnectionOf(InetAddress.getByName(host), port, params);</span>
+<span class="fc" id="L82">            } catch (UnknownHostException e) {</span>
+<span class="fc" id="L83">                throw new PlcConnectionException(e);</span>
+            }
+        }
+    }
+
+    @Override
+    public PlcConnection connect(String url, PlcAuthentication authentication) throws PlcConnectionException {
+<span class="fc" id="L90">        throw new PlcConnectionException(&quot;Modbus connections don't support authentication.&quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

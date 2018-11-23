@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultByteFieldItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Driver-Base: Base</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.base.messages.items</a> &gt; <span class="el_source">DefaultByteFieldItem.java</span></div><h1>DefaultByteFieldItem.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.base.messages.items;
+
+import org.apache.plc4x.java.api.exceptions.PlcIncompatibleDatatypeException;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
+public class DefaultByteFieldItem extends BaseDefaultFieldItem&lt;Byte&gt; {
+
+    public DefaultByteFieldItem(Byte... values) {
+<span class="fc" id="L29">        super(values);</span>
+<span class="fc" id="L30">    }</span>
+
+    @Override
+    public Object getObject(int index) {
+<span class="fc" id="L34">        return getValue(index);</span>
+    }
+
+    @Override
+    public boolean isValidBoolean(int index) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        return getValue(index) != null;</span>
+    }
+
+    @Override
+    public Boolean getBoolean(int index) {
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (!isValidBoolean(index)) {</span>
+<span class="fc" id="L45">            throw new PlcIncompatibleDatatypeException(Boolean.class, index);</span>
+        }
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        return getValue(index) != 0L;</span>
+    }
+
+    @Override
+    public boolean isValidByte(int index) {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        return getValue(index) != null;</span>
+    }
+
+    @Override
+    public Byte getByte(int index) {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (!isValidByte(index)) {</span>
+<span class="fc" id="L58">            throw new PlcIncompatibleDatatypeException(Byte.class, index);</span>
+        }
+<span class="fc" id="L60">        return getValue(index);</span>
+    }
+
+    @Override
+    public boolean isValidShort(int index) {
+<span class="fc" id="L65">        return isValidByte(index);</span>
+    }
+
+    @Override
+    public Short getShort(int index) {
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (!isValidShort(index)) {</span>
+<span class="fc" id="L71">            throw new PlcIncompatibleDatatypeException(Short.class, index);</span>
+        }
+<span class="fc" id="L73">        return getValue(index).shortValue();</span>
+    }
+
+    @Override
+    public boolean isValidInteger(int index) {
+<span class="fc" id="L78">        return isValidByte(index);</span>
+    }
+
+    @Override
+    public Integer getInteger(int index) {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (!isValidInteger(index)) {</span>
+<span class="fc" id="L84">            throw new PlcIncompatibleDatatypeException(Integer.class, index);</span>
+        }
+<span class="fc" id="L86">        return getValue(index).intValue();</span>
+    }
+
+    @Override
+    public boolean isValidLong(int index) {
+<span class="fc" id="L91">        return isValidByte(index);</span>
+    }
+
+    @Override
+    public Long getLong(int index) {
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (!isValidLong(index)) {</span>
+<span class="fc" id="L97">            throw new PlcIncompatibleDatatypeException(Long.class, index);</span>
+        }
+<span class="fc" id="L99">        return getValue(index).longValue();</span>
+    }
+
+    public boolean isValidBigInteger(int index) {
+<span class="fc" id="L103">        return isValidByte(index);</span>
+    }
+
+    public BigInteger getBigInteger(int index) {
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if (!isValidBigInteger(index)) {</span>
+<span class="fc" id="L108">            throw new PlcIncompatibleDatatypeException(BigInteger.class, index);</span>
+        }
+<span class="fc" id="L110">        return BigInteger.valueOf(getValue(index));</span>
+    }
+
+    @Override
+    public boolean isValidFloat(int index) {
+<span class="fc" id="L115">        return isValidByte(index);</span>
+    }
+
+    @Override
+    public Float getFloat(int index) {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (!isValidFloat(index)) {</span>
+<span class="fc" id="L121">            throw new PlcIncompatibleDatatypeException(Float.class, index);</span>
+        }
+<span class="fc" id="L123">        return getValue(index).floatValue();</span>
+    }
+
+    @Override
+    public boolean isValidDouble(int index) {
+<span class="fc" id="L128">        return isValidByte(index);</span>
+    }
+
+    @Override
+    public Double getDouble(int index) {
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (!isValidDouble(index)) {</span>
+<span class="fc" id="L134">            throw new PlcIncompatibleDatatypeException(Double.class, index);</span>
+        }
+<span class="fc" id="L136">        return getValue(index).doubleValue();</span>
+    }
+
+    public boolean isValidBigDecimal(int index) {
+<span class="fc" id="L140">        return isValidByte(index);</span>
+    }
+
+    public BigDecimal getBigDecimal(int index) {
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        if(!isValidBigDecimal(index)) {</span>
+<span class="fc" id="L145">            throw new PlcIncompatibleDatatypeException(BigDecimal.class, index);</span>
+        }
+<span class="fc" id="L147">        return new BigDecimal(getValue(index));</span>
+    }
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

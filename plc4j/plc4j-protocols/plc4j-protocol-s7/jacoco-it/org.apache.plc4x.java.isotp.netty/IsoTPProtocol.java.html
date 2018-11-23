@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IsoTPProtocol.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: S7</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.isotp.netty</a> &gt; <span class="el_source">IsoTPProtocol.java</span></div><h1>IsoTPProtocol.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.isotp.netty;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import org.apache.plc4x.java.api.exceptions.PlcProtocolPayloadTooBigException;
+import org.apache.plc4x.java.base.PlcMessageToMessageCodec;
+import org.apache.plc4x.java.base.events.ConnectEvent;
+import org.apache.plc4x.java.isoontcp.netty.IsoOnTcpProtocol;
+import org.apache.plc4x.java.isoontcp.netty.model.IsoOnTcpMessage;
+import org.apache.plc4x.java.isotp.netty.events.IsoTPConnectedEvent;
+import org.apache.plc4x.java.isotp.netty.model.IsoTPMessage;
+import org.apache.plc4x.java.isotp.netty.model.params.*;
+import org.apache.plc4x.java.isotp.netty.model.tpdus.*;
+import org.apache.plc4x.java.isotp.netty.model.types.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+public class IsoTPProtocol extends PlcMessageToMessageCodec&lt;IsoOnTcpMessage, Tpdu&gt; {
+
+<span class="fc" id="L45">    private static final Logger logger = LoggerFactory.getLogger(IsoTPProtocol.class);</span>
+
+    private short callingTsapId;
+    private short calledTsapId;
+    private TpduSize tpduSize;
+
+<span class="fc" id="L51">    public IsoTPProtocol(short callingTsapId, short calledTsapId, TpduSize tpduSize) {</span>
+<span class="fc" id="L52">        this.callingTsapId = callingTsapId;</span>
+<span class="fc" id="L53">        this.calledTsapId = calledTsapId;</span>
+<span class="fc" id="L54">        this.tpduSize = tpduSize;</span>
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * If the IsoTP protocol is used on top of the ISO on TCP protocol, then as soon as the pipeline receives the
+     * request to connect, an IsoTP connection request TPDU must be sent in order to initialize the connection.
+     *
+     * @param ctx the current protocol layers context
+     * @param evt the event
+     * @throws Exception throws an exception if something goes wrong internally
+     */
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+<span class="fc" id="L67">        ChannelHandler prevHandler = getPrevChannelHandler(ctx);</span>
+
+        // If the connection has just been established, start setting up the connection
+        // by sending a connection request to the plc.
+<span class="pc bpc" id="L71" title="1 of 4 branches missed.">        if ((prevHandler instanceof IsoOnTcpProtocol) &amp;&amp; (evt instanceof ConnectEvent)) {</span>
+<span class="fc" id="L72">            logger.debug(&quot;ISO Transport Protocol Sending Connection Request&quot;);</span>
+            // Open the session on ISO Transport Protocol first.
+<span class="fc" id="L74">            ConnectionRequestTpdu connectionRequest = new ConnectionRequestTpdu(</span>
+                (short) 0x0000, (short) 0x000F, ProtocolClass.CLASS_0,
+<span class="fc" id="L76">                Arrays.asList(</span>
+                    new CalledTsapParameter(calledTsapId),
+                    new CallingTsapParameter(callingTsapId),
+                    new TpduSizeParameter(tpduSize)),
+<span class="fc" id="L80">                Unpooled.buffer());</span>
+<span class="fc" id="L81">            ctx.channel().writeAndFlush(connectionRequest);</span>
+<span class="fc" id="L82">        } else {</span>
+<span class="fc" id="L83">            super.userEventTriggered(ctx, evt);</span>
+        }
+<span class="fc" id="L85">    }</span>
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Encoding
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    protected void encode(ChannelHandlerContext ctx, Tpdu in, List&lt;Object&gt; out) {
+<span class="fc" id="L93">        logger.trace(&quot;ISO Transport Protocol Message sent&quot;);</span>
+
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (in == null) {</span>
+<span class="nc" id="L96">            return;</span>
+        }
+
+<span class="fc" id="L99">        ByteBuf buf = Unpooled.buffer();</span>
+
+        // Header length indicator field (The length byte doesn't count)
+<span class="fc" id="L102">        buf.writeByte((byte) (getHeaderLength(in) - 1));</span>
+        // TPDU Code (First 4 bits), Initial Credit Allocation (Second 4 bits)
+<span class="fc" id="L104">        buf.writeByte(in.getTpduCode().getCode());</span>
+        // The fixed header of a TCP TP Packet depends highly on the selected type.
+<span class="pc bpc" id="L106" title="2 of 5 branches missed.">        switch (in.getTpduCode()) {</span>
+            case CONNECTION_REQUEST:
+            case CONNECTION_CONFIRM:
+<span class="fc" id="L109">                encodeConnectionTpdu(in, buf);</span>
+<span class="fc" id="L110">                break;</span>
+            case DATA:
+<span class="fc" id="L112">                encodeDataTpdu((DataTpdu) in, buf);</span>
+<span class="fc" id="L113">                break;</span>
+            case DISCONNECT_REQUEST:
+            case DISCONNECT_CONFIRM:
+<span class="fc" id="L116">                encodeDisconnectTpdu(in, buf);</span>
+<span class="fc" id="L117">                break;</span>
+            case TPDU_ERROR:
+<span class="nc" id="L119">                encodeErrorTpdu(in, buf);</span>
+<span class="nc" id="L120">                break;</span>
+            default:
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                if (logger.isErrorEnabled()) {</span>
+<span class="nc" id="L123">                    logger.error(&quot;TDPU Value {} not implemented yet&quot;, in.getTpduCode().name());</span>
+                }
+<span class="nc" id="L125">                return;</span>
+        }
+        // Add the user-data itself.
+<span class="fc" id="L128">        buf.writeBytes(in.getUserData());</span>
+
+        // Check if the message doesn't exceed the negotiated maximum size.
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">        if(buf.writerIndex() &gt; tpduSize.getValue()) {</span>
+<span class="nc" id="L132">            ctx.fireExceptionCaught(new PlcProtocolPayloadTooBigException(</span>
+<span class="nc" id="L133">                &quot;iso-tp&quot;, tpduSize.getValue(), buf.writerIndex(), in));</span>
+        } else {
+<span class="fc" id="L135">            out.add(new IsoOnTcpMessage(buf));</span>
+        }
+<span class="fc" id="L137">    }</span>
+
+    private void encodeErrorTpdu(Tpdu in, ByteBuf buf) {
+<span class="nc" id="L140">        ErrorTpdu errorTpdu = (ErrorTpdu) in;</span>
+<span class="nc" id="L141">        buf.writeShort(errorTpdu.getDestinationReference());</span>
+<span class="nc" id="L142">        buf.writeByte(errorTpdu.getRejectCause().getCode());</span>
+<span class="nc" id="L143">        encodeParameters(buf, in.getParameters());</span>
+<span class="nc" id="L144">    }</span>
+
+    private void encodeDisconnectTpdu(Tpdu in, ByteBuf buf) {
+<span class="fc" id="L147">        DisconnectTpdu disconnectTpdu = (DisconnectTpdu) in;</span>
+<span class="fc" id="L148">        buf.writeShort(disconnectTpdu.getDestinationReference());</span>
+<span class="fc" id="L149">        buf.writeShort(disconnectTpdu.getSourceReference());</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (disconnectTpdu instanceof DisconnectRequestTpdu) {</span>
+<span class="fc" id="L151">            DisconnectRequestTpdu disconnectRequestTpdu = (DisconnectRequestTpdu) disconnectTpdu;</span>
+<span class="fc" id="L152">            buf.writeByte(disconnectRequestTpdu.getDisconnectReason().getCode());</span>
+        }
+<span class="fc" id="L154">        encodeParameters(buf, in.getParameters());</span>
+<span class="fc" id="L155">    }</span>
+
+    private void encodeDataTpdu(DataTpdu in, ByteBuf buf) {
+        // EOT (Bit 8 = 1) / TPDU (All other bits 0)
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">        buf.writeByte((byte) (in.getTpduRef() | (in.isEot() ? 0x80 : 0x00)));</span>
+        // Note: A Data TPDU in Class 0 doesn't have parameters
+<span class="fc" id="L161">    }</span>
+
+    private void encodeConnectionTpdu(Tpdu in, ByteBuf buf) {
+<span class="fc" id="L164">        ConnectionTpdu connectionTpdu = (ConnectionTpdu) in;</span>
+<span class="fc" id="L165">        buf.writeShort(connectionTpdu.getDestinationReference());</span>
+<span class="fc" id="L166">        buf.writeShort(connectionTpdu.getSourceReference());</span>
+<span class="fc" id="L167">        buf.writeByte(connectionTpdu.getProtocolClass().getCode());</span>
+<span class="fc" id="L168">        encodeParameters(buf, in.getParameters());</span>
+<span class="fc" id="L169">    }</span>
+
+    private void encodeParameters(ByteBuf out, List&lt;Parameter&gt; parameters) {
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (parameters == null) {</span>
+<span class="nc" id="L173">            return;</span>
+        }
+
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        for (Parameter parameter : parameters) {</span>
+<span class="fc" id="L177">            out.writeByte(parameter.getType().getCode());</span>
+<span class="fc" id="L178">            out.writeByte((byte) (getParameterLength(parameter) - 2));</span>
+<span class="pc bpc" id="L179" title="3 of 5 branches missed.">            switch (parameter.getType()) {</span>
+                case CALLED_TSAP:
+                case CALLING_TSAP:
+<span class="fc" id="L182">                    TsapParameter tsap = (TsapParameter) parameter;</span>
+<span class="fc" id="L183">                    out.writeShort(tsap.getTsapId());</span>
+<span class="fc" id="L184">                    break;</span>
+                case CHECKSUM:
+<span class="nc" id="L186">                    ChecksumParameter checksum = (ChecksumParameter) parameter;</span>
+<span class="nc" id="L187">                    out.writeByte(checksum.getChecksum());</span>
+<span class="nc" id="L188">                    break;</span>
+                case DISCONNECT_ADDITIONAL_INFORMATION:
+<span class="nc" id="L190">                    DisconnectAdditionalInformationParameter disconnectAdditionalInformation = (DisconnectAdditionalInformationParameter) parameter;</span>
+<span class="nc" id="L191">                    out.writeBytes(disconnectAdditionalInformation.getData());</span>
+<span class="nc" id="L192">                    break;</span>
+                case TPDU_SIZE:
+<span class="fc" id="L194">                    TpduSizeParameter sizeParameter = (TpduSizeParameter) parameter;</span>
+<span class="fc" id="L195">                    out.writeByte(sizeParameter.getTpduSize().getCode());</span>
+<span class="fc" id="L196">                    break;</span>
+                default:
+<span class="nc bnc" id="L198" title="All 2 branches missed.">                    if (logger.isErrorEnabled()) {</span>
+<span class="nc" id="L199">                        logger.error(&quot;TDPU tarameter type {} not implemented yet&quot;, parameter.getType().name());</span>
+                    }
+<span class="nc" id="L201">                    return;</span>
+            }
+<span class="fc" id="L203">        }</span>
+<span class="fc" id="L204">    }</span>
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Decoding
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    protected void decode(ChannelHandlerContext ctx, IsoOnTcpMessage in, List&lt;Object&gt; out) {
+<span class="fc" id="L212">        logger.trace(&quot;ISO TP Message received&quot;);</span>
+<span class="pc bpc" id="L213" title="1 of 2 branches missed.">        if (in == null) {</span>
+<span class="nc" id="L214">            return;</span>
+        }
+
+<span class="pc bpc" id="L217" title="1 of 2 branches missed.">        if (logger.isDebugEnabled()) {</span>
+<span class="fc" id="L218">            logger.debug(&quot;Got Data: {}&quot;, ByteBufUtil.hexDump(in.getUserData()));</span>
+        }
+
+<span class="fc" id="L221">        ByteBuf userData = in.getUserData();</span>
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">        if (userData.writerIndex() &lt; 1) {</span>
+<span class="nc" id="L223">            return;</span>
+        }
+
+<span class="fc" id="L226">        int packetStart = userData.readerIndex();</span>
+<span class="fc" id="L227">        byte headerLength = userData.readByte();</span>
+<span class="fc" id="L228">        int headerEnd = packetStart + headerLength;</span>
+<span class="fc" id="L229">        TpduCode tpduCode = TpduCode.valueOf(userData.readByte());</span>
+        // Read fixed header part.
+<span class="fc" id="L231">        Tpdu tpdu = null;</span>
+<span class="fc" id="L232">        List&lt;Parameter&gt; parameters = new LinkedList&lt;&gt;();</span>
+<span class="pc bpc" id="L233" title="3 of 5 branches missed.">        switch (tpduCode) {</span>
+            case CONNECTION_REQUEST:
+            case CONNECTION_CONFIRM:
+<span class="fc" id="L236">                tpdu = decodeConnectTpdu(ctx, userData, tpduCode, parameters);</span>
+<span class="fc" id="L237">                break;</span>
+            case DATA:
+<span class="fc" id="L239">                tpdu = decodeDataTpdu(userData, parameters);</span>
+<span class="fc" id="L240">                break;</span>
+            case DISCONNECT_REQUEST:
+            case DISCONNECT_CONFIRM:
+<span class="nc" id="L243">                tpdu = decodeDisconnectTpdu(userData, tpduCode, parameters);</span>
+<span class="nc" id="L244">                break;</span>
+            case TPDU_ERROR:
+<span class="nc" id="L246">                tpdu = decodeErrorTpdu(userData, parameters);</span>
+<span class="nc" id="L247">                break;</span>
+            default:
+<span class="nc bnc" id="L249" title="All 2 branches missed.">                if (logger.isErrorEnabled()) {</span>
+<span class="nc" id="L250">                    logger.error(&quot;Tpdu Code {} not implemented&quot;, tpduCode.name());</span>
+                }
+                break;
+        }
+
+        // Read variable header parameters
+<span class="fc bfc" id="L256" title="All 2 branches covered.">        while (userData.readerIndex() &lt; headerEnd) {</span>
+<span class="fc" id="L257">            Parameter parameter = decodeParameter(userData);</span>
+<span class="pc bpc" id="L258" title="1 of 2 branches missed.">            if (parameter != null) {</span>
+<span class="fc" id="L259">                parameters.add(parameter);</span>
+            }
+<span class="fc" id="L261">        }</span>
+
+<span class="pc bpc" id="L263" title="1 of 2 branches missed.">        if (tpdu != null) {</span>
+            // If we got a ConnectionConfirmTpdu response we are currently
+            // in the process of establishing a connection with the PLC, so
+            // Save some of the information in the session and tell the next
+            // layer to negotiate the connection parameters.
+<span class="fc bfc" id="L268" title="All 2 branches covered.">            if (tpdu instanceof ConnectionConfirmTpdu) {</span>
+<span class="fc" id="L269">                tpdu.getParameter(CalledTsapParameter.class).ifPresent(</span>
+<span class="fc" id="L270">                    calledTsapParameter -&gt; calledTsapId = calledTsapParameter.getTsapId());</span>
+<span class="fc" id="L271">                tpdu.getParameter(TpduSizeParameter.class).ifPresent(</span>
+<span class="fc" id="L272">                    tpduSizeParameter -&gt; tpduSize = tpduSizeParameter.getTpduSize());</span>
+            }
+<span class="fc" id="L274">            out.add(new IsoTPMessage(tpdu, userData));</span>
+        }
+<span class="fc" id="L276">    }</span>
+
+    private Tpdu decodeErrorTpdu(ByteBuf userData, List&lt;Parameter&gt; parameters) {
+        Tpdu tpdu;
+<span class="nc" id="L280">        short destinationReference = userData.readShort();</span>
+<span class="nc" id="L281">        RejectCause rejectCause = RejectCause.valueOf(userData.readByte());</span>
+<span class="nc" id="L282">        tpdu = new ErrorTpdu(destinationReference, rejectCause, parameters, userData);</span>
+<span class="nc" id="L283">        return tpdu;</span>
+    }
+
+    private Tpdu decodeDisconnectTpdu(ByteBuf userData, TpduCode tpduCode, List&lt;Parameter&gt; parameters) {
+        Tpdu tpdu;
+<span class="nc" id="L288">        short destinationReference = userData.readShort();</span>
+<span class="nc" id="L289">        short sourceReference = userData.readShort();</span>
+<span class="nc bnc" id="L290" title="All 2 branches missed.">        if (tpduCode == TpduCode.DISCONNECT_REQUEST) {</span>
+<span class="nc" id="L291">            DisconnectReason disconnectReason = DisconnectReason.valueOf(userData.readByte());</span>
+<span class="nc" id="L292">            tpdu = new DisconnectRequestTpdu(</span>
+                destinationReference, sourceReference, disconnectReason, parameters, userData);
+<span class="nc" id="L294">        } else {  // TpduCode.DISCONNECT_CONFIRM</span>
+<span class="nc" id="L295">            tpdu = new DisconnectConfirmTpdu(</span>
+                destinationReference, sourceReference, parameters, userData);
+        }
+<span class="nc" id="L298">        return tpdu;</span>
+    }
+
+    private Tpdu decodeDataTpdu(ByteBuf userData, List&lt;Parameter&gt; parameters) {
+        Tpdu tpdu;
+<span class="fc" id="L303">        byte tmp = userData.readByte();</span>
+        // Bit 8 is the EOT indicator (1 = last TPDU)
+<span class="pc bpc" id="L305" title="1 of 2 branches missed.">        boolean eot = (tmp &amp; 0x80) == 0x80;</span>
+        // The rest is simply a 7 bit number identifying the current request.
+<span class="fc" id="L307">        byte tpduRef = (byte) (tmp &amp; 0x7F);</span>
+<span class="fc" id="L308">        tpdu = new DataTpdu(eot, tpduRef, parameters, userData);</span>
+<span class="fc" id="L309">        return tpdu;</span>
+    }
+
+    private Tpdu decodeConnectTpdu(ChannelHandlerContext ctx, ByteBuf userData, TpduCode tpduCode, List&lt;Parameter&gt; parameters) {
+        Tpdu tpdu;
+<span class="fc" id="L314">        short destinationReference = userData.readShort();</span>
+<span class="fc" id="L315">        short sourceReference = userData.readShort();</span>
+<span class="fc" id="L316">        ProtocolClass protocolClass = ProtocolClass.valueOf(userData.readByte());</span>
+
+<span class="pc bpc" id="L318" title="1 of 2 branches missed.">        if (tpduCode == TpduCode.CONNECTION_REQUEST) {</span>
+<span class="nc" id="L319">            tpdu = new ConnectionRequestTpdu(destinationReference, sourceReference, protocolClass, parameters, userData);</span>
+
+        } else { // TpduCode.CONNECTION_CONFIRM
+<span class="fc" id="L322">            tpdu = new ConnectionConfirmTpdu(destinationReference, sourceReference, protocolClass, parameters, userData);</span>
+<span class="fc" id="L323">            ctx.channel().pipeline().fireUserEventTriggered(new IsoTPConnectedEvent());</span>
+        }
+<span class="fc" id="L325">        return tpdu;</span>
+    }
+
+    private Parameter decodeParameter(ByteBuf out) {
+<span class="fc" id="L329">        ParameterCode parameterCode = ParameterCode.valueOf(out.readByte());</span>
+<span class="pc bpc" id="L330" title="1 of 2 branches missed.">        if (parameterCode == null) {</span>
+<span class="nc" id="L331">            logger.error(&quot;Could not find parameter code&quot;);</span>
+<span class="nc" id="L332">            return null;</span>
+        }
+<span class="fc" id="L334">        byte length = out.readByte();</span>
+<span class="pc bpc" id="L335" title="3 of 5 branches missed.">        switch (parameterCode) {</span>
+            case CALLING_TSAP:
+            case CALLED_TSAP:
+<span class="fc" id="L338">                return decodeTsapParameter(out, parameterCode);</span>
+            case CHECKSUM:
+<span class="nc" id="L340">                byte checksum = out.readByte();</span>
+<span class="nc" id="L341">                return new ChecksumParameter(checksum);</span>
+            case DISCONNECT_ADDITIONAL_INFORMATION:
+<span class="nc" id="L343">                byte[] data = new byte[length];</span>
+<span class="nc" id="L344">                out.readBytes(data);</span>
+<span class="nc" id="L345">                return new DisconnectAdditionalInformationParameter(data);</span>
+            case TPDU_SIZE:
+<span class="fc" id="L347">                TpduSize size = TpduSize.valueOf(out.readByte());</span>
+<span class="fc" id="L348">                return new TpduSizeParameter(size);</span>
+            default:
+<span class="nc bnc" id="L350" title="All 2 branches missed.">                if (logger.isErrorEnabled()) {</span>
+<span class="nc" id="L351">                    logger.error(&quot;Parameter not implemented yet {}&quot;, parameterCode.name());</span>
+                }
+<span class="nc" id="L353">                return null;</span>
+        }
+    }
+
+    private Parameter decodeTsapParameter(ByteBuf out, ParameterCode parameterCode) {
+<span class="fc" id="L358">        short tsapId = out.readShort();</span>
+<span class="pc bpc" id="L359" title="1 of 3 branches missed.">        switch (parameterCode) {</span>
+            case CALLING_TSAP:
+<span class="fc" id="L361">                return new CallingTsapParameter(tsapId);</span>
+            case CALLED_TSAP:
+<span class="fc" id="L363">                return new CalledTsapParameter(tsapId);</span>
+            default:
+<span class="nc bnc" id="L365" title="All 2 branches missed.">                if (logger.isErrorEnabled()) {</span>
+<span class="nc" id="L366">                    logger.error(&quot;Parameter not implemented yet {}&quot;, parameterCode.name());</span>
+                }
+<span class="nc" id="L368">                return null;</span>
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Helpers
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Return the length of the entire header in bytes (including the size field itself)
+     * This is a sum of the fixed size header defined for the given tpdu type and the
+     * lengths of all parameters.
+     *
+     * @param tpdu Tpdu to get the header length for
+     * @return length of the iso tp header
+     */
+    private short getHeaderLength(Tpdu tpdu) {
+<span class="pc bpc" id="L385" title="1 of 2 branches missed.">        if (tpdu == null) {</span>
+<span class="nc" id="L386">            return 0;</span>
+        }
+
+        short headerLength;
+<span class="pc bpc" id="L390" title="3 of 6 branches missed.">        switch (tpdu.getTpduCode()) {</span>
+            case CONNECTION_REQUEST:
+            case CONNECTION_CONFIRM:
+<span class="fc" id="L393">                headerLength = 7;</span>
+<span class="fc" id="L394">                break;</span>
+            case DATA:
+<span class="fc" id="L396">                headerLength = 3;</span>
+<span class="fc" id="L397">                break;</span>
+            case DISCONNECT_REQUEST:
+<span class="fc" id="L399">                headerLength = 7;</span>
+<span class="fc" id="L400">                break;</span>
+            case DISCONNECT_CONFIRM:
+<span class="nc" id="L402">                headerLength = 6;</span>
+<span class="nc" id="L403">                break;</span>
+            case TPDU_ERROR:
+<span class="nc" id="L405">                headerLength = 5;</span>
+<span class="nc" id="L406">                break;</span>
+            default:
+<span class="nc" id="L408">                headerLength = 0;</span>
+                break;
+        }
+<span class="fc" id="L411">        return (short) (headerLength + getParametersLength(tpdu.getParameters()));</span>
+    }
+
+    private short getParametersLength(List&lt;Parameter&gt; parameters) {
+<span class="fc" id="L415">        short length = 0;</span>
+<span class="pc bpc" id="L416" title="1 of 2 branches missed.">        if (parameters != null) {</span>
+<span class="fc bfc" id="L417" title="All 2 branches covered.">            for (Parameter parameter : parameters) {</span>
+<span class="fc" id="L418">                length += getParameterLength(parameter);</span>
+<span class="fc" id="L419">            }</span>
+        }
+<span class="fc" id="L421">        return length;</span>
+    }
+
+    private short getParameterLength(Parameter parameter) {
+<span class="pc bpc" id="L425" title="1 of 2 branches missed.">        if (parameter == null) {</span>
+<span class="nc" id="L426">            return 0;</span>
+        }
+<span class="pc bpc" id="L428" title="3 of 5 branches missed.">        switch (parameter.getType()) {</span>
+            case CALLED_TSAP:
+            case CALLING_TSAP:
+<span class="fc" id="L431">                return 4;</span>
+            case CHECKSUM:
+<span class="nc" id="L433">                return 3;</span>
+            case DISCONNECT_ADDITIONAL_INFORMATION:
+<span class="nc" id="L435">                DisconnectAdditionalInformationParameter disconnectAdditionalInformationParameter =</span>
+                    (DisconnectAdditionalInformationParameter) parameter;
+<span class="nc bnc" id="L437" title="All 2 branches missed.">                return (short) (2 + ((disconnectAdditionalInformationParameter.getData() != null) ?</span>
+<span class="nc" id="L438">                    disconnectAdditionalInformationParameter.getData().length : 0));</span>
+            case TPDU_SIZE:
+<span class="fc" id="L440">                return 3;</span>
+            default:
+<span class="nc" id="L442">                return 0;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

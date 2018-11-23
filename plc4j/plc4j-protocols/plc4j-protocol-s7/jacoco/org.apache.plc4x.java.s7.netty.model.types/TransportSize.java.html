@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransportSize.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: S7</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.s7.netty.model.types</a> &gt; <span class="el_source">TransportSize.java</span></div><h1>TransportSize.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.s7.netty.model.types;
+
+import org.apache.plc4x.java.s7.types.S7ControllerType;
+
+import java.util.*;
+
+<span class="fc" id="L25">public enum TransportSize {</span>
+
+    /**
+     * TODO: For the types with code 0x00 we need to put some additional effort in reverse engineering the codes for these types.
+     */
+    // -----------------------------------------
+    // Single bit
+    // -----------------------------------------
+<span class="fc" id="L33">    BOOL(0x01, &quot;X&quot;, 1, null, DataTransportSize.BIT, S7ControllerType.S7_ANY),</span>
+
+    // -----------------------------------------
+    // Bit strings
+    // -----------------------------------------
+<span class="fc" id="L38">    BYTE(0x02, &quot;B&quot;, 1, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L39">    WORD(0x04, &quot;W&quot;, 2, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+<span class="fc" id="L40">    DWORD(0x06, &quot;D&quot;, 4, WORD, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+    // Only got a basic TIA license (S7-1500 needed to find this out)
+    // TODO: Find the code
+<span class="fc" id="L43">    LWORD(0x00, &quot;X&quot;, 8, null, null, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
+
+    // -----------------------------------------
+    // Integers
+    // -----------------------------------------
+    // Signed Int
+<span class="fc" id="L49">    INT(0x05, &quot;W&quot;, 2, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+    // Unsigned Int
+<span class="fc" id="L51">    UINT(0x05, &quot;W&quot;, 2, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
+    // (Signed) Small Int
+<span class="fc" id="L53">    SINT(0x02, &quot;B&quot;, 1, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
+    // Unsigned Small Int
+<span class="fc" id="L55">    USINT(0x02, &quot;B&quot;, 1, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
+    // Double Precision Int
+<span class="fc" id="L57">    DINT(0x07, &quot;D&quot;, 4, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+    // Unsigned Double Precision Int
+<span class="fc" id="L59">    UDINT(0x07, &quot;D&quot;, 4, INT, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
+    // Only got a basic TIA license (S7-1500 needed to find this out)
+    // TODO: Find the code
+<span class="fc" id="L62">    LINT(0x00, &quot;X&quot;, 8, INT, null, S7ControllerType.S7_1500),</span>
+    // Only got a basic TIA license (S7-1500 needed to find this out)
+    // TODO: Find the code
+<span class="fc" id="L65">    ULINT(0x00, &quot;X&quot;, 16, INT, null, S7ControllerType.S7_1500),</span>
+
+    // -----------------------------------------
+    // Reals
+    // -----------------------------------------
+<span class="fc" id="L70">    REAL(0x08, &quot;D&quot;, 4, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+    // TODO: Find the code
+<span class="fc" id="L72">    LREAL(0x00, &quot;X&quot;, 8, REAL, null, S7ControllerType.S7_1200, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
+
+    // -----------------------------------------
+    // Durations
+    // -----------------------------------------
+    // IEC time
+<span class="fc" id="L78">    TIME(0x0B, &quot;X&quot;, 4, null, null, S7ControllerType.S7_ANY),</span>
+    // TODO: Find the code
+<span class="fc" id="L80">    LTIME(0x00, &quot;X&quot;, 8, TIME, null, S7ControllerType.S7_1500),</span>
+
+    // -----------------------------------------
+    // Date
+    // -----------------------------------------
+    // IEC date (yyyy-m-d)
+    // TODO: Find the code
+<span class="fc" id="L87">    DATE(0x00, &quot;X&quot;, 2, null, null, S7ControllerType.S7_ANY),</span>
+
+    // -----------------------------------------
+    // Time of day
+    // -----------------------------------------
+    // Time (hh:mm:ss.S)
+<span class="fc" id="L93">    TIME_OF_DAY(0x0A, &quot;X&quot;, 4, null, null, S7ControllerType.S7_ANY),</span>
+
+    // -----------------------------------------
+    // Date and time of day
+    // -----------------------------------------
+<span class="fc" id="L98">    DATE_AND_TIME(0x0F, &quot;X&quot;, 8, null, null, S7ControllerType.S7_ANY),</span>
+
+    // -----------------------------------------
+    // ASCII Strings
+    // -----------------------------------------
+    // Single-byte character
+<span class="fc" id="L104">    CHAR(0x03, &quot;B&quot;, 1, null, DataTransportSize.BYTE_WORD_DWORD, S7ControllerType.S7_ANY),</span>
+    // Double-byte character
+<span class="fc" id="L106">    WCHAR(0x13, &quot;X&quot;, 2, null, null, S7ControllerType.S7_1200, S7ControllerType.S7_1500),</span>
+    // Variable-length single-byte character string
+    // TODO: Find the code (Eventually 0x03)
+<span class="fc" id="L109">    STRING(0x00, &quot;X&quot;, -1, null, null, S7ControllerType.S7_ANY),</span>
+    // Variable-length double-byte character string
+    // TODO: Find the code (Eventually 0x13)
+<span class="fc" id="L112">    WSTRING(0x00, &quot;X&quot;, -1, null, null, S7ControllerType.S7_1200, S7ControllerType.S7_1500);</span>
+
+    /* TO BE CONTINUED */
+
+    // Codes and their types:
+    // 0x1C: Counter
+    // 0x1D: Timer
+    // 0x1E: IEC Timer
+    // 0x1F: IEC Counter
+    // 0x20: HS Counter
+    //
+
+    private static final Map&lt;Byte, TransportSize&gt; map;
+    static {
+<span class="fc" id="L126">        map = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        for (TransportSize dataType : TransportSize.values()) {</span>
+<span class="fc" id="L128">            map.put(dataType.typeCode, dataType);</span>
+        }
+<span class="fc" id="L130">    }</span>
+
+    private final byte typeCode;
+    private final String sizeCode;
+    private final int sizeInBytes;
+    private final Set&lt;S7ControllerType&gt; supportedControllerTypes;
+    private final TransportSize baseType;
+    private final DataTransportSize dataTransportSize;
+
+    TransportSize(int typeCode, String sizeCode, int sizeInBytes, TransportSize baseType, DataTransportSize dataTransportSize,
+<span class="fc" id="L140">                  S7ControllerType... supportedControllerTypes) {</span>
+<span class="fc" id="L141">        this.typeCode = (byte) typeCode;</span>
+<span class="fc" id="L142">        this.sizeCode = sizeCode;</span>
+<span class="fc" id="L143">        this.sizeInBytes = sizeInBytes;</span>
+<span class="fc" id="L144">        this.supportedControllerTypes = new HashSet&lt;&gt;(Arrays.asList(supportedControllerTypes));</span>
+<span class="fc" id="L145">        this.baseType = baseType;</span>
+<span class="fc" id="L146">        this.dataTransportSize = dataTransportSize;</span>
+<span class="fc" id="L147">    }</span>
+
+    public byte getTypeCode() {
+<span class="fc" id="L150">        return typeCode;</span>
+    }
+
+    public String getSizeCode() {
+<span class="fc" id="L154">        return sizeCode;</span>
+    }
+
+    public int getSizeInBytes() {
+<span class="fc" id="L158">        return sizeInBytes;</span>
+    }
+
+    public boolean isBaseType() {
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        return baseType == null;</span>
+    }
+
+    TransportSize getBaseType() {
+        // If this is a base-type itself, the baseType is null, in all
+        // other cases it is set.
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        if (baseType == null) {</span>
+<span class="nc" id="L169">            return this;</span>
+        } else {
+<span class="nc" id="L171">            return baseType;</span>
+        }
+    }
+
+    TransportSize getSubType(String sizeCode) {
+        // Try to find a sub-type with this base type for which the size code matches.
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        for (TransportSize value : values()) {</span>
+<span class="nc bnc" id="L178" title="All 6 branches missed.">            if ((value.baseType == this) &amp;&amp; (value.sizeCode != null) &amp;&amp; (value.sizeCode.equals(sizeCode))) {</span>
+<span class="nc" id="L179">                return value;</span>
+            }
+        }
+<span class="nc" id="L182">        return null;</span>
+    }
+
+    public DataTransportSize getDataTransportSize() {
+<span class="fc" id="L186">        return dataTransportSize;</span>
+    }
+
+    boolean isControllerTypeSupported(S7ControllerType controllerType) {
+<span class="nc" id="L190">        return supportedControllerTypes.contains(controllerType);</span>
+    }
+
+    public static TransportSize valueOf(byte code) {
+<span class="fc" id="L194">        return map.get(code);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

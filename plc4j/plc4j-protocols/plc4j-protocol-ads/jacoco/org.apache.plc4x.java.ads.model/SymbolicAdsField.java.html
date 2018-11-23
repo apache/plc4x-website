@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SymbolicAdsField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.model</a> &gt; <span class="el_source">SymbolicAdsField.java</span></div><h1>SymbolicAdsField.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.model;
+
+import org.apache.plc4x.java.api.exceptions.PlcInvalidFieldException;
+
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * ADS address witch is defined by symbolic name (e.g. {@code Main.items[0]}).
+ */
+public class SymbolicAdsField implements AdsField {
+
+<span class="fc" id="L32">    private static final Pattern SYMBOLIC_ADDRESS_PATTERN = Pattern.compile(&quot;^(?&lt;symbolicAddress&gt;.+):(?&lt;adsDataType&gt;\\w+)(\\[(?&lt;numberOfElements&gt;\\d)])?&quot;);</span>
+
+    private final String symbolicAddress;
+
+    private final AdsDataType adsDataType;
+
+    private final int numberOfElements;
+
+<span class="fc" id="L40">    private SymbolicAdsField(String symbolicAddress, AdsDataType adsDataType, Integer numberOfElements) {</span>
+<span class="fc" id="L41">        this.symbolicAddress = Objects.requireNonNull(symbolicAddress);</span>
+<span class="fc" id="L42">        this.adsDataType = Objects.requireNonNull(adsDataType);</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        this.numberOfElements = numberOfElements != null ? numberOfElements : 1;</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (this.numberOfElements &lt;= 0) {</span>
+<span class="nc" id="L45">            throw new IllegalArgumentException(&quot;numberOfElements must be greater then zero. Was &quot; + this.numberOfElements);</span>
+        }
+<span class="fc" id="L47">    }</span>
+
+    public static SymbolicAdsField of(String address) {
+<span class="fc" id="L50">        Matcher matcher = SYMBOLIC_ADDRESS_PATTERN.matcher(address);</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (!matcher.matches()) {</span>
+<span class="nc" id="L52">            throw new PlcInvalidFieldException(address, SYMBOLIC_ADDRESS_PATTERN, &quot;{address}&quot;);</span>
+        }
+<span class="fc" id="L54">        String symbolicAddress = matcher.group(&quot;symbolicAddress&quot;);</span>
+
+<span class="fc" id="L56">        String adsDataTypeString = matcher.group(&quot;adsDataType&quot;);</span>
+<span class="fc" id="L57">        AdsDataType adsDataType = AdsDataType.valueOf(adsDataTypeString);</span>
+
+<span class="fc" id="L59">        String numberOfElementsString = matcher.group(&quot;numberOfElements&quot;);</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        Integer numberOfElements = numberOfElementsString != null ? Integer.valueOf(numberOfElementsString) : null;</span>
+
+<span class="fc" id="L62">        return new SymbolicAdsField(symbolicAddress, adsDataType, numberOfElements);</span>
+    }
+
+    public static boolean matches(String address) {
+<span class="nc" id="L66">        return SYMBOLIC_ADDRESS_PATTERN.matcher(address).matches();</span>
+    }
+
+    public String getSymbolicField() {
+<span class="fc" id="L70">        return symbolicAddress;</span>
+    }
+
+    @Override
+    public AdsDataType getAdsDataType() {
+<span class="fc" id="L75">        return adsDataType;</span>
+    }
+
+    public int getNumberOfElements() {
+<span class="fc" id="L79">        return numberOfElements;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L85">            return true;</span>
+        }
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (!(o instanceof SymbolicAdsField)) {</span>
+<span class="nc" id="L88">            return false;</span>
+        }
+<span class="fc" id="L90">        SymbolicAdsField that = (SymbolicAdsField) o;</span>
+<span class="fc" id="L91">        return Objects.equals(symbolicAddress, that.symbolicAddress);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L96">        return Objects.hash(symbolicAddress);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L101">        return &quot;SymbolicAdsField{&quot; +</span>
+            &quot;symbolicAddress='&quot; + symbolicAddress + '\'' +
+            '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

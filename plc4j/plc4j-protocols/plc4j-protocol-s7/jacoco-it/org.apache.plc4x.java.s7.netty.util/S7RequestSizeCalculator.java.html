@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>S7RequestSizeCalculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: S7</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.s7.netty.util</a> &gt; <span class="el_source">S7RequestSizeCalculator.java</span></div><h1>S7RequestSizeCalculator.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.s7.netty.util;
+
+import org.apache.commons.lang3.NotImplementedException;
+import org.apache.plc4x.java.s7.netty.model.messages.S7RequestMessage;
+import org.apache.plc4x.java.s7.netty.model.params.S7Parameter;
+import org.apache.plc4x.java.s7.netty.model.params.VarParameter;
+import org.apache.plc4x.java.s7.netty.model.params.items.VarParameterItem;
+import org.apache.plc4x.java.s7.netty.model.payloads.S7Payload;
+import org.apache.plc4x.java.s7.netty.model.payloads.VarPayload;
+import org.apache.plc4x.java.s7.netty.model.payloads.items.VarPayloadItem;
+import org.apache.plc4x.java.s7.netty.model.types.VariableAddressingMode;
+
+import java.util.List;
+
+/**
+ * When sending S7 messages we have to pay attention to the size of the message
+ * in it's serialized form as we have to stay below the agreed upon maximum
+ * PDU size. This helper calculates this message size and hereby helps implementing
+ * different strategies for optimizing requests.
+ */
+public class S7RequestSizeCalculator {
+
+    private S7RequestSizeCalculator() {
+        // We don't want this to be instantiated.
+    }
+
+    /**
+     * Calculate the size of a request message.
+     *
+     * @param requestMessage the request message we want to get the size for.
+     * @return the size in bytes this message will have.
+     */
+    public static short getRequestMessageSize(S7RequestMessage requestMessage) {
+        // The fixed header size.
+<span class="fc" id="L53">        short size = 10;</span>
+<span class="fc" id="L54">        size += getRequestParametersSize(requestMessage.getParameters());</span>
+<span class="fc" id="L55">        size += getRequestPayloadsSize(requestMessage.getPayloads());</span>
+<span class="fc" id="L56">        return size;</span>
+    }
+
+    /**
+     * Calculates the size adding an item (parameter and eventually payload) would add to any existing
+     * message.
+     *
+     * @param varParameterItem parameter item.
+     * @param varPayloadItem corresponding payload (can be null).
+     * @return size in bytes this item would add to an existing request message.
+     */
+    public static short getRequestItemTotalSize(VarParameterItem varParameterItem, VarPayloadItem varPayloadItem) {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        return (short) (getRequestReadWriteVarParameterItemSize(varParameterItem) + ((varPayloadItem != null) ?</span>
+<span class="pc" id="L69">            getRequestWriteVarPayloadItemSize(varPayloadItem) : 0));</span>
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Internal Request size calculations.
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private static short getRequestParametersSize(List&lt;S7Parameter&gt; parameters) {
+<span class="fc" id="L77">        short l = 0;</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (parameters != null) {</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            for (S7Parameter parameter : parameters) {</span>
+<span class="fc" id="L80">                l += getRequestParameterSize(parameter);</span>
+<span class="fc" id="L81">            }</span>
+        }
+<span class="fc" id="L83">        return l;</span>
+    }
+
+    private static short getRequestParameterSize(S7Parameter parameter) {
+<span class="pc bpc" id="L87" title="2 of 3 branches missed.">        switch (parameter.getType()) {</span>
+            case READ_VAR:
+            case WRITE_VAR:
+<span class="fc" id="L90">                return getRequestReadWriteVarParameterSize((VarParameter) parameter);</span>
+            case SETUP_COMMUNICATION:
+<span class="nc" id="L92">                return 8;</span>
+            default:
+<span class="nc" id="L94">                throw new NotImplementedException(&quot;Not implemented&quot;);</span>
+        }
+    }
+
+    private static short getRequestReadWriteVarParameterSize(VarParameter varParameter) {
+        // A var parameter always has a minimum size of 2 bytes (type of parameter, number of items)
+<span class="fc" id="L100">        short length = 2;</span>
+        // Then come the items ...
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        for (VarParameterItem varParameterItem : varParameter.getItems()) {</span>
+<span class="nc" id="L103">            length += getRequestReadWriteVarParameterItemSize(varParameterItem);</span>
+<span class="nc" id="L104">        }</span>
+<span class="fc" id="L105">        return length;</span>
+    }
+
+    private static short getRequestReadWriteVarParameterItemSize(VarParameterItem varParameterItem) {
+<span class="fc" id="L109">        VariableAddressingMode addressMode = varParameterItem.getAddressingMode();</span>
+        // S7 Any items have a fixed size of 12 bytes.
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if (addressMode == VariableAddressingMode.S7ANY) {</span>
+<span class="fc" id="L112">            return 12;</span>
+        } else {
+<span class="nc" id="L114">            throw new NotImplementedException(&quot;Not implemented&quot;);</span>
+        }
+    }
+
+    private static short getRequestPayloadsSize(List&lt;S7Payload&gt; payloads) {
+<span class="fc" id="L119">        short l = 0;</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (payloads != null) {</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">            for (S7Payload payload : payloads) {</span>
+<span class="nc" id="L122">                l += getRequestPayloadSize(payload);</span>
+<span class="nc" id="L123">            }</span>
+        }
+<span class="fc" id="L125">        return l;</span>
+    }
+
+    private static short getRequestPayloadSize(S7Payload payload) {
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        switch (payload.getType()) {</span>
+            case WRITE_VAR:
+<span class="nc" id="L131">                return getRequestWriteVarPayloadSize((VarPayload) payload);</span>
+            default:
+<span class="nc" id="L133">                throw new NotImplementedException(&quot;Not implemented&quot;);</span>
+        }
+    }
+
+    private static short getRequestWriteVarPayloadSize(VarPayload varPayload) {
+<span class="nc" id="L138">        short length = 0;</span>
+        // Then come the items ...
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        for (VarPayloadItem varPayloadItem : varPayload.getItems()) {</span>
+<span class="nc" id="L141">            length += getRequestWriteVarPayloadItemSize(varPayloadItem);</span>
+<span class="nc" id="L142">        }</span>
+<span class="nc" id="L143">        return length;</span>
+    }
+
+    private static short getRequestWriteVarPayloadItemSize(VarPayloadItem varPayloadItem) {
+        // A var payload item always has a minimum size of 4 bytes (return code, transport size, size (two bytes))
+<span class="nc" id="L148">        short length = 4;</span>
+<span class="nc" id="L149">        length += varPayloadItem.getData().length;</span>
+        // It seems that bit payloads need a additional separating 0x00 byte.
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        if(varPayloadItem.getDataTransportSize().isSizeInBits()) {</span>
+<span class="nc" id="L152">            length += 1;</span>
+        }
+<span class="nc" id="L154">        return length;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

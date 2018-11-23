@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlcEntityManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Utils: Object PLC Mapping</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.opm</a> &gt; <span class="el_source">PlcEntityManager.java</span></div><h1>PlcEntityManager.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+
+package org.apache.plc4x.java.opm;
+
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.description.modifier.Visibility;
+import net.bytebuddy.implementation.MethodDelegation;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.plc4x.java.PlcDriverManager;
+import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.api.exceptions.PlcInvalidFieldException;
+import org.apache.plc4x.java.api.messages.PlcReadRequest;
+import org.apache.plc4x.java.api.messages.PlcReadResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.time.Instant;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Callable;
+
+import static net.bytebuddy.matcher.ElementMatchers.isDeclaredBy;
+import static net.bytebuddy.matcher.ElementMatchers.not;
+
+/**
+ * Plc4x equivalent of Jpas EntityManager for implementing Object-Plc-Mapping.
+ * This means that calls to a plc can be done by using plain POJOs with Annotations.
+ * &lt;p&gt;
+ * First, the necessary annotations are {@link PlcEntity} and {@link PlcField}.
+ * For a class to be usable as PlcEntity it needs
+ * &lt;ul&gt;
+ * &lt;li&gt;be non-final (as proxiing has to be used in case of {@link #connect(Class, String)}&lt;/li&gt;
+ * &lt;li&gt;a public no args constructor for instanciation&lt;/li&gt;
+ * &lt;li&gt;Needs to be annotated with {@link PlcEntity} and has a valid value which is the connection string&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;p&gt;
+ * Basically, the {@link PlcEntityManager} has to operation &quot;modes&quot; represented by the methods {@link #read(Class,String)} and
+ * {@link #connect(Class,String)}.
+ * &lt;p&gt;
+ * For a field to get Values from the Plc Injected it needs to be annotated with the {@link PlcField} annotation.
+ * The value has to be the plc fields string (which is inserted in the {@link PlcReadRequest}).
+ * The connection string is taken from the value of the {@link PlcEntity} annotation on the class.
+ * &lt;p&gt;
+ * The {@link #read(Class,String)} method has no direkt equivalent in JPA (as far as I know) as it only returns a &quot;detached&quot;
+ * entity. This means it fetches all values from the plc that are annotated wiht the {@link PlcField} annotations.
+ * &lt;p&gt;
+ * The {@link #connect(Class,String)} method is more JPA-like as it returns a &quot;connected&quot; entity. This means, that each
+ * time one of the getters on the returned entity is called a call is made to the plc (and the field value is changed
+ * for this specific field).
+ * Furthermore, if a method which is no getter is called, then all {@link PlcField}s are refreshed before doing the call.
+ * Thus, all operations on fields that are annotated with {@link PlcField} are always done against the &quot;live&quot; values
+ * from the PLC.
+ * &lt;p&gt;
+ * A connected @{@link PlcEntity} can be disconnected calling {@link #disconnect(Object)}, then it behaves like the
+ * regular Pojo it was before.
+ * &lt;p&gt;
+ * All invocations on the getters are forwarded to the
+ * {@link PlcEntityInterceptor#intercept(Object, Method, Callable, String, PlcDriverManager, AliasRegistry, Map)}
+ * method.
+ */
+public class PlcEntityManager {
+
+<span class="fc" id="L85">    private static final Logger LOGGER = LoggerFactory.getLogger(PlcEntityManager.class);</span>
+
+    public static final String PLC_ADDRESS_FIELD_NAME = &quot;_plcAddress&quot;;
+    static final String DRIVER_MANAGER_FIELD_NAME = &quot;_driverManager&quot;;
+    static final String ALIAS_REGISTRY = &quot;_aliasRegistry&quot;;
+    public static final String LAST_FETCHED = &quot;_lastFetched&quot;;
+
+    private final PlcDriverManager driverManager;
+    private final SimpleAliasRegistry registry;
+
+    public PlcEntityManager() {
+<span class="fc" id="L96">        this(new PlcDriverManager());</span>
+<span class="fc" id="L97">    }</span>
+
+    public PlcEntityManager(PlcDriverManager driverManager) {
+<span class="fc" id="L100">        this(driverManager, new SimpleAliasRegistry());</span>
+<span class="fc" id="L101">    }</span>
+
+<span class="fc" id="L103">    public PlcEntityManager(PlcDriverManager driverManager, SimpleAliasRegistry registry) {</span>
+<span class="fc" id="L104">        this.driverManager = driverManager;</span>
+<span class="fc" id="L105">        this.registry = registry;</span>
+<span class="fc" id="L106">    }</span>
+
+    public &lt;T&gt; T read(Class&lt;T&gt; clazz, String address) throws OPMException {
+<span class="fc" id="L109">        PlcEntity annotation = OpmUtils.getPlcEntityAndCheckPreconditions(clazz);</span>
+
+<span class="fc" id="L111">        try (PlcConnection connection = driverManager.getConnection(address)) {</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">            if (!connection.getMetadata().canRead()) {</span>
+<span class="nc" id="L113">                throw new OPMException(&quot;Unable to get Reader for connection with url '&quot; + address + &quot;'&quot;);</span>
+            }
+
+<span class="fc" id="L116">            PlcReadRequest.Builder requestBuilder = connection.readRequestBuilder();</span>
+
+<span class="fc" id="L118">            Arrays.stream(clazz.getDeclaredFields())</span>
+<span class="fc" id="L119">                .filter(field -&gt; field.isAnnotationPresent(PlcField.class))</span>
+<span class="fc" id="L120">                .forEach(field -&gt;</span>
+<span class="fc" id="L121">                    requestBuilder.addItem(</span>
+<span class="fc" id="L122">                        field.getDeclaringClass().getName() + &quot;.&quot; + field.getName(),</span>
+<span class="fc" id="L123">                        OpmUtils.getOrResolveAddress(registry, field.getAnnotation(PlcField.class).value())</span>
+                    )
+                );
+
+            // Build the request
+<span class="fc" id="L128">            PlcReadRequest request = requestBuilder.build();</span>
+
+            // Perform the request
+<span class="fc" id="L131">            PlcReadResponse response = PlcEntityInterceptor.getPlcReadResponse(request);</span>
+
+            // Construct the Object
+<span class="fc" id="L134">            T instance = clazz.getConstructor().newInstance();</span>
+
+            // Fill all requested fields
+<span class="fc bfc" id="L137" title="All 2 branches covered.">            for (String fieldName : response.getFieldNames()) {</span>
+<span class="fc" id="L138">                String targetFieldName = StringUtils.substringAfterLast(fieldName, &quot;.&quot;);</span>
+<span class="fc" id="L139">                PlcEntityInterceptor.setField(clazz, instance, response, targetFieldName, fieldName);</span>
+<span class="fc" id="L140">            }</span>
+<span class="fc" id="L141">            return instance;</span>
+<span class="fc" id="L142">        } catch (PlcInvalidFieldException e) {</span>
+<span class="fc" id="L143">            throw new OPMException(&quot;Unable to parse field '&quot; + e.getFieldToBeParsed() + &quot;'&quot;, e);</span>
+<span class="fc" id="L144">        } catch (PlcConnectionException e) {</span>
+<span class="fc" id="L145">            throw new OPMException(&quot;Unable to get connection with url '&quot; + address + &quot;'&quot;, e);</span>
+<span class="nc" id="L146">        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | NoSuchFieldException | IllegalAccessException e) {</span>
+<span class="nc" id="L147">            throw new OPMException(&quot;Unable to fetch PlcEntity &quot; + clazz.getName(), e);</span>
+<span class="fc" id="L148">        } catch (Exception e) {</span>
+<span class="fc" id="L149">            throw new OPMException(&quot;Unexpected Exception: &quot; + e.getMessage(), e);</span>
+        }
+    }
+
+    /**
+     * Returns a connected proxy.
+     *
+     * @param clazz clazz to be connected.
+     * @param &lt;T&gt;   type of param {@code clazz}.
+     * @return a connected entity.
+     * @throws OPMException when proxy can't be build.
+     */
+    public &lt;T&gt; T connect(Class&lt;T&gt; clazz, String address) throws OPMException {
+<span class="fc" id="L162">        OpmUtils.getPlcEntityAndCheckPreconditions(clazz);</span>
+        try {
+            // Use Byte Buddy to generate a subclassed proxy that delegates all PlcField Methods
+            // to the intercept method
+<span class="fc" id="L166">            T instance = new ByteBuddy()</span>
+<span class="fc" id="L167">                .subclass(clazz)</span>
+<span class="fc" id="L168">                .defineField(PLC_ADDRESS_FIELD_NAME, String.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L169">                .defineField(DRIVER_MANAGER_FIELD_NAME, PlcDriverManager.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L170">                .defineField(ALIAS_REGISTRY, AliasRegistry.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L171">                .defineField(LAST_FETCHED, Map.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L172">                .method(not(isDeclaredBy(Object.class))).intercept(MethodDelegation.to(PlcEntityInterceptor.class))</span>
+<span class="fc" id="L173">                .make()</span>
+<span class="fc" id="L174">                .load(Thread.currentThread().getContextClassLoader())</span>
+<span class="fc" id="L175">                .getLoaded()</span>
+<span class="fc" id="L176">                .getConstructor()</span>
+<span class="fc" id="L177">                .newInstance();</span>
+            // Set connection value into the private field
+<span class="fc" id="L179">            FieldUtils.writeDeclaredField(instance, PLC_ADDRESS_FIELD_NAME, address, true);</span>
+<span class="fc" id="L180">            FieldUtils.writeDeclaredField(instance, DRIVER_MANAGER_FIELD_NAME, driverManager, true);</span>
+<span class="fc" id="L181">            FieldUtils.writeDeclaredField(instance, ALIAS_REGISTRY, registry, true);</span>
+<span class="fc" id="L182">            Map&lt;String, Instant&gt; lastFetched = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L183">            FieldUtils.writeDeclaredField(instance, LAST_FETCHED, lastFetched, true);</span>
+
+            // Initially fetch all values
+<span class="fc" id="L186">            PlcEntityInterceptor.refetchAllFields(instance, driverManager, address, registry, lastFetched);</span>
+
+<span class="fc" id="L188">            return instance;</span>
+<span class="fc" id="L189">        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | IllegalAccessError e) {</span>
+<span class="fc" id="L190">            throw new OPMException(&quot;Unable to instantiate Proxy&quot;, e);</span>
+        }
+    }
+
+    /**
+     * Disconnects the given instance.
+     * @param entity Instance of a PlcEntity.
+     * @throws OPMException Is thrown when the plc is already disconnected or no entity.
+     */
+    public void disconnect(Object entity) throws OPMException {
+        // Check if this is an entity
+<span class="fc" id="L201">        PlcEntity annotation = entity.getClass().getSuperclass().getAnnotation(PlcEntity.class);</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">        if (annotation == null) {</span>
+<span class="nc" id="L203">            throw new OPMException(&quot;Unable to disconnect Object, is no entity!&quot;);</span>
+        }
+        try {
+<span class="fc" id="L206">            Object manager = FieldUtils.readDeclaredField(entity, DRIVER_MANAGER_FIELD_NAME, true);</span>
+<span class="pc bpc" id="L207" title="1 of 2 branches missed.">            if (manager == null) {</span>
+<span class="nc" id="L208">                throw new OPMException(&quot;Instance is already disconnected!&quot;);</span>
+            }
+<span class="fc" id="L210">            FieldUtils.writeDeclaredField(entity, DRIVER_MANAGER_FIELD_NAME, null, true);</span>
+<span class="nc" id="L211">        } catch (IllegalAccessException e) {</span>
+<span class="nc" id="L212">            throw new OPMException(&quot;Unable to fetch driverManager instance on entity instance&quot;, e);</span>
+<span class="fc" id="L213">        }</span>
+<span class="fc" id="L214">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

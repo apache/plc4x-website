@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TestFieldHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Driver: Simulated</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.simulated.connection</a> &gt; <span class="el_source">TestFieldHandler.java</span></div><h1>TestFieldHandler.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+
+package org.apache.plc4x.java.simulated.connection;
+
+import org.apache.plc4x.java.api.exceptions.PlcInvalidFieldException;
+import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
+import org.apache.plc4x.java.api.model.PlcField;
+import org.apache.plc4x.java.base.connection.PlcFieldHandler;
+import org.apache.plc4x.java.base.messages.items.*;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Arrays;
+
+<span class="nc" id="L35">public class TestFieldHandler implements PlcFieldHandler {</span>
+
+    @Override
+    public PlcField createField(String fieldQuery) throws PlcInvalidFieldException {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (TestField.matches(fieldQuery)) {</span>
+<span class="nc" id="L40">            return TestField.of(fieldQuery);</span>
+        }
+<span class="nc" id="L42">        throw new PlcInvalidFieldException(fieldQuery);</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeBoolean(PlcField field, Object[] values) {
+<span class="nc" id="L47">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (testField.getDataType() == Boolean.class) {</span>
+<span class="nc" id="L49">            return new DefaultBooleanFieldItem((Boolean[]) values);</span>
+        }
+<span class="nc" id="L51">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeByte(PlcField field, Object[] values) {
+<span class="nc" id="L56">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (testField.getDataType() == Byte.class) {</span>
+<span class="nc" id="L58">            return new DefaultLongFieldItem(Arrays.stream(values).map(x -&gt; new Long((Byte) x)).toArray(Long[]::new));</span>
+        }
+<span class="nc" id="L60">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeShort(PlcField field, Object[] values) {
+<span class="nc" id="L65">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (testField.getDataType() == Short.class) {</span>
+<span class="nc" id="L67">            return new DefaultLongFieldItem(Arrays.stream(values).map(x -&gt; new Long((Short) x)).toArray(Long[]::new));</span>
+        }
+<span class="nc" id="L69">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeInteger(PlcField field, Object[] values) {
+<span class="nc" id="L74">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (testField.getDataType() == Integer.class) {</span>
+<span class="nc" id="L76">            return new DefaultLongFieldItem(Arrays.stream(values).map(x -&gt; new Long((Integer) x)).toArray(Long[]::new));</span>
+        }
+<span class="nc" id="L78">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeBigInteger(PlcField field, Object[] values) {
+<span class="nc" id="L83">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (testField.getDataType() == BigInteger.class) {</span>
+<span class="nc" id="L85">            return new DefaultLongFieldItem(Arrays.stream(values).map(x -&gt; ((BigInteger) x).longValue()).toArray(Long[]::new));</span>
+        }
+<span class="nc" id="L87">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeLong(PlcField field, Object[] values) {
+<span class="nc" id="L92">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (testField.getDataType() == Long.class) {</span>
+<span class="nc" id="L94">            return new DefaultLongFieldItem((Long[]) values);</span>
+        }
+<span class="nc" id="L96">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeFloat(PlcField field, Object[] values) {
+<span class="nc" id="L101">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (testField.getDataType() == Float.class) {</span>
+<span class="nc" id="L103">            return new DefaultDoubleFieldItem((Double[]) values);</span>
+        }
+<span class="nc" id="L105">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeBigDecimal(PlcField field, Object[] values) {
+<span class="nc" id="L110">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (testField.getDataType() == BigDecimal.class) {</span>
+<span class="nc" id="L112">            return new DefaultBigDecimalFieldItem((BigDecimal[]) values);</span>
+        }
+<span class="nc" id="L114">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeDouble(PlcField field, Object[] values) {
+<span class="nc" id="L119">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (testField.getDataType() == Double.class) {</span>
+<span class="nc" id="L121">            return new DefaultDoubleFieldItem((Double[]) values);</span>
+        }
+<span class="nc" id="L123">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeString(PlcField field, Object[] values) {
+<span class="nc" id="L128">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (testField.getDataType() == String.class) {</span>
+<span class="nc" id="L130">            return new DefaultStringFieldItem((String[]) values);</span>
+        }
+<span class="nc" id="L132">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeTime(PlcField field, Object[] values) {
+<span class="nc" id="L137">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (testField.getDataType() == LocalTime.class) {</span>
+<span class="nc" id="L139">            return new DefaultLocalDateTimeFieldItem((LocalDateTime[]) values);</span>
+        }
+<span class="nc" id="L141">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeDate(PlcField field, Object[] values) {
+<span class="nc" id="L146">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (testField.getDataType() == LocalDate.class) {</span>
+<span class="nc" id="L148">            return new DefaultLocalDateTimeFieldItem((LocalDateTime[]) values);</span>
+        }
+<span class="nc" id="L150">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeDateTime(PlcField field, Object[] values) {
+<span class="nc" id="L155">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        if (testField.getDataType() == LocalDateTime.class) {</span>
+<span class="nc" id="L157">            return new DefaultLocalDateTimeFieldItem((LocalDateTime[]) values);</span>
+        }
+<span class="nc" id="L159">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+    @Override
+    public BaseDefaultFieldItem encodeByteArray(PlcField field, Object[] values) {
+<span class="nc" id="L164">        TestField testField = (TestField) field;</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (testField.getDataType() == byte[].class) {</span>
+<span class="nc" id="L166">            return new DefaultByteArrayFieldItem(Arrays.stream(values).map(Byte.class::cast).toArray(Byte[]::new));</span>
+        }
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        if (testField.getDataType() == Byte[].class) {</span>
+<span class="nc" id="L169">            return new DefaultByteArrayFieldItem((Byte[]) values);</span>
+        }
+<span class="nc" id="L171">        throw new PlcRuntimeException(&quot;Invalid encoder for type &quot; + testField.getDataType().getName());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

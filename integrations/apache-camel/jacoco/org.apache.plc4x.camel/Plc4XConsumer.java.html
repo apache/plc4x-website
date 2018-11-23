@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Plc4XConsumer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Integrations: Apache Camel</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.camel</a> &gt; <span class="el_source">Plc4XConsumer.java</span></div><h1>Plc4XConsumer.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.camel;
+
+import org.apache.camel.*;
+import org.apache.camel.spi.ExceptionHandler;
+import org.apache.camel.support.LoggingExceptionHandler;
+import org.apache.camel.support.ServiceSupport;
+import org.apache.camel.util.AsyncProcessorConverterHelper;
+import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.exceptions.PlcException;
+import org.apache.plc4x.java.api.messages.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+public class Plc4XConsumer extends ServiceSupport implements Consumer, java.util.function.Consumer&lt;PlcSubscriptionEvent&gt; {
+<span class="fc" id="L41">    private static final Logger LOGGER = LoggerFactory.getLogger(Plc4XConsumer.class);</span>
+
+    private Plc4XEndpoint endpoint;
+    private AsyncProcessor processor;
+    private ExceptionHandler exceptionHandler;
+    private PlcConnection plcConnection;
+    private String fieldQuery;
+    private Class&lt;?&gt; dataType;
+    private PlcSubscriptionResponse subscriptionResponse;
+
+<span class="fc" id="L51">    public Plc4XConsumer(Plc4XEndpoint endpoint, Processor processor) throws PlcException {</span>
+<span class="fc" id="L52">        this.endpoint = endpoint;</span>
+<span class="fc" id="L53">        this.dataType = endpoint.getDataType();</span>
+<span class="fc" id="L54">        this.processor = AsyncProcessorConverterHelper.convert(processor);</span>
+<span class="fc" id="L55">        this.exceptionHandler = new LoggingExceptionHandler(endpoint.getCamelContext(), getClass());</span>
+<span class="fc" id="L56">        String plc4xURI = endpoint.getEndpointUri().replaceFirst(&quot;plc4x:/?/?&quot;, &quot;&quot;);</span>
+<span class="fc" id="L57">        this.plcConnection = endpoint.getPlcDriverManager().getConnection(plc4xURI);</span>
+<span class="fc" id="L58">        this.fieldQuery = endpoint.getAddress();</span>
+<span class="fc" id="L59">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L63">        return &quot;Plc4XConsumer[&quot; + endpoint + &quot;]&quot;;</span>
+    }
+
+    @Override
+    public Endpoint getEndpoint() {
+<span class="fc" id="L68">        return endpoint;</span>
+    }
+
+    public ExceptionHandler getExceptionHandler() {
+<span class="nc" id="L72">        return exceptionHandler;</span>
+    }
+
+    public void setExceptionHandler(ExceptionHandler exceptionHandler) {
+<span class="nc" id="L76">        this.exceptionHandler = exceptionHandler;</span>
+<span class="nc" id="L77">    }</span>
+
+    @Override
+    protected void doStart() throws InterruptedException, ExecutionException {
+        // TODO: Is it correct to only support one field?
+<span class="fc" id="L82">        PlcSubscriptionRequest request = plcConnection.subscriptionRequestBuilder()</span>
+<span class="fc" id="L83">            .addCyclicField(&quot;default&quot;, fieldQuery, Duration.of(3, ChronoUnit.SECONDS)).build();</span>
+<span class="fc" id="L84">        subscriptionResponse = request.execute().get();</span>
+        // TODO: we need to return the plcSubscriptionResponse here too as we need this to unsubscribe...
+        // TODO: figure out what to do with this
+        // plcSubscriber.register(this, plcSubscriptionResponse.getSubscriptionHandles());
+<span class="fc" id="L88">    }</span>
+
+    @Override
+    protected void doStop() throws InterruptedException, ExecutionException, TimeoutException {
+<span class="fc" id="L92">        PlcUnsubscriptionRequest request = plcConnection.unsubscriptionRequestBuilder().addHandles(subscriptionResponse.getSubscriptionHandles()).build();</span>
+<span class="fc" id="L93">        CompletableFuture&lt;? extends PlcUnsubscriptionResponse&gt; unsubscriptionFuture = request.execute();</span>
+<span class="fc" id="L94">        /*PlcUnsubscriptionResponse unsubscriptionResponse =*/ unsubscriptionFuture.get(5, TimeUnit.SECONDS);</span>
+        // TODO: Handle the response ...
+        try {
+<span class="fc" id="L97">            plcConnection.close();</span>
+<span class="nc" id="L98">        } catch (Exception e) {</span>
+<span class="nc" id="L99">            LOGGER.error(&quot;Error closing connection&quot;, e);</span>
+<span class="fc" id="L100">        }</span>
+<span class="fc" id="L101">    }</span>
+
+    @Override
+    public void accept(PlcSubscriptionEvent plcSubscriptionEvent) {
+<span class="nc" id="L105">        LOGGER.debug(&quot;Received {}&quot;, plcSubscriptionEvent);</span>
+        try {
+<span class="nc" id="L107">            Exchange exchange = endpoint.createExchange();</span>
+<span class="nc" id="L108">            exchange.getIn().setBody(unwrapIfSingle(plcSubscriptionEvent.getAllObjects(&quot;default&quot;)));</span>
+<span class="nc" id="L109">            processor.process(exchange);</span>
+<span class="nc" id="L110">        } catch (Exception e) {</span>
+<span class="nc" id="L111">            exceptionHandler.handleException(e);</span>
+<span class="nc" id="L112">        }</span>
+<span class="nc" id="L113">    }</span>
+
+    private Object unwrapIfSingle(Collection collection) {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        if (collection.isEmpty()) {</span>
+<span class="nc" id="L117">            return null;</span>
+        }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if (collection.size() == 1) {</span>
+<span class="nc" id="L120">            return collection.iterator().next();</span>
+        }
+<span class="nc" id="L122">        return collection;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

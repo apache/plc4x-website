@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PoolKeyFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Utils: Connection Pool</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.utils.connectionpool</a> &gt; <span class="el_source">PoolKeyFactory.java</span></div><h1>PoolKeyFactory.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+
+package org.apache.plc4x.java.utils.connectionpool;
+
+import org.apache.plc4x.java.api.authentication.PlcAuthentication;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+<span class="fc" id="L31">public class PoolKeyFactory {</span>
+
+    public PoolKey getPoolKey(String url, PlcAuthentication plcAuthentication) throws PlcConnectionException {
+<span class="fc" id="L34">        Objects.requireNonNull(url);</span>
+        URI connectionUri;
+        try {
+<span class="fc" id="L37">            connectionUri = new URI(url);</span>
+<span class="nc" id="L38">        } catch (URISyntaxException e) {</span>
+<span class="nc" id="L39">            throw new PlcConnectionException(&quot;Invalid plc4j connection string '&quot; + url + &quot;'&quot;, e);</span>
+<span class="fc" id="L40">        }</span>
+<span class="fc" id="L41">        String protocol = connectionUri.getScheme().toLowerCase();</span>
+<span class="fc bfc" id="L42" title="All 4 branches covered.">        switch (protocol) {</span>
+            case &quot;s7&quot;:
+<span class="fc" id="L44">                return new PoolKey(url, plcAuthentication) {</span>
+<span class="fc" id="L45">                    private final Pattern s7URIPattern = Pattern.compile(&quot;^(?&lt;poolablePart&gt;s7://(?&lt;host&gt;.*)/(?&lt;rack&gt;\\d{1,4})/(?&lt;slot&gt;\\d{1,4}))(?&lt;params&gt;\\?.*)?&quot;);</span>
+
+                    @Override
+                    public String getPoolableKey() {
+<span class="fc" id="L49">                        Matcher matcher = s7URIPattern.matcher(url);</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">                        if (!matcher.matches()) {</span>
+<span class="nc" id="L51">                            throw new IllegalArgumentException(url + &quot; doesn't match &quot; + s7URIPattern);</span>
+                        }
+<span class="fc" id="L53">                        return Objects.requireNonNull(matcher.group(&quot;poolablePart&quot;));</span>
+                    }
+                };
+            case &quot;ads&quot;:
+<span class="fc" id="L57">                return new PoolKey(url, plcAuthentication) {</span>
+<span class="fc" id="L58">                    private final Pattern amsPortPattern = Pattern.compile(&quot;\\d+&quot;);</span>
+<span class="fc" id="L59">                    private final Pattern amsNetIdPattern = Pattern.compile(&quot;\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}&quot;);</span>
+<span class="fc" id="L60">                    private final Pattern adsAddressPattern =</span>
+<span class="fc" id="L61">                        Pattern.compile(&quot;(?&lt;targetAmsNetId&gt;&quot; + amsNetIdPattern + &quot;):(?&lt;targetAmsPort&gt;&quot; + amsPortPattern + &quot;)&quot;</span>
+                            + &quot;(/&quot;
+                            + &quot;(?&lt;sourceAmsNetId&gt;&quot; + amsNetIdPattern + &quot;):(?&lt;sourceAmsPort&gt;&quot; + amsPortPattern + &quot;)&quot;
+                            + &quot;)?&quot;);
+<span class="fc" id="L65">                    private final Pattern inetAddressPattern = Pattern.compile(&quot;tcp://(?&lt;host&gt;[\\w.]+)(:(?&lt;port&gt;\\d*))?&quot;);</span>
+<span class="fc" id="L66">                    private final Pattern serialPattern = Pattern.compile(&quot;serial://(?&lt;serialDefinition&gt;((?!/\\d).)*)&quot;);</span>
+<span class="fc" id="L67">                    private final Pattern adsUriPattern = Pattern.compile(&quot;^(?&lt;poolablePart&gt;ads:(&quot; + inetAddressPattern + &quot;|&quot; + serialPattern + &quot;))/&quot; + adsAddressPattern + &quot;(\\?.*)?&quot;);</span>
+
+                    @Override
+                    public String getPoolableKey() {
+<span class="fc" id="L71">                        Matcher matcher =</span>
+<span class="fc" id="L72">                            adsUriPattern.matcher(url);</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">                        if (!matcher.matches()) {</span>
+<span class="nc" id="L74">                            throw new IllegalArgumentException(url + &quot; doesn't match &quot; + adsUriPattern);</span>
+                        }
+<span class="fc" id="L76">                        return Objects.requireNonNull(matcher.group(&quot;poolablePart&quot;));</span>
+                    }
+                };
+            case &quot;modbus&quot;:
+<span class="fc" id="L80">                return new PoolKey(url, plcAuthentication) {</span>
+<span class="fc" id="L81">                    private final Pattern inetAddressPattern = Pattern.compile(&quot;tcp://(?&lt;host&gt;[\\w.]+)(:(?&lt;port&gt;\\d*))?&quot;);</span>
+<span class="fc" id="L82">                    private final Pattern serialPattern = Pattern.compile(&quot;serial://(?&lt;serialDefinition&gt;((?!/\\d).)*)&quot;);</span>
+<span class="fc" id="L83">                    private final Pattern modbusUriPattern = Pattern.compile(&quot;^(?&lt;poolablePart&gt;modbus:(&quot; + inetAddressPattern + &quot;|&quot; + serialPattern + &quot;))/?&quot; + &quot;(?&lt;params&gt;\\?.*)?&quot;);</span>
+
+                    @Override
+                    public String getPoolableKey() {
+<span class="fc" id="L87">                        Matcher matcher = modbusUriPattern.matcher(url);</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">                        if (!matcher.matches()) {</span>
+<span class="nc" id="L89">                            throw new IllegalArgumentException(url + &quot; doesn't match &quot; + modbusUriPattern);</span>
+                        }
+<span class="fc" id="L91">                        return Objects.requireNonNull(matcher.group(&quot;poolablePart&quot;));</span>
+                    }
+                };
+            default:
+<span class="fc" id="L95">                return new PoolKey(url, plcAuthentication) {</span>
+                    @Override
+                    public String getPoolableKey() {
+<span class="fc" id="L98">                        return url;</span>
+                    }
+                };
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

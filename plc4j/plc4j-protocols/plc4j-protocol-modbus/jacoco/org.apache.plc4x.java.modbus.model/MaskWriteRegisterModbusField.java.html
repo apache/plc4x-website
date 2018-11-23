@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MaskWriteRegisterModbusField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Modbus</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.modbus.model</a> &gt; <span class="el_source">MaskWriteRegisterModbusField.java</span></div><h1>MaskWriteRegisterModbusField.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.modbus.model;
+
+import org.apache.plc4x.java.api.exceptions.PlcInvalidFieldException;
+
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class MaskWriteRegisterModbusField extends ModbusField {
+
+<span class="fc" id="L29">    public static final Pattern ADDRESS_PATTERN = Pattern.compile(&quot;maskwrite:&quot; + ModbusField.ADDRESS_PATTERN + &quot;/&quot; + &quot;(?&lt;andMask&gt;\\d+)/(?&lt;orMask&gt;\\d+)&quot;);</span>
+
+    private final int andMask;
+    private final int orMask;
+
+    protected MaskWriteRegisterModbusField(int address, int andMask, int orMask, Integer quantity) {
+<span class="fc" id="L35">        super(address, quantity);</span>
+<span class="fc" id="L36">        this.andMask = andMask;</span>
+<span class="fc" id="L37">        this.orMask = orMask;</span>
+<span class="fc" id="L38">    }</span>
+
+    public static MaskWriteRegisterModbusField of(String addressString) throws PlcInvalidFieldException {
+<span class="fc" id="L41">        Matcher matcher = ADDRESS_PATTERN.matcher(addressString);</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (!matcher.matches()) {</span>
+<span class="nc" id="L43">            throw new PlcInvalidFieldException(addressString, ADDRESS_PATTERN);</span>
+        }
+<span class="fc" id="L45">        int address = Integer.parseInt(matcher.group(&quot;address&quot;));</span>
+<span class="fc" id="L46">        int andMask = Integer.parseInt(matcher.group(&quot;andMask&quot;));</span>
+<span class="fc" id="L47">        int orMask = Integer.parseInt(matcher.group(&quot;orMask&quot;));</span>
+
+<span class="fc" id="L49">        String quantityString = matcher.group(&quot;quantity&quot;);</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        Integer quantity = quantityString != null ? Integer.valueOf(quantityString) : null;</span>
+<span class="fc" id="L51">        return new MaskWriteRegisterModbusField(address, andMask, orMask, quantity);</span>
+    }
+
+    public int getAndMask() {
+<span class="fc" id="L55">        return andMask;</span>
+    }
+
+    public int getOrMask() {
+<span class="fc" id="L59">        return orMask;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L65">            return true;</span>
+        }
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (!(o instanceof MaskWriteRegisterModbusField)) {</span>
+<span class="nc" id="L68">            return false;</span>
+        }
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (!super.equals(o)) {</span>
+<span class="nc" id="L71">            return false;</span>
+        }
+<span class="nc" id="L73">        MaskWriteRegisterModbusField that = (MaskWriteRegisterModbusField) o;</span>
+<span class="nc bnc" id="L74" title="All 4 branches missed.">        return andMask == that.andMask &amp;&amp;</span>
+            orMask == that.orMask;
+    }
+
+    @Override
+    public int hashCode() {
+
+<span class="nc" id="L81">        return Objects.hash(super.hashCode(), andMask, orMask);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L86">        return &quot;MaskWriteRegisterModbusField{&quot; +</span>
+            &quot;andMask=&quot; + andMask +
+            &quot;, orMask=&quot; + orMask +
+<span class="nc" id="L89">            &quot;} &quot; + super.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

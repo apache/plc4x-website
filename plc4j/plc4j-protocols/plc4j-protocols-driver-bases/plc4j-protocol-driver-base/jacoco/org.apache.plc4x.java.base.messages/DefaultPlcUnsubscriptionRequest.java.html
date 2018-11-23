@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultPlcUnsubscriptionRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Driver-Base: Base</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.base.messages</a> &gt; <span class="el_source">DefaultPlcUnsubscriptionRequest.java</span></div><h1>DefaultPlcUnsubscriptionRequest.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.base.messages;
+
+import org.apache.plc4x.java.api.messages.PlcUnsubscriptionRequest;
+import org.apache.plc4x.java.api.messages.PlcUnsubscriptionResponse;
+import org.apache.plc4x.java.api.model.PlcSubscriptionHandle;
+import org.apache.plc4x.java.base.model.InternalPlcSubscriptionHandle;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+
+public class DefaultPlcUnsubscriptionRequest implements InternalPlcUnsubscriptionRequest, InternalPlcRequest {
+
+    private final PlcSubscriber subscriber;
+
+    private final Collection&lt;? extends InternalPlcSubscriptionHandle&gt; internalPlcSubscriptionHandles;
+
+<span class="fc" id="L39">    public DefaultPlcUnsubscriptionRequest(PlcSubscriber subscriber, Collection&lt;? extends InternalPlcSubscriptionHandle&gt; internalPlcSubscriptionHandles) {</span>
+<span class="fc" id="L40">        this.subscriber = subscriber;</span>
+<span class="fc" id="L41">        this.internalPlcSubscriptionHandles = internalPlcSubscriptionHandles;</span>
+<span class="fc" id="L42">    }</span>
+
+    @Override
+    public CompletableFuture&lt;PlcUnsubscriptionResponse&gt; execute() {
+<span class="fc" id="L46">        return subscriber.unsubscribe(this);</span>
+    }
+
+    @Override
+    public Collection&lt;? extends InternalPlcSubscriptionHandle&gt; getInternalPlcSubscriptionHandles() {
+<span class="fc" id="L51">        return internalPlcSubscriptionHandles;</span>
+    }
+
+    public static class Builder implements PlcUnsubscriptionRequest.Builder {
+
+        private final PlcSubscriber subscriber;
+        private List&lt;InternalPlcSubscriptionHandle&gt; plcSubscriptionHandles;
+
+<span class="fc" id="L59">        public Builder(PlcSubscriber subscriber) {</span>
+<span class="fc" id="L60">            this.subscriber = subscriber;</span>
+<span class="fc" id="L61">            plcSubscriptionHandles = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L62">        }</span>
+
+        public PlcUnsubscriptionRequest.Builder addHandles(PlcSubscriptionHandle plcSubscriptionHandle) {
+<span class="fc" id="L65">            plcSubscriptionHandles.add((InternalPlcSubscriptionHandle) plcSubscriptionHandle);</span>
+<span class="fc" id="L66">            return this;</span>
+        }
+
+        @Override
+        public PlcUnsubscriptionRequest.Builder addHandles(PlcSubscriptionHandle plcSubscriptionHandle1, PlcSubscriptionHandle... plcSubscriptionHandles) {
+<span class="fc" id="L71">            this.plcSubscriptionHandles.add((InternalPlcSubscriptionHandle) plcSubscriptionHandle1);</span>
+<span class="fc" id="L72">            this.plcSubscriptionHandles.addAll(Arrays.stream(plcSubscriptionHandles).map(InternalPlcSubscriptionHandle.class::cast).collect(Collectors.toList()));</span>
+<span class="fc" id="L73">            return this;</span>
+        }
+
+        @Override
+        public PlcUnsubscriptionRequest.Builder addHandles(Collection&lt;PlcSubscriptionHandle&gt; plcSubscriptionHandles) {
+<span class="fc" id="L78">            this.plcSubscriptionHandles.addAll(plcSubscriptionHandles.stream().map(InternalPlcSubscriptionHandle.class::cast).collect(Collectors.toList()));</span>
+<span class="fc" id="L79">            return this;</span>
+        }
+
+        @Override
+        public PlcUnsubscriptionRequest build() {
+<span class="fc" id="L84">            return new DefaultPlcUnsubscriptionRequest(subscriber, plcSubscriptionHandles);</span>
+        }
+
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

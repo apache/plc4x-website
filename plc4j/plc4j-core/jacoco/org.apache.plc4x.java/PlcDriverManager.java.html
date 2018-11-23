@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlcDriverManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Core</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java</a> &gt; <span class="el_source">PlcDriverManager.java</span></div><h1>PlcDriverManager.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java;
+
+import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.authentication.PlcAuthentication;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.spi.PlcDriver;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ServiceLoader;
+
+public class PlcDriverManager {
+
+    protected ClassLoader classLoader;
+
+    private Map&lt;String, PlcDriver&gt; driverMap;
+
+    public PlcDriverManager() {
+<span class="fc" id="L39">        this(Thread.currentThread().getContextClassLoader());</span>
+<span class="fc" id="L40">    }</span>
+
+<span class="fc" id="L42">    public PlcDriverManager(ClassLoader classLoader) {</span>
+<span class="fc" id="L43">        this.classLoader = classLoader;</span>
+<span class="fc" id="L44">        driverMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L45">        ServiceLoader&lt;PlcDriver&gt; plcDriverLoader = ServiceLoader.load(PlcDriver.class, classLoader);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (PlcDriver driver : plcDriverLoader) {</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            if (driverMap.containsKey(driver.getProtocolCode())) {</span>
+<span class="fc" id="L48">                throw new IllegalStateException(</span>
+                    &quot;Multiple driver implementations available for protocol code '&quot; +
+<span class="fc" id="L50">                        driver.getProtocolCode() + &quot;'&quot;);</span>
+            }
+<span class="fc" id="L52">            driverMap.put(driver.getProtocolCode(), driver);</span>
+<span class="fc" id="L53">        }</span>
+<span class="fc" id="L54">    }</span>
+
+    /**
+     * Connects to a PLC using the given plc connection string.
+     *
+     * @param url plc connection string.
+     * @return PlcConnection object.
+     * @throws PlcConnectionException an exception if the connection attempt failed.
+     */
+    public PlcConnection getConnection(String url) throws PlcConnectionException {
+<span class="fc" id="L64">        PlcDriver driver = getDriver(url);</span>
+<span class="fc" id="L65">        PlcConnection connection = driver.connect(url);</span>
+<span class="fc" id="L66">        connection.connect();</span>
+<span class="fc" id="L67">        return connection;</span>
+    }
+
+    /**
+     * Connects to a PLC using the given plc connection string using given authentication credentials.
+     *
+     * @param url            plc connection string.
+     * @param authentication authentication credentials.
+     * @return PlcConnection object.
+     * @throws PlcConnectionException an exception if the connection attempt failed.
+     */
+    public PlcConnection getConnection(String url, PlcAuthentication authentication) throws PlcConnectionException {
+<span class="fc" id="L79">        PlcDriver driver = getDriver(url);</span>
+<span class="fc" id="L80">        PlcConnection connection = driver.connect(url, authentication);</span>
+<span class="fc" id="L81">        connection.connect();</span>
+<span class="fc" id="L82">        return connection;</span>
+    }
+
+    private PlcDriver getDriver(String url) throws PlcConnectionException {
+        try {
+<span class="fc" id="L87">            URI connectionUri = new URI(url);</span>
+<span class="fc" id="L88">            String protocol = connectionUri.getScheme();</span>
+<span class="fc" id="L89">            PlcDriver driver = driverMap.get(protocol);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            if (driver == null) {</span>
+<span class="fc" id="L91">                throw new PlcConnectionException(&quot;Unable to find driver for protocol '&quot; + protocol + &quot;'&quot;);</span>
+            }
+<span class="fc" id="L93">            return driver;</span>
+<span class="fc" id="L94">        } catch (URISyntaxException e) {</span>
+<span class="fc" id="L95">            throw new PlcConnectionException(&quot;Invalid plc4j connection string '&quot; + url + &quot;'&quot;, e);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

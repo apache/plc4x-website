@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>S7ResponseSizeEstimator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: S7</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.s7.netty.util</a> &gt; <span class="el_source">S7ResponseSizeEstimator.java</span></div><h1>S7ResponseSizeEstimator.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.s7.netty.util;
+
+import org.apache.commons.lang3.NotImplementedException;
+import org.apache.plc4x.java.s7.netty.model.messages.S7RequestMessage;
+import org.apache.plc4x.java.s7.netty.model.params.S7Parameter;
+import org.apache.plc4x.java.s7.netty.model.params.VarParameter;
+import org.apache.plc4x.java.s7.netty.model.params.items.S7AnyVarParameterItem;
+import org.apache.plc4x.java.s7.netty.model.params.items.VarParameterItem;
+import org.apache.plc4x.java.s7.netty.model.payloads.items.VarPayloadItem;
+import org.apache.plc4x.java.s7.netty.model.types.TransportSize;
+
+import java.util.List;
+
+/**
+ * When sending S7 messages we have to also pay attention to the expected size
+ * of a response for a given request. This helper estimates this response size
+ * and hereby helps implementing different strategies for optimizing requests.
+ */
+public class S7ResponseSizeEstimator {
+
+    private S7ResponseSizeEstimator() {
+        // We don't want this to be instantiated.
+    }
+
+    /**
+     * Estimate the size of the response for a given request object.
+     * This is needed in order to decide if a request will be able to be processed
+     * as S7 PLCs will return errors if a request will produce a response that exceeds
+     * the agreed upon PDU size.
+     *
+     * @param requestMessage the request message for which we want to estimate the response size for.
+     * @return the estimated size in bytes the response for this message will have.
+     */
+    public static short getEstimatedResponseMessageSize(S7RequestMessage requestMessage) {
+        // The fixed header size (two bytes more than the request for error class and code values).
+<span class="fc" id="L54">        short size = 12;</span>
+<span class="fc" id="L55">        size += getEstimatedResponseParametersSize(requestMessage.getParameters());</span>
+<span class="fc" id="L56">        size += getEstimatedResponsePayloadsSize(requestMessage.getParameters());</span>
+<span class="fc" id="L57">        return size;</span>
+    }
+
+    /**
+     * Calculates the estimated size adding an item (parameter and eventually payload) would add to the
+     * response for a current request message. While for the parameters the size of the items depends on
+     * if they are requests or responses, the payload depends on if it's a read or write operation.
+     *
+     * @param varParameterItem parameter item.
+     * @param varPayloadItem payload item.
+     * @return size in bytes in the corresponding response message, this item would add to an existing response message.
+     */
+    public static short getEstimatedResponseReadItemTotalSize(VarParameterItem varParameterItem,
+                                                              VarPayloadItem varPayloadItem) {
+        // If both are provided, this is a write request.
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if(varPayloadItem != null) {</span>
+            // When writing values the item size in the response is constantly 1 byte.
+<span class="fc" id="L74">            return getEstimatedResponseWriteVarPayloadItemSize(varParameterItem);</span>
+        }
+        // If the payload is empty, this is a read request and the response could contain real information.
+        else {
+<span class="fc" id="L78">            return getEstimatedResponseReadVarPayloadItemSize(varParameterItem);</span>
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Internal Response size estimations.
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private static short getEstimatedResponseParametersSize(List&lt;S7Parameter&gt; parameters) {
+<span class="fc" id="L87">        short l = 0;</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (parameters != null) {</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            for (S7Parameter parameter : parameters) {</span>
+<span class="fc" id="L90">                l += getEstimatedResponseParameterSize(parameter);</span>
+<span class="fc" id="L91">            }</span>
+        }
+<span class="fc" id="L93">        return l;</span>
+    }
+
+    private static short getEstimatedResponseParameterSize(S7Parameter parameter) {
+<span class="fc bfc" id="L97" title="All 3 branches covered.">        switch (parameter.getType()) {</span>
+            case READ_VAR:
+            case WRITE_VAR:
+<span class="fc" id="L100">                return getEstimatedResponseReadWriteVarParameterSize((VarParameter) parameter);</span>
+            case SETUP_COMMUNICATION:
+<span class="fc" id="L102">                return 8;</span>
+            default:
+<span class="fc" id="L104">                throw new NotImplementedException(&quot;Not implemented&quot;);</span>
+        }
+    }
+
+    private static short getEstimatedResponseReadWriteVarParameterSize(VarParameter varParameter) {
+        // In the response the var parameter only consists of the type and number of items.
+<span class="fc" id="L110">        return 2;</span>
+    }
+
+    private static short getEstimatedResponsePayloadsSize(List&lt;S7Parameter&gt; parameters) {
+<span class="fc" id="L114">        short l = 0;</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (parameters != null) {</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">            for (S7Parameter parameter : parameters) {</span>
+<span class="fc" id="L117">                l += getEstimatedResponsePayloadSize(parameter);</span>
+<span class="fc" id="L118">            }</span>
+        }
+<span class="fc" id="L120">        return l;</span>
+    }
+
+    private static short getEstimatedResponsePayloadSize(S7Parameter parameter) {
+<span class="fc bfc" id="L124" title="All 3 branches covered.">        switch (parameter.getType()) {</span>
+            case READ_VAR:
+<span class="fc" id="L126">                return getEstimatedResponseReadVarPayloadSize((VarParameter) parameter);</span>
+            case WRITE_VAR:
+<span class="fc" id="L128">                return getEstimatedResponseWriteVarPayloadSize((VarParameter) parameter);</span>
+            // As we already handled all cases in the parameter size section, SETUP_COMMUNICATION
+            // is the last possible option.
+            default :
+<span class="fc" id="L132">                return 0;</span>
+        }
+    }
+
+    private static short getEstimatedResponseReadVarPayloadSize(VarParameter varParameter) {
+<span class="fc" id="L137">        short length = 0;</span>
+        // Then come the items ...
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        for (VarParameterItem varParameterItem : varParameter.getItems()) {</span>
+<span class="fc" id="L140">            length += getEstimatedResponseReadVarPayloadItemSize(varParameterItem);</span>
+<span class="fc" id="L141">        }</span>
+<span class="fc" id="L142">        return length;</span>
+    }
+
+    private static short getEstimatedResponseReadVarPayloadItemSize(VarParameterItem varParameterItem) {
+        // A var payload item always has a minimum size of 4 bytes (return code, transport size, size (two bytes))
+<span class="fc" id="L147">        short length = 4;</span>
+<span class="fc" id="L148">        S7AnyVarParameterItem s7AnyVarParameterItem = (S7AnyVarParameterItem) varParameterItem;</span>
+<span class="fc" id="L149">        length +=</span>
+<span class="fc" id="L150">            s7AnyVarParameterItem.getNumElements() * s7AnyVarParameterItem.getDataType().getSizeInBytes();</span>
+        // It seems that bit payloads need a additional separating 0x00 byte.
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if(s7AnyVarParameterItem.getDataType() == TransportSize.BOOL) {</span>
+<span class="fc" id="L153">            length += 1;</span>
+        }
+<span class="fc" id="L155">        return length;</span>
+    }
+
+    private static short getEstimatedResponseWriteVarPayloadSize(VarParameter varParameter) {
+<span class="fc" id="L159">        short length = 0;</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">        for (VarParameterItem varParameterItem : varParameter.getItems()) {</span>
+<span class="fc" id="L161">            length += getEstimatedResponseWriteVarPayloadItemSize(varParameterItem);</span>
+<span class="fc" id="L162">        }</span>
+<span class="fc" id="L163">        return length;</span>
+    }
+
+    private static short getEstimatedResponseWriteVarPayloadItemSize(VarParameterItem varParameterItem) {
+        // This is just one byte containing the error code.
+<span class="fc" id="L168">        return 1;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

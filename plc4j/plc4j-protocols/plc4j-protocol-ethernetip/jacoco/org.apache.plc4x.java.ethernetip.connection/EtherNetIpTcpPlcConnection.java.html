@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EtherNetIpTcpPlcConnection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Ethernet/IP</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ethernetip.connection</a> &gt; <span class="el_source">EtherNetIpTcpPlcConnection.java</span></div><h1>EtherNetIpTcpPlcConnection.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.ethernetip.connection;
+
+import io.netty.channel.*;
+import org.apache.plc4x.java.base.connection.ChannelFactory;
+import org.apache.plc4x.java.base.connection.TcpSocketChannelFactory;
+import org.apache.plc4x.java.base.events.ConnectEvent;
+import org.apache.plc4x.java.base.events.ConnectedEvent;
+import org.apache.plc4x.java.ethernetip.netty.EnipCodec;
+import org.apache.plc4x.java.ethernetip.netty.Plc4XEtherNetIpProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.InetAddress;
+import java.util.concurrent.CompletableFuture;
+
+public class EtherNetIpTcpPlcConnection extends BaseEtherNetIpPlcConnection {
+
+    // Port 44818
+    private static final int ETHERNET_IP_TCP_PORT = 0xAF12;
+
+<span class="nc" id="L39">    private static final Logger logger = LoggerFactory.getLogger(EtherNetIpTcpPlcConnection.class);</span>
+
+    public EtherNetIpTcpPlcConnection(InetAddress address, String params) {
+<span class="nc" id="L42">        this(new TcpSocketChannelFactory(address, ETHERNET_IP_TCP_PORT), params);</span>
+<span class="nc" id="L43">        logger.info(&quot;Configured EtherNetIpTcpPlcConnection with: host-name {}&quot;, address.getHostAddress());</span>
+<span class="nc" id="L44">    }</span>
+
+    public EtherNetIpTcpPlcConnection(InetAddress address, int port, String params) {
+<span class="nc" id="L47">        this(new TcpSocketChannelFactory(address, port), params);</span>
+<span class="nc" id="L48">        logger.info(&quot;Configured EtherNetIpTcpPlcConnection with: host-name {}&quot;, address.getHostAddress());</span>
+<span class="nc" id="L49">    }</span>
+
+    public EtherNetIpTcpPlcConnection(ChannelFactory channelFactory, String params) {
+<span class="nc" id="L52">        super(channelFactory, params);</span>
+<span class="nc" id="L53">    }</span>
+
+    @Override
+    protected ChannelHandler getChannelHandler(CompletableFuture&lt;Void&gt; sessionSetupCompleteFuture) {
+<span class="nc" id="L57">        return new ChannelInitializer() {</span>
+            @Override
+            protected void initChannel(Channel channel) {
+<span class="nc" id="L60">                ChannelPipeline pipeline = channel.pipeline();</span>
+<span class="nc" id="L61">                pipeline.addLast(new ChannelInboundHandlerAdapter() {</span>
+                    @Override
+                    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                        if (evt instanceof ConnectedEvent) {</span>
+<span class="nc" id="L65">                            sessionSetupCompleteFuture.complete(null);</span>
+                        } else {
+<span class="nc" id="L67">                            super.userEventTriggered(ctx, evt);</span>
+                        }
+<span class="nc" id="L69">                    }</span>
+                });
+<span class="nc" id="L71">                pipeline.addLast(new EnipCodec());</span>
+<span class="nc" id="L72">                pipeline.addLast(new Plc4XEtherNetIpProtocol());</span>
+<span class="nc" id="L73">            }</span>
+        };
+    }
+
+    @Override
+    protected void sendChannelCreatedEvent() {
+        // Send an event to the pipeline telling the Protocol filters what's going on.
+<span class="nc" id="L80">        channel.pipeline().fireUserEventTriggered(new ConnectEvent());</span>
+<span class="nc" id="L81">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

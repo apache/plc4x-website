@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsReadDeviceInfoResponse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.api.commands</a> &gt; <span class="el_source">AdsReadDeviceInfoResponse.java</span></div><h1>AdsReadDeviceInfoResponse.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.api.commands;
+
+import org.apache.plc4x.java.ads.api.commands.types.*;
+import org.apache.plc4x.java.ads.api.generic.AdsData;
+import org.apache.plc4x.java.ads.api.generic.AmsHeader;
+import org.apache.plc4x.java.ads.api.generic.types.AmsNetId;
+import org.apache.plc4x.java.ads.api.generic.types.AmsPort;
+import org.apache.plc4x.java.ads.api.generic.types.Command;
+import org.apache.plc4x.java.ads.api.generic.types.Invoke;
+
+import static java.util.Objects.requireNonNull;
+
+/**
+ * Reads the name and the version number of the ADS device.
+ */
+@AdsCommandType(Command.ADS_READ_DEVICE_INFO)
+public class AdsReadDeviceInfoResponse extends AdsAbstractResponse {
+    /**
+     * 4 bytes	ADS error number.
+     */
+    private final Result result;
+    /**
+     * Version	1 byte	Major version number
+     */
+    private final MajorVersion majorVersion;
+    /**
+     * Version	1 byte	Minor version number
+     */
+    private final MinorVersion minorVersion;
+    /**
+     * Build	2 bytes	Build number
+     */
+    private final Version version;
+    /**
+     * Name	16 bytes	Name of ADS device
+     */
+    private final Device device;
+
+    private AdsReadDeviceInfoResponse(AmsHeader amsHeader, Result result, MajorVersion majorVersion, MinorVersion minorVersion, Version version, Device device) {
+<span class="fc" id="L58">        super(amsHeader);</span>
+<span class="fc" id="L59">        this.result = requireNonNull(result);</span>
+<span class="fc" id="L60">        this.majorVersion = requireNonNull(majorVersion);</span>
+<span class="fc" id="L61">        this.minorVersion = requireNonNull(minorVersion);</span>
+<span class="fc" id="L62">        this.version = requireNonNull(version);</span>
+<span class="fc" id="L63">        this.device = requireNonNull(device);</span>
+<span class="fc" id="L64">    }</span>
+
+    private AdsReadDeviceInfoResponse(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, Invoke invokeId, Result result, MajorVersion majorVersion, MinorVersion minorVersion, Version version, Device device) {
+<span class="fc" id="L67">        super(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, invokeId);</span>
+<span class="fc" id="L68">        this.result = requireNonNull(result);</span>
+<span class="fc" id="L69">        this.majorVersion = requireNonNull(majorVersion);</span>
+<span class="fc" id="L70">        this.minorVersion = requireNonNull(minorVersion);</span>
+<span class="fc" id="L71">        this.version = requireNonNull(version);</span>
+<span class="fc" id="L72">        this.device = requireNonNull(device);</span>
+<span class="fc" id="L73">    }</span>
+
+    public static AdsReadDeviceInfoResponse of(AmsHeader amsHeader, Result result, MajorVersion majorVersion, MinorVersion minorVersion, Version version, Device device) {
+<span class="fc" id="L76">        return new AdsReadDeviceInfoResponse(amsHeader, result, majorVersion, minorVersion, version, device);</span>
+    }
+
+    public static AdsReadDeviceInfoResponse of(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, Invoke invokeId, Result result, MajorVersion majorVersion, MinorVersion minorVersion, Version version, Device device) {
+<span class="fc" id="L80">        return new AdsReadDeviceInfoResponse(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, invokeId, result, majorVersion, minorVersion, version, device);</span>
+    }
+
+    public Result getResult() {
+<span class="fc" id="L84">        return result;</span>
+    }
+
+    public MajorVersion getMajorVersion() {
+<span class="fc" id="L88">        return majorVersion;</span>
+    }
+
+    public MinorVersion getMinorVersion() {
+<span class="fc" id="L92">        return minorVersion;</span>
+    }
+
+    public Version getVersion() {
+<span class="fc" id="L96">        return version;</span>
+    }
+
+    public Device getDevice() {
+<span class="fc" id="L100">        return device;</span>
+    }
+
+    @Override
+    public AdsData getAdsData() {
+<span class="fc" id="L105">        return buildADSData(result, majorVersion, minorVersion, version, device);</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if (this == o)</span>
+<span class="nc" id="L111">            return true;</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (!(o instanceof AdsReadDeviceInfoResponse))</span>
+<span class="nc" id="L113">            return false;</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        if (!super.equals(o))</span>
+<span class="nc" id="L115">            return false;</span>
+
+<span class="fc" id="L117">        AdsReadDeviceInfoResponse that = (AdsReadDeviceInfoResponse) o;</span>
+
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if (!result.equals(that.result))</span>
+<span class="nc" id="L120">            return false;</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        if (!majorVersion.equals(that.majorVersion))</span>
+<span class="nc" id="L122">            return false;</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">        if (!minorVersion.equals(that.minorVersion))</span>
+<span class="nc" id="L124">            return false;</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (!version.equals(that.version))</span>
+<span class="nc" id="L126">            return false;</span>
+
+<span class="fc" id="L128">        return device.equals(that.device);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L133">        int result1 = super.hashCode();</span>
+<span class="nc" id="L134">        result1 = 31 * result1 + result.hashCode();</span>
+<span class="nc" id="L135">        result1 = 31 * result1 + majorVersion.hashCode();</span>
+<span class="nc" id="L136">        result1 = 31 * result1 + minorVersion.hashCode();</span>
+<span class="nc" id="L137">        result1 = 31 * result1 + version.hashCode();</span>
+<span class="nc" id="L138">        result1 = 31 * result1 + device.hashCode();</span>
+<span class="nc" id="L139">        return result1;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L144">        return &quot;AdsReadDeviceInfoResponse{&quot; +</span>
+            &quot;result=&quot; + result +
+            &quot;, majorVersion=&quot; + majorVersion +
+            &quot;, minorVersion=&quot; + minorVersion +
+            &quot;, version=&quot; + version +
+            &quot;, device=&quot; + device +
+<span class="fc" id="L150">            &quot;} &quot; + super.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

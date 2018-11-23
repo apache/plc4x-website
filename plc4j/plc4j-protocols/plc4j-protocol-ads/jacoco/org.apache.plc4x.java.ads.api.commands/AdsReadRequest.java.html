@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsReadRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.api.commands</a> &gt; <span class="el_source">AdsReadRequest.java</span></div><h1>AdsReadRequest.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.api.commands;
+
+import org.apache.plc4x.java.ads.api.commands.types.IndexGroup;
+import org.apache.plc4x.java.ads.api.commands.types.IndexOffset;
+import org.apache.plc4x.java.ads.api.commands.types.Length;
+import org.apache.plc4x.java.ads.api.generic.AdsData;
+import org.apache.plc4x.java.ads.api.generic.AmsHeader;
+import org.apache.plc4x.java.ads.api.generic.types.AmsNetId;
+import org.apache.plc4x.java.ads.api.generic.types.AmsPort;
+import org.apache.plc4x.java.ads.api.generic.types.Command;
+import org.apache.plc4x.java.ads.api.generic.types.Invoke;
+
+import static java.util.Objects.requireNonNull;
+
+/**
+ * With ADS Read data can be read from an ADS device.  The data are addressed by the Index Group and the Index Offset
+ */
+@AdsCommandType(Command.ADS_READ)
+public class AdsReadRequest extends AdsAbstractRequest {
+
+    /**
+     * 4 bytes	Index Group of the data which should be read.
+     */
+    private final IndexGroup indexGroup;
+
+    /**
+     * 4 bytes	Index Offset of the data which should be read.
+     */
+    private final IndexOffset indexOffset;
+
+    /**
+     * 4 bytes	Length of the data (in bytes) which should be read.
+     */
+    private final Length length;
+
+    private AdsReadRequest(AmsHeader amsHeader, IndexGroup indexGroup, IndexOffset indexOffset, Length length) {
+<span class="fc" id="L55">        super(amsHeader);</span>
+<span class="fc" id="L56">        this.indexGroup = requireNonNull(indexGroup);</span>
+<span class="fc" id="L57">        this.indexOffset = requireNonNull(indexOffset);</span>
+<span class="fc" id="L58">        this.length = requireNonNull(length);</span>
+<span class="fc" id="L59">    }</span>
+
+    private AdsReadRequest(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, Invoke invokeId, IndexGroup indexGroup, IndexOffset indexOffset, Length length) {
+<span class="fc" id="L62">        super(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, invokeId);</span>
+<span class="fc" id="L63">        this.indexGroup = requireNonNull(indexGroup);</span>
+<span class="fc" id="L64">        this.indexOffset = requireNonNull(indexOffset);</span>
+<span class="fc" id="L65">        this.length = requireNonNull(length);</span>
+<span class="fc" id="L66">    }</span>
+
+    public static AdsReadRequest of(AmsHeader amsHeader, IndexGroup indexGroup, IndexOffset indexOffset, Length length) {
+<span class="fc" id="L69">        return new AdsReadRequest(amsHeader, indexGroup, indexOffset, length);</span>
+    }
+
+    public static AdsReadRequest of(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, Invoke invokeId, IndexGroup indexGroup, IndexOffset indexOffset, Length length) {
+<span class="fc" id="L73">        return new AdsReadRequest(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, invokeId, indexGroup, indexOffset, length);</span>
+    }
+
+    public IndexGroup getIndexGroup() {
+<span class="fc" id="L77">        return indexGroup;</span>
+    }
+
+    public IndexOffset getIndexOffset() {
+<span class="fc" id="L81">        return indexOffset;</span>
+    }
+
+    public Length getLength() {
+<span class="fc" id="L85">        return length;</span>
+    }
+
+    @Override
+    public AdsData getAdsData() {
+<span class="fc" id="L90">        return buildADSData(indexGroup, indexOffset, length);</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (this == o)</span>
+<span class="nc" id="L96">            return true;</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if (!(o instanceof AdsReadRequest))</span>
+<span class="nc" id="L98">            return false;</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (!super.equals(o))</span>
+<span class="nc" id="L100">            return false;</span>
+
+<span class="fc" id="L102">        AdsReadRequest that = (AdsReadRequest) o;</span>
+
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if (!indexGroup.equals(that.indexGroup))</span>
+<span class="nc" id="L105">            return false;</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if (!indexOffset.equals(that.indexOffset))</span>
+<span class="nc" id="L107">            return false;</span>
+
+<span class="fc" id="L109">        return length.equals(that.length);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L114">        int result = super.hashCode();</span>
+<span class="nc" id="L115">        result = 31 * result + indexGroup.hashCode();</span>
+<span class="nc" id="L116">        result = 31 * result + indexOffset.hashCode();</span>
+<span class="nc" id="L117">        result = 31 * result + length.hashCode();</span>
+<span class="nc" id="L118">        return result;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L123">        return &quot;AdsReadRequest{&quot; +</span>
+            &quot;indexGroup=&quot; + indexGroup +
+            &quot;, indexOffset=&quot; + indexOffset +
+            &quot;, length=&quot; + length +
+<span class="fc" id="L127">            &quot;} &quot; + super.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

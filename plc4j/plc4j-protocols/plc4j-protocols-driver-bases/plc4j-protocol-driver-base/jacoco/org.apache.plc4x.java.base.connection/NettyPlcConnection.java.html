@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NettyPlcConnection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Driver-Base: Base</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.base.connection</a> &gt; <span class="el_source">NettyPlcConnection.java</span></div><h1>NettyPlcConnection.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.base.connection;
+
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
+import io.netty.util.HashedWheelTimer;
+import io.netty.util.Timer;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.api.exceptions.PlcIoException;
+
+import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
+public abstract class NettyPlcConnection extends AbstractPlcConnection {
+
+    /**
+     * a {@link HashedWheelTimer} shall be only instantiated once.
+     */
+    // TODO: maybe find a way to make this configurable per jvm
+<span class="nc" id="L38">    protected final static Timer timer = new HashedWheelTimer();</span>
+
+    protected final ChannelFactory channelFactory;
+
+    protected final boolean awaitSessionSetupComplete;
+
+    protected Channel channel;
+
+    protected boolean connected;
+
+    protected NettyPlcConnection(ChannelFactory channelFactory) {
+<span class="nc" id="L49">        this(channelFactory, false);</span>
+<span class="nc" id="L50">    }</span>
+
+<span class="nc" id="L52">    protected NettyPlcConnection(ChannelFactory channelFactory, boolean awaitSessionSetupComplete) {</span>
+<span class="nc" id="L53">        this.channelFactory = channelFactory;</span>
+<span class="nc" id="L54">        this.awaitSessionSetupComplete = awaitSessionSetupComplete;</span>
+<span class="nc" id="L55">        this.connected = false;</span>
+<span class="nc" id="L56">    }</span>
+
+    @Override
+    public void connect() throws PlcConnectionException {
+        try {
+            // As we don't just want to wait till the connection is established,
+            // define a future we can use to signal back that the s7 session is
+            // finished initializing.
+<span class="nc" id="L64">            CompletableFuture&lt;Void&gt; sessionSetupCompleteFuture = new CompletableFuture&lt;&gt;();</span>
+
+            // Have the channel factory create a new channel instance.
+<span class="nc" id="L67">            channel = channelFactory.createChannel(getChannelHandler(sessionSetupCompleteFuture));</span>
+<span class="nc" id="L68">            channel.closeFuture().addListener(future -&gt; {</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">                if (!sessionSetupCompleteFuture.isDone()) {</span>
+<span class="nc" id="L70">                    sessionSetupCompleteFuture.completeExceptionally(</span>
+                        new PlcIoException(&quot;Connection terminated by remote&quot;));
+                }
+<span class="nc" id="L73">            });</span>
+            // Send an event to the pipeline telling the Protocol filters what's going on.
+<span class="nc" id="L75">            sendChannelCreatedEvent();</span>
+
+            // Wait till the connection is established.
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (awaitSessionSetupComplete) {</span>
+<span class="nc" id="L79">                sessionSetupCompleteFuture.get();</span>
+            }
+
+            // Set the connection to &quot;connected&quot;
+<span class="nc" id="L83">            connected = true;</span>
+<span class="nc" id="L84">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L85">            Thread.currentThread().interrupt();</span>
+<span class="nc" id="L86">            throw new PlcConnectionException(e);</span>
+<span class="nc" id="L87">        } catch (ExecutionException e) {</span>
+<span class="nc" id="L88">            throw new PlcConnectionException(e);</span>
+<span class="nc" id="L89">        }</span>
+<span class="nc" id="L90">    }</span>
+
+    @Override
+    public void close() throws PlcConnectionException {
+<span class="nc" id="L94">        channel = null;</span>
+<span class="nc" id="L95">        connected = false;</span>
+<span class="nc" id="L96">    }</span>
+
+    @Override
+    public boolean isConnected() {
+<span class="nc" id="L100">        return connected;</span>
+    }
+
+    public Channel getChannel() {
+<span class="nc" id="L104">        return channel;</span>
+    }
+
+    protected abstract ChannelHandler getChannelHandler(CompletableFuture&lt;Void&gt; sessionSetupCompleteFuture);
+
+    protected void sendChannelCreatedEvent() {
+        // Implemented in sub-classes, if needed.
+<span class="nc" id="L111">    }</span>
+
+    /**
+     * Can be used to check and cast a parameter to its required internal type (can be used for general type checking too).
+     *
+     * @param o     the object to be checked against target {@code clazz}.
+     * @param clazz the expected {@code clazz}.
+     * @param &lt;T&gt;   the type of the expected {@code clazz}.
+     * @return the cast type of {@code clazz}.
+     */
+    protected &lt;T&gt; T checkInternal(Object o, Class&lt;T&gt; clazz) {
+<span class="nc" id="L122">        Objects.requireNonNull(o);</span>
+<span class="nc" id="L123">        Objects.requireNonNull(clazz);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        if (!clazz.isInstance(o)) {</span>
+<span class="nc" id="L125">            throw new IllegalArgumentException(&quot;illegal type &quot; + o.getClass() + &quot;. Expected &quot; + clazz);</span>
+        }
+<span class="nc" id="L127">        return clazz.cast(o);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

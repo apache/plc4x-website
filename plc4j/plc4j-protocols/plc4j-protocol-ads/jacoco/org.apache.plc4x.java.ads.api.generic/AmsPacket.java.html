@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AmsPacket.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.api.generic</a> &gt; <span class="el_source">AmsPacket.java</span></div><h1>AmsPacket.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.api.generic;
+
+import io.netty.buffer.ByteBuf;
+import org.apache.plc4x.java.ads.api.commands.AdsCommandType;
+import org.apache.plc4x.java.ads.api.generic.types.*;
+import org.apache.plc4x.java.ads.api.util.ByteReadable;
+
+import static java.util.Objects.requireNonNull;
+
+public abstract class AmsPacket implements ByteReadable {
+
+    protected final AmsHeader amsHeader;
+
+<span class="fc" id="L32">    protected AmsPacket(AmsHeader amsHeader) {</span>
+<span class="fc" id="L33">        this.amsHeader = amsHeader;</span>
+<span class="fc" id="L34">    }</span>
+
+<span class="fc" id="L36">    protected AmsPacket(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, State stateId, Invoke invokeId) {</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (!getClass().isAnnotationPresent(AdsCommandType.class)) {</span>
+<span class="nc" id="L38">            throw new IllegalArgumentException(AdsCommandType.class + &quot; need to be present.&quot;);</span>
+        }
+<span class="fc" id="L40">        this.amsHeader = AmsHeader.of(</span>
+<span class="fc" id="L41">            requireNonNull(targetAmsNetId),</span>
+<span class="fc" id="L42">            requireNonNull(targetAmsPort),</span>
+<span class="fc" id="L43">            requireNonNull(sourceAmsNetId),</span>
+<span class="fc" id="L44">            requireNonNull(sourceAmsPort),</span>
+<span class="fc" id="L45">            requireNonNull(getClass().getAnnotation(AdsCommandType.class).value()),</span>
+<span class="fc" id="L46">            requireNonNull(stateId),</span>
+<span class="fc" id="L47">            () -&gt; getAdsData().getCalculatedLength(),</span>
+<span class="fc" id="L48">            requireNonNull(AmsError.NONE),</span>
+<span class="fc" id="L49">            requireNonNull(invokeId));</span>
+<span class="fc" id="L50">    }</span>
+
+    public AmsHeader getAmsHeader() {
+<span class="fc" id="L53">        return amsHeader;</span>
+    }
+
+    public abstract AdsData getAdsData();
+
+    protected AdsData buildADSData(ByteReadable... byteReadables) {
+<span class="fc" id="L59">        return () -&gt; buildByteBuff(byteReadables);</span>
+    }
+
+    @Override
+    public ByteBuf getByteBuf() {
+<span class="fc" id="L64">        return buildByteBuff(amsHeader, getAdsData());</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L70">            return true;</span>
+        }
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (!(o instanceof AmsPacket)) {</span>
+<span class="nc" id="L73">            return false;</span>
+        }
+
+<span class="fc" id="L76">        AmsPacket amsPacket = (AmsPacket) o;</span>
+
+<span class="fc" id="L78">        return amsHeader.equals(amsPacket.amsHeader);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L83">        return amsHeader.hashCode();</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L88">        return getClass().getSimpleName() + &quot;{&quot; +</span>
+            &quot;amsHeader=&quot; + amsHeader +
+            '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

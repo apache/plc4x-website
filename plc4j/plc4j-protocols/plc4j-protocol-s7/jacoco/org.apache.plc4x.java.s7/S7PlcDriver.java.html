@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>S7PlcDriver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: S7</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.s7</a> &gt; <span class="el_source">S7PlcDriver.java</span></div><h1>S7PlcDriver.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.s7;
+
+import org.apache.plc4x.java.spi.PlcDriver;
+import org.apache.plc4x.java.api.authentication.PlcAuthentication;
+import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.s7.connection.S7PlcConnection;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Implementation of the S7 protocol, based on:
+ * - S7 Protocol
+ * - ISO Transport Protocol (Class 0) (https://tools.ietf.org/html/rfc905)
+ * - ISO on TCP (https://tools.ietf.org/html/rfc1006)
+ * - TCP
+ */
+<span class="fc" id="L39">public class S7PlcDriver implements PlcDriver {</span>
+
+<span class="fc" id="L41">    private static final Pattern S7_URI_PATTERN = Pattern.compile(&quot;^s7://(?&lt;host&gt;.*)/(?&lt;rack&gt;\\d{1,4})/(?&lt;slot&gt;\\d{1,4})(?&lt;params&gt;\\?.*)?&quot;);</span>
+
+    @Override
+    public String getProtocolCode() {
+<span class="fc" id="L45">        return &quot;s7&quot;;</span>
+    }
+
+    @Override
+    public String getProtocolName() {
+<span class="fc" id="L50">        return &quot;Siemens S7 (Basic)&quot;;</span>
+    }
+
+    @Override
+    public PlcConnection connect(String url) throws PlcConnectionException {
+<span class="fc" id="L55">        Matcher matcher = S7_URI_PATTERN.matcher(url);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (!matcher.matches()) {</span>
+<span class="fc" id="L57">            throw new PlcConnectionException(</span>
+                &quot;Connection url doesn't match the format 's7://{host|ip}/{rack}/{slot}'&quot;);
+        }
+<span class="fc" id="L60">        String host = matcher.group(&quot;host&quot;);</span>
+
+<span class="fc" id="L62">        int rack = Integer.parseInt(matcher.group(&quot;rack&quot;));</span>
+<span class="fc" id="L63">        int slot = Integer.parseInt(matcher.group(&quot;slot&quot;));</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        String params = matcher.group(&quot;params&quot;) != null ? matcher.group(&quot;params&quot;).substring(1) : null;</span>
+
+        try {
+<span class="fc" id="L67">            InetAddress serverInetAddress = InetAddress.getByName(host);</span>
+<span class="fc" id="L68">            return new S7PlcConnection(serverInetAddress, rack, slot, params);</span>
+<span class="fc" id="L69">        } catch (UnknownHostException e) {</span>
+<span class="fc" id="L70">            throw new PlcConnectionException(&quot;Error parsing address&quot;, e);</span>
+        }
+    }
+
+    @Override
+    public PlcConnection connect(String url, PlcAuthentication authentication) throws PlcConnectionException {
+<span class="fc" id="L76">        throw new PlcConnectionException(&quot;Basic S7 connections don't support authentication.&quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

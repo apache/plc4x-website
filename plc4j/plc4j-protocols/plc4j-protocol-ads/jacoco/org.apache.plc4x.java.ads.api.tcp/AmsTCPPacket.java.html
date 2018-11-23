@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AmsTCPPacket.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.api.tcp</a> &gt; <span class="el_source">AmsTCPPacket.java</span></div><h1>AmsTCPPacket.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.api.tcp;
+
+import io.netty.buffer.ByteBuf;
+import org.apache.plc4x.java.ads.api.tcp.types.UserData;
+import org.apache.plc4x.java.ads.api.util.ByteReadable;
+
+import static java.util.Objects.requireNonNull;
+
+public class AmsTCPPacket implements ByteReadable {
+    /**
+     * The ams - tcp to be sent.
+     */
+    private final AmsTcpHeader amsTcpHeader;
+
+    /**
+     * The AMS packet to be sent.
+     */
+    private final UserData userData;
+
+<span class="nc" id="L38">    private AmsTCPPacket(AmsTcpHeader amsTcpHeader, UserData userData) {</span>
+<span class="nc" id="L39">        this.amsTcpHeader = requireNonNull(amsTcpHeader);</span>
+<span class="nc" id="L40">        this.userData = requireNonNull(userData);</span>
+<span class="nc" id="L41">    }</span>
+
+<span class="fc" id="L43">    private AmsTCPPacket(UserData userData) {</span>
+<span class="fc" id="L44">        this.userData = requireNonNull(userData);</span>
+        // It is important that we wrap the ads data call as this will initialized in the constructor
+        // so this value will be null if we call adsData now.
+<span class="fc" id="L47">        this.amsTcpHeader = AmsTcpHeader.of(requireNonNull(userData));</span>
+<span class="fc" id="L48">    }</span>
+
+    public AmsTcpHeader getAmsTcpHeader() {
+<span class="fc" id="L51">        return amsTcpHeader;</span>
+    }
+
+    @Override
+    public ByteBuf getByteBuf() {
+<span class="fc" id="L56">        return buildByteBuff(amsTcpHeader, userData);</span>
+    }
+
+    public static AmsTCPPacket of(UserData userData) {
+<span class="fc" id="L60">        return new AmsTCPPacket(userData);</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (this == o) {</span>
+<span class="nc" id="L66">            return true;</span>
+        }
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (!(o instanceof AmsTCPPacket)) {</span>
+<span class="nc" id="L69">            return false;</span>
+        }
+
+<span class="nc" id="L72">        AmsTCPPacket that = (AmsTCPPacket) o;</span>
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (!amsTcpHeader.equals(that.amsTcpHeader)) {</span>
+<span class="nc" id="L75">            return false;</span>
+        }
+<span class="nc" id="L77">        return userData.equals(that.userData);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L82">        int result = amsTcpHeader.hashCode();</span>
+<span class="nc" id="L83">        result = 31 * result + userData.hashCode();</span>
+<span class="nc" id="L84">        return result;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L89">        return &quot;AmsTCPPacket{&quot; +</span>
+            &quot;amsTcpHeader=&quot; + amsTcpHeader +
+            &quot;, amsPacket=&quot; + userData +
+            '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

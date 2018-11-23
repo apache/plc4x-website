@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsAbstractPlcConnection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.connection</a> &gt; <span class="el_source">AdsAbstractPlcConnection.java</span></div><h1>AdsAbstractPlcConnection.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.connection;
+
+import io.netty.channel.ChannelFuture;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.SystemConfiguration;
+import org.apache.plc4x.java.ads.api.commands.AdsReadWriteRequest;
+import org.apache.plc4x.java.ads.api.commands.AdsReadWriteResponse;
+import org.apache.plc4x.java.ads.api.commands.AdsWriteRequest;
+import org.apache.plc4x.java.ads.api.commands.types.*;
+import org.apache.plc4x.java.ads.api.generic.types.AmsNetId;
+import org.apache.plc4x.java.ads.api.generic.types.AmsPort;
+import org.apache.plc4x.java.ads.api.generic.types.Invoke;
+import org.apache.plc4x.java.ads.model.AdsPlcFieldHandler;
+import org.apache.plc4x.java.ads.model.DirectAdsField;
+import org.apache.plc4x.java.ads.model.SymbolicAdsField;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
+import org.apache.plc4x.java.api.messages.*;
+import org.apache.plc4x.java.base.connection.NettyPlcConnection;
+import org.apache.plc4x.java.base.connection.ChannelFactory;
+import org.apache.plc4x.java.base.messages.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.*;
+
+public abstract class AdsAbstractPlcConnection extends NettyPlcConnection implements PlcReader, PlcWriter, PlcProprietarySender {
+
+<span class="fc" id="L47">    private static final Logger LOGGER = LoggerFactory.getLogger(AdsAbstractPlcConnection.class);</span>
+
+<span class="fc" id="L49">    protected static final Configuration CONF = new SystemConfiguration();</span>
+<span class="fc" id="L50">    protected static final long SYMBOL_RESOLVE_TIMEOUT = CONF.getLong(&quot;plc4x.adsconnection.symbol.resolve,timeout&quot;, 3000);</span>
+
+    protected final AmsNetId targetAmsNetId;
+
+    protected final AmsPort targetAmsPort;
+
+    protected final AmsNetId sourceAmsNetId;
+
+    protected final AmsPort sourceAmsPort;
+
+    protected final ConcurrentMap&lt;SymbolicAdsField, DirectAdsField&gt; fieldMapping;
+
+    protected AdsAbstractPlcConnection(ChannelFactory channelFactory, AmsNetId targetAmsNetId, AmsPort targetAmsPort) {
+<span class="fc" id="L63">        this(channelFactory, targetAmsNetId, targetAmsPort, generateAMSNetId(), generateAMSPort());</span>
+<span class="fc" id="L64">    }</span>
+
+    protected AdsAbstractPlcConnection(ChannelFactory channelFactory, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc" id="L67">        super(channelFactory);</span>
+<span class="fc" id="L68">        this.targetAmsNetId = targetAmsNetId;</span>
+<span class="fc" id="L69">        this.targetAmsPort = targetAmsPort;</span>
+<span class="fc" id="L70">        this.sourceAmsNetId = sourceAmsNetId;</span>
+<span class="fc" id="L71">        this.sourceAmsPort = sourceAmsPort;</span>
+<span class="fc" id="L72">        this.fieldMapping = new ConcurrentHashMap&lt;&gt;();</span>
+<span class="fc" id="L73">    }</span>
+
+    public AmsNetId getTargetAmsNetId() {
+<span class="fc" id="L76">        return targetAmsNetId;</span>
+    }
+
+    public AmsPort getTargetAmsPort() {
+<span class="fc" id="L80">        return targetAmsPort;</span>
+    }
+
+    public AmsNetId getSourceAmsNetId() {
+<span class="fc" id="L84">        return sourceAmsNetId;</span>
+    }
+
+    public AmsPort getSourceAmsPort() {
+<span class="fc" id="L88">        return sourceAmsPort;</span>
+    }
+
+    @Override
+    public boolean canRead() {
+<span class="fc" id="L93">        return true;</span>
+    }
+
+    @Override
+    public boolean canWrite() {
+<span class="fc" id="L98">        return true;</span>
+    }
+
+    @Override
+    public CompletableFuture&lt;PlcReadResponse&gt; read(PlcReadRequest readRequest) {
+<span class="fc" id="L103">        mapFields(readRequest);</span>
+<span class="fc" id="L104">        CompletableFuture&lt;InternalPlcReadResponse&gt; readFuture = new CompletableFuture&lt;&gt;();</span>
+<span class="fc" id="L105">        ChannelFuture channelFuture = channel.writeAndFlush(new PlcRequestContainer&lt;&gt;((InternalPlcReadRequest) readRequest, readFuture));</span>
+<span class="fc" id="L106">        channelFuture.addListener(future -&gt; {</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if (!future.isSuccess()) {</span>
+<span class="fc" id="L108">                readFuture.completeExceptionally(future.cause());</span>
+            }
+<span class="fc" id="L110">        });</span>
+<span class="fc" id="L111">        return readFuture</span>
+<span class="fc" id="L112">            .thenApply(PlcReadResponse.class::cast);</span>
+    }
+
+    @Override
+    public PlcReadRequest.Builder readRequestBuilder() {
+<span class="fc" id="L117">        return new DefaultPlcReadRequest.Builder(this, new AdsPlcFieldHandler());</span>
+    }
+
+    @Override
+    public PlcWriteRequest.Builder writeRequestBuilder() {
+<span class="fc" id="L122">        return new DefaultPlcWriteRequest.Builder(this, new AdsPlcFieldHandler());</span>
+    }
+
+    @Override
+    public CompletableFuture&lt;PlcWriteResponse&gt; write(PlcWriteRequest writeRequest) {
+<span class="fc" id="L127">        mapFields(writeRequest);</span>
+<span class="fc" id="L128">        CompletableFuture&lt;InternalPlcWriteResponse&gt; writeFuture = new CompletableFuture&lt;&gt;();</span>
+<span class="fc" id="L129">        ChannelFuture channelFuture = channel.writeAndFlush(new PlcRequestContainer&lt;&gt;((InternalPlcWriteRequest) writeRequest, writeFuture));</span>
+<span class="fc" id="L130">        channelFuture.addListener(future -&gt; {</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">            if (!future.isSuccess()) {</span>
+<span class="fc" id="L132">                writeFuture.completeExceptionally(future.cause());</span>
+            }
+<span class="fc" id="L134">        });</span>
+<span class="fc" id="L135">        return writeFuture</span>
+<span class="fc" id="L136">            .thenApply(PlcWriteResponse.class::cast);</span>
+    }
+
+    @Override
+    public &lt;T&gt; CompletableFuture&lt;PlcProprietaryResponse&lt;T&gt;&gt; send(PlcProprietaryRequest proprietaryRequest) {
+<span class="fc" id="L141">        CompletableFuture&lt;InternalPlcProprietaryResponse&lt;T&gt;&gt; sendFuture = new CompletableFuture&lt;&gt;();</span>
+<span class="fc" id="L142">        ChannelFuture channelFuture = channel.writeAndFlush(new PlcRequestContainer&lt;&gt;((InternalPlcProprietaryRequest) proprietaryRequest, sendFuture));</span>
+<span class="fc" id="L143">        channelFuture.addListener(future -&gt; {</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">            if (!future.isSuccess()) {</span>
+<span class="fc" id="L145">                sendFuture.completeExceptionally(future.cause());</span>
+            }
+<span class="fc" id="L147">        });</span>
+<span class="fc" id="L148">        return sendFuture</span>
+<span class="fc" id="L149">            .thenApply(PlcProprietaryResponse.class::cast);</span>
+    }
+
+    protected void mapFields(PlcFieldRequest request) {
+<span class="fc" id="L153">        request.getFields().stream()</span>
+<span class="fc" id="L154">            .parallel()</span>
+<span class="fc" id="L155">            .filter(SymbolicAdsField.class::isInstance)</span>
+<span class="fc" id="L156">            .map(SymbolicAdsField.class::cast)</span>
+<span class="fc" id="L157">            .forEach(this::mapFields);</span>
+<span class="fc" id="L158">    }</span>
+
+    protected void mapFields(SymbolicAdsField symbolicAdsField) {
+        // If the map doesn't contain an entry for the given symbolicAdsField,
+        // resolve it and add it to the map.
+<span class="fc" id="L163">        fieldMapping.computeIfAbsent(symbolicAdsField, symbolicAdsFieldInternal -&gt; {</span>
+<span class="fc" id="L164">            LOGGER.debug(&quot;Resolving {}&quot;, symbolicAdsFieldInternal);</span>
+<span class="fc" id="L165">            AdsReadWriteRequest adsReadWriteRequest = AdsReadWriteRequest.of(</span>
+                targetAmsNetId,
+                targetAmsPort,
+                sourceAmsNetId,
+                sourceAmsPort,
+                Invoke.NONE,
+                IndexGroup.ReservedGroups.ADSIGRP_SYM_HNDBYNAME,
+                IndexOffset.NONE,
+<span class="fc" id="L173">                ReadLength.of(IndexOffset.NUM_BYTES),</span>
+<span class="fc" id="L174">                Data.of(symbolicAdsFieldInternal.getSymbolicField())</span>
+            );
+
+            // TODO: This is blocking, should be changed to be async.
+<span class="fc" id="L178">            CompletableFuture&lt;InternalPlcProprietaryResponse&lt;AdsReadWriteResponse&gt;&gt; getHandelFuture = new CompletableFuture&lt;&gt;();</span>
+<span class="fc" id="L179">            channel.writeAndFlush(new PlcRequestContainer&lt;&gt;(new DefaultPlcProprietaryRequest&lt;&gt;(adsReadWriteRequest), getHandelFuture));</span>
+<span class="fc" id="L180">            InternalPlcProprietaryResponse&lt;AdsReadWriteResponse&gt; getHandleResponse = getFromFuture(getHandelFuture, SYMBOL_RESOLVE_TIMEOUT);</span>
+<span class="fc" id="L181">            AdsReadWriteResponse response = getHandleResponse.getResponse();</span>
+
+<span class="fc bfc" id="L183" title="All 2 branches covered.">            if (response.getResult().toAdsReturnCode() != AdsReturnCode.ADS_CODE_0) {</span>
+<span class="fc" id="L184">                throw new PlcRuntimeException(&quot;Non error code received &quot; + response.getResult());</span>
+            }
+
+<span class="fc" id="L187">            IndexOffset symbolHandle = IndexOffset.of(response.getData().getBytes());</span>
+<span class="fc" id="L188">            return DirectAdsField.of(IndexGroup.ReservedGroups.ADSIGRP_SYM_VALBYHND.getAsLong(), symbolHandle.getAsLong(), symbolicAdsFieldInternal.getAdsDataType(), symbolicAdsFieldInternal.getNumberOfElements());</span>
+        });
+<span class="fc" id="L190">    }</span>
+
+    protected static AmsNetId generateAMSNetId() {
+<span class="fc" id="L193">        return AmsNetId.of(&quot;0.0.0.0.0.0&quot;);</span>
+    }
+
+    protected static AmsPort generateAMSPort() {
+<span class="fc" id="L197">        return AmsPort.of(0);</span>
+    }
+
+    @Override
+    public void close() throws PlcConnectionException {
+<span class="fc" id="L202">        fieldMapping.values().stream()</span>
+<span class="fc" id="L203">            .parallel()</span>
+<span class="fc" id="L204">            .map(adsField -&gt; AdsWriteRequest.of(</span>
+                targetAmsNetId,
+                targetAmsPort,
+                sourceAmsNetId,
+                sourceAmsPort,
+                Invoke.NONE,
+                IndexGroup.ReservedGroups.ADSIGRP_SYM_RELEASEHND,
+                IndexOffset.NONE,
+<span class="fc" id="L212">                Data.of(IndexGroup.of(adsField.getIndexGroup()).getBytes())</span>
+            ))
+<span class="fc" id="L214">            .map(adsWriteRequest -&gt; new PlcRequestContainer&lt;&gt;(new DefaultPlcProprietaryRequest&lt;&gt;(adsWriteRequest), new CompletableFuture&lt;&gt;()))</span>
+            // We don't need a response so we just supply a throw away future.
+<span class="fc" id="L216">            .forEach(channel::write);</span>
+<span class="fc" id="L217">        channel.flush();</span>
+<span class="fc" id="L218">        super.close();</span>
+<span class="fc" id="L219">    }</span>
+
+    /**
+     * Clears the fieldMapping.
+     */
+    public void clearMapping() {
+<span class="fc" id="L225">        fieldMapping.clear();</span>
+<span class="fc" id="L226">    }</span>
+
+    protected &lt;T&gt; T getFromFuture(CompletableFuture&lt;T&gt; future, long timeout) {
+        try {
+<span class="fc" id="L230">            return future.get(timeout, TimeUnit.MILLISECONDS);</span>
+<span class="fc" id="L231">        } catch (InterruptedException e) {</span>
+<span class="fc" id="L232">            LOGGER.warn(&quot;Interrupted!&quot;, e);</span>
+<span class="fc" id="L233">            Thread.currentThread().interrupt();</span>
+<span class="fc" id="L234">            throw new PlcRuntimeException(e);</span>
+<span class="fc" id="L235">        } catch (ExecutionException | TimeoutException e) {</span>
+<span class="fc" id="L236">            throw new PlcRuntimeException(e);</span>
+        }
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L242">        return &quot;AdsAbstractPlcConnection{&quot; +</span>
+            &quot;targetAmsNetId=&quot; + targetAmsNetId +
+            &quot;, targetAmsPort=&quot; + targetAmsPort +
+            &quot;, sourceAmsNetId=&quot; + sourceAmsNetId +
+            &quot;, sourceAmsPort=&quot; + sourceAmsPort +
+<span class="fc" id="L247">            &quot;} &quot; + super.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

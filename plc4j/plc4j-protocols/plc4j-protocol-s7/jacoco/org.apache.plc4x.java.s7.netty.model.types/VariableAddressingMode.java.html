@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VariableAddressingMode.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: S7</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.s7.netty.model.types</a> &gt; <span class="el_source">VariableAddressingMode.java</span></div><h1>VariableAddressingMode.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.s7.netty.model.types;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * (Values determined by evaluating generated &quot;.pcapng&quot; files)
+ * Renamed from &quot;SyntaxId&quot;.
+ */
+<span class="fc" id="L28">public enum VariableAddressingMode {</span>
+<span class="fc" id="L29">    S7ANY((byte) 0x10),</span>
+<span class="fc" id="L30">    PBC_R_ID((byte) 0x13),</span>
+<span class="fc" id="L31">    ALARM_LOCKFREE((byte) 0x15),</span>
+<span class="fc" id="L32">    ALARM_IND((byte) 0x16),</span>
+<span class="fc" id="L33">    ALARM_ACK((byte) 0x19),</span>
+<span class="fc" id="L34">    ALARM_QUERYREQ((byte) 0x1a),</span>
+<span class="fc" id="L35">    NOTIFY_IND((byte) 0x1c),</span>
+<span class="fc" id="L36">    NIC((byte) 0x82),</span>
+<span class="fc" id="L37">    DRIVEESANY((byte) 0xa2),</span>
+<span class="fc" id="L38">    DBREAD((byte) 0xb0),</span>
+<span class="fc" id="L39">    SYM1200((byte) 0xb2); /* Renamed from &quot;1200SYM&quot; */</span>
+
+    private static final Map&lt;Byte, VariableAddressingMode&gt; map;
+    static {
+<span class="fc" id="L43">        map = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        for (VariableAddressingMode variableAddressingMode : VariableAddressingMode.values()) {</span>
+<span class="fc" id="L45">            map.put(variableAddressingMode.code, variableAddressingMode);</span>
+        }
+<span class="fc" id="L47">    }</span>
+
+    private final byte code;
+
+<span class="fc" id="L51">    VariableAddressingMode(byte code) {</span>
+<span class="fc" id="L52">        this.code = code;</span>
+<span class="fc" id="L53">    }</span>
+
+    public byte getCode() {
+<span class="fc" id="L56">        return code;</span>
+    }
+
+    public static VariableAddressingMode valueOf(byte code) {
+<span class="fc" id="L60">        return map.get(code);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

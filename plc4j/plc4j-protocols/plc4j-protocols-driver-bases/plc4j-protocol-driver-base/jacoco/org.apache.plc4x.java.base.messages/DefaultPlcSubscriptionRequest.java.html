@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultPlcSubscriptionRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Driver-Base: Base</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.base.messages</a> &gt; <span class="el_source">DefaultPlcSubscriptionRequest.java</span></div><h1>DefaultPlcSubscriptionRequest.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.base.messages;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
+import org.apache.plc4x.java.api.messages.PlcSubscriptionRequest;
+import org.apache.plc4x.java.api.messages.PlcSubscriptionResponse;
+import org.apache.plc4x.java.api.model.PlcField;
+import org.apache.plc4x.java.api.types.PlcSubscriptionType;
+import org.apache.plc4x.java.base.connection.PlcFieldHandler;
+import org.apache.plc4x.java.base.model.SubscriptionPlcField;
+
+import java.time.Duration;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+
+public class DefaultPlcSubscriptionRequest implements InternalPlcSubscriptionRequest, InternalPlcFieldRequest {
+
+    private final PlcSubscriber subscriber;
+
+    private LinkedHashMap&lt;String, SubscriptionPlcField&gt; fields;
+
+<span class="fc" id="L41">    public DefaultPlcSubscriptionRequest(PlcSubscriber subscriber, LinkedHashMap&lt;String, SubscriptionPlcField&gt; fields) {</span>
+<span class="fc" id="L42">        this.subscriber = subscriber;</span>
+<span class="fc" id="L43">        this.fields = fields;</span>
+<span class="fc" id="L44">    }</span>
+
+    @Override
+    public CompletableFuture&lt;PlcSubscriptionResponse&gt; execute() {
+<span class="fc" id="L48">        return subscriber.subscribe(this);</span>
+    }
+
+    @Override
+    public int getNumberOfFields() {
+<span class="fc" id="L53">        return fields.size();</span>
+    }
+
+    @Override
+    public LinkedHashSet&lt;String&gt; getFieldNames() {
+<span class="fc" id="L58">        return new LinkedHashSet&lt;&gt;(fields.keySet());</span>
+    }
+
+    @Override
+    public PlcField getField(String name) {
+<span class="fc" id="L63">        SubscriptionPlcField subscriptionPlcField = fields.get(name);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (subscriptionPlcField == null) {</span>
+<span class="fc" id="L65">            return null;</span>
+        }
+<span class="fc" id="L67">        return subscriptionPlcField.getPlcField();</span>
+    }
+
+    @Override
+    public List&lt;PlcField&gt; getFields() {
+<span class="fc" id="L72">        return fields.values().stream().map(SubscriptionPlcField::getPlcField).collect(Collectors.toCollection(LinkedList::new));</span>
+    }
+
+    @Override
+    public List&lt;SubscriptionPlcField&gt; getSubscriptionFields() {
+<span class="fc" id="L77">        return new LinkedList&lt;&gt;(fields.values());</span>
+    }
+
+    @Override
+    public LinkedHashMap&lt;String, SubscriptionPlcField&gt; getSubscriptionPlcFieldMap() {
+<span class="fc" id="L82">        return fields;</span>
+    }
+
+    @Override
+    public List&lt;Pair&lt;String, PlcField&gt;&gt; getNamedFields() {
+<span class="fc" id="L87">        return fields.entrySet()</span>
+<span class="fc" id="L88">            .stream()</span>
+<span class="fc" id="L89">            .map(stringPlcFieldEntry -&gt; Pair.of(stringPlcFieldEntry.getKey(), stringPlcFieldEntry.getValue().getPlcField()))</span>
+<span class="fc" id="L90">            .collect(Collectors.toCollection(LinkedList::new));</span>
+    }
+
+    @Override
+    public List&lt;Pair&lt;String, SubscriptionPlcField&gt;&gt; getNamedSubscriptionFields() {
+<span class="fc" id="L95">        return fields.entrySet()</span>
+<span class="fc" id="L96">            .stream()</span>
+<span class="fc" id="L97">            .map(stringPlcFieldEntry -&gt; Pair.of(stringPlcFieldEntry.getKey(), stringPlcFieldEntry.getValue()))</span>
+<span class="fc" id="L98">            .collect(Collectors.toCollection(LinkedList::new));</span>
+    }
+
+    protected PlcSubscriber getSubscriber() {
+<span class="fc" id="L102">        return subscriber;</span>
+    }
+
+    public static class Builder implements PlcSubscriptionRequest.Builder {
+
+        private final PlcSubscriber subscriber;
+        private final PlcFieldHandler fieldHandler;
+        private final Map&lt;String, BuilderItem&gt; fields;
+
+<span class="fc" id="L111">        public Builder(PlcSubscriber subscriber, PlcFieldHandler fieldHandler) {</span>
+<span class="fc" id="L112">            this.subscriber = subscriber;</span>
+<span class="fc" id="L113">            this.fieldHandler = fieldHandler;</span>
+<span class="fc" id="L114">            fields = new TreeMap&lt;&gt;();</span>
+<span class="fc" id="L115">        }</span>
+
+        @Override
+        public PlcSubscriptionRequest.Builder addCyclicField(String name, String fieldQuery, Duration pollingInterval) {
+<span class="fc" id="L119">            fields.put(name, new BuilderItem(fieldQuery, PlcSubscriptionType.CYCLIC, pollingInterval));</span>
+<span class="fc" id="L120">            return this;</span>
+        }
+
+        @Override
+        public PlcSubscriptionRequest.Builder addChangeOfStateField(String name, String fieldQuery) {
+<span class="fc" id="L125">            fields.put(name, new BuilderItem(fieldQuery, PlcSubscriptionType.CHANGE_OF_STATE));</span>
+<span class="fc" id="L126">            return this;</span>
+        }
+
+        @Override
+        public PlcSubscriptionRequest.Builder addEventField(String name, String fieldQuery) {
+<span class="fc bfc" id="L131" title="All 2 branches covered.">            if (fields.containsKey(name)) {</span>
+<span class="fc" id="L132">                throw new PlcRuntimeException(&quot;Duplicate field definition '&quot; + name + &quot;'&quot;);</span>
+            }
+<span class="fc" id="L134">            fields.put(name, new BuilderItem(fieldQuery, PlcSubscriptionType.EVENT));</span>
+<span class="fc" id="L135">            return this;</span>
+        }
+
+        @Override
+        public PlcSubscriptionRequest build() {
+<span class="fc" id="L140">            LinkedHashMap&lt;String, SubscriptionPlcField&gt; parsedFields = new LinkedHashMap&lt;&gt;();</span>
+
+<span class="fc" id="L142">            fields.forEach((name, builderItem) -&gt; {</span>
+<span class="fc" id="L143">                PlcField parsedField = fieldHandler.createField(builderItem.fieldQuery);</span>
+<span class="fc" id="L144">                parsedFields.put(name, new SubscriptionPlcField(builderItem.plcSubscriptionType, parsedField, builderItem.duration));</span>
+<span class="fc" id="L145">            });</span>
+<span class="fc" id="L146">            return new DefaultPlcSubscriptionRequest(subscriber, parsedFields);</span>
+        }
+
+        private static class BuilderItem {
+            private final String fieldQuery;
+            private final PlcSubscriptionType plcSubscriptionType;
+            private final Duration duration;
+
+            private BuilderItem(String fieldQuery, PlcSubscriptionType plcSubscriptionType) {
+<span class="fc" id="L155">                this(fieldQuery, plcSubscriptionType, null);</span>
+<span class="fc" id="L156">            }</span>
+
+<span class="fc" id="L158">            private BuilderItem(String fieldQuery, PlcSubscriptionType plcSubscriptionType, Duration duration) {</span>
+<span class="fc" id="L159">                this.fieldQuery = fieldQuery;</span>
+<span class="fc" id="L160">                this.plcSubscriptionType = plcSubscriptionType;</span>
+<span class="fc" id="L161">                this.duration = duration;</span>
+<span class="fc" id="L162">            }</span>
+
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

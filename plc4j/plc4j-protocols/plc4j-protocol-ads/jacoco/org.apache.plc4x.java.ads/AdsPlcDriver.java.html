@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsPlcDriver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads</a> &gt; <span class="el_source">AdsPlcDriver.java</span></div><h1>AdsPlcDriver.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.ads;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.plc4x.java.ads.api.generic.types.AmsNetId;
+import org.apache.plc4x.java.ads.api.generic.types.AmsPort;
+import org.apache.plc4x.java.ads.connection.AdsConnectionFactory;
+import org.apache.plc4x.java.spi.PlcDriver;
+import org.apache.plc4x.java.api.authentication.PlcAuthentication;
+import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Implementation of the ADS protocol, based on:
+ * - ADS Protocol
+ * - TCP
+ * - Serial
+ */
+public class AdsPlcDriver implements PlcDriver {
+
+<span class="fc" id="L43">    public static final Pattern ADS_ADDRESS_PATTERN =</span>
+<span class="fc" id="L44">        Pattern.compile(&quot;(?&lt;targetAmsNetId&gt;&quot; + AmsNetId.AMS_NET_ID_PATTERN + &quot;):(?&lt;targetAmsPort&gt;&quot; + AmsPort.AMS_PORT_PATTERN + &quot;)&quot;</span>
+            + &quot;(/&quot;
+            + &quot;(?&lt;sourceAmsNetId&gt;&quot; + AmsNetId.AMS_NET_ID_PATTERN + &quot;):(?&lt;sourceAmsPort&gt;&quot; + AmsPort.AMS_PORT_PATTERN + &quot;)&quot;
+            + &quot;)?&quot;);
+<span class="fc" id="L48">    public static final Pattern INET_ADDRESS_PATTERN = Pattern.compile(&quot;tcp://(?&lt;host&gt;[\\w.]+)(:(?&lt;port&gt;\\d*))?&quot;);</span>
+<span class="fc" id="L49">    public static final Pattern SERIAL_PATTERN = Pattern.compile(&quot;serial://(?&lt;serialDefinition&gt;((?!/\\d).)*)&quot;);</span>
+<span class="fc" id="L50">    public static final Pattern ADS_URI_PATTERN = Pattern.compile(&quot;^ads:(&quot; + INET_ADDRESS_PATTERN + &quot;|&quot; + SERIAL_PATTERN + &quot;)/&quot; + ADS_ADDRESS_PATTERN + &quot;(\\?.*)?&quot;);</span>
+
+    private AdsConnectionFactory adsConnectionFactory;
+
+<span class="fc" id="L54">    public AdsPlcDriver() {</span>
+<span class="fc" id="L55">        this.adsConnectionFactory = new AdsConnectionFactory();</span>
+<span class="fc" id="L56">    }</span>
+
+<span class="fc" id="L58">    public AdsPlcDriver(AdsConnectionFactory adsConnectionFactory) {</span>
+<span class="fc" id="L59">        this.adsConnectionFactory = adsConnectionFactory;</span>
+<span class="fc" id="L60">    }</span>
+
+    @Override
+    public String getProtocolCode() {
+<span class="fc" id="L64">        return &quot;ads&quot;;</span>
+    }
+
+    @Override
+    public String getProtocolName() {
+<span class="fc" id="L69">        return &quot;Beckhoff Twincat ADS&quot;;</span>
+    }
+
+    @Override
+    public PlcConnection connect(String url) throws PlcConnectionException {
+<span class="fc" id="L74">        Matcher matcher = ADS_URI_PATTERN.matcher(url);</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (!matcher.matches()) {</span>
+<span class="fc" id="L76">            throw new PlcConnectionException(</span>
+                &quot;Connection url &quot; + url + &quot; doesn't match 'ads://{{host|ip}|serial:definition}/{targetAmsNetId}:{targetAmsPort}/{sourceAmsNetId}:{sourceAmsPort}' RAW:&quot; + ADS_URI_PATTERN);
+        }
+<span class="fc" id="L79">        String host = matcher.group(&quot;host&quot;);</span>
+<span class="fc" id="L80">        String serialDefinition = matcher.group(&quot;serialDefinition&quot;);</span>
+<span class="fc" id="L81">        String portString = matcher.group(&quot;port&quot;);</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        Integer port = StringUtils.isNotBlank(portString) ? Integer.parseInt(portString) : null;</span>
+<span class="fc" id="L83">        AmsNetId targetAmsNetId = AmsNetId.of(matcher.group(&quot;targetAmsNetId&quot;));</span>
+<span class="fc" id="L84">        AmsPort targetAmsPort = AmsPort.of(matcher.group(&quot;targetAmsPort&quot;));</span>
+<span class="fc" id="L85">        String sourceAmsNetIdString = matcher.group(&quot;sourceAmsNetId&quot;);</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        AmsNetId sourceAmsNetId = StringUtils.isNotBlank(sourceAmsNetIdString) ? AmsNetId.of(sourceAmsNetIdString) : null;</span>
+<span class="fc" id="L87">        String sourceAmsPortString = matcher.group(&quot;sourceAmsPort&quot;);</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        AmsPort sourceAmsPort = StringUtils.isNotBlank(sourceAmsPortString) ? AmsPort.of(sourceAmsPortString) : null;</span>
+
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (serialDefinition != null) {</span>
+<span class="fc" id="L91">            return adsConnectionFactory.adsSerialPlcConnectionOf(serialDefinition, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+        } else {
+            try {
+<span class="fc" id="L94">                return adsConnectionFactory.adsTcpPlcConnectionOf(InetAddress.getByName(host), port, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+<span class="fc" id="L95">            } catch (UnknownHostException e) {</span>
+<span class="fc" id="L96">                throw new PlcConnectionException(e);</span>
+            }
+        }
+    }
+
+    @Override
+    public PlcConnection connect(String url, PlcAuthentication authentication) throws PlcConnectionException {
+<span class="fc" id="L103">        throw new PlcConnectionException(&quot;Basic ADS connections don't support authentication.&quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

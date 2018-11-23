@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultPlcReadRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Driver-Base: Base</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.base.messages</a> &gt; <span class="el_source">DefaultPlcReadRequest.java</span></div><h1>DefaultPlcReadRequest.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.base.messages;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
+import org.apache.plc4x.java.api.messages.PlcReadRequest;
+import org.apache.plc4x.java.api.messages.PlcReadResponse;
+import org.apache.plc4x.java.api.model.PlcField;
+import org.apache.plc4x.java.base.connection.PlcFieldHandler;
+
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+
+public class DefaultPlcReadRequest implements InternalPlcReadRequest, InternalPlcFieldRequest {
+
+    private final PlcReader reader;
+    private LinkedHashMap&lt;String, PlcField&gt; fields;
+
+<span class="fc" id="L37">    protected DefaultPlcReadRequest(PlcReader reader, LinkedHashMap&lt;String, PlcField&gt; fields) {</span>
+<span class="fc" id="L38">        this.reader = reader;</span>
+<span class="fc" id="L39">        this.fields = fields;</span>
+<span class="fc" id="L40">    }</span>
+
+    @Override
+    public CompletableFuture&lt;PlcReadResponse&gt; execute() {
+<span class="fc" id="L44">        return reader.read(this);</span>
+    }
+
+    @Override
+    public int getNumberOfFields() {
+<span class="fc" id="L49">        return fields.size();</span>
+    }
+
+    @Override
+    public LinkedHashSet&lt;String&gt; getFieldNames() {
+        // TODO: Check if this already is a LinkedHashSet.
+<span class="fc" id="L55">        return new LinkedHashSet&lt;&gt;(fields.keySet());</span>
+    }
+
+    @Override
+    public PlcField getField(String name) {
+<span class="fc" id="L60">        return fields.get(name);</span>
+    }
+
+    @Override
+    public List&lt;PlcField&gt; getFields() {
+<span class="fc" id="L65">        return new LinkedList&lt;&gt;(fields.values());</span>
+    }
+
+    @Override
+    public List&lt;Pair&lt;String, PlcField&gt;&gt; getNamedFields() {
+<span class="fc" id="L70">        return fields.entrySet()</span>
+<span class="fc" id="L71">            .stream()</span>
+<span class="fc" id="L72">            .map(stringPlcFieldEntry -&gt; Pair.of(stringPlcFieldEntry.getKey(), stringPlcFieldEntry.getValue()))</span>
+<span class="fc" id="L73">            .collect(Collectors.toCollection(LinkedList::new));</span>
+    }
+
+    protected PlcReader getReader() {
+<span class="fc" id="L77">        return reader;</span>
+    }
+
+    public static class Builder implements PlcReadRequest.Builder {
+
+        private final PlcReader reader;
+        private final PlcFieldHandler fieldHandler;
+        private final Map&lt;String, String&gt; fields;
+
+<span class="fc" id="L86">        public Builder(PlcReader reader, PlcFieldHandler fieldHandler) {</span>
+<span class="fc" id="L87">            this.reader = reader;</span>
+<span class="fc" id="L88">            this.fieldHandler = fieldHandler;</span>
+<span class="fc" id="L89">            fields = new TreeMap&lt;&gt;();</span>
+<span class="fc" id="L90">        }</span>
+
+        @Override
+        public PlcReadRequest.Builder addItem(String name, String fieldQuery) {
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            if (fields.containsKey(name)) {</span>
+<span class="fc" id="L95">                throw new PlcRuntimeException(&quot;Duplicate field definition '&quot; + name + &quot;'&quot;);</span>
+            }
+<span class="fc" id="L97">            fields.put(name, fieldQuery);</span>
+<span class="fc" id="L98">            return this;</span>
+        }
+
+        @Override
+        public PlcReadRequest build() {
+<span class="fc" id="L103">            LinkedHashMap&lt;String, PlcField&gt; parsedFields = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L104">            fields.forEach((name, fieldQuery) -&gt; {</span>
+<span class="fc" id="L105">                PlcField parsedField = fieldHandler.createField(fieldQuery);</span>
+<span class="fc" id="L106">                parsedFields.put(name, parsedField);</span>
+<span class="fc" id="L107">            });</span>
+<span class="fc" id="L108">            return new DefaultPlcReadRequest(reader, parsedFields);</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseDefaultFieldItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: Driver-Base: Base</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.base.messages.items</a> &gt; <span class="el_source">BaseDefaultFieldItem.java</span></div><h1>BaseDefaultFieldItem.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x.java.base.messages.items;
+
+import org.apache.plc4x.java.api.exceptions.PlcFieldRangeException;
+import org.apache.plc4x.java.api.exceptions.PlcIncompatibleDatatypeException;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.Objects;
+
+public abstract class BaseDefaultFieldItem&lt;T&gt; {
+
+    private final T[] values;
+
+<span class="fc" id="L36">    protected BaseDefaultFieldItem(T[] values) {</span>
+<span class="fc" id="L37">        this.values = Objects.requireNonNull(values);</span>
+<span class="fc" id="L38">    }</span>
+
+    public int getNumberOfValues() {
+<span class="fc" id="L41">        return values.length;</span>
+    }
+
+    public abstract Object getObject(int index);
+
+    public boolean isValidBoolean(int index) {
+<span class="fc" id="L47">        return false;</span>
+    }
+
+    public Boolean getBoolean(int index) {
+<span class="fc" id="L51">        throw new PlcIncompatibleDatatypeException(Boolean.class, index);</span>
+    }
+
+    public boolean isValidByte(int index) {
+<span class="fc" id="L55">        return false;</span>
+    }
+
+    public Byte getByte(int index) {
+<span class="fc" id="L59">        throw new PlcIncompatibleDatatypeException(Byte.class, index);</span>
+    }
+
+    public boolean isValidShort(int index) {
+<span class="fc" id="L63">        return false;</span>
+    }
+
+    public Short getShort(int index) {
+<span class="fc" id="L67">        throw new PlcIncompatibleDatatypeException(Short.class, index);</span>
+    }
+
+    public boolean isValidInteger(int index) {
+<span class="fc" id="L71">        return false;</span>
+    }
+
+    public Integer getInteger(int index) {
+<span class="fc" id="L75">        throw new PlcIncompatibleDatatypeException(Integer.class, index);</span>
+    }
+
+    public boolean isValidLong(int index) {
+<span class="fc" id="L79">        return false;</span>
+    }
+
+    public Long getLong(int index) {
+<span class="fc" id="L83">        throw new PlcIncompatibleDatatypeException(Long.class, index);</span>
+    }
+
+    public boolean isValidBigInteger(int index) {
+<span class="fc" id="L87">        return false;</span>
+    }
+
+    public BigInteger getBigInteger(int index) {
+<span class="fc" id="L91">        throw new PlcIncompatibleDatatypeException(BigInteger.class, index);</span>
+    }
+
+    public boolean isValidFloat(int index) {
+<span class="fc" id="L95">        return false;</span>
+    }
+
+    public Float getFloat(int index) {
+<span class="fc" id="L99">        throw new PlcIncompatibleDatatypeException(Float.class, index);</span>
+    }
+
+    public boolean isValidDouble(int index) {
+<span class="fc" id="L103">        return false;</span>
+    }
+
+    public Double getDouble(int index) {
+<span class="fc" id="L107">        throw new PlcIncompatibleDatatypeException(Double.class, index);</span>
+    }
+
+    public boolean isValidBigDecimal(int index) {
+<span class="fc" id="L111">        return false;</span>
+    }
+
+    public BigDecimal getBigDecimal(int index) {
+<span class="fc" id="L115">        throw new PlcIncompatibleDatatypeException(BigDecimal.class, index);</span>
+    }
+
+    public boolean isValidString(int index) {
+<span class="fc" id="L119">        return false;</span>
+    }
+
+    public String getString(int index) {
+<span class="fc" id="L123">        throw new PlcIncompatibleDatatypeException(String.class, index);</span>
+    }
+
+    public boolean isValidTime(int index) {
+<span class="fc" id="L127">        return false;</span>
+    }
+
+    public LocalTime getTime(int index) {
+<span class="fc" id="L131">        throw new PlcIncompatibleDatatypeException(LocalTime.class, index);</span>
+    }
+
+    public boolean isValidDate(int index) {
+<span class="fc" id="L135">        return false;</span>
+    }
+
+    public LocalDate getDate(int index) {
+<span class="fc" id="L139">        throw new PlcIncompatibleDatatypeException(LocalDate.class, index);</span>
+    }
+
+    public boolean isValidDateTime(int index) {
+<span class="fc" id="L143">        return false;</span>
+    }
+
+    public LocalDateTime getDateTime(int index) {
+<span class="fc" id="L147">        throw new PlcIncompatibleDatatypeException(LocalDateTime.class, index);</span>
+    }
+
+    public boolean isValidByteArray(int index) {
+<span class="fc" id="L151">        return false;</span>
+    }
+
+    public Byte[] getByteArray(int index) {
+<span class="fc" id="L155">        throw new PlcIncompatibleDatatypeException(Byte[].class, index);</span>
+    }
+
+    public T[] getValues() {
+<span class="fc" id="L159">        return values;</span>
+    }
+
+    protected T getValue(int index) {
+<span class="pc bpc" id="L163" title="2 of 6 branches missed.">        if ((values == null) || (index &lt; 0 || (index &gt;= values.length))) {</span>
+<span class="pc bpc" id="L164" title="1 of 2 branches missed.">            throw new PlcFieldRangeException((values == null) ? -1 : values.length - 1, index);</span>
+        }
+<span class="fc" id="L166">        return values[index];</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        if (this == o) {</span>
+<span class="fc" id="L172">            return true;</span>
+        }
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        if (!(o instanceof BaseDefaultFieldItem)) {</span>
+<span class="fc" id="L175">            return false;</span>
+        }
+<span class="fc" id="L177">        BaseDefaultFieldItem&lt;?&gt; fieldItem = (BaseDefaultFieldItem&lt;?&gt;) o;</span>
+<span class="fc" id="L178">        return Arrays.equals(values, fieldItem.values);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L183">        return Arrays.hashCode(values);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L188">        return getClass().getSimpleName() + &quot;{&quot; +</span>
+<span class="fc" id="L189">            &quot;values=&quot; + Arrays.toString(values) +</span>
+            '}';
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

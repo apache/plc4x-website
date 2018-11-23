@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsNotificationSample.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Protocol: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.api.commands.types</a> &gt; <span class="el_source">AdsNotificationSample.java</span></div><h1>AdsNotificationSample.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.api.commands.types;
+
+import io.netty.buffer.ByteBuf;
+import org.apache.plc4x.java.ads.api.util.ByteReadable;
+import org.apache.plc4x.java.ads.api.util.LengthSupplier;
+
+import static java.util.Objects.requireNonNull;
+
+public class AdsNotificationSample implements ByteReadable {
+
+    /**
+     * 4 Bytes	Handle of notification.
+     */
+    private final NotificationHandle notificationHandle;
+    /**
+     * 4 Bytes	Size of data range in bytes.
+     */
+    private final SampleSize sampleSize;
+    /**
+     * n Bytes	Data
+     */
+    private final Data data;
+
+    private final transient LengthSupplier lengthSupplier;
+
+<span class="fc" id="L44">    private AdsNotificationSample(NotificationHandle notificationHandle, Data data) {</span>
+<span class="fc" id="L45">        this.notificationHandle = requireNonNull(notificationHandle);</span>
+<span class="fc" id="L46">        this.sampleSize = null;</span>
+<span class="fc" id="L47">        this.data = requireNonNull(data);</span>
+<span class="fc" id="L48">        lengthSupplier = data;</span>
+<span class="fc" id="L49">    }</span>
+
+<span class="fc" id="L51">    private AdsNotificationSample(NotificationHandle notificationHandle, SampleSize sampleSize, Data data) {</span>
+<span class="fc" id="L52">        this.notificationHandle = requireNonNull(notificationHandle);</span>
+<span class="fc" id="L53">        this.sampleSize = requireNonNull(sampleSize);</span>
+<span class="fc" id="L54">        this.data = requireNonNull(data);</span>
+<span class="fc" id="L55">        lengthSupplier = null;</span>
+<span class="fc" id="L56">    }</span>
+
+    public static AdsNotificationSample of(NotificationHandle notificationHandle, Data data) {
+<span class="fc" id="L59">        return new AdsNotificationSample(notificationHandle, data);</span>
+    }
+
+    public static AdsNotificationSample of(NotificationHandle notificationHandle, SampleSize sampleSize, Data data) {
+<span class="fc" id="L63">        return new AdsNotificationSample(notificationHandle, sampleSize, data);</span>
+    }
+
+    @Override
+    public ByteBuf getByteBuf() {
+<span class="fc" id="L68">        return buildByteBuff(notificationHandle, getSampleSize(), data);</span>
+    }
+
+    public NotificationHandle getNotificationHandle() {
+<span class="fc" id="L72">        return notificationHandle;</span>
+    }
+
+    public SampleSize getSampleSize() {
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        return lengthSupplier == null ? sampleSize : SampleSize.of(lengthSupplier);</span>
+    }
+
+    public Data getData() {
+<span class="fc" id="L80">        return data;</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (this == o)</span>
+<span class="nc" id="L86">            return true;</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (!(o instanceof AdsNotificationSample))</span>
+<span class="nc" id="L88">            return false;</span>
+
+<span class="fc" id="L90">        AdsNotificationSample that = (AdsNotificationSample) o;</span>
+
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (!notificationHandle.equals(that.notificationHandle))</span>
+<span class="nc" id="L93">            return false;</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (!data.equals(that.data))</span>
+<span class="nc" id="L95">            return false;</span>
+
+<span class="fc" id="L97">        return getSampleSize().equals(that.getSampleSize());</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L102">        int result = notificationHandle.hashCode();</span>
+<span class="nc" id="L103">        result = 31 * result + data.hashCode();</span>
+<span class="nc" id="L104">        result = 31 * result + getSampleSize().hashCode();</span>
+<span class="nc" id="L105">        return result;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L110">        return &quot;AdsNotificationSample{&quot; +</span>
+            &quot;notificationHandle=&quot; + notificationHandle +
+<span class="fc" id="L112">            &quot;, sampleSize=&quot; + getSampleSize() +</span>
+            &quot;, data=&quot; + data +
+            '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
