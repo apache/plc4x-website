@@ -59,14 +59,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
     public void connect(ChannelHandlerContext ctx, SocketAddress remoteAddress, SocketAddress localAddress, ChannelPromise promise) throws Exception {
 <span class="fc" id="L60">        LOGGER.debug(&quot;connect({}, {}, {}, {})&quot;, ctx, remoteAddress, localAddress, promise);</span>
 <span class="fc" id="L61">        sender = ctx.executor().scheduleAtFixedRate(() -&gt; {</span>
-<span class="nc" id="L62">            LOGGER.trace(&quot;Woke up and doing work messageOnTheWay:{}, messageQueue:{}&quot;, messageOnTheWay, messagesQueue);</span>
-<span class="nc bnc" id="L63" title="All 4 branches missed.">            if (!messagesQueue.isEmpty() &amp;&amp; messageOnTheWay.compareAndSet(false, true)) {</span>
+<span class="fc" id="L62">            LOGGER.trace(&quot;Woke up and doing work messageOnTheWay:{}, messageQueue:{}&quot;, messageOnTheWay, messagesQueue);</span>
+<span class="pc bpc" id="L63" title="3 of 4 branches missed.">            if (!messagesQueue.isEmpty() &amp;&amp; messageOnTheWay.compareAndSet(false, true)) {</span>
 <span class="nc" id="L64">                ToSend pop = messagesQueue.pop();</span>
 <span class="nc" id="L65">                LOGGER.debug(&quot;Sending {}&quot;, pop);</span>
 <span class="nc" id="L66">                pop.channelHandlerContext.writeAndFlush(pop.objectToSend, pop.promise);</span>
 <span class="nc" id="L67">                LOGGER.debug(&quot;Send {}&quot;, pop);</span>
             }
-<span class="nc" id="L69">        }, 100, 10, TimeUnit.MILLISECONDS);</span>
+<span class="fc" id="L69">        }, 100, 10, TimeUnit.MILLISECONDS);</span>
 <span class="fc" id="L70">        super.connect(ctx, remoteAddress, localAddress, promise);</span>
 <span class="fc" id="L71">    }</span>
 
