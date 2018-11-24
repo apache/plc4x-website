@@ -24,6 +24,7 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.implementation.MethodDelegation;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.plc4x.java.PlcDriverManager;
+import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
 import org.apache.plc4x.java.api.messages.PlcReadRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +78,7 @@ import static net.bytebuddy.matcher.ElementMatchers.not;
  */
 public class PlcEntityManager {
 
-<span class="fc" id="L80">    private static final Logger LOGGER = LoggerFactory.getLogger(PlcEntityManager.class);</span>
+<span class="fc" id="L81">    private static final Logger LOGGER = LoggerFactory.getLogger(PlcEntityManager.class);</span>
 
     public static final String PLC_ADDRESS_FIELD_NAME = &quot;_plcAddress&quot;;
     static final String DRIVER_MANAGER_FIELD_NAME = &quot;_driverManager&quot;;
@@ -89,28 +90,28 @@ public class PlcEntityManager {
     private final SimpleAliasRegistry registry;
 
     public PlcEntityManager() {
-<span class="fc" id="L92">        this(new PlcDriverManager());</span>
-<span class="fc" id="L93">    }</span>
+<span class="fc" id="L93">        this(new PlcDriverManager());</span>
+<span class="fc" id="L94">    }</span>
 
     public PlcEntityManager(PlcDriverManager driverManager) {
-<span class="fc" id="L96">        this(driverManager, new SimpleAliasRegistry());</span>
-<span class="fc" id="L97">    }</span>
+<span class="fc" id="L97">        this(driverManager, new SimpleAliasRegistry());</span>
+<span class="fc" id="L98">    }</span>
 
-<span class="fc" id="L99">    public PlcEntityManager(PlcDriverManager driverManager, SimpleAliasRegistry registry) {</span>
-<span class="fc" id="L100">        this.driverManager = driverManager;</span>
-<span class="fc" id="L101">        this.registry = registry;</span>
-<span class="fc" id="L102">    }</span>
+<span class="fc" id="L100">    public PlcEntityManager(PlcDriverManager driverManager, SimpleAliasRegistry registry) {</span>
+<span class="fc" id="L101">        this.driverManager = driverManager;</span>
+<span class="fc" id="L102">        this.registry = registry;</span>
+<span class="fc" id="L103">    }</span>
 
     public &lt;T&gt; T read(Class&lt;T&gt; clazz, String address) throws OPMException {
-<span class="fc" id="L105">        T connect = connect(clazz, address);</span>
-<span class="fc" id="L106">        disconnect(connect);</span>
-<span class="fc" id="L107">        return connect;</span>
+<span class="fc" id="L106">        T connect = connect(clazz, address);</span>
+<span class="fc" id="L107">        disconnect(connect);</span>
+<span class="fc" id="L108">        return connect;</span>
     }
 
     public &lt;T&gt; T write(Class&lt;T&gt; clazz, String address, T object) throws OPMException {
-<span class="fc" id="L111">        T merge = merge(clazz, address, object);</span>
-<span class="fc" id="L112">        disconnect(merge);</span>
-<span class="fc" id="L113">        return merge;</span>
+<span class="fc" id="L112">        T merge = merge(clazz, address, object);</span>
+<span class="fc" id="L113">        disconnect(merge);</span>
+<span class="fc" id="L114">        return merge;</span>
     }
 
     /**
@@ -122,7 +123,7 @@ public class PlcEntityManager {
      * @throws OPMException when proxy can't be build.
      */
     public &lt;T&gt; T connect(Class&lt;T&gt; clazz, String address) throws OPMException {
-<span class="fc" id="L125">        return connect(clazz, address, null);</span>
+<span class="fc" id="L126">        return connect(clazz, address, null);</span>
     }
 
 
@@ -135,68 +136,68 @@ public class PlcEntityManager {
      * @throws OPMException when proxy can't be build.
      */
     public &lt;T&gt; T merge(Class&lt;T&gt; clazz, String address, T instance) throws OPMException {
-<span class="fc" id="L138">        return connect(clazz, address, instance);</span>
+<span class="fc" id="L139">        return connect(clazz, address, instance);</span>
     }
 
     private &lt;T&gt; T connect(Class&lt;T&gt; clazz, String address, T existingInstance) throws OPMException {
-<span class="fc" id="L142">        OpmUtils.getPlcEntityAndCheckPreconditions(clazz);</span>
+<span class="fc" id="L143">        OpmUtils.getPlcEntityAndCheckPreconditions(clazz);</span>
         try {
             // Use Byte Buddy to generate a subclassed proxy that delegates all PlcField Methods
             // to the intercept method
-<span class="fc" id="L146">            T instance = new ByteBuddy()</span>
-<span class="fc" id="L147">                .subclass(clazz)</span>
-<span class="fc" id="L148">                .defineField(PLC_ADDRESS_FIELD_NAME, String.class, Visibility.PRIVATE)</span>
-<span class="fc" id="L149">                .defineField(DRIVER_MANAGER_FIELD_NAME, PlcDriverManager.class, Visibility.PRIVATE)</span>
-<span class="fc" id="L150">                .defineField(ALIAS_REGISTRY, AliasRegistry.class, Visibility.PRIVATE)</span>
-<span class="fc" id="L151">                .defineField(LAST_FETCHED, Map.class, Visibility.PRIVATE)</span>
-<span class="fc" id="L152">                .defineField(LAST_WRITTEN, Map.class, Visibility.PRIVATE)</span>
-<span class="fc" id="L153">                .method(not(isDeclaredBy(Object.class))).intercept(MethodDelegation.to(PlcEntityInterceptor.class))</span>
-<span class="fc" id="L154">                .make()</span>
-<span class="fc" id="L155">                .load(Thread.currentThread().getContextClassLoader())</span>
-<span class="fc" id="L156">                .getLoaded()</span>
-<span class="fc" id="L157">                .getConstructor()</span>
-<span class="fc" id="L158">                .newInstance();</span>
+<span class="fc" id="L147">            T instance = new ByteBuddy()</span>
+<span class="fc" id="L148">                .subclass(clazz)</span>
+<span class="fc" id="L149">                .defineField(PLC_ADDRESS_FIELD_NAME, String.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L150">                .defineField(DRIVER_MANAGER_FIELD_NAME, PlcDriverManager.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L151">                .defineField(ALIAS_REGISTRY, AliasRegistry.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L152">                .defineField(LAST_FETCHED, Map.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L153">                .defineField(LAST_WRITTEN, Map.class, Visibility.PRIVATE)</span>
+<span class="fc" id="L154">                .method(not(isDeclaredBy(Object.class))).intercept(MethodDelegation.to(PlcEntityInterceptor.class))</span>
+<span class="fc" id="L155">                .make()</span>
+<span class="fc" id="L156">                .load(Thread.currentThread().getContextClassLoader())</span>
+<span class="fc" id="L157">                .getLoaded()</span>
+<span class="fc" id="L158">                .getConstructor()</span>
+<span class="fc" id="L159">                .newInstance();</span>
             // Set connection value into the private field
-<span class="fc" id="L160">            FieldUtils.writeDeclaredField(instance, PLC_ADDRESS_FIELD_NAME, address, true);</span>
-<span class="fc" id="L161">            FieldUtils.writeDeclaredField(instance, DRIVER_MANAGER_FIELD_NAME, driverManager, true);</span>
-<span class="fc" id="L162">            FieldUtils.writeDeclaredField(instance, ALIAS_REGISTRY, registry, true);</span>
-<span class="fc" id="L163">            Map&lt;String, Instant&gt; lastFetched = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L164">            FieldUtils.writeDeclaredField(instance, LAST_FETCHED, lastFetched, true);</span>
-<span class="fc" id="L165">            Map&lt;String, Instant&gt; lastWritten = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L166">            FieldUtils.writeDeclaredField(instance, LAST_WRITTEN, lastWritten, true);</span>
+<span class="fc" id="L161">            FieldUtils.writeDeclaredField(instance, PLC_ADDRESS_FIELD_NAME, address, true);</span>
+<span class="fc" id="L162">            FieldUtils.writeDeclaredField(instance, DRIVER_MANAGER_FIELD_NAME, driverManager, true);</span>
+<span class="fc" id="L163">            FieldUtils.writeDeclaredField(instance, ALIAS_REGISTRY, registry, true);</span>
+<span class="fc" id="L164">            Map&lt;String, Instant&gt; lastFetched = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L165">            FieldUtils.writeDeclaredField(instance, LAST_FETCHED, lastFetched, true);</span>
+<span class="fc" id="L166">            Map&lt;String, Instant&gt; lastWritten = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L167">            FieldUtils.writeDeclaredField(instance, LAST_WRITTEN, lastWritten, true);</span>
 
             // Initially fetch all values
-<span class="fc bfc" id="L169" title="All 2 branches covered.">            if (existingInstance == null) {</span>
-<span class="fc" id="L170">                PlcEntityInterceptor.refetchAllFields(instance, driverManager, address, registry, lastFetched);</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">            if (existingInstance == null) {</span>
+<span class="fc" id="L171">                PlcEntityInterceptor.refetchAllFields(instance, driverManager, address, registry, lastFetched);</span>
             } else {
-<span class="fc" id="L172">                FieldUtils.getAllFieldsList(clazz).stream()</span>
-<span class="fc" id="L173">                    .peek(field -&gt; field.setAccessible(true))</span>
-<span class="fc" id="L174">                    .forEach(field -&gt; setValueToField(field, instance, getValueFromField(field, existingInstance)));</span>
+<span class="fc" id="L173">                FieldUtils.getAllFieldsList(clazz).stream()</span>
+<span class="fc" id="L174">                    .peek(field -&gt; field.setAccessible(true))</span>
+<span class="fc" id="L175">                    .forEach(field -&gt; setValueToField(field, instance, getValueFromField(field, existingInstance)));</span>
 
-<span class="fc" id="L176">                PlcEntityInterceptor.writeAllFields(instance, driverManager, address, registry, lastWritten);</span>
+<span class="fc" id="L177">                PlcEntityInterceptor.writeAllFields(instance, driverManager, address, registry, lastWritten);</span>
             }
 
-<span class="fc" id="L179">            return instance;</span>
-<span class="fc" id="L180">        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | IllegalAccessError e) {</span>
-<span class="fc" id="L181">            throw new OPMException(&quot;Unable to instantiate Proxy&quot;, e);</span>
+<span class="fc" id="L180">            return instance;</span>
+<span class="fc" id="L181">        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | IllegalAccessError e) {</span>
+<span class="fc" id="L182">            throw new OPMException(&quot;Unable to instantiate Proxy&quot;, e);</span>
         }
     }
 
     private Object getValueFromField(Field field, Object object) {
         try {
-<span class="fc" id="L187">            return field.get(object);</span>
-<span class="nc" id="L188">        } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L189">            throw new RuntimeException(e);</span>
+<span class="fc" id="L188">            return field.get(object);</span>
+<span class="nc" id="L189">        } catch (IllegalAccessException e) {</span>
+<span class="nc" id="L190">            throw new PlcRuntimeException(e);</span>
         }
     }
 
     private void setValueToField(Field field, Object object, Object value) {
         try {
-<span class="fc" id="L195">            field.set(object, value);</span>
-<span class="nc" id="L196">        } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L197">            throw new RuntimeException(e);</span>
-<span class="fc" id="L198">        }</span>
-<span class="fc" id="L199">    }</span>
+<span class="fc" id="L196">            field.set(object, value);</span>
+<span class="nc" id="L197">        } catch (IllegalAccessException e) {</span>
+<span class="nc" id="L198">            throw new PlcRuntimeException(e);</span>
+<span class="fc" id="L199">        }</span>
+<span class="fc" id="L200">    }</span>
 
     /**
      * Disconnects the given instance.
@@ -206,20 +207,20 @@ public class PlcEntityManager {
      */
     public void disconnect(Object entity) throws OPMException {
         // Check if this is an entity
-<span class="fc" id="L209">        PlcEntity annotation = entity.getClass().getSuperclass().getAnnotation(PlcEntity.class);</span>
-<span class="pc bpc" id="L210" title="1 of 2 branches missed.">        if (annotation == null) {</span>
-<span class="nc" id="L211">            throw new OPMException(&quot;Unable to disconnect Object, is no entity!&quot;);</span>
+<span class="fc" id="L210">        PlcEntity annotation = entity.getClass().getSuperclass().getAnnotation(PlcEntity.class);</span>
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        if (annotation == null) {</span>
+<span class="nc" id="L212">            throw new OPMException(&quot;Unable to disconnect Object, is no entity!&quot;);</span>
         }
         try {
-<span class="fc" id="L214">            Object manager = FieldUtils.readDeclaredField(entity, DRIVER_MANAGER_FIELD_NAME, true);</span>
-<span class="fc bfc" id="L215" title="All 2 branches covered.">            if (manager == null) {</span>
-<span class="fc" id="L216">                throw new OPMException(&quot;Instance is already disconnected!&quot;);</span>
+<span class="fc" id="L215">            Object manager = FieldUtils.readDeclaredField(entity, DRIVER_MANAGER_FIELD_NAME, true);</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">            if (manager == null) {</span>
+<span class="fc" id="L217">                throw new OPMException(&quot;Instance is already disconnected!&quot;);</span>
             }
-<span class="fc" id="L218">            FieldUtils.writeDeclaredField(entity, DRIVER_MANAGER_FIELD_NAME, null, true);</span>
-<span class="nc" id="L219">        } catch (IllegalAccessException e) {</span>
-<span class="nc" id="L220">            throw new OPMException(&quot;Unable to fetch driverManager instance on entity instance&quot;, e);</span>
-<span class="fc" id="L221">        }</span>
-<span class="fc" id="L222">    }</span>
+<span class="fc" id="L219">            FieldUtils.writeDeclaredField(entity, DRIVER_MANAGER_FIELD_NAME, null, true);</span>
+<span class="nc" id="L220">        } catch (IllegalAccessException e) {</span>
+<span class="nc" id="L221">            throw new OPMException(&quot;Unable to fetch driverManager instance on entity instance&quot;, e);</span>
+<span class="fc" id="L222">        }</span>
+<span class="fc" id="L223">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

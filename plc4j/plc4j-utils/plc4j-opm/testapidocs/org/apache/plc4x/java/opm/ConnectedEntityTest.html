@@ -18,12 +18,6 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
-var altColor = "altColor";
-var rowColor = "rowColor";
-var tableTab = "tableTab";
-var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -76,13 +70,13 @@ var activeTableTab = "activeTableTab";
 <li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#method.summary">Method</a></li>
+<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -108,7 +102,8 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">ConnectedEntityTest</span>
+<pre>@ExtendWith(value=org.mockito.junit.jupiter.MockitoExtension.class)
+public class <span class="typeNameLabel">ConnectedEntityTest</span>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
 <div class="block">Tests for Connected Entities.</div>
 </li>
@@ -159,25 +154,6 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <!--   -->
 </a>
 <h3>Method Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Method and Description</th>
-</tr>
-<tr id="i0" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/opm/ConnectedEntityTest.html#cache_manyRequests_onlyOneToPlc--">cache_manyRequests_onlyOneToPlc</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/opm/ConnectedEntityTest.html#useCache_timeout_refetches--">useCache_timeout_refetches</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/opm/ConnectedEntityTest.html#useCache--">useCache</a></span>()</code>&nbsp;</td>
-</tr>
-</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
@@ -206,67 +182,6 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <li class="blockList">
 <h4>ConnectedEntityTest</h4>
 <pre>public&nbsp;ConnectedEntityTest()</pre>
-</li>
-</ul>
-</li>
-</ul>
-<!-- ============ METHOD DETAIL ========== -->
-<ul class="blockList">
-<li class="blockList"><a name="method.detail">
-<!--   -->
-</a>
-<h3>Method Detail</h3>
-<a name="useCache--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>useCache</h4>
-<pre>@Test
-public&nbsp;void&nbsp;useCache()
-                    throws <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcConnectionException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcConnectionException</a>,
-                           <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/opm.OPMException.html?is-external=true" title="class or interface in org.apache.plc4x.java">org.apache.plc4x.java.opm.OPMException</a></pre>
-<dl>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcConnectionException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcConnectionException</a></code></dd>
-<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/opm.OPMException.html?is-external=true" title="class or interface in org.apache.plc4x.java">org.apache.plc4x.java.opm.OPMException</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="useCache_timeout_refetches--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>useCache_timeout_refetches</h4>
-<pre>@Test
-public&nbsp;void&nbsp;useCache_timeout_refetches()
-                                      throws <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcConnectionException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcConnectionException</a>,
-                                             <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/opm.OPMException.html?is-external=true" title="class or interface in org.apache.plc4x.java">org.apache.plc4x.java.opm.OPMException</a>,
-                                             <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</a></pre>
-<dl>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcConnectionException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcConnectionException</a></code></dd>
-<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/opm.OPMException.html?is-external=true" title="class or interface in org.apache.plc4x.java">org.apache.plc4x.java.opm.OPMException</a></code></dd>
-<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="cache_manyRequests_onlyOneToPlc--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>cache_manyRequests_onlyOneToPlc</h4>
-<pre>@Test
-public&nbsp;void&nbsp;cache_manyRequests_onlyOneToPlc()
-                                           throws <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcConnectionException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcConnectionException</a>,
-                                                  <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/opm.OPMException.html?is-external=true" title="class or interface in org.apache.plc4x.java">org.apache.plc4x.java.opm.OPMException</a></pre>
-<dl>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcConnectionException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcConnectionException</a></code></dd>
-<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/opm.OPMException.html?is-external=true" title="class or interface in org.apache.plc4x.java">org.apache.plc4x.java.opm.OPMException</a></code></dd>
-</dl>
 </li>
 </ul>
 </li>
@@ -324,13 +239,13 @@ public&nbsp;void&nbsp;cache_manyRequests_onlyOneToPlc()
 <li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#method.summary">Method</a></li>
+<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">
