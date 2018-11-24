@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsTcpPlcConnection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Driver: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.connection</a> &gt; <span class="el_source">AdsTcpPlcConnection.java</span></div><h1>AdsTcpPlcConnection.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.connection;
+
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.plc4x.java.ads.api.commands.*;
+import org.apache.plc4x.java.ads.api.commands.types.*;
+import org.apache.plc4x.java.ads.api.generic.types.AmsNetId;
+import org.apache.plc4x.java.ads.api.generic.types.AmsPort;
+import org.apache.plc4x.java.ads.api.generic.types.Invoke;
+import org.apache.plc4x.java.ads.model.*;
+import org.apache.plc4x.java.ads.protocol.Ads2PayloadProtocol;
+import org.apache.plc4x.java.ads.protocol.Payload2TcpProtocol;
+import org.apache.plc4x.java.ads.protocol.Plc4x2AdsProtocol;
+import org.apache.plc4x.java.ads.protocol.util.LittleEndianDecoder;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
+import org.apache.plc4x.java.api.messages.*;
+import org.apache.plc4x.java.api.model.PlcConsumerRegistration;
+import org.apache.plc4x.java.api.model.PlcField;
+import org.apache.plc4x.java.api.model.PlcSubscriptionHandle;
+import org.apache.plc4x.java.api.types.PlcResponseCode;
+import org.apache.plc4x.java.base.connection.TcpSocketChannelFactory;
+import org.apache.plc4x.java.base.messages.*;
+import org.apache.plc4x.java.base.messages.items.BaseDefaultFieldItem;
+import org.apache.plc4x.java.base.model.DefaultPlcConsumerRegistration;
+import org.apache.plc4x.java.base.model.InternalPlcConsumerRegistration;
+import org.apache.plc4x.java.base.model.InternalPlcSubscriptionHandle;
+import org.apache.plc4x.java.base.model.SubscriptionPlcField;
+import org.apache.plc4x.java.base.protocol.SingleItemToSingleRequestProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class AdsTcpPlcConnection extends AdsAbstractPlcConnection implements PlcSubscriber {
+
+<span class="fc" id="L71">    private static final Logger LOGGER = LoggerFactory.getLogger(AdsTcpPlcConnection.class);</span>
+
+    private static final int TCP_PORT = 48898;
+
+<span class="fc" id="L75">    private static final long ADD_DEVICE_TIMEOUT = CONF.getLong(&quot;plc4x.adsconnection.add.device,timeout&quot;, 3000);</span>
+<span class="fc" id="L76">    private static final long DEL_DEVICE_TIMEOUT = CONF.getLong(&quot;plc4x.adsconnection.del.device,timeout&quot;, 3000);</span>
+
+<span class="fc" id="L78">    private static AtomicInteger localPorts = new AtomicInteger(30000);</span>
+
+<span class="fc" id="L80">    private Map&lt;InternalPlcConsumerRegistration, Consumer&lt;AdsDeviceNotificationRequest&gt;&gt; consumerRegistrations = new HashMap&lt;&gt;();</span>
+
+    private AdsTcpPlcConnection(InetAddress address, AmsNetId targetAmsNetId, AmsPort targetAmsPort) {
+<span class="fc" id="L83">        this(address, targetAmsNetId, targetAmsPort, generateAMSNetId(), generateAMSPort());</span>
+<span class="fc" id="L84">    }</span>
+
+    private AdsTcpPlcConnection(InetAddress address, Integer port, AmsNetId targetAmsNetId, AmsPort targetAmsPort) {
+<span class="fc" id="L87">        this(address, port, targetAmsNetId, targetAmsPort, generateAMSNetId(), generateAMSPort());</span>
+<span class="fc" id="L88">    }</span>
+
+    private AdsTcpPlcConnection(InetAddress address, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc" id="L91">        this(address, null, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+<span class="fc" id="L92">    }</span>
+
+    private AdsTcpPlcConnection(InetAddress address, Integer port, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        super(new TcpSocketChannelFactory(address, port != null ? port : TCP_PORT), targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+<span class="fc" id="L96">    }</span>
+
+    public static AdsTcpPlcConnection of(InetAddress address, AmsNetId targetAmsNetId, AmsPort targetAmsPort) {
+<span class="fc" id="L99">        return new AdsTcpPlcConnection(address, targetAmsNetId, targetAmsPort);</span>
+    }
+
+    public static AdsTcpPlcConnection of(InetAddress address, Integer port, AmsNetId targetAmsNetId, AmsPort targetAmsPort) {
+<span class="fc" id="L103">        return new AdsTcpPlcConnection(address, port, targetAmsNetId, targetAmsPort);</span>
+    }
+
+    public static AdsTcpPlcConnection of(InetAddress address, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc" id="L107">        return new AdsTcpPlcConnection(address, null, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+    }
+
+    public static AdsTcpPlcConnection of(InetAddress address, Integer port, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc" id="L111">        return new AdsTcpPlcConnection(address, port, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+    }
+
+    @Override
+    protected ChannelHandler getChannelHandler(CompletableFuture&lt;Void&gt; sessionSetupCompleteFuture) {
+<span class="fc" id="L116">        return new ChannelInitializer() {</span>
+            @Override
+            protected void initChannel(Channel channel) {
+                // Build the protocol stack for communicating with the ads protocol.
+<span class="fc" id="L120">                ChannelPipeline pipeline = channel.pipeline();</span>
+<span class="fc" id="L121">                pipeline.addLast(new Payload2TcpProtocol());</span>
+<span class="fc" id="L122">                pipeline.addLast(new Ads2PayloadProtocol());</span>
+<span class="fc" id="L123">                pipeline.addLast(new Plc4x2AdsProtocol(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, fieldMapping));</span>
+<span class="fc" id="L124">                pipeline.addLast(new SingleItemToSingleRequestProtocol(AdsTcpPlcConnection.this, AdsTcpPlcConnection.this, AdsTcpPlcConnection.this, timer, SingleItemToSingleRequestProtocol.SplitConfig.builder().dontSplitSubscribe().dontSplitUnsubscribe().build(), false));</span>
+<span class="fc" id="L125">            }</span>
+        };
+    }
+
+    public InetAddress getRemoteAddress() {
+<span class="fc" id="L130">        return ((TcpSocketChannelFactory) channelFactory).getAddress();</span>
+    }
+
+    protected static AmsNetId generateAMSNetId() {
+        try {
+<span class="fc" id="L135">            return AmsNetId.of(Inet4Address.getLocalHost().getHostAddress() + &quot;.1.1&quot;);</span>
+<span class="nc" id="L136">        } catch (UnknownHostException e) {</span>
+<span class="nc" id="L137">            throw new PlcRuntimeException(e);</span>
+        }
+    }
+
+    protected static AmsPort generateAMSPort() {
+<span class="fc" id="L142">        return AmsPort.of(localPorts.getAndIncrement());</span>
+    }
+
+    @Override
+    public CompletableFuture&lt;PlcSubscriptionResponse&gt; subscribe(PlcSubscriptionRequest plcSubscriptionRequest) {
+<span class="fc" id="L147">        InternalPlcSubscriptionRequest internalPlcSubscriptionRequest = checkInternal(plcSubscriptionRequest, InternalPlcSubscriptionRequest.class);</span>
+<span class="fc" id="L148">        CompletableFuture&lt;PlcSubscriptionResponse&gt; future = new CompletableFuture&lt;&gt;();</span>
+
+<span class="fc" id="L150">        Map&lt;String, Pair&lt;PlcResponseCode, PlcSubscriptionHandle&gt;&gt; responseItems = internalPlcSubscriptionRequest.getSubscriptionPlcFieldMap().entrySet().stream()</span>
+<span class="fc" id="L151">            .map(subscriptionPlcFieldEntry -&gt; {</span>
+<span class="fc" id="L152">                final String plcFieldName = subscriptionPlcFieldEntry.getKey();</span>
+<span class="fc" id="L153">                final SubscriptionPlcField subscriptionPlcField = subscriptionPlcFieldEntry.getValue();</span>
+<span class="fc" id="L154">                final PlcField field = Objects.requireNonNull(subscriptionPlcField.getPlcField());</span>
+
+                final IndexGroup indexGroup;
+                final IndexOffset indexOffset;
+                final AdsDataType adsDataType;
+                final int numberOfElements;
+                // If this is a symbolic field, it has to be resolved first.
+                // TODO: This is blocking, should be changed to be async.
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">                if (field instanceof SymbolicAdsField) {</span>
+<span class="nc" id="L163">                    mapFields((SymbolicAdsField) field);</span>
+<span class="nc" id="L164">                    DirectAdsField directAdsField = fieldMapping.get(field);</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">                    if (directAdsField == null) {</span>
+<span class="nc" id="L166">                        throw new PlcRuntimeException(&quot;Unresolvable field &quot; + field);</span>
+                    }
+<span class="nc" id="L168">                    indexGroup = IndexGroup.of(directAdsField.getIndexGroup());</span>
+<span class="nc" id="L169">                    indexOffset = IndexOffset.of(directAdsField.getIndexOffset());</span>
+<span class="nc" id="L170">                    adsDataType = directAdsField.getAdsDataType();</span>
+<span class="nc" id="L171">                    numberOfElements = directAdsField.getNumberOfElements();</span>
+<span class="nc" id="L172">                }</span>
+                // If it's no symbolic field, we can continue immediately
+                // without having to do any resolving.
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">                else if (field instanceof DirectAdsField) {</span>
+<span class="fc" id="L176">                    DirectAdsField directAdsField = (DirectAdsField) field;</span>
+<span class="fc" id="L177">                    indexGroup = IndexGroup.of(directAdsField.getIndexGroup());</span>
+<span class="fc" id="L178">                    indexOffset = IndexOffset.of(directAdsField.getIndexOffset());</span>
+<span class="fc" id="L179">                    adsDataType = directAdsField.getAdsDataType();</span>
+<span class="fc" id="L180">                    numberOfElements = directAdsField.getNumberOfElements();</span>
+<span class="fc" id="L181">                } else {</span>
+<span class="nc" id="L182">                    throw new IllegalArgumentException(&quot;Unsupported field type &quot; + field.getClass());</span>
+                }
+
+                final TransmissionMode transmissionMode;
+<span class="fc" id="L186">                long cycleTime = 4000000;</span>
+<span class="pc bpc" id="L187" title="2 of 3 branches missed.">                switch (subscriptionPlcField.getPlcSubscriptionType()) {</span>
+                    case CYCLIC:
+<span class="fc" id="L189">                        transmissionMode = TransmissionMode.DefinedValues.ADSTRANS_SERVERCYCLE;</span>
+<span class="fc" id="L190">                        cycleTime = subscriptionPlcField.getDuration().orElse(Duration.ofSeconds(1)).toMillis();</span>
+<span class="fc" id="L191">                        break;</span>
+                    case CHANGE_OF_STATE:
+<span class="nc" id="L193">                        transmissionMode = TransmissionMode.DefinedValues.ADSTRANS_SERVERONCHA;</span>
+<span class="nc" id="L194">                        break;</span>
+                    default:
+<span class="nc" id="L196">                        throw new PlcRuntimeException(&quot;Unmapped type &quot; + subscriptionPlcField.getPlcSubscriptionType());</span>
+                }
+
+                // Prepare the subscription request itself.
+<span class="fc" id="L200">                AdsAddDeviceNotificationRequest adsAddDeviceNotificationRequest = AdsAddDeviceNotificationRequest.of(</span>
+                    targetAmsNetId,
+                    targetAmsPort,
+                    sourceAmsNetId,
+                    sourceAmsPort,
+                    Invoke.NONE,
+                    indexGroup,
+                    indexOffset,
+<span class="fc" id="L208">                    Length.of(adsDataType.getTargetByteSize() * (long) numberOfElements),</span>
+                    transmissionMode,
+                    // We set max delay to cycle time as we don't have a second parameter for this in the plc4j-api
+<span class="fc" id="L211">                    MaxDelay.of(cycleTime + 1),</span>
+<span class="fc" id="L212">                    CycleTime.of(cycleTime)</span>
+                );
+
+                // Send the request to the plc and wait for a response
+                // TODO: This is blocking, should be changed to be async.
+<span class="fc" id="L217">                CompletableFuture&lt;InternalPlcProprietaryResponse&lt;AdsAddDeviceNotificationResponse&gt;&gt; addDeviceFuture = new CompletableFuture&lt;&gt;();</span>
+<span class="fc" id="L218">                channel.writeAndFlush(new PlcRequestContainer&lt;&gt;(new DefaultPlcProprietaryRequest&lt;&gt;(adsAddDeviceNotificationRequest), addDeviceFuture));</span>
+<span class="fc" id="L219">                InternalPlcProprietaryResponse&lt;AdsAddDeviceNotificationResponse&gt; addDeviceResponse = getFromFuture(addDeviceFuture, ADD_DEVICE_TIMEOUT);</span>
+<span class="fc" id="L220">                AdsAddDeviceNotificationResponse response = addDeviceResponse.getResponse();</span>
+
+                // Abort if we got anything but a successful response.
+<span class="pc bpc" id="L223" title="1 of 2 branches missed.">                if (response.getResult().toAdsReturnCode() != AdsReturnCode.ADS_CODE_0) {</span>
+<span class="nc" id="L224">                    throw new PlcRuntimeException(&quot;Error code received &quot; + response.getResult());</span>
+                }
+<span class="fc" id="L226">                PlcSubscriptionHandle adsSubscriptionHandle = new AdsSubscriptionHandle(this, plcFieldName, adsDataType, response.getNotificationHandle());</span>
+<span class="fc" id="L227">                return Pair.of(plcFieldName, Pair.of(PlcResponseCode.OK, adsSubscriptionHandle));</span>
+            })
+<span class="fc" id="L229">            .collect(Collectors.toMap(Pair::getKey, Pair::getValue));</span>
+
+<span class="fc" id="L231">        future.complete(new DefaultPlcSubscriptionResponse(internalPlcSubscriptionRequest, responseItems));</span>
+<span class="fc" id="L232">        return future;</span>
+    }
+
+    @Override
+    public CompletableFuture&lt;PlcUnsubscriptionResponse&gt; unsubscribe(PlcUnsubscriptionRequest plcUnsubscriptionRequest) {
+<span class="fc" id="L237">        InternalPlcUnsubscriptionRequest internalPlcUnsubscriptionRequest = checkInternal(plcUnsubscriptionRequest, InternalPlcUnsubscriptionRequest.class);</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        for (InternalPlcSubscriptionHandle internalPlcSubscriptionHandle : internalPlcUnsubscriptionRequest.getInternalPlcSubscriptionHandles()) {</span>
+<span class="pc bpc" id="L239" title="1 of 2 branches missed.">            if (internalPlcSubscriptionHandle instanceof AdsSubscriptionHandle) {</span>
+<span class="fc" id="L240">                AdsSubscriptionHandle adsSubscriptionHandle = (AdsSubscriptionHandle) internalPlcSubscriptionHandle;</span>
+<span class="fc" id="L241">                AdsDeleteDeviceNotificationRequest adsDeleteDeviceNotificationRequest =</span>
+<span class="fc" id="L242">                    AdsDeleteDeviceNotificationRequest.of(</span>
+                        targetAmsNetId,
+                        targetAmsPort,
+                        sourceAmsNetId,
+                        sourceAmsPort,
+                        Invoke.NONE,
+<span class="fc" id="L248">                        adsSubscriptionHandle.getNotificationHandle()</span>
+                    );
+<span class="fc" id="L250">                CompletableFuture&lt;InternalPlcProprietaryResponse&lt;AdsDeleteDeviceNotificationResponse&gt;&gt; deleteDeviceFuture =</span>
+                    new CompletableFuture&lt;&gt;();
+<span class="fc" id="L252">                channel.writeAndFlush(new PlcRequestContainer&lt;&gt;(new DefaultPlcProprietaryRequest&lt;&gt;(adsDeleteDeviceNotificationRequest), deleteDeviceFuture));</span>
+
+<span class="fc" id="L254">                InternalPlcProprietaryResponse&lt;AdsDeleteDeviceNotificationResponse&gt; deleteDeviceResponse =</span>
+<span class="fc" id="L255">                    getFromFuture(deleteDeviceFuture, DEL_DEVICE_TIMEOUT);</span>
+<span class="fc" id="L256">                AdsDeleteDeviceNotificationResponse response = deleteDeviceResponse.getResponse();</span>
+<span class="pc bpc" id="L257" title="1 of 2 branches missed.">                if (response.getResult().toAdsReturnCode() != AdsReturnCode.ADS_CODE_0) {</span>
+<span class="nc" id="L258">                    throw new PlcRuntimeException(&quot;Non error code received &quot; + response.getResult());</span>
+                }
+            }
+<span class="fc" id="L261">        }</span>
+<span class="fc" id="L262">        CompletableFuture&lt;PlcUnsubscriptionResponse&gt; future = new CompletableFuture&lt;&gt;();</span>
+<span class="fc" id="L263">        future.complete(new DefaultPlcUnsubscriptionResponse(internalPlcUnsubscriptionRequest));</span>
+<span class="fc" id="L264">        return future;</span>
+    }
+
+    @Override
+    public PlcConsumerRegistration register(Consumer&lt;PlcSubscriptionEvent&gt; consumer, Collection&lt;PlcSubscriptionHandle&gt; handles) {
+<span class="nc" id="L269">        return register(consumer, handles.toArray(new PlcSubscriptionHandle[0]));</span>
+    }
+
+    public InternalPlcConsumerRegistration register(Consumer&lt;PlcSubscriptionEvent&gt; consumer, PlcSubscriptionHandle... handles) {
+<span class="fc" id="L273">        Objects.requireNonNull(consumer);</span>
+<span class="fc" id="L274">        Objects.requireNonNull(handles);</span>
+<span class="fc" id="L275">        InternalPlcSubscriptionHandle[] internalPlcSubscriptionHandles = new InternalPlcSubscriptionHandle[handles.length];</span>
+<span class="pc bpc" id="L276" title="1 of 2 branches missed.">        for (int i = 0; i &lt; handles.length; i++) {</span>
+<span class="nc" id="L277">            internalPlcSubscriptionHandles[i] = checkInternal(handles[i], InternalPlcSubscriptionHandle.class);</span>
+        }
+
+<span class="fc" id="L280">        InternalPlcConsumerRegistration internalPlcConsumerRegistration = new DefaultPlcConsumerRegistration(this, consumer, internalPlcSubscriptionHandles);</span>
+<span class="fc" id="L281">        Map&lt;NotificationHandle, AdsSubscriptionHandle&gt; notificationHandleAdsSubscriptionHandleMap = Arrays.stream(internalPlcSubscriptionHandles)</span>
+<span class="pc" id="L282">            .map(subscriptionHandle -&gt; checkInternal(subscriptionHandle, AdsSubscriptionHandle.class))</span>
+<span class="fc" id="L283">            .collect(Collectors.toConcurrentMap(AdsSubscriptionHandle::getNotificationHandle, Function.identity()));</span>
+
+<span class="fc" id="L285">        Consumer&lt;AdsDeviceNotificationRequest&gt; adsDeviceNotificationRequestConsumer =</span>
+<span class="fc" id="L286">            adsDeviceNotificationRequest -&gt; adsDeviceNotificationRequest.getAdsStampHeaders().forEach(adsStampHeader -&gt; {</span>
+<span class="fc" id="L287">                Instant timeStamp = adsStampHeader.getTimeStamp().getAsDate().toInstant();</span>
+
+<span class="fc" id="L289">                Map&lt;String, Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt;&gt; fields = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L290">                adsStampHeader.getAdsNotificationSamples()</span>
+<span class="fc" id="L291">                    .forEach(adsNotificationSample -&gt; {</span>
+<span class="fc" id="L292">                        NotificationHandle notificationHandle = adsNotificationSample.getNotificationHandle();</span>
+<span class="fc" id="L293">                        Data data = adsNotificationSample.getData();</span>
+<span class="fc" id="L294">                        AdsSubscriptionHandle adsSubscriptionHandle = notificationHandleAdsSubscriptionHandleMap.get(notificationHandle);</span>
+<span class="pc bpc" id="L295" title="1 of 2 branches missed.">                        if (adsSubscriptionHandle == null) {</span>
+                            // TODO: we might want to refactor this so that we don't subscribe to everything in the first place.
+                            // TODO: rather than we add a Consumer with the handle as key
+<span class="fc" id="L298">                            LOGGER.trace(&quot;We are not interested in this sample {} with handle {}&quot;, adsNotificationSample, notificationHandle);</span>
+<span class="fc" id="L299">                            return;</span>
+                        }
+<span class="nc" id="L301">                        String plcFieldName = adsSubscriptionHandle.getPlcFieldName();</span>
+<span class="nc" id="L302">                        AdsDataType adsDataType = adsSubscriptionHandle.getAdsDataType();</span>
+                        try {
+<span class="nc" id="L304">                            BaseDefaultFieldItem baseDefaultFieldItem = LittleEndianDecoder.decodeData(adsDataType, data.getBytes());</span>
+<span class="nc" id="L305">                            fields.put(plcFieldName, Pair.of(PlcResponseCode.OK, baseDefaultFieldItem));</span>
+<span class="nc" id="L306">                        } catch (RuntimeException e) {</span>
+<span class="nc" id="L307">                            LOGGER.error(&quot;Can't decode {}&quot;, data, e);</span>
+<span class="nc" id="L308">                        }</span>
+
+<span class="nc" id="L310">                    });</span>
+                try {
+<span class="fc" id="L312">                    PlcSubscriptionEvent subscriptionEventItem = new DefaultPlcSubscriptionEvent(timeStamp, fields);</span>
+<span class="fc" id="L313">                    consumer.accept(subscriptionEventItem);</span>
+<span class="nc" id="L314">                } catch (RuntimeException e) {</span>
+<span class="nc" id="L315">                    LOGGER.error(&quot;Can't dispatch adsStampHeader {}&quot;, adsStampHeader, e);</span>
+<span class="fc" id="L316">                }</span>
+<span class="fc" id="L317">            });</span>
+
+        // Store the reference for so it can be uses for later
+<span class="fc" id="L320">        consumerRegistrations.put(internalPlcConsumerRegistration, adsDeviceNotificationRequestConsumer);</span>
+        // register the actual consumer.
+<span class="fc" id="L322">        getChannel().pipeline().get(Plc4x2AdsProtocol.class).addConsumer(adsDeviceNotificationRequestConsumer);</span>
+
+<span class="fc" id="L324">        return internalPlcConsumerRegistration;</span>
+    }
+
+    @Override
+    public void unregister(PlcConsumerRegistration plcConsumerRegistration) {
+<span class="fc" id="L329">        InternalPlcConsumerRegistration internalPlcConsumerRegistration = checkInternal(plcConsumerRegistration, InternalPlcConsumerRegistration.class);</span>
+<span class="fc" id="L330">        Consumer&lt;AdsDeviceNotificationRequest&gt; adsDeviceNotificationRequestConsumer = consumerRegistrations.remove(internalPlcConsumerRegistration);</span>
+<span class="pc bpc" id="L331" title="1 of 2 branches missed.">        if (adsDeviceNotificationRequestConsumer == null) {</span>
+<span class="fc" id="L332">            return;</span>
+        }
+<span class="nc" id="L334">        getChannel().pipeline().get(Plc4x2AdsProtocol.class).removeConsumer(adsDeviceNotificationRequestConsumer);</span>
+<span class="nc" id="L335">    }</span>
+
+    @Override
+    public boolean canSubscribe() {
+<span class="fc" id="L339">        return true;</span>
+    }
+
+    @Override
+    public PlcSubscriptionRequest.Builder subscriptionRequestBuilder() {
+<span class="fc" id="L344">        return new DefaultPlcSubscriptionRequest.Builder(this, new AdsPlcFieldHandler());</span>
+    }
+
+    @Override
+    public PlcUnsubscriptionRequest.Builder unsubscriptionRequestBuilder() {
+<span class="fc" id="L349">        return new DefaultPlcUnsubscriptionRequest.Builder(this);</span>
+    }
+
+    @Override
+    public void close() throws PlcConnectionException {
+        try {
+<span class="fc" id="L355">            consumerRegistrations.values().forEach(getChannel().pipeline().get(Plc4x2AdsProtocol.class)::removeConsumer);</span>
+<span class="fc" id="L356">            List&lt;PlcSubscriptionHandle&gt; collect = consumerRegistrations.keySet().stream()</span>
+<span class="fc" id="L357">                .map(InternalPlcConsumerRegistration::getAssociatedHandles)</span>
+<span class="fc" id="L358">                .flatMap(Collection::stream)</span>
+<span class="fc" id="L359">                .map(PlcSubscriptionHandle.class::cast)</span>
+<span class="fc" id="L360">                .collect(Collectors.toList());</span>
+
+<span class="fc" id="L362">            PlcUnsubscriptionRequest plcUnsubscriptionRequest = new DefaultPlcUnsubscriptionRequest.Builder(this).addHandles(collect).build();</span>
+<span class="fc" id="L363">            unsubscribe(plcUnsubscriptionRequest).get(5, TimeUnit.SECONDS);</span>
+
+<span class="fc" id="L365">            consumerRegistrations.clear();</span>
+<span class="nc" id="L366">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L367">            LOGGER.warn(&quot;Exception while closing&quot;, e);</span>
+<span class="nc" id="L368">            Thread.currentThread().interrupt();</span>
+<span class="nc" id="L369">        } catch (RuntimeException | ExecutionException | TimeoutException e) {</span>
+<span class="nc" id="L370">            LOGGER.warn(&quot;Exception while closing&quot;, e);</span>
+<span class="pc" id="L371">        }</span>
+<span class="fc" id="L372">        super.close();</span>
+<span class="fc" id="L373">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

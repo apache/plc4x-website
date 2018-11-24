@@ -33,13 +33,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Inspired by {@code ChannelTrafficShapingHandler} this limiter ensures only one message is sent at a time.
  */
-<span class="fc" id="L36">public class SingleMessageRateLimiter extends ChannelDuplexHandler {</span>
+<span class="nc" id="L36">public class SingleMessageRateLimiter extends ChannelDuplexHandler {</span>
 
-<span class="fc" id="L38">    private static final Logger LOGGER = LoggerFactory.getLogger(SingleMessageRateLimiter.class);</span>
+<span class="nc" id="L38">    private static final Logger LOGGER = LoggerFactory.getLogger(SingleMessageRateLimiter.class);</span>
 
-<span class="fc" id="L40">    private final ArrayDeque&lt;ToSend&gt; messagesQueue = new ArrayDeque&lt;&gt;();</span>
+<span class="nc" id="L40">    private final ArrayDeque&lt;ToSend&gt; messagesQueue = new ArrayDeque&lt;&gt;();</span>
 
-<span class="fc" id="L42">    private AtomicBoolean messageOnTheWay = new AtomicBoolean(false);</span>
+<span class="nc" id="L42">    private AtomicBoolean messageOnTheWay = new AtomicBoolean(false);</span>
 
     private ScheduledFuture&lt;?&gt; sender;
 
@@ -57,8 +57,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
     @Override
     public void connect(ChannelHandlerContext ctx, SocketAddress remoteAddress, SocketAddress localAddress, ChannelPromise promise) throws Exception {
-<span class="fc" id="L60">        LOGGER.debug(&quot;connect({}, {}, {}, {})&quot;, ctx, remoteAddress, localAddress, promise);</span>
-<span class="fc" id="L61">        sender = ctx.executor().scheduleAtFixedRate(() -&gt; {</span>
+<span class="nc" id="L60">        LOGGER.debug(&quot;connect({}, {}, {}, {})&quot;, ctx, remoteAddress, localAddress, promise);</span>
+<span class="nc" id="L61">        sender = ctx.executor().scheduleAtFixedRate(() -&gt; {</span>
 <span class="nc" id="L62">            LOGGER.trace(&quot;Woke up and doing work messageOnTheWay:{}, messageQueue:{}&quot;, messageOnTheWay, messagesQueue);</span>
 <span class="nc bnc" id="L63" title="All 4 branches missed.">            if (!messagesQueue.isEmpty() &amp;&amp; messageOnTheWay.compareAndSet(false, true)) {</span>
 <span class="nc" id="L64">                ToSend pop = messagesQueue.pop();</span>
@@ -67,8 +67,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 <span class="nc" id="L67">                LOGGER.debug(&quot;Send {}&quot;, pop);</span>
             }
 <span class="nc" id="L69">        }, 100, 10, TimeUnit.MILLISECONDS);</span>
-<span class="fc" id="L70">        super.connect(ctx, remoteAddress, localAddress, promise);</span>
-<span class="fc" id="L71">    }</span>
+<span class="nc" id="L70">        super.connect(ctx, remoteAddress, localAddress, promise);</span>
+<span class="nc" id="L71">    }</span>
 
     @Override
     public void disconnect(ChannelHandlerContext ctx, ChannelPromise promise) throws Exception {
@@ -79,20 +79,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
-<span class="fc" id="L82">        LOGGER.trace(&quot;(&lt;--OUT): {}, {}, {}&quot;, ctx, msg, promise);</span>
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (messageOnTheWay.compareAndSet(false, true)) {</span>
-<span class="fc" id="L84">            ctx.write(msg, promise);</span>
+<span class="nc" id="L82">        LOGGER.trace(&quot;(&lt;--OUT): {}, {}, {}&quot;, ctx, msg, promise);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (messageOnTheWay.compareAndSet(false, true)) {</span>
+<span class="nc" id="L84">            ctx.write(msg, promise);</span>
         } else {
 <span class="nc" id="L86">            messagesQueue.add(new ToSend(ctx, msg, promise));</span>
         }
-<span class="fc" id="L88">    }</span>
+<span class="nc" id="L88">    }</span>
 
     @Override
     public void read(ChannelHandlerContext ctx) throws Exception {
-<span class="fc" id="L92">        LOGGER.trace(&quot;(--&gt;In): {}&quot;, ctx);</span>
-<span class="fc" id="L93">        messageOnTheWay.set(false);</span>
-<span class="fc" id="L94">        super.read(ctx);</span>
-<span class="fc" id="L95">    }</span>
+<span class="nc" id="L92">        LOGGER.trace(&quot;(--&gt;In): {}&quot;, ctx);</span>
+<span class="nc" id="L93">        messageOnTheWay.set(false);</span>
+<span class="nc" id="L94">        super.read(ctx);</span>
+<span class="nc" id="L95">    }</span>
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {

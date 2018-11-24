@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsConnectionFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Driver: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.connection</a> &gt; <span class="el_source">AdsConnectionFactory.java</span></div><h1>AdsConnectionFactory.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.connection;
+
+import org.apache.plc4x.java.ads.api.generic.types.AmsNetId;
+import org.apache.plc4x.java.ads.api.generic.types.AmsPort;
+
+import java.net.InetAddress;
+import java.util.Objects;
+
+<span class="fc" id="L27">public class AdsConnectionFactory {</span>
+
+    public AdsTcpPlcConnection adsTcpPlcConnectionOf(InetAddress address, Integer port, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc" id="L30">        Objects.requireNonNull(address);</span>
+<span class="fc" id="L31">        Objects.requireNonNull(targetAmsNetId);</span>
+<span class="fc" id="L32">        Objects.requireNonNull(targetAmsPort);</span>
+<span class="fc bfc" id="L33" title="All 4 branches covered.">        if (sourceAmsNetId == null || sourceAmsPort == null) {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (port == null) {</span>
+<span class="fc" id="L35">                return AdsTcpPlcConnection.of(address, targetAmsNetId, targetAmsPort);</span>
+            } else {
+<span class="fc" id="L37">                return AdsTcpPlcConnection.of(address, port, targetAmsNetId, targetAmsPort);</span>
+            }
+        } else {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            if (port == null) {</span>
+<span class="fc" id="L41">                return AdsTcpPlcConnection.of(address, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+            } else {
+<span class="fc" id="L43">                return AdsTcpPlcConnection.of(address, port, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+            }
+        }
+    }
+
+    public AdsSerialPlcConnection adsSerialPlcConnectionOf(String serialPort, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc" id="L49">        Objects.requireNonNull(serialPort);</span>
+<span class="fc" id="L50">        Objects.requireNonNull(targetAmsNetId);</span>
+<span class="fc" id="L51">        Objects.requireNonNull(targetAmsPort);</span>
+<span class="fc bfc" id="L52" title="All 4 branches covered.">        if (sourceAmsNetId == null || sourceAmsPort == null) {</span>
+<span class="fc" id="L53">            return AdsSerialPlcConnection.of(serialPort, targetAmsNetId, targetAmsPort);</span>
+        } else {
+<span class="fc" id="L55">            return AdsSerialPlcConnection.of(serialPort, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

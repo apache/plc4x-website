@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdsSerialPlcConnection.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Driver: ADS</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.ads.connection</a> &gt; <span class="el_source">AdsSerialPlcConnection.java</span></div><h1>AdsSerialPlcConnection.java</h1><pre class="source lang-java linenums">/*
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ &quot;License&quot;); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+package org.apache.plc4x.java.ads.connection;
+
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import org.apache.plc4x.java.ads.api.generic.types.AmsNetId;
+import org.apache.plc4x.java.ads.api.generic.types.AmsPort;
+import org.apache.plc4x.java.ads.protocol.Ads2PayloadProtocol;
+import org.apache.plc4x.java.ads.protocol.Payload2SerialProtocol;
+import org.apache.plc4x.java.ads.protocol.Plc4x2AdsProtocol;
+import org.apache.plc4x.java.ads.protocol.util.SingleMessageRateLimiter;
+import org.apache.plc4x.java.base.connection.SerialChannelFactory;
+import org.apache.plc4x.java.base.protocol.SingleItemToSingleRequestProtocol;
+
+import java.util.concurrent.CompletableFuture;
+
+public class AdsSerialPlcConnection extends AdsAbstractPlcConnection {
+
+    private AdsSerialPlcConnection(String serialPort, AmsNetId targetAmsNetId, AmsPort targetAmsPort) {
+<span class="fc" id="L39">        this(serialPort, targetAmsNetId, targetAmsPort, generateAMSNetId(), generateAMSPort());</span>
+<span class="fc" id="L40">    }</span>
+
+    private AdsSerialPlcConnection(String serialPort, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc" id="L43">        super(new SerialChannelFactory(serialPort), targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+<span class="fc" id="L44">    }</span>
+
+    public static AdsSerialPlcConnection of(String serialPort, AmsNetId targetAmsNetId, AmsPort targetAmsPort) {
+<span class="fc" id="L47">        return new AdsSerialPlcConnection(serialPort, targetAmsNetId, targetAmsPort);</span>
+    }
+
+    public static AdsSerialPlcConnection of(String serialPort, AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort) {
+<span class="fc" id="L51">        return new AdsSerialPlcConnection(serialPort, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);</span>
+    }
+
+    @Override
+    protected ChannelHandler getChannelHandler(CompletableFuture&lt;Void&gt; sessionSetupCompleteFuture) {
+<span class="fc" id="L56">        return new ChannelInitializer() {</span>
+            @Override
+            protected void initChannel(Channel channel) {
+                // Build the protocol stack for communicating with the ads protocol.
+<span class="fc" id="L60">                ChannelPipeline pipeline = channel.pipeline();</span>
+<span class="fc" id="L61">                pipeline.addLast(new Payload2SerialProtocol());</span>
+<span class="fc" id="L62">                pipeline.addLast(new SingleMessageRateLimiter());</span>
+<span class="fc" id="L63">                pipeline.addLast(new Ads2PayloadProtocol());</span>
+<span class="fc" id="L64">                pipeline.addLast(new Plc4x2AdsProtocol(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, fieldMapping));</span>
+<span class="fc" id="L65">                pipeline.addLast(new SingleItemToSingleRequestProtocol(AdsSerialPlcConnection.this, AdsSerialPlcConnection.this, null, timer));</span>
+<span class="fc" id="L66">            }</span>
+        };
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
