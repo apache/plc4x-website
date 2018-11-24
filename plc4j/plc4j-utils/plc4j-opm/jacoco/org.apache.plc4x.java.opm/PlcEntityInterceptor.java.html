@@ -108,8 +108,8 @@ public class PlcEntityInterceptor {
         }
 
 <span class="fc bfc" id="L110" title="All 2 branches covered.">        if (method.getName().startsWith(&quot;get&quot;)) {</span>
-<span class="pc bpc" id="L111" title="1 of 2 branches missed.">            if (method.getParameterCount() &gt; 0) {</span>
-<span class="nc" id="L112">                throw new OPMException(&quot;Only getter with no arguments are supported&quot;);</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">            if (method.getParameterCount() &gt; 0) {</span>
+<span class="fc" id="L112">                throw new OPMException(&quot;Only getter with no arguments are supported&quot;);</span>
             }
             // Fetch single value
 <span class="fc" id="L115">            LOGGER.trace(&quot;Invoked method {} is getter, trying to find annotated field and return requested value&quot;,</span>
@@ -383,8 +383,8 @@ public class PlcEntityInterceptor {
 <span class="fc" id="L383">            setForField(field, proxy, value);</span>
 <span class="nc" id="L384">        } catch (ClassCastException e) {</span>
 <span class="nc" id="L385">            throw new OPMException(&quot;Unable to return response as suitable type&quot;, e);</span>
-<span class="nc" id="L386">        } catch (Exception e) {</span>
-<span class="nc" id="L387">            throw new OPMException(&quot;Problem during processing&quot;, e);</span>
+<span class="fc" id="L386">        } catch (Exception e) {</span>
+<span class="fc" id="L387">            throw new OPMException(&quot;Problem during processing&quot;, e);</span>
 <span class="fc" id="L388">        }</span>
 <span class="fc" id="L389">    }</span>
 

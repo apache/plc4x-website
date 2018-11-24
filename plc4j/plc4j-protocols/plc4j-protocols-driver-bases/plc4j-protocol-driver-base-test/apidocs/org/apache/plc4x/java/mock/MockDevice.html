@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -125,6 +125,28 @@ var activeTableTab = "activeTableTab";
 <td class="colFirst"><code>org.apache.commons.lang3.tuple.Pair&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/types/PlcResponseCode.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.types">PlcResponseCode</a>,<a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages.items">BaseDefaultFieldItem</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/mock/MockDevice.html#read-java.lang.String-">read</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery)</code>&nbsp;</td>
 </tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcConsumerRegistration.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcConsumerRegistration</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/mock/MockDevice.html#register-java.util.function.Consumer-java.util.Collection-">register</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html?is-external=true" title="class or interface in java.util.function">Consumer</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionEvent.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionEvent</a>&gt;&nbsp;consumer,
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcSubscriptionHandle.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcSubscriptionHandle</a>&gt;&nbsp;handles)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>org.apache.commons.lang3.tuple.Pair&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/types/PlcResponseCode.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.types">PlcResponseCode</a>,<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcSubscriptionHandle.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcSubscriptionHandle</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/mock/MockDevice.html#subscribe-java.lang.String-">subscribe</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/mock/MockDevice.html#unregister-org.apache.plc4x.java.api.model.PlcConsumerRegistration-">unregister</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcConsumerRegistration.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcConsumerRegistration</a>&nbsp;registration)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/mock/MockDevice.html#unsubscribe--">unsubscribe</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/types/PlcResponseCode.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.types">PlcResponseCode</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/mock/MockDevice.html#write-java.lang.String-java.lang.Object-">write</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery,
+     <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;value)</code>&nbsp;</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -143,10 +165,57 @@ var activeTableTab = "activeTableTab";
 <a name="read-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>read</h4>
 <pre>org.apache.commons.lang3.tuple.Pair&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/types/PlcResponseCode.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.types">PlcResponseCode</a>,<a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.messages.items">BaseDefaultFieldItem</a>&gt;&nbsp;read(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery)</pre>
+</li>
+</ul>
+<a name="write-java.lang.String-java.lang.Object-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>write</h4>
+<pre><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/types/PlcResponseCode.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.types">PlcResponseCode</a>&nbsp;write(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery,
+                      <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;value)</pre>
+</li>
+</ul>
+<a name="subscribe-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>subscribe</h4>
+<pre>org.apache.commons.lang3.tuple.Pair&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/types/PlcResponseCode.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.types">PlcResponseCode</a>,<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcSubscriptionHandle.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcSubscriptionHandle</a>&gt;&nbsp;subscribe(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery)</pre>
+</li>
+</ul>
+<a name="unsubscribe--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>unsubscribe</h4>
+<pre>void&nbsp;unsubscribe()</pre>
+</li>
+</ul>
+<a name="register-java.util.function.Consumer-java.util.Collection-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>register</h4>
+<pre><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcConsumerRegistration.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcConsumerRegistration</a>&nbsp;register(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html?is-external=true" title="class or interface in java.util.function">Consumer</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcSubscriptionEvent.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcSubscriptionEvent</a>&gt;&nbsp;consumer,
+                                 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcSubscriptionHandle.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcSubscriptionHandle</a>&gt;&nbsp;handles)</pre>
+</li>
+</ul>
+<a name="unregister-org.apache.plc4x.java.api.model.PlcConsumerRegistration-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>unregister</h4>
+<pre>void&nbsp;unregister(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcConsumerRegistration.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcConsumerRegistration</a>&nbsp;registration)</pre>
 </li>
 </ul>
 </li>
