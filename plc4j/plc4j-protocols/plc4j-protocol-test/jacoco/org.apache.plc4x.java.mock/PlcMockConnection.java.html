@@ -22,24 +22,24 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.plc4x.java.api.PlcConnection;
 import org.apache.plc4x.java.api.authentication.PlcAuthentication;
-import org.apache.plc4x.java.api.exceptions.PlcUnsupportedOperationException;
 import org.apache.plc4x.java.api.messages.*;
 import org.apache.plc4x.java.api.metadata.PlcConnectionMetadata;
+import org.apache.plc4x.java.api.model.PlcConsumerRegistration;
+import org.apache.plc4x.java.api.model.PlcSubscriptionHandle;
 import org.apache.plc4x.java.api.types.PlcResponseCode;
-import org.apache.plc4x.java.base.messages.DefaultPlcReadRequest;
-import org.apache.plc4x.java.base.messages.DefaultPlcReadResponse;
-import org.apache.plc4x.java.base.messages.PlcReader;
+import org.apache.plc4x.java.base.messages.*;
 import org.apache.plc4x.java.base.messages.items.BaseDefaultFieldItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class PlcMockConnection implements PlcConnection, PlcReader {
+public class PlcMockConnection implements PlcConnection, PlcReader, PlcWriter, PlcSubscriber {
 
 <span class="fc" id="L44">    private static final Logger LOGGER = LoggerFactory.getLogger(PlcMockConnection.class);</span>
 
@@ -85,12 +85,12 @@ public class PlcMockConnection implements PlcConnection, PlcReader {
 
             @Override
             public boolean canWrite() {
-<span class="nc" id="L88">                return false;</span>
+<span class="nc" id="L88">                return true;</span>
             }
 
             @Override
             public boolean canSubscribe() {
-<span class="nc" id="L93">                return false;</span>
+<span class="nc" id="L93">                return true;</span>
             }
         };
     }
@@ -102,40 +102,86 @@ public class PlcMockConnection implements PlcConnection, PlcReader {
 
     @Override
     public CompletableFuture&lt;PlcReadResponse&gt; read(PlcReadRequest readRequest) {
-<span class="fc" id="L105">        return CompletableFuture.supplyAsync(new Supplier&lt;PlcReadResponse&gt;() {</span>
-
-            @Override
-            public PlcReadResponse get() {
-<span class="fc" id="L109">                Validate.notNull(device, &quot;No device is set in the mock connection!&quot;);</span>
-<span class="fc" id="L110">                LOGGER.debug(&quot;Sending read request to MockDevice&quot;);</span>
-<span class="fc" id="L111">                Map&lt;String, Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt;&gt; response = readRequest.getFieldNames().stream()</span>
-<span class="fc" id="L112">                    .collect(Collectors.toMap(</span>
-<span class="fc" id="L113">                        Function.identity(),</span>
-<span class="fc" id="L114">                        name -&gt; device.read(((MockField) readRequest.getField(name)).getFieldQuery())</span>
-                        )
-                    );
-<span class="fc" id="L117">                return new DefaultPlcReadResponse((DefaultPlcReadRequest)readRequest, response);</span>
-            }
+<span class="fc" id="L105">        return CompletableFuture.supplyAsync(() -&gt; {</span>
+<span class="fc" id="L106">            Validate.notNull(device, &quot;No device is set in the mock connection!&quot;);</span>
+<span class="fc" id="L107">            LOGGER.debug(&quot;Sending read request to MockDevice&quot;);</span>
+<span class="fc" id="L108">            Map&lt;String, Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt;&gt; response = readRequest.getFieldNames().stream()</span>
+<span class="fc" id="L109">                .collect(Collectors.toMap(</span>
+<span class="fc" id="L110">                    Function.identity(),</span>
+<span class="fc" id="L111">                    name -&gt; device.read(((MockField) readRequest.getField(name)).getFieldQuery())</span>
+                    )
+                );
+<span class="fc" id="L114">            return new DefaultPlcReadResponse((DefaultPlcReadRequest) readRequest, response);</span>
         });
     }
 
     @Override
+    public CompletableFuture&lt;PlcWriteResponse&gt; write(PlcWriteRequest writeRequest) {
+<span class="nc" id="L120">        return CompletableFuture.supplyAsync(() -&gt; {</span>
+<span class="nc" id="L121">            Validate.notNull(device, &quot;No device is set in the mock connection!&quot;);</span>
+<span class="nc" id="L122">            LOGGER.debug(&quot;Sending write request to MockDevice&quot;);</span>
+<span class="nc" id="L123">            Map&lt;String, PlcResponseCode&gt; response = writeRequest.getFieldNames().stream()</span>
+<span class="nc" id="L124">                .collect(Collectors.toMap(</span>
+<span class="nc" id="L125">                    Function.identity(),</span>
+<span class="nc" id="L126">                    name -&gt; device.write(((MockField) writeRequest.getField(name)).getFieldQuery(), ((MockField) writeRequest.getField(name)).getValues())</span>
+                    )
+                );
+<span class="nc" id="L129">            return new DefaultPlcWriteResponse((DefaultPlcWriteRequest) writeRequest, response);</span>
+        });
+    }
+
+    @Override
+    public CompletableFuture&lt;PlcSubscriptionResponse&gt; subscribe(PlcSubscriptionRequest subscriptionRequest) {
+<span class="nc" id="L135">        return CompletableFuture.supplyAsync(() -&gt; {</span>
+<span class="nc" id="L136">            Validate.notNull(device, &quot;No device is set in the mock connection!&quot;);</span>
+<span class="nc" id="L137">            LOGGER.debug(&quot;Sending subsribe request to MockDevice&quot;);</span>
+<span class="nc" id="L138">            Map&lt;String, Pair&lt;PlcResponseCode, PlcSubscriptionHandle&gt;&gt; response = subscriptionRequest.getFieldNames().stream()</span>
+<span class="nc" id="L139">                .collect(Collectors.toMap(</span>
+<span class="nc" id="L140">                    Function.identity(),</span>
+<span class="nc" id="L141">                    name -&gt; device.subscribe(((MockField) subscriptionRequest.getField(name)).getFieldQuery())</span>
+                    )
+                );
+<span class="nc" id="L144">            return new DefaultPlcSubscriptionResponse((DefaultPlcSubscriptionRequest) subscriptionRequest, response);</span>
+        });
+    }
+
+    @Override
+    public CompletableFuture&lt;PlcUnsubscriptionResponse&gt; unsubscribe(PlcUnsubscriptionRequest unsubscriptionRequest) {
+<span class="nc" id="L150">        return CompletableFuture.supplyAsync(() -&gt; {</span>
+<span class="nc" id="L151">            Validate.notNull(device, &quot;No device is set in the mock connection!&quot;);</span>
+<span class="nc" id="L152">            LOGGER.debug(&quot;Sending subsribe request to MockDevice&quot;);</span>
+<span class="nc" id="L153">            device.unsubscribe();</span>
+<span class="nc" id="L154">            return new DefaultPlcUnsubscriptionResponse((DefaultPlcUnsubscriptionRequest) unsubscriptionRequest);</span>
+        });
+    }
+
+    @Override
+    public PlcConsumerRegistration register(Consumer&lt;PlcSubscriptionEvent&gt; consumer, Collection&lt;PlcSubscriptionHandle&gt; handles) {
+<span class="nc" id="L160">        return device.register(consumer, handles);</span>
+    }
+
+    @Override
+    public void unregister(PlcConsumerRegistration registration) {
+<span class="nc" id="L165">        device.unregister(registration);</span>
+<span class="nc" id="L166">    }</span>
+
+    @Override
     public PlcWriteRequest.Builder writeRequestBuilder() {
-<span class="nc" id="L124">        throw new PlcUnsupportedOperationException(&quot;Write not supported by Mock Driver&quot;);</span>
+<span class="nc" id="L170">        return new DefaultPlcWriteRequest.Builder(this, new MockFieldHandler());</span>
     }
 
     @Override
     public PlcSubscriptionRequest.Builder subscriptionRequestBuilder() {
-<span class="nc" id="L129">        throw new PlcUnsupportedOperationException(&quot;Subscription not supported by Mock Driver&quot;);</span>
+<span class="nc" id="L175">        return new DefaultPlcSubscriptionRequest.Builder(this, new MockFieldHandler());</span>
     }
 
     @Override
     public PlcUnsubscriptionRequest.Builder unsubscriptionRequestBuilder() {
-<span class="nc" id="L134">        throw new PlcUnsupportedOperationException(&quot;Subscription not supported by Mock Driver&quot;);</span>
+<span class="nc" id="L180">        return new DefaultPlcUnsubscriptionRequest.Builder(this);</span>
     }
 
     public PlcAuthentication getAuthentication() {
-<span class="nc" id="L138">        return authentication;</span>
+<span class="nc" id="L184">        return authentication;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

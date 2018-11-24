@@ -36,10 +36,10 @@
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <em class="jxr_javadoccomment"> * Field that is mapped</em>
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  @Retention(RetentionPolicy.RUNTIME)
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  @Target({ElementType.METHOD, ElementType.FIELD})
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  @Target({ElementType.FIELD})
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">public</strong> @<strong class="jxr_keyword">interface</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcField.html">PlcField</a> {
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>      String value();
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>      <strong class="jxr_keyword">long</strong> cacheDurationMillis() <strong class="jxr_keyword">default</strong> 1000;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>      <strong class="jxr_keyword">long</strong> cacheDurationMillis() <strong class="jxr_keyword">default</strong> -1;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  }
 </pre>
 <hr/>

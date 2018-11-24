@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9};
+var methods = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -111,9 +111,9 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">PlcEntityInterceptor</span>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
 <div class="block">Interceptor for dynamic functionality of @<a href="../../../../../org/apache/plc4x/java/opm/PlcEntity.html" title="annotation in org.apache.plc4x.java.opm"><code>PlcEntity</code></a>.
- Basically, its <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#intercept-java.lang.Object-java.lang.reflect.Method-java.util.concurrent.Callable-java.lang.String-org.apache.plc4x.java.PlcDriverManager-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-"><code>intercept(Object, Method, Callable, String, PlcDriverManager, AliasRegistry, Map)</code></a> method is called for each
+ Basically, its <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#interceptGetter-java.lang.Object-java.lang.reflect.Method-java.util.concurrent.Callable-java.lang.String-org.apache.plc4x.java.PlcDriverManager-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-java.util.Map-"><code>interceptGetter(Object, Method, Callable, String, PlcDriverManager, AliasRegistry, Map, Map)</code></a> method is called for each
  invocation of a method on a connected @<a href="../../../../../org/apache/plc4x/java/opm/PlcEntity.html" title="annotation in org.apache.plc4x.java.opm"><code>PlcEntity</code></a> and does then the dynamic part.
-
+ <p>
  For those not too familiar with the JVM's dispatch on can roughly imagine the intercept method being a "regular"
  method on the "proxied" entity and all parameters of the intercept method could then be access to local fields.</div>
 <dl>
@@ -139,16 +139,34 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteResponse</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#getPlcWriteResponse-org.apache.plc4x.java.api.messages.PlcWriteRequest-">getPlcWriteResponse</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteRequest</a>&nbsp;request)</code>
+<div class="block">Fetch the request and do appropriate error handling</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#intercept-java.lang.Object-java.lang.reflect.Method-java.util.concurrent.Callable-java.lang.String-org.apache.plc4x.java.PlcDriverManager-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-">intercept</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;proxy,
-         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</a>&nbsp;method,
-         <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Callable.html?is-external=true" title="class or interface in java.util.concurrent">Callable</a>&lt;?&gt;&nbsp;callable,
-         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;address,
-         <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/PlcDriverManager.html?is-external=true" title="class or interface in org.apache.plc4x.java">PlcDriverManager</a>&nbsp;driverManager,
-         <a href="../../../../../org/apache/plc4x/java/opm/AliasRegistry.html" title="interface in org.apache.plc4x.java.opm">AliasRegistry</a>&nbsp;registry,
-         <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html?is-external=true" title="class or interface in java.time">Instant</a>&gt;&nbsp;lastFetched)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#interceptGetter-java.lang.Object-java.lang.reflect.Method-java.util.concurrent.Callable-java.lang.String-org.apache.plc4x.java.PlcDriverManager-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-java.util.Map-">interceptGetter</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;proxy,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</a>&nbsp;method,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Callable.html?is-external=true" title="class or interface in java.util.concurrent">Callable</a>&lt;?&gt;&nbsp;callable,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;address,
+               <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/PlcDriverManager.html?is-external=true" title="class or interface in org.apache.plc4x.java">PlcDriverManager</a>&nbsp;driverManager,
+               <a href="../../../../../org/apache/plc4x/java/opm/AliasRegistry.html" title="interface in org.apache.plc4x.java.opm">AliasRegistry</a>&nbsp;registry,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html?is-external=true" title="class or interface in java.time">Instant</a>&gt;&nbsp;lastFetched,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html?is-external=true" title="class or interface in java.time">Instant</a>&gt;&nbsp;lastWritten)</code>
 <div class="block">Basic Intersector for all methods on the proxy object.</div>
 </td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>static <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#interceptSetter-java.lang.Object-java.lang.reflect.Method-java.util.concurrent.Callable-java.lang.String-org.apache.plc4x.java.PlcDriverManager-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-java.lang.Object-">interceptSetter</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;proxy,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</a>&nbsp;method,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Callable.html?is-external=true" title="class or interface in java.util.concurrent">Callable</a>&lt;?&gt;&nbsp;callable,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;address,
+               <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/PlcDriverManager.html?is-external=true" title="class or interface in org.apache.plc4x.java">PlcDriverManager</a>&nbsp;driverManager,
+               <a href="../../../../../org/apache/plc4x/java/opm/AliasRegistry.html" title="interface in org.apache.plc4x.java.opm">AliasRegistry</a>&nbsp;registry,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html?is-external=true" title="class or interface in java.time">Instant</a>&gt;&nbsp;lastFetched,
+               <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;argument)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -172,31 +190,33 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="intercept-java.lang.Object-java.lang.reflect.Method-java.util.concurrent.Callable-java.lang.String-org.apache.plc4x.java.PlcDriverManager-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-">
+<a name="interceptGetter-java.lang.Object-java.lang.reflect.Method-java.util.concurrent.Callable-java.lang.String-org.apache.plc4x.java.PlcDriverManager-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-java.util.Map-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
-<h4>intercept</h4>
+<h4>interceptGetter</h4>
 <pre>@RuntimeType
-public static&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;intercept(@This
-                                            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;proxy,
-                                            @Origin
-                                            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</a>&nbsp;method,
-                                            @SuperCall
-                                            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Callable.html?is-external=true" title="class or interface in java.util.concurrent">Callable</a>&lt;?&gt;&nbsp;callable,
-                                            @FieldValue(value="_plcAddress")
-                                            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;address,
-                                            @FieldValue(value="_driverManager")
-                                            <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/PlcDriverManager.html?is-external=true" title="class or interface in org.apache.plc4x.java">PlcDriverManager</a>&nbsp;driverManager,
-                                            @FieldValue(value="_aliasRegistry")
-                                            <a href="../../../../../org/apache/plc4x/java/opm/AliasRegistry.html" title="interface in org.apache.plc4x.java.opm">AliasRegistry</a>&nbsp;registry,
-                                            @FieldValue(value="_lastFetched")
-                                            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html?is-external=true" title="class or interface in java.time">Instant</a>&gt;&nbsp;lastFetched)
-                                     throws <a href="../../../../../org/apache/plc4x/java/opm/OPMException.html" title="class in org.apache.plc4x.java.opm">OPMException</a></pre>
+public static&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;interceptGetter(@This
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;proxy,
+                                                  @Origin
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</a>&nbsp;method,
+                                                  @SuperCall
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Callable.html?is-external=true" title="class or interface in java.util.concurrent">Callable</a>&lt;?&gt;&nbsp;callable,
+                                                  @FieldValue(value="_plcAddress")
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;address,
+                                                  @FieldValue(value="_driverManager")
+                                                  <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/PlcDriverManager.html?is-external=true" title="class or interface in org.apache.plc4x.java">PlcDriverManager</a>&nbsp;driverManager,
+                                                  @FieldValue(value="_aliasRegistry")
+                                                  <a href="../../../../../org/apache/plc4x/java/opm/AliasRegistry.html" title="interface in org.apache.plc4x.java.opm">AliasRegistry</a>&nbsp;registry,
+                                                  @FieldValue(value="_lastFetched")
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html?is-external=true" title="class or interface in java.time">Instant</a>&gt;&nbsp;lastFetched,
+                                                  @FieldValue(value="_lastWritten")
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html?is-external=true" title="class or interface in java.time">Instant</a>&gt;&nbsp;lastWritten)
+                                           throws <a href="../../../../../org/apache/plc4x/java/opm/OPMException.html" title="class in org.apache.plc4x.java.opm">OPMException</a></pre>
 <div class="block">Basic Intersector for all methods on the proxy object.
  It checks if the invoked method is a getter and if so, only retrieves the requested field, forwarding to
- the <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#fetchValueForGetter-java.lang.Object-java.lang.reflect.Method-org.apache.plc4x.java.PlcDriverManager-java.lang.String-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-"><code>fetchValueForGetter(Object, Method, PlcDriverManager, String, AliasRegistry, Map)</code></a> method.
+ the <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#fetchAndSetValueForGetter-java.lang.Object-java.lang.reflect.Method-org.apache.plc4x.java.PlcDriverManager-java.lang.String-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-"><code>fetchAndSetValueForGetter(Object, Method, PlcDriverManager, String, AliasRegistry, Map)</code></a> method.
  <p>
  If the field is no getter, then all fields are refreshed by calling <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityInterceptor.html#refetchAllFields-java.lang.Object-org.apache.plc4x.java.PlcDriverManager-java.lang.String-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-"><code>refetchAllFields(Object, PlcDriverManager, String, AliasRegistry, Map)</code></a>
  and then, the method is invoked.</div>
@@ -211,6 +231,55 @@ public static&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/
 <dd>possible result of the original methods invocation</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="../../../../../org/apache/plc4x/java/opm/OPMException.html" title="class in org.apache.plc4x.java.opm">OPMException</a></code> - Problems with plc / proxying</dd>
+</dl>
+</li>
+</ul>
+<a name="interceptSetter-java.lang.Object-java.lang.reflect.Method-java.util.concurrent.Callable-java.lang.String-org.apache.plc4x.java.PlcDriverManager-org.apache.plc4x.java.opm.AliasRegistry-java.util.Map-java.lang.Object-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>interceptSetter</h4>
+<pre>@RuntimeType
+public static&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;interceptSetter(@This
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;proxy,
+                                                  @Origin
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</a>&nbsp;method,
+                                                  @SuperCall
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Callable.html?is-external=true" title="class or interface in java.util.concurrent">Callable</a>&lt;?&gt;&nbsp;callable,
+                                                  @FieldValue(value="_plcAddress")
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;address,
+                                                  @FieldValue(value="_driverManager")
+                                                  <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/PlcDriverManager.html?is-external=true" title="class or interface in org.apache.plc4x.java">PlcDriverManager</a>&nbsp;driverManager,
+                                                  @FieldValue(value="_aliasRegistry")
+                                                  <a href="../../../../../org/apache/plc4x/java/opm/AliasRegistry.html" title="interface in org.apache.plc4x.java.opm">AliasRegistry</a>&nbsp;registry,
+                                                  @FieldValue(value="_lastFetched")
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html?is-external=true" title="class or interface in java.time">Instant</a>&gt;&nbsp;lastFetched,
+                                                  @Argument(value=0)
+                                                  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;argument)
+                                           throws <a href="../../../../../org/apache/plc4x/java/opm/OPMException.html" title="class in org.apache.plc4x.java.opm">OPMException</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../../../org/apache/plc4x/java/opm/OPMException.html" title="class in org.apache.plc4x.java.opm">OPMException</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getPlcWriteResponse-org.apache.plc4x.java.api.messages.PlcWriteRequest-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getPlcWriteResponse</h4>
+<pre>public static&nbsp;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteResponse</a>&nbsp;getPlcWriteResponse(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteRequest</a>&nbsp;request)
+                                            throws <a href="../../../../../org/apache/plc4x/java/opm/OPMException.html" title="class in org.apache.plc4x.java.opm">OPMException</a></pre>
+<div class="block">Fetch the request and do appropriate error handling</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>request</code> - the request to get the exception from</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the response from the exception.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../../../org/apache/plc4x/java/opm/OPMException.html" title="class in org.apache.plc4x.java.opm">OPMException</a></code> - on <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang"><code>InterruptedException</code></a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutionException.html?is-external=true" title="class or interface in java.util.concurrent"><code>ExecutionException</code></a> or <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/TimeoutException.html?is-external=true" title="class or interface in java.util.concurrent"><code>TimeoutException</code></a></dd>
 </dl>
 </li>
 </ul>
