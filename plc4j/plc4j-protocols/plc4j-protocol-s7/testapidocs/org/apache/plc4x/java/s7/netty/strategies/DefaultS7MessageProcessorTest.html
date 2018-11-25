@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -148,23 +148,29 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processCompositeMessageReadResponse--">processCompositeMessageReadResponse</a></span>()</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processCompositeMessageMergedReadResponse--">processCompositeMessageMergedReadResponse</a></span>()</code>
 <div class="block">This test handles the special case in which a response is part of a single request message.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processCompositeMessageWriteResponse--">processCompositeMessageWriteResponse</a></span>()</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processCompositeMessageReadResponse--">processCompositeMessageReadResponse</a></span>()</code>
 <div class="block">This test handles the special case in which a response is part of a single request message.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processSimpleMessageResponse--">processSimpleMessageResponse</a></span>()</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processCompositeMessageWriteResponse--">processCompositeMessageWriteResponse</a></span>()</code>
 <div class="block">This test handles the special case in which a response is part of a single request message.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processSimpleMessageResponse--">processSimpleMessageResponse</a></span>()</code>
+<div class="block">This test handles the special case in which a response is part of a single request message.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#readMessageCompositeWithLargeResponseSize--">readMessageCompositeWithLargeResponseSize</a></span>()</code>
 <div class="block">In this request, the request size itself is way within the bounds set by the PDU size parameter,
@@ -172,20 +178,20 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
  expected to split the one request with two items up into two requests with each one item.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#readMessageMultipleItems--">readMessageMultipleItems</a></span>()</code>
 <div class="block">In this test both the size of the request as well as the estimated response will be well within
  the bounds set by the PDU size parameter, so we are expecting the processor to not change anything.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#readMessageMultipleItemsWithLargeRequestSize--">readMessageMultipleItemsWithLargeRequestSize</a></span>()</code>
 <div class="block">The maximum number of request items to fit into a PDU with the size 250 is usually 19.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#readMessageMultipleItemsWithTooLargeRequestSize--">readMessageMultipleItemsWithTooLargeRequestSize</a></span>()</code>
 <div class="block">In this request, the request size itself exceeds the bounds set by the PDU size parameter,
@@ -193,50 +199,57 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
  with each one item.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#readMessageSimple--">readMessageSimple</a></span>()</code>
 <div class="block">In this test both the size of the request as well as the estimated response will be well within
  the bounds set by the PDU size parameter, so we are expecting the processor to not change anything.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#readMessageWithTooLargeResponseSize--">readMessageWithTooLargeResponseSize</a></span>()</code>
+<div class="block">In this request, the request size itself is way within the bounds set by the PDU size parameter,
+ however the estimated size of the response would exceed this greatly.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#setUp--">setUp</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#writeMessageMultipleArrayItems--">writeMessageMultipleArrayItems</a></span>()</code>
 <div class="block">In this test, we are writing multiple independent array items in one message.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#writeMessageMultipleItems--">writeMessageMultipleItems</a></span>()</code>
 <div class="block">In this test, we are writing multiple independent items in one message.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#writeMessageSimple--">writeMessageSimple</a></span>()</code>
 <div class="block">In this request, we only send one single element to one single field.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#writeMessageSimpleBitArray--">writeMessageSimpleBitArray</a></span>()</code>
 <div class="block">In this request, we send an array of bit elements to a single field, the request should be broken
  up into multiple single element write messages as the S7 doesn't seem to like writing of arrays.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#writeMessageSimpleByteArray--">writeMessageSimpleByteArray</a></span>()</code>
 <div class="block">In this request, we send an array of elements to a single field, the request should be broken
  up into multiple single element write messages as the S7 doesn't seem to like writing of arrays.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#writeMessageSimpleDwordArray--">writeMessageSimpleDwordArray</a></span>()</code>
 <div class="block">In this request, we send an array of elements to a single field, the request should be broken
@@ -373,6 +386,24 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </dl>
 </li>
 </ul>
+<a name="readMessageWithTooLargeResponseSize--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>readMessageWithTooLargeResponseSize</h4>
+<pre>public&nbsp;void&nbsp;readMessageWithTooLargeResponseSize()
+                                         throws <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcException</a></pre>
+<div class="block">In this request, the request size itself is way within the bounds set by the PDU size parameter,
+ however the estimated size of the response would exceed this greatly. In contrast to the test above
+ a single item is too large for being sent at all. So in this case the item should be split up into
+ multiple element and joined together after all sub-messages are returned.</div>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcException</a></code> - something went wrong.</dd>
+</dl>
+</li>
+</ul>
 <a name="writeMessageSimple--">
 <!--   -->
 </a>
@@ -499,6 +530,22 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </dl>
 </li>
 </ul>
+<a name="processCompositeMessageMergedReadResponse--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>processCompositeMessageMergedReadResponse</h4>
+<pre>public&nbsp;void&nbsp;processCompositeMessageMergedReadResponse()
+                                               throws <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcException</a></pre>
+<div class="block">This test handles the special case in which a response is part of a single request message.
+ This means that it is immediately finished and is hereby immediately processed.</div>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcException</a></code></dd>
+</dl>
+</li>
+</ul>
 <a name="processCompositeMessageWriteResponse--">
 <!--   -->
 </a>
@@ -508,7 +555,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <pre>public&nbsp;void&nbsp;processCompositeMessageWriteResponse()
                                           throws <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcException</a></pre>
 <div class="block">This test handles the special case in which a response is part of a single request message.
- This means that it is immediatly finished and is hereby immediatly processed.</div>
+ This means that it is immediately finished and is hereby immediately processed.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcException</a></code></dd>

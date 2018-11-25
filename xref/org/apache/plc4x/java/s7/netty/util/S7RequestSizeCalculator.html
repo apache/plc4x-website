@@ -154,15 +154,16 @@
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">short</strong> getRequestWriteVarPayloadItemSize(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> varPayloadItem) {
 <a class="jxr_linenumber" name="L147" href="#L147">147</a>         <em class="jxr_comment">// A var payload item always has a minimum size of 4 bytes (return code, transport size, size (two bytes))</em>
 <a class="jxr_linenumber" name="L148" href="#L148">148</a>         <strong class="jxr_keyword">short</strong> length = 4;
-<a class="jxr_linenumber" name="L149" href="#L149">149</a>         length += varPayloadItem.getData().length;
-<a class="jxr_linenumber" name="L150" href="#L150">150</a>         <em class="jxr_comment">// It seems that bit payloads need a additional separating 0x00 byte.</em>
-<a class="jxr_linenumber" name="L151" href="#L151">151</a>         <strong class="jxr_keyword">if</strong>(varPayloadItem.getDataTransportSize().isSizeInBits()) {
-<a class="jxr_linenumber" name="L152" href="#L152">152</a>             length += 1;
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>         }
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>         <strong class="jxr_keyword">return</strong> length;
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>     }
-<a class="jxr_linenumber" name="L156" href="#L156">156</a> 
-<a class="jxr_linenumber" name="L157" href="#L157">157</a> }
+<a class="jxr_linenumber" name="L149" href="#L149">149</a>         <em class="jxr_comment">// Data is a byte array ... so there is no need to translate this into number of bytes.</em>
+<a class="jxr_linenumber" name="L150" href="#L150">150</a>         length += varPayloadItem.getData().length;
+<a class="jxr_linenumber" name="L151" href="#L151">151</a>         <em class="jxr_comment">// It seems that bit payloads need a additional separating 0x00 byte.</em>
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>         <strong class="jxr_keyword">if</strong>(varPayloadItem.getDataTransportSize().isSizeInBits()) {
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>             length += 1;
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>         }
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>         <strong class="jxr_keyword">return</strong> length;
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>     }
+<a class="jxr_linenumber" name="L157" href="#L157">157</a> 
+<a class="jxr_linenumber" name="L158" href="#L158">158</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017&#x2013;2018 <a href="https://www.apache.org/">The Apache Software Foundation</a>. All rights reserved.</div>

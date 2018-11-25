@@ -25,6 +25,7 @@ import org.apache.plc4x.java.api.messages.PlcSubscriptionRequest;
 import org.apache.plc4x.java.api.messages.PlcUnsubscriptionRequest;
 import org.apache.plc4x.java.api.messages.PlcWriteRequest;
 import org.apache.plc4x.java.api.metadata.PlcConnectionMetadata;
+import org.apache.plc4x.java.base.messages.InternalPlcMessage;
 
 import java.util.Objects;
 
@@ -34,46 +35,46 @@ import java.util.Objects;
  * Concrete implementations should override the methods indicating connection capabilities
  * and for obtaining respective request builders.
  */
-<span class="fc" id="L37">public abstract class AbstractPlcConnection implements PlcConnection, PlcConnectionMetadata {</span>
+<span class="fc" id="L38">public abstract class AbstractPlcConnection implements PlcConnection, PlcConnectionMetadata {</span>
 
     @Override
     public PlcConnectionMetadata getMetadata() {
-<span class="fc" id="L41">        return this;</span>
+<span class="fc" id="L42">        return this;</span>
     }
 
     @Override
     public boolean canRead() {
-<span class="fc" id="L46">        return false;</span>
+<span class="fc" id="L47">        return false;</span>
     }
 
     @Override
     public boolean canWrite() {
-<span class="fc" id="L51">        return false;</span>
+<span class="fc" id="L52">        return false;</span>
     }
 
     @Override
     public boolean canSubscribe() {
-<span class="fc" id="L56">        return false;</span>
+<span class="fc" id="L57">        return false;</span>
     }
 
     @Override
     public PlcReadRequest.Builder readRequestBuilder() {
-<span class="fc" id="L61">        throw new PlcUnsupportedOperationException(&quot;The connection does not support reading&quot;);</span>
+<span class="fc" id="L62">        throw new PlcUnsupportedOperationException(&quot;The connection does not support reading&quot;);</span>
     }
 
     @Override
     public PlcWriteRequest.Builder writeRequestBuilder() {
-<span class="fc" id="L66">        throw new PlcUnsupportedOperationException(&quot;The connection does not support writing&quot;);</span>
+<span class="fc" id="L67">        throw new PlcUnsupportedOperationException(&quot;The connection does not support writing&quot;);</span>
     }
 
     @Override
     public PlcSubscriptionRequest.Builder subscriptionRequestBuilder() {
-<span class="fc" id="L71">        throw new PlcUnsupportedOperationException(&quot;The connection does not support subscription&quot;);</span>
+<span class="fc" id="L72">        throw new PlcUnsupportedOperationException(&quot;The connection does not support subscription&quot;);</span>
     }
 
     @Override
     public PlcUnsubscriptionRequest.Builder unsubscriptionRequestBuilder() {
-<span class="fc" id="L76">        throw new PlcUnsupportedOperationException(&quot;The connection does not support subscription&quot;);</span>
+<span class="fc" id="L77">        throw new PlcUnsupportedOperationException(&quot;The connection does not support subscription&quot;);</span>
     }
 
     /**
@@ -84,13 +85,13 @@ import java.util.Objects;
      * @param &lt;T&gt;   the type of the expected {@code clazz}.
      * @return the cast type of {@code clazz}.
      */
-    protected &lt;T&gt; T checkInternal(Object o, Class&lt;T&gt; clazz) {
-<span class="nc" id="L88">        Objects.requireNonNull(o);</span>
-<span class="nc" id="L89">        Objects.requireNonNull(clazz);</span>
-<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (!clazz.isInstance(o)) {</span>
-<span class="nc" id="L91">            throw new IllegalArgumentException(&quot;illegal type &quot; + o.getClass() + &quot;. Expected &quot; + clazz);</span>
+    protected &lt;T extends InternalPlcMessage&gt; T checkInternal(Object o, Class&lt;T&gt; clazz) {
+<span class="fc" id="L89">        Objects.requireNonNull(o);</span>
+<span class="fc" id="L90">        Objects.requireNonNull(clazz);</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (!clazz.isInstance(o)) {</span>
+<span class="fc" id="L92">            throw new IllegalArgumentException(&quot;illegal type &quot; + o.getClass() + &quot;. Expected &quot; + clazz);</span>
         }
-<span class="nc" id="L93">        return clazz.cast(o);</span>
+<span class="fc" id="L94">        return clazz.cast(o);</span>
     }
 
 }

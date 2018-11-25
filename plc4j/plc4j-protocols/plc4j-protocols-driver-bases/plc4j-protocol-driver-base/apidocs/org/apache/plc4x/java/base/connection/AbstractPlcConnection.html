@@ -172,7 +172,7 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#canWrite--">canWrite</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>protected &lt;T&gt;&nbsp;T</code></td>
+<td class="colFirst"><code>protected &lt;T extends <a href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcMessage.html" title="interface in org.apache.plc4x.java.base.messages">InternalPlcMessage</a>&gt;<br>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#checkInternal-java.lang.Object-java.lang.Class-">checkInternal</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;o,
              <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;T&gt;&nbsp;clazz)</code>
 <div class="block">Can be used to check and cast a parameter to its required internal type (can be used for general type checking too).</div>
@@ -354,8 +354,8 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/
 <ul class="blockListLast">
 <li class="blockList">
 <h4>checkInternal</h4>
-<pre>protected&nbsp;&lt;T&gt;&nbsp;T&nbsp;checkInternal(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;o,
-                              <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;T&gt;&nbsp;clazz)</pre>
+<pre>protected&nbsp;&lt;T extends <a href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcMessage.html" title="interface in org.apache.plc4x.java.base.messages">InternalPlcMessage</a>&gt;&nbsp;T&nbsp;checkInternal(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;o,
+                                                         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;T&gt;&nbsp;clazz)</pre>
 <div class="block">Can be used to check and cast a parameter to its required internal type (can be used for general type checking too).</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>

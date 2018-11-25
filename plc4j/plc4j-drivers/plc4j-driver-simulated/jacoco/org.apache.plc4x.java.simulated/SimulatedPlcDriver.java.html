@@ -48,8 +48,8 @@ import org.apache.plc4x.java.spi.PlcDriver;
     public PlcConnection connect(String url) throws PlcConnectionException {
         // TODO: perform further checks
 <span class="fc" id="L50">        String deviceName = url.substring(5);</span>
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (deviceName.isEmpty()) {</span>
-<span class="nc" id="L52">            throw new PlcConnectionException(&quot;Invalid URL: no device name given.&quot;);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (deviceName.isEmpty()) {</span>
+<span class="fc" id="L52">            throw new PlcConnectionException(&quot;Invalid URL: no device name given.&quot;);</span>
         }
 <span class="fc" id="L54">        TestDevice device = new TestDevice(deviceName);</span>
 <span class="fc" id="L55">        return new SimulatedPlcConnection(device);</span>

@@ -194,6 +194,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/apache/plc4x/java/s7/netty/Plc4XS7ProtocolTest.html#Plc4XS7ProtocolTest--">Plc4XS7ProtocolTest()</a></span> - Constructor for class org.apache.plc4x.java.s7.netty.<a href="org/apache/plc4x/java/s7/netty/Plc4XS7ProtocolTest.html" title="class in org.apache.plc4x.java.s7.netty">Plc4XS7ProtocolTest</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processCompositeMessageMergedReadResponse--">processCompositeMessageMergedReadResponse()</a></span> - Method in class org.apache.plc4x.java.s7.netty.strategies.<a href="org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html" title="class in org.apache.plc4x.java.s7.netty.strategies">DefaultS7MessageProcessorTest</a></dt>
+<dd>
+<div class="block">This test handles the special case in which a response is part of a single request message.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#processCompositeMessageReadResponse--">processCompositeMessageReadResponse()</a></span> - Method in class org.apache.plc4x.java.s7.netty.strategies.<a href="org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html" title="class in org.apache.plc4x.java.s7.netty.strategies">DefaultS7MessageProcessorTest</a></dt>
 <dd>
 <div class="block">This test handles the special case in which a response is part of a single request message.</div>
@@ -237,6 +241,11 @@
 <dd>
 <div class="block">In this test both the size of the request as well as the estimated response will be well within
  the bounds set by the PDU size parameter, so we are expecting the processor to not change anything.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html#readMessageWithTooLargeResponseSize--">readMessageWithTooLargeResponseSize()</a></span> - Method in class org.apache.plc4x.java.s7.netty.strategies.<a href="org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessorTest.html" title="class in org.apache.plc4x.java.s7.netty.strategies">DefaultS7MessageProcessorTest</a></dt>
+<dd>
+<div class="block">In this request, the request size itself is way within the bounds set by the PDU size parameter,
+ however the estimated size of the response would exceed this greatly.</div>
 </dd>
 </dl>
 <a name="I:S">
