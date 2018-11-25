@@ -21,14 +21,13 @@ package org.apache.plc4x.java.scraper.config;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Configuration for one {@link org.apache.plc4x.java.scraper.ScrapeJob} in the @{@link ScraperConfiguration}.
+ */
 public class JobConfiguration {
 
     private final String name;
@@ -36,31 +35,38 @@ public class JobConfiguration {
     private final List&lt;String&gt; sources;
     private final Map&lt;String, String&gt; fields;
 
+    /**
+     * Default construcotr
+     * @param name Job Name / identifier
+     * @param scrapeRate Scrape rate in ms
+     * @param sources source alias (&lt;b&gt;not&lt;/b&gt; connection string but the alias (from @{@link ScraperConfiguration}).
+     * @param fields Map from field alias (how it is named in the result map) to plc4x field query
+     */
     @JsonCreator
     JobConfiguration(@JsonProperty(value = &quot;name&quot;, required = true) String name,
                             @JsonProperty(value = &quot;scrapeRate&quot;, required = true) int scrapeRate,
                             @JsonProperty(value = &quot;sources&quot;, required = true) List&lt;String&gt; sources,
-<span class="fc" id="L43">                            @JsonProperty(value = &quot;fields&quot;, required = true) Map&lt;String, String&gt; fields) {</span>
-<span class="fc" id="L44">        this.name = name;</span>
-<span class="fc" id="L45">        this.scrapeRate = scrapeRate;</span>
-<span class="fc" id="L46">        this.sources = sources;</span>
-<span class="fc" id="L47">        this.fields = fields;</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L49">                            @JsonProperty(value = &quot;fields&quot;, required = true) Map&lt;String, String&gt; fields) {</span>
+<span class="fc" id="L50">        this.name = name;</span>
+<span class="fc" id="L51">        this.scrapeRate = scrapeRate;</span>
+<span class="fc" id="L52">        this.sources = sources;</span>
+<span class="fc" id="L53">        this.fields = fields;</span>
+<span class="fc" id="L54">    }</span>
 
     public String getName() {
-<span class="fc" id="L51">        return name;</span>
+<span class="fc" id="L57">        return name;</span>
     }
 
     public int getScrapeRate() {
-<span class="fc" id="L55">        return scrapeRate;</span>
+<span class="fc" id="L61">        return scrapeRate;</span>
     }
 
     public List&lt;String&gt; getSources() {
-<span class="fc" id="L59">        return sources;</span>
+<span class="fc" id="L65">        return sources;</span>
     }
 
     public Map&lt;String, String&gt; getFields() {
-<span class="fc" id="L63">        return fields;</span>
+<span class="fc" id="L69">        return fields;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

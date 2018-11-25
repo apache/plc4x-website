@@ -39,80 +39,84 @@ import java.util.stream.Collectors;
 /**
  * Configuration class for {@link Scraper}.
  */
-
 public class ScraperConfiguration {
 
     private final Map&lt;String, String&gt; sources;
     private final List&lt;JobConfiguration&gt; jobConfigurations;
 
+    /**
+     * Default constructor.
+     * @param sources Map from connection alias to connection string
+     * @param jobConfigurations List of configurations one for each Job
+     */
     @JsonCreator
     ScraperConfiguration(@JsonProperty(value = &quot;sources&quot;, required = true) Map&lt;String, String&gt; sources,
-<span class="fc" id="L50">                         @JsonProperty(value = &quot;jobs&quot;, required = true) List&lt;JobConfiguration&gt; jobConfigurations) {</span>
-<span class="fc" id="L51">        checkNoUnreferencedSources(sources, jobConfigurations);</span>
+<span class="fc" id="L54">                         @JsonProperty(value = &quot;jobs&quot;, required = true) List&lt;JobConfiguration&gt; jobConfigurations) {</span>
+<span class="fc" id="L55">        checkNoUnreferencedSources(sources, jobConfigurations);</span>
         // TODO Warning on too many sources?!
-<span class="fc" id="L53">        this.sources = sources;</span>
-<span class="fc" id="L54">        this.jobConfigurations = jobConfigurations;</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L57">        this.sources = sources;</span>
+<span class="fc" id="L58">        this.jobConfigurations = jobConfigurations;</span>
+<span class="fc" id="L59">    }</span>
 
     private void checkNoUnreferencedSources(Map&lt;String, String&gt; sources, List&lt;JobConfiguration&gt; jobConfigurations) {
-<span class="fc" id="L58">        Set&lt;String&gt; unreferencedSources = jobConfigurations.stream()</span>
-<span class="fc" id="L59">            .flatMap(job -&gt; job.getSources().stream())</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">            .filter(source -&gt; !sources.containsKey(source))</span>
-<span class="fc" id="L61">            .collect(Collectors.toSet());</span>
-<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (!unreferencedSources.isEmpty()) {</span>
-<span class="fc" id="L63">            throw new PlcRuntimeException(&quot;There are the following unreferenced sources: &quot; + unreferencedSources);</span>
+<span class="fc" id="L62">        Set&lt;String&gt; unreferencedSources = jobConfigurations.stream()</span>
+<span class="fc" id="L63">            .flatMap(job -&gt; job.getSources().stream())</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            .filter(source -&gt; !sources.containsKey(source))</span>
+<span class="fc" id="L65">            .collect(Collectors.toSet());</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (!unreferencedSources.isEmpty()) {</span>
+<span class="fc" id="L67">            throw new PlcRuntimeException(&quot;There are the following unreferenced sources: &quot; + unreferencedSources);</span>
         }
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L69">    }</span>
 
     public static ScraperConfiguration fromYaml(String yaml) {
-<span class="fc" id="L68">        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());</span>
+<span class="fc" id="L72">        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());</span>
         try {
-<span class="fc" id="L70">            return mapper.readValue(yaml, ScraperConfiguration.class);</span>
-<span class="fc" id="L71">        } catch (IOException e) {</span>
-<span class="fc" id="L72">            throw new PlcRuntimeException(&quot;Unable to parse given yaml configuration!&quot;, e);</span>
+<span class="fc" id="L74">            return mapper.readValue(yaml, ScraperConfiguration.class);</span>
+<span class="fc" id="L75">        } catch (IOException e) {</span>
+<span class="fc" id="L76">            throw new PlcRuntimeException(&quot;Unable to parse given yaml configuration!&quot;, e);</span>
         }
     }
 
     public static ScraperConfiguration fromJson(String json) {
-<span class="fc" id="L77">        ObjectMapper mapper = new ObjectMapper(new JsonFactory());</span>
+<span class="fc" id="L81">        ObjectMapper mapper = new ObjectMapper(new JsonFactory());</span>
         try {
-<span class="fc" id="L79">            return mapper.readValue(json, ScraperConfiguration.class);</span>
-<span class="nc" id="L80">        } catch (IOException e) {</span>
-<span class="nc" id="L81">            throw new PlcRuntimeException(&quot;Unable to parse given json configuration!&quot;, e);</span>
+<span class="fc" id="L83">            return mapper.readValue(json, ScraperConfiguration.class);</span>
+<span class="nc" id="L84">        } catch (IOException e) {</span>
+<span class="nc" id="L85">            throw new PlcRuntimeException(&quot;Unable to parse given json configuration!&quot;, e);</span>
         }
     }
 
     public static ScraperConfiguration fromFile(String path) throws IOException {
         ObjectMapper mapper;
-<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (path.endsWith(&quot;json&quot;)) {</span>
-<span class="fc" id="L88">            mapper = new ObjectMapper(new JsonFactory());</span>
-<span class="pc bpc" id="L89" title="3 of 4 branches missed.">        } else if (path.endsWith(&quot;yml&quot;) || path.endsWith(&quot;yaml&quot;)) {</span>
-<span class="fc" id="L90">            mapper = new ObjectMapper(new YAMLFactory());</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (path.endsWith(&quot;json&quot;)) {</span>
+<span class="fc" id="L92">            mapper = new ObjectMapper(new JsonFactory());</span>
+<span class="pc bpc" id="L93" title="3 of 4 branches missed.">        } else if (path.endsWith(&quot;yml&quot;) || path.endsWith(&quot;yaml&quot;)) {</span>
+<span class="fc" id="L94">            mapper = new ObjectMapper(new YAMLFactory());</span>
         } else {
-<span class="nc" id="L92">            throw new InvalidParameterException(&quot;Only files with extensions json, yml or yaml can be read&quot;);</span>
+<span class="nc" id="L96">            throw new InvalidParameterException(&quot;Only files with extensions json, yml or yaml can be read&quot;);</span>
         }
-<span class="fc" id="L94">        return mapper.readValue(new File(path), ScraperConfiguration.class);</span>
+<span class="fc" id="L98">        return mapper.readValue(new File(path), ScraperConfiguration.class);</span>
     }
 
     public Map&lt;String, String&gt; getSources() {
-<span class="fc" id="L98">        return sources;</span>
+<span class="fc" id="L102">        return sources;</span>
     }
 
     public List&lt;JobConfiguration&gt; getJobConfigurations() {
-<span class="fc" id="L102">        return jobConfigurations;</span>
+<span class="fc" id="L106">        return jobConfigurations;</span>
     }
 
     public List&lt;ScrapeJob&gt; getJobs() {
-<span class="fc" id="L106">        return jobConfigurations.stream()</span>
-<span class="fc" id="L107">            .map(conf -&gt; new ScrapeJob(conf.getName(), conf.getScrapeRate(),</span>
-<span class="fc" id="L108">                getSourcesForAliases(conf.getSources()), conf.getFields()))</span>
-<span class="fc" id="L109">            .collect(Collectors.toList());</span>
+<span class="fc" id="L110">        return jobConfigurations.stream()</span>
+<span class="fc" id="L111">            .map(conf -&gt; new ScrapeJob(conf.getName(), conf.getScrapeRate(),</span>
+<span class="fc" id="L112">                getSourcesForAliases(conf.getSources()), conf.getFields()))</span>
+<span class="fc" id="L113">            .collect(Collectors.toList());</span>
     }
 
     private Map&lt;String, String&gt; getSourcesForAliases(List&lt;String&gt; aliases) {
-<span class="fc" id="L113">        return aliases.stream()</span>
-<span class="fc" id="L114">            .collect(Collectors.toMap(</span>
-<span class="fc" id="L115">                Function.identity(),</span>
+<span class="fc" id="L117">        return aliases.stream()</span>
+<span class="fc" id="L118">            .collect(Collectors.toMap(</span>
+<span class="fc" id="L119">                Function.identity(),</span>
                 sources::get
             ));
     }

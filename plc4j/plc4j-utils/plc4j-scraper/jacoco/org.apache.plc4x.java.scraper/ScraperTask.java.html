@@ -42,11 +42,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Plc Scraper that scrapes one source.
+ * Plc Scraper Task that scrapes one source.
+ * One {@link ScrapeJob} gets split into multiple tasks.
+ * One task for each source that is defined in the {@link org.apache.plc4x.java.scraper.config.JobConfiguration}.
  */
 public class ScraperTask implements Runnable {
 
-<span class="fc" id="L49">    private static final Logger LOGGER = LoggerFactory.getLogger(ScraperTask.class);</span>
+<span class="fc" id="L51">    private static final Logger LOGGER = LoggerFactory.getLogger(ScraperTask.class);</span>
 
     private final PlcDriverManager driverManager;
     private final String jobName;
@@ -55,141 +57,141 @@ public class ScraperTask implements Runnable {
     private final Map&lt;String, String&gt; fields;
     private final long requestTimeoutMs;
     private final ExecutorService handlerService;
-    private final Scraper.ResultHandler resultHandler;
+    private final ResultHandler resultHandler;
 
-<span class="fc" id="L60">    private final AtomicLong requestCounter = new AtomicLong(0);</span>
-<span class="fc" id="L61">    private final AtomicLong successCounter = new AtomicLong(0);</span>
-<span class="fc" id="L62">    private final DescriptiveStatistics latencyStatistics = new DescriptiveStatistics(1000);</span>
-<span class="fc" id="L63">    private final DescriptiveStatistics failedStatistics = new DescriptiveStatistics(1000);</span>
+<span class="fc" id="L62">    private final AtomicLong requestCounter = new AtomicLong(0);</span>
+<span class="fc" id="L63">    private final AtomicLong successCounter = new AtomicLong(0);</span>
+<span class="fc" id="L64">    private final DescriptiveStatistics latencyStatistics = new DescriptiveStatistics(1000);</span>
+<span class="fc" id="L65">    private final DescriptiveStatistics failedStatistics = new DescriptiveStatistics(1000);</span>
 
     public ScraperTask(PlcDriverManager driverManager, String jobName, String connectionAlias, String connectionString,
-<span class="fc" id="L66">                       Map&lt;String, String&gt; fields, long requestTimeoutMs, ExecutorService handlerService, Scraper.ResultHandler resultHandler) {</span>
-<span class="fc" id="L67">        Validate.notNull(driverManager);</span>
-<span class="fc" id="L68">        Validate.notBlank(jobName);</span>
-<span class="fc" id="L69">        Validate.notBlank(connectionAlias);</span>
-<span class="fc" id="L70">        Validate.notBlank(connectionString);</span>
-<span class="fc" id="L71">        Validate.notEmpty(fields);</span>
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        Validate.isTrue(requestTimeoutMs &gt; 0);</span>
-<span class="fc" id="L73">        Validate.notNull(resultHandler);</span>
-<span class="fc" id="L74">        this.driverManager = driverManager;</span>
-<span class="fc" id="L75">        this.jobName = jobName;</span>
-<span class="fc" id="L76">        this.connectionAlias = connectionAlias;</span>
-<span class="fc" id="L77">        this.connectionString = connectionString;</span>
-<span class="fc" id="L78">        this.fields = fields;</span>
-<span class="fc" id="L79">        this.requestTimeoutMs = requestTimeoutMs;</span>
-<span class="fc" id="L80">        this.handlerService = handlerService;</span>
-<span class="fc" id="L81">        this.resultHandler = resultHandler;</span>
-<span class="fc" id="L82">    }</span>
+<span class="fc" id="L68">                       Map&lt;String, String&gt; fields, long requestTimeoutMs, ExecutorService handlerService, ResultHandler resultHandler) {</span>
+<span class="fc" id="L69">        Validate.notNull(driverManager);</span>
+<span class="fc" id="L70">        Validate.notBlank(jobName);</span>
+<span class="fc" id="L71">        Validate.notBlank(connectionAlias);</span>
+<span class="fc" id="L72">        Validate.notBlank(connectionString);</span>
+<span class="fc" id="L73">        Validate.notEmpty(fields);</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        Validate.isTrue(requestTimeoutMs &gt; 0);</span>
+<span class="fc" id="L75">        Validate.notNull(resultHandler);</span>
+<span class="fc" id="L76">        this.driverManager = driverManager;</span>
+<span class="fc" id="L77">        this.jobName = jobName;</span>
+<span class="fc" id="L78">        this.connectionAlias = connectionAlias;</span>
+<span class="fc" id="L79">        this.connectionString = connectionString;</span>
+<span class="fc" id="L80">        this.fields = fields;</span>
+<span class="fc" id="L81">        this.requestTimeoutMs = requestTimeoutMs;</span>
+<span class="fc" id="L82">        this.handlerService = handlerService;</span>
+<span class="fc" id="L83">        this.resultHandler = resultHandler;</span>
+<span class="fc" id="L84">    }</span>
 
     @Override
     public void run() {
         // Does a single fetch
-<span class="fc" id="L87">        LOGGER.trace(&quot;Start new scrape of task of job {} for connection {}&quot;, jobName, connectionAlias);</span>
-<span class="fc" id="L88">        requestCounter.incrementAndGet();</span>
-<span class="fc" id="L89">        StopWatch stopWatch = new StopWatch();</span>
-<span class="fc" id="L90">        stopWatch.start();</span>
-<span class="fc" id="L91">        PlcConnection connection = null;</span>
+<span class="fc" id="L89">        LOGGER.trace(&quot;Start new scrape of task of job {} for connection {}&quot;, jobName, connectionAlias);</span>
+<span class="fc" id="L90">        requestCounter.incrementAndGet();</span>
+<span class="fc" id="L91">        StopWatch stopWatch = new StopWatch();</span>
+<span class="fc" id="L92">        stopWatch.start();</span>
+<span class="fc" id="L93">        PlcConnection connection = null;</span>
         try {
-<span class="fc" id="L93">            CompletableFuture&lt;PlcConnection&gt; future = CompletableFuture.supplyAsync(() -&gt; {</span>
+<span class="fc" id="L95">            CompletableFuture&lt;PlcConnection&gt; future = CompletableFuture.supplyAsync(() -&gt; {</span>
                 try {
-<span class="fc" id="L95">                    return driverManager.getConnection(connectionString);</span>
-<span class="fc" id="L96">                } catch (PlcConnectionException e) {</span>
-<span class="fc" id="L97">                    throw new PlcRuntimeException(e);</span>
+<span class="fc" id="L97">                    return driverManager.getConnection(connectionString);</span>
+<span class="fc" id="L98">                } catch (PlcConnectionException e) {</span>
+<span class="fc" id="L99">                    throw new PlcRuntimeException(e);</span>
                 }
             }, handlerService);
-<span class="fc" id="L100">            connection = future.get(10*requestTimeoutMs, TimeUnit.MILLISECONDS);</span>
-<span class="fc" id="L101">            LOGGER.trace(&quot;Connection to {} established: {}&quot;, connectionString, connection);</span>
+<span class="fc" id="L102">            connection = future.get(10*requestTimeoutMs, TimeUnit.MILLISECONDS);</span>
+<span class="fc" id="L103">            LOGGER.trace(&quot;Connection to {} established: {}&quot;, connectionString, connection);</span>
             PlcReadResponse response;
             try {
-<span class="fc" id="L104">                PlcReadRequest.Builder builder = connection.readRequestBuilder();</span>
-<span class="fc" id="L105">                fields.forEach((alias,qry) -&gt; {</span>
-<span class="fc" id="L106">                    LOGGER.trace(&quot;Requesting: {} -&gt; {}&quot;, alias, qry);</span>
-<span class="fc" id="L107">                    builder.addItem(alias,qry);</span>
-<span class="fc" id="L108">                });</span>
-<span class="fc" id="L109">                response = builder</span>
-<span class="fc" id="L110">                    .build()</span>
-<span class="fc" id="L111">                    .execute()</span>
-<span class="fc" id="L112">                    .get(requestTimeoutMs, TimeUnit.MILLISECONDS);</span>
-<span class="nc" id="L113">            } catch (ExecutionException e) {</span>
+<span class="fc" id="L106">                PlcReadRequest.Builder builder = connection.readRequestBuilder();</span>
+<span class="fc" id="L107">                fields.forEach((alias,qry) -&gt; {</span>
+<span class="fc" id="L108">                    LOGGER.trace(&quot;Requesting: {} -&gt; {}&quot;, alias, qry);</span>
+<span class="fc" id="L109">                    builder.addItem(alias,qry);</span>
+<span class="fc" id="L110">                });</span>
+<span class="fc" id="L111">                response = builder</span>
+<span class="fc" id="L112">                    .build()</span>
+<span class="fc" id="L113">                    .execute()</span>
+<span class="fc" id="L114">                    .get(requestTimeoutMs, TimeUnit.MILLISECONDS);</span>
+<span class="nc" id="L115">            } catch (ExecutionException e) {</span>
                 // Handle execution exception
-<span class="nc" id="L115">                handleException(e);</span>
-<span class="nc" id="L116">                return;</span>
-<span class="fc" id="L117">            }</span>
+<span class="nc" id="L117">                handleException(e);</span>
+<span class="nc" id="L118">                return;</span>
+<span class="fc" id="L119">            }</span>
             // Add statistics
-<span class="fc" id="L119">            stopWatch.stop();</span>
-<span class="fc" id="L120">            latencyStatistics.addValue(stopWatch.getNanoTime());</span>
-<span class="fc" id="L121">            failedStatistics.addValue(0.0);</span>
-<span class="fc" id="L122">            successCounter.incrementAndGet();</span>
+<span class="fc" id="L121">            stopWatch.stop();</span>
+<span class="fc" id="L122">            latencyStatistics.addValue(stopWatch.getNanoTime());</span>
+<span class="fc" id="L123">            failedStatistics.addValue(0.0);</span>
+<span class="fc" id="L124">            successCounter.incrementAndGet();</span>
             // Validate response
-<span class="fc" id="L124">            validateResponse(response);</span>
+<span class="fc" id="L126">            validateResponse(response);</span>
             // Handle response (Async)
-<span class="fc" id="L126">            CompletableFuture.runAsync(() -&gt; resultHandler.handle(transformResponseToMap(response)), handlerService);</span>
-<span class="fc" id="L127">        } catch (Exception e) {</span>
-<span class="fc" id="L128">            LOGGER.debug(&quot;Exception during scrape&quot;, e);</span>
-<span class="fc" id="L129">            handleException(e);</span>
+<span class="fc" id="L128">            CompletableFuture.runAsync(() -&gt; resultHandler.handle(jobName, connectionAlias, transformResponseToMap(response)), handlerService);</span>
+<span class="fc" id="L129">        } catch (Exception e) {</span>
+<span class="fc" id="L130">            LOGGER.debug(&quot;Exception during scrape&quot;, e);</span>
+<span class="fc" id="L131">            handleException(e);</span>
         } finally {
-<span class="fc bfc" id="L131" title="All 2 branches covered.">            if (connection != null) {</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">            if (connection != null) {</span>
                 try {
-<span class="fc" id="L133">                    connection.close();</span>
-<span class="nc" id="L134">                } catch (Exception e) {</span>
+<span class="fc" id="L135">                    connection.close();</span>
+<span class="nc" id="L136">                } catch (Exception e) {</span>
                     // intentionally do nothing
-<span class="fc" id="L136">                }</span>
+<span class="fc" id="L138">                }</span>
             }
         }
-<span class="fc" id="L139">    }</span>
+<span class="fc" id="L141">    }</span>
 
     private void validateResponse(PlcReadResponse response) {
-<span class="fc" id="L142">        Map&lt;String, PlcResponseCode&gt; failedFields = response.getFieldNames().stream()</span>
-<span class="fc bfc" id="L143" title="All 2 branches covered.">            .filter(name -&gt; !PlcResponseCode.OK.equals(response.getResponseCode(name)))</span>
-<span class="fc" id="L144">            .collect(Collectors.toMap(</span>
-<span class="fc" id="L145">                Function.identity(),</span>
+<span class="fc" id="L144">        Map&lt;String, PlcResponseCode&gt; failedFields = response.getFieldNames().stream()</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">            .filter(name -&gt; !PlcResponseCode.OK.equals(response.getResponseCode(name)))</span>
+<span class="fc" id="L146">            .collect(Collectors.toMap(</span>
+<span class="fc" id="L147">                Function.identity(),</span>
                 response::getResponseCode
             ));
-<span class="fc bfc" id="L148" title="All 2 branches covered.">        if (failedFields.size() &gt; 0) {</span>
-<span class="fc" id="L149">            handleErrorResponse(failedFields);</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">        if (failedFields.size() &gt; 0) {</span>
+<span class="fc" id="L151">            handleErrorResponse(failedFields);</span>
         }
-<span class="fc" id="L151">    }</span>
+<span class="fc" id="L153">    }</span>
 
     private Map&lt;String, Object&gt; transformResponseToMap(PlcReadResponse response) {
-<span class="fc" id="L154">        return response.getFieldNames().stream()</span>
-<span class="fc" id="L155">            .collect(Collectors.toMap(</span>
-<span class="fc" id="L156">                name -&gt; name,</span>
+<span class="fc" id="L156">        return response.getFieldNames().stream()</span>
+<span class="fc" id="L157">            .collect(Collectors.toMap(</span>
+<span class="fc" id="L158">                name -&gt; name,</span>
                 response::getObject
             ));
     }
 
     public String getJobName() {
-<span class="fc" id="L162">        return jobName;</span>
+<span class="fc" id="L164">        return jobName;</span>
     }
 
     public String getConnectionAlias() {
-<span class="fc" id="L166">        return connectionAlias;</span>
+<span class="fc" id="L168">        return connectionAlias;</span>
     }
 
     public long getRequestCounter() {
-<span class="fc" id="L170">        return requestCounter.get();</span>
+<span class="fc" id="L172">        return requestCounter.get();</span>
     }
 
     public long getSuccessfullRequestCounter() {
-<span class="fc" id="L174">        return successCounter.get();</span>
+<span class="fc" id="L176">        return successCounter.get();</span>
     }
 
     public DescriptiveStatistics getLatencyStatistics() {
-<span class="fc" id="L178">        return latencyStatistics;</span>
+<span class="fc" id="L180">        return latencyStatistics;</span>
     }
 
     public double getPercentageFailed() {
-<span class="fc" id="L182">        return 100.0*failedStatistics.getMean();</span>
+<span class="fc" id="L184">        return 100.0*failedStatistics.getMean();</span>
     }
 
     public void handleException(Exception e) {
-<span class="fc" id="L186">        LOGGER.debug(&quot;Exception: &quot;, e);</span>
-<span class="fc" id="L187">        failedStatistics.addValue(1.0);</span>
-<span class="fc" id="L188">    }</span>
+<span class="fc" id="L188">        LOGGER.debug(&quot;Exception: &quot;, e);</span>
+<span class="fc" id="L189">        failedStatistics.addValue(1.0);</span>
+<span class="fc" id="L190">    }</span>
 
     public void handleErrorResponse(Map&lt;String, PlcResponseCode&gt; failed) {
-<span class="fc" id="L191">        LOGGER.warn(&quot;Handling error responses: {}&quot;, failed);</span>
-<span class="fc" id="L192">    }</span>
+<span class="fc" id="L193">        LOGGER.warn(&quot;Handling error responses: {}&quot;, failed);</span>
+<span class="fc" id="L194">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

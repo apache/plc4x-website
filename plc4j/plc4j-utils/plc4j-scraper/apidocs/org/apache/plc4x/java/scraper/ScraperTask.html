@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../org/apache/plc4x/java/scraper/Scraper.ResultHandler.html" title="interface in org.apache.plc4x.java.scraper"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html" title="class in org.apache.plc4x.java.scraper"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
@@ -116,7 +116,9 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">ScraperTask</span>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>
 implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</a></pre>
-<div class="block">Plc Scraper that scrapes one source.</div>
+<div class="block">Plc Scraper Task that scrapes one source.
+ One <a href="../../../../../org/apache/plc4x/java/scraper/ScrapeJob.html" title="class in org.apache.plc4x.java.scraper"><code>ScrapeJob</code></a> gets split into multiple tasks.
+ One task for each source that is defined in the <a href="../../../../../org/apache/plc4x/java/scraper/config/JobConfiguration.html" title="class in org.apache.plc4x.java.scraper.config"><code>JobConfiguration</code></a>.</div>
 </li>
 </ul>
 </div>
@@ -135,14 +137,14 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Runnable
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/scraper/ScraperTask.html#ScraperTask-org.apache.plc4x.java.PlcDriverManager-java.lang.String-java.lang.String-java.lang.String-java.util.Map-long-java.util.concurrent.ExecutorService-org.apache.plc4x.java.scraper.Scraper.ResultHandler-">ScraperTask</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/PlcDriverManager.html?is-external=true" title="class or interface in org.apache.plc4x.java">PlcDriverManager</a>&nbsp;driverManager,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/scraper/ScraperTask.html#ScraperTask-org.apache.plc4x.java.PlcDriverManager-java.lang.String-java.lang.String-java.lang.String-java.util.Map-long-java.util.concurrent.ExecutorService-org.apache.plc4x.java.scraper.ResultHandler-">ScraperTask</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/PlcDriverManager.html?is-external=true" title="class or interface in org.apache.plc4x.java">PlcDriverManager</a>&nbsp;driverManager,
            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;jobName,
            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;connectionAlias,
            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;connectionString,
            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;fields,
            long&nbsp;requestTimeoutMs,
            <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</a>&nbsp;handlerService,
-           <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.ResultHandler.html" title="interface in org.apache.plc4x.java.scraper">Scraper.ResultHandler</a>&nbsp;resultHandler)</code>&nbsp;</td>
+           <a href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html" title="interface in org.apache.plc4x.java.scraper">ResultHandler</a>&nbsp;resultHandler)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -217,7 +219,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Runnable
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="ScraperTask-org.apache.plc4x.java.PlcDriverManager-java.lang.String-java.lang.String-java.lang.String-java.util.Map-long-java.util.concurrent.ExecutorService-org.apache.plc4x.java.scraper.Scraper.ResultHandler-">
+<a name="ScraperTask-org.apache.plc4x.java.PlcDriverManager-java.lang.String-java.lang.String-java.lang.String-java.util.Map-long-java.util.concurrent.ExecutorService-org.apache.plc4x.java.scraper.ResultHandler-">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -230,7 +232,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Runnable
                    <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;fields,
                    long&nbsp;requestTimeoutMs,
                    <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</a>&nbsp;handlerService,
-                   <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.ResultHandler.html" title="interface in org.apache.plc4x.java.scraper">Scraper.ResultHandler</a>&nbsp;resultHandler)</pre>
+                   <a href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html" title="interface in org.apache.plc4x.java.scraper">ResultHandler</a>&nbsp;resultHandler)</pre>
 </li>
 </ul>
 </li>
@@ -354,7 +356,7 @@ implements <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Runnable
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../org/apache/plc4x/java/scraper/Scraper.ResultHandler.html" title="interface in org.apache.plc4x.java.scraper"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html" title="class in org.apache.plc4x.java.scraper"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">

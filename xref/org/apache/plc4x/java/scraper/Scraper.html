@@ -65,7 +65,7 @@
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>              .build()
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>      );
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>  
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html">ResultHandler</a> resultHandler;
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html">ResultHandler</a> resultHandler;
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> MultiValuedMap&lt;ScrapeJob, ScraperTask&gt; tasks = <strong class="jxr_keyword">new</strong> ArrayListValuedHashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> MultiValuedMap&lt;ScraperTask, ScheduledFuture&lt;?&gt;&gt; futures = <strong class="jxr_keyword">new</strong> ArrayListValuedHashMap&lt;&gt;();
@@ -78,7 +78,7 @@
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>  <em class="jxr_javadoccomment">     * @param config Configuration to use.</em>
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">     * @param resultHandler</em>
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html">Scraper</a>(<a href="../../../../../org/apache/plc4x/java/scraper/config/ScraperConfiguration.html">ScraperConfiguration</a> config, <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html">ResultHandler</a> resultHandler) {
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html">Scraper</a>(<a href="../../../../../org/apache/plc4x/java/scraper/config/ScraperConfiguration.html">ScraperConfiguration</a> config, <a href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html">ResultHandler</a> resultHandler) {
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">this</strong>(resultHandler, <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/utils/connectionpool/PooledPlcDriverManager.html">PooledPlcDriverManager</a>(), config.getJobs());
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>      }
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>  
@@ -88,7 +88,7 @@
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>  <em class="jxr_javadoccomment">     * @param driverManager</em>
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  <em class="jxr_javadoccomment">     * @param jobs</em>
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html">Scraper</a>(<a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html">ResultHandler</a> resultHandler, <a href="../../../../../org/apache/plc4x/java/PlcDriverManager.html">PlcDriverManager</a> driverManager, List&lt;ScrapeJob&gt; jobs) {
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html">Scraper</a>(<a href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html">ResultHandler</a> resultHandler, <a href="../../../../../org/apache/plc4x/java/PlcDriverManager.html">PlcDriverManager</a> driverManager, List&lt;ScrapeJob&gt; jobs) {
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>          <strong class="jxr_keyword">this</strong>.resultHandler = resultHandler;
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          Validate.notEmpty(jobs);
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">this</strong>.driverManager = driverManager;
@@ -161,14 +161,7 @@
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>         futures.clear();
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>     }
 <a class="jxr_linenumber" name="L155" href="#L155">155</a> 
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>     @FunctionalInterface
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">interface</strong> <a href="../../../../../org/apache/plc4x/java/scraper/Scraper.html">ResultHandler</a> {
-<a class="jxr_linenumber" name="L158" href="#L158">158</a> 
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>         <strong class="jxr_keyword">void</strong> handle(Map&lt;String, Object&gt; results);
-<a class="jxr_linenumber" name="L160" href="#L160">160</a> 
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>     }
-<a class="jxr_linenumber" name="L162" href="#L162">162</a> 
-<a class="jxr_linenumber" name="L163" href="#L163">163</a> }
+<a class="jxr_linenumber" name="L156" href="#L156">156</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017&#x2013;2018 <a href="https://www.apache.org/">The Apache Software Foundation</a>. All rights reserved.</div>
