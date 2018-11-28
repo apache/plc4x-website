@@ -396,7 +396,7 @@
 <a class="jxr_linenumber" name="L388" href="#L388">388</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> requestItem = (S7AnyVarParameterItem) varParameter.getItems().get(i);
 <a class="jxr_linenumber" name="L389" href="#L389">389</a> 
 <a class="jxr_linenumber" name="L390" href="#L390">390</a>                 <em class="jxr_comment">// Get the pairs of corresponding parameter and payload items.</em>
-<a class="jxr_linenumber" name="L391" href="#L391">391</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> responseParameterItem = (S7AnyVarParameterItem) parameterItems.get(i + responseOffset);
+<a class="jxr_linenumber" name="L391" href="#L391">391</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> responseParameterItem = (S7AnyVarParameterItem) parameterItems.get(0);
 <a class="jxr_linenumber" name="L392" href="#L392">392</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> responsePayloadItem = payloadItems.get(i + responseOffset);
 <a class="jxr_linenumber" name="L393" href="#L393">393</a>                 <strong class="jxr_keyword">int</strong> dataOffset = (responsePayloadItem.getData() != <strong class="jxr_keyword">null</strong>) ? responsePayloadItem.getData().length : 0;
 <a class="jxr_linenumber" name="L394" href="#L394">394</a> 
