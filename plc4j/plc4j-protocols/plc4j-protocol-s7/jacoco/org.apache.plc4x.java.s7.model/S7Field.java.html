@@ -29,9 +29,9 @@ import java.util.regex.Pattern;
 public class S7Field implements PlcField {
 
 <span class="fc" id="L31">    private static final Pattern ADDRESS_PATTERN =</span>
-<span class="fc" id="L32">        Pattern.compile(&quot;^%(?&lt;memoryArea&gt;.)(?&lt;transferSizeCode&gt;[XBWD]?)(?&lt;byteOffset&gt;\\d{1,4})(.(?&lt;bitOffset&gt;[0-7]))?:(?&lt;dataType&gt;[a-zA-Z_]+)(\\[(?&lt;numElements&gt;\\d+)])?&quot;);</span>
+<span class="fc" id="L32">        Pattern.compile(&quot;^%(?&lt;memoryArea&gt;.)(?&lt;transferSizeCode&gt;[XBWD]?)(?&lt;byteOffset&gt;\\d{1,5})(.(?&lt;bitOffset&gt;[0-7]))?:(?&lt;dataType&gt;[a-zA-Z_]+)(\\[(?&lt;numElements&gt;\\d+)])?&quot;);</span>
 <span class="fc" id="L33">    private static final Pattern DATA_BLOCK_ADDRESS_PATTERN =</span>
-<span class="fc" id="L34">        Pattern.compile(&quot;^%DB(?&lt;blockNumber&gt;\\d{1,4}).DB(?&lt;transferSizeCode&gt;[XBWD]?)(?&lt;byteOffset&gt;\\d{1,4})(.(?&lt;bitOffset&gt;[0-7]))?:(?&lt;dataType&gt;[a-zA-Z_]+)(\\[(?&lt;numElements&gt;\\d+)])?&quot;);</span>
+<span class="fc" id="L34">        Pattern.compile(&quot;^%DB(?&lt;blockNumber&gt;\\d{1,4}).DB(?&lt;transferSizeCode&gt;[XBWD]?)(?&lt;byteOffset&gt;\\d{1,5})(.(?&lt;bitOffset&gt;[0-7]))?:(?&lt;dataType&gt;[a-zA-Z_]+)(\\[(?&lt;numElements&gt;\\d+)])?&quot;);</span>
 
     private static final String DATA_TYPE = &quot;dataType&quot;;
     private static final String TRANSFER_SIZE_CODE = &quot;transferSizeCode&quot;;
