@@ -109,10 +109,10 @@ var activeTableTab = "activeTableTab";
 <li>io.netty.channel.ChannelDuplexHandler</li>
 <li>
 <ul class="inheritance">
-<li>io.netty.handler.codec.MessageToMessageCodec&lt;INBOUND_IN,OUTBOUND_IN&gt;</li>
+<li>io.netty.handler.codec.ByteToMessageCodec&lt;OUTBOUND_IN&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/PlcMessageToMessageCodec.html?is-external=true" title="class or interface in org.apache.plc4x.java.base">org.apache.plc4x.java.base.PlcMessageToMessageCodec</a>&lt;io.netty.buffer.ByteBuf,<a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&gt;</li>
+<li><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/PlcByteToMessageCodec.html?is-external=true" title="class or interface in org.apache.plc4x.java.base">org.apache.plc4x.java.base.PlcByteToMessageCodec</a>&lt;<a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>org.apache.plc4x.java.isoontcp.protocol.IsoOnTcpProtocol</li>
@@ -139,7 +139,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">IsoOnTcpProtocol</span>
-extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/PlcMessageToMessageCodec.html?is-external=true" title="class or interface in org.apache.plc4x.java.base">PlcMessageToMessageCodec</a>&lt;io.netty.buffer.ByteBuf,<a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&gt;</pre>
+extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/PlcByteToMessageCodec.html?is-external=true" title="class or interface in org.apache.plc4x.java.base">PlcByteToMessageCodec</a>&lt;<a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&gt;</pre>
 </li>
 </ul>
 </div>
@@ -198,24 +198,24 @@ extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/IsoOnTcpProtocol.html#encode-io.netty.channel.ChannelHandlerContext-org.apache.plc4x.java.isoontcp.protocol.model.IsoOnTcpMessage-java.util.List-">encode</a></span>(io.netty.channel.ChannelHandlerContext&nbsp;ctx,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/IsoOnTcpProtocol.html#encode-io.netty.channel.ChannelHandlerContext-org.apache.plc4x.java.isoontcp.protocol.model.IsoOnTcpMessage-io.netty.buffer.ByteBuf-">encode</a></span>(io.netty.channel.ChannelHandlerContext&nbsp;ctx,
       <a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&nbsp;in,
-      <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&gt;&nbsp;out)</code>&nbsp;</td>
+      io.netty.buffer.ByteBuf&nbsp;out)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.org.apache.plc4x.java.base.PlcMessageToMessageCodec">
+<li class="blockList"><a name="methods.inherited.from.class.org.apache.plc4x.java.base.PlcByteToMessageCodec">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;org.apache.plc4x.java.base.<a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/PlcMessageToMessageCodec.html?is-external=true" title="class or interface in org.apache.plc4x.java.base">PlcMessageToMessageCodec</a></h3>
-<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/PlcMessageToMessageCodec.html?is-external=true#getPrevChannelHandler-io.netty.channel.ChannelHandlerContext-" title="class or interface in org.apache.plc4x.java.base">getPrevChannelHandler</a></code></li>
+<h3>Methods inherited from class&nbsp;org.apache.plc4x.java.base.<a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/PlcByteToMessageCodec.html?is-external=true" title="class or interface in org.apache.plc4x.java.base">PlcByteToMessageCodec</a></h3>
+<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/PlcByteToMessageCodec.html?is-external=true#getPrevChannelHandler-io.netty.channel.ChannelHandlerContext-" title="class or interface in org.apache.plc4x.java.base">getPrevChannelHandler</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.netty.handler.codec.MessageToMessageCodec">
+<li class="blockList"><a name="methods.inherited.from.class.io.netty.handler.codec.ByteToMessageCodec">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.netty.handler.codec.MessageToMessageCodec</h3>
-<code>acceptInboundMessage, acceptOutboundMessage, channelRead, write</code></li>
+<h3>Methods inherited from class&nbsp;io.netty.handler.codec.ByteToMessageCodec</h3>
+<code>acceptOutboundMessage, channelInactive, channelRead, channelReadComplete, decodeLast, handlerAdded, handlerRemoved, write</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.netty.channel.ChannelDuplexHandler">
@@ -229,14 +229,14 @@ extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.netty.channel.ChannelInboundHandlerAdapter</h3>
-<code>channelActive, channelInactive, channelReadComplete, channelRegistered, channelUnregistered, channelWritabilityChanged, exceptionCaught, userEventTriggered</code></li>
+<code>channelActive, channelRegistered, channelUnregistered, channelWritabilityChanged, exceptionCaught, userEventTriggered</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.netty.channel.ChannelHandlerAdapter">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.netty.channel.ChannelHandlerAdapter</h3>
-<code>ensureNotSharable, handlerAdded, handlerRemoved, isSharable</code></li>
+<code>ensureNotSharable, isSharable</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -250,7 +250,7 @@ extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.netty.channel.ChannelHandler</h3>
-<code>exceptionCaught, handlerAdded, handlerRemoved</code></li>
+<code>exceptionCaught</code></li>
 </ul>
 </li>
 </ul>
@@ -283,7 +283,7 @@ extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="encode-io.netty.channel.ChannelHandlerContext-org.apache.plc4x.java.isoontcp.protocol.model.IsoOnTcpMessage-java.util.List-">
+<a name="encode-io.netty.channel.ChannelHandlerContext-org.apache.plc4x.java.isoontcp.protocol.model.IsoOnTcpMessage-io.netty.buffer.ByteBuf-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -291,10 +291,13 @@ extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-
 <h4>encode</h4>
 <pre>protected&nbsp;void&nbsp;encode(io.netty.channel.ChannelHandlerContext&nbsp;ctx,
                       <a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&nbsp;in,
-                      <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&gt;&nbsp;out)</pre>
+                      io.netty.buffer.ByteBuf&nbsp;out)
+               throws <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>encode</code>&nbsp;in class&nbsp;<code>io.netty.handler.codec.MessageToMessageCodec&lt;io.netty.buffer.ByteBuf,<a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&gt;</code></dd>
+<dd><code>encode</code>&nbsp;in class&nbsp;<code>io.netty.handler.codec.ByteToMessageCodec&lt;<a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&gt;</code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -310,7 +313,7 @@ extends <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-
                throws <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>decode</code>&nbsp;in class&nbsp;<code>io.netty.handler.codec.MessageToMessageCodec&lt;io.netty.buffer.ByteBuf,<a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&gt;</code></dd>
+<dd><code>decode</code>&nbsp;in class&nbsp;<code>io.netty.handler.codec.ByteToMessageCodec&lt;<a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/model/IsoOnTcpMessage.html" title="class in org.apache.plc4x.java.isoontcp.protocol.model">IsoOnTcpMessage</a>&gt;</code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></code></dd>
 </dl>

@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
@@ -64,7 +65,7 @@ import java.util.List;
  */
 public class PlcConnectionAdapter implements AutoCloseable {
 
-<span class="fc" id="L67">    private static final Logger logger = LoggerFactory.getLogger(PlcConnectionAdapter.class);</span>
+<span class="fc" id="L68">    private static final Logger logger = LoggerFactory.getLogger(PlcConnectionAdapter.class);</span>
 
     private static final String FIELD_NAME = &quot;default&quot;;
 
@@ -78,48 +79,55 @@ public class PlcConnectionAdapter implements AutoCloseable {
      *   to enable the app to register an error callback handler or such.
      */
 
-<span class="fc" id="L81">    public PlcConnectionAdapter(PlcConnection plcConnection) {</span>
-<span class="fc" id="L82">        this.plcConnection = plcConnection;</span>
-<span class="fc" id="L83">    }</span>
+<span class="fc" id="L82">    public PlcConnectionAdapter(PlcConnection plcConnection) {</span>
+<span class="fc" id="L83">        this.plcConnection = plcConnection;</span>
+<span class="fc" id="L84">    }</span>
 
-<span class="fc" id="L85">    public PlcConnectionAdapter(String plcConnectionUrl) {</span>
-<span class="fc" id="L86">        this.plcConnectionUrl = plcConnectionUrl;</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L86">    public PlcConnectionAdapter(String plcConnectionUrl) {</span>
+<span class="fc" id="L87">        this.plcConnectionUrl = plcConnectionUrl;</span>
+<span class="fc" id="L88">    }</span>
 
     PlcConnection getConnection() throws PlcException {
-<span class="fc" id="L90">        synchronized (this) {</span>
-<span class="fc bfc" id="L91" title="All 2 branches covered.">            if (plcConnection == null) {</span>
-<span class="fc" id="L92">                plcConnection = new PlcDriverManager().getConnection(plcConnectionUrl);</span>
+<span class="fc" id="L91">        synchronized (this) {</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (plcConnection == null) {</span>
+<span class="fc" id="L93">                plcConnection = new PlcDriverManager().getConnection(plcConnectionUrl);</span>
             }
-<span class="fc" id="L94">            return plcConnection;</span>
+<span class="fc" id="L95">            return plcConnection;</span>
         }
     }
 
     @Override
     public void close() throws Exception {
         // only close a connection this instance created/connected
-<span class="pc bpc" id="L101" title="1 of 4 branches missed.">        if (plcConnectionUrl != null &amp;&amp; plcConnection != null) {</span>
-<span class="fc" id="L102">            plcConnection.close();</span>
+<span class="pc bpc" id="L102" title="1 of 4 branches missed.">        if (plcConnectionUrl != null &amp;&amp; plcConnection != null) {</span>
+<span class="fc" id="L103">            plcConnection.close();</span>
         }
-<span class="fc" id="L104">    }</span>
+<span class="fc" id="L105">    }</span>
 
     public PlcReadRequest.Builder readRequestBuilder() throws PlcException {
-<span class="fc" id="L107">        return getConnection().readRequestBuilder();</span>
+<span class="fc" id="L108">        return getConnection().readRequestBuilder();</span>
     }
 
     Supplier&lt;PlcReadResponse&gt; newSupplier(PlcReadRequest readRequest) {
-<span class="nc" id="L111">        return new Supplier&lt;PlcReadResponse&gt;() {</span>
+<span class="nc" id="L112">        return new Supplier&lt;PlcReadResponse&gt;() {</span>
             private static final long serialVersionUID = 1L;
 
             @Override
             public PlcReadResponse get() {
-<span class="nc" id="L116">                PlcConnection connection = null;</span>
+<span class="nc" id="L117">                PlcConnection connection = null;</span>
                 try {
-<span class="nc" id="L118">                    connection = getConnection();</span>
-<span class="nc" id="L119">                    return readRequest.execute().get();</span>
-<span class="nc" id="L120">                } catch (Exception e) {</span>
-<span class="nc" id="L121">                    logger.error(&quot;reading from plc device {} {} failed&quot;, connection, readRequest, e);</span>
-<span class="nc" id="L122">                    return null;</span>
+<span class="nc" id="L119">                    connection = getConnection();</span>
+<span class="nc" id="L120">                    LocalDateTime start = LocalDateTime.now();</span>
+<span class="nc" id="L121">                    PlcReadResponse plcReadResponse = readRequest.execute().get();</span>
+<span class="nc" id="L122">                    LocalDateTime end = LocalDateTime.now();</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                    if(logger.isTraceEnabled()) {</span>
+<span class="nc" id="L124">                        long diff = ChronoUnit.MILLIS.between(start, end);</span>
+<span class="nc" id="L125">                        logger.trace(&quot;Processed request in &quot; + diff + &quot;ms&quot;);</span>
+                    }
+<span class="nc" id="L127">                    return plcReadResponse;</span>
+<span class="nc" id="L128">                } catch (Exception e) {</span>
+<span class="nc" id="L129">                    logger.error(&quot;reading from plc device {} {} failed&quot;, connection, readRequest, e);</span>
+<span class="nc" id="L130">                    return null;</span>
                 }
             }
         };
@@ -127,12 +135,12 @@ public class PlcConnectionAdapter implements AutoCloseable {
 
     &lt;T&gt; Supplier&lt;T&gt; newSupplier(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
         // satisfy sonar's &quot;Reduce number of anonymous class lines&quot; code smell
-<span class="fc" id="L130">        return new MySupplier&lt;&gt;(genericDatatype, clientDatatype, fieldQuery);</span>
+<span class="fc" id="L138">        return new MySupplier&lt;&gt;(genericDatatype, clientDatatype, fieldQuery);</span>
     }
 
     &lt;T&gt; Supplier&lt;List&lt;T&gt;&gt; newListSupplier(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
         // satisfy sonar's &quot;Reduce number of anonymous class lines&quot; code smell
-<span class="nc" id="L135">        return new MyListSupplier&lt;&gt;(genericDatatype, clientDatatype, fieldQuery);</span>
+<span class="nc" id="L143">        return new MyListSupplier&lt;&gt;(genericDatatype, clientDatatype, fieldQuery);</span>
     }
 
     private class MySupplier&lt;T&gt; implements Supplier&lt;T&gt; {
@@ -143,68 +151,68 @@ public class PlcConnectionAdapter implements AutoCloseable {
         private PlcClientDatatype clientDatatype;
         private String fieldQuery;
 
-<span class="fc" id="L146">        MySupplier(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {</span>
-<span class="fc" id="L147">            this.genericDatatype = genericDatatype;</span>
-<span class="fc" id="L148">            this.clientDatatype = clientDatatype;</span>
-<span class="fc" id="L149">            this.fieldQuery = fieldQuery;</span>
-<span class="fc" id="L150">        }</span>
+<span class="fc" id="L154">        MySupplier(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {</span>
+<span class="fc" id="L155">            this.genericDatatype = genericDatatype;</span>
+<span class="fc" id="L156">            this.clientDatatype = clientDatatype;</span>
+<span class="fc" id="L157">            this.fieldQuery = fieldQuery;</span>
+<span class="fc" id="L158">        }</span>
 
         @Override
         @SuppressWarnings(&quot;unchecked&quot;)
         public T get() {
-<span class="nc" id="L155">            PlcConnection connection = null;</span>
-<span class="nc" id="L156">            PlcField field = null;</span>
+<span class="nc" id="L163">            PlcConnection connection = null;</span>
+<span class="nc" id="L164">            PlcField field = null;</span>
             try {
-<span class="nc" id="L158">                connection = getConnection();</span>
-<span class="nc" id="L159">                PlcReadRequest readRequest = connection.readRequestBuilder().addItem(FIELD_NAME, fieldQuery).build();</span>
-<span class="nc" id="L160">                PlcReadResponse readResponse = readRequest.execute().get();</span>
-<span class="nc" id="L161">                Object value = null;</span>
-<span class="nc bnc" id="L162" title="All 12 branches missed.">                switch (clientDatatype) {</span>
+<span class="nc" id="L166">                connection = getConnection();</span>
+<span class="nc" id="L167">                PlcReadRequest readRequest = connection.readRequestBuilder().addItem(FIELD_NAME, fieldQuery).build();</span>
+<span class="nc" id="L168">                PlcReadResponse readResponse = readRequest.execute().get();</span>
+<span class="nc" id="L169">                Object value = null;</span>
+<span class="nc bnc" id="L170" title="All 12 branches missed.">                switch (clientDatatype) {</span>
                     case BOOLEAN:
-<span class="nc" id="L164">                        value = readResponse.getBoolean(FIELD_NAME);</span>
-<span class="nc" id="L165">                        break;</span>
+<span class="nc" id="L172">                        value = readResponse.getBoolean(FIELD_NAME);</span>
+<span class="nc" id="L173">                        break;</span>
                     case BYTE:
-<span class="nc" id="L167">                        value = readResponse.getByte(FIELD_NAME);</span>
-<span class="nc" id="L168">                        break;</span>
+<span class="nc" id="L175">                        value = readResponse.getByte(FIELD_NAME);</span>
+<span class="nc" id="L176">                        break;</span>
                     case SHORT:
-<span class="nc" id="L170">                        value = readResponse.getShort(FIELD_NAME);</span>
-<span class="nc" id="L171">                        break;</span>
+<span class="nc" id="L178">                        value = readResponse.getShort(FIELD_NAME);</span>
+<span class="nc" id="L179">                        break;</span>
                     case INTEGER:
-<span class="nc" id="L173">                        value = readResponse.getInteger(FIELD_NAME);</span>
-<span class="nc" id="L174">                        break;</span>
+<span class="nc" id="L181">                        value = readResponse.getInteger(FIELD_NAME);</span>
+<span class="nc" id="L182">                        break;</span>
                     case LONG:
-<span class="nc" id="L176">                        value = readResponse.getLong(FIELD_NAME);</span>
-<span class="nc" id="L177">                        break;</span>
+<span class="nc" id="L184">                        value = readResponse.getLong(FIELD_NAME);</span>
+<span class="nc" id="L185">                        break;</span>
                     case FLOAT:
-<span class="nc" id="L179">                        value = readResponse.getFloat(FIELD_NAME);</span>
-<span class="nc" id="L180">                        break;</span>
+<span class="nc" id="L187">                        value = readResponse.getFloat(FIELD_NAME);</span>
+<span class="nc" id="L188">                        break;</span>
                     case DOUBLE:
-<span class="nc" id="L182">                        value = readResponse.getDouble(FIELD_NAME);</span>
-<span class="nc" id="L183">                        break;</span>
+<span class="nc" id="L190">                        value = readResponse.getDouble(FIELD_NAME);</span>
+<span class="nc" id="L191">                        break;</span>
                     case STRING:
-<span class="nc" id="L185">                        value = readResponse.getString(FIELD_NAME);</span>
-<span class="nc" id="L186">                        break;</span>
+<span class="nc" id="L193">                        value = readResponse.getString(FIELD_NAME);</span>
+<span class="nc" id="L194">                        break;</span>
                     case TIME:
-<span class="nc" id="L188">                        value = readResponse.getTime(FIELD_NAME);</span>
-<span class="nc" id="L189">                        break;</span>
+<span class="nc" id="L196">                        value = readResponse.getTime(FIELD_NAME);</span>
+<span class="nc" id="L197">                        break;</span>
                     case DATE:
-<span class="nc" id="L191">                        value = readResponse.getDate(FIELD_NAME);</span>
-<span class="nc" id="L192">                        break;</span>
+<span class="nc" id="L199">                        value = readResponse.getDate(FIELD_NAME);</span>
+<span class="nc" id="L200">                        break;</span>
                     case DATE_TIME:
-<span class="nc" id="L194">                        value = readResponse.getDateTime(FIELD_NAME);</span>
+<span class="nc" id="L202">                        value = readResponse.getDateTime(FIELD_NAME);</span>
                         break;
                 }
-<span class="nc bnc" id="L197" title="All 2 branches missed.">                if (value != null) {</span>
-<span class="nc bnc" id="L198" title="All 2 branches missed.">                    if (genericDatatype.isAssignableFrom(value.getClass())) {</span>
-<span class="nc" id="L199">                        return (T) value;</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">                if (value != null) {</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                    if (genericDatatype.isAssignableFrom(value.getClass())) {</span>
+<span class="nc" id="L207">                        return (T) value;</span>
                     } else {
-<span class="nc" id="L201">                        logger.error(&quot;types don't match {} should be of type {}&quot;, value.getClass(), genericDatatype);</span>
+<span class="nc" id="L209">                        logger.error(&quot;types don't match {} should be of type {}&quot;, value.getClass(), genericDatatype);</span>
                     }
                 }
-<span class="nc" id="L204">            } catch (Exception e) {</span>
-<span class="nc" id="L205">                logger.error(&quot;reading from plc device {} {} failed&quot;, connection, field, e);</span>
-<span class="nc" id="L206">            }</span>
-<span class="nc" id="L207">            return null;</span>
+<span class="nc" id="L212">            } catch (Exception e) {</span>
+<span class="nc" id="L213">                logger.error(&quot;reading from plc device {} {} failed&quot;, connection, field, e);</span>
+<span class="nc" id="L214">            }</span>
+<span class="nc" id="L215">            return null;</span>
         }
     }
 
@@ -216,146 +224,146 @@ public class PlcConnectionAdapter implements AutoCloseable {
         private PlcClientDatatype clientDatatype;
         private String fieldQuery;
 
-<span class="nc" id="L219">        MyListSupplier(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {</span>
-<span class="nc" id="L220">            this.genericDatatype = genericDatatype;</span>
-<span class="nc" id="L221">            this.clientDatatype = clientDatatype;</span>
-<span class="nc" id="L222">            this.fieldQuery = fieldQuery;</span>
-<span class="nc" id="L223">        }</span>
+<span class="nc" id="L227">        MyListSupplier(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {</span>
+<span class="nc" id="L228">            this.genericDatatype = genericDatatype;</span>
+<span class="nc" id="L229">            this.clientDatatype = clientDatatype;</span>
+<span class="nc" id="L230">            this.fieldQuery = fieldQuery;</span>
+<span class="nc" id="L231">        }</span>
 
         @Override
         @SuppressWarnings(&quot;unchecked&quot;)
         public List&lt;T&gt; get() {
-<span class="nc" id="L228">            PlcConnection connection = null;</span>
-<span class="nc" id="L229">            PlcField field = null;</span>
+<span class="nc" id="L236">            PlcConnection connection = null;</span>
+<span class="nc" id="L237">            PlcField field = null;</span>
             try {
-<span class="nc" id="L231">                connection = getConnection();</span>
-<span class="nc" id="L232">                PlcReadRequest readRequest = connection.readRequestBuilder().addItem(FIELD_NAME, fieldQuery).build();</span>
-<span class="nc" id="L233">                PlcReadResponse readResponse = readRequest.execute().get();</span>
-<span class="nc" id="L234">                Object value = null;</span>
-<span class="nc bnc" id="L235" title="All 12 branches missed.">                switch (clientDatatype) {</span>
+<span class="nc" id="L239">                connection = getConnection();</span>
+<span class="nc" id="L240">                PlcReadRequest readRequest = connection.readRequestBuilder().addItem(FIELD_NAME, fieldQuery).build();</span>
+<span class="nc" id="L241">                PlcReadResponse readResponse = readRequest.execute().get();</span>
+<span class="nc" id="L242">                Object value = null;</span>
+<span class="nc bnc" id="L243" title="All 12 branches missed.">                switch (clientDatatype) {</span>
                     case BOOLEAN:
-<span class="nc" id="L237">                        value = readResponse.getAllBooleans(FIELD_NAME);</span>
-<span class="nc" id="L238">                        break;</span>
+<span class="nc" id="L245">                        value = readResponse.getAllBooleans(FIELD_NAME);</span>
+<span class="nc" id="L246">                        break;</span>
                     case BYTE:
-<span class="nc" id="L240">                        value = readResponse.getAllBytes(FIELD_NAME);</span>
-<span class="nc" id="L241">                        break;</span>
+<span class="nc" id="L248">                        value = readResponse.getAllBytes(FIELD_NAME);</span>
+<span class="nc" id="L249">                        break;</span>
                     case SHORT:
-<span class="nc" id="L243">                        value = readResponse.getAllShorts(FIELD_NAME);</span>
-<span class="nc" id="L244">                        break;</span>
+<span class="nc" id="L251">                        value = readResponse.getAllShorts(FIELD_NAME);</span>
+<span class="nc" id="L252">                        break;</span>
                     case INTEGER:
-<span class="nc" id="L246">                        value = readResponse.getAllIntegers(FIELD_NAME);</span>
-<span class="nc" id="L247">                        break;</span>
+<span class="nc" id="L254">                        value = readResponse.getAllIntegers(FIELD_NAME);</span>
+<span class="nc" id="L255">                        break;</span>
                     case LONG:
-<span class="nc" id="L249">                        value = readResponse.getAllLongs(FIELD_NAME);</span>
-<span class="nc" id="L250">                        break;</span>
+<span class="nc" id="L257">                        value = readResponse.getAllLongs(FIELD_NAME);</span>
+<span class="nc" id="L258">                        break;</span>
                     case FLOAT:
-<span class="nc" id="L252">                        value = readResponse.getAllFloats(FIELD_NAME);</span>
-<span class="nc" id="L253">                        break;</span>
+<span class="nc" id="L260">                        value = readResponse.getAllFloats(FIELD_NAME);</span>
+<span class="nc" id="L261">                        break;</span>
                     case DOUBLE:
-<span class="nc" id="L255">                        value = readResponse.getAllDoubles(FIELD_NAME);</span>
-<span class="nc" id="L256">                        break;</span>
+<span class="nc" id="L263">                        value = readResponse.getAllDoubles(FIELD_NAME);</span>
+<span class="nc" id="L264">                        break;</span>
                     case STRING:
-<span class="nc" id="L258">                        value = readResponse.getAllStrings(FIELD_NAME);</span>
-<span class="nc" id="L259">                        break;</span>
+<span class="nc" id="L266">                        value = readResponse.getAllStrings(FIELD_NAME);</span>
+<span class="nc" id="L267">                        break;</span>
                     case TIME:
-<span class="nc" id="L261">                        value = readResponse.getAllTimes(FIELD_NAME);</span>
-<span class="nc" id="L262">                        break;</span>
+<span class="nc" id="L269">                        value = readResponse.getAllTimes(FIELD_NAME);</span>
+<span class="nc" id="L270">                        break;</span>
                     case DATE:
-<span class="nc" id="L264">                        value = readResponse.getAllDates(FIELD_NAME);</span>
-<span class="nc" id="L265">                        break;</span>
+<span class="nc" id="L272">                        value = readResponse.getAllDates(FIELD_NAME);</span>
+<span class="nc" id="L273">                        break;</span>
                     case DATE_TIME:
-<span class="nc" id="L267">                        value = readResponse.getAllDateTimes(FIELD_NAME);</span>
+<span class="nc" id="L275">                        value = readResponse.getAllDateTimes(FIELD_NAME);</span>
                         break;
                 }
-<span class="nc bnc" id="L270" title="All 2 branches missed.">                if (value != null) {</span>
-<span class="nc" id="L271">                    return Collections.checkedList((List&lt;T&gt;) value, genericDatatype);</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">                if (value != null) {</span>
+<span class="nc" id="L279">                    return Collections.checkedList((List&lt;T&gt;) value, genericDatatype);</span>
                 }
-<span class="nc" id="L273">            } catch (Exception e) {</span>
-<span class="nc" id="L274">                logger.error(&quot;reading from plc device {} {} failed&quot;, connection, field, e);</span>
-<span class="nc" id="L275">            }</span>
-<span class="nc" id="L276">            return null;</span>
+<span class="nc" id="L281">            } catch (Exception e) {</span>
+<span class="nc" id="L282">                logger.error(&quot;reading from plc device {} {} failed&quot;, connection, field, e);</span>
+<span class="nc" id="L283">            }</span>
+<span class="nc" id="L284">            return null;</span>
         }
     }
 
     &lt;T&gt; Consumer&lt;T&gt; newJsonConsumer(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
-<span class="fc" id="L281">        return new ObjectConsumer&lt;&gt;(genericDatatype, clientDatatype, fieldQuery);</span>
+<span class="fc" id="L289">        return new ObjectConsumer&lt;&gt;(genericDatatype, clientDatatype, fieldQuery);</span>
     }
 
     &lt;T&gt; Consumer&lt;JsonObject&gt; newJsonConsumer(PlcClientDatatype clientDatatype, Function&lt;JsonObject, String&gt; fieldQueryFn, Function&lt;JsonObject, T&gt; fieldValueFn) {
-<span class="fc" id="L285">        return new JsonConsumer&lt;&gt;(clientDatatype, fieldQueryFn, fieldValueFn);</span>
+<span class="fc" id="L293">        return new JsonConsumer&lt;&gt;(clientDatatype, fieldQueryFn, fieldValueFn);</span>
     }
 
-<span class="fc" id="L288">    private abstract class BaseConsumer&lt;T&gt; implements Consumer&lt;T&gt; {</span>
+<span class="fc" id="L296">    private abstract class BaseConsumer&lt;T&gt; implements Consumer&lt;T&gt; {</span>
 
         protected void write(PlcClientDatatype clientDatatype, String fieldQuery, Object fieldValue) {
-<span class="fc" id="L291">            PlcConnection connection = null;</span>
+<span class="fc" id="L299">            PlcConnection connection = null;</span>
             try {
-<span class="fc" id="L293">                connection = getConnection();</span>
-<span class="fc" id="L294">                PlcWriteRequest.Builder builder = connection.writeRequestBuilder();</span>
-<span class="fc" id="L295">                PlcWriteRequest writeRequest = builder.build();</span>
-<span class="fc" id="L296">                addItem(builder, clientDatatype, fieldQuery, fieldValue);</span>
-<span class="fc" id="L297">                writeRequest.execute().get();</span>
-<span class="nc" id="L298">            } catch (Exception e) {</span>
-<span class="nc" id="L299">                logger.error(&quot;writing to plc device {} {} failed&quot;, connection, fieldQuery, e);</span>
-<span class="fc" id="L300">            }</span>
+<span class="fc" id="L301">                connection = getConnection();</span>
+<span class="fc" id="L302">                PlcWriteRequest.Builder builder = connection.writeRequestBuilder();</span>
+<span class="fc" id="L303">                PlcWriteRequest writeRequest = builder.build();</span>
+<span class="fc" id="L304">                addItem(builder, clientDatatype, fieldQuery, fieldValue);</span>
+<span class="fc" id="L305">                writeRequest.execute().get();</span>
+<span class="nc" id="L306">            } catch (Exception e) {</span>
+<span class="nc" id="L307">                logger.error(&quot;writing to plc device {} {} failed&quot;, connection, fieldQuery, e);</span>
+<span class="fc" id="L308">            }</span>
 
-<span class="fc" id="L302">        }</span>
+<span class="fc" id="L310">        }</span>
 
         private void addItem(PlcWriteRequest.Builder builder,
                              PlcClientDatatype clientDatatype, String fieldQuery, Object fieldValue) {
-<span class="pc bpc" id="L306" title="5 of 11 branches missed.">            switch (clientDatatype) {</span>
+<span class="pc bpc" id="L314" title="5 of 11 branches missed.">            switch (clientDatatype) {</span>
                 case BYTE:
-<span class="pc bpc" id="L308" title="1 of 2 branches missed.">                    if (fieldValue instanceof Byte) {</span>
-<span class="fc" id="L309">                        builder.addItem(FIELD_NAME, fieldQuery, (Byte) fieldValue);</span>
+<span class="pc bpc" id="L316" title="1 of 2 branches missed.">                    if (fieldValue instanceof Byte) {</span>
+<span class="fc" id="L317">                        builder.addItem(FIELD_NAME, fieldQuery, (Byte) fieldValue);</span>
                     }
                     break;
                 case SHORT:
-<span class="pc bpc" id="L313" title="1 of 2 branches missed.">                    if (fieldValue instanceof Short) {</span>
-<span class="fc" id="L314">                        builder.addItem(FIELD_NAME, fieldQuery, (Short) fieldValue);</span>
+<span class="pc bpc" id="L321" title="1 of 2 branches missed.">                    if (fieldValue instanceof Short) {</span>
+<span class="fc" id="L322">                        builder.addItem(FIELD_NAME, fieldQuery, (Short) fieldValue);</span>
                     }
                     break;
                 case INTEGER:
-<span class="pc bpc" id="L318" title="1 of 2 branches missed.">                    if (fieldValue instanceof Integer) {</span>
-<span class="fc" id="L319">                        builder.addItem(FIELD_NAME, fieldQuery, (Integer) fieldValue);</span>
+<span class="pc bpc" id="L326" title="1 of 2 branches missed.">                    if (fieldValue instanceof Integer) {</span>
+<span class="fc" id="L327">                        builder.addItem(FIELD_NAME, fieldQuery, (Integer) fieldValue);</span>
                     }
                     break;
                 case LONG:
-<span class="nc bnc" id="L323" title="All 2 branches missed.">                    if (fieldValue instanceof Long) {</span>
-<span class="nc" id="L324">                        builder.addItem(FIELD_NAME, fieldQuery, (Long) fieldValue);</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">                    if (fieldValue instanceof Long) {</span>
+<span class="nc" id="L332">                        builder.addItem(FIELD_NAME, fieldQuery, (Long) fieldValue);</span>
                     }
                     break;
                 case FLOAT:
-<span class="pc bpc" id="L328" title="1 of 2 branches missed.">                    if (fieldValue instanceof Float) {</span>
-<span class="fc" id="L329">                        builder.addItem(FIELD_NAME, fieldQuery, (Float) fieldValue);</span>
+<span class="pc bpc" id="L336" title="1 of 2 branches missed.">                    if (fieldValue instanceof Float) {</span>
+<span class="fc" id="L337">                        builder.addItem(FIELD_NAME, fieldQuery, (Float) fieldValue);</span>
                     }
                     break;
                 case DOUBLE:
-<span class="nc bnc" id="L333" title="All 2 branches missed.">                    if (fieldValue instanceof Double) {</span>
-<span class="nc" id="L334">                        builder.addItem(FIELD_NAME, fieldQuery, (Double) fieldValue);</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">                    if (fieldValue instanceof Double) {</span>
+<span class="nc" id="L342">                        builder.addItem(FIELD_NAME, fieldQuery, (Double) fieldValue);</span>
                     }
                     break;
                 case STRING:
-<span class="pc bpc" id="L338" title="1 of 2 branches missed.">                    if (fieldValue instanceof String) {</span>
-<span class="fc" id="L339">                        builder.addItem(FIELD_NAME, fieldQuery, (String) fieldValue);</span>
+<span class="pc bpc" id="L346" title="1 of 2 branches missed.">                    if (fieldValue instanceof String) {</span>
+<span class="fc" id="L347">                        builder.addItem(FIELD_NAME, fieldQuery, (String) fieldValue);</span>
                     }
                     break;
                 case TIME:
-<span class="nc bnc" id="L343" title="All 2 branches missed.">                    if (fieldValue instanceof LocalTime) {</span>
-<span class="nc" id="L344">                        builder.addItem(FIELD_NAME, fieldQuery, (LocalTime) fieldValue);</span>
+<span class="nc bnc" id="L351" title="All 2 branches missed.">                    if (fieldValue instanceof LocalTime) {</span>
+<span class="nc" id="L352">                        builder.addItem(FIELD_NAME, fieldQuery, (LocalTime) fieldValue);</span>
                     }
                     break;
                 case DATE:
-<span class="nc bnc" id="L348" title="All 2 branches missed.">                    if (fieldValue instanceof LocalDate) {</span>
-<span class="nc" id="L349">                        builder.addItem(FIELD_NAME, fieldQuery, (LocalDate) fieldValue);</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">                    if (fieldValue instanceof LocalDate) {</span>
+<span class="nc" id="L357">                        builder.addItem(FIELD_NAME, fieldQuery, (LocalDate) fieldValue);</span>
                     }
                     break;
                 case DATE_TIME:
-<span class="nc bnc" id="L353" title="All 2 branches missed.">                    if (fieldValue instanceof LocalDateTime) {</span>
-<span class="nc" id="L354">                        builder.addItem(FIELD_NAME, fieldQuery, (LocalDateTime) fieldValue);</span>
+<span class="nc bnc" id="L361" title="All 2 branches missed.">                    if (fieldValue instanceof LocalDateTime) {</span>
+<span class="nc" id="L362">                        builder.addItem(FIELD_NAME, fieldQuery, (LocalDateTime) fieldValue);</span>
                     }
                     break;
             }
-<span class="fc" id="L358">        }</span>
+<span class="fc" id="L366">        }</span>
     }
 
     private class ObjectConsumer&lt;T&gt; extends BaseConsumer&lt;T&gt; {
@@ -364,15 +372,15 @@ public class PlcConnectionAdapter implements AutoCloseable {
         private PlcClientDatatype clientDatatype;
         private String fieldQuery;
 
-<span class="fc" id="L367">        ObjectConsumer(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {</span>
-<span class="fc" id="L368">            this.clientDatatype = clientDatatype;</span>
-<span class="fc" id="L369">            this.fieldQuery = fieldQuery;</span>
-<span class="fc" id="L370">        }</span>
+<span class="fc" id="L375">        ObjectConsumer(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {</span>
+<span class="fc" id="L376">            this.clientDatatype = clientDatatype;</span>
+<span class="fc" id="L377">            this.fieldQuery = fieldQuery;</span>
+<span class="fc" id="L378">        }</span>
 
         @Override
         public void accept(Object fieldValue) {
-<span class="nc" id="L374">            write(clientDatatype, fieldQuery, fieldValue);</span>
-<span class="nc" id="L375">        }</span>
+<span class="nc" id="L382">            write(clientDatatype, fieldQuery, fieldValue);</span>
+<span class="nc" id="L383">        }</span>
     }
 
     private class JsonConsumer&lt;T&gt; extends BaseConsumer&lt;JsonObject&gt; {
@@ -382,18 +390,18 @@ public class PlcConnectionAdapter implements AutoCloseable {
         private Function&lt;JsonObject, String&gt; fieldQueryFn;
         private Function&lt;JsonObject, T&gt; fieldValueFn;
 
-<span class="fc" id="L385">        JsonConsumer(PlcClientDatatype clientDatatype, Function&lt;JsonObject, String&gt; fieldQueryFn, Function&lt;JsonObject, T&gt; fieldValueFn) {</span>
-<span class="fc" id="L386">            this.clientDatatype = clientDatatype;</span>
-<span class="fc" id="L387">            this.fieldQueryFn = fieldQueryFn;</span>
-<span class="fc" id="L388">            this.fieldValueFn = fieldValueFn;</span>
-<span class="fc" id="L389">        }</span>
+<span class="fc" id="L393">        JsonConsumer(PlcClientDatatype clientDatatype, Function&lt;JsonObject, String&gt; fieldQueryFn, Function&lt;JsonObject, T&gt; fieldValueFn) {</span>
+<span class="fc" id="L394">            this.clientDatatype = clientDatatype;</span>
+<span class="fc" id="L395">            this.fieldQueryFn = fieldQueryFn;</span>
+<span class="fc" id="L396">            this.fieldValueFn = fieldValueFn;</span>
+<span class="fc" id="L397">        }</span>
 
         @Override
         public void accept(JsonObject jsonObject) {
-<span class="fc" id="L393">            String fieldQuery = fieldQueryFn.apply(jsonObject);</span>
-<span class="fc" id="L394">            Object fieldValue = fieldValueFn.apply(jsonObject);</span>
-<span class="fc" id="L395">            write(clientDatatype, fieldQuery, fieldValue);</span>
-<span class="fc" id="L396">        }</span>
+<span class="fc" id="L401">            String fieldQuery = fieldQueryFn.apply(jsonObject);</span>
+<span class="fc" id="L402">            Object fieldValue = fieldValueFn.apply(jsonObject);</span>
+<span class="fc" id="L403">            write(clientDatatype, fieldQuery, fieldValue);</span>
+<span class="fc" id="L404">        }</span>
     }
 
 }

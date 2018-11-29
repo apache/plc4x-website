@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -175,13 +175,20 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnectionIT.html#setUp--">setUp</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnectionIT.html#readLargeResponse--">readLargeResponse</a></span>()</code>
+<div class="block">In case of a slow network connection Netty tends to call the IsoOnTcpProtocol decode method
+ prior to reading the full packet.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnectionIT.html#tearDown--">tearDown</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnectionIT.html#setUp--">setUp</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnectionIT.html#tearDown--">tearDown</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnectionIT.html#write--">write</a></span>()</code>&nbsp;</td>
 </tr>
@@ -286,6 +293,27 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <h4>read</h4>
 <pre>public&nbsp;void&nbsp;read()
           throws <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="readLargeResponse--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>readLargeResponse</h4>
+<pre>@Disabled
+public&nbsp;void&nbsp;readLargeResponse()
+                                 throws <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></pre>
+<div class="block">In case of a slow network connection Netty tends to call the IsoOnTcpProtocol decode method
+ prior to reading the full packet. Therefor we usually check if enough bytes have been read.
+ If not we give up and wait for Netty to call again.
+
+ In case of a fast connection with large response sizes it seems that Netty splits up the
+ responses into 512 byte chunks.</div>
 <dl>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></code></dd>

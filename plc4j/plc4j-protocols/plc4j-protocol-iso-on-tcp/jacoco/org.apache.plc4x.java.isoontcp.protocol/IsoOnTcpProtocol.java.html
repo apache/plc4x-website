@@ -20,52 +20,48 @@ package org.apache.plc4x.java.isoontcp.protocol;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.plc4x.java.api.exceptions.PlcProtocolException;
-import org.apache.plc4x.java.base.PlcMessageToMessageCodec;
+import org.apache.plc4x.java.base.PlcByteToMessageCodec;
 import org.apache.plc4x.java.isoontcp.protocol.model.IsoOnTcpMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-<span class="fc" id="L33">public class IsoOnTcpProtocol extends PlcMessageToMessageCodec&lt;ByteBuf, IsoOnTcpMessage&gt; {</span>
+<span class="fc" id="L32">public class IsoOnTcpProtocol extends PlcByteToMessageCodec&lt;IsoOnTcpMessage&gt; {</span>
 
     static final byte ISO_ON_TCP_MAGIC_NUMBER = 0x03;
 
-<span class="fc" id="L37">    private static final Logger logger = LoggerFactory.getLogger(IsoOnTcpProtocol.class);</span>
+<span class="fc" id="L36">    private static final Logger logger = LoggerFactory.getLogger(IsoOnTcpProtocol.class);</span>
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Encoding
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
-    protected void encode(ChannelHandlerContext ctx, IsoOnTcpMessage in, List&lt;Object&gt; out) {
-<span class="fc" id="L45">        logger.debug(&quot;ISO on TCP Message sent&quot;);</span>
+    protected void encode(ChannelHandlerContext ctx, IsoOnTcpMessage in, ByteBuf out) throws Exception {
+<span class="fc" id="L44">        logger.debug(&quot;ISO on TCP Message sent&quot;);</span>
         // At this point of processing all higher levels have already serialized their payload.
         // This data is passed to the lower levels in form of an IoBuffer.
-<span class="fc" id="L48">        final ByteBuf userData = in.getUserData();</span>
+<span class="fc" id="L47">        final ByteBuf userData = in.getUserData();</span>
 
-<span class="fc" id="L50">        int packetSize = userData.readableBytes() + 4;</span>
+<span class="fc" id="L49">        int packetSize = userData.readableBytes() + 4;</span>
 
-<span class="fc" id="L52">        ByteBuf buf = Unpooled.buffer();</span>
         // Version (is always constant 0x03)
-<span class="fc" id="L54">        buf.writeByte(ISO_ON_TCP_MAGIC_NUMBER);</span>
+<span class="fc" id="L52">        out.writeByte(ISO_ON_TCP_MAGIC_NUMBER);</span>
         // Reserved (is always constant 0x00)
-<span class="fc" id="L56">        buf.writeByte((byte) 0x00);</span>
+<span class="fc" id="L54">        out.writeByte((byte) 0x00);</span>
         // Packet length (including ISOonTCP header)
         // (&quot;remaining&quot; returns the number of bytes left to read in this buffer.
         // It is usually set to a read position of 0 and a limit at the end.
         // So in general remaining is equivalent to a non-existing
         // &quot;userData.size()&quot; method.)
-<span class="fc" id="L62">        buf.writeShort((short) packetSize);</span>
+<span class="fc" id="L60">        out.writeShort((short) packetSize);</span>
 
         // Output the payload.
-<span class="fc" id="L65">        buf.writeBytes(userData);</span>
-
-<span class="fc" id="L67">        out.add(buf);</span>
-<span class="fc" id="L68">    }</span>
+<span class="fc" id="L63">        out.writeBytes(userData);</span>
+<span class="fc" id="L64">    }</span>
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Decoding
@@ -73,37 +69,42 @@ import java.util.List;
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List&lt;Object&gt; out) throws Exception {
-<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if(logger.isTraceEnabled()) {</span>
-<span class="fc" id="L77">            logger.trace(&quot;Got Data: {}&quot;, ByteBufUtil.hexDump(in));</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if(logger.isTraceEnabled()) {</span>
+<span class="fc" id="L73">            logger.trace(&quot;Got Data: {}&quot;, ByteBufUtil.hexDump(in));</span>
         }
         // If at least 4 bytes are readable, peek into them (without changing the read position)
         // and get the packet length. Only if the available amount of readable bytes is larger or
         // equal to this, continue processing the rest.
-<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if(in.readableBytes() &gt;= 4) {</span>
-<span class="fc" id="L83">            logger.debug(&quot;ISO on TCP Message received&quot;);</span>
+        /*if(chunkedResponse != null) {
+            chunkedResponse.writeBytes(in);
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        } else*/ if(in.readableBytes() &gt;= 4) {</span>
+<span class="fc" id="L81">            logger.debug(&quot;ISO on TCP Message received&quot;);</span>
             // The ISO on TCP protocol is really simple and in this case the buffer length
             // will take care of the higher levels not reading more than is in the packet.
             // So we just gobble up the header and continue reading in higher levels.
-<span class="fc bfc" id="L87" title="All 2 branches covered.">            if (in.getByte(0) != ISO_ON_TCP_MAGIC_NUMBER) {</span>
-<span class="fc" id="L88">                logger.warn(&quot;Expecting ISO on TCP magic number: {}&quot;, ISO_ON_TCP_MAGIC_NUMBER);</span>
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">                if (logger.isDebugEnabled()) {</span>
-<span class="fc" id="L90">                    logger.debug(&quot;Got Data: {}&quot;, ByteBufUtil.hexDump(in));</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (in.getByte(0) != ISO_ON_TCP_MAGIC_NUMBER) {</span>
+<span class="fc" id="L86">                logger.warn(&quot;Expecting ISO on TCP magic number: {}&quot;, ISO_ON_TCP_MAGIC_NUMBER);</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">                if (logger.isDebugEnabled()) {</span>
+<span class="fc" id="L88">                    logger.debug(&quot;Got Data: {}&quot;, ByteBufUtil.hexDump(in));</span>
                 }
-<span class="fc" id="L92">                exceptionCaught(ctx, new PlcProtocolException(</span>
-<span class="fc" id="L93">                    String.format(&quot;Expecting ISO on TCP magic number: %02X&quot;, ISO_ON_TCP_MAGIC_NUMBER)));</span>
-<span class="fc" id="L94">                return;</span>
+<span class="fc" id="L90">                exceptionCaught(ctx, new PlcProtocolException(</span>
+<span class="fc" id="L91">                    String.format(&quot;Expecting ISO on TCP magic number: %02X&quot;, ISO_ON_TCP_MAGIC_NUMBER)));</span>
+<span class="fc" id="L92">                return;</span>
             }
             // Byte 1 is a reserved byte set to 0x00
-<span class="fc" id="L97">            short packetLength = in.getShort(2);</span>
-<span class="fc bfc" id="L98" title="All 2 branches covered.">            if(in.readableBytes() &gt;= packetLength) {</span>
+<span class="fc" id="L95">            short packetLength = in.getShort(2);</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">            if(in.readableBytes() &gt;= packetLength) {</span>
                 // Skip the 4 bytes we peeked into manually.
-<span class="fc" id="L100">                in.skipBytes(4);</span>
+<span class="fc" id="L98">                in.skipBytes(4);</span>
                 // Simply place the current buffer to the output ... the next handler will continue.
-<span class="fc" id="L102">                ByteBuf payload = in.readBytes(packetLength - 4);</span>
-<span class="fc" id="L103">                out.add(new IsoOnTcpMessage(payload));</span>
+<span class="fc" id="L100">                ByteBuf payload = in.readBytes(packetLength - 4);</span>
+<span class="fc" id="L101">                out.add(new IsoOnTcpMessage(payload));</span>
+            /*} else {
+                chunkedResponse = Unpooled.buffer(packetLength);
+                chunkedResponse.writeBytes(in, packetLength);*/
             }
         }
-<span class="fc" id="L106">    }</span>
+<span class="fc" id="L107">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
