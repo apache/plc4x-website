@@ -399,173 +399,171 @@ import java.util.List;
         Object[] castedValues;
 <span class="pc bpc" id="L400" title="1 of 3 branches missed.">        switch (s7Field.getDataType()) {</span>
             case REAL:
-                // Yes this is actually correct, if I set min to Float.MIN_VALUE (0.0 &lt; Float.MIN_VALUE = true)
-<span class="fc" id="L403">                minValue = (double) -Float.MAX_VALUE;</span>
-<span class="fc" id="L404">                maxValue = (double) Float.MAX_VALUE;</span>
-<span class="fc" id="L405">                fieldType = DefaultFloatFieldItem.class;</span>
-<span class="fc" id="L406">                valueType = Float[].class;</span>
-<span class="fc" id="L407">                castedValues = new Float[values.length];</span>
-<span class="fc" id="L408">                break;</span>
+<span class="fc" id="L402">                minValue = (double) -Float.MAX_VALUE;</span>
+<span class="fc" id="L403">                maxValue = (double) Float.MAX_VALUE;</span>
+<span class="fc" id="L404">                fieldType = DefaultFloatFieldItem.class;</span>
+<span class="fc" id="L405">                valueType = Float[].class;</span>
+<span class="fc" id="L406">                castedValues = new Float[values.length];</span>
+<span class="fc" id="L407">                break;</span>
             case LREAL:
-                // Yes this is actually correct, if I set min to Double.MIN_VALUE (0.0 &lt; Double.MIN_VALUE = true)
-<span class="fc" id="L411">                minValue = -Double.MAX_VALUE;</span>
-<span class="fc" id="L412">                maxValue = Double.MAX_VALUE;</span>
-<span class="fc" id="L413">                fieldType = DefaultDoubleFieldItem.class;</span>
-<span class="fc" id="L414">                valueType = Double[].class;</span>
-<span class="fc" id="L415">                castedValues = new Double[values.length];</span>
-<span class="fc" id="L416">                break;</span>
+<span class="fc" id="L409">                minValue = -Double.MAX_VALUE;</span>
+<span class="fc" id="L410">                maxValue = Double.MAX_VALUE;</span>
+<span class="fc" id="L411">                fieldType = DefaultDoubleFieldItem.class;</span>
+<span class="fc" id="L412">                valueType = Double[].class;</span>
+<span class="fc" id="L413">                castedValues = new Double[values.length];</span>
+<span class="fc" id="L414">                break;</span>
             default:
-<span class="nc" id="L418">                throw new IllegalArgumentException(</span>
-<span class="nc" id="L419">                    &quot;Cannot assign floating point values to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
+<span class="nc" id="L416">                throw new IllegalArgumentException(</span>
+<span class="nc" id="L417">                    &quot;Cannot assign floating point values to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
         }
 
         // Check the constraints
-<span class="fc bfc" id="L423" title="All 2 branches covered.">        for (int i = 0; i &lt; values.length; i++) {</span>
+<span class="fc bfc" id="L421" title="All 2 branches covered.">        for (int i = 0; i &lt; values.length; i++) {</span>
             Double value;
-<span class="fc bfc" id="L425" title="All 2 branches covered.">            if (values[i] instanceof Float) {</span>
-<span class="fc" id="L426">                value = ((Float) values[i]).doubleValue();</span>
-<span class="fc bfc" id="L427" title="All 2 branches covered.">            } else if (values[i] instanceof Double) {</span>
-<span class="fc" id="L428">                value = (Double) values[i];</span>
+<span class="fc bfc" id="L423" title="All 2 branches covered.">            if (values[i] instanceof Float) {</span>
+<span class="fc" id="L424">                value = ((Float) values[i]).doubleValue();</span>
+<span class="fc bfc" id="L425" title="All 2 branches covered.">            } else if (values[i] instanceof Double) {</span>
+<span class="fc" id="L426">                value = (Double) values[i];</span>
             } else {
-<span class="fc" id="L430">                throw new IllegalArgumentException(</span>
-<span class="fc" id="L431">                    &quot;Value of type &quot; + values[i].getClass().getName() +</span>
-<span class="fc" id="L432">                        &quot; is not assignable to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
+<span class="fc" id="L428">                throw new IllegalArgumentException(</span>
+<span class="fc" id="L429">                    &quot;Value of type &quot; + values[i].getClass().getName() +</span>
+<span class="fc" id="L430">                        &quot; is not assignable to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
             }
-<span class="fc bfc" id="L434" title="All 2 branches covered.">            if (value &lt; minValue) {</span>
-<span class="fc" id="L435">                throw new IllegalArgumentException(</span>
+<span class="fc bfc" id="L432" title="All 2 branches covered.">            if (value &lt; minValue) {</span>
+<span class="fc" id="L433">                throw new IllegalArgumentException(</span>
                     &quot;Value of &quot; + value + &quot; exceeds allowed minimum for type &quot;
-<span class="fc" id="L437">                        + s7Field.getDataType().name() + &quot; (min &quot; + minValue.toString() + &quot;)&quot;);</span>
+<span class="fc" id="L435">                        + s7Field.getDataType().name() + &quot; (min &quot; + minValue.toString() + &quot;)&quot;);</span>
             }
-<span class="fc bfc" id="L439" title="All 2 branches covered.">            if (value &gt; maxValue) {</span>
-<span class="fc" id="L440">                throw new IllegalArgumentException(</span>
+<span class="fc bfc" id="L437" title="All 2 branches covered.">            if (value &gt; maxValue) {</span>
+<span class="fc" id="L438">                throw new IllegalArgumentException(</span>
                     &quot;Value of &quot; + value + &quot; exceeds allowed maximum for type &quot;
-<span class="fc" id="L442">                        + s7Field.getDataType().name() + &quot; (max &quot; + maxValue.toString() + &quot;)&quot;);</span>
+<span class="fc" id="L440">                        + s7Field.getDataType().name() + &quot; (max &quot; + maxValue.toString() + &quot;)&quot;);</span>
             }
-<span class="fc bfc" id="L444" title="All 2 branches covered.">            if (valueType == Float[].class) {</span>
-<span class="fc" id="L445">                castedValues[i] = value.floatValue();</span>
+<span class="fc bfc" id="L442" title="All 2 branches covered.">            if (valueType == Float[].class) {</span>
+<span class="fc" id="L443">                castedValues[i] = value.floatValue();</span>
             } else {
-<span class="fc" id="L447">                castedValues[i] = value;</span>
+<span class="fc" id="L445">                castedValues[i] = value;</span>
             }
         }
 
         // Create the field item.
         try {
-<span class="fc" id="L453">            return fieldType.getDeclaredConstructor(valueType).newInstance(new Object[]{castedValues});</span>
-<span class="nc" id="L454">        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {</span>
-<span class="nc" id="L455">            throw new PlcRuntimeException(&quot;Error initializing field class &quot; + fieldType.getSimpleName(), e);</span>
+<span class="fc" id="L451">            return fieldType.getDeclaredConstructor(valueType).newInstance(new Object[]{castedValues});</span>
+<span class="nc" id="L452">        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {</span>
+<span class="nc" id="L453">            throw new PlcRuntimeException(&quot;Error initializing field class &quot; + fieldType.getSimpleName(), e);</span>
         }
     }
 
     private BaseDefaultFieldItem internalEncodeString(PlcField field, Object[] values) {
-<span class="fc" id="L460">        S7Field s7Field = (S7Field) field;</span>
+<span class="fc" id="L458">        S7Field s7Field = (S7Field) field;</span>
 
         // Initialize the constraints.
         int maxLength;
         boolean encoding16Bit;
-<span class="pc bpc" id="L465" title="1 of 5 branches missed.">        switch (s7Field.getDataType()) {</span>
+<span class="pc bpc" id="L463" title="1 of 5 branches missed.">        switch (s7Field.getDataType()) {</span>
             case CHAR:
-<span class="fc" id="L467">                maxLength = 1;</span>
-<span class="fc" id="L468">                encoding16Bit = false;</span>
-<span class="fc" id="L469">                break;</span>
+<span class="fc" id="L465">                maxLength = 1;</span>
+<span class="fc" id="L466">                encoding16Bit = false;</span>
+<span class="fc" id="L467">                break;</span>
             case WCHAR:
-<span class="fc" id="L471">                maxLength = 1;</span>
-<span class="fc" id="L472">                encoding16Bit = true;</span>
-<span class="fc" id="L473">                break;</span>
+<span class="fc" id="L469">                maxLength = 1;</span>
+<span class="fc" id="L470">                encoding16Bit = true;</span>
+<span class="fc" id="L471">                break;</span>
             case STRING:
-<span class="fc" id="L475">                maxLength = 254;</span>
-<span class="fc" id="L476">                encoding16Bit = false;</span>
-<span class="fc" id="L477">                break;</span>
+<span class="fc" id="L473">                maxLength = 254;</span>
+<span class="fc" id="L474">                encoding16Bit = false;</span>
+<span class="fc" id="L475">                break;</span>
             case WSTRING:
-<span class="fc" id="L479">                maxLength = 254;</span>
-<span class="fc" id="L480">                encoding16Bit = true;</span>
-<span class="fc" id="L481">                break;</span>
+<span class="fc" id="L477">                maxLength = 254;</span>
+<span class="fc" id="L478">                encoding16Bit = true;</span>
+<span class="fc" id="L479">                break;</span>
             default:
-<span class="nc" id="L483">                throw new IllegalArgumentException(</span>
-<span class="nc" id="L484">                    &quot;Cannot assign string values to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
+<span class="nc" id="L481">                throw new IllegalArgumentException(</span>
+<span class="nc" id="L482">                    &quot;Cannot assign string values to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
         }
 
         // Check the constraints and create the strings.
-<span class="fc" id="L488">        List&lt;String&gt; stringValues = new LinkedList&lt;&gt;();</span>
-<span class="fc bfc" id="L489" title="All 2 branches covered.">        for (Object value : values) {</span>
-<span class="fc bfc" id="L490" title="All 2 branches covered.">            if (value instanceof String) {</span>
-<span class="fc" id="L491">                String stringValue = (String) value;</span>
-<span class="fc bfc" id="L492" title="All 2 branches covered.">                if (stringValue.length() &gt; maxLength) {</span>
-<span class="fc" id="L493">                    throw new IllegalArgumentException(</span>
-<span class="fc" id="L494">                        &quot;String length &quot; + stringValue.length() + &quot; exceeds allowed maximum for type &quot;</span>
-<span class="fc" id="L495">                            + s7Field.getDataType().name() + &quot; (max &quot; + maxLength + &quot;)&quot;);</span>
+<span class="fc" id="L486">        List&lt;String&gt; stringValues = new LinkedList&lt;&gt;();</span>
+<span class="fc bfc" id="L487" title="All 2 branches covered.">        for (Object value : values) {</span>
+<span class="fc bfc" id="L488" title="All 2 branches covered.">            if (value instanceof String) {</span>
+<span class="fc" id="L489">                String stringValue = (String) value;</span>
+<span class="fc bfc" id="L490" title="All 2 branches covered.">                if (stringValue.length() &gt; maxLength) {</span>
+<span class="fc" id="L491">                    throw new IllegalArgumentException(</span>
+<span class="fc" id="L492">                        &quot;String length &quot; + stringValue.length() + &quot; exceeds allowed maximum for type &quot;</span>
+<span class="fc" id="L493">                            + s7Field.getDataType().name() + &quot; (max &quot; + maxLength + &quot;)&quot;);</span>
                 }
-<span class="fc" id="L497">                stringValues.add(stringValue);</span>
-<span class="fc" id="L498">            }</span>
+<span class="fc" id="L495">                stringValues.add(stringValue);</span>
+<span class="fc" id="L496">            }</span>
             // All other types just translate to max one String character.
-<span class="fc bfc" id="L500" title="All 2 branches covered.">            else if (value instanceof Byte) {</span>
-<span class="fc" id="L501">                Byte byteValue = (Byte) value;</span>
-<span class="fc" id="L502">                byte[] stringBytes = new byte[]{byteValue};</span>
-<span class="fc bfc" id="L503" title="All 2 branches covered.">                if (encoding16Bit) {</span>
-<span class="fc" id="L504">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_16));</span>
+<span class="fc bfc" id="L498" title="All 2 branches covered.">            else if (value instanceof Byte) {</span>
+<span class="fc" id="L499">                Byte byteValue = (Byte) value;</span>
+<span class="fc" id="L500">                byte[] stringBytes = new byte[]{byteValue};</span>
+<span class="fc bfc" id="L501" title="All 2 branches covered.">                if (encoding16Bit) {</span>
+<span class="fc" id="L502">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_16));</span>
                 } else {
-<span class="fc" id="L506">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_8));</span>
+<span class="fc" id="L504">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_8));</span>
                 }
-<span class="fc bfc" id="L508" title="All 2 branches covered.">            } else if (value instanceof Short) {</span>
-<span class="fc" id="L509">                Short shortValue = (Short) value;</span>
-<span class="fc" id="L510">                byte[] stringBytes = new byte[2];</span>
-<span class="fc" id="L511">                stringBytes[0] = (byte) (shortValue &gt;&gt; 8);</span>
-<span class="fc" id="L512">                stringBytes[1] = (byte) (shortValue &amp; 0xFF);</span>
-<span class="fc bfc" id="L513" title="All 2 branches covered.">                if (encoding16Bit) {</span>
-<span class="fc" id="L514">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_16));</span>
+<span class="fc bfc" id="L506" title="All 2 branches covered.">            } else if (value instanceof Short) {</span>
+<span class="fc" id="L507">                Short shortValue = (Short) value;</span>
+<span class="fc" id="L508">                byte[] stringBytes = new byte[2];</span>
+<span class="fc" id="L509">                stringBytes[0] = (byte) (shortValue &gt;&gt; 8);</span>
+<span class="fc" id="L510">                stringBytes[1] = (byte) (shortValue &amp; 0xFF);</span>
+<span class="fc bfc" id="L511" title="All 2 branches covered.">                if (encoding16Bit) {</span>
+<span class="fc" id="L512">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_16));</span>
                 } else {
-<span class="fc" id="L516">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_8));</span>
+<span class="fc" id="L514">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_8));</span>
                 }
-<span class="fc bfc" id="L518" title="All 2 branches covered.">            } else if (value instanceof Integer) {</span>
-<span class="fc" id="L519">                Integer integerValue = (Integer) value;</span>
-<span class="fc" id="L520">                byte[] stringBytes = new byte[4];</span>
-<span class="fc" id="L521">                stringBytes[0] = (byte) ((integerValue &gt;&gt; 24) &amp; 0xFF);</span>
-<span class="fc" id="L522">                stringBytes[1] = (byte) ((integerValue &gt;&gt; 16) &amp; 0xFF);</span>
-<span class="fc" id="L523">                stringBytes[2] = (byte) ((integerValue &gt;&gt; 8) &amp; 0xFF);</span>
-<span class="fc" id="L524">                stringBytes[3] = (byte) (integerValue &amp; 0xFF);</span>
-<span class="fc bfc" id="L525" title="All 2 branches covered.">                if (encoding16Bit) {</span>
-<span class="fc" id="L526">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_16));</span>
+<span class="fc bfc" id="L516" title="All 2 branches covered.">            } else if (value instanceof Integer) {</span>
+<span class="fc" id="L517">                Integer integerValue = (Integer) value;</span>
+<span class="fc" id="L518">                byte[] stringBytes = new byte[4];</span>
+<span class="fc" id="L519">                stringBytes[0] = (byte) ((integerValue &gt;&gt; 24) &amp; 0xFF);</span>
+<span class="fc" id="L520">                stringBytes[1] = (byte) ((integerValue &gt;&gt; 16) &amp; 0xFF);</span>
+<span class="fc" id="L521">                stringBytes[2] = (byte) ((integerValue &gt;&gt; 8) &amp; 0xFF);</span>
+<span class="fc" id="L522">                stringBytes[3] = (byte) (integerValue &amp; 0xFF);</span>
+<span class="fc bfc" id="L523" title="All 2 branches covered.">                if (encoding16Bit) {</span>
+<span class="fc" id="L524">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_16));</span>
                 } else {
-<span class="fc" id="L528">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_8));</span>
+<span class="fc" id="L526">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_8));</span>
                 }
-<span class="fc bfc" id="L530" title="All 2 branches covered.">            } else if (value instanceof Long) {</span>
-<span class="fc" id="L531">                Long longValue = (Long) value;</span>
-<span class="fc" id="L532">                byte[] stringBytes = new byte[8];</span>
-<span class="fc" id="L533">                stringBytes[0] = (byte) ((longValue &gt;&gt; 56) &amp; 0xFF);</span>
-<span class="fc" id="L534">                stringBytes[1] = (byte) ((longValue &gt;&gt; 48) &amp; 0xFF);</span>
-<span class="fc" id="L535">                stringBytes[2] = (byte) ((longValue &gt;&gt; 40) &amp; 0xFF);</span>
-<span class="fc" id="L536">                stringBytes[3] = (byte) ((longValue &gt;&gt; 32) &amp; 0xFF);</span>
-<span class="fc" id="L537">                stringBytes[4] = (byte) ((longValue &gt;&gt; 24) &amp; 0xFF);</span>
-<span class="fc" id="L538">                stringBytes[5] = (byte) ((longValue &gt;&gt; 16) &amp; 0xFF);</span>
-<span class="fc" id="L539">                stringBytes[6] = (byte) ((longValue &gt;&gt; 8) &amp; 0xFF);</span>
-<span class="fc" id="L540">                stringBytes[7] = (byte) (longValue &amp; 0xFF);</span>
-<span class="fc bfc" id="L541" title="All 2 branches covered.">                if (encoding16Bit) {</span>
-<span class="fc" id="L542">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_16));</span>
+<span class="fc bfc" id="L528" title="All 2 branches covered.">            } else if (value instanceof Long) {</span>
+<span class="fc" id="L529">                Long longValue = (Long) value;</span>
+<span class="fc" id="L530">                byte[] stringBytes = new byte[8];</span>
+<span class="fc" id="L531">                stringBytes[0] = (byte) ((longValue &gt;&gt; 56) &amp; 0xFF);</span>
+<span class="fc" id="L532">                stringBytes[1] = (byte) ((longValue &gt;&gt; 48) &amp; 0xFF);</span>
+<span class="fc" id="L533">                stringBytes[2] = (byte) ((longValue &gt;&gt; 40) &amp; 0xFF);</span>
+<span class="fc" id="L534">                stringBytes[3] = (byte) ((longValue &gt;&gt; 32) &amp; 0xFF);</span>
+<span class="fc" id="L535">                stringBytes[4] = (byte) ((longValue &gt;&gt; 24) &amp; 0xFF);</span>
+<span class="fc" id="L536">                stringBytes[5] = (byte) ((longValue &gt;&gt; 16) &amp; 0xFF);</span>
+<span class="fc" id="L537">                stringBytes[6] = (byte) ((longValue &gt;&gt; 8) &amp; 0xFF);</span>
+<span class="fc" id="L538">                stringBytes[7] = (byte) (longValue &amp; 0xFF);</span>
+<span class="fc bfc" id="L539" title="All 2 branches covered.">                if (encoding16Bit) {</span>
+<span class="fc" id="L540">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_16));</span>
                 } else {
-<span class="fc" id="L544">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_8));</span>
+<span class="fc" id="L542">                    stringValues.add(new String(stringBytes, StandardCharsets.UTF_8));</span>
                 }
-<span class="fc" id="L546">            } else {</span>
-<span class="fc" id="L547">                throw new IllegalArgumentException(</span>
-<span class="fc" id="L548">                    &quot;Value of type &quot; + value.getClass().getName() +</span>
-<span class="fc" id="L549">                        &quot; is not assignable to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
+<span class="fc" id="L544">            } else {</span>
+<span class="fc" id="L545">                throw new IllegalArgumentException(</span>
+<span class="fc" id="L546">                    &quot;Value of type &quot; + value.getClass().getName() +</span>
+<span class="fc" id="L547">                        &quot; is not assignable to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
             }
         }
 
         // Create the field item.
-<span class="fc" id="L554">        return new DefaultStringFieldItem(stringValues.toArray(new String[0]));</span>
+<span class="fc" id="L552">        return new DefaultStringFieldItem(stringValues.toArray(new String[0]));</span>
     }
 
     private BaseDefaultFieldItem internalEncodeTemporal(PlcField field, Object[] values) {
-<span class="nc" id="L558">        S7Field s7Field = (S7Field) field;</span>
-<span class="nc bnc" id="L559" title="All 2 branches missed.">        switch (s7Field.getDataType()) {</span>
+<span class="nc" id="L556">        S7Field s7Field = (S7Field) field;</span>
+<span class="nc bnc" id="L557" title="All 2 branches missed.">        switch (s7Field.getDataType()) {</span>
             case TIME:
                 // TODO: I think I should implement this some time ...
             case DATE:
                 // TODO: I think I should implement this some time ...
             case DATE_AND_TIME:
-<span class="nc" id="L565">                return new DefaultLocalDateTimeFieldItem();</span>
+<span class="nc" id="L563">                return new DefaultLocalDateTimeFieldItem();</span>
             default:
-<span class="nc" id="L567">                throw new IllegalArgumentException(</span>
-<span class="nc" id="L568">                    &quot;Cannot assign temporal values to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
+<span class="nc" id="L565">                throw new IllegalArgumentException(</span>
+<span class="nc" id="L566">                    &quot;Cannot assign temporal values to &quot; + s7Field.getDataType().name() + &quot; fields.&quot;);</span>
         }
     }
 

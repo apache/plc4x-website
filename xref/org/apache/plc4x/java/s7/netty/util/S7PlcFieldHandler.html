@@ -407,177 +407,175 @@
 <a class="jxr_linenumber" name="L399" href="#L399">399</a>         Object[] castedValues;
 <a class="jxr_linenumber" name="L400" href="#L400">400</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L401" href="#L401">401</a>             <strong class="jxr_keyword">case</strong> REAL:
-<a class="jxr_linenumber" name="L402" href="#L402">402</a>                 <em class="jxr_comment">// Yes this is actually correct, if I set min to Float.MIN_VALUE (0.0 &lt; Float.MIN_VALUE = true)</em>
-<a class="jxr_linenumber" name="L403" href="#L403">403</a>                 minValue = (<strong class="jxr_keyword">double</strong>) -Float.MAX_VALUE;
-<a class="jxr_linenumber" name="L404" href="#L404">404</a>                 maxValue = (<strong class="jxr_keyword">double</strong>) Float.MAX_VALUE;
-<a class="jxr_linenumber" name="L405" href="#L405">405</a>                 fieldType = DefaultFloatFieldItem.<strong class="jxr_keyword">class</strong>;
-<a class="jxr_linenumber" name="L406" href="#L406">406</a>                 valueType = Float[].<strong class="jxr_keyword">class</strong>;
-<a class="jxr_linenumber" name="L407" href="#L407">407</a>                 castedValues = <strong class="jxr_keyword">new</strong> Float[values.length];
-<a class="jxr_linenumber" name="L408" href="#L408">408</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L409" href="#L409">409</a>             <strong class="jxr_keyword">case</strong> LREAL:
-<a class="jxr_linenumber" name="L410" href="#L410">410</a>                 <em class="jxr_comment">// Yes this is actually correct, if I set min to Double.MIN_VALUE (0.0 &lt; Double.MIN_VALUE = true)</em>
-<a class="jxr_linenumber" name="L411" href="#L411">411</a>                 minValue = -Double.MAX_VALUE;
-<a class="jxr_linenumber" name="L412" href="#L412">412</a>                 maxValue = Double.MAX_VALUE;
-<a class="jxr_linenumber" name="L413" href="#L413">413</a>                 fieldType = DefaultDoubleFieldItem.<strong class="jxr_keyword">class</strong>;
-<a class="jxr_linenumber" name="L414" href="#L414">414</a>                 valueType = Double[].<strong class="jxr_keyword">class</strong>;
-<a class="jxr_linenumber" name="L415" href="#L415">415</a>                 castedValues = <strong class="jxr_keyword">new</strong> Double[values.length];
-<a class="jxr_linenumber" name="L416" href="#L416">416</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L417" href="#L417">417</a>             <strong class="jxr_keyword">default</strong>:
-<a class="jxr_linenumber" name="L418" href="#L418">418</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L419" href="#L419">419</a>                     <span class="jxr_string">"Cannot assign floating point values to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
-<a class="jxr_linenumber" name="L420" href="#L420">420</a>         }
-<a class="jxr_linenumber" name="L421" href="#L421">421</a> 
-<a class="jxr_linenumber" name="L422" href="#L422">422</a>         <em class="jxr_comment">// Check the constraints</em>
-<a class="jxr_linenumber" name="L423" href="#L423">423</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; values.length; i++) {
-<a class="jxr_linenumber" name="L424" href="#L424">424</a>             Double value;
-<a class="jxr_linenumber" name="L425" href="#L425">425</a>             <strong class="jxr_keyword">if</strong> (values[i] instanceof Float) {
-<a class="jxr_linenumber" name="L426" href="#L426">426</a>                 value = ((Float) values[i]).doubleValue();
-<a class="jxr_linenumber" name="L427" href="#L427">427</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (values[i] instanceof Double) {
-<a class="jxr_linenumber" name="L428" href="#L428">428</a>                 value = (Double) values[i];
-<a class="jxr_linenumber" name="L429" href="#L429">429</a>             } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L430" href="#L430">430</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L431" href="#L431">431</a>                     <span class="jxr_string">"Value of type "</span> + values[i].getClass().getName() +
-<a class="jxr_linenumber" name="L432" href="#L432">432</a>                         <span class="jxr_string">" is not assignable to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
-<a class="jxr_linenumber" name="L433" href="#L433">433</a>             }
-<a class="jxr_linenumber" name="L434" href="#L434">434</a>             <strong class="jxr_keyword">if</strong> (value &lt; minValue) {
-<a class="jxr_linenumber" name="L435" href="#L435">435</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L436" href="#L436">436</a>                     <span class="jxr_string">"Value of "</span> + value + <span class="jxr_string">" exceeds allowed minimum for type "</span>
-<a class="jxr_linenumber" name="L437" href="#L437">437</a>                         + s7Field.getDataType().name() + <span class="jxr_string">" (min "</span> + minValue.toString() + <span class="jxr_string">")"</span>);
-<a class="jxr_linenumber" name="L438" href="#L438">438</a>             }
-<a class="jxr_linenumber" name="L439" href="#L439">439</a>             <strong class="jxr_keyword">if</strong> (value &gt; maxValue) {
-<a class="jxr_linenumber" name="L440" href="#L440">440</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L441" href="#L441">441</a>                     <span class="jxr_string">"Value of "</span> + value + <span class="jxr_string">" exceeds allowed maximum for type "</span>
-<a class="jxr_linenumber" name="L442" href="#L442">442</a>                         + s7Field.getDataType().name() + <span class="jxr_string">" (max "</span> + maxValue.toString() + <span class="jxr_string">")"</span>);
-<a class="jxr_linenumber" name="L443" href="#L443">443</a>             }
-<a class="jxr_linenumber" name="L444" href="#L444">444</a>             <strong class="jxr_keyword">if</strong> (valueType == Float[].<strong class="jxr_keyword">class</strong>) {
-<a class="jxr_linenumber" name="L445" href="#L445">445</a>                 castedValues[i] = value.floatValue();
-<a class="jxr_linenumber" name="L446" href="#L446">446</a>             } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L447" href="#L447">447</a>                 castedValues[i] = value;
-<a class="jxr_linenumber" name="L448" href="#L448">448</a>             }
-<a class="jxr_linenumber" name="L449" href="#L449">449</a>         }
-<a class="jxr_linenumber" name="L450" href="#L450">450</a> 
-<a class="jxr_linenumber" name="L451" href="#L451">451</a>         <em class="jxr_comment">// Create the field item.</em>
-<a class="jxr_linenumber" name="L452" href="#L452">452</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L453" href="#L453">453</a>             <strong class="jxr_keyword">return</strong> fieldType.getDeclaredConstructor(valueType).newInstance(<strong class="jxr_keyword">new</strong> Object[]{castedValues});
-<a class="jxr_linenumber" name="L454" href="#L454">454</a>         } <strong class="jxr_keyword">catch</strong> (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-<a class="jxr_linenumber" name="L455" href="#L455">455</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html">PlcRuntimeException</a>(<span class="jxr_string">"Error initializing field class "</span> + fieldType.getSimpleName(), e);
-<a class="jxr_linenumber" name="L456" href="#L456">456</a>         }
-<a class="jxr_linenumber" name="L457" href="#L457">457</a>     }
-<a class="jxr_linenumber" name="L458" href="#L458">458</a> 
-<a class="jxr_linenumber" name="L459" href="#L459">459</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html">BaseDefaultFieldItem</a> internalEncodeString(<a href="../../../../../../../org/apache/plc4x/java/api/model/PlcField.html">PlcField</a> field, Object[] values) {
-<a class="jxr_linenumber" name="L460" href="#L460">460</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
-<a class="jxr_linenumber" name="L461" href="#L461">461</a> 
-<a class="jxr_linenumber" name="L462" href="#L462">462</a>         <em class="jxr_comment">// Initialize the constraints.</em>
-<a class="jxr_linenumber" name="L463" href="#L463">463</a>         <strong class="jxr_keyword">int</strong> maxLength;
-<a class="jxr_linenumber" name="L464" href="#L464">464</a>         <strong class="jxr_keyword">boolean</strong> encoding16Bit;
-<a class="jxr_linenumber" name="L465" href="#L465">465</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
-<a class="jxr_linenumber" name="L466" href="#L466">466</a>             <strong class="jxr_keyword">case</strong> CHAR:
-<a class="jxr_linenumber" name="L467" href="#L467">467</a>                 maxLength = 1;
-<a class="jxr_linenumber" name="L468" href="#L468">468</a>                 encoding16Bit = false;
-<a class="jxr_linenumber" name="L469" href="#L469">469</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L470" href="#L470">470</a>             <strong class="jxr_keyword">case</strong> WCHAR:
-<a class="jxr_linenumber" name="L471" href="#L471">471</a>                 maxLength = 1;
-<a class="jxr_linenumber" name="L472" href="#L472">472</a>                 encoding16Bit = <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="L473" href="#L473">473</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L474" href="#L474">474</a>             <strong class="jxr_keyword">case</strong> STRING:
-<a class="jxr_linenumber" name="L475" href="#L475">475</a>                 maxLength = 254;
-<a class="jxr_linenumber" name="L476" href="#L476">476</a>                 encoding16Bit = false;
-<a class="jxr_linenumber" name="L477" href="#L477">477</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L478" href="#L478">478</a>             <strong class="jxr_keyword">case</strong> WSTRING:
-<a class="jxr_linenumber" name="L479" href="#L479">479</a>                 maxLength = 254;
-<a class="jxr_linenumber" name="L480" href="#L480">480</a>                 encoding16Bit = <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="L481" href="#L481">481</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L482" href="#L482">482</a>             <strong class="jxr_keyword">default</strong>:
-<a class="jxr_linenumber" name="L483" href="#L483">483</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L484" href="#L484">484</a>                     <span class="jxr_string">"Cannot assign string values to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
-<a class="jxr_linenumber" name="L485" href="#L485">485</a>         }
-<a class="jxr_linenumber" name="L486" href="#L486">486</a> 
-<a class="jxr_linenumber" name="L487" href="#L487">487</a>         <em class="jxr_comment">// Check the constraints and create the strings.</em>
-<a class="jxr_linenumber" name="L488" href="#L488">488</a>         List&lt;String&gt; stringValues = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
-<a class="jxr_linenumber" name="L489" href="#L489">489</a>         <strong class="jxr_keyword">for</strong> (Object value : values) {
-<a class="jxr_linenumber" name="L490" href="#L490">490</a>             <strong class="jxr_keyword">if</strong> (value instanceof String) {
-<a class="jxr_linenumber" name="L491" href="#L491">491</a>                 String stringValue = (String) value;
-<a class="jxr_linenumber" name="L492" href="#L492">492</a>                 <strong class="jxr_keyword">if</strong> (stringValue.length() &gt; maxLength) {
-<a class="jxr_linenumber" name="L493" href="#L493">493</a>                     <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L494" href="#L494">494</a>                         <span class="jxr_string">"String length "</span> + stringValue.length() + <span class="jxr_string">" exceeds allowed maximum for type "</span>
-<a class="jxr_linenumber" name="L495" href="#L495">495</a>                             + s7Field.getDataType().name() + <span class="jxr_string">" (max "</span> + maxLength + <span class="jxr_string">")"</span>);
-<a class="jxr_linenumber" name="L496" href="#L496">496</a>                 }
-<a class="jxr_linenumber" name="L497" href="#L497">497</a>                 stringValues.add(stringValue);
-<a class="jxr_linenumber" name="L498" href="#L498">498</a>             }
-<a class="jxr_linenumber" name="L499" href="#L499">499</a>             <em class="jxr_comment">// All other types just translate to max one String character.</em>
-<a class="jxr_linenumber" name="L500" href="#L500">500</a>             <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (value instanceof Byte) {
-<a class="jxr_linenumber" name="L501" href="#L501">501</a>                 Byte byteValue = (Byte) value;
-<a class="jxr_linenumber" name="L502" href="#L502">502</a>                 byte[] stringBytes = <strong class="jxr_keyword">new</strong> byte[]{byteValue};
-<a class="jxr_linenumber" name="L503" href="#L503">503</a>                 <strong class="jxr_keyword">if</strong> (encoding16Bit) {
-<a class="jxr_linenumber" name="L504" href="#L504">504</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_16));
-<a class="jxr_linenumber" name="L505" href="#L505">505</a>                 } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L506" href="#L506">506</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_8));
-<a class="jxr_linenumber" name="L507" href="#L507">507</a>                 }
-<a class="jxr_linenumber" name="L508" href="#L508">508</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (value instanceof Short) {
-<a class="jxr_linenumber" name="L509" href="#L509">509</a>                 Short shortValue = (Short) value;
-<a class="jxr_linenumber" name="L510" href="#L510">510</a>                 byte[] stringBytes = <strong class="jxr_keyword">new</strong> byte[2];
-<a class="jxr_linenumber" name="L511" href="#L511">511</a>                 stringBytes[0] = (byte) (shortValue &gt;&gt; 8);
-<a class="jxr_linenumber" name="L512" href="#L512">512</a>                 stringBytes[1] = (byte) (shortValue &amp; 0xFF);
-<a class="jxr_linenumber" name="L513" href="#L513">513</a>                 <strong class="jxr_keyword">if</strong> (encoding16Bit) {
-<a class="jxr_linenumber" name="L514" href="#L514">514</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_16));
-<a class="jxr_linenumber" name="L515" href="#L515">515</a>                 } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L516" href="#L516">516</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_8));
-<a class="jxr_linenumber" name="L517" href="#L517">517</a>                 }
-<a class="jxr_linenumber" name="L518" href="#L518">518</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (value instanceof Integer) {
-<a class="jxr_linenumber" name="L519" href="#L519">519</a>                 Integer integerValue = (Integer) value;
-<a class="jxr_linenumber" name="L520" href="#L520">520</a>                 byte[] stringBytes = <strong class="jxr_keyword">new</strong> byte[4];
-<a class="jxr_linenumber" name="L521" href="#L521">521</a>                 stringBytes[0] = (byte) ((integerValue &gt;&gt; 24) &amp; 0xFF);
-<a class="jxr_linenumber" name="L522" href="#L522">522</a>                 stringBytes[1] = (byte) ((integerValue &gt;&gt; 16) &amp; 0xFF);
-<a class="jxr_linenumber" name="L523" href="#L523">523</a>                 stringBytes[2] = (byte) ((integerValue &gt;&gt; 8) &amp; 0xFF);
-<a class="jxr_linenumber" name="L524" href="#L524">524</a>                 stringBytes[3] = (byte) (integerValue &amp; 0xFF);
-<a class="jxr_linenumber" name="L525" href="#L525">525</a>                 <strong class="jxr_keyword">if</strong> (encoding16Bit) {
-<a class="jxr_linenumber" name="L526" href="#L526">526</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_16));
-<a class="jxr_linenumber" name="L527" href="#L527">527</a>                 } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L528" href="#L528">528</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_8));
-<a class="jxr_linenumber" name="L529" href="#L529">529</a>                 }
-<a class="jxr_linenumber" name="L530" href="#L530">530</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (value instanceof Long) {
-<a class="jxr_linenumber" name="L531" href="#L531">531</a>                 Long longValue = (Long) value;
-<a class="jxr_linenumber" name="L532" href="#L532">532</a>                 byte[] stringBytes = <strong class="jxr_keyword">new</strong> byte[8];
-<a class="jxr_linenumber" name="L533" href="#L533">533</a>                 stringBytes[0] = (byte) ((longValue &gt;&gt; 56) &amp; 0xFF);
-<a class="jxr_linenumber" name="L534" href="#L534">534</a>                 stringBytes[1] = (byte) ((longValue &gt;&gt; 48) &amp; 0xFF);
-<a class="jxr_linenumber" name="L535" href="#L535">535</a>                 stringBytes[2] = (byte) ((longValue &gt;&gt; 40) &amp; 0xFF);
-<a class="jxr_linenumber" name="L536" href="#L536">536</a>                 stringBytes[3] = (byte) ((longValue &gt;&gt; 32) &amp; 0xFF);
-<a class="jxr_linenumber" name="L537" href="#L537">537</a>                 stringBytes[4] = (byte) ((longValue &gt;&gt; 24) &amp; 0xFF);
-<a class="jxr_linenumber" name="L538" href="#L538">538</a>                 stringBytes[5] = (byte) ((longValue &gt;&gt; 16) &amp; 0xFF);
-<a class="jxr_linenumber" name="L539" href="#L539">539</a>                 stringBytes[6] = (byte) ((longValue &gt;&gt; 8) &amp; 0xFF);
-<a class="jxr_linenumber" name="L540" href="#L540">540</a>                 stringBytes[7] = (byte) (longValue &amp; 0xFF);
-<a class="jxr_linenumber" name="L541" href="#L541">541</a>                 <strong class="jxr_keyword">if</strong> (encoding16Bit) {
-<a class="jxr_linenumber" name="L542" href="#L542">542</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_16));
-<a class="jxr_linenumber" name="L543" href="#L543">543</a>                 } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L544" href="#L544">544</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_8));
-<a class="jxr_linenumber" name="L545" href="#L545">545</a>                 }
-<a class="jxr_linenumber" name="L546" href="#L546">546</a>             } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L547" href="#L547">547</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L548" href="#L548">548</a>                     <span class="jxr_string">"Value of type "</span> + value.getClass().getName() +
-<a class="jxr_linenumber" name="L549" href="#L549">549</a>                         <span class="jxr_string">" is not assignable to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
-<a class="jxr_linenumber" name="L550" href="#L550">550</a>             }
-<a class="jxr_linenumber" name="L551" href="#L551">551</a>         }
-<a class="jxr_linenumber" name="L552" href="#L552">552</a> 
-<a class="jxr_linenumber" name="L553" href="#L553">553</a>         <em class="jxr_comment">// Create the field item.</em>
-<a class="jxr_linenumber" name="L554" href="#L554">554</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/DefaultStringFieldItem.html">DefaultStringFieldItem</a>(stringValues.toArray(<strong class="jxr_keyword">new</strong> String[0]));
-<a class="jxr_linenumber" name="L555" href="#L555">555</a>     }
-<a class="jxr_linenumber" name="L556" href="#L556">556</a> 
-<a class="jxr_linenumber" name="L557" href="#L557">557</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html">BaseDefaultFieldItem</a> internalEncodeTemporal(<a href="../../../../../../../org/apache/plc4x/java/api/model/PlcField.html">PlcField</a> field, Object[] values) {
-<a class="jxr_linenumber" name="L558" href="#L558">558</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
-<a class="jxr_linenumber" name="L559" href="#L559">559</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
-<a class="jxr_linenumber" name="L560" href="#L560">560</a>             <strong class="jxr_keyword">case</strong> TIME:
+<a class="jxr_linenumber" name="L402" href="#L402">402</a>                 minValue = (<strong class="jxr_keyword">double</strong>) -Float.MAX_VALUE;
+<a class="jxr_linenumber" name="L403" href="#L403">403</a>                 maxValue = (<strong class="jxr_keyword">double</strong>) Float.MAX_VALUE;
+<a class="jxr_linenumber" name="L404" href="#L404">404</a>                 fieldType = DefaultFloatFieldItem.<strong class="jxr_keyword">class</strong>;
+<a class="jxr_linenumber" name="L405" href="#L405">405</a>                 valueType = Float[].<strong class="jxr_keyword">class</strong>;
+<a class="jxr_linenumber" name="L406" href="#L406">406</a>                 castedValues = <strong class="jxr_keyword">new</strong> Float[values.length];
+<a class="jxr_linenumber" name="L407" href="#L407">407</a>                 <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L408" href="#L408">408</a>             <strong class="jxr_keyword">case</strong> LREAL:
+<a class="jxr_linenumber" name="L409" href="#L409">409</a>                 minValue = -Double.MAX_VALUE;
+<a class="jxr_linenumber" name="L410" href="#L410">410</a>                 maxValue = Double.MAX_VALUE;
+<a class="jxr_linenumber" name="L411" href="#L411">411</a>                 fieldType = DefaultDoubleFieldItem.<strong class="jxr_keyword">class</strong>;
+<a class="jxr_linenumber" name="L412" href="#L412">412</a>                 valueType = Double[].<strong class="jxr_keyword">class</strong>;
+<a class="jxr_linenumber" name="L413" href="#L413">413</a>                 castedValues = <strong class="jxr_keyword">new</strong> Double[values.length];
+<a class="jxr_linenumber" name="L414" href="#L414">414</a>                 <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L415" href="#L415">415</a>             <strong class="jxr_keyword">default</strong>:
+<a class="jxr_linenumber" name="L416" href="#L416">416</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L417" href="#L417">417</a>                     <span class="jxr_string">"Cannot assign floating point values to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
+<a class="jxr_linenumber" name="L418" href="#L418">418</a>         }
+<a class="jxr_linenumber" name="L419" href="#L419">419</a> 
+<a class="jxr_linenumber" name="L420" href="#L420">420</a>         <em class="jxr_comment">// Check the constraints</em>
+<a class="jxr_linenumber" name="L421" href="#L421">421</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; values.length; i++) {
+<a class="jxr_linenumber" name="L422" href="#L422">422</a>             Double value;
+<a class="jxr_linenumber" name="L423" href="#L423">423</a>             <strong class="jxr_keyword">if</strong> (values[i] instanceof Float) {
+<a class="jxr_linenumber" name="L424" href="#L424">424</a>                 value = ((Float) values[i]).doubleValue();
+<a class="jxr_linenumber" name="L425" href="#L425">425</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (values[i] instanceof Double) {
+<a class="jxr_linenumber" name="L426" href="#L426">426</a>                 value = (Double) values[i];
+<a class="jxr_linenumber" name="L427" href="#L427">427</a>             } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L428" href="#L428">428</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L429" href="#L429">429</a>                     <span class="jxr_string">"Value of type "</span> + values[i].getClass().getName() +
+<a class="jxr_linenumber" name="L430" href="#L430">430</a>                         <span class="jxr_string">" is not assignable to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
+<a class="jxr_linenumber" name="L431" href="#L431">431</a>             }
+<a class="jxr_linenumber" name="L432" href="#L432">432</a>             <strong class="jxr_keyword">if</strong> (value &lt; minValue) {
+<a class="jxr_linenumber" name="L433" href="#L433">433</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L434" href="#L434">434</a>                     <span class="jxr_string">"Value of "</span> + value + <span class="jxr_string">" exceeds allowed minimum for type "</span>
+<a class="jxr_linenumber" name="L435" href="#L435">435</a>                         + s7Field.getDataType().name() + <span class="jxr_string">" (min "</span> + minValue.toString() + <span class="jxr_string">")"</span>);
+<a class="jxr_linenumber" name="L436" href="#L436">436</a>             }
+<a class="jxr_linenumber" name="L437" href="#L437">437</a>             <strong class="jxr_keyword">if</strong> (value &gt; maxValue) {
+<a class="jxr_linenumber" name="L438" href="#L438">438</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L439" href="#L439">439</a>                     <span class="jxr_string">"Value of "</span> + value + <span class="jxr_string">" exceeds allowed maximum for type "</span>
+<a class="jxr_linenumber" name="L440" href="#L440">440</a>                         + s7Field.getDataType().name() + <span class="jxr_string">" (max "</span> + maxValue.toString() + <span class="jxr_string">")"</span>);
+<a class="jxr_linenumber" name="L441" href="#L441">441</a>             }
+<a class="jxr_linenumber" name="L442" href="#L442">442</a>             <strong class="jxr_keyword">if</strong> (valueType == Float[].<strong class="jxr_keyword">class</strong>) {
+<a class="jxr_linenumber" name="L443" href="#L443">443</a>                 castedValues[i] = value.floatValue();
+<a class="jxr_linenumber" name="L444" href="#L444">444</a>             } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L445" href="#L445">445</a>                 castedValues[i] = value;
+<a class="jxr_linenumber" name="L446" href="#L446">446</a>             }
+<a class="jxr_linenumber" name="L447" href="#L447">447</a>         }
+<a class="jxr_linenumber" name="L448" href="#L448">448</a> 
+<a class="jxr_linenumber" name="L449" href="#L449">449</a>         <em class="jxr_comment">// Create the field item.</em>
+<a class="jxr_linenumber" name="L450" href="#L450">450</a>         <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L451" href="#L451">451</a>             <strong class="jxr_keyword">return</strong> fieldType.getDeclaredConstructor(valueType).newInstance(<strong class="jxr_keyword">new</strong> Object[]{castedValues});
+<a class="jxr_linenumber" name="L452" href="#L452">452</a>         } <strong class="jxr_keyword">catch</strong> (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+<a class="jxr_linenumber" name="L453" href="#L453">453</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html">PlcRuntimeException</a>(<span class="jxr_string">"Error initializing field class "</span> + fieldType.getSimpleName(), e);
+<a class="jxr_linenumber" name="L454" href="#L454">454</a>         }
+<a class="jxr_linenumber" name="L455" href="#L455">455</a>     }
+<a class="jxr_linenumber" name="L456" href="#L456">456</a> 
+<a class="jxr_linenumber" name="L457" href="#L457">457</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html">BaseDefaultFieldItem</a> internalEncodeString(<a href="../../../../../../../org/apache/plc4x/java/api/model/PlcField.html">PlcField</a> field, Object[] values) {
+<a class="jxr_linenumber" name="L458" href="#L458">458</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L459" href="#L459">459</a> 
+<a class="jxr_linenumber" name="L460" href="#L460">460</a>         <em class="jxr_comment">// Initialize the constraints.</em>
+<a class="jxr_linenumber" name="L461" href="#L461">461</a>         <strong class="jxr_keyword">int</strong> maxLength;
+<a class="jxr_linenumber" name="L462" href="#L462">462</a>         <strong class="jxr_keyword">boolean</strong> encoding16Bit;
+<a class="jxr_linenumber" name="L463" href="#L463">463</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
+<a class="jxr_linenumber" name="L464" href="#L464">464</a>             <strong class="jxr_keyword">case</strong> CHAR:
+<a class="jxr_linenumber" name="L465" href="#L465">465</a>                 maxLength = 1;
+<a class="jxr_linenumber" name="L466" href="#L466">466</a>                 encoding16Bit = false;
+<a class="jxr_linenumber" name="L467" href="#L467">467</a>                 <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L468" href="#L468">468</a>             <strong class="jxr_keyword">case</strong> WCHAR:
+<a class="jxr_linenumber" name="L469" href="#L469">469</a>                 maxLength = 1;
+<a class="jxr_linenumber" name="L470" href="#L470">470</a>                 encoding16Bit = <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="L471" href="#L471">471</a>                 <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L472" href="#L472">472</a>             <strong class="jxr_keyword">case</strong> STRING:
+<a class="jxr_linenumber" name="L473" href="#L473">473</a>                 maxLength = 254;
+<a class="jxr_linenumber" name="L474" href="#L474">474</a>                 encoding16Bit = false;
+<a class="jxr_linenumber" name="L475" href="#L475">475</a>                 <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L476" href="#L476">476</a>             <strong class="jxr_keyword">case</strong> WSTRING:
+<a class="jxr_linenumber" name="L477" href="#L477">477</a>                 maxLength = 254;
+<a class="jxr_linenumber" name="L478" href="#L478">478</a>                 encoding16Bit = <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="L479" href="#L479">479</a>                 <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L480" href="#L480">480</a>             <strong class="jxr_keyword">default</strong>:
+<a class="jxr_linenumber" name="L481" href="#L481">481</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L482" href="#L482">482</a>                     <span class="jxr_string">"Cannot assign string values to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
+<a class="jxr_linenumber" name="L483" href="#L483">483</a>         }
+<a class="jxr_linenumber" name="L484" href="#L484">484</a> 
+<a class="jxr_linenumber" name="L485" href="#L485">485</a>         <em class="jxr_comment">// Check the constraints and create the strings.</em>
+<a class="jxr_linenumber" name="L486" href="#L486">486</a>         List&lt;String&gt; stringValues = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
+<a class="jxr_linenumber" name="L487" href="#L487">487</a>         <strong class="jxr_keyword">for</strong> (Object value : values) {
+<a class="jxr_linenumber" name="L488" href="#L488">488</a>             <strong class="jxr_keyword">if</strong> (value instanceof String) {
+<a class="jxr_linenumber" name="L489" href="#L489">489</a>                 String stringValue = (String) value;
+<a class="jxr_linenumber" name="L490" href="#L490">490</a>                 <strong class="jxr_keyword">if</strong> (stringValue.length() &gt; maxLength) {
+<a class="jxr_linenumber" name="L491" href="#L491">491</a>                     <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L492" href="#L492">492</a>                         <span class="jxr_string">"String length "</span> + stringValue.length() + <span class="jxr_string">" exceeds allowed maximum for type "</span>
+<a class="jxr_linenumber" name="L493" href="#L493">493</a>                             + s7Field.getDataType().name() + <span class="jxr_string">" (max "</span> + maxLength + <span class="jxr_string">")"</span>);
+<a class="jxr_linenumber" name="L494" href="#L494">494</a>                 }
+<a class="jxr_linenumber" name="L495" href="#L495">495</a>                 stringValues.add(stringValue);
+<a class="jxr_linenumber" name="L496" href="#L496">496</a>             }
+<a class="jxr_linenumber" name="L497" href="#L497">497</a>             <em class="jxr_comment">// All other types just translate to max one String character.</em>
+<a class="jxr_linenumber" name="L498" href="#L498">498</a>             <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (value instanceof Byte) {
+<a class="jxr_linenumber" name="L499" href="#L499">499</a>                 Byte byteValue = (Byte) value;
+<a class="jxr_linenumber" name="L500" href="#L500">500</a>                 byte[] stringBytes = <strong class="jxr_keyword">new</strong> byte[]{byteValue};
+<a class="jxr_linenumber" name="L501" href="#L501">501</a>                 <strong class="jxr_keyword">if</strong> (encoding16Bit) {
+<a class="jxr_linenumber" name="L502" href="#L502">502</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_16));
+<a class="jxr_linenumber" name="L503" href="#L503">503</a>                 } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L504" href="#L504">504</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_8));
+<a class="jxr_linenumber" name="L505" href="#L505">505</a>                 }
+<a class="jxr_linenumber" name="L506" href="#L506">506</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (value instanceof Short) {
+<a class="jxr_linenumber" name="L507" href="#L507">507</a>                 Short shortValue = (Short) value;
+<a class="jxr_linenumber" name="L508" href="#L508">508</a>                 byte[] stringBytes = <strong class="jxr_keyword">new</strong> byte[2];
+<a class="jxr_linenumber" name="L509" href="#L509">509</a>                 stringBytes[0] = (byte) (shortValue &gt;&gt; 8);
+<a class="jxr_linenumber" name="L510" href="#L510">510</a>                 stringBytes[1] = (byte) (shortValue &amp; 0xFF);
+<a class="jxr_linenumber" name="L511" href="#L511">511</a>                 <strong class="jxr_keyword">if</strong> (encoding16Bit) {
+<a class="jxr_linenumber" name="L512" href="#L512">512</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_16));
+<a class="jxr_linenumber" name="L513" href="#L513">513</a>                 } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L514" href="#L514">514</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_8));
+<a class="jxr_linenumber" name="L515" href="#L515">515</a>                 }
+<a class="jxr_linenumber" name="L516" href="#L516">516</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (value instanceof Integer) {
+<a class="jxr_linenumber" name="L517" href="#L517">517</a>                 Integer integerValue = (Integer) value;
+<a class="jxr_linenumber" name="L518" href="#L518">518</a>                 byte[] stringBytes = <strong class="jxr_keyword">new</strong> byte[4];
+<a class="jxr_linenumber" name="L519" href="#L519">519</a>                 stringBytes[0] = (byte) ((integerValue &gt;&gt; 24) &amp; 0xFF);
+<a class="jxr_linenumber" name="L520" href="#L520">520</a>                 stringBytes[1] = (byte) ((integerValue &gt;&gt; 16) &amp; 0xFF);
+<a class="jxr_linenumber" name="L521" href="#L521">521</a>                 stringBytes[2] = (byte) ((integerValue &gt;&gt; 8) &amp; 0xFF);
+<a class="jxr_linenumber" name="L522" href="#L522">522</a>                 stringBytes[3] = (byte) (integerValue &amp; 0xFF);
+<a class="jxr_linenumber" name="L523" href="#L523">523</a>                 <strong class="jxr_keyword">if</strong> (encoding16Bit) {
+<a class="jxr_linenumber" name="L524" href="#L524">524</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_16));
+<a class="jxr_linenumber" name="L525" href="#L525">525</a>                 } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L526" href="#L526">526</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_8));
+<a class="jxr_linenumber" name="L527" href="#L527">527</a>                 }
+<a class="jxr_linenumber" name="L528" href="#L528">528</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (value instanceof Long) {
+<a class="jxr_linenumber" name="L529" href="#L529">529</a>                 Long longValue = (Long) value;
+<a class="jxr_linenumber" name="L530" href="#L530">530</a>                 byte[] stringBytes = <strong class="jxr_keyword">new</strong> byte[8];
+<a class="jxr_linenumber" name="L531" href="#L531">531</a>                 stringBytes[0] = (byte) ((longValue &gt;&gt; 56) &amp; 0xFF);
+<a class="jxr_linenumber" name="L532" href="#L532">532</a>                 stringBytes[1] = (byte) ((longValue &gt;&gt; 48) &amp; 0xFF);
+<a class="jxr_linenumber" name="L533" href="#L533">533</a>                 stringBytes[2] = (byte) ((longValue &gt;&gt; 40) &amp; 0xFF);
+<a class="jxr_linenumber" name="L534" href="#L534">534</a>                 stringBytes[3] = (byte) ((longValue &gt;&gt; 32) &amp; 0xFF);
+<a class="jxr_linenumber" name="L535" href="#L535">535</a>                 stringBytes[4] = (byte) ((longValue &gt;&gt; 24) &amp; 0xFF);
+<a class="jxr_linenumber" name="L536" href="#L536">536</a>                 stringBytes[5] = (byte) ((longValue &gt;&gt; 16) &amp; 0xFF);
+<a class="jxr_linenumber" name="L537" href="#L537">537</a>                 stringBytes[6] = (byte) ((longValue &gt;&gt; 8) &amp; 0xFF);
+<a class="jxr_linenumber" name="L538" href="#L538">538</a>                 stringBytes[7] = (byte) (longValue &amp; 0xFF);
+<a class="jxr_linenumber" name="L539" href="#L539">539</a>                 <strong class="jxr_keyword">if</strong> (encoding16Bit) {
+<a class="jxr_linenumber" name="L540" href="#L540">540</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_16));
+<a class="jxr_linenumber" name="L541" href="#L541">541</a>                 } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L542" href="#L542">542</a>                     stringValues.add(<strong class="jxr_keyword">new</strong> String(stringBytes, StandardCharsets.UTF_8));
+<a class="jxr_linenumber" name="L543" href="#L543">543</a>                 }
+<a class="jxr_linenumber" name="L544" href="#L544">544</a>             } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L545" href="#L545">545</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L546" href="#L546">546</a>                     <span class="jxr_string">"Value of type "</span> + value.getClass().getName() +
+<a class="jxr_linenumber" name="L547" href="#L547">547</a>                         <span class="jxr_string">" is not assignable to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
+<a class="jxr_linenumber" name="L548" href="#L548">548</a>             }
+<a class="jxr_linenumber" name="L549" href="#L549">549</a>         }
+<a class="jxr_linenumber" name="L550" href="#L550">550</a> 
+<a class="jxr_linenumber" name="L551" href="#L551">551</a>         <em class="jxr_comment">// Create the field item.</em>
+<a class="jxr_linenumber" name="L552" href="#L552">552</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/DefaultStringFieldItem.html">DefaultStringFieldItem</a>(stringValues.toArray(<strong class="jxr_keyword">new</strong> String[0]));
+<a class="jxr_linenumber" name="L553" href="#L553">553</a>     }
+<a class="jxr_linenumber" name="L554" href="#L554">554</a> 
+<a class="jxr_linenumber" name="L555" href="#L555">555</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html">BaseDefaultFieldItem</a> internalEncodeTemporal(<a href="../../../../../../../org/apache/plc4x/java/api/model/PlcField.html">PlcField</a> field, Object[] values) {
+<a class="jxr_linenumber" name="L556" href="#L556">556</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L557" href="#L557">557</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
+<a class="jxr_linenumber" name="L558" href="#L558">558</a>             <strong class="jxr_keyword">case</strong> TIME:
+<a class="jxr_linenumber" name="L559" href="#L559">559</a>                 <em class="jxr_comment">// TODO: I think I should implement this some time ...</em>
+<a class="jxr_linenumber" name="L560" href="#L560">560</a>             <strong class="jxr_keyword">case</strong> DATE:
 <a class="jxr_linenumber" name="L561" href="#L561">561</a>                 <em class="jxr_comment">// TODO: I think I should implement this some time ...</em>
-<a class="jxr_linenumber" name="L562" href="#L562">562</a>             <strong class="jxr_keyword">case</strong> DATE:
-<a class="jxr_linenumber" name="L563" href="#L563">563</a>                 <em class="jxr_comment">// TODO: I think I should implement this some time ...</em>
-<a class="jxr_linenumber" name="L564" href="#L564">564</a>             <strong class="jxr_keyword">case</strong> DATE_AND_TIME:
-<a class="jxr_linenumber" name="L565" href="#L565">565</a>                 <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/DefaultLocalDateTimeFieldItem.html">DefaultLocalDateTimeFieldItem</a>();
-<a class="jxr_linenumber" name="L566" href="#L566">566</a>             <strong class="jxr_keyword">default</strong>:
-<a class="jxr_linenumber" name="L567" href="#L567">567</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
-<a class="jxr_linenumber" name="L568" href="#L568">568</a>                     <span class="jxr_string">"Cannot assign temporal values to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
-<a class="jxr_linenumber" name="L569" href="#L569">569</a>         }
-<a class="jxr_linenumber" name="L570" href="#L570">570</a>     }
-<a class="jxr_linenumber" name="L571" href="#L571">571</a> 
-<a class="jxr_linenumber" name="L572" href="#L572">572</a> }
+<a class="jxr_linenumber" name="L562" href="#L562">562</a>             <strong class="jxr_keyword">case</strong> DATE_AND_TIME:
+<a class="jxr_linenumber" name="L563" href="#L563">563</a>                 <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/DefaultLocalDateTimeFieldItem.html">DefaultLocalDateTimeFieldItem</a>();
+<a class="jxr_linenumber" name="L564" href="#L564">564</a>             <strong class="jxr_keyword">default</strong>:
+<a class="jxr_linenumber" name="L565" href="#L565">565</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(
+<a class="jxr_linenumber" name="L566" href="#L566">566</a>                     <span class="jxr_string">"Cannot assign temporal values to "</span> + s7Field.getDataType().name() + <span class="jxr_string">" fields."</span>);
+<a class="jxr_linenumber" name="L567" href="#L567">567</a>         }
+<a class="jxr_linenumber" name="L568" href="#L568">568</a>     }
+<a class="jxr_linenumber" name="L569" href="#L569">569</a> 
+<a class="jxr_linenumber" name="L570" href="#L570">570</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017&#x2013;2018 <a href="https://www.apache.org/">The Apache Software Foundation</a>. All rights reserved.</div>
