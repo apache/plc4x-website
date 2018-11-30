@@ -404,35 +404,37 @@ public class DefaultS7MessageProcessor implements S7MessageProcessor {
                     // Initialize the current size, this will be lower than the original, as the only
                     // way to have different count, is if the request was split up.
 <span class="fc" id="L406">                    int curSize = responseParameterItem.getNumElements();</span>
+<span class="fc" id="L407">                    int curSizeInBytes = curSize * requestItem.getDataType().getSizeInBytes();</span>
 
                     // Now iterate over the succeeding pairs of parameters and payloads till we have
                     // found the original number of elements.
-<span class="fc bfc" id="L410" title="All 2 branches covered.">                    while(curSize &lt; totalSizeInBytes) {</span>
-<span class="fc" id="L411">                        responseOffset++;</span>
+<span class="fc bfc" id="L411" title="All 2 branches covered.">                    while(curSizeInBytes &lt; totalSizeInBytes) {</span>
+<span class="fc" id="L412">                        responseOffset++;</span>
                         // No need to process the parameters, we only need them to get the number of items.
-<span class="fc" id="L413">                        responseParameterItem = (S7AnyVarParameterItem) parameterItems.get(i + responseOffset);</span>
-<span class="fc" id="L414">                        curSize += responseParameterItem.getNumElements();</span>
+<span class="fc" id="L414">                        responseParameterItem = (S7AnyVarParameterItem) parameterItems.get(i + responseOffset);</span>
+<span class="fc" id="L415">                        curSize += responseParameterItem.getNumElements();</span>
+<span class="fc" id="L416">                        curSizeInBytes = curSize * requestItem.getDataType().getSizeInBytes();</span>
 
                         // Get the next payload item in the list.
-<span class="fc" id="L417">                        responsePayloadItem = payloadItems.get(i + responseOffset);</span>
+<span class="fc" id="L419">                        responsePayloadItem = payloadItems.get(i + responseOffset);</span>
 
                         // Copy the data of this item behind the previous content.
-<span class="fc" id="L420">                        System.arraycopy(responsePayloadItem.getData(), 0, data, dataOffset, responsePayloadItem.getData().length);</span>
-<span class="fc" id="L421">                        dataOffset += responsePayloadItem.getData().length;</span>
+<span class="fc" id="L422">                        System.arraycopy(responsePayloadItem.getData(), 0, data, dataOffset, responsePayloadItem.getData().length);</span>
+<span class="fc" id="L423">                        dataOffset += responsePayloadItem.getData().length;</span>
                     }
 
-<span class="fc" id="L424">                    mergedPayloadItems.add(new VarPayloadItem(DataTransportErrorCode.OK,</span>
-<span class="fc" id="L425">                        responsePayloadItem.getDataTransportSize(), data));</span>
-<span class="fc" id="L426">                } else {</span>
-<span class="fc" id="L427">                    mergedPayloadItems.add(responsePayloadItem);</span>
+<span class="fc" id="L426">                    mergedPayloadItems.add(new VarPayloadItem(DataTransportErrorCode.OK,</span>
+<span class="fc" id="L427">                        responsePayloadItem.getDataTransportSize(), data));</span>
+<span class="fc" id="L428">                } else {</span>
+<span class="fc" id="L429">                    mergedPayloadItems.add(responsePayloadItem);</span>
                 }
             }
 
-<span class="fc" id="L431">            s7Parameters.add(new VarParameter(varParameter.getType(), mergedParameterItems));</span>
-<span class="fc" id="L432">            s7Payloads.add(new VarPayload(varParameter.getType(), mergedPayloadItems));</span>
+<span class="fc" id="L433">            s7Parameters.add(new VarParameter(varParameter.getType(), mergedParameterItems));</span>
+<span class="fc" id="L434">            s7Payloads.add(new VarPayload(varParameter.getType(), mergedPayloadItems));</span>
         }
         // TODO: The error codes are wrong
-<span class="fc" id="L435">        return new S7ResponseMessage(messageType, tpduReference, s7Parameters, s7Payloads, (byte) 0xFF, (byte) 0xFF);</span>
+<span class="fc" id="L437">        return new S7ResponseMessage(messageType, tpduReference, s7Parameters, s7Payloads, (byte) 0xFF, (byte) 0xFF);</span>
     }
 
     static class S7CompositeRequestMessage implements PlcProtocolMessage {
@@ -441,15 +443,15 @@ public class DefaultS7MessageProcessor implements S7MessageProcessor {
         private List&lt;S7RequestMessage&gt; requestMessages;
         private List&lt;S7ResponseMessage&gt; responseMessages;
 
-<span class="fc" id="L444">        S7CompositeRequestMessage(S7RequestMessage originalRequest) {</span>
-<span class="fc" id="L445">            this.originalRequest = originalRequest;</span>
-<span class="fc" id="L446">            this.requestMessages = new LinkedList&lt;&gt;();</span>
-<span class="fc" id="L447">            this.responseMessages = new LinkedList&lt;&gt;();</span>
-<span class="fc" id="L448">        }</span>
+<span class="fc" id="L446">        S7CompositeRequestMessage(S7RequestMessage originalRequest) {</span>
+<span class="fc" id="L447">            this.originalRequest = originalRequest;</span>
+<span class="fc" id="L448">            this.requestMessages = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L449">            this.responseMessages = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L450">        }</span>
 
         @Override
         public PlcProtocolMessage getParent() {
-<span class="nc" id="L452">            return originalRequest;</span>
+<span class="nc" id="L454">            return originalRequest;</span>
         }
 
         /**
@@ -458,28 +460,28 @@ public class DefaultS7MessageProcessor implements S7MessageProcessor {
          * @return true if all children are acknowledged.
          */
         private boolean isAcknowledged() {
-<span class="fc bfc" id="L461" title="All 2 branches covered.">            for (S7RequestMessage requestMessage : requestMessages) {</span>
-<span class="fc bfc" id="L462" title="All 2 branches covered.">                if(!requestMessage.isAcknowledged()) {</span>
-<span class="fc" id="L463">                    return false;</span>
+<span class="fc bfc" id="L463" title="All 2 branches covered.">            for (S7RequestMessage requestMessage : requestMessages) {</span>
+<span class="fc bfc" id="L464" title="All 2 branches covered.">                if(!requestMessage.isAcknowledged()) {</span>
+<span class="fc" id="L465">                    return false;</span>
                 }
-<span class="fc" id="L465">            }</span>
-<span class="fc" id="L466">            return true;</span>
+<span class="fc" id="L467">            }</span>
+<span class="fc" id="L468">            return true;</span>
         }
 
         void addRequestMessage(S7RequestMessage requestMessage) {
-<span class="fc" id="L470">            requestMessages.add(requestMessage);</span>
-<span class="fc" id="L471">        }</span>
+<span class="fc" id="L472">            requestMessages.add(requestMessage);</span>
+<span class="fc" id="L473">        }</span>
 
         public List&lt;S7RequestMessage&gt; getRequestMessages() {
-<span class="fc" id="L474">            return requestMessages;</span>
+<span class="fc" id="L476">            return requestMessages;</span>
         }
 
         private void addResponseMessage(S7ResponseMessage responseMessage) {
-<span class="fc" id="L478">            responseMessages.add(responseMessage);</span>
-<span class="fc" id="L479">        }</span>
+<span class="fc" id="L480">            responseMessages.add(responseMessage);</span>
+<span class="fc" id="L481">        }</span>
 
         public List&lt;S7ResponseMessage&gt; getResponseMessages() {
-<span class="fc" id="L482">            return responseMessages;</span>
+<span class="fc" id="L484">            return responseMessages;</span>
         }
     }
 
