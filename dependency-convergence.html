@@ -202,6 +202,7 @@
                                               <li><a href="#_toc_com101teczkclient1" title="com.101tec:zkclient">com.101tec:zkclient</a></li>
                 <li><a href="#_toc_comfasterxmljacksoncorejackson-annotations1" title="com.fasterxml.jackson.core:jackson-annotations">com.fasterxml.jackson.core:jackson-annotations</a></li>
                 <li><a href="#_toc_comgithubjnrjnr-ffi1" title="com.github.jnr:jnr-ffi">com.github.jnr:jnr-ffi</a></li>
+                <li><a href="#_toc_comgooglecodefindbugsjsr3051" title="com.google.code.findbugs:jsr305">com.google.code.findbugs:jsr305</a></li>
                 <li><a href="#_toc_comsquareupokhttp3okhttp1" title="com.squareup.okhttp3:okhttp">com.squareup.okhttp3:okhttp</a></li>
                 <li><a href="#_toc_log4jlog4j1" title="log4j:log4j">log4j:log4j</a></li>
                 <li><a href="#_toc_netbytebuddybyte-buddy1" title="net.bytebuddy:byte-buddy">net.bytebuddy:byte-buddy</a></li>
@@ -253,15 +254,15 @@
    </tr> 
    <tr class="a"> 
     <th>Number of dependencies (NOD):</th> 
-    <td>264</td> 
+    <td>266</td> 
    </tr> 
    <tr class="b"> 
     <th>Number of unique artifacts (NOA):</th> 
-    <td>322</td> 
+    <td>323</td> 
    </tr> 
    <tr class="a"> 
     <th>Number of version-conflicting artifacts (NOC):</th> 
-    <td>13</td> 
+    <td>14</td> 
    </tr> 
    <tr class="b"> 
     <th>Number of SNAPSHOT artifacts (NOS):</th> 
@@ -269,7 +270,7 @@
    </tr> 
    <tr class="a"> 
     <th>Convergence (NOD/NOA):</th> 
-    <td><i class="glyphicon glyphicon-exclamation-sign"></i>&nbsp;<b>81 %</b></td> 
+    <td><i class="glyphicon glyphicon-exclamation-sign"></i>&nbsp;<b>82 %</b></td> 
    </tr> 
    <tr class="b"> 
     <th>Ready for release (100% convergence and no SNAPSHOTS):</th> 
@@ -374,7 +375,7 @@
   </table> 
  </div> 
  <div class="section"> 
-  <h4 id="_toc_comsquareupokhttp3okhttp1">com.squareup.okhttp3:okhttp</h4> 
+  <h4 id="_toc_comgooglecodefindbugsjsr3051">com.google.code.findbugs:jsr305</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
     <tr class="b"> 
@@ -383,6 +384,37 @@
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
         <tr class="a"> 
+         <td width="25%">3.0.0</td> 
+         <td> 
+          <ol style="list-style-type: decimal"> 
+           <li>org.apache.plc4x:plc4j-driver-ethernet-ip:jar:0.3.0-SNAPSHOT<br>+-&nbsp;org.apache.plc4x:plc4j-protocol-ethernet-ip:jar:0.3.0-SNAPSHOT:compile<br>|&nbsp;&nbsp;\-&nbsp;com.digitalpetri.enip:enip-core:jar:1.2.0:compile<br>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(com.google.code.findbugs:jsr305:jar:3.0.0:compile - omitted for duplicate)<br>+-&nbsp;com.digitalpetri.enip:cip-core:jar:1.2.0:compile<br>|&nbsp;&nbsp;\-&nbsp;com.google.code.findbugs:jsr305:jar:3.0.0:compile<br>+-&nbsp;com.digitalpetri.enip:enip-client:jar:1.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;(com.google.code.findbugs:jsr305:jar:3.0.0:test - omitted for duplicate)<br>\-&nbsp;com.digitalpetri.enip:cip-client:jar:1.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(com.google.code.findbugs:jsr305:jar:3.0.0:test - omitted for duplicate)<br></li> 
+           <br> 
+          </ol></td> 
+        </tr> 
+        <tr class="b"> 
+         <td width="25%">3.0.2</td> 
+         <td> 
+          <ol style="list-style-type: decimal"> 
+           <li>org.apache.plc4x:plc4j-driver-ethernet-ip:jar:0.3.0-SNAPSHOT<br>\-&nbsp;com.digitalpetri.enip:enip-client:jar:1.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;com.google.guava:guava:jar:27.0.1-jre:test (version managed from 18.0)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(com.google.code.findbugs:jsr305:jar:3.0.2:test - omitted for conflict with 3.0.0)<br></li> 
+           <br> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="_toc_comsquareupokhttp3okhttp1">com.squareup.okhttp3:okhttp</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
          <td width="25%">3.10.0</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -390,7 +422,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">3.11.0</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -408,12 +440,12 @@
   <h4 id="_toc_log4jlog4j1">log4j:log4j</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.2.16</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -421,7 +453,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">1.2.17</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -439,12 +471,12 @@
   <h4 id="_toc_netbytebuddybyte-buddy1">net.bytebuddy:byte-buddy</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">1.8.15</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -454,7 +486,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.8.21</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -474,12 +506,12 @@
   <h4 id="_toc_orgapachelogginglog4jlog4j-api1">org.apache.logging.log4j:log4j-api</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">2.11.1</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -487,7 +519,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">2.7</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -505,12 +537,12 @@
   <h4 id="_toc_orgcodehausgroovygroovy1">org.codehaus.groovy:groovy</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">2.0.8</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -522,7 +554,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">2.5.2</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -534,7 +566,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">2.5.3</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -556,12 +588,12 @@
   <h4 id="_toc_orgcodehausgroovygroovy-json1">org.codehaus.groovy:groovy-json</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">2.0.8</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -573,7 +605,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">2.5.2</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -595,12 +627,12 @@
   <h4 id="_toc_orgcodehausgroovygroovy-templates1">org.codehaus.groovy:groovy-templates</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">2.0.8</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -612,7 +644,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">2.5.2</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -634,12 +666,12 @@
   <h4 id="_toc_orgcodehausgroovygroovy-xml1">org.codehaus.groovy:groovy-xml</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">2.0.8</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -651,7 +683,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">2.5.2</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -673,12 +705,12 @@
   <h4 id="_toc_orgjunitplatformjunit-platform-engine1">org.junit.platform:junit-platform-engine</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.2.0</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -758,7 +790,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">1.3.1</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -848,12 +880,12 @@
   <h4 id="_toc_orgslf4jslf4j-log4j121">org.slf4j:slf4j-log4j12</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">1.7.21</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -861,7 +893,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.7.25</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -879,12 +911,12 @@
   <h4 id="_toc_orgapacheplc4xplc4j-protocol-test1">org.apache.plc4x:plc4j-protocol-test</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">0.3.0-SNAPSHOT</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -902,12 +934,12 @@
   <h4 id="_toc_orgmqttbeemqtt-bee1">org.mqttbee:mqtt-bee</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.0.0-SNAPSHOT</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
