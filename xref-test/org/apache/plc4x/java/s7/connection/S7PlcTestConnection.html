@@ -32,16 +32,16 @@
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">import</strong> org.apache.commons.io.IOUtils;
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> org.apache.plc4x.java.base.connection.TestChannelFactory;
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> org.pcap4j.core.NotOpenException;
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> org.pcap4j.core.PcapHandle;
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> org.pcap4j.core.PcapNativeException;
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> org.pcap4j.core.Pcaps;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> org.pcap4j.packet.Packet;
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.io.EOFException;
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.io.File;
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> java.io.InputStream;
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> org.junit.jupiter.api.TestInfo;
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> org.pcap4j.core.*;
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> org.pcap4j.packet.Packet;
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> org.pcap4j.packet.namednumber.DataLinkType;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.io.EOFException;
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.io.File;
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> java.io.InputStream;
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> java.lang.reflect.Method;
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> java.util.Arrays;
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <strong class="jxr_keyword">import</strong> java.util.Objects;
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.TimeoutException;
@@ -168,39 +168,48 @@
 <a class="jxr_linenumber" name="L160" href="#L160">160</a>         }
 <a class="jxr_linenumber" name="L161" href="#L161">161</a>     }
 <a class="jxr_linenumber" name="L162" href="#L162">162</a> 
-<a class="jxr_linenumber" name="L163" href="#L163">163</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> verifyPcapFile(String filename) {
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> verifyPcapFile(String filename, TestInfo testInfo) {
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L165" href="#L165">165</a>             ClassLoader classLoader = getClass().getClassLoader();
 <a class="jxr_linenumber" name="L166" href="#L166">166</a>             File file = <strong class="jxr_keyword">new</strong> File(Objects.requireNonNull(classLoader.getResource(filename)).getFile());
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>             PcapHandle responsePcap = Pcaps.openOffline(file.getAbsolutePath());
 <a class="jxr_linenumber" name="L168" href="#L168">168</a>             Packet packet = responsePcap.getNextPacketEx();
-<a class="jxr_linenumber" name="L169" href="#L169">169</a>             byte[] actData = packet.getPayload().getPayload().getPayload().getRawData();
+<a class="jxr_linenumber" name="L169" href="#L169">169</a>             byte[] refData = packet.getPayload().getPayload().getPayload().getRawData();
 <a class="jxr_linenumber" name="L170" href="#L170">170</a> 
 <a class="jxr_linenumber" name="L171" href="#L171">171</a>             <em class="jxr_comment">// Get the systems output.</em>
 <a class="jxr_linenumber" name="L172" href="#L172">172</a>             EmbeddedChannel channel = (EmbeddedChannel) getChannel();
 <a class="jxr_linenumber" name="L173" href="#L173">173</a>             ByteBuf request = channel.readOutbound();
 <a class="jxr_linenumber" name="L174" href="#L174">174</a> 
 <a class="jxr_linenumber" name="L175" href="#L175">175</a>             <em class="jxr_comment">// Check the sizes are equal.</em>
-<a class="jxr_linenumber" name="L176" href="#L176">176</a>             assertThat(actData.length, equalTo(request.readableBytes()));
+<a class="jxr_linenumber" name="L176" href="#L176">176</a>             assertThat(refData.length, equalTo(request.readableBytes()));
 <a class="jxr_linenumber" name="L177" href="#L177">177</a> 
 <a class="jxr_linenumber" name="L178" href="#L178">178</a>             <em class="jxr_comment">// Read the raw data sent to the output.</em>
-<a class="jxr_linenumber" name="L179" href="#L179">179</a>             byte[] refData = <strong class="jxr_keyword">new</strong> byte[request.readableBytes()];
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>             request.readBytes(refData);
+<a class="jxr_linenumber" name="L179" href="#L179">179</a>             byte[] actData = <strong class="jxr_keyword">new</strong> byte[request.readableBytes()];
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>             request.readBytes(actData);
 <a class="jxr_linenumber" name="L181" href="#L181">181</a> 
 <a class="jxr_linenumber" name="L182" href="#L182">182</a>             <em class="jxr_comment">// Compare the actual output to the reference output</em>
 <a class="jxr_linenumber" name="L183" href="#L183">183</a>             <strong class="jxr_keyword">if</strong>(!Arrays.equals(actData, refData)) {
-<a class="jxr_linenumber" name="L184" href="#L184">184</a>                 <strong class="jxr_keyword">for</strong>(<strong class="jxr_keyword">int</strong> i = 0; i &lt; actData.length; i++) {
-<a class="jxr_linenumber" name="L185" href="#L185">185</a>                     <strong class="jxr_keyword">if</strong>(actData[i] != refData[i]) {
-<a class="jxr_linenumber" name="L186" href="#L186">186</a>                         fail(<span class="jxr_string">"Mismatch at position "</span> + i);
-<a class="jxr_linenumber" name="L187" href="#L187">187</a>                     }
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>                 }
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>             }
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>         } <strong class="jxr_keyword">catch</strong> (PcapNativeException | EOFException | TimeoutException | NotOpenException e) {
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> RuntimeException(<span class="jxr_string">"Error sending pacap file "</span> + filename, e);
-<a class="jxr_linenumber" name="L192" href="#L192">192</a>         }
-<a class="jxr_linenumber" name="L193" href="#L193">193</a>     }
-<a class="jxr_linenumber" name="L194" href="#L194">194</a> 
-<a class="jxr_linenumber" name="L195" href="#L195">195</a> }
+<a class="jxr_linenumber" name="L184" href="#L184">184</a>                 String currentWorkingDir = System.getProperty(<span class="jxr_string">"user.dir"</span>);
+<a class="jxr_linenumber" name="L185" href="#L185">185</a>                 Class&lt;?&gt; testClass = testInfo.getTestClass().orElse(Object.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L186" href="#L186">186</a>                 Method testMethod = testInfo.getTestMethod().orElse(<strong class="jxr_keyword">null</strong>);
+<a class="jxr_linenumber" name="L187" href="#L187">187</a>                 String fileName = currentWorkingDir + <span class="jxr_string">"/target/failsafe-reports/failure-"</span> + testClass.getSimpleName() + <span class="jxr_string">"-"</span>  + testMethod.getName() + <span class="jxr_string">".pcapng"</span>;
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>                 <strong class="jxr_keyword">try</strong> (PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, 65536)) {
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>                     PcapDumper dumper = handle.dumpOpen(fileName);
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>                     dumper.dumpRaw(actData);
+<a class="jxr_linenumber" name="L191" href="#L191">191</a>                     dumper.flush();
+<a class="jxr_linenumber" name="L192" href="#L192">192</a>                 }
+<a class="jxr_linenumber" name="L193" href="#L193">193</a>                 <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; actData.length; i++) {
+<a class="jxr_linenumber" name="L194" href="#L194">194</a>                     <strong class="jxr_keyword">if</strong> (actData[i] != refData[i]) {
+<a class="jxr_linenumber" name="L195" href="#L195">195</a>                         fail(<span class="jxr_string">"Mismatch at position "</span> + i);
+<a class="jxr_linenumber" name="L196" href="#L196">196</a>                     }
+<a class="jxr_linenumber" name="L197" href="#L197">197</a>                 }
+<a class="jxr_linenumber" name="L198" href="#L198">198</a>             }
+<a class="jxr_linenumber" name="L199" href="#L199">199</a>         } <strong class="jxr_keyword">catch</strong> (Exception e) {
+<a class="jxr_linenumber" name="L200" href="#L200">200</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> RuntimeException(<span class="jxr_string">"Error sending pacap file "</span> + filename, e);
+<a class="jxr_linenumber" name="L201" href="#L201">201</a>         }
+<a class="jxr_linenumber" name="L202" href="#L202">202</a>     }
+<a class="jxr_linenumber" name="L203" href="#L203">203</a> 
+<a class="jxr_linenumber" name="L204" href="#L204">204</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017&#x2013;2018 <a href="https://www.apache.org/">The Apache Software Foundation</a>. All rights reserved.</div>
