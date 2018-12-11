@@ -22,6 +22,8 @@ import org.apache.plc4x.java.api.PlcConnection;
 import org.apache.plc4x.java.api.authentication.PlcAuthentication;
 import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
 import org.apache.plc4x.java.spi.PlcDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,27 +33,32 @@ import java.util.ServiceLoader;
 
 public class PlcDriverManager {
 
+<span class="fc" id="L36">    private static final Logger LOGGER = LoggerFactory.getLogger(PlcDriverManager.class);</span>
+
     protected ClassLoader classLoader;
 
     private Map&lt;String, PlcDriver&gt; driverMap;
 
     public PlcDriverManager() {
-<span class="fc" id="L39">        this(Thread.currentThread().getContextClassLoader());</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L43">        this(Thread.currentThread().getContextClassLoader());</span>
+<span class="fc" id="L44">    }</span>
 
-<span class="fc" id="L42">    public PlcDriverManager(ClassLoader classLoader) {</span>
-<span class="fc" id="L43">        this.classLoader = classLoader;</span>
-<span class="fc" id="L44">        driverMap = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L45">        ServiceLoader&lt;PlcDriver&gt; plcDriverLoader = ServiceLoader.load(PlcDriver.class, classLoader);</span>
-<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (PlcDriver driver : plcDriverLoader) {</span>
-<span class="fc bfc" id="L47" title="All 2 branches covered.">            if (driverMap.containsKey(driver.getProtocolCode())) {</span>
-<span class="fc" id="L48">                throw new IllegalStateException(</span>
+<span class="fc" id="L46">    public PlcDriverManager(ClassLoader classLoader) {</span>
+<span class="fc" id="L47">        LOGGER.info(&quot;Instantiating new PLC Driver Manager with class loader {}&quot;, classLoader);</span>
+<span class="fc" id="L48">        this.classLoader = classLoader;</span>
+<span class="fc" id="L49">        driverMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L50">        ServiceLoader&lt;PlcDriver&gt; plcDriverLoader = ServiceLoader.load(PlcDriver.class, classLoader);</span>
+<span class="fc" id="L51">        LOGGER.info(&quot;Registering available drivers...&quot;);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        for (PlcDriver driver : plcDriverLoader) {</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (driverMap.containsKey(driver.getProtocolCode())) {</span>
+<span class="fc" id="L54">                throw new IllegalStateException(</span>
                     &quot;Multiple driver implementations available for protocol code '&quot; +
-<span class="fc" id="L50">                        driver.getProtocolCode() + &quot;'&quot;);</span>
+<span class="fc" id="L56">                        driver.getProtocolCode() + &quot;'&quot;);</span>
             }
-<span class="fc" id="L52">            driverMap.put(driver.getProtocolCode(), driver);</span>
-<span class="fc" id="L53">        }</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L58">            LOGGER.info(&quot;Registering driver for Protocol {} ({})&quot;, driver.getProtocolCode(), driver.getProtocolName());</span>
+<span class="fc" id="L59">            driverMap.put(driver.getProtocolCode(), driver);</span>
+<span class="fc" id="L60">        }</span>
+<span class="fc" id="L61">    }</span>
 
     /**
      * Connects to a PLC using the given plc connection string.
@@ -61,10 +68,10 @@ public class PlcDriverManager {
      * @throws PlcConnectionException an exception if the connection attempt failed.
      */
     public PlcConnection getConnection(String url) throws PlcConnectionException {
-<span class="fc" id="L64">        PlcDriver driver = getDriver(url);</span>
-<span class="fc" id="L65">        PlcConnection connection = driver.connect(url);</span>
-<span class="fc" id="L66">        connection.connect();</span>
-<span class="fc" id="L67">        return connection;</span>
+<span class="fc" id="L71">        PlcDriver driver = getDriver(url);</span>
+<span class="fc" id="L72">        PlcConnection connection = driver.connect(url);</span>
+<span class="fc" id="L73">        connection.connect();</span>
+<span class="fc" id="L74">        return connection;</span>
     }
 
     /**
@@ -76,23 +83,23 @@ public class PlcDriverManager {
      * @throws PlcConnectionException an exception if the connection attempt failed.
      */
     public PlcConnection getConnection(String url, PlcAuthentication authentication) throws PlcConnectionException {
-<span class="fc" id="L79">        PlcDriver driver = getDriver(url);</span>
-<span class="fc" id="L80">        PlcConnection connection = driver.connect(url, authentication);</span>
-<span class="fc" id="L81">        connection.connect();</span>
-<span class="fc" id="L82">        return connection;</span>
+<span class="fc" id="L86">        PlcDriver driver = getDriver(url);</span>
+<span class="fc" id="L87">        PlcConnection connection = driver.connect(url, authentication);</span>
+<span class="fc" id="L88">        connection.connect();</span>
+<span class="fc" id="L89">        return connection;</span>
     }
 
     private PlcDriver getDriver(String url) throws PlcConnectionException {
         try {
-<span class="fc" id="L87">            URI connectionUri = new URI(url);</span>
-<span class="fc" id="L88">            String protocol = connectionUri.getScheme();</span>
-<span class="fc" id="L89">            PlcDriver driver = driverMap.get(protocol);</span>
-<span class="fc bfc" id="L90" title="All 2 branches covered.">            if (driver == null) {</span>
-<span class="fc" id="L91">                throw new PlcConnectionException(&quot;Unable to find driver for protocol '&quot; + protocol + &quot;'&quot;);</span>
+<span class="fc" id="L94">            URI connectionUri = new URI(url);</span>
+<span class="fc" id="L95">            String protocol = connectionUri.getScheme();</span>
+<span class="fc" id="L96">            PlcDriver driver = driverMap.get(protocol);</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">            if (driver == null) {</span>
+<span class="fc" id="L98">                throw new PlcConnectionException(&quot;Unable to find driver for protocol '&quot; + protocol + &quot;'&quot;);</span>
             }
-<span class="fc" id="L93">            return driver;</span>
-<span class="fc" id="L94">        } catch (URISyntaxException e) {</span>
-<span class="fc" id="L95">            throw new PlcConnectionException(&quot;Invalid plc4j connection string '&quot; + url + &quot;'&quot;, e);</span>
+<span class="fc" id="L100">            return driver;</span>
+<span class="fc" id="L101">        } catch (URISyntaxException e) {</span>
+<span class="fc" id="L102">            throw new PlcConnectionException(&quot;Invalid plc4j connection string '&quot; + url + &quot;'&quot;, e);</span>
         }
     }
 
