@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Plc4xBaseTable.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">apache-calcite</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x</a> &gt; <span class="el_source">Plc4xBaseTable.java</span></div><h1>Plc4xBaseTable.java</h1><pre class="source lang-java linenums">/*
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+&quot;License&quot;); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+&quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+*/
+package org.apache.plc4x;
+
+import org.apache.calcite.DataContext;
+import org.apache.calcite.linq4j.AbstractEnumerable;
+import org.apache.calcite.linq4j.Enumerable;
+import org.apache.calcite.linq4j.Enumerator;
+import org.apache.calcite.rel.*;
+import org.apache.calcite.rel.type.RelDataType;
+import org.apache.calcite.rel.type.RelDataTypeFactory;
+import org.apache.calcite.schema.Statistic;
+import org.apache.calcite.schema.impl.AbstractTable;
+import org.apache.calcite.util.ImmutableBitSet;
+import org.apache.plc4x.java.scraper.config.JobConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+/**
+ * Base for Stream and &quot;Table&quot; version of the Plc4xTable.
+ * Needs to be subclassed due to usage of &quot;instanceof&quot; in Calcites internals.
+ */
+public abstract class Plc4xBaseTable extends AbstractTable {
+
+<span class="fc" id="L52">    private static final Logger logger = LoggerFactory.getLogger(Plc4xBaseTable.class);</span>
+
+    private final BlockingQueue&lt;Plc4xSchema.Record&gt; queue;
+    private final JobConfiguration conf;
+    private final long tableCutoff;
+    private Plc4xSchema.Record current;
+    private List&lt;String&gt; names;
+
+<span class="fc" id="L60">    public Plc4xBaseTable(BlockingQueue&lt;Plc4xSchema.Record&gt; queue, JobConfiguration conf, long tableCutoff) {</span>
+<span class="fc" id="L61">        this.tableCutoff = tableCutoff;</span>
+<span class="fc" id="L62">        logger.info(&quot;Instantiating new PLC4X Table with configuration: {}&quot;, conf);</span>
+<span class="fc" id="L63">        this.queue = queue;</span>
+<span class="fc" id="L64">        this.conf = conf;</span>
+        // Extract names
+<span class="fc" id="L66">        names = new ArrayList&lt;&gt;(conf.getFields().keySet());</span>
+<span class="fc" id="L67">    }</span>
+
+    @Override
+    public Statistic getStatistic() {
+<span class="fc" id="L71">        return new Statistic() {</span>
+
+            public Double getRowCount() {
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">                return tableCutoff &gt; 0 ? (double)tableCutoff : null;</span>
+            }
+
+            public boolean isKey(ImmutableBitSet columns) {
+<span class="nc" id="L78">                return false;</span>
+            }
+
+            public List&lt;RelReferentialConstraint&gt; getReferentialConstraints() {
+<span class="nc" id="L82">                return Collections.emptyList();</span>
+            }
+
+            public List&lt;RelCollation&gt; getCollations() {
+<span class="fc" id="L86">                return Collections.singletonList(RelCollationImpl.of(new RelFieldCollation(0, RelFieldCollation.Direction.ASCENDING)));</span>
+            }
+
+            public RelDistribution getDistribution() {
+<span class="nc" id="L90">                return RelDistributionTraitDef.INSTANCE.getDefault();</span>
+            }
+        };
+    }
+
+    @Override
+    public RelDataType getRowType(RelDataTypeFactory typeFactory) {
+        // Create the table spec
+        // Block until the first result is in the queue
+<span class="fc" id="L99">        CompletableFuture&lt;Plc4xSchema.Record&gt; future = CompletableFuture.supplyAsync(new FirstElementFetcher(queue));</span>
+        Plc4xSchema.Record first;
+        try {
+<span class="fc" id="L102">            first = future.get(5, TimeUnit.SECONDS);</span>
+<span class="nc" id="L103">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L104">            Thread.currentThread().interrupt();</span>
+<span class="nc" id="L105">            throw new RuntimeException(&quot;Thread was interrupted!&quot;, e);</span>
+<span class="nc" id="L106">        } catch (ExecutionException | TimeoutException e) {</span>
+<span class="nc" id="L107">            throw new RuntimeException(&quot;Unable to fetch first record and infer arguments!&quot;);</span>
+<span class="fc" id="L108">        }</span>
+<span class="fc" id="L109">        logger.info(&quot;Inferring types for Table '{}' based on values: {}&quot;, conf.getName(), first.values);</span>
+        // Extract types
+<span class="fc" id="L111">        List&lt;RelDataType&gt; types = names.stream()</span>
+<span class="fc" id="L112">            .map(n -&gt; {</span>
+<span class="fc" id="L113">                Object o = first.values.get(n);</span>
+<span class="fc" id="L114">                logger.debug(&quot;Infer field '{}' as class '{}'&quot;, n, o.getClass());</span>
+<span class="fc" id="L115">                return typeFactory.createJavaType(o.getClass());</span>
+            })
+<span class="fc" id="L117">            .collect(Collectors.toList());</span>
+<span class="fc" id="L118">        List&lt;String&gt; pre = new ArrayList&lt;&gt;(Arrays.asList(&quot;timestamp&quot;, &quot;source&quot;));</span>
+<span class="fc" id="L119">        pre.addAll(names);</span>
+<span class="fc" id="L120">        List&lt;RelDataType&gt; preTypes = Stream.of(Timestamp.class, String.class)</span>
+<span class="fc" id="L121">            .map(typeFactory::createJavaType)</span>
+<span class="fc" id="L122">            .collect(Collectors.toList());</span>
+<span class="fc" id="L123">        preTypes.addAll(types);</span>
+<span class="fc" id="L124">        return typeFactory.createStructType(preTypes, pre);</span>
+    }
+
+    /**
+     * if tableCutoff is positive, then the row gets limited to that.
+     */
+    public Enumerable&lt;Object[]&gt; scan(DataContext root) {
+<span class="fc" id="L131">        return new AbstractEnumerable&lt;Object[]&gt;() {</span>
+            @Override
+            public Enumerator&lt;Object[]&gt; enumerator() {
+<span class="fc" id="L134">                return new Enumerator&lt;Object[]&gt;() {</span>
+
+<span class="fc" id="L136">                    private final AtomicLong counter = new AtomicLong(0);</span>
+
+                    @Override
+                    public Object[] current() {
+<span class="fc" id="L140">                        List&lt;Object&gt; objects = new ArrayList&lt;&gt;(Arrays.asList(new Timestamp(current.timestamp.toEpochMilli()), current.source));</span>
+<span class="fc" id="L141">                        List&lt;Object&gt; objects2 = names.stream().map(name -&gt; current.values.get(name)).collect(Collectors.toList());</span>
+<span class="fc" id="L142">                        objects.addAll(objects2);</span>
+<span class="fc" id="L143">                        return objects.toArray();</span>
+                    }
+
+                    @Override
+                    public boolean moveNext() {
+                        try {
+<span class="fc" id="L149">                            current = queue.take();</span>
+                            // If stream, simply return
+<span class="fc bfc" id="L151" title="All 2 branches covered.">                            if (tableCutoff &lt;= 0L) {</span>
+<span class="fc" id="L152">                                return true;</span>
+                            }
+                            // If table, return if below cutoff
+<span class="fc bfc" id="L155" title="All 2 branches covered.">                            return counter.getAndIncrement() &lt; tableCutoff;</span>
+<span class="nc" id="L156">                        } catch (InterruptedException e) {</span>
+<span class="nc" id="L157">                            Thread.currentThread().interrupt();</span>
+                        }
+<span class="nc" id="L159">                        return false;</span>
+                    }
+
+                    @Override
+                    public void reset() {
+<span class="nc" id="L164">                        counter.set(0);</span>
+<span class="nc" id="L165">                    }</span>
+
+                    @Override
+                    public void close() {
+                        // Unimplemented
+<span class="nc" id="L170">                    }</span>
+                };
+            }
+        };
+    }
+
+    /**
+     * Waits until a first (non null) element is in the queue
+     */
+    private static class FirstElementFetcher implements Supplier&lt;Plc4xSchema.Record&gt; {
+
+        private final BlockingQueue&lt;Plc4xSchema.Record&gt; queue;
+
+<span class="fc" id="L183">        private FirstElementFetcher(BlockingQueue&lt;Plc4xSchema.Record&gt; queue) {</span>
+<span class="fc" id="L184">            this.queue = queue;</span>
+<span class="fc" id="L185">        }</span>
+
+        @Override
+        public Plc4xSchema.Record get() {
+            Plc4xSchema.Record first;
+            do {
+<span class="fc" id="L191">                first = queue.peek();</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">            } while (first == null);</span>
+<span class="fc" id="L193">            return first;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
