@@ -113,10 +113,10 @@ public class ScraperTask implements Runnable {
 <span class="fc" id="L113">                    .build()</span>
 <span class="fc" id="L114">                    .execute()</span>
 <span class="fc" id="L115">                    .get(requestTimeoutMs, TimeUnit.MILLISECONDS);</span>
-<span class="fc" id="L116">            } catch (ExecutionException e) {</span>
+<span class="nc" id="L116">            } catch (ExecutionException e) {</span>
                 // Handle execution exception
-<span class="fc" id="L118">                handleException(e);</span>
-<span class="fc" id="L119">                return;</span>
+<span class="nc" id="L118">                handleException(e);</span>
+<span class="nc" id="L119">                return;</span>
 <span class="fc" id="L120">            }</span>
             // Add statistics
 <span class="fc" id="L122">            stopWatch.stop();</span>
