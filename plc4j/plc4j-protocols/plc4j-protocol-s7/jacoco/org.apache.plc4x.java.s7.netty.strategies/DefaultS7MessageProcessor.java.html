@@ -413,23 +413,23 @@ public class DefaultS7MessageProcessor implements S7MessageProcessor {
 
                     // Initialize the current size, this will be lower than the original, as the only
                     // way to have different count, is if the request was split up.
-<span class="fc" id="L416">                    int curSizeInBytes = responseParameterItem.getNumElements() * itemSizeInBytes;</span>
+<span class="fc" id="L416">                    int curSizeInBytes = requestItem.getNumElements() * itemSizeInBytes;</span>
 
                     // Now iterate over the succeeding pairs of parameters and payloads till we have
                     // found the original number of elements.
-<span class="fc bfc" id="L420" title="All 2 branches covered.">                    while(curSizeInBytes &lt; totalSizeInBytes) {</span>
-<span class="fc" id="L421">                        responseOffset++;</span>
+<span class="pc bpc" id="L420" title="1 of 2 branches missed.">                    while(curSizeInBytes &lt; totalSizeInBytes) {</span>
+<span class="nc" id="L421">                        responseOffset++;</span>
                         // No need to process the parameters, we only need them to get the number of items.
-<span class="fc" id="L423">                        responseParameterItem = (S7AnyVarParameterItem) parameterItems.get(i + responseOffset);</span>
-<span class="fc" id="L424">                        curSizeInBytes += responseParameterItem.getNumElements() * itemSizeInBytes;</span>
+<span class="nc" id="L423">                        responseParameterItem = (S7AnyVarParameterItem) parameterItems.get(i + responseOffset);</span>
+<span class="nc" id="L424">                        curSizeInBytes += responseParameterItem.getNumElements() * itemSizeInBytes;</span>
 
                         // Get the next payload item in the list.
-<span class="fc" id="L427">                        responsePayloadItem = payloadItems.get(i + responseOffset);</span>
+<span class="nc" id="L427">                        responsePayloadItem = payloadItems.get(i + responseOffset);</span>
 
                         // Copy the data of this item behind the previous content.
-<span class="pc bpc" id="L430" title="1 of 2 branches missed.">                        if(varParameter.getType() == ParameterType.READ_VAR) {</span>
-<span class="fc" id="L431">                            System.arraycopy(responsePayloadItem.getData(), 0, data, dataOffset, responsePayloadItem.getData().length);</span>
-<span class="fc" id="L432">                            dataOffset += responsePayloadItem.getData().length;</span>
+<span class="nc bnc" id="L430" title="All 2 branches missed.">                        if(varParameter.getType() == ParameterType.READ_VAR) {</span>
+<span class="nc" id="L431">                            System.arraycopy(responsePayloadItem.getData(), 0, data, dataOffset, responsePayloadItem.getData().length);</span>
+<span class="nc" id="L432">                            dataOffset += responsePayloadItem.getData().length;</span>
                         }
                     }
 

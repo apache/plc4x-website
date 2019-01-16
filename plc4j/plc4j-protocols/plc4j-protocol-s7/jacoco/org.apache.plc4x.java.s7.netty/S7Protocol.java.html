@@ -676,15 +676,15 @@ public class S7Protocol extends ChannelDuplexHandler {
 <span class="nc" id="L676">                return decodeCpuServicesParameter(in);</span>
             case READ_VAR:
             case WRITE_VAR:
-                List&lt;VarParameterItem&gt; varParamameter;
+                List&lt;VarParameterItem&gt; varParameterItems;
 <span class="nc" id="L680">                byte numItems = in.readByte();</span>
 <span class="nc bnc" id="L681" title="All 2 branches missed.">                if (!isResponse) {</span>
-<span class="nc" id="L682">                    varParamameter = decodeReadWriteVarParameter(in, numItems);</span>
+<span class="nc" id="L682">                    varParameterItems = decodeReadWriteVarParameter(in, numItems);</span>
                 } else {
-<span class="nc" id="L684">                    varParamameter = Collections.singletonList(</span>
+<span class="nc" id="L684">                    varParameterItems = Collections.singletonList(</span>
                         new S7AnyVarParameterItem(null, null, null, numItems, (short) 0, (short) 0, (byte) 0));
                 }
-<span class="nc" id="L687">                return new VarParameter(parameterType, varParamameter);</span>
+<span class="nc" id="L687">                return new VarParameter(parameterType, varParameterItems);</span>
             case SETUP_COMMUNICATION:
                 // Reserved (is always constant 0x00)
 <span class="nc" id="L690">                in.readByte();</span>

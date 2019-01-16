@@ -684,15 +684,15 @@
 <a class="jxr_linenumber" name="L676" href="#L676">676</a>                 <strong class="jxr_keyword">return</strong> decodeCpuServicesParameter(in);
 <a class="jxr_linenumber" name="L677" href="#L677">677</a>             <strong class="jxr_keyword">case</strong> READ_VAR:
 <a class="jxr_linenumber" name="L678" href="#L678">678</a>             <strong class="jxr_keyword">case</strong> WRITE_VAR:
-<a class="jxr_linenumber" name="L679" href="#L679">679</a>                 List&lt;VarParameterItem&gt; varParamameter;
+<a class="jxr_linenumber" name="L679" href="#L679">679</a>                 List&lt;VarParameterItem&gt; varParameterItems;
 <a class="jxr_linenumber" name="L680" href="#L680">680</a>                 byte numItems = in.readByte();
 <a class="jxr_linenumber" name="L681" href="#L681">681</a>                 <strong class="jxr_keyword">if</strong> (!isResponse) {
-<a class="jxr_linenumber" name="L682" href="#L682">682</a>                     varParamameter = decodeReadWriteVarParameter(in, numItems);
+<a class="jxr_linenumber" name="L682" href="#L682">682</a>                     varParameterItems = decodeReadWriteVarParameter(in, numItems);
 <a class="jxr_linenumber" name="L683" href="#L683">683</a>                 } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L684" href="#L684">684</a>                     varParamameter = Collections.singletonList(
+<a class="jxr_linenumber" name="L684" href="#L684">684</a>                     varParameterItems = Collections.singletonList(
 <a class="jxr_linenumber" name="L685" href="#L685">685</a>                         <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a>(<strong class="jxr_keyword">null</strong>, <strong class="jxr_keyword">null</strong>, <strong class="jxr_keyword">null</strong>, numItems, (<strong class="jxr_keyword">short</strong>) 0, (<strong class="jxr_keyword">short</strong>) 0, (byte) 0));
 <a class="jxr_linenumber" name="L686" href="#L686">686</a>                 }
-<a class="jxr_linenumber" name="L687" href="#L687">687</a>                 <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(parameterType, varParamameter);
+<a class="jxr_linenumber" name="L687" href="#L687">687</a>                 <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(parameterType, varParameterItems);
 <a class="jxr_linenumber" name="L688" href="#L688">688</a>             <strong class="jxr_keyword">case</strong> SETUP_COMMUNICATION:
 <a class="jxr_linenumber" name="L689" href="#L689">689</a>                 <em class="jxr_comment">// Reserved (is always constant 0x00)</em>
 <a class="jxr_linenumber" name="L690" href="#L690">690</a>                 in.readByte();
