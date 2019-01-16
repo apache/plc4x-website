@@ -330,8 +330,8 @@
     </tr> 
     <tr class="b"> 
      <td>org.apache.plc4x</td> 
-     <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocol-test">plc4j-protocol-test</a></td> 
-     <td>0.3.0-SNAPSHOT</td> 
+     <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base-test">plc4j-protocol-driver-base-test</a></td> 
+     <td>0.4.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
@@ -1056,17 +1056,17 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.apache.plc4x:plc4j-protocol-test:jar:0.3.0-SNAPSHOT (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep52"><i class="glyphicon glyphicon-info-sign"></i></button> 
+     <li>org.apache.plc4x:plc4j-protocol-driver-base-test:jar:0.4.0-SNAPSHOT (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep52"><i class="glyphicon glyphicon-info-sign"></i></button> 
       <div id="_dep52" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
-          <th>PLC4J: Protocol: TEST</th> 
+          <th>PLC4J: Protocol: Driver-Base: Test</th> 
          </tr> 
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>Test implementation of a PLC4X driver.</p> <p><b>URL: </b><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocol-test">https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocol-test</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>Base classes needed to implement plc4x drivers for testing using internal byte streams.</p> <p><b>URL: </b><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base-test">https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base-test</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
@@ -1438,7 +1438,7 @@
  <p><b>The Apache License, Version 2.0: </b>org.apiguardian:apiguardian-api, org.opentest4j:opentest4j</p> 
  <p><b>MIT License: </b>SLF4J API Module</p> 
  <p><b>The MIT License: </b>mockito-core, mockito-junit-jupiter</p> 
- <p><b>Apache License, Version 2.0: </b>Apache Commons Collections, Apache Commons Configuration, Apache Commons IO, Apache Commons Lang, Apache Commons Pool, AssertJ fluent assertions, Netty/Buffer, Netty/Codec, Netty/Common, Netty/Resolver, Netty/Transport, PLC4J: API, PLC4J: Driver: S7, PLC4J: Protocol: Driver-Base: Base, PLC4J: Protocol: Driver-Base: TCP, PLC4J: Protocol: ISO TP, PLC4J: Protocol: ISO on TCP, PLC4J: Protocol: S7, PLC4J: Protocol: TEST, PLC4J: Utils: Connection Pool, PLC4J: Utils: Scraper, SnakeYAML</p> 
+ <p><b>Apache License, Version 2.0: </b>Apache Commons Collections, Apache Commons Configuration, Apache Commons IO, Apache Commons Lang, Apache Commons Pool, AssertJ fluent assertions, Netty/Buffer, Netty/Codec, Netty/Common, Netty/Resolver, Netty/Transport, PLC4J: API, PLC4J: Driver: S7, PLC4J: Protocol: Driver-Base: Base, PLC4J: Protocol: Driver-Base: TCP, PLC4J: Protocol: Driver-Base: Test, PLC4J: Protocol: ISO TP, PLC4J: Protocol: ISO on TCP, PLC4J: Protocol: S7, PLC4J: Utils: Connection Pool, PLC4J: Utils: Scraper, SnakeYAML</p> 
  <p><b>Eclipse Public License v2.0: </b>JUnit Jupiter API, JUnit Jupiter Engine, JUnit Jupiter Params, JUnit Platform Commons, JUnit Platform Engine API, JUnit Platform Launcher, JUnit Vintage Engine</p> 
  <p><b>GNU Lesser General Public License: </b>Logback Classic Module, Logback Core Module</p> 
  <p><b>New BSD License: </b>Hamcrest Core, Hamcrest library</p> 
@@ -1694,6 +1694,15 @@
     <td>Yes</td> 
    </tr> 
    <tr class="b"> 
+    <td>plc4j-protocol-driver-base-test-0.4.0-SNAPSHOT.jar</td> 
+    <td>33.2 kB</td> 
+    <td>39</td> 
+    <td>15</td> 
+    <td>5</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+   </tr> 
+   <tr class="a"> 
     <td>plc4j-protocol-iso-on-tcp-0.4.0-SNAPSHOT.jar</td> 
     <td>11.5 kB</td> 
     <td>20</td> 
@@ -1702,7 +1711,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>plc4j-protocol-iso-tp-0.4.0-SNAPSHOT.jar</td> 
     <td>41.7 kB</td> 
     <td>50</td> 
@@ -1711,21 +1720,12 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>plc4j-protocol-s7-0.4.0-SNAPSHOT.jar</td> 
     <td>102.9 kB</td> 
     <td>82</td> 
     <td>51</td> 
     <td>14</td> 
-    <td>1.8</td> 
-    <td>Yes</td> 
-   </tr> 
-   <tr class="a"> 
-    <td>plc4j-protocol-test-0.3.0-SNAPSHOT.jar</td> 
-    <td>17.3 kB</td> 
-    <td>25</td> 
-    <td>7</td> 
-    <td>1</td> 
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
@@ -1912,9 +1912,9 @@
    <tr class="b"> 
     <td>49</td> 
     <td>24 MB</td> 
-    <td>17002</td> 
-    <td>15701</td> 
-    <td>696</td> 
+    <td>17016</td> 
+    <td>15709</td> 
+    <td>700</td> 
     <td>1.8</td> 
     <td>49</td> 
    </tr> 
@@ -1929,10 +1929,10 @@
    </tr> 
    <tr class="b"> 
     <td>test: 36</td> 
-    <td>test: 17.9 MB</td> 
-    <td>test: 13044</td> 
-    <td>test: 12136</td> 
-    <td>test: 485</td> 
+    <td>test: 18 MB</td> 
+    <td>test: 13058</td> 
+    <td>test: 12144</td> 
+    <td>test: 489</td> 
     <td>-</td> 
     <td>test: 36</td> 
    </tr> 
