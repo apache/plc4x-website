@@ -404,7 +404,7 @@
 <a class="jxr_linenumber" name="L396" href="#L396">396</a>         S7RequestMessage request = createWriteMessage(
 <a class="jxr_linenumber" name="L397" href="#L397">397</a>             Collections.singletonList(
 <a class="jxr_linenumber" name="L398" href="#L398">398</a>                 <strong class="jxr_keyword">new</strong> S7AnyVarParameterItem(SpecificationType.VARIABLE_SPECIFICATION, MemoryArea.DATA_BLOCKS,
-<a class="jxr_linenumber" name="L399" href="#L399">399</a>                     TransportSize.BYTE, (<strong class="jxr_keyword">short</strong>) 10, (<strong class="jxr_keyword">short</strong>) 1, (<strong class="jxr_keyword">short</strong>) 0, (byte) 0)),
+<a class="jxr_linenumber" name="L399" href="#L399">399</a>                     TransportSize.BYTE, 10, 1, (<strong class="jxr_keyword">short</strong>) 0, (byte) 0)),
 <a class="jxr_linenumber" name="L400" href="#L400">400</a>             Collections.singletonList(
 <a class="jxr_linenumber" name="L401" href="#L401">401</a>                 <strong class="jxr_keyword">new</strong> VarPayloadItem(DataTransportErrorCode.OK, DataTransportSize.BYTE_WORD_DWORD, <strong class="jxr_keyword">new</strong> byte[] {
 <a class="jxr_linenumber" name="L402" href="#L402">402</a>                     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A}))
@@ -412,9 +412,9 @@
 <a class="jxr_linenumber" name="L404" href="#L404">404</a>         Collection&lt;S7RequestMessage&gt; processedRequests = SUT.processRequest(request, 250);
 <a class="jxr_linenumber" name="L405" href="#L405">405</a> 
 <a class="jxr_linenumber" name="L406" href="#L406">406</a>         <em class="jxr_comment">// Initialize a set of expected fields.</em>
-<a class="jxr_linenumber" name="L407" href="#L407">407</a>         Set&lt;Short&gt; expectedFields = <strong class="jxr_keyword">new</strong> HashSet&lt;&gt;(10);
+<a class="jxr_linenumber" name="L407" href="#L407">407</a>         Set&lt;Integer&gt; expectedFields = <strong class="jxr_keyword">new</strong> HashSet&lt;&gt;(10);
 <a class="jxr_linenumber" name="L408" href="#L408">408</a>         <strong class="jxr_keyword">for</strong>(<strong class="jxr_keyword">int</strong> i = 0; i &lt; 10; i++) {
-<a class="jxr_linenumber" name="L409" href="#L409">409</a>             expectedFields.add((<strong class="jxr_keyword">short</strong>) i);
+<a class="jxr_linenumber" name="L409" href="#L409">409</a>             expectedFields.add(i);
 <a class="jxr_linenumber" name="L410" href="#L410">410</a>         }
 <a class="jxr_linenumber" name="L411" href="#L411">411</a> 
 <a class="jxr_linenumber" name="L412" href="#L412">412</a>         <em class="jxr_comment">// We are expecting to receive 10 messages as we had an array of 10 items.</em>
@@ -483,9 +483,9 @@
 <a class="jxr_linenumber" name="L475" href="#L475">475</a>         Collection&lt;S7RequestMessage&gt; processedRequests = SUT.processRequest(request, 250);
 <a class="jxr_linenumber" name="L476" href="#L476">476</a> 
 <a class="jxr_linenumber" name="L477" href="#L477">477</a>         <em class="jxr_comment">// Initialize a set of expected fields.</em>
-<a class="jxr_linenumber" name="L478" href="#L478">478</a>         Set&lt;Short&gt; expectedFields = <strong class="jxr_keyword">new</strong> HashSet&lt;&gt;(10);
+<a class="jxr_linenumber" name="L478" href="#L478">478</a>         Set&lt;Integer&gt; expectedFields = <strong class="jxr_keyword">new</strong> HashSet&lt;&gt;(10);
 <a class="jxr_linenumber" name="L479" href="#L479">479</a>         <strong class="jxr_keyword">for</strong>(<strong class="jxr_keyword">int</strong> i = 0; i &lt; 10; i++) {
-<a class="jxr_linenumber" name="L480" href="#L480">480</a>             expectedFields.add((<strong class="jxr_keyword">short</strong>) (i * 4));
+<a class="jxr_linenumber" name="L480" href="#L480">480</a>             expectedFields.add((i * 4));
 <a class="jxr_linenumber" name="L481" href="#L481">481</a>         }
 <a class="jxr_linenumber" name="L482" href="#L482">482</a> 
 <a class="jxr_linenumber" name="L483" href="#L483">483</a>         <em class="jxr_comment">// We are expecting to receive 10 messages as we had an array of 10 items.</em>

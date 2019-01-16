@@ -141,7 +141,7 @@ public class DefaultS7MessageProcessor implements S7MessageProcessor {
 <span class="fc" id="L141">                    (double) maxResponseSize / (double) s7AnyVarParameterItem.getDataType().getSizeInBytes());</span>
 <span class="fc" id="L142">                int sizeMaxNumElementInBytes = maxNumElements * s7AnyVarParameterItem.getDataType().getSizeInBytes();</span>
 <span class="fc" id="L143">                int remainingNumElements = s7AnyVarParameterItem.getNumElements();</span>
-<span class="fc" id="L144">                short curByteOffset = s7AnyVarParameterItem.getByteOffset();</span>
+<span class="fc" id="L144">                int curByteOffset = s7AnyVarParameterItem.getByteOffset();</span>
 
 <span class="fc bfc" id="L146" title="All 2 branches covered.">                while(remainingNumElements &gt; 0) {</span>
 <span class="fc" id="L147">                    int numCurElements = Math.min(remainingNumElements, maxNumElements);</span>
@@ -218,7 +218,7 @@ public class DefaultS7MessageProcessor implements S7MessageProcessor {
 
 <span class="pc bpc" id="L219" title="1 of 2 branches missed.">            if (varParameterItem instanceof S7AnyVarParameterItem) {</span>
 <span class="fc" id="L220">                S7AnyVarParameterItem s7AnyVarParameterItem = (S7AnyVarParameterItem) varParameterItem;</span>
-<span class="fc" id="L221">                short byteOffset = s7AnyVarParameterItem.getByteOffset();</span>
+<span class="fc" id="L221">                int byteOffset = s7AnyVarParameterItem.getByteOffset();</span>
 <span class="fc bfc" id="L222" title="All 2 branches covered.">                if (s7AnyVarParameterItem.getDataType() == TransportSize.BOOL) {</span>
 <span class="fc" id="L223">                    processBooleanWriteVarParameter(request, varParameter, varPayload, s7AnyVarParameterItem,</span>
                         varPayloadItem, byteOffset, compositeRequestMessage);
@@ -235,8 +235,8 @@ public class DefaultS7MessageProcessor implements S7MessageProcessor {
 
     private void processBooleanWriteVarParameter(S7RequestMessage request, VarParameter varParameter, VarPayload varPayload,
                                          S7AnyVarParameterItem s7AnyVarParameterItem, VarPayloadItem varPayloadItem,
-                                         short byteOffset, S7CompositeRequestMessage compositeRequestMessage) {
-<span class="fc" id="L239">        short curParameterByteOffset = byteOffset;</span>
+                                         int byteOffset, S7CompositeRequestMessage compositeRequestMessage) {
+<span class="fc" id="L239">        int curParameterByteOffset = byteOffset;</span>
 <span class="fc" id="L240">        byte curParameterBitOffset = s7AnyVarParameterItem.getBitOffset();</span>
 <span class="fc" id="L241">        byte curPayloadBitOffset = 0;</span>
 <span class="fc bfc" id="L242" title="All 2 branches covered.">        for (int i = 0; i &lt; s7AnyVarParameterItem.getNumElements(); i++) {</span>
@@ -288,8 +288,8 @@ public class DefaultS7MessageProcessor implements S7MessageProcessor {
 
     private void processNonBooleanWriteVarParameter(S7RequestMessage request, VarParameter varParameter, VarPayload varPayload,
                                             S7AnyVarParameterItem s7AnyVarParameterItem, VarPayloadItem varPayloadItem,
-                                            short byteOffset, S7CompositeRequestMessage compositeRequestMessage) {
-<span class="fc" id="L292">        short curByteOffset = byteOffset;</span>
+                                            int byteOffset, S7CompositeRequestMessage compositeRequestMessage) {
+<span class="fc" id="L292">        int curByteOffset = byteOffset;</span>
 <span class="fc" id="L293">        int payloadPosition = 0;</span>
 <span class="fc bfc" id="L294" title="All 2 branches covered.">        for (int i = 0; i &lt; s7AnyVarParameterItem.getNumElements(); i++) {</span>
 <span class="fc" id="L295">            int elementSize = s7AnyVarParameterItem.getDataType().getSizeInBytes();</span>

@@ -28,10 +28,13 @@ import java.util.regex.Pattern;
 
 public class S7Field implements PlcField {
 
-<span class="fc" id="L31">    private static final Pattern ADDRESS_PATTERN =</span>
-<span class="fc" id="L32">        Pattern.compile(&quot;^%(?&lt;memoryArea&gt;.)(?&lt;transferSizeCode&gt;[XBWD]?)(?&lt;byteOffset&gt;\\d{1,5})(.(?&lt;bitOffset&gt;[0-7]))?:(?&lt;dataType&gt;[a-zA-Z_]+)(\\[(?&lt;numElements&gt;\\d+)])?&quot;);</span>
-<span class="fc" id="L33">    private static final Pattern DATA_BLOCK_ADDRESS_PATTERN =</span>
-<span class="fc" id="L34">        Pattern.compile(&quot;^%DB(?&lt;blockNumber&gt;\\d{1,4}).DB(?&lt;transferSizeCode&gt;[XBWD]?)(?&lt;byteOffset&gt;\\d{1,5})(.(?&lt;bitOffset&gt;[0-7]))?:(?&lt;dataType&gt;[a-zA-Z_]+)(\\[(?&lt;numElements&gt;\\d+)])?&quot;);</span>
+    //byteOffset theoretically can reach up to 2097151 ... see checkByteOffset() below --&gt; 7digits
+<span class="fc" id="L32">    private static final Pattern ADDRESS_PATTERN =</span>
+<span class="fc" id="L33">        Pattern.compile(&quot;^%(?&lt;memoryArea&gt;.)(?&lt;transferSizeCode&gt;[XBWD]?)(?&lt;byteOffset&gt;\\d{1,7})(.(?&lt;bitOffset&gt;[0-7]))?:(?&lt;dataType&gt;[a-zA-Z_]+)(\\[(?&lt;numElements&gt;\\d+)])?&quot;);</span>
+
+    //blockNumber usually has its max hat around 64000 --&gt; 5digits
+<span class="fc" id="L36">    private static final Pattern DATA_BLOCK_ADDRESS_PATTERN =</span>
+<span class="fc" id="L37">        Pattern.compile(&quot;^%DB(?&lt;blockNumber&gt;\\d{1,5}).DB(?&lt;transferSizeCode&gt;[XBWD]?)(?&lt;byteOffset&gt;\\d{1,7})(.(?&lt;bitOffset&gt;[0-7]))?:(?&lt;dataType&gt;[a-zA-Z_]+)(\\[(?&lt;numElements&gt;\\d+)])?&quot;);</span>
 
     private static final String DATA_TYPE = &quot;dataType&quot;;
     private static final String TRANSFER_SIZE_CODE = &quot;transferSizeCode&quot;;
@@ -43,99 +46,130 @@ public class S7Field implements PlcField {
 
     private final TransportSize dataType;
     private final MemoryArea memoryArea;
-    private final short blockNumber;
-    private final short byteOffset;
+    private final int blockNumber;
+    private final int byteOffset;
     private final short bitOffset;
     private final int numElements;
 
-<span class="fc" id="L51">    private S7Field(TransportSize dataType, MemoryArea memoryArea, short blockNumber, short byteOffset, short bitOffset, int numElements) {</span>
-<span class="fc" id="L52">        this.dataType = dataType;</span>
-<span class="fc" id="L53">        this.memoryArea = memoryArea;</span>
-<span class="fc" id="L54">        this.blockNumber = blockNumber;</span>
-<span class="fc" id="L55">        this.byteOffset = byteOffset;</span>
-<span class="fc" id="L56">        this.bitOffset = bitOffset;</span>
-<span class="fc" id="L57">        this.numElements = numElements;</span>
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L54">    private S7Field(TransportSize dataType, MemoryArea memoryArea, int blockNumber, int byteOffset, short bitOffset, int numElements) {</span>
+<span class="fc" id="L55">        this.dataType = dataType;</span>
+<span class="fc" id="L56">        this.memoryArea = memoryArea;</span>
+<span class="fc" id="L57">        this.blockNumber = blockNumber;</span>
+<span class="fc" id="L58">        this.byteOffset = byteOffset;</span>
+<span class="fc" id="L59">        this.bitOffset = bitOffset;</span>
+<span class="fc" id="L60">        this.numElements = numElements;</span>
+<span class="fc" id="L61">    }</span>
 
     public TransportSize getDataType() {
-<span class="fc" id="L61">        return dataType;</span>
+<span class="fc" id="L64">        return dataType;</span>
     }
 
     public MemoryArea getMemoryArea() {
-<span class="fc" id="L65">        return memoryArea;</span>
+<span class="fc" id="L68">        return memoryArea;</span>
     }
 
-    public short getBlockNumber() {
-<span class="fc" id="L69">        return blockNumber;</span>
+    public int getBlockNumber() {
+<span class="fc" id="L72">        return blockNumber;</span>
     }
 
-    public short getByteOffset() {
-<span class="fc" id="L73">        return byteOffset;</span>
+    public int getByteOffset() {
+<span class="fc" id="L76">        return byteOffset;</span>
     }
 
     public short getBitOffset() {
-<span class="fc" id="L77">        return bitOffset;</span>
+<span class="fc" id="L80">        return bitOffset;</span>
     }
 
     public int getNumElements() {
-<span class="fc" id="L81">        return numElements;</span>
+<span class="fc" id="L84">        return numElements;</span>
     }
 
     public static boolean matches(String fieldString) {
-<span class="fc bfc" id="L85" title="All 2 branches covered.">        return DATA_BLOCK_ADDRESS_PATTERN.matcher(fieldString).matches() ||</span>
-<span class="pc bpc" id="L86" title="1 of 2 branches missed.">            ADDRESS_PATTERN.matcher(fieldString).matches();</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        return DATA_BLOCK_ADDRESS_PATTERN.matcher(fieldString).matches() ||</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">            ADDRESS_PATTERN.matcher(fieldString).matches();</span>
     }
 
     public static S7Field of(String fieldString) {
-<span class="fc" id="L90">        Matcher matcher = DATA_BLOCK_ADDRESS_PATTERN.matcher(fieldString);</span>
-<span class="fc bfc" id="L91" title="All 2 branches covered.">        if(matcher.matches()) {</span>
-<span class="fc" id="L92">            TransportSize dataType = TransportSize.valueOf(matcher.group(DATA_TYPE));</span>
-<span class="fc" id="L93">            MemoryArea memoryArea = MemoryArea.DATA_BLOCKS;</span>
-<span class="fc" id="L94">            String transferSizeCode = matcher.group(TRANSFER_SIZE_CODE);</span>
-<span class="fc" id="L95">            short blockNumber = Short.parseShort(matcher.group(BLOCK_NUMBER));</span>
-<span class="fc" id="L96">            short byteOffset = Short.parseShort(matcher.group(BYTE_OFFSET));</span>
-<span class="fc" id="L97">            short bitOffset = 0;</span>
-<span class="fc bfc" id="L98" title="All 2 branches covered.">            if(matcher.group(BIT_OFFSET) != null) {</span>
-<span class="fc" id="L99">                bitOffset = Short.parseShort(matcher.group(BIT_OFFSET));</span>
-<span class="fc bfc" id="L100" title="All 2 branches covered.">            } else if(dataType == TransportSize.BOOL) {</span>
-<span class="fc" id="L101">                throw new PlcInvalidFieldException(&quot;Expected bit offset for BOOL parameters.&quot;);</span>
+<span class="fc" id="L93">        Matcher matcher = DATA_BLOCK_ADDRESS_PATTERN.matcher(fieldString);</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if(matcher.matches()) {</span>
+<span class="fc" id="L95">            TransportSize dataType = TransportSize.valueOf(matcher.group(DATA_TYPE));</span>
+<span class="fc" id="L96">            MemoryArea memoryArea = MemoryArea.DATA_BLOCKS;</span>
+<span class="fc" id="L97">            String transferSizeCode = matcher.group(TRANSFER_SIZE_CODE);</span>
+
+<span class="fc" id="L99">            int blockNumber = checkDatablockNumber(Integer.parseInt(matcher.group(BLOCK_NUMBER)));</span>
+
+<span class="fc" id="L101">            int byteOffset = checkByteOffset(Integer.parseInt(matcher.group(BYTE_OFFSET)));</span>
+
+<span class="fc" id="L103">            short bitOffset = 0;</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            if(matcher.group(BIT_OFFSET) != null) {</span>
+<span class="fc" id="L105">                bitOffset = Short.parseShort(matcher.group(BIT_OFFSET));</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">            } else if(dataType == TransportSize.BOOL) {</span>
+<span class="fc" id="L107">                throw new PlcInvalidFieldException(&quot;Expected bit offset for BOOL parameters.&quot;);</span>
             }
-<span class="fc" id="L103">            int numElements = 1;</span>
-<span class="fc bfc" id="L104" title="All 2 branches covered.">            if(matcher.group(NUM_ELEMENTS) != null) {</span>
-<span class="fc" id="L105">                numElements = Integer.parseInt(matcher.group(NUM_ELEMENTS));</span>
+<span class="fc" id="L109">            int numElements = 1;</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if(matcher.group(NUM_ELEMENTS) != null) {</span>
+<span class="fc" id="L111">                numElements = Integer.parseInt(matcher.group(NUM_ELEMENTS));</span>
             }
-<span class="fc" id="L107">            numElements = calcNumberOfElementsForStringTypes(numElements,dataType);</span>
-<span class="pc bpc" id="L108" title="2 of 4 branches missed.">            if(!transferSizeCode.isEmpty() &amp;&amp; !dataType.getSizeCode().equals(transferSizeCode)) {</span>
-<span class="nc" id="L109">                throw new PlcInvalidFieldException(&quot;Transfer size code '&quot; + transferSizeCode +</span>
-<span class="nc" id="L110">                    &quot;' doesn't match specified data type '&quot; + dataType.name() + &quot;'&quot;);</span>
+<span class="fc" id="L113">            numElements = calcNumberOfElementsForStringTypes(numElements,dataType);</span>
+<span class="pc bpc" id="L114" title="2 of 4 branches missed.">            if(!transferSizeCode.isEmpty() &amp;&amp; !dataType.getSizeCode().equals(transferSizeCode)) {</span>
+<span class="nc" id="L115">                throw new PlcInvalidFieldException(&quot;Transfer size code '&quot; + transferSizeCode +</span>
+<span class="nc" id="L116">                    &quot;' doesn't match specified data type '&quot; + dataType.name() + &quot;'&quot;);</span>
             }
-<span class="fc" id="L112">            return new S7Field(dataType, memoryArea, blockNumber, byteOffset, bitOffset, numElements);</span>
+<span class="fc" id="L118">            return new S7Field(dataType, memoryArea, blockNumber, byteOffset, bitOffset, numElements);</span>
         } else {
-<span class="fc" id="L114">            matcher = ADDRESS_PATTERN.matcher(fieldString);</span>
-<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            if (matcher.matches()) {</span>
-<span class="fc" id="L116">                TransportSize dataType = TransportSize.valueOf(matcher.group(DATA_TYPE));</span>
-<span class="fc" id="L117">                MemoryArea memoryArea = MemoryArea.valueOfShortName(matcher.group(MEMORY_AREA));</span>
-<span class="fc" id="L118">                String transferSizeCode = matcher.group(TRANSFER_SIZE_CODE);</span>
-<span class="fc" id="L119">                short byteOffset = Short.parseShort(matcher.group(BYTE_OFFSET));</span>
-<span class="fc" id="L120">                short bitOffset = 0;</span>
-<span class="fc bfc" id="L121" title="All 2 branches covered.">                if(matcher.group(BIT_OFFSET) != null) {</span>
-<span class="fc" id="L122">                    bitOffset = Short.parseShort(matcher.group(BIT_OFFSET));</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">                } else if(dataType == TransportSize.BOOL) {</span>
-<span class="fc" id="L124">                    throw new PlcInvalidFieldException(&quot;Expected bit offset for BOOL parameters.&quot;);</span>
+<span class="fc" id="L120">            matcher = ADDRESS_PATTERN.matcher(fieldString);</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">            if (matcher.matches()) {</span>
+<span class="fc" id="L122">                TransportSize dataType = TransportSize.valueOf(matcher.group(DATA_TYPE));</span>
+<span class="fc" id="L123">                MemoryArea memoryArea = MemoryArea.valueOfShortName(matcher.group(MEMORY_AREA));</span>
+<span class="fc" id="L124">                String transferSizeCode = matcher.group(TRANSFER_SIZE_CODE);</span>
+
+<span class="fc" id="L126">                int byteOffset = checkByteOffset(Integer.parseInt(matcher.group(BYTE_OFFSET)));</span>
+
+<span class="fc" id="L128">                short bitOffset = 0;</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">                if(matcher.group(BIT_OFFSET) != null) {</span>
+<span class="fc" id="L130">                    bitOffset = Short.parseShort(matcher.group(BIT_OFFSET));</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">                } else if(dataType == TransportSize.BOOL) {</span>
+<span class="fc" id="L132">                    throw new PlcInvalidFieldException(&quot;Expected bit offset for BOOL parameters.&quot;);</span>
                 }
-<span class="fc" id="L126">                int numElements = 1;</span>
-<span class="pc bpc" id="L127" title="1 of 2 branches missed.">                if(matcher.group(NUM_ELEMENTS) != null) {</span>
-<span class="nc" id="L128">                    numElements = Integer.parseInt(matcher.group(NUM_ELEMENTS));</span>
+<span class="fc" id="L134">                int numElements = 1;</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">                if(matcher.group(NUM_ELEMENTS) != null) {</span>
+<span class="nc" id="L136">                    numElements = Integer.parseInt(matcher.group(NUM_ELEMENTS));</span>
                 }
-<span class="fc" id="L130">                numElements = calcNumberOfElementsForStringTypes(numElements,dataType);</span>
-<span class="fc bfc" id="L131" title="All 4 branches covered.">                if(!transferSizeCode.isEmpty() &amp;&amp; !dataType.getSizeCode().equals(transferSizeCode)) {</span>
-<span class="fc" id="L132">                    throw new PlcInvalidFieldException(&quot;Transfer size code '&quot; + transferSizeCode +</span>
-<span class="fc" id="L133">                        &quot;' doesn't match specified data type '&quot; + dataType.name() + &quot;'&quot;);</span>
+<span class="fc" id="L138">                numElements = calcNumberOfElementsForStringTypes(numElements,dataType);</span>
+<span class="fc bfc" id="L139" title="All 4 branches covered.">                if(!transferSizeCode.isEmpty() &amp;&amp; !dataType.getSizeCode().equals(transferSizeCode)) {</span>
+<span class="fc" id="L140">                    throw new PlcInvalidFieldException(&quot;Transfer size code '&quot; + transferSizeCode +</span>
+<span class="fc" id="L141">                        &quot;' doesn't match specified data type '&quot; + dataType.name() + &quot;'&quot;);</span>
                 }
-<span class="fc" id="L135">                return new S7Field(dataType, memoryArea, (short) 0, byteOffset, bitOffset, numElements);</span>
+<span class="fc" id="L143">                return new S7Field(dataType, memoryArea, (short) 0, byteOffset, bitOffset, numElements);</span>
             }
         }
-<span class="nc" id="L138">        throw new PlcInvalidFieldException(&quot;Unable to parse address: &quot; + fieldString);</span>
+<span class="nc" id="L146">        throw new PlcInvalidFieldException(&quot;Unable to parse address: &quot; + fieldString);</span>
+    }
+
+    /**
+     * checks if DatablockNumber of S7Field is in valid range
+     * @param blockNumber given DatablockNumber
+     * @return given blockNumber if Ok, throws PlcInvalidFieldException otherwise
+     */
+    private static int checkDatablockNumber(int blockNumber){
+        //ToDo check the value or add reference - limit eventually depending on active S7 --&gt; make a case selection
+<span class="pc bpc" id="L156" title="2 of 4 branches missed.">        if(blockNumber&gt;64000 || blockNumber&lt;1){</span>
+<span class="nc" id="L157">            throw new PlcInvalidFieldException(&quot;Datablock numbers larger than 64000 or smaller than 1 are not supported.&quot;);</span>
+        }
+<span class="fc" id="L159">        return blockNumber;</span>
+    }
+
+    /**
+     * checks if ByteOffset from S7Field is in valid range
+     * @param byteOffset given byteOffset
+     * @return given byteOffset if Ok, throws PlcInvalidFieldException otherwise
+     */
+    private static int checkByteOffset(int byteOffset){
+        //ToDo check the value or add reference
+<span class="pc bpc" id="L169" title="2 of 4 branches missed.">        if(byteOffset&gt;2097151 || byteOffset&lt;0){</span>
+<span class="nc" id="L170">            throw new PlcInvalidFieldException(&quot;ByteOffset must be smaller than 2097151 and positive.&quot;);</span>
+        }
+<span class="fc" id="L172">        return byteOffset;</span>
     }
 
     /**
@@ -146,15 +180,15 @@ public class S7Field implements PlcField {
      */
     private static int calcNumberOfElementsForStringTypes(int numElements,TransportSize dataType){
         //if no String nothing has to be done
-<span class="fc bfc" id="L149" title="All 2 branches covered.">        if(!dataType.equals(TransportSize.STRING)){</span>
-<span class="fc" id="L150">            return numElements;</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        if(!dataType.equals(TransportSize.STRING)){</span>
+<span class="fc" id="L184">            return numElements;</span>
         }
         //on valid String-length add two byte because of S7-representation of Strings
-<span class="pc bpc" id="L153" title="3 of 4 branches missed.">        if(numElements&gt;1 &amp;&amp; numElements&lt;=254){</span>
-<span class="nc" id="L154">            return numElements+2;</span>
+<span class="pc bpc" id="L187" title="3 of 4 branches missed.">        if(numElements&gt;1 &amp;&amp; numElements&lt;=254){</span>
+<span class="nc" id="L188">            return numElements+2;</span>
         }
         //connection String usage with &quot;STRING&quot; only --&gt; numElements=1 --&gt; enter default value
-<span class="fc" id="L157">        return 256;</span>
+<span class="fc" id="L191">        return 256;</span>
     }
 
 }
