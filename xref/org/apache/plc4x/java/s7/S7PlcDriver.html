@@ -76,15 +76,17 @@
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>              <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html">S7PlcConnection</a>(serverInetAddress, rack, slot, params);
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>          } <strong class="jxr_keyword">catch</strong> (UnknownHostException e) {
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(<span class="jxr_string">"Error parsing address"</span>, e);
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>          }
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>      }
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>  
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>      @Override
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> connect(String url, <a href="../../../../../org/apache/plc4x/java/api/authentication/PlcAuthentication.html">PlcAuthentication</a> authentication) <strong class="jxr_keyword">throws</strong> PlcConnectionException {
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>          <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(<span class="jxr_string">"Basic S7 connections don't support authentication."</span>);
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>      }
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>  
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>  }
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          } <strong class="jxr_keyword">catch</strong> (Exception e) {
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(<span class="jxr_string">"Error connecting to host"</span>, e);
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>          }
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>      }
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>  
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>      @Override
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> connect(String url, <a href="../../../../../org/apache/plc4x/java/api/authentication/PlcAuthentication.html">PlcAuthentication</a> authentication) <strong class="jxr_keyword">throws</strong> PlcConnectionException {
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>          <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(<span class="jxr_string">"Basic S7 connections don't support authentication."</span>);
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>      }
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>  
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017&#x2013;2019 <a href="https://www.apache.org/">The Apache Software Foundation</a>. All rights reserved.</div>

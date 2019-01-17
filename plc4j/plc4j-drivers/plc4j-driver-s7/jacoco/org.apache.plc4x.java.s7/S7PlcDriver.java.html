@@ -68,12 +68,14 @@ import java.util.regex.Pattern;
 <span class="fc" id="L68">            return new S7PlcConnection(serverInetAddress, rack, slot, params);</span>
 <span class="fc" id="L69">        } catch (UnknownHostException e) {</span>
 <span class="fc" id="L70">            throw new PlcConnectionException(&quot;Error parsing address&quot;, e);</span>
+<span class="nc" id="L71">        } catch (Exception e) {</span>
+<span class="nc" id="L72">            throw new PlcConnectionException(&quot;Error connecting to host&quot;, e);</span>
         }
     }
 
     @Override
     public PlcConnection connect(String url, PlcAuthentication authentication) throws PlcConnectionException {
-<span class="fc" id="L76">        throw new PlcConnectionException(&quot;Basic S7 connections don't support authentication.&quot;);</span>
+<span class="fc" id="L78">        throw new PlcConnectionException(&quot;Basic S7 connections don't support authentication.&quot;);</span>
     }
 
 }
