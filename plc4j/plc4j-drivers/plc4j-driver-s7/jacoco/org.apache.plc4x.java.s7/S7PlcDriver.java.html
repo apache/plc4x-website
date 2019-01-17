@@ -66,8 +66,8 @@ import java.util.regex.Pattern;
         try {
 <span class="fc" id="L67">            InetAddress serverInetAddress = InetAddress.getByName(host);</span>
 <span class="fc" id="L68">            return new S7PlcConnection(serverInetAddress, rack, slot, params);</span>
-<span class="fc" id="L69">        } catch (UnknownHostException e) {</span>
-<span class="fc" id="L70">            throw new PlcConnectionException(&quot;Error parsing address&quot;, e);</span>
+<span class="nc" id="L69">        } catch (UnknownHostException e) {</span>
+<span class="nc" id="L70">            throw new PlcConnectionException(&quot;Error parsing address&quot;, e);</span>
 <span class="nc" id="L71">        } catch (Exception e) {</span>
 <span class="nc" id="L72">            throw new PlcConnectionException(&quot;Error connecting to host&quot;, e);</span>
         }
