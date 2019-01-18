@@ -41,9 +41,9 @@
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.Arrays;
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * Little helper class used to generate pcapng files for usage in Wireshark.</em>
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * Little helper class used to generate pcap files for usage in Wireshark.</em>
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * As I can't use the WireShark code to define the constant values for the s7 protocol as</em>
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> * this code is licensed under GPL, with this tool, I'll simply generate loads of pcapng files</em>
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> * this code is licensed under GPL, with this tool, I'll simply generate loads of pcap files</em>
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * each with slightly different values and hereby find out the constant values.</em>
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/s7/PcapGenerator.html">PcapGenerator</a> {
@@ -300,7 +300,7 @@
 <a class="jxr_linenumber" name="L292" href="#L292">292</a>             <em class="jxr_comment">// Generate a packet.</em>
 <a class="jxr_linenumber" name="L293" href="#L293">293</a>             byte[] copy = Arrays.copyOf(template, template.length);
 <a class="jxr_linenumber" name="L294" href="#L294">294</a>             copy[byteIndex] = (byte) i;
-<a class="jxr_linenumber" name="L295" href="#L295">295</a>             File output = <strong class="jxr_keyword">new</strong> File(testDir, i + <span class="jxr_string">".pcapng"</span>);
+<a class="jxr_linenumber" name="L295" href="#L295">295</a>             File output = <strong class="jxr_keyword">new</strong> File(testDir, i + <span class="jxr_string">".pcap"</span>);
 <a class="jxr_linenumber" name="L296" href="#L296">296</a>             FileUtils.writeByteArrayToFile(output, copy);
 <a class="jxr_linenumber" name="L297" href="#L297">297</a> 
 <a class="jxr_linenumber" name="L298" href="#L298">298</a>             <em class="jxr_comment">// Use WireShark to decode the packet to an xml form.</em>
