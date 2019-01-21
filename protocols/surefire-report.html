@@ -73,6 +73,7 @@
                     <li class="dropdown-submenu ">
 <a  href="project-reports.html"  title="Project Reports" >Project Reports</a>                    <ul class="dropdown-menu">
                                         <li  class="active" ><a  href=""  title="Surefire Report" >Surefire Report</a></li>
+                        <li ><a  href="jacoco/index.html"  title="JaCoCo" >JaCoCo</a></li>
                         <li ><a  href="xref-test/index.html"  title="Test Source Xref" >Test Source Xref</a></li>
                         <li ><a  href="testapidocs/index.html"  title="Test Javadoc" >Test Javadoc</a></li>
                         <li ><a  href="changelog.html"  title="Change Log" >Change Log</a></li>
@@ -150,7 +151,15 @@
                             </ul>
                         </li>
                         <li class="divider-vertical"></li>
-                        <li class="toplevel"><a href="#_toc_test_cases" title="Test Cases">Test Cases</a></li>
+                        <li class="dropdown">
+                            <a href="#_toc_test_cases" title="Test Cases" class="dropdown-toggle" role="button" data-toggle="dropdown">Test Cases <b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
+                                <li><a href="#_toc_test_cases" title="Test Cases">Test Cases</a></li>
+                                <li class="divider"></li>
+                                              <li><a href="#_toc_tpktprotocoltest" title="TpktProtocolTest">TpktProtocolTest</a></li>
+                            </ul>
+                        </li>
           </ul>
         </div>
       </div> <!-- .container -->
@@ -204,12 +213,12 @@ function toggleDisplay(elementId) {
   </thead> 
   <tbody> 
    <tr class="b"> 
+    <td>4</td> 
     <td>0</td> 
     <td>0</td> 
     <td>0</td> 
-    <td>0</td> 
-    <td>0%</td> 
-    <td>0.008</td> 
+    <td>100%</td> 
+    <td>13.135</td> 
    </tr> 
   </tbody> 
  </table> 
@@ -237,12 +246,12 @@ function toggleDisplay(elementId) {
   <tbody> 
    <tr class="b"> 
     <td><a href="#org.apache.plc4x.protocols">org.apache.plc4x.protocols</a></td> 
+    <td>4</td> 
     <td>0</td> 
     <td>0</td> 
     <td>0</td> 
-    <td>0</td> 
-    <td>0%</td> 
-    <td>0.008</td> 
+    <td>100%</td> 
+    <td>13.135</td> 
    </tr> 
   </tbody> 
  </table> 
@@ -266,14 +275,14 @@ function toggleDisplay(elementId) {
    </thead> 
    <tbody> 
     <tr class="b"> 
-     <td><a href="#org.apache.plc4x.protocols.CotpProtocolTest"><i class="glyphicon glyphicon-ok"></i></a></td> 
-     <td><a href="#org.apache.plc4x.protocols.CotpProtocolTest">CotpProtocolTest</a></td> 
+     <td><a href="#org.apache.plc4x.protocols.TpktProtocolTest"><i class="glyphicon glyphicon-ok"></i></a></td> 
+     <td><a href="#org.apache.plc4x.protocols.TpktProtocolTest">TpktProtocolTest</a></td> 
+     <td>4</td> 
      <td>0</td> 
      <td>0</td> 
      <td>0</td> 
-     <td>0</td> 
-     <td>0%</td> 
-     <td>0.008</td> 
+     <td>100%</td> 
+     <td>13.135</td> 
     </tr> 
    </tbody> 
   </table> 
@@ -284,6 +293,34 @@ function toggleDisplay(elementId) {
  <h2 id="_toc_test_cases">Test Cases</h2> 
  <a name="Test_Cases"></a> 
  <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p> 
+ <div class="section"> 
+  <h3 id="_toc_tpktprotocoltest">TpktProtocolTest</h3> 
+  <a name="org.apache.plc4x.protocols.TpktProtocolTest"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="glyphicon glyphicon-ok"></i></td> 
+     <td><a name="TC_org.apache.plc4x.protocols.TpktProtocolTest.tpktPacketContainingCotpConnectResponse"></a>tpktPacketContainingCotpConnectResponse</td> 
+     <td>12.603</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="glyphicon glyphicon-ok"></i></td> 
+     <td><a name="TC_org.apache.plc4x.protocols.TpktProtocolTest.tooLongPayload"></a>tooLongPayload</td> 
+     <td>0.277</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="glyphicon glyphicon-ok"></i></td> 
+     <td><a name="TC_org.apache.plc4x.protocols.TpktProtocolTest.tooShortPayload"></a>tooShortPayload</td> 
+     <td>0.101</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="glyphicon glyphicon-ok"></i></td> 
+     <td><a name="TC_org.apache.plc4x.protocols.TpktProtocolTest.invalidMagicByte"></a>invalidMagicByte</td> 
+     <td>0.132</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
  <br> 
 </div>      </div>
     </div>
@@ -303,6 +340,7 @@ function toggleDisplay(elementId) {
                     <li ><a  href="project-info.html"  title="Project Information" >Project Information <i class="glyphicon glyphicon-chevron-right"></i></a></li>
                                     <li ><a  href="project-reports.html"  title="Project Reports" >Project Reports <i class="glyphicon glyphicon-chevron-down"></i></a>        <ul class="nav nav-list">
                                     <li  class="active" ><a  href="#"  title="Surefire Report" >Surefire Report</a></li>
+                    <li ><a  href="jacoco/index.html"  title="JaCoCo" >JaCoCo</a></li>
                     <li ><a  href="xref-test/index.html"  title="Test Source Xref" >Test Source Xref</a></li>
                     <li ><a  href="testapidocs/index.html"  title="Test Javadoc" >Test Javadoc</a></li>
                     <li ><a  href="changelog.html"  title="Change Log" >Change Log</a></li>
