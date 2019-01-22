@@ -452,6 +452,49 @@ Bug Fixes
    <div class="paragraph"> 
     <p>However this just prepared the git repository for the release, we have to perform the release to produce and stage the release artifacts.</p> 
    </div> 
+   <div class="paragraph"> 
+    <p>Please verify the git repository at: <a href="https://gitbox.apache.org/repos/asf?p=incubator-plc4x.git" class="bare">https://gitbox.apache.org/repos/asf?p=incubator-plc4x.git</a> is in the correct state. Please select the release branch and verify the commit log looks similar to this</p> 
+   </div> 
+   <div class="imageblock"> 
+    <div class="content"> 
+     <img src="../img/release-git-history.png" alt="release git history" class="img-responsive"> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>It is important that the commit with the message "[maven-release-plugin] prepare release XXX" is tagged with the release tag (in this case release/0.3.0)</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>If you check the commit itself, it should mainly consist of version updates like this:</p> 
+   </div> 
+   <div class="imageblock"> 
+    <div class="content"> 
+     <img src="../img/release-git-diff-prepare-release.png" alt="release git diff prepare release" class="img-responsive"> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>The root pom has a few more changes, but in general this should be what you are seeing.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>After that should come a second commit:</p> 
+   </div> 
+   <div class="imageblock"> 
+    <div class="content"> 
+     <img src="../img/release-git-diff-next-development-iteration.png" alt="release git diff next development iteration" class="img-responsive"> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>This now updates the versions again, but this time from the release version to the one we selected for the next development iteration (in this case 0.3.1-SNAPSHOT)</p> 
+   </div> 
+   <div class="admonitionblock note"> 
+    <table> 
+     <tbody> 
+      <tr> 
+       <td class="icon"> <i class="fa icon-note" title="Note"></i> </td> 
+       <td class="content"> If the commit history doesn’t look like this, something went wrong. </td> 
+      </tr> 
+     </tbody> 
+    </table> 
+   </div> 
   </div> 
  </div> 
 </div> 
