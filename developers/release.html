@@ -417,11 +417,11 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:prepare -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:prepare -P with-cpp -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>In general the plugin will now ask you 3 questions:</p> 
+    <p>(The <code>-P with-cpp</code> tells maven to activace the <code>with-cpp</code> profile which also enables the C++ modules and makes sure the versions of these modules are updated as part of the release) In general the plugin will now ask you 3 questions:</p> 
    </div> 
    <div class="olist arabic"> 
     <ol class="arabic"> 
