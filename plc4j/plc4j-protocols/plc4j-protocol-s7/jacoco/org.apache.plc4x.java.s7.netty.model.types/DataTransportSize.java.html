@@ -25,13 +25,13 @@ import java.util.Map;
  * (Values determined by evaluating generated &quot;.pcap&quot; files)
  */
 <span class="fc" id="L27">public enum DataTransportSize {</span>
-<span class="fc" id="L28">    NULL((byte) 0x00, false, false),</span>
-<span class="fc" id="L29">    BIT((byte) 0x03, true, true),</span>
-<span class="fc" id="L30">    BYTE_WORD_DWORD((byte) 0x04, true, false),</span>
-<span class="fc" id="L31">    INTEGER((byte) 0x05, true, false),</span>
-<span class="fc" id="L32">    DINTEGER((byte) 0x06, false, false),</span>
-<span class="fc" id="L33">    REAL((byte) 0x07, false, false),</span>
-<span class="fc" id="L34">    OCTET_STRING((byte) 0x09, false, false);</span>
+<span class="fc" id="L28">    NULL((byte) 0x00, false),</span>
+<span class="fc" id="L29">    BIT((byte) 0x03, true),</span>
+<span class="fc" id="L30">    BYTE_WORD_DWORD((byte) 0x04, true),</span>
+<span class="fc" id="L31">    INTEGER((byte) 0x05, true),</span>
+<span class="fc" id="L32">    DINTEGER((byte) 0x06, false),</span>
+<span class="fc" id="L33">    REAL((byte) 0x07, false),</span>
+<span class="fc" id="L34">    OCTET_STRING((byte) 0x09, false);</span>
 
     private static final Map&lt;Byte, DataTransportSize&gt; map;
     static {
@@ -43,28 +43,22 @@ import java.util.Map;
 
     private final byte code;
     private final boolean sizeInBits;
-    private final boolean hasBlankByte;
 
-<span class="fc" id="L48">    DataTransportSize(byte code, boolean sizeInBits, boolean hasBlankByte) {</span>
-<span class="fc" id="L49">        this.code = code;</span>
-<span class="fc" id="L50">        this.sizeInBits = sizeInBits;</span>
-<span class="fc" id="L51">        this.hasBlankByte = hasBlankByte;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L47">    DataTransportSize(byte code, boolean sizeInBits) {</span>
+<span class="fc" id="L48">        this.code = code;</span>
+<span class="fc" id="L49">        this.sizeInBits = sizeInBits;</span>
+<span class="fc" id="L50">    }</span>
 
     public byte getCode() {
-<span class="fc" id="L55">        return code;</span>
+<span class="fc" id="L53">        return code;</span>
     }
 
     public boolean isSizeInBits() {
-<span class="fc" id="L59">        return sizeInBits;</span>
-    }
-
-    public boolean isHasBlankByte() {
-<span class="nc" id="L63">        return hasBlankByte;</span>
+<span class="fc" id="L57">        return sizeInBits;</span>
     }
 
     public static DataTransportSize valueOf(byte code) {
-<span class="fc" id="L67">        return map.get(code);</span>
+<span class="fc" id="L61">        return map.get(code);</span>
     }
 
 }
