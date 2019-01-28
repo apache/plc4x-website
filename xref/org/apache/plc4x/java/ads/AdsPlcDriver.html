@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -46,7 +46,7 @@
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> * - TCP</em>
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * - Serial</em>
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/ads/AdsPlcDriver.html">AdsPlcDriver</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../../org/apache/plc4x/java/spi/PlcDriver.html">PlcDriver</a> {
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="AdsPlcDriver" href="../../../../../org/apache/plc4x/java/ads/AdsPlcDriver.html#AdsPlcDriver">AdsPlcDriver</a> <strong class="jxr_keyword">implements</strong> <a name="PlcDriver" href="../../../../../org/apache/plc4x/java/spi/PlcDriver.html#PlcDriver">PlcDriver</a> {
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Pattern ADS_ADDRESS_PATTERN =
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>          Pattern.compile(<span class="jxr_string">"(?&lt;targetAmsNetId&gt;"</span> + AmsNetId.AMS_NET_ID_PATTERN + <span class="jxr_string">"):(?&lt;targetAmsPort&gt;"</span> + AmsPort.AMS_PORT_PATTERN + <span class="jxr_string">")"</span>
@@ -57,13 +57,13 @@
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Pattern SERIAL_PATTERN = Pattern.compile(<span class="jxr_string">"serial://(?&lt;serialDefinition&gt;((?!/&#92;&#92;d).)*)"</span>);
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Pattern ADS_URI_PATTERN = Pattern.compile(<span class="jxr_string">"^ads:("</span> + INET_ADDRESS_PATTERN + <span class="jxr_string">"|"</span> + SERIAL_PATTERN + <span class="jxr_string">")/"</span> + ADS_ADDRESS_PATTERN + <span class="jxr_string">"(&#92;&#92;?.*)?"</span>);
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../../org/apache/plc4x/java/ads/connection/AdsConnectionFactory.html">AdsConnectionFactory</a> adsConnectionFactory;
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> <a name="AdsConnectionFactory" href="../../../../../org/apache/plc4x/java/ads/connection/AdsConnectionFactory.html#AdsConnectionFactory">AdsConnectionFactory</a> adsConnectionFactory;
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/ads/AdsPlcDriver.html">AdsPlcDriver</a>() {
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>          <strong class="jxr_keyword">this</strong>.adsConnectionFactory = <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/ads/connection/AdsConnectionFactory.html">AdsConnectionFactory</a>();
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>      <strong class="jxr_keyword">public</strong> <a name="AdsPlcDriver" href="../../../../../org/apache/plc4x/java/ads/AdsPlcDriver.html#AdsPlcDriver">AdsPlcDriver</a>() {
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>          <strong class="jxr_keyword">this</strong>.adsConnectionFactory = <strong class="jxr_keyword">new</strong> <a name="AdsConnectionFactory" href="../../../../../org/apache/plc4x/java/ads/connection/AdsConnectionFactory.html#AdsConnectionFactory">AdsConnectionFactory</a>();
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>      }
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/ads/AdsPlcDriver.html">AdsPlcDriver</a>(<a href="../../../../../org/apache/plc4x/java/ads/connection/AdsConnectionFactory.html">AdsConnectionFactory</a> adsConnectionFactory) {
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">public</strong> <a name="AdsPlcDriver" href="../../../../../org/apache/plc4x/java/ads/AdsPlcDriver.html#AdsPlcDriver">AdsPlcDriver</a>(<a name="AdsConnectionFactory" href="../../../../../org/apache/plc4x/java/ads/connection/AdsConnectionFactory.html#AdsConnectionFactory">AdsConnectionFactory</a> adsConnectionFactory) {
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">this</strong>.adsConnectionFactory = adsConnectionFactory;
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>      }
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
@@ -78,22 +78,22 @@
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>      }
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>  
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>      @Override
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> connect(String url) <strong class="jxr_keyword">throws</strong> PlcConnectionException {
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">public</strong> <a name="PlcConnection" href="../../../../../org/apache/plc4x/java/api/PlcConnection.html#PlcConnection">PlcConnection</a> connect(String url) <strong class="jxr_keyword">throws</strong> <a name="PlcConnectionException" href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> {
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          Matcher matcher = ADS_URI_PATTERN.matcher(url);
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>          <strong class="jxr_keyword">if</strong> (!matcher.matches()) {
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcConnectionException" href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a>(
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>                  <span class="jxr_string">"Connection url "</span> + url + <span class="jxr_string">" doesn't match 'ads://{{host|ip}|serial:definition}/{targetAmsNetId}:{targetAmsPort}/{sourceAmsNetId}:{sourceAmsPort}' RAW:"</span> + ADS_URI_PATTERN);
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>          }
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          String host = matcher.group(<span class="jxr_string">"host"</span>);
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>          String serialDefinition = matcher.group(<span class="jxr_string">"serialDefinition"</span>);
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>          String portString = matcher.group(<span class="jxr_string">"port"</span>);
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>          Integer port = StringUtils.isNotBlank(portString) ? Integer.parseInt(portString) : <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>          <a href="../../../../../org/apache/plc4x/java/ads/api/generic/types/AmsNetId.html">AmsNetId</a> targetAmsNetId = AmsNetId.of(matcher.group(<span class="jxr_string">"targetAmsNetId"</span>));
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>          <a href="../../../../../org/apache/plc4x/java/ads/api/generic/types/AmsPort.html">AmsPort</a> targetAmsPort = AmsPort.of(matcher.group(<span class="jxr_string">"targetAmsPort"</span>));
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>          <a name="AmsNetId" href="../../../../../org/apache/plc4x/java/ads/api/generic/types/AmsNetId.html#AmsNetId">AmsNetId</a> targetAmsNetId = AmsNetId.of(matcher.group(<span class="jxr_string">"targetAmsNetId"</span>));
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>          <a name="AmsPort" href="../../../../../org/apache/plc4x/java/ads/api/generic/types/AmsPort.html#AmsPort">AmsPort</a> targetAmsPort = AmsPort.of(matcher.group(<span class="jxr_string">"targetAmsPort"</span>));
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          String sourceAmsNetIdString = matcher.group(<span class="jxr_string">"sourceAmsNetId"</span>);
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>          <a href="../../../../../org/apache/plc4x/java/ads/api/generic/types/AmsNetId.html">AmsNetId</a> sourceAmsNetId = StringUtils.isNotBlank(sourceAmsNetIdString) ? AmsNetId.of(sourceAmsNetIdString) : <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>          <a name="AmsNetId" href="../../../../../org/apache/plc4x/java/ads/api/generic/types/AmsNetId.html#AmsNetId">AmsNetId</a> sourceAmsNetId = StringUtils.isNotBlank(sourceAmsNetIdString) ? AmsNetId.of(sourceAmsNetIdString) : <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          String sourceAmsPortString = matcher.group(<span class="jxr_string">"sourceAmsPort"</span>);
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>          <a href="../../../../../org/apache/plc4x/java/ads/api/generic/types/AmsPort.html">AmsPort</a> sourceAmsPort = StringUtils.isNotBlank(sourceAmsPortString) ? AmsPort.of(sourceAmsPortString) : <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>          <a name="AmsPort" href="../../../../../org/apache/plc4x/java/ads/api/generic/types/AmsPort.html#AmsPort">AmsPort</a> sourceAmsPort = StringUtils.isNotBlank(sourceAmsPortString) ? AmsPort.of(sourceAmsPortString) : <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>  
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>          <strong class="jxr_keyword">if</strong> (serialDefinition != <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>              <strong class="jxr_keyword">return</strong> adsConnectionFactory.adsSerialPlcConnectionOf(serialDefinition, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);
@@ -101,14 +101,14 @@
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>              <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>                  <strong class="jxr_keyword">return</strong> adsConnectionFactory.adsTcpPlcConnectionOf(InetAddress.getByName(host), port, targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort);
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>              } <strong class="jxr_keyword">catch</strong> (UnknownHostException e) {
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>                  <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(e);
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>                  <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcConnectionException" href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a>(e);
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>              }
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>          }
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>      }
 <a class="jxr_linenumber" name="L100" href="#L100">100</a> 
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>     @Override
-<a class="jxr_linenumber" name="L102" href="#L102">102</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> connect(String url, <a href="../../../../../org/apache/plc4x/java/api/authentication/PlcAuthentication.html">PlcAuthentication</a> authentication) <strong class="jxr_keyword">throws</strong> PlcConnectionException {
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(<span class="jxr_string">"Basic ADS connections don't support authentication."</span>);
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>     <strong class="jxr_keyword">public</strong> <a name="PlcConnection" href="../../../../../org/apache/plc4x/java/api/PlcConnection.html#PlcConnection">PlcConnection</a> connect(String url, <a name="PlcAuthentication" href="../../../../../org/apache/plc4x/java/api/authentication/PlcAuthentication.html#PlcAuthentication">PlcAuthentication</a> authentication) <strong class="jxr_keyword">throws</strong> <a name="PlcConnectionException" href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> {
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>         <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcConnectionException" href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a>(<span class="jxr_string">"Basic ADS connections don't support authentication."</span>);
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>     }
 <a class="jxr_linenumber" name="L105" href="#L105">105</a> 
 <a class="jxr_linenumber" name="L106" href="#L106">106</a> }

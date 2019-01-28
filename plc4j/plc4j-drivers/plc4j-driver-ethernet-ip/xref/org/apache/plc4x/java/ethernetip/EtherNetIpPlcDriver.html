@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -39,12 +39,12 @@
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment"> * Implementation of the Ethernet/IP protocol, based on the driver implementation available at:</em>
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> * https://github.com/digitalpetri/ethernet-ip/</em>
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> * <a href="https://github.com/digitalpetri/ethernet-ip/" target="alexandria_uri">https://github.com/digitalpetri/ethernet-ip/</a></em>
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * Spec:</em>
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * <a href="http://read.pudn.com/downloads166/ebook/763212/EIP-CIP-V2-1.0.pd" target="alexandria_uri">http://read.pudn.com/downloads166/ebook/763212/EIP-CIP-V2-1.0.pd</a>f</em>
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * <a href="http://read.pudn.com/downloads166/ebook/763212/EIP-CIP-V2-1.0.pdf" target="alexandria_uri">http://read.pudn.com/downloads166/ebook/763212/EIP-CIP-V2-1.0.pdf</a></em>
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/ethernetip/EtherNetIpPlcDriver.html">EtherNetIpPlcDriver</a> <strong class="jxr_keyword">implements</strong> PlcDriver {
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="EtherNetIpPlcDriver" href="../../../../../org/apache/plc4x/java/ethernetip/EtherNetIpPlcDriver.html#EtherNetIpPlcDriver">EtherNetIpPlcDriver</a> <strong class="jxr_keyword">implements</strong> PlcDriver {
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Pattern ETHERNETIP_URI_PATTERN = Pattern.compile(<span class="jxr_string">"^eip://(?&lt;host&gt;[&#92;&#92;w.]+)(:(?&lt;port&gt;&#92;&#92;d*))?(?&lt;params&gt;&#92;&#92;?.*)?"</span>);
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  
@@ -72,9 +72,9 @@
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>          <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>              InetAddress inetAddress = InetAddress.getByName(host);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>              <strong class="jxr_keyword">if</strong> (port == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>                  <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html">EtherNetIpTcpPlcConnection</a>(inetAddress, params);
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>                  <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="EtherNetIpTcpPlcConnection" href="../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html#EtherNetIpTcpPlcConnection">EtherNetIpTcpPlcConnection</a>(inetAddress, params);
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>              } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>                  <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html">EtherNetIpTcpPlcConnection</a>(inetAddress, Integer.valueOf(port), params);
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>                  <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="EtherNetIpTcpPlcConnection" href="../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html#EtherNetIpTcpPlcConnection">EtherNetIpTcpPlcConnection</a>(inetAddress, Integer.valueOf(port), params);
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>              }
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          } <strong class="jxr_keyword">catch</strong> (UnknownHostException e) {
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> PlcConnectionException(<span class="jxr_string">"Unknown host"</span> + host, e);

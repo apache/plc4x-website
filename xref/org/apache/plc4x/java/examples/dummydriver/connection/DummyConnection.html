@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -42,7 +42,7 @@
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.net.InetAddress;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.CompletableFuture;
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/examples/dummydriver/connection/DummyConnection.html">DummyConnection</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html">NettyPlcConnection</a> <strong class="jxr_keyword">implements</strong> PlcReader, <a href="../../../../../../../org/apache/plc4x/java/base/messages/PlcWriter.html">PlcWriter</a> {
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="DummyConnection" href="../../../../../../../org/apache/plc4x/java/examples/dummydriver/connection/DummyConnection.html#DummyConnection">DummyConnection</a> <strong class="jxr_keyword">extends</strong> <a name="NettyPlcConnection" href="../../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html#NettyPlcConnection">NettyPlcConnection</a> <strong class="jxr_keyword">implements</strong> PlcReader, <a name="PlcWriter" href="../../../../../../../org/apache/plc4x/java/base/messages/PlcWriter.html#PlcWriter">PlcWriter</a> {
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>      @SuppressWarnings(<span class="jxr_string">"unused"</span>)
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger logger = LoggerFactory.getLogger(DummyConnection.<strong class="jxr_keyword">class</strong>);
@@ -50,8 +50,8 @@
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>      @SuppressWarnings(<span class="jxr_string">"unused"</span>)
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> connected;
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../../org/apache/plc4x/java/examples/dummydriver/connection/DummyConnection.html">DummyConnection</a>(InetAddress host) {
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>          <strong class="jxr_keyword">super</strong>(<strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/base/connection/TcpSocketChannelFactory.html">TcpSocketChannelFactory</a>(host, 42));
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">public</strong> <a name="DummyConnection" href="../../../../../../../org/apache/plc4x/java/examples/dummydriver/connection/DummyConnection.html#DummyConnection">DummyConnection</a>(InetAddress host) {
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>          <strong class="jxr_keyword">super</strong>(<strong class="jxr_keyword">new</strong> <a name="TcpSocketChannelFactory" href="../../../../../../../org/apache/plc4x/java/base/connection/TcpSocketChannelFactory.html#TcpSocketChannelFactory">TcpSocketChannelFactory</a>(host, 42));
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>      }
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      @Override
@@ -64,20 +64,20 @@
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>      }
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>      @Override
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">public</strong> CompletableFuture&lt;PlcReadResponse&gt; read(<a href="../../../../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.html">PlcReadRequest</a> readRequest) {
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">public</strong> CompletableFuture&lt;PlcReadResponse&gt; read(<a name="PlcReadRequest" href="../../../../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.html#PlcReadRequest">PlcReadRequest</a> readRequest) {
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>          CompletableFuture&lt;InternalPlcReadResponse&gt; readFuture = <strong class="jxr_keyword">new</strong> CompletableFuture&lt;&gt;();
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>          PlcRequestContainer&lt;InternalPlcReadRequest, InternalPlcReadResponse&gt; container =
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>              <strong class="jxr_keyword">new</strong> PlcRequestContainer&lt;&gt;((InternalPlcReadRequest) readRequest, readFuture);
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>              <strong class="jxr_keyword">new</strong> PlcRequestContainer&lt;&gt;((<a name="InternalPlcReadRequest" href="../../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html#InternalPlcReadRequest">InternalPlcReadRequest</a>) readRequest, readFuture);
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>          channel.writeAndFlush(container);
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>          <strong class="jxr_keyword">return</strong> readFuture
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>              .thenApply(PlcReadResponse.<strong class="jxr_keyword">class</strong>::<strong class="jxr_keyword">cast</strong>);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>      }
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      @Override
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>      <strong class="jxr_keyword">public</strong> CompletableFuture&lt;PlcWriteResponse&gt; write(<a href="../../../../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html">PlcWriteRequest</a> writeRequest) {
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>      <strong class="jxr_keyword">public</strong> CompletableFuture&lt;PlcWriteResponse&gt; write(<a name="PlcWriteRequest" href="../../../../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html#PlcWriteRequest">PlcWriteRequest</a> writeRequest) {
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          CompletableFuture&lt;InternalPlcWriteResponse&gt; writeFuture = <strong class="jxr_keyword">new</strong> CompletableFuture&lt;&gt;();
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          PlcRequestContainer&lt;InternalPlcWriteRequest, InternalPlcWriteResponse&gt; container =
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>              <strong class="jxr_keyword">new</strong> PlcRequestContainer&lt;&gt;((InternalPlcWriteRequest) writeRequest, writeFuture);
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>              <strong class="jxr_keyword">new</strong> PlcRequestContainer&lt;&gt;((<a name="InternalPlcWriteRequest" href="../../../../../../../org/apache/plc4x/java/base/messages/InternalPlcWriteRequest.html#InternalPlcWriteRequest">InternalPlcWriteRequest</a>) writeRequest, writeFuture);
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>          channel.writeAndFlush(container);
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">return</strong> writeFuture
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>              .thenApply(PlcWriteResponse.<strong class="jxr_keyword">class</strong>::<strong class="jxr_keyword">cast</strong>);

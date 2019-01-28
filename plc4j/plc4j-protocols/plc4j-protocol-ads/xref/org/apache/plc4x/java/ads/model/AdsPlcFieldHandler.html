@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -47,7 +47,7 @@
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_comment">// TODO: implement me acording to ads. currently copy pasta from S7</em>
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_comment">// Use endian decoders.</em>
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_comment">// TODO: replace all ifs with switches</em>
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsPlcFieldHandler.html">AdsPlcFieldHandler</a> <strong class="jxr_keyword">extends</strong> DefaultPlcFieldHandler {
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="AdsPlcFieldHandler" href="../../../../../../org/apache/plc4x/java/ads/model/AdsPlcFieldHandler.html#AdsPlcFieldHandler">AdsPlcFieldHandler</a> <strong class="jxr_keyword">extends</strong> DefaultPlcFieldHandler {
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>  
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>      @Override
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">public</strong> PlcField createField(String fieldQuery) <strong class="jxr_keyword">throws</strong> PlcInvalidFieldException {
@@ -61,7 +61,7 @@
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      @Override
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeBoolean(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>          <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>          <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          <em class="jxr_comment">// All of these types are declared as Bit or Bit-String types.</em>
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>              <strong class="jxr_keyword">case</strong> BIT:
@@ -113,7 +113,7 @@
 <a class="jxr_linenumber" name="L105" href="#L105">105</a> 
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>     @Override
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeByte(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L108" href="#L108">108</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L109" href="#L109">109</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -164,7 +164,7 @@
 <a class="jxr_linenumber" name="L156" href="#L156">156</a> 
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>     @Override
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeShort(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L160" href="#L160">160</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L161" href="#L161">161</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L162" href="#L162">162</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -215,7 +215,7 @@
 <a class="jxr_linenumber" name="L207" href="#L207">207</a> 
 <a class="jxr_linenumber" name="L208" href="#L208">208</a>     @Override
 <a class="jxr_linenumber" name="L209" href="#L209">209</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeInteger(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L210" href="#L210">210</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L210" href="#L210">210</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L211" href="#L211">211</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L212" href="#L212">212</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L213" href="#L213">213</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -266,7 +266,7 @@
 <a class="jxr_linenumber" name="L258" href="#L258">258</a> 
 <a class="jxr_linenumber" name="L259" href="#L259">259</a>     @Override
 <a class="jxr_linenumber" name="L260" href="#L260">260</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeBigInteger(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L261" href="#L261">261</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L261" href="#L261">261</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L262" href="#L262">262</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L263" href="#L263">263</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L264" href="#L264">264</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -317,7 +317,7 @@
 <a class="jxr_linenumber" name="L309" href="#L309">309</a> 
 <a class="jxr_linenumber" name="L310" href="#L310">310</a>     @Override
 <a class="jxr_linenumber" name="L311" href="#L311">311</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeLong(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L312" href="#L312">312</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L312" href="#L312">312</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L313" href="#L313">313</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L314" href="#L314">314</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L315" href="#L315">315</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -368,7 +368,7 @@
 <a class="jxr_linenumber" name="L360" href="#L360">360</a> 
 <a class="jxr_linenumber" name="L361" href="#L361">361</a>     @Override
 <a class="jxr_linenumber" name="L362" href="#L362">362</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeFloat(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L363" href="#L363">363</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L363" href="#L363">363</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L364" href="#L364">364</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L365" href="#L365">365</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L366" href="#L366">366</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -419,7 +419,7 @@
 <a class="jxr_linenumber" name="L411" href="#L411">411</a> 
 <a class="jxr_linenumber" name="L412" href="#L412">412</a>     @Override
 <a class="jxr_linenumber" name="L413" href="#L413">413</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeDouble(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L414" href="#L414">414</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L414" href="#L414">414</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L415" href="#L415">415</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L416" href="#L416">416</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L417" href="#L417">417</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -470,7 +470,7 @@
 <a class="jxr_linenumber" name="L462" href="#L462">462</a> 
 <a class="jxr_linenumber" name="L463" href="#L463">463</a>     @Override
 <a class="jxr_linenumber" name="L464" href="#L464">464</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeString(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L465" href="#L465">465</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L465" href="#L465">465</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L466" href="#L466">466</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L467" href="#L467">467</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L468" href="#L468">468</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -521,7 +521,7 @@
 <a class="jxr_linenumber" name="L513" href="#L513">513</a> 
 <a class="jxr_linenumber" name="L514" href="#L514">514</a>     @Override
 <a class="jxr_linenumber" name="L515" href="#L515">515</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeTime(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L516" href="#L516">516</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L516" href="#L516">516</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L517" href="#L517">517</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L518" href="#L518">518</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L519" href="#L519">519</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -572,7 +572,7 @@
 <a class="jxr_linenumber" name="L564" href="#L564">564</a> 
 <a class="jxr_linenumber" name="L565" href="#L565">565</a>     @Override
 <a class="jxr_linenumber" name="L566" href="#L566">566</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeDate(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L567" href="#L567">567</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L567" href="#L567">567</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L568" href="#L568">568</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L569" href="#L569">569</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L570" href="#L570">570</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -623,7 +623,7 @@
 <a class="jxr_linenumber" name="L615" href="#L615">615</a> 
 <a class="jxr_linenumber" name="L616" href="#L616">616</a>     @Override
 <a class="jxr_linenumber" name="L617" href="#L617">617</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeDateTime(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L618" href="#L618">618</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L618" href="#L618">618</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L619" href="#L619">619</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L620" href="#L620">620</a>             <strong class="jxr_keyword">case</strong> BIT:
 <a class="jxr_linenumber" name="L621" href="#L621">621</a>             <strong class="jxr_keyword">case</strong> BIT8:
@@ -673,7 +673,7 @@
 <a class="jxr_linenumber" name="L665" href="#L665">665</a>     }
 <a class="jxr_linenumber" name="L666" href="#L666">666</a> 
 <a class="jxr_linenumber" name="L667" href="#L667">667</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeBoolean(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L668" href="#L668">668</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L668" href="#L668">668</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L669" href="#L669">669</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L670" href="#L670">670</a>             <strong class="jxr_keyword">case</strong> BOOL:
 <a class="jxr_linenumber" name="L671" href="#L671">671</a>             <strong class="jxr_keyword">case</strong> BYTE:
@@ -723,7 +723,7 @@
 <a class="jxr_linenumber" name="L715" href="#L715">715</a>     }
 <a class="jxr_linenumber" name="L716" href="#L716">716</a> 
 <a class="jxr_linenumber" name="L717" href="#L717">717</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeInteger(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L718" href="#L718">718</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L718" href="#L718">718</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L719" href="#L719">719</a>         Class&lt;? <strong class="jxr_keyword">extends</strong> BaseDefaultFieldItem&gt; fieldType;
 <a class="jxr_linenumber" name="L720" href="#L720">720</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L721" href="#L721">721</a>             <strong class="jxr_keyword">case</strong> BYTE:
@@ -810,9 +810,9 @@
 <a class="jxr_linenumber" name="L802" href="#L802">802</a>     }
 <a class="jxr_linenumber" name="L803" href="#L803">803</a> 
 <a class="jxr_linenumber" name="L804" href="#L804">804</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeFloatingPoint(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L805" href="#L805">805</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L805" href="#L805">805</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L806" href="#L806">806</a>         Class&lt;? <strong class="jxr_keyword">extends</strong> BaseDefaultFieldItem&gt; fieldType;
-<a class="jxr_linenumber" name="L807" href="#L807">807</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsDataType.html">AdsDataType</a> adsDataType = adsField.getAdsDataType();
+<a class="jxr_linenumber" name="L807" href="#L807">807</a>         <a name="AdsDataType" href="../../../../../../org/apache/plc4x/java/ads/model/AdsDataType.html#AdsDataType">AdsDataType</a> adsDataType = adsField.getAdsDataType();
 <a class="jxr_linenumber" name="L808" href="#L808">808</a>         <strong class="jxr_keyword">switch</strong> (adsDataType) {
 <a class="jxr_linenumber" name="L809" href="#L809">809</a>             <strong class="jxr_keyword">case</strong> REAL:
 <a class="jxr_linenumber" name="L810" href="#L810">810</a>                 fieldType = DefaultFloatFieldItem.<strong class="jxr_keyword">class</strong>;
@@ -872,7 +872,7 @@
 <a class="jxr_linenumber" name="L864" href="#L864">864</a>     }
 <a class="jxr_linenumber" name="L865" href="#L865">865</a> 
 <a class="jxr_linenumber" name="L866" href="#L866">866</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeString(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L867" href="#L867">867</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L867" href="#L867">867</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L868" href="#L868">868</a>         Number maxLength = adsField.getAdsDataType().getUpperBound();
 <a class="jxr_linenumber" name="L869" href="#L869">869</a>         <em class="jxr_comment">//boolean encoding16Bit;</em>
 <a class="jxr_linenumber" name="L870" href="#L870">870</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
@@ -951,7 +951,7 @@
 <a class="jxr_linenumber" name="L943" href="#L943">943</a>     }
 <a class="jxr_linenumber" name="L944" href="#L944">944</a> 
 <a class="jxr_linenumber" name="L945" href="#L945">945</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalTimeTemporal(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L946" href="#L946">946</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L946" href="#L946">946</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L947" href="#L947">947</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L948" href="#L948">948</a>             <strong class="jxr_keyword">case</strong> TIME:
 <a class="jxr_linenumber" name="L949" href="#L949">949</a>             <strong class="jxr_keyword">case</strong> DATE:
@@ -970,7 +970,7 @@
 <a class="jxr_linenumber" name="L962" href="#L962">962</a>     }
 <a class="jxr_linenumber" name="L963" href="#L963">963</a> 
 <a class="jxr_linenumber" name="L964" href="#L964">964</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalDateTemporal(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L965" href="#L965">965</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L965" href="#L965">965</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L966" href="#L966">966</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L967" href="#L967">967</a>             <strong class="jxr_keyword">case</strong> TIME:
 <a class="jxr_linenumber" name="L968" href="#L968">968</a>             <strong class="jxr_keyword">case</strong> DATE:
@@ -989,7 +989,7 @@
 <a class="jxr_linenumber" name="L981" href="#L981">981</a>     }
 <a class="jxr_linenumber" name="L982" href="#L982">982</a> 
 <a class="jxr_linenumber" name="L983" href="#L983">983</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalDateTimeTemporal(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L984" href="#L984">984</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html">AdsField</a> adsField = (AdsField) field;
+<a class="jxr_linenumber" name="L984" href="#L984">984</a>         <a name="AdsField" hr<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>./../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a> adsField = (<a name="AdsField" href="../../../../../../org/apache/plc4x/java/ads/model/AdsField.html#AdsField">AdsField</a>) field;
 <a class="jxr_linenumber" name="L985" href="#L985">985</a>         Class&lt;? <strong class="jxr_keyword">extends</strong> BaseDefaultFieldItem&gt; fieldType;
 <a class="jxr_linenumber" name="L986" href="#L986">986</a>         <strong class="jxr_keyword">switch</strong> (adsField.getAdsDataType()) {
 <a class="jxr_linenumber" name="L987" href="#L987">987</a>             <strong class="jxr_keyword">case</strong> TIME:

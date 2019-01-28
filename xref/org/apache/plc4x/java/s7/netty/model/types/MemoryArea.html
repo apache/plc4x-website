@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -32,7 +32,7 @@
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  <em class="jxr_javadoccomment"> * (Values determined by evaluating generated ".pcap" files)</em>
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">public</strong> enum <a href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html">MemoryArea</a> {
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">public</strong> enum <a name="MemoryArea" href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a> {
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>      COUNTERS(<span class="jxr_string">"C"</span>, (byte) 0x1C), <em class="jxr_comment">/* Renamed from "S7 Counters" */</em> <em class="jxr_comment">// TODO: Double check shortName</em>
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>      TIMERS(<span class="jxr_string">"T"</span>, (byte) 0x1D), <em class="jxr_comment">/* Renamed from "S7 Timers" */</em> <em class="jxr_comment">// TODO: Double check shortName</em>
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>      DIRECT_PERIPHERAL_ACCESS(<span class="jxr_string">"D"</span>, (byte) 0x80), <em class="jxr_comment">// TODO: Double check shortName</em>
@@ -54,7 +54,7 @@
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Map&lt;Byte, MemoryArea&gt; map;
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">static</strong> {
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>          map = <strong class="jxr_keyword">new</strong> HashMap&lt;&gt;();
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>          <strong class="jxr_keyword">for</strong> (MemoryArea memoryArea : MemoryArea.values()) {
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>          <strong class="jxr_keyword">for</strong> (<a name="MemoryArea" href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a> memoryArea : MemoryArea.values()) {
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>              map.put(memoryArea.code, memoryArea);
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>          }
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>      }
@@ -62,7 +62,7 @@
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String shortName;
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> byte code;
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>  
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>      <a href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html">MemoryArea</a>(String shortName, byte code) {
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      <a name="MemoryArea" href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a>(String shortName, byte code) {
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          <strong class="jxr_keyword">this</strong>.shortName = shortName;
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">this</strong>.code = code;
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>      }
@@ -75,8 +75,8 @@
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">return</strong> code;
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      }
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html">MemoryArea</a> valueOfShortName(String shortName) {
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">for</strong> (MemoryArea value : MemoryArea.values()) {
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a name="MemoryArea" href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a> valueOfShortName(String shortName) {
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">for</strong> (<a name="MemoryArea" href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a> value : MemoryArea.values()) {
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>              <strong class="jxr_keyword">if</strong>(value.getShortName().equals(shortName)) {
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>                  <strong class="jxr_keyword">return</strong> value;
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>              }
@@ -84,7 +84,7 @@
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>      }
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>  
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html">MemoryArea</a> valueOf(byte code) {
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a name="MemoryArea" href="../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a> valueOf(byte code) {
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>          <strong class="jxr_keyword">return</strong> map.get(code);
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>      }
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>  

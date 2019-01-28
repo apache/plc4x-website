@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -83,7 +83,7 @@
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>  <em class="jxr_javadoccomment"> * where the {bit-offset} is optional.</em>
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>  <em class="jxr_javadoccomment"> * All Available Memory Areas for this mode are defined in the {@link MemoryArea} enum.</em>
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html">S7PlcConnection</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html">NettyPlcConnection</a> <strong class="jxr_keyword">implements</strong> PlcReader, <a href="../../../../../../org/apache/plc4x/java/base/messages/PlcWriter.html">PlcWriter</a> {
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="S7PlcConnection" href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#S7PlcConnection">S7PlcConnection</a> <strong class="jxr_keyword">extends</strong> <a name="NettyPlcConnection" href="../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html#NettyPlcConnection">NettyPlcConnection</a> <strong class="jxr_keyword">implements</strong> PlcReader, <a name="PlcWriter" href="../../../../../../org/apache/plc4x/java/base/messages/PlcWriter.html#PlcWriter">PlcWriter</a> {
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>  
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> ISO_ON_TCP_PORT = 102;
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  
@@ -99,17 +99,17 @@
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">short</strong> paramPduSize;
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">short</strong> paramMaxAmqCaller;
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">short</strong> paramMaxAmqCallee;
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../org/apache/plc4x/java/s7/types/S7ControllerType.html">S7ControllerType</a> paramControllerType;
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a name="S7ControllerType" href="../../../../../../org/apache/plc4x/java/s7/types/S7ControllerType.html#S7ControllerType">S7ControllerType</a> paramControllerType;
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>  
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html">S7PlcConnection</a>(InetAddress address, <strong class="jxr_keyword">int</strong> rack, <strong class="jxr_keyword">int</strong> slot, String params) {
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>          <strong class="jxr_keyword">this</strong>(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/TcpSocketChannelFactory.html">TcpSocketChannelFactory</a>(address, ISO_ON_TCP_PORT), rack, slot, params);
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>      <strong class="jxr_keyword">public</strong> <a name="S7PlcConnection" href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#S7PlcConnection">S7PlcConnection</a>(InetAddress address, <strong class="jxr_keyword">int</strong> rack, <strong class="jxr_keyword">int</strong> slot, String params) {
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>          <strong class="jxr_keyword">this</strong>(<strong class="jxr_keyword">new</strong> <a name="TcpSocketChannelFactory" href="../../../../../../org/apache/plc4x/java/base/connection/TcpSocketChannelFactory.html#TcpSocketChannelFactory">TcpSocketChannelFactory</a>(address, ISO_ON_TCP_PORT), rack, slot, params);
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>  
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>          logger.info(<span class="jxr_string">"Setting up S7cConnection with: host-name {}, rack {}, slot {}, pdu-size {}, max-amq-caller {}, "</span> +
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>                 <span class="jxr_string">"max-amq-callee {}"</span>, address.getHostAddress(), rack, slot,
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>             paramPduSize, paramMaxAmqCaller, paramMaxAmqCallee);
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>     }
 <a class="jxr_linenumber" name="L103" href="#L103">103</a> 
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html">S7PlcConnection</a>(<a href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html">ChannelFactory</a> channelFactory, <strong class="jxr_keyword">int</strong> rack, <strong class="jxr_keyword">int</strong> slot, String params) {
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>     <strong class="jxr_keyword">public</strong> <a name="S7PlcConnection" href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#S7PlcConnection">S7PlcConnection</a>(<a name="ChannelFactory" href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html#ChannelFactory">ChannelFactory</a> channelFactory, <strong class="jxr_keyword">int</strong> rack, <strong class="jxr_keyword">int</strong> slot, String params) {
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>         <strong class="jxr_keyword">super</strong>(channelFactory, <strong class="jxr_keyword">true</strong>);
 <a class="jxr_linenumber" name="L106" href="#L106">106</a> 
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">this</strong>.rack = rack;
@@ -118,7 +118,7 @@
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>         <strong class="jxr_keyword">short</strong> curParamPduSize = 1024;
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>         <strong class="jxr_keyword">short</strong> curParamMaxAmqCaller = 8;
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>         <strong class="jxr_keyword">short</strong> curParamMaxAmqCallee = 8;
-<a class="jxr_linenumber" name="L113" href="#L113">113</a>         <a href="../../../../../../org/apache/plc4x/java/s7/types/S7ControllerType.html">S7ControllerType</a> curParamControllerType = S7ControllerType.ANY;
+<a class="jxr_linenumber" name="L113" href="#L113">113</a>         <a name="S7ControllerType" href="../../../../../../org/apache/plc4x/java/s7/types/S7ControllerType.html#S7ControllerType">S7ControllerType</a> curParamControllerType = S7ControllerType.ANY;
 <a class="jxr_linenumber" name="L114" href="#L114">114</a> 
 <a class="jxr_linenumber" name="L115" href="#L115">115</a>         <strong class="jxr_keyword">if</strong> (!StringUtils.isEmpty(params)) {
 <a class="jxr_linenumber" name="L116" href="#L116">116</a>             <strong class="jxr_keyword">for</strong> (String param : params.split(<span class="jxr_string">"&amp;"</span>)) {
@@ -186,18 +186,18 @@
 <a class="jxr_linenumber" name="L178" href="#L178">178</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> ChannelInboundHandlerAdapter() {
 <a class="jxr_linenumber" name="L179" href="#L179">179</a>                     @Override
 <a class="jxr_linenumber" name="L180" href="#L180">180</a>                     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> userEventTriggered(ChannelHandlerContext ctx, Object evt) <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>                         <strong class="jxr_keyword">if</strong> (evt instanceof ConnectedEvent) {
+<a class="jxr_linenumber" name="L181" href="#L181">181</a>                         <strong class="jxr_keyword">if</strong> (evt instanceof <a name="ConnectedEvent" href="../../../../../../org/apache/plc4x/java/base/events/ConnectedEvent.html#ConnectedEvent">ConnectedEvent</a>) {
 <a class="jxr_linenumber" name="L182" href="#L182">182</a>                             sessionSetupCompleteFuture.complete(<strong class="jxr_keyword">null</strong>);
 <a class="jxr_linenumber" name="L183" href="#L183">183</a>                         } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L184" href="#L184">184</a>                             <strong class="jxr_keyword">super</strong>.userEventTriggered(ctx, evt);
 <a class="jxr_linenumber" name="L185" href="#L185">185</a>                         }
 <a class="jxr_linenumber" name="L186" href="#L186">186</a>                     }
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>                 });
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/IsoOnTcpProtocol.html">IsoOnTcpProtocol</a>());
-<a class="jxr_linenumber" name="L189" href="#L189">189</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/isotp/protocol/IsoTPProtocol.html">IsoTPProtocol</a>(callingTsapId, calledTsapId, TpduSize.valueForGivenSize(paramPduSize)));
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/S7Protocol.html">S7Protocol</a>(paramMaxAmqCaller, paramMaxAmqCallee, paramPduSize, paramControllerType,
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>                     <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">DefaultS7MessageProcessor</a>()));
-<a class="jxr_linenumber" name="L192" href="#L192">192</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/Plc4XS7Protocol.html">Plc4XS7Protocol</a>());
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> <a name="IsoOnTcpProtocol" href="../../../../../../org/apache/plc4x/java/isoontcp/protocol/IsoOnTcpProtocol.html#IsoOnTcpProtocol">IsoOnTcpProtocol</a>());
+<a class="jxr_linenumber" name="L189" href="#L189">189</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> <a name="IsoTPProtocol" href="../../../../../../org/apache/plc4x/java/isotp/protocol/IsoTPProtocol.html#IsoTPProtocol">IsoTPProtocol</a>(callingTsapId, calledTsapId, TpduSize.valueForGivenSize(paramPduSize)));
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> <a name="S7Protocol" href="../../../../../../org/apache/plc4x/java/s7/netty/S7Protocol.html#S7Protocol">S7Protocol</a>(paramMaxAmqCaller, paramMaxAmqCallee, paramPduSize, paramControllerType,
+<a class="jxr_linenumber" name="L191" href="#L191">191</a>                     <strong class="jxr_keyword">new</strong> <a name="DefaultS7MessageProcessor" href="../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html#DefaultS7MessageProcessor">DefaultS7MessageProcessor</a>()));
+<a class="jxr_linenumber" name="L192" href="#L192">192</a>                 pipeline.addLast(<strong class="jxr_keyword">new</strong> <a name="Plc4XS7Protocol" href="../../../../../../org/apache/plc4x/java/s7/netty/Plc4XS7Protocol.html#Plc4XS7Protocol">Plc4XS7Protocol</a>());
 <a class="jxr_linenumber" name="L193" href="#L193">193</a>             }
 <a class="jxr_linenumber" name="L194" href="#L194">194</a>         };
 <a class="jxr_linenumber" name="L195" href="#L195">195</a>     }
@@ -205,7 +205,7 @@
 <a class="jxr_linenumber" name="L197" href="#L197">197</a>     @Override
 <a class="jxr_linenumber" name="L198" href="#L198">198</a>     <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> sendChannelCreatedEvent() {
 <a class="jxr_linenumber" name="L199" href="#L199">199</a>         <em class="jxr_comment">// Send an event to the pipeline telling the Protocol filters what's going on.</em>
-<a class="jxr_linenumber" name="L200" href="#L200">200</a>         channel.pipeline().fireUserEventTriggered(<strong class="jxr_keyword">new</strong> ConnectEvent());
+<a class="jxr_linenumber" name="L200" href="#L200">200</a>         channel.pipeline().fireUserEventTriggered(<strong class="jxr_keyword">new</strong> <a name="ConnectEvent" href="../../../../../../org/apache/plc4x/java/base/events/ConnectEvent.html#ConnectEvent">ConnectEvent</a>());
 <a class="jxr_linenumber" name="L201" href="#L201">201</a>     }
 <a class="jxr_linenumber" name="L202" href="#L202">202</a> 
 <a class="jxr_linenumber" name="L203" href="#L203">203</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> getRack() {
@@ -228,15 +228,15 @@
 <a class="jxr_linenumber" name="L220" href="#L220">220</a>         <strong class="jxr_keyword">return</strong> paramMaxAmqCallee;
 <a class="jxr_linenumber" name="L221" href="#L221">221</a>     }
 <a class="jxr_linenumber" name="L222" href="#L222">222</a> 
-<a class="jxr_linenumber" name="L223" href="#L223">223</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/s7/types/S7ControllerType.html">S7ControllerType</a> getParamControllerType() {
+<a class="jxr_linenumber" name="L223" href="#L223">223</a>     <strong class="jxr_keyword">public</strong> <a name="S7ControllerType" href="../../../../../../org/apache/plc4x/java/s7/types/S7ControllerType.html#S7ControllerType">S7ControllerType</a> getParamControllerType() {
 <a class="jxr_linenumber" name="L224" href="#L224">224</a>         <strong class="jxr_keyword">return</strong> paramControllerType;
 <a class="jxr_linenumber" name="L225" href="#L225">225</a>     }
 <a class="jxr_linenumber" name="L226" href="#L226">226</a> 
 <a class="jxr_linenumber" name="L227" href="#L227">227</a>     @Override
-<a class="jxr_linenumber" name="L228" href="#L228">228</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> close() <strong class="jxr_keyword">throws</strong> PlcConnectionException {
+<a class="jxr_linenumber" name="L228" href="#L228">228</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> close() <strong class="jxr_keyword">throws</strong> <a name="PlcConnectionException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> {
 <a class="jxr_linenumber" name="L229" href="#L229">229</a>         <strong class="jxr_keyword">if</strong> ((channel != <strong class="jxr_keyword">null</strong>) &amp;&amp; channel.isOpen()) {
 <a class="jxr_linenumber" name="L230" href="#L230">230</a>             <em class="jxr_comment">// Send the PLC a message that the connection is being closed.</em>
-<a class="jxr_linenumber" name="L231" href="#L231">231</a>             <a href="../../../../../../org/apache/plc4x/java/isotp/protocol/model/tpdus/DisconnectRequestTpdu.html">DisconnectRequestTpdu</a> disconnectRequest = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/isotp/protocol/model/tpdus/DisconnectRequestTpdu.html">DisconnectRequestTpdu</a>(
+<a class="jxr_linenumber" name="L231" href="#L231">231</a>             <a name="DisconnectRequestTpdu" href="../../../../../../org/apache/plc4x/java/isotp<a name="DisconnectRequestTpdu" href="../../../../../../org/apache/plc4x/java/isotp/protocol/model/tpdus/DisconnectRequestTpdu.html#DisconnectRequestTpdu">DisconnectRequestTpdu</a>/DisconnectRequestTpdu.html#DisconnectRequestTpdu">DisconnectRequestTpdu</a> disconnectRequest = <strong class="jxr_keyword">new</strong> <a name="DisconnectRequestTpdu" href="../../../../../../org/apache/plc4x/java/isotp/protocol/model/tpdus/DisconnectRequestTpdu.html#DisconnectRequestTpdu">DisconnectRequestTpdu</a>(
 <a class="jxr_linenumber" name="L232" href="#L232">232</a>                 (<strong class="jxr_keyword">short</strong>) 0x0000, (<strong class="jxr_keyword">short</strong>) 0x000F, DisconnectReason.NORMAL, Collections.emptyList(),
 <a class="jxr_linenumber" name="L233" href="#L233">233</a>                 Unpooled.EMPTY_BUFFER);
 <a class="jxr_linenumber" name="L234" href="#L234">234</a> 
@@ -260,7 +260,7 @@
 <a class="jxr_linenumber" name="L252" href="#L252">252</a>             } <strong class="jxr_keyword">catch</strong> (InterruptedException e) {
 <a class="jxr_linenumber" name="L253" href="#L253">253</a>                 Thread.currentThread().interrupt();
 <a class="jxr_linenumber" name="L254" href="#L254">254</a>             } <strong class="jxr_keyword">catch</strong> (ExecutionException e) {
-<a class="jxr_linenumber" name="L255" href="#L255">255</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(e);
+<a class="jxr_linenumber" name="L255" href="#L255">255</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcConnectionException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a>(e);
 <a class="jxr_linenumber" name="L256" href="#L256">256</a>             }
 <a class="jxr_linenumber" name="L257" href="#L257">257</a> 
 <a class="jxr_linenumber" name="L258" href="#L258">258</a>             <em class="jxr_comment">// Do some additional cleanup operations ...</em>
@@ -275,17 +275,17 @@
 <a class="jxr_linenumber" name="L267" href="#L267">267</a> 
 <a class="jxr_linenumber" name="L268" href="#L268">268</a>     @Override
 <a class="jxr_linenumber" name="L269" href="#L269">269</a>     <strong class="jxr_keyword">public</strong> PlcReadRequest.Builder readRequestBuilder() {
-<a class="jxr_linenumber" name="L270" href="#L270">270</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcReadRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/util/S7PlcFieldHandler.html">S7PlcFieldHandler</a>());
+<a class="jxr_linenumber" name="L270" href="#L270">270</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcReadRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a name="S7PlcFieldHandler" href="../../../../../../org/apache/plc4x/java/s7/netty/util/S7PlcFieldHandler.html#S7PlcFieldHandler">S7PlcFieldHandler</a>());
 <a class="jxr_linenumber" name="L271" href="#L271">271</a>     }
 <a class="jxr_linenumber" name="L272" href="#L272">272</a> 
 <a class="jxr_linenumber" name="L273" href="#L273">273</a>     @Override
 <a class="jxr_linenumber" name="L274" href="#L274">274</a>     <strong class="jxr_keyword">public</strong> PlcWriteRequest.Builder writeRequestBuilder() {
-<a class="jxr_linenumber" name="L275" href="#L275">275</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcWriteRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/util/S7PlcFieldHandler.html">S7PlcFieldHandler</a>());
+<a class="jxr_linenumber" name="L275" href="#L275">275</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcWriteRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a name="S7PlcFieldHandler" href="../../../../../../org/apache/plc4x/java/s7/netty/util/S7PlcFieldHandler.html#S7PlcFieldHandler">S7PlcFieldHandler</a>());
 <a class="jxr_linenumber" name="L276" href="#L276">276</a>     }
 <a class="jxr_linenumber" name="L277" href="#L277">277</a> 
 <a class="jxr_linenumber" name="L278" href="#L278">278</a>     @Override
-<a class="jxr_linenumber" name="L279" href="#L279">279</a>     <strong class="jxr_keyword">public</strong> CompletableFuture&lt;PlcReadResponse&gt; read(<a href="../../../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.html">PlcReadRequest</a> readRequest) {
-<a class="jxr_linenumber" name="L280" href="#L280">280</a>         <a href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html">InternalPlcReadRequest</a> internalReadRequest = checkInternal(readRequest, InternalPlcReadRequest.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L279" href="#L279">279</a>     <strong class="jxr_keyword">public</strong> CompletableFuture&lt;PlcReadResponse&gt; read(<a name="PlcReadRequest" href="../../../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.html#PlcReadRequest">PlcReadRequest</a> readRequest) {
+<a class="jxr_linenumber" name="L280" href="#L280">280</a>         <a name="InternalPlcReadRequest" href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html#InternalPlcReadRequest">InternalPlcReadRequest</a> internalReadRequest = checkInternal(readRequest, InternalPlcReadRequest.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L281" href="#L281">281</a>         CompletableFuture&lt;InternalPlcReadResponse&gt; future = <strong class="jxr_keyword">new</strong> CompletableFuture&lt;&gt;();
 <a class="jxr_linenumber" name="L282" href="#L282">282</a>         PlcRequestContainer&lt;InternalPlcReadRequest, InternalPlcReadResponse&gt; container =
 <a class="jxr_linenumber" name="L283" href="#L283">283</a>             <strong class="jxr_keyword">new</strong> PlcRequestContainer&lt;&gt;(internalReadRequest, future);
@@ -299,8 +299,8 @@
 <a class="jxr_linenumber" name="L291" href="#L291">291</a>     }
 <a class="jxr_linenumber" name="L292" href="#L292">292</a> 
 <a class="jxr_linenumber" name="L293" href="#L293">293</a>     @Override
-<a class="jxr_linenumber" name="L294" href="#L294">294</a>     <strong class="jxr_keyword">public</strong> CompletableFuture&lt;PlcWriteResponse&gt; write(<a href="../../../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html">PlcWriteRequest</a> writeRequest) {
-<a class="jxr_linenumber" name="L295" href="#L295">295</a>         <a href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcWriteRequest.html">InternalPlcWriteRequest</a> internalWriteRequest = checkInternal(writeRequest, InternalPlcWriteRequest.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L294" href="#L294">294</a>     <strong class="jxr_keyword">public</strong> CompletableFuture&lt;PlcWriteResponse&gt; write(<a name="PlcWriteRequest" href="../../../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html#PlcWriteRequest">PlcWriteRequest</a> writeRequest) {
+<a class="jxr_linenumber" name="L295" href="#L295">295</a>         <a name="InternalPlcWriteRequest" href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcWriteRequest.html#InternalPlcWriteRequest">InternalPlcWriteRequest</a> internalWriteRequest = checkInternal(writeRequest, InternalPlcWriteRequest.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L296" href="#L296">296</a>         CompletableFuture&lt;InternalPlcWriteResponse&gt; future = <strong class="jxr_keyword">new</strong> CompletableFuture&lt;&gt;();
 <a class="jxr_linenumber" name="L297" href="#L297">297</a>         PlcRequestContainer&lt;InternalPlcWriteRequest, InternalPlcWriteResponse&gt; container =
 <a class="jxr_linenumber" name="L298" href="#L298">298</a>             <strong class="jxr_keyword">new</strong> PlcRequestContainer&lt;&gt;(internalWriteRequest, future);

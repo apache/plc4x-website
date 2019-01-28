@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -34,15 +34,15 @@
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> java.util.Objects.requireNonNull;
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html">ByteValue</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteReadable.html">ByteReadable</a> {
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="ByteValue" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a> <strong class="jxr_keyword">implements</strong> <a name="ByteReadable" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteReadable.html#ByteReadable">ByteReadable</a> {
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> byte[] value;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>      <strong class="jxr_keyword">protected</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html">ByteValue</a>(byte... value) {
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>      <strong class="jxr_keyword">protected</strong> <a name="ByteValue" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a>(byte... value) {
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>          <strong class="jxr_keyword">this</strong>.value = requireNonNull(value);
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>      }
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">protected</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html">ByteValue</a>(ByteBuf byteBuf) {
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">protected</strong> <a name="ByteValue" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a>(ByteBuf byteBuf) {
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>          requireNonNull(byteBuf);
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>          value = <strong class="jxr_keyword">new</strong> byte[byteBuf.readableBytes()];
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>          byteBuf.readBytes(value);
@@ -83,18 +83,18 @@
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>          <strong class="jxr_keyword">return</strong> value.length;
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>      }
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>  
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html">ByteValue</a> of(byte... values) {
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html">ByteValue</a>(values);
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a name="ByteValue" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a> of(byte... values) {
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="ByteValue" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a>(values);
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      }
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>      @Override
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">boolean</strong> equals(Object o) {
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>          <strong class="jxr_keyword">if</strong> (<strong class="jxr_keyword">this</strong> == o)
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>              <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">if</strong> (!(o instanceof ByteValue))
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">if</strong> (!(o instanceof <a name="ByteValue" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a>))
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>              <strong class="jxr_keyword">return</strong> false;
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>  
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>          <a href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html">ByteValue</a> byteValue = (ByteValue) o;
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>          <a name="ByteValue" hre<a name="ByteValue" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a>../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a> byteValue = (<a name="ByteValue" href="../../../../../../../org/apache/plc4x/java/ads/api/util/ByteValue.html#ByteValue">ByteValue</a>) o;
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>  
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>          <strong class="jxr_keyword">return</strong> Arrays.equals(value, byteValue.value);
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>      }

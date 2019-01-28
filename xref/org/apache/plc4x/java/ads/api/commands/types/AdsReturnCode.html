@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -30,10 +30,10 @@
 <a class="jxr_linenumber" name="L22" href="#L22">22</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> java.util.Objects.requireNonNull;
 <a class="jxr_linenumber" name="L23" href="#L23">23</a>  
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <em class="jxr_javadoccomment"> * Based on spec from: https://infosys.beckhoff.com/content/1033/tcadscommon/html/ads_returncodes.htm</em>
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <em class="jxr_javadoccomment"> * Based on spec from: <a href="https://infosys.beckhoff.com/content/1033/tcadscommon/html/ads_returncodes.htm" target="alexandria_uri">https://infosys.beckhoff.com/content/1033/tcadscommon/html/ads_returncodes.htm</a></em>
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <em class="jxr_comment">// Error codes: 0x000..., 0x500..., 0x700..., 0x1000..., 0x274C...</em>
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">public</strong> enum <a href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html">AdsReturnCode</a> {
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">public</strong> enum <a name="AdsReturnCode" href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html#AdsReturnCode">AdsReturnCode</a> {
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>      <em class="jxr_comment">// Global Error Codes</em>
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>      ADS_CODE_0(0x0, 0, <span class="jxr_string">"no error"</span>),
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>      ADS_CODE_1(0x1, 1, <span class="jxr_string">"Internal error"</span>),
@@ -175,15 +175,15 @@
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String possibleCauses;
 <a class="jxr_linenumber" name="L168" href="#L168">168</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String solution;
 <a class="jxr_linenumber" name="L169" href="#L169">169</a> 
-<a class="jxr_linenumber" name="L170" href="#L170">170</a>     <a href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html">AdsReturnCode</a>(<strong class="jxr_keyword">long</strong> hex, <strong class="jxr_keyword">long</strong> dec, String description) {
+<a class="jxr_linenumber" name="L170" href="#L170">170</a>     <a name="AdsReturnCode" href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html#AdsReturnCode">AdsReturnCode</a>(<strong class="jxr_keyword">long</strong> hex, <strong class="jxr_keyword">long</strong> dec, String description) {
 <a class="jxr_linenumber" name="L171" href="#L171">171</a>         <strong class="jxr_keyword">this</strong>(hex, dec, description, <span class="jxr_string">""</span>);
 <a class="jxr_linenumber" name="L172" href="#L172">172</a>     }
 <a class="jxr_linenumber" name="L173" href="#L173">173</a> 
-<a class="jxr_linenumber" name="L174" href="#L174">174</a>     <a href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html">AdsReturnCode</a>(<strong class="jxr_keyword">long</strong> hex, <strong class="jxr_keyword">long</strong> dec, String description, String possibleCauses) {
+<a class="jxr_linenumber" name="L174" href="#L174">174</a>     <a name="AdsReturnCode" href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html#AdsReturnCode">AdsReturnCode</a>(<strong class="jxr_keyword">long</strong> hex, <strong class="jxr_keyword">long</strong> dec, String description, String possibleCauses) {
 <a class="jxr_linenumber" name="L175" href="#L175">175</a>         <strong class="jxr_keyword">this</strong>(hex, dec, description, possibleCauses, <span class="jxr_string">""</span>);
 <a class="jxr_linenumber" name="L176" href="#L176">176</a>     }
 <a class="jxr_linenumber" name="L177" href="#L177">177</a> 
-<a class="jxr_linenumber" name="L178" href="#L178">178</a>     <a href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html">AdsReturnCode</a>(<strong class="jxr_keyword">long</strong> hex, <strong class="jxr_keyword">long</strong> dec, String description, String possibleCauses, String solution) {
+<a class="jxr_linenumber" name="L178" href="#L178">178</a>     <a name="AdsReturnCode" href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html#AdsReturnCode">AdsReturnCode</a>(<strong class="jxr_keyword">long</strong> hex, <strong class="jxr_keyword">long</strong> dec, String description, String possibleCauses, String solution) {
 <a class="jxr_linenumber" name="L179" href="#L179">179</a>         <strong class="jxr_keyword">this</strong>.hex = hex;
 <a class="jxr_linenumber" name="L180" href="#L180">180</a>         <strong class="jxr_keyword">this</strong>.dec = dec;
 <a class="jxr_linenumber" name="L181" href="#L181">181</a>         <strong class="jxr_keyword">if</strong> (hex != dec) {
@@ -195,8 +195,8 @@
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>     }
 <a class="jxr_linenumber" name="L188" href="#L188">188</a> 
 <a class="jxr_linenumber" name="L189" href="#L189">189</a>     <em class="jxr_comment">// TODO: optimize with map</em>
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html">AdsReturnCode</a> of(<strong class="jxr_keyword">long</strong> hex) {
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>         <strong class="jxr_keyword">for</strong> (AdsReturnCode adsReturnCode : values()) {
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a name="AdsReturnCode" href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html#AdsReturnCode">AdsReturnCode</a> of(<strong class="jxr_keyword">long</strong> hex) {
+<a class="jxr_linenumber" name="L191" href="#L191">191</a>         <strong class="jxr_keyword">for</strong> (<a name="AdsReturnCode" href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html#AdsReturnCode">AdsReturnCode</a> adsReturnCode : values()) {
 <a class="jxr_linenumber" name="L192" href="#L192">192</a>             <strong class="jxr_keyword">if</strong> (adsReturnCode.hex == hex) {
 <a class="jxr_linenumber" name="L193" href="#L193">193</a>                 <strong class="jxr_keyword">return</strong> adsReturnCode;
 <a class="jxr_linenumber" name="L194" href="#L194">194</a>             }
@@ -204,11 +204,11 @@
 <a class="jxr_linenumber" name="L196" href="#L196">196</a>         <strong class="jxr_keyword">return</strong> UNKNOWN;
 <a class="jxr_linenumber" name="L197" href="#L197">197</a>     }
 <a class="jxr_linenumber" name="L198" href="#L198">198</a> 
-<a class="jxr_linenumber" name="L199" href="#L199">199</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html">AdsReturnCode</a> of(String name) {
+<a class="jxr_linenumber" name="L199" href="#L199">199</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a name="AdsReturnCode" href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html#AdsReturnCode">AdsReturnCode</a> of(String name) {
 <a class="jxr_linenumber" name="L200" href="#L200">200</a>         <strong class="jxr_keyword">return</strong> valueOf(name);
 <a class="jxr_linenumber" name="L201" href="#L201">201</a>     }
 <a class="jxr_linenumber" name="L202" href="#L202">202</a> 
-<a class="jxr_linenumber" name="L203" href="#L203">203</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html">AdsReturnCode</a> ofInt(String value) {
+<a class="jxr_linenumber" name="L203" href="#L203">203</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a name="AdsReturnCode" href="../../../../../../../../org/apache/plc4x/java/ads/api/commands/types/AdsReturnCode.html#AdsReturnCode">AdsReturnCode</a> ofInt(String value) {
 <a class="jxr_linenumber" name="L204" href="#L204">204</a>         <strong class="jxr_keyword">return</strong> of(Long.parseLong(value));
 <a class="jxr_linenumber" name="L205" href="#L205">205</a>     }
 <a class="jxr_linenumber" name="L206" href="#L206">206</a> 

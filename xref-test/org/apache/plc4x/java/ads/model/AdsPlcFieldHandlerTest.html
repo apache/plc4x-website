@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -52,7 +52,7 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.jupiter.api.Assertions.assertNotNull;
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.jupiter.api.Assertions.fail;
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsPlcFieldHandlerTest.html">AdsPlcFieldHandlerTest</a> {
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <strong class="jxr_keyword">class</strong> <a name="AdsPlcFieldHandlerTest" href="../../../../../../org/apache/plc4x/java/ads/model/AdsPlcFieldHandlerTest.html#AdsPlcFieldHandlerTest">AdsPlcFieldHandlerTest</a> {
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> AdsPlcFieldHandler SUT = <strong class="jxr_keyword">new</strong> AdsPlcFieldHandler();
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
@@ -557,7 +557,7 @@
 <a class="jxr_linenumber" name="L549" href="#L549">549</a>         <strong class="jxr_keyword">return</strong> array;
 <a class="jxr_linenumber" name="L550" href="#L550">550</a>     }
 <a class="jxr_linenumber" name="L551" href="#L551">551</a> 
-<a class="jxr_linenumber" name="L552" href="#L552">552</a>     enum <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsPlcFieldHandlerTest.html">InputTypes</a> {
+<a class="jxr_linenumber" name="L552" href="#L552">552</a>     enum InputTypes {
 <a class="jxr_linenumber" name="L553" href="#L553">553</a>         BOOLEAN(DefaultBooleanFieldItem.<strong class="jxr_keyword">class</strong>, <strong class="jxr_keyword">new</strong> Boolean[]{false, <strong class="jxr_keyword">true</strong>}),
 <a class="jxr_linenumber" name="L554" href="#L554">554</a>         BYTE(DefaultByteFieldItem.<strong class="jxr_keyword">class</strong>, <strong class="jxr_keyword">new</strong> Byte[]{(byte) 0, (byte) 42, Byte.MIN_VALUE, Byte.MAX_VALUE}),
 <a class="jxr_linenumber" name="L555" href="#L555">555</a>         SHORT(DefaultShortFieldItem.<strong class="jxr_keyword">class</strong>, <strong class="jxr_keyword">new</strong> Short[]{(<strong class="jxr_keyword">short</strong>) 0, (<strong class="jxr_keyword">short</strong>) 42, Short.MIN_VALUE, Short.MAX_VALUE}),
@@ -574,7 +574,7 @@
 <a class="jxr_linenumber" name="L566" href="#L566">566</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> Class&lt;? <strong class="jxr_keyword">extends</strong> BaseDefaultFieldItem&gt; fieldItemType;
 <a class="jxr_linenumber" name="L567" href="#L567">567</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> Object[] values;
 <a class="jxr_linenumber" name="L568" href="#L568">568</a> 
-<a class="jxr_linenumber" name="L569" href="#L569">569</a>         <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsPlcFieldHandlerTest.html">InputTypes</a>(Class&lt;? <strong class="jxr_keyword">extends</strong> BaseDefaultFieldItem&gt; fieldItemType, Object[] values) {
+<a class="jxr_linenumber" name="L569" href="#L569">569</a>         InputTypes(Class&lt;? <strong class="jxr_keyword">extends</strong> BaseDefaultFieldItem&gt; fieldItemType, Object[] values) {
 <a class="jxr_linenumber" name="L570" href="#L570">570</a>             <strong class="jxr_keyword">this</strong>.fieldItemType = fieldItemType;
 <a class="jxr_linenumber" name="L571" href="#L571">571</a>             <strong class="jxr_keyword">this</strong>.values = values;
 <a class="jxr_linenumber" name="L572" href="#L572">572</a>         }

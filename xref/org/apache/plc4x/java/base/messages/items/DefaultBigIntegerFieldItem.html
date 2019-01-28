@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -31,9 +31,9 @@
 <a class="jxr_linenumber" name="L23" href="#L23">23</a>  <strong class="jxr_keyword">import</strong> java.math.BigDecimal;
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">import</strong> java.math.BigInteger;
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/DefaultBigIntegerFieldItem.html">DefaultBigIntegerFieldItem</a> <strong class="jxr_keyword">extends</strong> BaseDefaultFieldItem&lt;BigInteger&gt; {
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="DefaultBigIntegerFieldItem" href="../../../../../../../org/apache/plc4x/java/base/messages/items/DefaultBigIntegerFieldItem.html#DefaultBigIntegerFieldItem">DefaultBigIntegerFieldItem</a> <strong class="jxr_keyword">extends</strong> BaseDefaultFieldItem&lt;BigInteger&gt; {
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../../org/apache/plc4x/java/base/messages/items/DefaultBigIntegerFieldItem.html">DefaultBigIntegerFieldItem</a>(BigInteger... values) {
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>      <strong class="jxr_keyword">public</strong> <a name="DefaultBigIntegerFieldItem" href="../../../../../../../org/apache/plc4x/java/base/messages/items/DefaultBigIntegerFieldItem.html#DefaultBigIntegerFieldItem">DefaultBigIntegerFieldItem</a>(BigInteger... values) {
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>          <strong class="jxr_keyword">super</strong>(values);
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>      }
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  
@@ -50,7 +50,7 @@
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>      @Override
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">public</strong> Boolean getBoolean(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>          <strong class="jxr_keyword">if</strong> (!isValidBoolean(index)) {
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(Boolean.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(Boolean.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>          }
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>          <strong class="jxr_keyword">return</strong> getValue(index).compareTo(BigInteger.ZERO) == 0;
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>      }
@@ -65,7 +65,7 @@
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>      @Override
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">public</strong> Byte getByte(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">if</strong> (!isValidByte(index)) {
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(Byte.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(Byte.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>          }
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>          <strong class="jxr_keyword">return</strong> getValue(index).byteValue();
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>      }
@@ -80,7 +80,7 @@
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>      @Override
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">public</strong> Short getShort(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">if</strong> (!isValidShort(index)) {
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(Short.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(Short.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          }
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>          <strong class="jxr_keyword">return</strong> getValue(index).shortValue();
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>      }
@@ -95,7 +95,7 @@
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>      @Override
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>      <strong class="jxr_keyword">public</strong> Integer getInteger(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          <strong class="jxr_keyword">if</strong> (!isValidInteger(index)) {
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(Integer.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(Integer.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>          }
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>          <strong class="jxr_keyword">return</strong> getValue(index).intValue();
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>      }
@@ -110,7 +110,7 @@
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>     @Override
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>     <strong class="jxr_keyword">public</strong> Long getLong(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>         <strong class="jxr_keyword">if</strong> (!isValidLong(index)) {
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(Long.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(Long.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         }
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">return</strong> getValue(index).longValue();
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>     }
@@ -121,7 +121,7 @@
 <a class="jxr_linenumber" name="L113" href="#L113">113</a> 
 <a class="jxr_linenumber" name="L114" href="#L114">114</a>     <strong class="jxr_keyword">public</strong> BigInteger getBigInteger(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L115" href="#L115">115</a>         <strong class="jxr_keyword">if</strong> (!isValidBigInteger(index)) {
-<a class="jxr_linenumber" name="L116" href="#L116">116</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(BigInteger.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L116" href="#L116">116</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(BigInteger.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L117" href="#L117">117</a>         }
 <a class="jxr_linenumber" name="L118" href="#L118">118</a>         <strong class="jxr_keyword">return</strong> getValue(index);
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>     }
@@ -140,7 +140,7 @@
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>     @Override
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>     <strong class="jxr_keyword">public</strong> Float getFloat(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L134" href="#L134">134</a>         <strong class="jxr_keyword">if</strong> (!isValidFloat(index)) {
-<a class="jxr_linenumber" name="L135" href="#L135">135</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(Float.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L135" href="#L135">135</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(Float.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>         }
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>         <strong class="jxr_keyword">return</strong> getValue(index).floatValue();
 <a class="jxr_linenumber" name="L138" href="#L138">138</a>     }
@@ -159,7 +159,7 @@
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>     @Override
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>     <strong class="jxr_keyword">public</strong> Double getDouble(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>         <strong class="jxr_keyword">if</strong> (!isValidDouble(index)) {
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(Double.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(Double.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>         }
 <a class="jxr_linenumber" name="L156" href="#L156">156</a>         <strong class="jxr_keyword">return</strong> getValue(index).doubleValue();
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>     }
@@ -170,7 +170,7 @@
 <a class="jxr_linenumber" name="L162" href="#L162">162</a> 
 <a class="jxr_linenumber" name="L163" href="#L163">163</a>     <strong class="jxr_keyword">public</strong> BigDecimal getBigDecimal(<strong class="jxr_keyword">int</strong> index) {
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>         <strong class="jxr_keyword">if</strong>(!isValidBigDecimal(index)) {
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html">PlcIncompatibleDatatypeException</a>(BigDecimal.<strong class="jxr_keyword">class</strong>, index);
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcIncompatibleDatatypeException" href="../../../../../../../org/apache/plc4x/java/api/exceptions/PlcIncompatibleDatatypeException.html#PlcIncompatibleDatatypeException">PlcIncompatibleDatatypeException</a>(BigDecimal.<strong class="jxr_keyword">class</strong>, index);
 <a class="jxr_linenumber" name="L166" href="#L166">166</a>         }
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> BigDecimal(getValue(index));
 <a class="jxr_linenumber" name="L168" href="#L168">168</a>     }

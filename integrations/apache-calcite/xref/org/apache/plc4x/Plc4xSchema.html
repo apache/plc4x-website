@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -40,17 +40,17 @@
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.BlockingQueue;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.stream.Collectors;
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../org/apache/plc4x/Plc4xSchema.html">Plc4xSchema</a> <strong class="jxr_keyword">extends</strong> AbstractSchema {
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="Plc4xSchema" href="../../../org/apache/plc4x/Plc4xSchema.html#Plc4xSchema">Plc4xSchema</a> <strong class="jxr_keyword">extends</strong> AbstractSchema {
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> ScraperConfiguration configuration;
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> Scraper scraper;
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> <a href="../../../org/apache/plc4x/Plc4xSchema.html">QueueHandler</a> handler;
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> QueueHandler handler;
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> Map&lt;String, BlockingQueue&lt;Record&gt;&gt; queues;
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> Map&lt;String, Table&gt; tableMap;
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">public</strong> <a href="../../../org/apache/plc4x/Plc4xSchema.html">Plc4xSchema</a>(ScraperConfiguration configuration, <strong class="jxr_keyword">long</strong> tableCutoff) {
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">public</strong> <a name="Plc4xSchema" href="../../../org/apache/plc4x/Plc4xSchema.html#Plc4xSchema">Plc4xSchema</a>(ScraperConfiguration configuration, <strong class="jxr_keyword">long</strong> tableCutoff) {
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>          <strong class="jxr_keyword">this</strong>.configuration = configuration;
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>          <strong class="jxr_keyword">this</strong>.handler = <strong class="jxr_keyword">new</strong> <a href="../../../org/apache/plc4x/Plc4xSchema.html">QueueHandler</a>();
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>          <strong class="jxr_keyword">this</strong>.handler = <strong class="jxr_keyword">new</strong> QueueHandler();
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>          <strong class="jxr_keyword">this</strong>.scraper = <strong class="jxr_keyword">new</strong> Scraper(configuration, handler);
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>          <strong class="jxr_keyword">this</strong>.queues = configuration.getJobConfigurations().stream()
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>              .collect(Collectors.toMap(
@@ -69,9 +69,9 @@
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>      Table defineTable(BlockingQueue&lt;Record&gt; queue, JobConfiguration configuration, Long limit) {
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>          <strong class="jxr_keyword">if</strong> (limit &lt;= 0) {
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>              <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/apache/plc4x/Plc4xStreamTable.html">Plc4xStreamTable</a>(queue, configuration);
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>              <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="Plc4xStreamTable" href="../../../org/apache/plc4x/Plc4xStreamTable.html#Plc4xStreamTable">Plc4xStreamTable</a>(queue, configuration);
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>          } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>              <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../org/apache/plc4x/Plc4xTable.html">Plc4xTable</a>(queue, configuration, limit);
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>              <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="Plc4xTable" href="../../../org/apache/plc4x/Plc4xTable.html#Plc4xTable">Plc4xTable</a>(queue, configuration, limit);
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          }
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      }
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  
@@ -81,25 +81,25 @@
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">this</strong>.tableMap;
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>      }
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>  
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../org/apache/plc4x/Plc4xSchema.html">Record</a> {
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> Record {
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>  
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>          <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> Instant timestamp;
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> String source;
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>          <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> Map&lt;String, Object&gt; values;
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>          <strong class="jxr_keyword">public</strong> <a href="../../../org/apache/plc4x/Plc4xSchema.html">Record</a>(Instant timestamp, String source, Map&lt;String, Object&gt; values) {
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>          <strong class="jxr_keyword">public</strong> Record(Instant timestamp, String source, Map&lt;String, Object&gt; values) {
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>              <strong class="jxr_keyword">this</strong>.timestamp = timestamp;
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>              <strong class="jxr_keyword">this</strong>.source = source;
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>              <strong class="jxr_keyword">this</strong>.values = values;
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          }
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>      }
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>  
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>      <strong class="jxr_keyword">class</strong> <a href="../../../org/apache/plc4x/Plc4xSchema.html">QueueHandler</a> <strong class="jxr_keyword">implements</strong> ResultHandler {
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>      <strong class="jxr_keyword">class</strong> QueueHandler <strong class="jxr_keyword">implements</strong> ResultHandler {
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>  
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>          @Override
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>          <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> handle(String job, String alias, Map&lt;String, Object&gt; results) {
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>              <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>                  <a href="../../../org/apache/plc4x/Plc4xSchema.html">Record</a> record = <strong class="jxr_keyword">new</strong> <a href="../../../org/apache/plc4x/Plc4xSchema.html">Record</a>(Instant.now(), alias, results);
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>                  Record record = <strong class="jxr_keyword">new</strong> Record(Instant.now(), alias, results);
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>                  queues.get(job).put(record);
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>              } <strong class="jxr_keyword">catch</strong> (InterruptedException e) {
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>                  Thread.currentThread().interrupt();

@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -71,7 +71,7 @@
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>  <em class="jxr_javadoccomment"> * @see PlcFunctions</em>
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html">PlcConnectionAdapter</a> <strong class="jxr_keyword">implements</strong> AutoCloseable {
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="PlcConnectionAdapter" href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html#PlcConnectionAdapter">PlcConnectionAdapter</a> <strong class="jxr_keyword">implements</strong> AutoCloseable {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger logger = LoggerFactory.getLogger(PlcConnectionAdapter.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  
@@ -87,11 +87,11 @@
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>  <em class="jxr_comment">     *   to enable the app to register an error callback handler or such.</em>
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>  <em class="jxr_comment">     */</em>
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html">PlcConnectionAdapter</a>(PlcConnection plcConnection) {
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>      <strong class="jxr_keyword">public</strong> <a name="PlcConnectionAdapter" href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html#PlcConnectionAdapter">PlcConnectionAdapter</a>(PlcConnection plcConnection) {
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          <strong class="jxr_keyword">this</strong>.plcConnection = plcConnection;
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>      }
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>  
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html">PlcConnectionAdapter</a>(String plcConnectionUrl) {
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">public</strong> <a name="PlcConnectionAdapter" href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html#PlcConnectionAdapter">PlcConnectionAdapter</a>(String plcConnectionUrl) {
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">this</strong>.plcConnectionUrl = plcConnectionUrl;
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>      }
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>  
@@ -159,7 +159,7 @@
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>         <strong class="jxr_keyword">private</strong> PlcClientDatatype clientDatatype;
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>         <strong class="jxr_keyword">private</strong> String fieldQuery;
 <a class="jxr_linenumber" name="L153" href="#L153">153</a> 
-<a class="jxr_linenumber" name="L154" href="#L154">154</a>         <a href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html">MySupplier</a>(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
+<a class="jxr_linenumber" name="L154" href="#L154">154</a>         MySupplier(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>             <strong class="jxr_keyword">this</strong>.genericDatatype = genericDatatype;
 <a class="jxr_linenumber" name="L156" href="#L156">156</a>             <strong class="jxr_keyword">this</strong>.clientDatatype = clientDatatype;
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>             <strong class="jxr_keyword">this</strong>.fieldQuery = fieldQuery;
@@ -232,7 +232,7 @@
 <a class="jxr_linenumber" name="L224" href="#L224">224</a>         <strong class="jxr_keyword">private</strong> PlcClientDatatype clientDatatype;
 <a class="jxr_linenumber" name="L225" href="#L225">225</a>         <strong class="jxr_keyword">private</strong> String fieldQuery;
 <a class="jxr_linenumber" name="L226" href="#L226">226</a> 
-<a class="jxr_linenumber" name="L227" href="#L227">227</a>         <a href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html">MyListSupplier</a>(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
+<a class="jxr_linenumber" name="L227" href="#L227">227</a>         MyListSupplier(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
 <a class="jxr_linenumber" name="L228" href="#L228">228</a>             <strong class="jxr_keyword">this</strong>.genericDatatype = genericDatatype;
 <a class="jxr_linenumber" name="L229" href="#L229">229</a>             <strong class="jxr_keyword">this</strong>.clientDatatype = clientDatatype;
 <a class="jxr_linenumber" name="L230" href="#L230">230</a>             <strong class="jxr_keyword">this</strong>.fieldQuery = fieldQuery;
@@ -380,7 +380,7 @@
 <a class="jxr_linenumber" name="L372" href="#L372">372</a>         <strong class="jxr_keyword">private</strong> PlcClientDatatype clientDatatype;
 <a class="jxr_linenumber" name="L373" href="#L373">373</a>         <strong class="jxr_keyword">private</strong> String fieldQuery;
 <a class="jxr_linenumber" name="L374" href="#L374">374</a> 
-<a class="jxr_linenumber" name="L375" href="#L375">375</a>         <a href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html">ObjectConsumer</a>(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
+<a class="jxr_linenumber" name="L375" href="#L375">375</a>         ObjectConsumer(Class&lt;T&gt; genericDatatype, PlcClientDatatype clientDatatype, String fieldQuery) {
 <a class="jxr_linenumber" name="L376" href="#L376">376</a>             <strong class="jxr_keyword">this</strong>.clientDatatype = clientDatatype;
 <a class="jxr_linenumber" name="L377" href="#L377">377</a>             <strong class="jxr_keyword">this</strong>.fieldQuery = fieldQuery;
 <a class="jxr_linenumber" name="L378" href="#L378">378</a>         }
@@ -398,7 +398,7 @@
 <a class="jxr_linenumber" name="L390" href="#L390">390</a>         <strong class="jxr_keyword">private</strong> Function&lt;JsonObject, String&gt; fieldQueryFn;
 <a class="jxr_linenumber" name="L391" href="#L391">391</a>         <strong class="jxr_keyword">private</strong> Function&lt;JsonObject, T&gt; fieldValueFn;
 <a class="jxr_linenumber" name="L392" href="#L392">392</a> 
-<a class="jxr_linenumber" name="L393" href="#L393">393</a>         <a href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html">JsonConsumer</a>(PlcClientDatatype clientDatatype, Function&lt;JsonObject, String&gt; fieldQueryFn, Function&lt;JsonObject, T&gt; fieldValueFn) {
+<a class="jxr_linenumber" name="L393" href="#L393">393</a>         JsonConsumer(PlcClientDatatype clientDatatype, Function&lt;JsonObject, String&gt; fieldQueryFn, Function&lt;JsonObject, T&gt; fieldValueFn) {
 <a class="jxr_linenumber" name="L394" href="#L394">394</a>             <strong class="jxr_keyword">this</strong>.clientDatatype = clientDatatype;
 <a class="jxr_linenumber" name="L395" href="#L395">395</a>             <strong class="jxr_keyword">this</strong>.fieldQueryFn = fieldQueryFn;
 <a class="jxr_linenumber" name="L396" href="#L396">396</a>             <strong class="jxr_keyword">this</strong>.fieldValueFn = fieldValueFn;

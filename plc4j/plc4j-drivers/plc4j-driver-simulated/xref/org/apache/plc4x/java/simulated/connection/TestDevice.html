@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -40,7 +40,7 @@
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <em class="jxr_javadoccomment"> * Test device storing its state in memory.</em>
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment"> * Values are stored in a HashMap.</em>
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestDevice.html">TestDevice</a> {
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="TestDevice" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestDevice.html#TestDevice">TestDevice</a> {
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> Random random = <strong class="jxr_keyword">new</strong> Random();
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  
@@ -58,11 +58,11 @@
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> ExecutorService pool = Executors.newCachedThreadPool();
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestDevice.html">TestDevice</a>(String name) {
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">public</strong> <a name="TestDevice" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestDevice.html#TestDevice">TestDevice</a>(String name) {
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>          <strong class="jxr_keyword">this</strong>.name = name;
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>      }
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>  
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>      <strong class="jxr_keyword">public</strong> Optional&lt;BaseDefaultFieldItem&gt; get(<a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html">TestField</a> field) {
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      <strong class="jxr_keyword">public</strong> Optional&lt;BaseDefaultFieldItem&gt; get(<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a> field) {
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          Objects.requireNonNull(field);
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">switch</strong> (field.getType()) {
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>              <strong class="jxr_keyword">case</strong> STATE:
@@ -75,7 +75,7 @@
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"Unsupported field type: "</span> + field.getType().name());
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      }
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> set(<a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html">TestField</a> field, BaseDefaultFieldItem value) {
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> set(<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a> field, BaseDefaultFieldItem value) {
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          Objects.requireNonNull(field);
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          <strong class="jxr_keyword">switch</strong> (field.getType()) {
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>              <strong class="jxr_keyword">case</strong> STATE:
@@ -144,7 +144,7 @@
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>             result = bytes;
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>         }
 <a class="jxr_linenumber" name="L138" href="#L138">138</a> 
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestFieldItem.html">TestFieldItem</a>(<strong class="jxr_keyword">new</strong> Object[]{result});
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="TestFieldItem" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestFieldItem.html#TestFieldItem">TestFieldItem</a>(<strong class="jxr_keyword">new</strong> Object[]{result});
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>     }
 <a class="jxr_linenumber" name="L141" href="#L141">141</a> 
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>     @Override
@@ -152,7 +152,7 @@
 <a class="jxr_linenumber" name="L144" href="#L144">144</a>         <strong class="jxr_keyword">return</strong> name;
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>     }
 <a class="jxr_linenumber" name="L146" href="#L146">146</a> 
-<a class="jxr_linenumber" name="L147" href="#L147">147</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addCyclicSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html">TestField</a> plcField, Duration duration) {
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addCyclicSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, <a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a> plcField, Duration duration) {
 <a class="jxr_linenumber" name="L148" href="#L148">148</a>         ScheduledFuture&lt;?&gt; scheduledFuture = scheduler.scheduleAtFixedRate(() -&gt; {
 <a class="jxr_linenumber" name="L149" href="#L149">149</a>             BaseDefaultFieldItem baseDefaultFieldItem = state.get(plcField);
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>             <strong class="jxr_keyword">if</strong> (baseDefaultFieldItem == <strong class="jxr_keyword">null</strong>) {
@@ -163,11 +163,11 @@
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>         cyclicSubscriptions.put(handle, scheduledFuture);
 <a class="jxr_linenumber" name="L156" href="#L156">156</a>     }
 <a class="jxr_linenumber" name="L157" href="#L157">157</a> 
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addChangeOfStateSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html">TestField</a> plcField) {
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addChangeOfStateSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, <a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a> plcField) {
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>         changeOfStateSubscriptions.put(handle, Pair.of(plcField, consumer));
 <a class="jxr_linenumber" name="L160" href="#L160">160</a>     }
 <a class="jxr_linenumber" name="L161" href="#L161">161</a> 
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addEventSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html">TestField</a> plcField) {
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> addEventSubscription(Consumer&lt;BaseDefaultFieldItem&gt; consumer, PlcSubscriptionHandle handle, <a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a> plcField) {
 <a class="jxr_linenumber" name="L163" href="#L163">163</a>         Future&lt;?&gt; submit = pool.submit(() -&gt; {
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>             <strong class="jxr_keyword">while</strong> (!Thread.currentThread().isInterrupted()) {
 <a class="jxr_linenumber" name="L165" href="#L165">165</a>                 BaseDefaultFieldItem baseDefaultFieldItem = state.get(plcField);

@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -74,13 +74,13 @@
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  <em class="jxr_javadoccomment"> * When a {@link S7ResponseMessage} is received it takes the existing request container from its Map and finishes</em>
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment"> * the {@link PlcRequestContainer}s future with the {@link PlcResponse}.</em>
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/Plc4XS7Protocol.html">Plc4XS7Protocol</a> <strong class="jxr_keyword">extends</strong> PlcMessageToMessageCodec&lt;S7Message, PlcRequestContainer&gt; {
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="Plc4XS7Protocol" href="../../../../../../org/apache/plc4x/java/s7/netty/Plc4XS7Protocol.html#Plc4XS7Protocol">Plc4XS7Protocol</a> <strong class="jxr_keyword">extends</strong> PlcMessageToMessageCodec&lt;S7Message, PlcRequestContainer&gt; {
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>  
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> AtomicInteger tpduGenerator = <strong class="jxr_keyword">new</strong> AtomicInteger(10);
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>  
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>      <strong class="jxr_keyword">private</strong> Map&lt;Short, PlcRequestContainer&gt; requests;
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>  
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/Plc4XS7Protocol.html">Plc4XS7Protocol</a>() {
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>      <strong class="jxr_keyword">public</strong> <a name="Plc4XS7Protocol" href="../../../../../../org/apache/plc4x/java/s7/netty/Plc4XS7Protocol.html#Plc4XS7Protocol">Plc4XS7Protocol</a>() {
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>          <strong class="jxr_keyword">this</strong>.requests = <strong class="jxr_keyword">new</strong> HashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>      }
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>  
@@ -94,7 +94,7 @@
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>      @Override
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> userEventTriggered(ChannelHandlerContext ctx, Object evt) <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>          <strong class="jxr_keyword">if</strong> (evt instanceof S7ConnectedEvent) {
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>          <strong class="jxr_keyword">if</strong> (evt instanceof <a name="S7ConnectedEvent" href="../../../../../../org/apache/plc4x/java/s7/netty/events/S7ConnectedEvent.html#S7ConnectedEvent">S7ConnectedEvent</a>) {
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>              ctx.channel().pipeline().fireUserEventTriggered(<strong class="jxr_keyword">new</strong> ConnectedEvent());
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>          } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>              <strong class="jxr_keyword">super</strong>.userEventTriggered(ctx, evt);
@@ -114,8 +114,8 @@
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> exceptionCaught(ChannelHandlerContext ctx, Throwable cause) <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">if</strong> (cause instanceof PlcProtocolPayloadTooBigException) {
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>             PlcProtocolPayloadTooBigException pptbe = (PlcProtocolPayloadTooBigException) cause;
-<a class="jxr_linenumber" name="L109" href="#L109">109</a>             <strong class="jxr_keyword">if</strong> (pptbe.getPayload() instanceof S7RequestMessage) {
-<a class="jxr_linenumber" name="L110" href="#L110">110</a>                 <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> request = (S7RequestMessage) pptbe.getPayload();
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>             <strong class="jxr_keyword">if</strong> (pptbe.getPayload() instanceof <a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>) {
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>                 <a name="S7RequestMessage" h<a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>/../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> request = (<a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>) pptbe.getPayload();
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>                 <strong class="jxr_keyword">if</strong> (request.getParent() instanceof PlcRequestContainer) {
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>                     PlcRequestContainer requestContainer = (PlcRequestContainer) request.getParent();
 <a class="jxr_linenumber" name="L113" href="#L113">113</a> 
@@ -162,21 +162,21 @@
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>         PlcReadRequest readRequest = (PlcReadRequest) msg.getRequest();
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>         <strong class="jxr_keyword">for</strong> (String fieldName : readRequest.getFieldNames()) {
 <a class="jxr_linenumber" name="L156" href="#L156">156</a>             PlcField field = readRequest.getField(fieldName);
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>             <strong class="jxr_keyword">if</strong> (!(field instanceof S7Field)) {
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>             <strong class="jxr_keyword">if</strong> (!(field instanceof <a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>)) {
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"The field should have been of type S7Field"</span>);
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>             }
-<a class="jxr_linenumber" name="L160" href="#L160">160</a>             <a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L160" href="#L160">160</a>             <a name="S7Field" h<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L161" href="#L161">161</a> 
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>             <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html">VarParameterItem</a> varParameterItem = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a>(
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>             <a name="VarParameterItem" href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> varParameterItem = <strong class="jxr_keyword">new</strong> <a name="S7AnyVarParameterItem" href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>(
 <a class="jxr_linenumber" name="L163" href="#L163">163</a>                 SpecificationType.VARIABLE_SPECIFICATION, s7Field.getMemoryArea(),
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>                 s7Field.getDataType(),
 <a class="jxr_linenumber" name="L165" href="#L165">165</a>                 s7Field.getNumElements(), s7Field.getBlockNumber(), s7Field.getByteOffset(), (byte) s7Field.getBitOffset());
 <a class="jxr_linenumber" name="L166" href="#L166">166</a>             parameterItems.add(varParameterItem);
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>         }
-<a class="jxr_linenumber" name="L168" href="#L168">168</a>         <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> readVarParameter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(ParameterType.READ_VAR, parameterItems);
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>         <a name="VarParameter" href="../../../../../../org/apache/plc4x/java/s7/n<a name="VarParameter" href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>arams/VarParameter.html#VarParameter">VarParameter</a> readVarParameter = <strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(ParameterType.READ_VAR, parameterItems);
 <a class="jxr_linenumber" name="L169" href="#L169">169</a> 
 <a class="jxr_linenumber" name="L170" href="#L170">170</a>         <em class="jxr_comment">// Assemble the request.</em>
-<a class="jxr_linenumber" name="L171" href="#L171">171</a>         <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> s7ReadRequest = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a>(MessageType.JOB,
+<a class="jxr_linenumber" name="L171" href="#L171">171</a>         <a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s<a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>ssages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> s7ReadRequest = <strong class="jxr_keyword">new</strong> <a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>(MessageType.JOB,
 <a class="jxr_linenumber" name="L172" href="#L172">172</a>             (<strong class="jxr_keyword">short</strong>) tpduGenerator.getAndIncrement(), Collections.singletonList(readVarParameter),
 <a class="jxr_linenumber" name="L173" href="#L173">173</a>             Collections.emptyList(), msg);
 <a class="jxr_linenumber" name="L174" href="#L174">174</a> 
@@ -192,10 +192,10 @@
 <a class="jxr_linenumber" name="L184" href="#L184">184</a>         PlcWriteRequest writeRequest = (PlcWriteRequest) msg.getRequest();
 <a class="jxr_linenumber" name="L185" href="#L185">185</a>         <strong class="jxr_keyword">for</strong> (String fieldName : writeRequest.getFieldNames()) {
 <a class="jxr_linenumber" name="L186" href="#L186">186</a>             PlcField field = writeRequest.getField(fieldName);
-<a class="jxr_linenumber" name="L187" href="#L187">187</a>             <strong class="jxr_keyword">if</strong> (!(field instanceof S7Field)) {
+<a class="jxr_linenumber" name="L187" href="#L187">187</a>             <strong class="jxr_keyword">if</strong> (!(field instanceof <a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>)) {
 <a class="jxr_linenumber" name="L188" href="#L188">188</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> PlcException(<span class="jxr_string">"The field should have been of type S7Field"</span>);
 <a class="jxr_linenumber" name="L189" href="#L189">189</a>             }
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>             <a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>             <a name="S7Field" h<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L191" href="#L191">191</a>             <strong class="jxr_keyword">if</strong>(!(writeRequest instanceof DefaultPlcWriteRequest)) {
 <a class="jxr_linenumber" name="L192" href="#L192">192</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> PlcException(<span class="jxr_string">"The writeRequest should have been of type DefaultPlcWriteRequest"</span>);
 <a class="jxr_linenumber" name="L193" href="#L193">193</a>             }
@@ -208,13 +208,13 @@
 <a class="jxr_linenumber" name="L200" href="#L200">200</a>                 writeRequest.getNumberOfValues(fieldName) != s7Field.getNumElements()) {
 <a class="jxr_linenumber" name="L201" href="#L201">201</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> PlcException(<span class="jxr_string">"The number of values provided doesn't match the number specified by the field."</span>);
 <a class="jxr_linenumber" name="L202" href="#L202">202</a>             }
-<a class="jxr_linenumber" name="L203" href="#L203">203</a>             <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html">VarParameterItem</a> varParameterItem = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a>(
+<a class="jxr_linenumber" name="L203" href="#L203">203</a>             <a name="VarParameterItem" href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> varParameterItem = <strong class="jxr_keyword">new</strong> <a name="S7AnyVarParameterItem" href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>(
 <a class="jxr_linenumber" name="L204" href="#L204">204</a>                 SpecificationType.VARIABLE_SPECIFICATION, s7Field.getMemoryArea(),
 <a class="jxr_linenumber" name="L205" href="#L205">205</a>                 s7Field.getDataType(),
 <a class="jxr_linenumber" name="L206" href="#L206">206</a>                 s7Field.getNumElements(), s7Field.getBlockNumber(), s7Field.getByteOffset(), (byte) s7Field.getBitOffset());
 <a class="jxr_linenumber" name="L207" href="#L207">207</a>             parameterItems.add(varParameterItem);
 <a class="jxr_linenumber" name="L208" href="#L208">208</a> 
-<a class="jxr_linenumber" name="L209" href="#L209">209</a>             <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/types/DataTransportSize.html">DataTransportSize</a> dataTransportSize = s7Field.getDataType().getDataTransportSize();
+<a class="jxr_linenumber" name="L209" href="#L209">209</a>             <a name="DataTransportSize" href="../../../../../../org/apache/plc4x/java/s7/netty/model/types/DataTransportSize.html#DataTransportSize">DataTransportSize</a> dataTransportSize = s7Field.getDataType().getDataTransportSize();
 <a class="jxr_linenumber" name="L210" href="#L210">210</a> 
 <a class="jxr_linenumber" name="L211" href="#L211">211</a>             <em class="jxr_comment">// TODO: Checkout if the payload items are sort of a flatMap of all request items.</em>
 <a class="jxr_linenumber" name="L212" href="#L212">212</a>             byte[] byteData;
@@ -287,16 +287,16 @@
 <a class="jxr_linenumber" name="L279" href="#L279">279</a>                     <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"Unsupported type "</span> + s7Field.getDataType());
 <a class="jxr_linenumber" name="L280" href="#L280">280</a>             }
 <a class="jxr_linenumber" name="L281" href="#L281">281</a> 
-<a class="jxr_linenumber" name="L282" href="#L282">282</a>             <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> varPayloadItem = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a>(
+<a class="jxr_linenumber" name="L282" href="#L282">282</a>             <a name="VarPayloadItem" href="../../../../../../org/apache/plc4x/java/s7<a name="VarPayloadItem" href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>ayloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> varPayloadItem = <strong class="jxr_keyword">new</strong> <a name="VarPayloadItem" href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>(
 <a class="jxr_linenumber" name="L283" href="#L283">283</a>                 DataTransportErrorCode.RESERVED, dataTransportSize, byteData);
 <a class="jxr_linenumber" name="L284" href="#L284">284</a> 
 <a class="jxr_linenumber" name="L285" href="#L285">285</a>             payloadItems.add(varPayloadItem);
 <a class="jxr_linenumber" name="L286" href="#L286">286</a>         }
-<a class="jxr_linenumber" name="L287" href="#L287">287</a>         <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> writeVarParameter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(ParameterType.WRITE_VAR, parameterItems);
-<a class="jxr_linenumber" name="L288" href="#L288">288</a>         <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a> writeVarPayload = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a>(ParameterType.WRITE_VAR, payloadItems);
+<a class="jxr_linenumber" name="L287" href="#L287">287</a>         <a name="VarParameter" href="../../../../../../org/apache/plc4x/java/s7/ne<a name="VarParameter" href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>rams/VarParameter.html#VarParameter">VarParameter</a> writeVarParameter = <strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(ParameterType.WRITE_VAR, parameterItems);
+<a class="jxr_linenumber" name="L288" href="#L288">288</a>         <a name="VarPayload" href="../../../../../../org/apache/plc4x/java/s7/<a name="VarPayload" href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a>l/payloads/VarPayload.html#VarPayload">VarPayload</a> writeVarPayload = <strong class="jxr_keyword">new</strong> <a name="VarPayload" href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a>(ParameterType.WRITE_VAR, payloadItems);
 <a class="jxr_linenumber" name="L289" href="#L289">289</a> 
 <a class="jxr_linenumber" name="L290" href="#L290">290</a>         <em class="jxr_comment">// Assemble the request.</em>
-<a class="jxr_linenumber" name="L291" href="#L291">291</a>         <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> s7WriteRequest = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a>(MessageType.JOB,
+<a class="jxr_linenumber" name="L291" href="#L291">291</a>         <a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s7<a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>sages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> s7WriteRequest = <strong class="jxr_keyword">new</strong> <a name="S7RequestMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>(MessageType.JOB,
 <a class="jxr_linenumber" name="L292" href="#L292">292</a>             (<strong class="jxr_keyword">short</strong>) tpduGenerator.getAndIncrement(), Collections.singletonList(writeVarParameter),
 <a class="jxr_linenumber" name="L293" href="#L293">293</a>             Collections.singletonList(writeVarPayload), msg);
 <a class="jxr_linenumber" name="L294" href="#L294">294</a> 
@@ -398,12 +398,12 @@
 <a class="jxr_linenumber" name="L390" href="#L390">390</a> 
 <a class="jxr_linenumber" name="L391" href="#L391">391</a>     @SuppressWarnings(<span class="jxr_string">"unchecked"</span>)
 <a class="jxr_linenumber" name="L392" href="#L392">392</a>     @Override
-<a class="jxr_linenumber" name="L393" href="#L393">393</a>     <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> decode(ChannelHandlerContext ctx, <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7Message.html">S7Message</a> msg, List&lt;Object&gt; out) <strong class="jxr_keyword">throws</strong> PlcException {
+<a class="jxr_linenumber" name="L393" href="#L393">393</a>     <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> decode(ChannelHandlerContext ctx, <a name="S7Message" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7Message.html#S7Message">S7Message</a> msg, List&lt;Object&gt; out) <strong class="jxr_keyword">throws</strong> PlcException {
 <a class="jxr_linenumber" name="L394" href="#L394">394</a>         <em class="jxr_comment">// We're currently just expecting responses.</em>
-<a class="jxr_linenumber" name="L395" href="#L395">395</a>         <strong class="jxr_keyword">if</strong> (!(msg instanceof S7ResponseMessage)) {
+<a class="jxr_linenumber" name="L395" href="#L395">395</a>         <strong class="jxr_keyword">if</strong> (!(msg instanceof <a name="S7ResponseMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a>)) {
 <a class="jxr_linenumber" name="L396" href="#L396">396</a>             <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L397" href="#L397">397</a>         }
-<a class="jxr_linenumber" name="L398" href="#L398">398</a>         <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html">S7ResponseMessage</a> responseMessage = (S7ResponseMessage) msg;
+<a class="jxr_linenumber" name="L398" href="#L398">398</a>         <a name="S7ResponseMessage" href="../<a name="S7ResponseMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a>g/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> responseMessage = (<a name="S7ResponseMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a>) msg;
 <a class="jxr_linenumber" name="L399" href="#L399">399</a>         <strong class="jxr_keyword">short</strong> tpduReference = responseMessage.getTpduReference();
 <a class="jxr_linenumber" name="L400" href="#L400">400</a>         <strong class="jxr_keyword">if</strong> (requests.containsKey(tpduReference)) {
 <a class="jxr_linenumber" name="L401" href="#L401">401</a>             <em class="jxr_comment">// As every response has a matching request, get this request based on the tpdu.</em>
@@ -426,10 +426,10 @@
 <a class="jxr_linenumber" name="L418" href="#L418">418</a>     }
 <a class="jxr_linenumber" name="L419" href="#L419">419</a> 
 <a class="jxr_linenumber" name="L420" href="#L420">420</a>     @SuppressWarnings(<span class="jxr_string">"unchecked"</span>)
-<a class="jxr_linenumber" name="L421" href="#L421">421</a>     <strong class="jxr_keyword">private</strong> PlcResponse decodeReadResponse(<a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html">S7ResponseMessage</a> responseMessage, PlcRequestContainer requestContainer) <strong class="jxr_keyword">throws</strong> PlcProtocolException {
+<a class="jxr_linenumber" name="L421" href="#L421">421</a>     <strong class="jxr_keyword">private</strong> PlcResponse decodeReadResponse(<a name="S7ResponseMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> responseMessage, PlcRequestContainer requestContainer) <strong class="jxr_keyword">throws</strong> PlcProtocolException {
 <a class="jxr_linenumber" name="L422" href="#L422">422</a>         InternalPlcReadRequest plcReadRequest = (InternalPlcReadRequest) requestContainer.getRequest();
 <a class="jxr_linenumber" name="L423" href="#L423">423</a> 
-<a class="jxr_linenumber" name="L424" href="#L424">424</a>         <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a> payload = responseMessage.getPayload(VarPayload.<strong class="jxr_keyword">class</strong>)
+<a class="jxr_linenumber" name="L424" href="#L424">424</a>         <a name="VarPayload" href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a> payload = responseMessage.getPayload(VarPayload.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L425" href="#L425">425</a>             .orElseThrow(() -&gt; <strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"No VarPayload supplied"</span>));
 <a class="jxr_linenumber" name="L426" href="#L426">426</a> 
 <a class="jxr_linenumber" name="L427" href="#L427">427</a>         <em class="jxr_comment">// TODO: Checkout if the payload items are sort of a flatMap of all request items.</em>
@@ -446,8 +446,8 @@
 <a class="jxr_linenumber" name="L438" href="#L438">438</a>         List&lt;VarPayloadItem&gt; payloadItems = payload.getItems();
 <a class="jxr_linenumber" name="L439" href="#L439">439</a>         <strong class="jxr_keyword">int</strong> index = 0;
 <a class="jxr_linenumber" name="L440" href="#L440">440</a>         <strong class="jxr_keyword">for</strong> (String fieldName : plcReadRequest.getFieldNames()) {
-<a class="jxr_linenumber" name="L441" href="#L441">441</a>             <a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field = (S7Field) plcReadRequest.getField(fieldName);
-<a class="jxr_linenumber" name="L442" href="#L442">442</a>             <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> payloadItem = payloadItems.get(index);
+<a class="jxr_linenumber" name="L441" href="#L441">441</a>             <a name="S7Field"<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field = (<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) plcReadRequest.getField(fieldName);
+<a class="jxr_linenumber" name="L442" href="#L442">442</a>             <a name="VarPayloadItem" href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> payloadItem = payloadItems.get(index);
 <a class="jxr_linenumber" name="L443" href="#L443">443</a> 
 <a class="jxr_linenumber" name="L444" href="#L444">444</a>             PlcResponseCode responseCode = decodeResponseCode(payloadItem.getReturnCode());
 <a class="jxr_linenumber" name="L445" href="#L445">445</a>             BaseDefaultFieldItem fieldItem = <strong class="jxr_keyword">null</strong>;
@@ -544,30 +544,30 @@
 <a class="jxr_linenumber" name="L536" href="#L536">536</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcReadResponse(plcReadRequest, values);
 <a class="jxr_linenumber" name="L537" href="#L537">537</a>     }
 <a class="jxr_linenumber" name="L538" href="#L538">538</a> 
-<a class="jxr_linenumber" name="L539" href="#L539">539</a>     BaseDefaultFieldItem decodeReadResponseBitField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L539" href="#L539">539</a>     BaseDefaultFieldItem decodeReadResponseBitField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L540" href="#L540">540</a>         Boolean[] booleans = readAllValues(Boolean.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readByte() != 0x00);
 <a class="jxr_linenumber" name="L541" href="#L541">541</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultBooleanFieldItem(booleans);
 <a class="jxr_linenumber" name="L542" href="#L542">542</a>     }
 <a class="jxr_linenumber" name="L543" href="#L543">543</a> 
-<a class="jxr_linenumber" name="L544" href="#L544">544</a>     BaseDefaultFieldItem decodeReadResponseByteBitStringField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L544" href="#L544">544</a>     BaseDefaultFieldItem decodeReadResponseByteBitStringField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L545" href="#L545">545</a>         byte[] bytes = <strong class="jxr_keyword">new</strong> byte[field.getNumElements()];
 <a class="jxr_linenumber" name="L546" href="#L546">546</a>         data.readBytes(bytes);
 <a class="jxr_linenumber" name="L547" href="#L547">547</a>         <strong class="jxr_keyword">return</strong> decodeBitStringField(bytes);
 <a class="jxr_linenumber" name="L548" href="#L548">548</a>     }
 <a class="jxr_linenumber" name="L549" href="#L549">549</a> 
-<a class="jxr_linenumber" name="L550" href="#L550">550</a>     BaseDefaultFieldItem decodeReadResponseShortBitStringField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L550" href="#L550">550</a>     BaseDefaultFieldItem decodeReadResponseShortBitStringField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L551" href="#L551">551</a>         byte[] bytes = <strong class="jxr_keyword">new</strong> byte[field.getNumElements() * 2];
 <a class="jxr_linenumber" name="L552" href="#L552">552</a>         data.readBytes(bytes);
 <a class="jxr_linenumber" name="L553" href="#L553">553</a>         <strong class="jxr_keyword">return</strong> decodeBitStringField(bytes);
 <a class="jxr_linenumber" name="L554" href="#L554">554</a>     }
 <a class="jxr_linenumber" name="L555" href="#L555">555</a> 
-<a class="jxr_linenumber" name="L556" href="#L556">556</a>     BaseDefaultFieldItem decodeReadResponseIntegerBitStringField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L556" href="#L556">556</a>     BaseDefaultFieldItem decodeReadResponseIntegerBitStringField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L557" href="#L557">557</a>         byte[] bytes = <strong class="jxr_keyword">new</strong> byte[field.getNumElements() * 4];
 <a class="jxr_linenumber" name="L558" href="#L558">558</a>         data.readBytes(bytes);
 <a class="jxr_linenumber" name="L559" href="#L559">559</a>         <strong class="jxr_keyword">return</strong> decodeBitStringField(bytes);
 <a class="jxr_linenumber" name="L560" href="#L560">560</a>     }
 <a class="jxr_linenumber" name="L561" href="#L561">561</a> 
-<a class="jxr_linenumber" name="L562" href="#L562">562</a>     BaseDefaultFieldItem decodeReadResponseLongBitStringField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L562" href="#L562">562</a>     BaseDefaultFieldItem decodeReadResponseLongBitStringField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L563" href="#L563">563</a>         byte[] bytes = <strong class="jxr_keyword">new</strong> byte[field.getNumElements() * 8];
 <a class="jxr_linenumber" name="L564" href="#L564">564</a>         data.readBytes(bytes);
 <a class="jxr_linenumber" name="L565" href="#L565">565</a>         <strong class="jxr_keyword">return</strong> decodeBitStringField(bytes);
@@ -585,52 +585,52 @@
 <a class="jxr_linenumber" name="L577" href="#L577">577</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultBooleanFieldItem(booleanValues);
 <a class="jxr_linenumber" name="L578" href="#L578">578</a>     }
 <a class="jxr_linenumber" name="L579" href="#L579">579</a> 
-<a class="jxr_linenumber" name="L580" href="#L580">580</a>     BaseDefaultFieldItem decodeReadResponseSignedByteField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L580" href="#L580">580</a>     BaseDefaultFieldItem decodeReadResponseSignedByteField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L581" href="#L581">581</a>         Byte[] bytes = readAllValues(Byte.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readByte());
 <a class="jxr_linenumber" name="L582" href="#L582">582</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultByteFieldItem(bytes);
 <a class="jxr_linenumber" name="L583" href="#L583">583</a>     }
 <a class="jxr_linenumber" name="L584" href="#L584">584</a> 
-<a class="jxr_linenumber" name="L585" href="#L585">585</a>     BaseDefaultFieldItem decodeReadResponseUnsignedByteField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L585" href="#L585">585</a>     BaseDefaultFieldItem decodeReadResponseUnsignedByteField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L586" href="#L586">586</a>         Short[] shorts = readAllValues(Short.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readUnsignedByte());
 <a class="jxr_linenumber" name="L587" href="#L587">587</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultShortFieldItem(shorts);
 <a class="jxr_linenumber" name="L588" href="#L588">588</a>     }
 <a class="jxr_linenumber" name="L589" href="#L589">589</a> 
-<a class="jxr_linenumber" name="L590" href="#L590">590</a>     BaseDefaultFieldItem decodeReadResponseSignedShortField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L590" href="#L590">590</a>     BaseDefaultFieldItem decodeReadResponseSignedShortField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L591" href="#L591">591</a>         Short[] shorts = readAllValues(Short.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readShort());
 <a class="jxr_linenumber" name="L592" href="#L592">592</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultShortFieldItem(shorts);
 <a class="jxr_linenumber" name="L593" href="#L593">593</a>     }
 <a class="jxr_linenumber" name="L594" href="#L594">594</a> 
-<a class="jxr_linenumber" name="L595" href="#L595">595</a>     BaseDefaultFieldItem decodeReadResponseUnsignedShortField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L595" href="#L595">595</a>     BaseDefaultFieldItem decodeReadResponseUnsignedShortField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L596" href="#L596">596</a>         Integer[] ints = readAllValues(Integer.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readUnsignedShort());
 <a class="jxr_linenumber" name="L597" href="#L597">597</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultIntegerFieldItem(ints);
 <a class="jxr_linenumber" name="L598" href="#L598">598</a>     }
 <a class="jxr_linenumber" name="L599" href="#L599">599</a> 
-<a class="jxr_linenumber" name="L600" href="#L600">600</a>     BaseDefaultFieldItem decodeReadResponseSignedIntegerField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L600" href="#L600">600</a>     BaseDefaultFieldItem decodeReadResponseSignedIntegerField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L601" href="#L601">601</a>         Integer[] ints = readAllValues(Integer.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readInt());
 <a class="jxr_linenumber" name="L602" href="#L602">602</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultIntegerFieldItem(ints);
 <a class="jxr_linenumber" name="L603" href="#L603">603</a>     }
 <a class="jxr_linenumber" name="L604" href="#L604">604</a> 
-<a class="jxr_linenumber" name="L605" href="#L605">605</a>     BaseDefaultFieldItem decodeReadResponseUnsignedIntegerField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L605" href="#L605">605</a>     BaseDefaultFieldItem decodeReadResponseUnsignedIntegerField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L606" href="#L606">606</a>         Long[] longs = readAllValues(Long.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readUnsignedInt());
 <a class="jxr_linenumber" name="L607" href="#L607">607</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultLongFieldItem(longs);
 <a class="jxr_linenumber" name="L608" href="#L608">608</a>     }
 <a class="jxr_linenumber" name="L609" href="#L609">609</a> 
-<a class="jxr_linenumber" name="L610" href="#L610">610</a>     BaseDefaultFieldItem decodeReadResponseSignedLongField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L610" href="#L610">610</a>     BaseDefaultFieldItem decodeReadResponseSignedLongField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L611" href="#L611">611</a>         Long[] longs = readAllValues(Long.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readLong());
 <a class="jxr_linenumber" name="L612" href="#L612">612</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultLongFieldItem(longs);
 <a class="jxr_linenumber" name="L613" href="#L613">613</a>     }
 <a class="jxr_linenumber" name="L614" href="#L614">614</a> 
-<a class="jxr_linenumber" name="L615" href="#L615">615</a>     BaseDefaultFieldItem decodeReadResponseUnsignedLongField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L615" href="#L615">615</a>     BaseDefaultFieldItem decodeReadResponseUnsignedLongField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L616" href="#L616">616</a>         BigInteger[] bigIntegers = readAllValues(BigInteger.<strong class="jxr_keyword">class</strong>, field, i -&gt; readUnsigned64BitInteger(data));
 <a class="jxr_linenumber" name="L617" href="#L617">617</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultBigIntegerFieldItem(bigIntegers);
 <a class="jxr_linenumber" name="L618" href="#L618">618</a>     }
 <a class="jxr_linenumber" name="L619" href="#L619">619</a> 
-<a class="jxr_linenumber" name="L620" href="#L620">620</a>     BaseDefaultFieldItem decodeReadResponseFloatField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L620" href="#L620">620</a>     BaseDefaultFieldItem decodeReadResponseFloatField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L621" href="#L621">621</a>         Float[] floats = readAllValues(Float.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readFloat());
 <a class="jxr_linenumber" name="L622" href="#L622">622</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultFloatFieldItem(floats);
 <a class="jxr_linenumber" name="L623" href="#L623">623</a>     }
 <a class="jxr_linenumber" name="L624" href="#L624">624</a> 
-<a class="jxr_linenumber" name="L625" href="#L625">625</a>     BaseDefaultFieldItem decodeReadResponseDoubleField(<a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, ByteBuf data) {
+<a class="jxr_linenumber" name="L625" href="#L625">625</a>     BaseDefaultFieldItem decodeReadResponseDoubleField(<a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, ByteBuf data) {
 <a class="jxr_linenumber" name="L626" href="#L626">626</a>         Double[] doubles = readAllValues(Double.<strong class="jxr_keyword">class</strong>, field, i -&gt; data.readDouble());
 <a class="jxr_linenumber" name="L627" href="#L627">627</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultDoubleFieldItem(doubles);
 <a class="jxr_linenumber" name="L628" href="#L628">628</a>     }
@@ -648,7 +648,7 @@
 <a class="jxr_linenumber" name="L640" href="#L640">640</a>         <strong class="jxr_keyword">return</strong> decodeReadResponseFixedLengthStringField(actualLength, isUtf16, data);
 <a class="jxr_linenumber" name="L641" href="#L641">641</a>     }
 <a class="jxr_linenumber" name="L642" href="#L642">642</a> 
-<a class="jxr_linenumber" name="L643" href="#L643">643</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> &lt;T&gt; T[] readAllValues(Class&lt;T&gt; clazz, <a href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> field, Function&lt;Integer, T&gt; extract) {
+<a class="jxr_linenumber" name="L643" href="#L643">643</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> &lt;T&gt; T[] readAllValues(Class&lt;T&gt; clazz, <a name="S7Field" href="../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> field, Function&lt;Integer, T&gt; extract) {
 <a class="jxr_linenumber" name="L644" href="#L644">644</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L645" href="#L645">645</a>             <strong class="jxr_keyword">return</strong> IntStream.rangeClosed(1, field.getNumElements())
 <a class="jxr_linenumber" name="L646" href="#L646">646</a>                 .mapToObj(extract::apply)
@@ -660,9 +660,9 @@
 <a class="jxr_linenumber" name="L652" href="#L652">652</a>     }
 <a class="jxr_linenumber" name="L653" href="#L653">653</a> 
 <a class="jxr_linenumber" name="L654" href="#L654">654</a>     @SuppressWarnings(<span class="jxr_string">"unchecked"</span>)
-<a class="jxr_linenumber" name="L655" href="#L655">655</a>     <strong class="jxr_keyword">private</strong> PlcResponse decodeWriteResponse(<a href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html">S7ResponseMessage</a> responseMessage, PlcRequestContainer requestContainer) <strong class="jxr_keyword">throws</strong> PlcProtocolException {
+<a class="jxr_linenumber" name="L655" href="#L655">655</a>     <strong class="jxr_keyword">private</strong> PlcResponse decodeWriteResponse(<a name="S7ResponseMessage" href="../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> responseMessage, PlcRequestContainer requestContainer) <strong class="jxr_keyword">throws</strong> PlcProtocolException {
 <a class="jxr_linenumber" name="L656" href="#L656">656</a>         InternalPlcWriteRequest plcWriteRequest = (InternalPlcWriteRequest) requestContainer.getRequest();
-<a class="jxr_linenumber" name="L657" href="#L657">657</a>         <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a> payload = responseMessage.getPayload(VarPayload.<strong class="jxr_keyword">class</strong>)
+<a class="jxr_linenumber" name="L657" href="#L657">657</a>         <a name="VarPayload" href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a> payload = responseMessage.getPayload(VarPayload.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L658" href="#L658">658</a>             .orElseThrow(() -&gt; <strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"No VarPayload supplied"</span>));
 <a class="jxr_linenumber" name="L659" href="#L659">659</a> 
 <a class="jxr_linenumber" name="L660" href="#L660">660</a>         <em class="jxr_comment">// TODO: Checkout if the payload items are sort of a flatMap of all request items.</em>
@@ -679,7 +679,7 @@
 <a class="jxr_linenumber" name="L671" href="#L671">671</a>         List&lt;VarPayloadItem&gt; payloadItems = payload.getItems();
 <a class="jxr_linenumber" name="L672" href="#L672">672</a>         <strong class="jxr_keyword">int</strong> index = 0;
 <a class="jxr_linenumber" name="L673" href="#L673">673</a>         <strong class="jxr_keyword">for</strong> (String fieldName : plcWriteRequest.getFieldNames()) {
-<a class="jxr_linenumber" name="L674" href="#L674">674</a>             <a href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> payloadItem = payloadItems.get(index);
+<a class="jxr_linenumber" name="L674" href="#L674">674</a>             <a name="VarPayloadItem" href="../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> payloadItem = payloadItems.get(index);
 <a class="jxr_linenumber" name="L675" href="#L675">675</a> 
 <a class="jxr_linenumber" name="L676" href="#L676">676</a>             <em class="jxr_comment">// A write response contains only the return code for every item.</em>
 <a class="jxr_linenumber" name="L677" href="#L677">677</a>             PlcResponseCode responseCode = decodeResponseCode(payloadItem.getReturnCode());
@@ -691,7 +691,7 @@
 <a class="jxr_linenumber" name="L683" href="#L683">683</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcWriteResponse(plcWriteRequest, values);
 <a class="jxr_linenumber" name="L684" href="#L684">684</a>     }
 <a class="jxr_linenumber" name="L685" href="#L685">685</a> 
-<a class="jxr_linenumber" name="L686" href="#L686">686</a>     <strong class="jxr_keyword">private</strong> PlcResponseCode decodeResponseCode(<a href="../../../../../../org/apache/plc4x/java/s7/netty/model/types/DataTransportErrorCode.html">DataTransportErrorCode</a> dataTransportErrorCode) {
+<a class="jxr_linenumber" name="L686" href="#L686">686</a>     <strong class="jxr_keyword">private</strong> PlcResponseCode decodeResponseCode(<a name="DataTransportErrorCode" href="../../../../../../org/apache/plc4x/java/s7/netty/model/types/DataTransportErrorCode.html#DataTransportErrorCode">DataTransportErrorCode</a> dataTransportErrorCode) {
 <a class="jxr_linenumber" name="L687" href="#L687">687</a>         <strong class="jxr_keyword">if</strong> (dataTransportErrorCode == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L688" href="#L688">688</a>             <strong class="jxr_keyword">return</strong> PlcResponseCode.INTERNAL_ERROR;
 <a class="jxr_linenumber" name="L689" href="#L689">689</a>         }

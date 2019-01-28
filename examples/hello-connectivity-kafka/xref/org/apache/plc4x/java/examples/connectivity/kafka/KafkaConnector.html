@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -53,14 +53,14 @@
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <strong class="jxr_keyword">import</strong> java.util.Map;
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.TimeUnit;
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/KafkaConnector.html">KafkaConnector</a> {
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="KafkaConnector" href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/KafkaConnector.html#KafkaConnector">KafkaConnector</a> {
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger logger = LoggerFactory.getLogger(KafkaConnector.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/model/Configuration.html">Configuration</a> config;
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> <a name="Configuration" href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/model/Configuration.html#Configuration">Configuration</a> config;
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">private</strong> PlcConnectionAdapter plcAdapter;
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/KafkaConnector.html">KafkaConnector</a>(String propsPath) {
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">private</strong> <a name="KafkaConnector" href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/KafkaConnector.html#KafkaConnector">KafkaConnector</a>(String propsPath) {
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>          <strong class="jxr_keyword">if</strong>(StringUtils.isEmpty(propsPath)) {
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>              logger.error(<span class="jxr_string">"Empty configuration file parameter"</span>);
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"Empty configuration file parameter"</span>);
@@ -85,8 +85,8 @@
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>  
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>          <em class="jxr_comment">// Build the entire request.</em>
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          PlcReadRequest.Builder builder = plcAdapter.readRequestBuilder();
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>          <strong class="jxr_keyword">for</strong>(<a href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/model/PlcMemoryBlock.html">PlcMemoryBlock</a> plcMemoryBlock : config.getPlcConfig().getPlcMemoryBlocks()) {
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>              <strong class="jxr_keyword">for</strong> (PlcFieldConfig address : config.getPlcConfig().getPlcFields()) {
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>          <strong class="jxr_keyword">for</strong>(<a name="PlcMemoryBlock" href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/model/PlcMemoryBlock.html#PlcMemoryBlock">PlcMemoryBlock</a> plcMemoryBlock : config.getPlcConfig().getPlcMemoryBlocks()) {
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>              <strong class="jxr_keyword">for</strong> (<a name="PlcFieldConfig" href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/model/PlcFieldConfig.html#PlcFieldConfig">PlcFieldConfig</a> address : config.getPlcConfig().getPlcFields()) {
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>                  builder = builder.addItem(plcMemoryBlock.getName() + <span class="jxr_string">"/"</span> + address.getName(),
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>                      <span class="jxr_string">"DATA_BLOCKS/"</span> + plcMemoryBlock.getAddress() + <span class="jxr_string">"/"</span> + address.getAddress());
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>              }
@@ -136,7 +136,7 @@
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>         <strong class="jxr_keyword">if</strong>(args.length != 1) {
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>             System.out.println(<span class="jxr_string">"Usage: KafkaBridge {path-to-kafka-connector.yml}"</span>);
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>         }
-<a class="jxr_linenumber" name="L131" href="#L131">131</a>         <a href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/KafkaConnector.html">KafkaConnector</a> kafkaBridge = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/KafkaConnector.html">KafkaConnector</a>(args[0]);
+<a class="jxr_linenumber" name="L131" href="#L131">131</a>         <a name="KafkaConnector" href="../../../../../../../org/apache/plc4x/j<a name="KafkaConnector" href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/KafkaConnector.html#KafkaConnector">KafkaConnector</a>onnectivity/kafka/KafkaConnector.html#KafkaConnector">KafkaConnector</a> kafkaBridge = <strong class="jxr_keyword">new</strong> <a name="KafkaConnector" href="../../../../../../../org/apache/plc4x/java/examples/connectivity/kafka/KafkaConnector.html#KafkaConnector">KafkaConnector</a>(args[0]);
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>         kafkaBridge.run();
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>     }
 <a class="jxr_linenumber" name="L134" href="#L134">134</a> 

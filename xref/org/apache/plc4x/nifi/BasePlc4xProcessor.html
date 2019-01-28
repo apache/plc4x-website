@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -41,7 +41,7 @@
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.util.*;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/apache/plc4x/nifi/BasePlc4xProcessor.html">BasePlc4xProcessor</a> <strong class="jxr_keyword">extends</strong> AbstractProcessor {
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a name="BasePlc4xProcessor" href="../../../../org/apache/plc4x/nifi/BasePlc4xProcessor.html#BasePlc4xProcessor">BasePlc4xProcessor</a> <strong class="jxr_keyword">extends</strong> AbstractProcessor {
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> PropertyDescriptor PLC_CONNECTION_STRING = <strong class="jxr_keyword">new</strong> PropertyDescriptor
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>          .Builder().name(<span class="jxr_string">"PLC_CONNECTION_STRING"</span>)
@@ -72,7 +72,7 @@
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>  
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>      Set&lt;Relationship&gt; relationships;
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> connection;
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>      <strong class="jxr_keyword">private</strong> <a name="PlcConnection" href="../../../../org/apache/plc4x/java/api/PlcConnection.html#PlcConnection">PlcConnection</a> connection;
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>      <strong class="jxr_keyword">private</strong> Map&lt;String, String&gt; addressMap;
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>  
@@ -82,7 +82,7 @@
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">this</strong>.relationships = <strong class="jxr_keyword">new</strong> HashSet&lt;&gt;(Arrays.asList(SUCCESS, FAILURE));
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>      }
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>  
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>      <a href="../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> getConnection() {
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>      <a name="PlcConnection" href="../../../../org/apache/plc4x/java/api/PlcConnection.html#PlcConnection">PlcConnection</a> getConnection() {
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>          <strong class="jxr_keyword">return</strong> connection;
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>      }
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>  
@@ -108,8 +108,8 @@
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>         PropertyValue property = context.getProperty(PLC_CONNECTION_STRING.getName());
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>         <strong class="jxr_keyword">if</strong> ((connection == <strong class="jxr_keyword">null</strong>) || !connection.isConnected()) {
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>             <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>                 connection = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/java/PlcDriverManager.html">PlcDriverManager</a>().getConnection(property.getValue());
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>             } <strong class="jxr_keyword">catch</strong> (PlcConnectionException e) {
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>                 connection = <strong class="jxr_keyword">new</strong> <a name="PlcDriverManager" href="../../../../org/apache/plc4x/java/PlcDriverManager.html#PlcDriverManager">PlcDriverManager</a>().getConnection(property.getValue());
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>             } <strong class="jxr_keyword">catch</strong> (<a name="PlcConnectionException" href="../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> e) {
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>                 getLogger().error(<span class="jxr_string">"Error connecting to "</span> + property.getValue(), e);
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>             }
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>         }
@@ -119,7 +119,7 @@
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>         <strong class="jxr_keyword">for</strong> (String segment : addresses.getValue().split(<span class="jxr_string">";"</span>)) {
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>             String[] parts = segment.split(<span class="jxr_string">"="</span>);
 <a class="jxr_linenumber" name="L113" href="#L113">113</a>             <strong class="jxr_keyword">if</strong>(parts.length != 2) {
-<a class="jxr_linenumber" name="L114" href="#L114">114</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html">PlcRuntimeException</a>(<span class="jxr_string">"Invalid address format"</span>);
+<a class="jxr_linenumber" name="L114" href="#L114">114</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcRuntimeException" href="../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html#PlcRuntimeException">PlcRuntimeException</a>(<span class="jxr_string">"Invalid address format"</span>);
 <a class="jxr_linenumber" name="L115" href="#L115">115</a>             }
 <a class="jxr_linenumber" name="L116" href="#L116">116</a>             addressMap.put(parts[0], parts[1]);
 <a class="jxr_linenumber" name="L117" href="#L117">117</a>         }
@@ -130,13 +130,13 @@
 <a class="jxr_linenumber" name="L122" href="#L122">122</a>         <strong class="jxr_keyword">if</strong> (<strong class="jxr_keyword">this</strong> == o) {
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>         }
-<a class="jxr_linenumber" name="L125" href="#L125">125</a>         <strong class="jxr_keyword">if</strong> (!(o instanceof BasePlc4xProcessor)) {
+<a class="jxr_linenumber" name="L125" href="#L125">125</a>         <strong class="jxr_keyword">if</strong> (!(o instanceof <a name="BasePlc4xProcessor" href="../../../../org/apache/plc4x/nifi/BasePlc4xProcessor.html#BasePlc4xProcessor">BasePlc4xProcessor</a>)) {
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>             <strong class="jxr_keyword">return</strong> false;
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>         }
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>         <strong class="jxr_keyword">if</strong> (!<strong class="jxr_keyword">super</strong>.equals(o)) {
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>             <strong class="jxr_keyword">return</strong> false;
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>         }
-<a class="jxr_linenumber" name="L131" href="#L131">131</a>         <a href="../../../../org/apache/plc4x/nifi/BasePlc4xProcessor.html">BasePlc4xProcessor</a> that = (BasePlc4xProcessor) o;
+<a class="jxr_linenumber" name="L131" href="#L131">131</a>         <a name="BasePlc4xProcessor<a name="BasePlc4xProcessor" href="../../../../org/apache/plc4x/nifi/BasePlc4xProcessor.html#BasePlc4xProcessor">BasePlc4xProcessor</a>./org/apache/plc4x/nifi/BasePlc4xProcessor.html#BasePlc4xProcessor">BasePlc4xProcessor</a> that = (<a name="BasePlc4xProcessor" href="../../../../org/apache/plc4x/nifi/BasePlc4xProcessor.html#BasePlc4xProcessor">BasePlc4xProcessor</a>) o;
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>         <strong class="jxr_keyword">return</strong> Objects.equals(descriptors, that.descriptors) &amp;&amp;
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>             Objects.equals(getRelationships(), that.getRelationships()) &amp;&amp;
 <a class="jxr_linenumber" name="L134" href="#L134">134</a>             Objects.equals(getConnection(), that.getConnection()) &amp;&amp;

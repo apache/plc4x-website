@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -51,7 +51,7 @@
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>  <em class="jxr_comment">// [START iot_mqtt_includes]</em>
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  <em class="jxr_comment">// [END iot_mqtt_includes]</em>
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/examples/cloud/google/S7PlcToGoogleIoTCoreSample.html">S7PlcToGoogleIoTCoreSample</a> {
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="S7PlcToGoogleIoTCoreSample" href="../../../../../../../org/apache/plc4x/java/examples/cloud/google/S7PlcToGoogleIoTCoreSample.html#S7PlcToGoogleIoTCoreSample">S7PlcToGoogleIoTCoreSample</a> {
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger logger = LoggerFactory.getLogger(S7PlcToGoogleIoTCoreSample.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  
@@ -134,7 +134,7 @@
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>     <em class="jxr_comment">// [END iot_mqtt_configcallback]</em>
 <a class="jxr_linenumber" name="L127" href="#L127">127</a> 
 <a class="jxr_linenumber" name="L128" href="#L128">128</a> 
-<a class="jxr_linenumber" name="L129" href="#L129">129</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> setConnectPassword(<a href="../../../../../../../org/apache/plc4x/java/examples/cloud/google/CliOptions.html">CliOptions</a> options, MqttConnectOptions connectOptions)
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> setConnectPassword(<a name="CliOptions" href="../../../../../../../org/apache/plc4x/java/examples/cloud/google/CliOptions.html#CliOptions">CliOptions</a> options, MqttConnectOptions connectOptions)
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>         <strong class="jxr_keyword">throws</strong> NoSuchAlgorithmException, IOException, InvalidKeySpecException {
 <a class="jxr_linenumber" name="L131" href="#L131">131</a>         <strong class="jxr_keyword">switch</strong> (options.getAlgorithm()) {
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>             <strong class="jxr_keyword">case</strong> <span class="jxr_string">"RS256"</span>:
@@ -160,7 +160,7 @@
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String[] args) <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L153" href="#L153">153</a> 
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>         <em class="jxr_comment">// [START iot_mqtt_configuremqtt]</em>
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>         <a href="../../../../../../../org/apache/plc4x/java/examples/cloud/google/CliOptions.html">CliOptions</a> options = CliOptions.fromArgs(args);
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>         <a name="CliOptions" href="../../../../../../../org/apache/plc4x/java/examples/cloud/google/CliOptions.html#CliOptions">CliOptions</a> options = CliOptions.fromArgs(args);
 <a class="jxr_linenumber" name="L156" href="#L156">156</a>         <strong class="jxr_keyword">if</strong> (options == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>             CliOptions.printHelp();
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>             <em class="jxr_comment">// Could not parse.</em>

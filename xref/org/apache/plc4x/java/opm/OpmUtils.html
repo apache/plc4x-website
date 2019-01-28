@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -35,17 +35,17 @@
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <em class="jxr_javadoccomment"> * Utility methods for usage with OPM.</em>
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/opm/OpmUtils.html">OpmUtils</a> {
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a name="OpmUtils" href="../../../../../org/apache/plc4x/java/opm/OpmUtils.html#OpmUtils">OpmUtils</a> {
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String ADDRESS = <span class="jxr_string">"address"</span>;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Pattern pattern = Pattern.compile(<span class="jxr_string">"^&#92;&#92;$&#92;&#92;{(?&lt;"</span> + ADDRESS + <span class="jxr_string">"&gt;.*)}$"</span>);
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../../org/apache/plc4x/java/opm/OpmUtils.html">OpmUtils</a>() {
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>      <strong class="jxr_keyword">private</strong> <a name="OpmUtils" href="../../../../../org/apache/plc4x/java/opm/OpmUtils.html#OpmUtils">OpmUtils</a>() {
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>          <em class="jxr_comment">// Util class</em>
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>      }
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">static</strong> &lt;T&gt; <a href="../../../../../org/apache/plc4x/java/opm/PlcEntity.html">PlcEntity</a> getPlcEntityAndCheckPreconditions(Class&lt;T&gt; clazz) {
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>          <a href="../../../../../org/apache/plc4x/java/opm/PlcEntity.html">PlcEntity</a> annotation = clazz.getAnnotation(PlcEntity.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">static</strong> &lt;T&gt; <a name="PlcEntity" href="../../../../../org/apache/plc4x/java/opm/PlcEntity.html#PlcEntity">PlcEntity</a> getPlcEntityAndCheckPreconditions(Class&lt;T&gt; clazz) {
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>          <a name="PlcEntity" href="../../../../../org/apache/plc4x/java/opm/PlcEntity.html#PlcEntity">PlcEntity</a> annotation = clazz.getAnnotation(PlcEntity.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>          <strong class="jxr_keyword">if</strong> (annotation == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"Given Class is no Plc Entity, i.e., not annotated with @PlcEntity"</span>);
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>          }
@@ -58,7 +58,7 @@
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>          <strong class="jxr_keyword">return</strong> annotation;
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>      }
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">static</strong> String getOrResolveAddress(<a href="../../../../../org/apache/plc4x/java/opm/AliasRegistry.html">AliasRegistry</a> registry, String addressString) {
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">static</strong> String getOrResolveAddress(<a name="AliasRegistry" href="../../../../../org/apache/plc4x/java/opm/AliasRegistry.html#AliasRegistry">AliasRegistry</a> registry, String addressString) {
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>          <strong class="jxr_keyword">if</strong> (!isValidExpression(addressString)) {
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> IllegalArgumentException(<span class="jxr_string">"Invalid Syntax, either use field address (no starting $) "</span> +
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>                  <span class="jxr_string">"or an alias with Syntax ${xxx}. But given was '"</span> + addressString + <span class="jxr_string">"'"</span>);

@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -72,7 +72,7 @@
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.Assume.assumeThat;
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>  
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  @RunWith(Parameterized.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/ads/protocol/Plc4x2AdsProtocolTest.html">Plc4x2AdsProtocolTest</a> {
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="Plc4x2AdsProtocolTest" href="../../../../../../org/apache/plc4x/java/ads/protocol/Plc4x2AdsProtocolTest.html#Plc4x2AdsProtocolTest">Plc4x2AdsProtocolTest</a> {
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger LOGGER = LoggerFactory.getLogger(Plc4x2AdsProtocolTest.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">private</strong> Plc4x2AdsProtocol SUT;
@@ -136,7 +136,7 @@
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>             .map(pair -&gt; <strong class="jxr_keyword">new</strong> Object[]{<span class="jxr_string">"???"</span>, pair.left, pair.left.getResponseFuture(), pair.left.getRequest().getClass().getSimpleName(), pair.right, pair.right.getClass().getSimpleName()}).collect(Collectors.toList());
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>     }
 <a class="jxr_linenumber" name="L130" href="#L130">130</a> 
-<a class="jxr_linenumber" name="L131" href="#L131">131</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../org/apache/plc4x/java/ads/protocol/Plc4x2AdsProtocolTest.html">AdsDataTypePair</a> mapToAdsDataType(Plc4XSupportedDataTypes.DataTypePair dataTypePair) {
+<a class="jxr_linenumber" name="L131" href="#L131">131</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> AdsDataTypePair mapToAdsDataType(Plc4XSupportedDataTypes.DataTypePair dataTypePair) {
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>         Map&lt;Class&lt;?&gt;, AdsDataType&gt; dataTypeMap = <strong class="jxr_keyword">new</strong> HashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>         dataTypeMap.put(Boolean.<strong class="jxr_keyword">class</strong>, AdsDataType.BOOL);
 <a class="jxr_linenumber" name="L134" href="#L134">134</a>         dataTypeMap.put(Byte.<strong class="jxr_keyword">class</strong>, AdsDataType.BYTE);
@@ -153,14 +153,14 @@
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>         dataTypeMap.put(LocalDateTime.<strong class="jxr_keyword">class</strong>, AdsDataType.DATE_AND_TIME);
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>         dataTypeMap.put(byte[].<strong class="jxr_keyword">class</strong>, AdsDataType.BYTE);
 <a class="jxr_linenumber" name="L147" href="#L147">147</a>         dataTypeMap.put(Byte[].<strong class="jxr_keyword">class</strong>, AdsDataType.BYTE);
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/ads/protocol/Plc4x2AdsProtocolTest.html">AdsDataTypePair</a>(dataTypePair, dataTypeMap.get(dataTypePair.getDataTypeClass()));
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> AdsDataTypePair(dataTypePair, dataTypeMap.get(dataTypePair.getDataTypeClass()));
 <a class="jxr_linenumber" name="L149" href="#L149">149</a>     }
 <a class="jxr_linenumber" name="L150" href="#L150">150</a> 
-<a class="jxr_linenumber" name="L151" href="#L151">151</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/ads/protocol/Plc4x2AdsProtocolTest.html">AdsDataTypePair</a> <strong class="jxr_keyword">extends</strong> Plc4XSupportedDataTypes.DataTypePair {
+<a class="jxr_linenumber" name="L151" href="#L151">151</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> AdsDataTypePair <strong class="jxr_keyword">extends</strong> Plc4XSupportedDataTypes.DataTypePair {
 <a class="jxr_linenumber" name="L152" href="#L152">152</a> 
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> AdsDataType adsDataType;
 <a class="jxr_linenumber" name="L154" href="#L154">154</a> 
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>         <strong class="jxr_keyword">private</strong> <a href="../../../../../../org/apache/plc4x/java/ads/protocol/Plc4x2AdsProtocolTest.html">AdsDataTypePair</a>(Plc4XSupportedDataTypes.DataTypePair dataTypePair, AdsDataType adsDataType) {
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>         <strong class="jxr_keyword">private</strong> AdsDataTypePair(Plc4XSupportedDataTypes.DataTypePair dataTypePair, AdsDataType adsDataType) {
 <a class="jxr_linenumber" name="L156" href="#L156">156</a>             <strong class="jxr_keyword">super</strong>(dataTypePair.getDataTypePair());
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>             <strong class="jxr_keyword">this</strong>.adsDataType = Objects.requireNonNull(adsDataType);
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>         }

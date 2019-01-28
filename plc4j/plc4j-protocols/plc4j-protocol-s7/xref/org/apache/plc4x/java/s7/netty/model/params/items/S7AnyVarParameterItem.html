@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -46,17 +46,17 @@
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> *     &lt;li&gt;bit / byteOffset where the adress starts&lt;/li&gt;</em>
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * &lt;/ul&gt;</em>
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html">VarParameterItem</a> {
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="S7AnyVarParameterItem" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a> <strong class="jxr_keyword">implements</strong> <a name="VarParameterItem" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> {
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/SpecificationType.html">SpecificationType</a> specificationType;
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html">MemoryArea</a> memoryArea;
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/TransportSize.html">TransportSize</a> dataType;
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a name="SpecificationType" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/SpecificationType.html#SpecificationType">SpecificationType</a> specificationType;
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a name="MemoryArea" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a> memoryArea;
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a name="TransportSize" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/TransportSize.html#TransportSize">TransportSize</a> dataType;
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> numElements;
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> dataBlockNumber;
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> byteOffset;
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> byte bitOffset;
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a>(<a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/SpecificationType.html">SpecificationType</a> specificationType, <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html">MemoryArea</a> memoryArea, <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/TransportSize.html">TransportSize</a> dataType, <strong class="jxr_keyword">int</strong> numElements, <strong class="jxr_keyword">int</strong> dataBlockNumber, <strong class="jxr_keyword">int</strong> byteOffset, byte bitOffset) {
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">public</strong> <a name="S7AnyVarParameterItem" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>(<a name="SpecificationType" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/SpecificationType.html#SpecificationType">SpecificationType</a> specificationType, <a name="MemoryArea" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a> memoryArea, <a name="TransportSize" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/TransportSize.html#TransportSize">TransportSize</a> dataType, <strong class="jxr_keyword">int</strong> numElements, <strong class="jxr_keyword">int</strong> dataBlockNumber, <strong class="jxr_keyword">int</strong> byteOffset, byte bitOffset) {
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>          <strong class="jxr_keyword">this</strong>.specificationType = specificationType;
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>          <strong class="jxr_keyword">this</strong>.memoryArea = memoryArea;
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>          <strong class="jxr_keyword">this</strong>.dataType = dataType;
@@ -67,19 +67,19 @@
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>      }
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>  
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>      @Override
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/VariableAddressingMode.html">VariableAddressingMode</a> getAddressingMode() {
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">public</strong> <a name="VariableAddressingMode" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/VariableAddressingMode.html#VariableAddressingMode">VariableAddressingMode</a> getAddressingMode() {
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>          <strong class="jxr_keyword">return</strong> VariableAddressingMode.S7ANY;
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>      }
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>  
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/SpecificationType.html">SpecificationType</a> getSpecificationType() {
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>      <strong class="jxr_keyword">public</strong> <a name="SpecificationType" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/SpecificationType.html#SpecificationType">SpecificationType</a> getSpecificationType() {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          <strong class="jxr_keyword">return</strong> specificationType;
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      }
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html">MemoryArea</a> getMemoryArea() {
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">public</strong> <a name="MemoryArea" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MemoryArea.html#MemoryArea">MemoryArea</a> getMemoryArea() {
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">return</strong> memoryArea;
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>      }
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>  
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/TransportSize.html">TransportSize</a> getDataType() {
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>      <strong class="jxr_keyword">public</strong> <a name="TransportSize" href="../../../../../../../../../org/apache/plc4x/java/s7/netty/model/types/TransportSize.html#TransportSize">TransportSize</a> getDataType() {
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>          <strong class="jxr_keyword">return</strong> dataType;
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>      }
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>  

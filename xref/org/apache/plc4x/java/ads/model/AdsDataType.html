@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -41,10 +41,10 @@
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> * Documentation can be found here:</em>
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <em class="jxr_javadoccomment"> *</em>
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * @see &lt;a href="https://infosys.beckhoff.com/english.php?content=../content/1033/tcsystemmanager/basics/TcSysMgr_DatatypeComparison.htm&amp;id="&gt;TwinCAT System Manager - I/O Variables&lt;/a&gt;</em>
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * @see &lt;a href="https://infosys.beckhoff.com/english.php?content=../content/1033/tcplccontrol/html/tcplcctrl_plc_data_types_overview.htm&amp;id"&gt;TwinCAT PLC Control: Data Types&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * @see &lt;a href="<a href="https://infosys.beckhoff.com/english.php?content=../content/1033/tcsystemmanager/basics/TcSysMgr_DatatypeComparison.htm&amp;id=" target="alexandria_uri">https://infosys.beckhoff.com/english.php?content=../content/1033/tcsystemmanager/basics/TcSysMgr_DatatypeComparison.htm&amp;id=</a>"&gt;TwinCAT System Manager - I/O Variables&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * @see &lt;a href="<a href="https://infosys.beckhoff.com/english.php?content=../content/1033/tcplccontrol/html/tcplcctrl_plc_data_types_overview.htm&amp;id" target="alexandria_uri">https://infosys.beckhoff.com/english.php?content=../content/1033/tcplccontrol/html/tcplcctrl_plc_data_types_overview.htm&amp;id</a>"&gt;TwinCAT PLC Control: Data Types&lt;/a&gt;</em>
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">public</strong> enum <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsDataType.html">AdsDataType</a> {
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">public</strong> enum <a name="AdsDataType" href="../../../../../../org/apache/plc4x/java/ads/model/AdsDataType.html#AdsDataType">AdsDataType</a> {
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>      <em class="jxr_comment">// TODO: maybe this are just types for the plc ide and can be removed</em>
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>      <em class="jxr_comment">// https://infosys.beckhoff.com/english.php?content=../content/1033/tcsystemmanager/basics/TcSysMgr_DatatypeComparison.htm&amp;id=</em>
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>      BIT(0, 1, 8),
@@ -518,11 +518,11 @@
 <a class="jxr_linenumber" name="L510" href="#L510">510</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> targetByteSize;
 <a class="jxr_linenumber" name="L511" href="#L511">511</a> 
 <a class="jxr_linenumber" name="L512" href="#L512">512</a>     <em class="jxr_comment">// TODO: BYTE.MAX default might not be the best....</em>
-<a class="jxr_linenumber" name="L513" href="#L513">513</a>     <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsDataType.html">AdsDataType</a>(<strong class="jxr_keyword">int</strong> memoryUse) {
+<a class="jxr_linenumber" name="L513" href="#L513">513</a>     <a name="AdsDataType" href="../../../../../../org/apache/plc4x/java/ads/model/AdsDataType.html#AdsDataType">AdsDataType</a>(<strong class="jxr_keyword">int</strong> memoryUse) {
 <a class="jxr_linenumber" name="L514" href="#L514">514</a>         <strong class="jxr_keyword">this</strong>(0, Byte.MAX_VALUE, memoryUse);
 <a class="jxr_linenumber" name="L515" href="#L515">515</a>     }
 <a class="jxr_linenumber" name="L516" href="#L516">516</a> 
-<a class="jxr_linenumber" name="L517" href="#L517">517</a>     <a href="../../../../../../org/apache/plc4x/java/ads/model/AdsDataType.html">AdsDataType</a>(Number lowerBound, Number upperBound, <strong class="jxr_keyword">int</strong> memoryUse) {
+<a class="jxr_linenumber" name="L517" href="#L517">517</a>     <a name="AdsDataType" href="../../../../../../org/apache/plc4x/java/ads/model/AdsDataType.html#AdsDataType">AdsDataType</a>(Number lowerBound, Number upperBound, <strong class="jxr_keyword">int</strong> memoryUse) {
 <a class="jxr_linenumber" name="L518" href="#L518">518</a>         <strong class="jxr_keyword">this</strong>.lowerBound = lowerBound;
 <a class="jxr_linenumber" name="L519" href="#L519">519</a>         <strong class="jxr_keyword">this</strong>.lowerBoundDouble = lowerBound.doubleValue();
 <a class="jxr_linenumber" name="L520" href="#L520">520</a>         <strong class="jxr_keyword">this</strong>.upperBound = upperBound;

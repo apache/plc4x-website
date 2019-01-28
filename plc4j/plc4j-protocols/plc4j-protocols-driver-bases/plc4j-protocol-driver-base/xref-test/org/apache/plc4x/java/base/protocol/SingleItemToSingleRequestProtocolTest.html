@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -63,7 +63,7 @@
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.mockito.Mockito.*;
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>  
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  @ExtendWith(MockitoExtension.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>  <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">SingleItemToSingleRequestProtocolTest</a> <strong class="jxr_keyword">implements</strong> WithAssertions {
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>  <strong class="jxr_keyword">class</strong> <a name="SingleItemToSingleRequestProtocolTest" href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html#SingleItemToSingleRequestProtocolTest">SingleItemToSingleRequestProtocolTest</a> <strong class="jxr_keyword">implements</strong> WithAssertions {
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>  
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>      SingleItemToSingleRequestProtocol SUT;
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
@@ -104,7 +104,7 @@
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>      }
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>  
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>      @Nested
-<a class="jxr_linenumber" name="L99" href="#L99">99</a>      <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">Misc</a> {
+<a class="jxr_linenumber" name="L99" href="#L99">99</a>      <strong class="jxr_keyword">class</strong> Misc {
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>         @Test
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>         <strong class="jxr_keyword">void</strong> channelRegistered() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>             SUT.channelRegistered(channelHandlerContext);
@@ -158,10 +158,10 @@
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>     }
 <a class="jxr_linenumber" name="L151" href="#L151">151</a> 
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>     @Nested
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>     <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">SplitConfig</a> {
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>     <strong class="jxr_keyword">class</strong> SplitConfig {
 <a class="jxr_linenumber" name="L154" href="#L154">154</a> 
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>         @Nested
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>         <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">SplitOn</a> {
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>         <strong class="jxr_keyword">class</strong> SplitOn {
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>             @BeforeEach
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>             <strong class="jxr_keyword">void</strong> setUp() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>                 <em class="jxr_comment">// We setup the SUT with a special configuration</em>
@@ -237,7 +237,7 @@
 <a class="jxr_linenumber" name="L229" href="#L229">229</a>         }
 <a class="jxr_linenumber" name="L230" href="#L230">230</a> 
 <a class="jxr_linenumber" name="L231" href="#L231">231</a>         @Nested
-<a class="jxr_linenumber" name="L232" href="#L232">232</a>         <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">SplitOff</a> {
+<a class="jxr_linenumber" name="L232" href="#L232">232</a>         <strong class="jxr_keyword">class</strong> SplitOff {
 <a class="jxr_linenumber" name="L233" href="#L233">233</a>             @BeforeEach
 <a class="jxr_linenumber" name="L234" href="#L234">234</a>             <strong class="jxr_keyword">void</strong> setUp() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L235" href="#L235">235</a>                 <em class="jxr_comment">// We setup the SUT with a special configuration</em>
@@ -316,9 +316,9 @@
 <a class="jxr_linenumber" name="L308" href="#L308">308</a>     }
 <a class="jxr_linenumber" name="L309" href="#L309">309</a> 
 <a class="jxr_linenumber" name="L310" href="#L310">310</a>     @Nested
-<a class="jxr_linenumber" name="L311" href="#L311">311</a>     <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">Roundtrip</a> {
+<a class="jxr_linenumber" name="L311" href="#L311">311</a>     <strong class="jxr_keyword">class</strong> Roundtrip {
 <a class="jxr_linenumber" name="L312" href="#L312">312</a>         @Nested
-<a class="jxr_linenumber" name="L313" href="#L313">313</a>         <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">Read</a> {
+<a class="jxr_linenumber" name="L313" href="#L313">313</a>         <strong class="jxr_keyword">class</strong> Read {
 <a class="jxr_linenumber" name="L314" href="#L314">314</a>             @Captor
 <a class="jxr_linenumber" name="L315" href="#L315">315</a>             ArgumentCaptor&lt;PlcRequestContainer&gt; plcRequestContainerArgumentCaptor;
 <a class="jxr_linenumber" name="L316" href="#L316">316</a> 
@@ -470,12 +470,12 @@
 <a class="jxr_linenumber" name="L462" href="#L462">462</a>         }
 <a class="jxr_linenumber" name="L463" href="#L463">463</a> 
 <a class="jxr_linenumber" name="L464" href="#L464">464</a>         @Nested
-<a class="jxr_linenumber" name="L465" href="#L465">465</a>         <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">Write</a> {
+<a class="jxr_linenumber" name="L465" href="#L465">465</a>         <strong class="jxr_keyword">class</strong> Write {
 <a class="jxr_linenumber" name="L466" href="#L466">466</a>             <em class="jxr_comment">// TODO: implement me</em>
 <a class="jxr_linenumber" name="L467" href="#L467">467</a>         }
 <a class="jxr_linenumber" name="L468" href="#L468">468</a> 
 <a class="jxr_linenumber" name="L469" href="#L469">469</a>         @Nested
-<a class="jxr_linenumber" name="L470" href="#L470">470</a>         <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">Subscribe</a> {
+<a class="jxr_linenumber" name="L470" href="#L470">470</a>         <strong class="jxr_keyword">class</strong> Subscribe {
 <a class="jxr_linenumber" name="L471" href="#L471">471</a>             @Captor
 <a class="jxr_linenumber" name="L472" href="#L472">472</a>             ArgumentCaptor&lt;PlcRequestContainer&gt; plcRequestContainerArgumentCaptor;
 <a class="jxr_linenumber" name="L473" href="#L473">473</a> 
@@ -567,7 +567,7 @@
 <a class="jxr_linenumber" name="L559" href="#L559">559</a>     }
 <a class="jxr_linenumber" name="L560" href="#L560">560</a> 
 <a class="jxr_linenumber" name="L561" href="#L561">561</a>     @Nested
-<a class="jxr_linenumber" name="L562" href="#L562">562</a>     <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">Decoding</a> {
+<a class="jxr_linenumber" name="L562" href="#L562">562</a>     <strong class="jxr_keyword">class</strong> Decoding {
 <a class="jxr_linenumber" name="L563" href="#L563">563</a>         @Test
 <a class="jxr_linenumber" name="L564" href="#L564">564</a>         <strong class="jxr_keyword">void</strong> tryFinish() {
 <a class="jxr_linenumber" name="L565" href="#L565">565</a>             SUT.tryFinish(1, <strong class="jxr_keyword">null</strong>, <strong class="jxr_keyword">new</strong> CompletableFuture&lt;&gt;());
@@ -582,7 +582,7 @@
 <a class="jxr_linenumber" name="L574" href="#L574">574</a>     }
 <a class="jxr_linenumber" name="L575" href="#L575">575</a> 
 <a class="jxr_linenumber" name="L576" href="#L576">576</a>     @Nested
-<a class="jxr_linenumber" name="L577" href="#L577">577</a>     <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">Encoding</a> {
+<a class="jxr_linenumber" name="L577" href="#L577">577</a>     <strong class="jxr_keyword">class</strong> Encoding {
 <a class="jxr_linenumber" name="L578" href="#L578">578</a> 
 <a class="jxr_linenumber" name="L579" href="#L579">579</a>         @Captor
 <a class="jxr_linenumber" name="L580" href="#L580">580</a>         ArgumentCaptor&lt;PlcRequestContainer&gt; plcRequestContainerArgumentCaptor;
@@ -680,58 +680,58 @@
 <a class="jxr_linenumber" name="L672" href="#L672">672</a>         }
 <a class="jxr_linenumber" name="L673" href="#L673">673</a>     }
 <a class="jxr_linenumber" name="L674" href="#L674">674</a> 
-<a class="jxr_linenumber" name="L675" href="#L675">675</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcReadRequest</a> <strong class="jxr_keyword">extends</strong> DefaultPlcReadRequest {
-<a class="jxr_linenumber" name="L676" href="#L676">676</a>         <strong class="jxr_keyword">private</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcReadRequest</a>(PlcReader reader, LinkedHashMap&lt;String, PlcField&gt; fields) {
+<a class="jxr_linenumber" name="L675" href="#L675">675</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> TestDefaultPlcReadRequest <strong class="jxr_keyword">extends</strong> DefaultPlcReadRequest {
+<a class="jxr_linenumber" name="L676" href="#L676">676</a>         <strong class="jxr_keyword">private</strong> TestDefaultPlcReadRequest(PlcReader reader, LinkedHashMap&lt;String, PlcField&gt; fields) {
 <a class="jxr_linenumber" name="L677" href="#L677">677</a>             <strong class="jxr_keyword">super</strong>(reader, fields);
 <a class="jxr_linenumber" name="L678" href="#L678">678</a>         }
 <a class="jxr_linenumber" name="L679" href="#L679">679</a> 
-<a class="jxr_linenumber" name="L680" href="#L680">680</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcReadRequest</a> build(PlcReader reader) {
+<a class="jxr_linenumber" name="L680" href="#L680">680</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> TestDefaultPlcReadRequest build(PlcReader reader) {
 <a class="jxr_linenumber" name="L681" href="#L681">681</a>             LinkedHashMap&lt;String, PlcField&gt; fields = <strong class="jxr_keyword">new</strong> LinkedHashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L682" href="#L682">682</a>             IntStream.rangeClosed(1, 5).forEach(i -&gt; fields.put(<span class="jxr_string">"readField"</span> + i, mock(PlcField.<strong class="jxr_keyword">class</strong>)));
-<a class="jxr_linenumber" name="L683" href="#L683">683</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcReadRequest</a>(reader, fields);
+<a class="jxr_linenumber" name="L683" href="#L683">683</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> TestDefaultPlcReadRequest(reader, fields);
 <a class="jxr_linenumber" name="L684" href="#L684">684</a>         }
 <a class="jxr_linenumber" name="L685" href="#L685">685</a>     }
 <a class="jxr_linenumber" name="L686" href="#L686">686</a> 
-<a class="jxr_linenumber" name="L687" href="#L687">687</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcWriteRequest</a> <strong class="jxr_keyword">extends</strong> DefaultPlcWriteRequest {
+<a class="jxr_linenumber" name="L687" href="#L687">687</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> TestDefaultPlcWriteRequest <strong class="jxr_keyword">extends</strong> DefaultPlcWriteRequest {
 <a class="jxr_linenumber" name="L688" href="#L688">688</a> 
-<a class="jxr_linenumber" name="L689" href="#L689">689</a>         <strong class="jxr_keyword">private</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcWriteRequest</a>(PlcWriter writer, LinkedHashMap&lt;String, Pair&lt;PlcField, BaseDefaultFieldItem&gt;&gt; fields) {
+<a class="jxr_linenumber" name="L689" href="#L689">689</a>         <strong class="jxr_keyword">private</strong> TestDefaultPlcWriteRequest(PlcWriter writer, LinkedHashMap&lt;String, Pair&lt;PlcField, BaseDefaultFieldItem&gt;&gt; fields) {
 <a class="jxr_linenumber" name="L690" href="#L690">690</a>             <strong class="jxr_keyword">super</strong>(writer, fields);
 <a class="jxr_linenumber" name="L691" href="#L691">691</a>         }
 <a class="jxr_linenumber" name="L692" href="#L692">692</a> 
-<a class="jxr_linenumber" name="L693" href="#L693">693</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcWriteRequest</a> build(PlcWriter writer) {
+<a class="jxr_linenumber" name="L693" href="#L693">693</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> TestDefaultPlcWriteRequest build(PlcWriter writer) {
 <a class="jxr_linenumber" name="L694" href="#L694">694</a>             LinkedHashMap&lt;String, Pair&lt;PlcField, BaseDefaultFieldItem&gt;&gt; fields = <strong class="jxr_keyword">new</strong> LinkedHashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L695" href="#L695">695</a>             IntStream.rangeClosed(1, 5).forEach(i -&gt; fields.put(<span class="jxr_string">"writeField"</span> + i, Pair.of(mock(PlcField.<strong class="jxr_keyword">class</strong>), mock(BaseDefaultFieldItem.<strong class="jxr_keyword">class</strong>))));
-<a class="jxr_linenumber" name="L696" href="#L696">696</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcWriteRequest</a>(writer, fields);
+<a class="jxr_linenumber" name="L696" href="#L696">696</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> TestDefaultPlcWriteRequest(writer, fields);
 <a class="jxr_linenumber" name="L697" href="#L697">697</a>         }
 <a class="jxr_linenumber" name="L698" href="#L698">698</a>     }
 <a class="jxr_linenumber" name="L699" href="#L699">699</a> 
-<a class="jxr_linenumber" name="L700" href="#L700">700</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcSubscriptionRequest</a> <strong class="jxr_keyword">extends</strong> DefaultPlcSubscriptionRequest {
+<a class="jxr_linenumber" name="L700" href="#L700">700</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> TestDefaultPlcSubscriptionRequest <strong class="jxr_keyword">extends</strong> DefaultPlcSubscriptionRequest {
 <a class="jxr_linenumber" name="L701" href="#L701">701</a> 
-<a class="jxr_linenumber" name="L702" href="#L702">702</a>         <strong class="jxr_keyword">private</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcSubscriptionRequest</a>(PlcSubscriber subscriber, LinkedHashMap&lt;String, SubscriptionPlcField&gt; fields) {
+<a class="jxr_linenumber" name="L702" href="#L702">702</a>         <strong class="jxr_keyword">private</strong> TestDefaultPlcSubscriptionRequest(PlcSubscriber subscriber, LinkedHashMap&lt;String, SubscriptionPlcField&gt; fields) {
 <a class="jxr_linenumber" name="L703" href="#L703">703</a>             <strong class="jxr_keyword">super</strong>(subscriber, fields);
 <a class="jxr_linenumber" name="L704" href="#L704">704</a>         }
 <a class="jxr_linenumber" name="L705" href="#L705">705</a> 
-<a class="jxr_linenumber" name="L706" href="#L706">706</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcSubscriptionRequest</a> build(PlcSubscriber subscriber) {
+<a class="jxr_linenumber" name="L706" href="#L706">706</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> TestDefaultPlcSubscriptionRequest build(PlcSubscriber subscriber) {
 <a class="jxr_linenumber" name="L707" href="#L707">707</a>             LinkedHashMap&lt;String, SubscriptionPlcField&gt; fields = <strong class="jxr_keyword">new</strong> LinkedHashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L708" href="#L708">708</a>             fields.put(<span class="jxr_string">"sub1"</span>, mock(SubscriptionPlcField.<strong class="jxr_keyword">class</strong>));
 <a class="jxr_linenumber" name="L709" href="#L709">709</a>             fields.put(<span class="jxr_string">"sub2"</span>, mock(SubscriptionPlcField.<strong class="jxr_keyword">class</strong>));
 <a class="jxr_linenumber" name="L710" href="#L710">710</a>             fields.put(<span class="jxr_string">"sub3"</span>, mock(SubscriptionPlcField.<strong class="jxr_keyword">class</strong>));
-<a class="jxr_linenumber" name="L711" href="#L711">711</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcSubscriptionRequest</a>(subscriber, fields);
+<a class="jxr_linenumber" name="L711" href="#L711">711</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> TestDefaultPlcSubscriptionRequest(subscriber, fields);
 <a class="jxr_linenumber" name="L712" href="#L712">712</a>         }
 <a class="jxr_linenumber" name="L713" href="#L713">713</a>     }
 <a class="jxr_linenumber" name="L714" href="#L714">714</a> 
-<a class="jxr_linenumber" name="L715" href="#L715">715</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcUnsubscriptionRequest</a> <strong class="jxr_keyword">extends</strong> DefaultPlcUnsubscriptionRequest {
+<a class="jxr_linenumber" name="L715" href="#L715">715</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> TestDefaultPlcUnsubscriptionRequest <strong class="jxr_keyword">extends</strong> DefaultPlcUnsubscriptionRequest {
 <a class="jxr_linenumber" name="L716" href="#L716">716</a> 
-<a class="jxr_linenumber" name="L717" href="#L717">717</a>         <strong class="jxr_keyword">private</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcUnsubscriptionRequest</a>(PlcSubscriber subscriber, Collection&lt;? <strong class="jxr_keyword">extends</strong> InternalPlcSubscriptionHandle&gt; internalPlcSubscriptionHandles) {
+<a class="jxr_linenumber" name="L717" href="#L717">717</a>         <strong class="jxr_keyword">private</strong> TestDefaultPlcUnsubscriptionRequest(PlcSubscriber subscriber, Collection&lt;? <strong class="jxr_keyword">extends</strong> InternalPlcSubscriptionHandle&gt; internalPlcSubscriptionHandles) {
 <a class="jxr_linenumber" name="L718" href="#L718">718</a>             <strong class="jxr_keyword">super</strong>(subscriber, internalPlcSubscriptionHandles);
 <a class="jxr_linenumber" name="L719" href="#L719">719</a>         }
 <a class="jxr_linenumber" name="L720" href="#L720">720</a> 
-<a class="jxr_linenumber" name="L721" href="#L721">721</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcUnsubscriptionRequest</a> build(PlcSubscriber subscriber) {
+<a class="jxr_linenumber" name="L721" href="#L721">721</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> TestDefaultPlcUnsubscriptionRequest build(PlcSubscriber subscriber) {
 <a class="jxr_linenumber" name="L722" href="#L722">722</a>             List&lt;InternalPlcSubscriptionHandle&gt; internalPlcSubscriptionHandles = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
 <a class="jxr_linenumber" name="L723" href="#L723">723</a>             internalPlcSubscriptionHandles.add(mock(InternalPlcSubscriptionHandle.<strong class="jxr_keyword">class</strong>));
 <a class="jxr_linenumber" name="L724" href="#L724">724</a>             internalPlcSubscriptionHandles.add(mock(InternalPlcSubscriptionHandle.<strong class="jxr_keyword">class</strong>));
 <a class="jxr_linenumber" name="L725" href="#L725">725</a>             internalPlcSubscriptionHandles.add(mock(InternalPlcSubscriptionHandle.<strong class="jxr_keyword">class</strong>));
-<a class="jxr_linenumber" name="L726" href="#L726">726</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/protocol/SingleItemToSingleRequestProtocolTest.html">TestDefaultPlcUnsubscriptionRequest</a>(subscriber, internalPlcSubscriptionHandles);
+<a class="jxr_linenumber" name="L726" href="#L726">726</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> TestDefaultPlcUnsubscriptionRequest(subscriber, internalPlcSubscriptionHandles);
 <a class="jxr_linenumber" name="L727" href="#L727">727</a>         }
 <a class="jxr_linenumber" name="L728" href="#L728">728</a>     }
 <a class="jxr_linenumber" name="L729" href="#L729">729</a> }

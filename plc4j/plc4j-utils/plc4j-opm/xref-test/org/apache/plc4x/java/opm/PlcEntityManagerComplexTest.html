@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -61,7 +61,7 @@
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.mockito.Mockito.when;
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">PlcEntityManagerComplexTest</a> <strong class="jxr_keyword">implements</strong> WithAssertions {
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="PlcEntityManagerComplexTest" href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html#PlcEntityManagerComplexTest">PlcEntityManagerComplexTest</a> <strong class="jxr_keyword">implements</strong> WithAssertions {
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">private</strong> PlcDriverManager driverManager;
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>  
@@ -89,7 +89,7 @@
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>          results.put(prefix + <span class="jxr_string">"counter2"</span>, <strong class="jxr_keyword">new</strong> DefaultLongFieldItem(1l));
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>          PlcEntityManager manager = getPlcEntityManager(results);
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>  
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>          <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">MyEntity</a> myEntity = manager.read(MyEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>          MyEntity myEntity = manager.read(MyEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>  
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          assertEquals(1, (<strong class="jxr_keyword">long</strong>) myEntity.getCounter());
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          assertEquals(1, myEntity.getCounter2());
@@ -99,7 +99,7 @@
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> readComplexObject() <strong class="jxr_keyword">throws</strong> PlcConnectionException, OPMException {
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>          PlcEntityManager manager = getInitializedEntityManager();
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>  
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>          <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">ConnectedEntity</a> connect = manager.read(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>          ConnectedEntity connect = manager.read(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>  
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>          Assert.assertNotNull(connect);
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>  
@@ -113,7 +113,7 @@
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> connect_callComplexMethod() <strong class="jxr_keyword">throws</strong> PlcConnectionException, OPMException {
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         PlcEntityManager manager = getInitializedEntityManager();
 <a class="jxr_linenumber" name="L107" href="#L107">107</a> 
-<a class="jxr_linenumber" name="L108" href="#L108">108</a>         <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">ConnectedEntity</a> connect = manager.connect(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>         ConnectedEntity connect = manager.connect(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
 <a class="jxr_linenumber" name="L109" href="#L109">109</a> 
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>         Assert.assertNotNull(connect);
 <a class="jxr_linenumber" name="L111" href="#L111">111</a> 
@@ -153,7 +153,7 @@
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> connect_callGetter() <strong class="jxr_keyword">throws</strong> PlcConnectionException, OPMException {
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>         PlcEntityManager manager = getInitializedEntityManager();
 <a class="jxr_linenumber" name="L147" href="#L147">147</a> 
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>         <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">ConnectedEntity</a> connect = manager.connect(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>         ConnectedEntity connect = manager.connect(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
 <a class="jxr_linenumber" name="L149" href="#L149">149</a> 
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>         Assert.assertNotNull(connect);
 <a class="jxr_linenumber" name="L151" href="#L151">151</a> 
@@ -167,7 +167,7 @@
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> disconnect() <strong class="jxr_keyword">throws</strong> PlcConnectionException, OPMException, IllegalAccessException {
 <a class="jxr_linenumber" name="L160" href="#L160">160</a>         PlcEntityManager manager = getInitializedEntityManager();
 <a class="jxr_linenumber" name="L161" href="#L161">161</a> 
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>         <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">ConnectedEntity</a> connected = manager.connect(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>         ConnectedEntity connected = manager.connect(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
 <a class="jxr_linenumber" name="L163" href="#L163">163</a> 
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>         manager.disconnect(connected);
 <a class="jxr_linenumber" name="L165" href="#L165">165</a> 
@@ -185,7 +185,7 @@
 <a class="jxr_linenumber" name="L177" href="#L177">177</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> disconnectTwice_throwsException() <strong class="jxr_keyword">throws</strong> PlcConnectionException, OPMException {
 <a class="jxr_linenumber" name="L178" href="#L178">178</a>         PlcEntityManager manager = getInitializedEntityManager();
 <a class="jxr_linenumber" name="L179" href="#L179">179</a> 
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>         <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">ConnectedEntity</a> connected = manager.connect(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>         ConnectedEntity connected = manager.connect(ConnectedEntity.<strong class="jxr_keyword">class</strong>, <span class="jxr_string">"s7://localhost:5555/0/0"</span>);
 <a class="jxr_linenumber" name="L181" href="#L181">181</a> 
 <a class="jxr_linenumber" name="L182" href="#L182">182</a>         manager.disconnect(connected);
 <a class="jxr_linenumber" name="L183" href="#L183">183</a>         assertThatThrownBy(() -&gt; manager.disconnect(connected))
@@ -238,10 +238,10 @@
 <a class="jxr_linenumber" name="L230" href="#L230">230</a>     }
 <a class="jxr_linenumber" name="L231" href="#L231">231</a> 
 <a class="jxr_linenumber" name="L232" href="#L232">232</a>     <strong class="jxr_keyword">private</strong> PlcFieldHandler getFieldHandler() {
-<a class="jxr_linenumber" name="L233" href="#L233">233</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">NoOpPlcFieldHandler</a>();
+<a class="jxr_linenumber" name="L233" href="#L233">233</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> NoOpPlcFieldHandler();
 <a class="jxr_linenumber" name="L234" href="#L234">234</a>     }
 <a class="jxr_linenumber" name="L235" href="#L235">235</a> 
-<a class="jxr_linenumber" name="L236" href="#L236">236</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">NoOpPlcFieldHandler</a> <strong class="jxr_keyword">implements</strong> PlcFieldHandler {
+<a class="jxr_linenumber" name="L236" href="#L236">236</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> NoOpPlcFieldHandler <strong class="jxr_keyword">implements</strong> PlcFieldHandler {
 <a class="jxr_linenumber" name="L237" href="#L237">237</a>         @Override
 <a class="jxr_linenumber" name="L238" href="#L238">238</a>         <strong class="jxr_keyword">public</strong> org.apache.plc4x.java.api.model.PlcField createField(String fieldQuery) <strong class="jxr_keyword">throws</strong> PlcInvalidFieldException {
 <a class="jxr_linenumber" name="L239" href="#L239">239</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> org.apache.plc4x.java.api.model.PlcField() {
@@ -319,17 +319,17 @@
 <a class="jxr_linenumber" name="L311" href="#L311">311</a>         }
 <a class="jxr_linenumber" name="L312" href="#L312">312</a>     }
 <a class="jxr_linenumber" name="L313" href="#L313">313</a> 
-<a class="jxr_linenumber" name="L314" href="#L314">314</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">NoEntity</a> {
+<a class="jxr_linenumber" name="L314" href="#L314">314</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> NoEntity {
 <a class="jxr_linenumber" name="L315" href="#L315">315</a> 
 <a class="jxr_linenumber" name="L316" href="#L316">316</a>     }
 <a class="jxr_linenumber" name="L317" href="#L317">317</a> 
 <a class="jxr_linenumber" name="L318" href="#L318">318</a>     @PlcEntity()
-<a class="jxr_linenumber" name="L319" href="#L319">319</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">EntityWithBadConstructor</a> {
+<a class="jxr_linenumber" name="L319" href="#L319">319</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> EntityWithBadConstructor {
 <a class="jxr_linenumber" name="L320" href="#L320">320</a> 
 <a class="jxr_linenumber" name="L321" href="#L321">321</a>         @PlcField(<span class="jxr_string">"asdf"</span>)
 <a class="jxr_linenumber" name="L322" href="#L322">322</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">long</strong> field;
 <a class="jxr_linenumber" name="L323" href="#L323">323</a> 
-<a class="jxr_linenumber" name="L324" href="#L324">324</a>         <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">EntityWithBadConstructor</a>(<strong class="jxr_keyword">long</strong> field) {
+<a class="jxr_linenumber" name="L324" href="#L324">324</a>         <strong class="jxr_keyword">public</strong> EntityWithBadConstructor(<strong class="jxr_keyword">long</strong> field) {
 <a class="jxr_linenumber" name="L325" href="#L325">325</a>             <strong class="jxr_keyword">this</strong>.field = field;
 <a class="jxr_linenumber" name="L326" href="#L326">326</a>         }
 <a class="jxr_linenumber" name="L327" href="#L327">327</a> 
@@ -339,7 +339,7 @@
 <a class="jxr_linenumber" name="L331" href="#L331">331</a>     }
 <a class="jxr_linenumber" name="L332" href="#L332">332</a> 
 <a class="jxr_linenumber" name="L333" href="#L333">333</a>     @PlcEntity()
-<a class="jxr_linenumber" name="L334" href="#L334">334</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">MyEntity</a> {
+<a class="jxr_linenumber" name="L334" href="#L334">334</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> MyEntity {
 <a class="jxr_linenumber" name="L335" href="#L335">335</a> 
 <a class="jxr_linenumber" name="L336" href="#L336">336</a>         @PlcField(<span class="jxr_string">"%DB3.DBW500"</span>)
 <a class="jxr_linenumber" name="L337" href="#L337">337</a>         <strong class="jxr_keyword">private</strong> Long counter;
@@ -358,7 +358,7 @@
 <a class="jxr_linenumber" name="L350" href="#L350">350</a>     }
 <a class="jxr_linenumber" name="L351" href="#L351">351</a> 
 <a class="jxr_linenumber" name="L352" href="#L352">352</a>     @PlcEntity()
-<a class="jxr_linenumber" name="L353" href="#L353">353</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">ConnectedEntity</a> {
+<a class="jxr_linenumber" name="L353" href="#L353">353</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> ConnectedEntity {
 <a class="jxr_linenumber" name="L354" href="#L354">354</a> 
 <a class="jxr_linenumber" name="L355" href="#L355">355</a>         @PlcField(<span class="jxr_string">"%DB1.DW111:BOOL"</span>)
 <a class="jxr_linenumber" name="L356" href="#L356">356</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> boolVar;
@@ -402,7 +402,7 @@
 <a class="jxr_linenumber" name="L394" href="#L394">394</a>         @PlcField(<span class="jxr_string">"%DB1.DW111:STRING"</span>)
 <a class="jxr_linenumber" name="L395" href="#L395">395</a>         <strong class="jxr_keyword">private</strong> String stringVar;
 <a class="jxr_linenumber" name="L396" href="#L396">396</a> 
-<a class="jxr_linenumber" name="L397" href="#L397">397</a>         <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/opm/PlcEntityManagerComplexTest.html">ConnectedEntity</a>() {
+<a class="jxr_linenumber" name="L397" href="#L397">397</a>         <strong class="jxr_keyword">public</strong> ConnectedEntity() {
 <a class="jxr_linenumber" name="L398" href="#L398">398</a>             <em class="jxr_comment">// Default</em>
 <a class="jxr_linenumber" name="L399" href="#L399">399</a>         }
 <a class="jxr_linenumber" name="L400" href="#L400">400</a> 

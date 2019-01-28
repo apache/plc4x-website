@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -41,10 +41,10 @@
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.Map;
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ExecutionException;
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/apache/plc4x/kafka/Plc4xSinkTask.html">Plc4xSinkTask</a> <strong class="jxr_keyword">extends</strong> SinkTask {
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="Plc4xSinkTask" href="../../../../org/apache/plc4x/kafka/Plc4xSinkTask.html#Plc4xSinkTask">Plc4xSinkTask</a> <strong class="jxr_keyword">extends</strong> SinkTask {
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">private</strong> String url;
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> plcConnection;
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">private</strong> <a name="PlcConnection" href="../../../../org/apache/plc4x/java/api/PlcConnection.html#PlcConnection">PlcConnection</a> plcConnection;
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>      @Override
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>      <strong class="jxr_keyword">public</strong> String version() {
@@ -74,7 +74,7 @@
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>              String query = record.key().toString();
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>              Object value = record.value();
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>              PlcWriteRequest.Builder builder = plcConnection.writeRequestBuilder();
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>              <a href="../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html">PlcWriteRequest</a> plcRequest = addToBuilder(builder, query, value).build();
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>              <a name="PlcWriteRequest" href="../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html#PlcWriteRequest">PlcWriteRequest</a> plcRequest = addToBuilder(builder, query, value).build();
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>              doWrite(plcRequest);
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          }
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>      }
@@ -96,9 +96,9 @@
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>  
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> openConnection() {
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>          <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>              plcConnection = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/java/PlcDriverManager.html">PlcDriverManager</a>().getConnection(url);
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>              plcConnection = <strong class="jxr_keyword">new</strong> <a name="PlcDriverManager" href="../../../../org/apache/plc4x/java/PlcDriverManager.html#PlcDriverManager">PlcDriverManager</a>().getConnection(url);
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>              plcConnection.connect();
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>          } <strong class="jxr_keyword">catch</strong> (PlcConnectionException e) {
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>          } <strong class="jxr_keyword">catch</strong> (<a name="PlcConnectionException" href="../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> e) {
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> ConnectException(<span class="jxr_string">"Could not establish a PLC connection"</span>, e);
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>          }
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>      }
@@ -108,12 +108,12 @@
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>             <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>                 plcConnection.close();
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>             } <strong class="jxr_keyword">catch</strong> (Exception e) {
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html">PlcRuntimeException</a>(<span class="jxr_string">"Caught exception while closing connection to PLC"</span>, e);
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcRuntimeException" href="../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html#PlcRuntimeException">PlcRuntimeException</a>(<span class="jxr_string">"Caught exception while closing connection to PLC"</span>, e);
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>             }
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>         }
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>     }
 <a class="jxr_linenumber" name="L107" href="#L107">107</a> 
-<a class="jxr_linenumber" name="L108" href="#L108">108</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> doWrite(<a href="../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html">PlcWriteRequest</a> request) {
+<a class="jxr_linenumber" name="L108" href="#L108">108</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> doWrite(<a name="PlcWriteRequest" href="../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html#PlcWriteRequest">PlcWriteRequest</a> request) {
 <a class="jxr_linenumber" name="L109" href="#L109">109</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>             request.execute().get();
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>         } <strong class="jxr_keyword">catch</strong> (ExecutionException | InterruptedException e) {

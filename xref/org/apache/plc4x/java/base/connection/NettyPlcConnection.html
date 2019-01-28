@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -36,7 +36,7 @@
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.CompletableFuture;
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ExecutionException;
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html">NettyPlcConnection</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html">AbstractPlcConnection</a> {
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a name="NettyPlcConnection" href="../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html#NettyPlcConnection">NettyPlcConnection</a> <strong class="jxr_keyword">extends</strong> <a name="AbstractPlcConnection" href="../../../../../../org/apache/plc4x/java/base/connection/AbstractPlcConnection.html#AbstractPlcConnection">AbstractPlcConnection</a> {
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment">     * a {@link HashedWheelTimer} shall be only instantiated once.</em>
@@ -44,7 +44,7 @@
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>      <em class="jxr_comment">// TODO: maybe find a way to make this configurable per jvm</em>
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">static</strong> Timer timer = <strong class="jxr_keyword">new</strong> HashedWheelTimer();
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html">ChannelFactory</a> channelFactory;
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> <a name="ChannelFactory" href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html#ChannelFactory">ChannelFactory</a> channelFactory;
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">boolean</strong> awaitSessionSetupComplete;
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  
@@ -52,18 +52,18 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">boolean</strong> connected;
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">protected</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html">NettyPlcConnection</a>(<a href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html">ChannelFactory</a> channelFactory) {
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">protected</strong> <a name="NettyPlcConnection" href="../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html#NettyPlcConnection">NettyPlcConnection</a>(<a name="ChannelFactory" href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html#ChannelFactory">ChannelFactory</a> channelFactory) {
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>          <strong class="jxr_keyword">this</strong>(channelFactory, false);
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      }
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">protected</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html">NettyPlcConnection</a>(<a href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html">ChannelFactory</a> channelFactory, <strong class="jxr_keyword">boolean</strong> awaitSessionSetupComplete) {
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">protected</strong> <a name="NettyPlcConnection" href="../../../../../../org/apache/plc4x/java/base/connection/NettyPlcConnection.html#NettyPlcConnection">NettyPlcConnection</a>(<a name="ChannelFactory" href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html#ChannelFactory">ChannelFactory</a> channelFactory, <strong class="jxr_keyword">boolean</strong> awaitSessionSetupComplete) {
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>          <strong class="jxr_keyword">this</strong>.channelFactory = channelFactory;
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>          <strong class="jxr_keyword">this</strong>.awaitSessionSetupComplete = awaitSessionSetupComplete;
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>          <strong class="jxr_keyword">this</strong>.connected = false;
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>      }
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>  
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>      @Override
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> connect() <strong class="jxr_keyword">throws</strong> PlcConnectionException {
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> connect() <strong class="jxr_keyword">throws</strong> <a name="PlcConnectionException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> {
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>              <em class="jxr_comment">// As we don't just want to wait till the connection is established,</em>
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>              <em class="jxr_comment">// define a future we can use to signal back that the s7 session is</em>
@@ -75,7 +75,7 @@
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>              channel.closeFuture().addListener(future -&gt; {
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>                  <strong class="jxr_keyword">if</strong> (!sessionSetupCompleteFuture.isDone()) {
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>                      sessionSetupCompleteFuture.completeExceptionally(
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>                          <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcIoException.html">PlcIoException</a>(<span class="jxr_string">"Connection terminated by remote"</span>));
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>                          <strong class="jxr_keyword">new</strong> <a name="PlcIoException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcIoException.html#PlcIoException">PlcIoException</a>(<span class="jxr_string">"Connection terminated by remote"</span>));
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>                  }
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>              });
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>              <em class="jxr_comment">// Send an event to the pipeline telling the Protocol filters what's going on.</em>
@@ -90,14 +90,14 @@
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>              connected = <strong class="jxr_keyword">true</strong>;
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          } <strong class="jxr_keyword">catch</strong> (InterruptedException e) {
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>              Thread.currentThread().interrupt();
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(e);
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcConnectionException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a>(e);
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          } <strong class="jxr_keyword">catch</strong> (ExecutionException e) {
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html">PlcConnectionException</a>(e);
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcConnectionException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a>(e);
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>          }
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>      }
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>  
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      @Override
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> close() <strong class="jxr_keyword">throws</strong> PlcConnectionException {
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> close() <strong class="jxr_keyword">throws</strong> <a name="PlcConnectionException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> {
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>          channel = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>          connected = false;
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>      }

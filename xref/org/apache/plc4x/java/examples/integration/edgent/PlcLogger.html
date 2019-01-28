@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -35,10 +35,10 @@
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.TimeUnit;
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/examples/integration/edgent/PlcLogger.html">PlcLogger</a> {
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="PlcLogger" href="../../../../../../../org/apache/plc4x/java/examples/integration/edgent/PlcLogger.html#PlcLogger">PlcLogger</a> {
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String[] args) <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>          <a href="../../../../../../../org/apache/plc4x/java/examples/integration/edgent/CliOptions.html">CliOptions</a> options = CliOptions.fromArgs(args);
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>          <a name="CliOptions" href="../../../../../../../org/apache/plc4x/java/examples/integration/edgent/CliOptions.html#CliOptions">CliOptions</a> options = CliOptions.fromArgs(args);
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>          <strong class="jxr_keyword">if</strong> (options == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>              CliOptions.printHelp();
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>              <em class="jxr_comment">// Could not parse.</em>
@@ -46,7 +46,7 @@
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>          }
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>          <em class="jxr_comment">// Get a plc connection.</em>
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>          <strong class="jxr_keyword">try</strong> (PlcConnectionAdapter plcAdapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(options.getConnectionString())) {
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>          <strong class="jxr_keyword">try</strong> (<a name="PlcConnectionAdapter" href="../../../../../../../org/apache/plc4x/<a name="PlcConnectionAdapter" href="../../../../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html#PlcConnectionAdapter">PlcConnectionAdapter</a>Adapter.html#PlcConnectionAdapter">PlcConnectionAdapter</a> plcAdapter = <strong class="jxr_keyword">new</strong> <a name="PlcConnectionAdapter" href="../../../../../../../org/apache/plc4x/edgent/PlcConnectionAdapter.html#PlcConnectionAdapter">PlcConnectionAdapter</a>(options.getConnectionString())) {
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>              <em class="jxr_comment">// Initialize the Edgent core.</em>
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>              DirectProvider dp = <strong class="jxr_keyword">new</strong> DirectProvider();
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>              Topology top = dp.newTopology();

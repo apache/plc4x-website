@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -47,9 +47,9 @@
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * Connection to a test device.</em>
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> * This class is not thread-safe.</em>
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html">SimulatedPlcConnection</a> <strong class="jxr_keyword">extends</strong> AbstractPlcConnection <strong class="jxr_keyword">implements</strong> PlcReader, PlcWriter, PlcSubscriber {
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="SimulatedPlcConnection" href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#SimulatedPlcConnection">SimulatedPlcConnection</a> <strong class="jxr_keyword">extends</strong> AbstractPlcConnection <strong class="jxr_keyword">implements</strong> PlcReader, PlcWriter, PlcSubscriber {
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>  
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestDevice.html">TestDevice</a> device;
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a name="TestDevice" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestDevice.html#TestDevice">TestDevice</a> device;
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> connected = false;
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
@@ -57,7 +57,7 @@
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">private</strong> Map&lt;Integer, Consumer&lt;PlcSubscriptionEvent&gt;&gt; consumerIdMap = <strong class="jxr_keyword">new</strong> ConcurrentHashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html">SimulatedPlcConnection</a>(<a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestDevice.html">TestDevice</a> device) {
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">public</strong> <a name="SimulatedPlcConnection" href="../../../../../../org/apache/plc4x/java/simulated/connection/SimulatedPlcConnection.html#SimulatedPlcConnection">SimulatedPlcConnection</a>(<a name="TestDevice" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestDevice.html#TestDevice">TestDevice</a> device) {
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>          <strong class="jxr_keyword">this</strong>.device = device;
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      }
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  
@@ -93,17 +93,17 @@
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>  
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>      @Override
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>      <strong class="jxr_keyword">public</strong> PlcReadRequest.Builder readRequestBuilder() {
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcReadRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestFieldHandler.html">TestFieldHandler</a>());
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcReadRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a name="TestFieldHandler" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestFieldHandler.html#TestFieldHandler">TestFieldHandler</a>());
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>      }
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>  
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      @Override
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>      <strong class="jxr_keyword">public</strong> PlcWriteRequest.Builder writeRequestBuilder() {
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcWriteRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestFieldHandler.html">TestFieldHandler</a>());
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcWriteRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a name="TestFieldHandler" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestFieldHandler.html#TestFieldHandler">TestFieldHandler</a>());
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>      }
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>  
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>      @Override
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>      <strong class="jxr_keyword">public</strong> PlcSubscriptionRequest.Builder subscriptionRequestBuilder() {
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcSubscriptionRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestFieldHandler.html">TestFieldHandler</a>());
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcSubscriptionRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a name="TestFieldHandler" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestFieldHandler.html#TestFieldHandler">TestFieldHandler</a>());
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>      }
 <a class="jxr_linenumber" name="L100" href="#L100">100</a> 
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>     @Override
@@ -116,7 +116,7 @@
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>         InternalPlcReadRequest request = checkInternal(readRequest, InternalPlcReadRequest.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L109" href="#L109">109</a>         Map&lt;String, Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt;&gt; fields = <strong class="jxr_keyword">new</strong> HashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>         <strong class="jxr_keyword">for</strong> (String fieldName : request.getFieldNames()) {
-<a class="jxr_linenumber" name="L111" href="#L111">111</a>             <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html">TestField</a> field = (TestField) request.getField(fieldName);
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>             <a name="TestField"<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a>/../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a> field = (<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a>) request.getField(fieldName);
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>             Optional&lt;BaseDefaultFieldItem&gt; fieldItemOptional = device.get(field);
 <a class="jxr_linenumber" name="L113" href="#L113">113</a>             ImmutablePair&lt;PlcResponseCode, BaseDefaultFieldItem&gt; fieldPair;
 <a class="jxr_linenumber" name="L114" href="#L114">114</a>             <strong class="jxr_keyword">boolean</strong> present = fieldItemOptional.isPresent();
@@ -134,7 +134,7 @@
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>         InternalPlcWriteRequest request = checkInternal(writeRequest, InternalPlcWriteRequest.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>         Map&lt;String, PlcResponseCode&gt; fields = <strong class="jxr_keyword">new</strong> HashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>         <strong class="jxr_keyword">for</strong> (String fieldName : request.getFieldNames()) {
-<a class="jxr_linenumber" name="L129" href="#L129">129</a>             <a href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html">TestField</a> field = (TestField) request.getField(fieldName);
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>             <a name="TestField"<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a>/../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a> field = (<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a>) request.getField(fieldName);
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>             BaseDefaultFieldItem fieldItem = request.getFieldItem(fieldName);
 <a class="jxr_linenumber" name="L131" href="#L131">131</a>             device.set(field, fieldItem);
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>             fields.put(fieldName, PlcResponseCode.OK);
@@ -158,13 +158,13 @@
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>             InternalPlcSubscriptionHandle handle = <strong class="jxr_keyword">new</strong> DefaultPlcSubscriptionHandle(<strong class="jxr_keyword">this</strong>);
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>             <strong class="jxr_keyword">switch</strong> (subscriptionPlcField.getPlcSubscriptionType()) {
 <a class="jxr_linenumber" name="L152" href="#L152">152</a>                 <strong class="jxr_keyword">case</strong> CYCLIC:
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>                     device.addCyclicSubscription(dispatchSubscriptionEvent(name, handle), handle, (TestField) subscriptionPlcField.getPlcField(), subscriptionPlcField.getDuration().orElseThrow(RuntimeException::<strong class="jxr_keyword">new</strong>));
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>                     device.addCyclicSubscription(dispatchSubscriptionEvent(name, handle), handle, (<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a>) subscriptionPlcField.getPlcField(), subscriptionPlcField.getDuration().orElseThrow(RuntimeException::<strong class="jxr_keyword">new</strong>));
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>                     <strong class="jxr_keyword">break</strong>;
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>                 <strong class="jxr_keyword">case</strong> CHANGE_OF_STATE:
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>                     device.addChangeOfStateSubscription(dispatchSubscriptionEvent(name, handle), handle, (TestField) subscriptionPlcField.getPlcField());
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>                     device.addChangeOfStateSubscription(dispatchSubscriptionEvent(name, handle), handle, (<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a>) subscriptionPlcField.getPlcField());
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>                     <strong class="jxr_keyword">break</strong>;
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>                 <strong class="jxr_keyword">case</strong> EVENT:
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>                     device.addEventSubscription(dispatchSubscriptionEvent(name, handle), handle, (TestField) subscriptionPlcField.getPlcField());
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>                     device.addEventSubscription(dispatchSubscriptionEvent(name, handle), handle, (<a name="TestField" href="../../../../../../org/apache/plc4x/java/simulated/connection/TestField.html#TestField">TestField</a>) subscriptionPlcField.getPlcField());
 <a class="jxr_linenumber" name="L160" href="#L160">160</a>                     <strong class="jxr_keyword">break</strong>;
 <a class="jxr_linenumber" name="L161" href="#L161">161</a>             }
 <a class="jxr_linenumber" name="L162" href="#L162">162</a>             values.put(name, Pair.of(PlcResponseCode.OK, handle));

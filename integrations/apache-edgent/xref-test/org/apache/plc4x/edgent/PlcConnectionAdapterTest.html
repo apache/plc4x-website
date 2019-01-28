@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -55,10 +55,10 @@
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.hamcrest.core.IsSame.sameInstance;
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.Assert.assertThat;
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapterTest.html">PlcConnectionAdapterTest</a> {
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="PlcConnectionAdapterTest" href="../../../../org/apache/plc4x/edgent/PlcConnectionAdapterTest.html#PlcConnectionAdapterTest">PlcConnectionAdapterTest</a> {
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> getMockConnection() <strong class="jxr_keyword">throws</strong> PlcConnectionException {
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>          <strong class="jxr_keyword">return</strong> (MockConnection) <strong class="jxr_keyword">new</strong> PlcDriverManager().getConnection(<span class="jxr_string">"mock-for-edgent-integration://some-cool-url"</span>);
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> <a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> getMockConnection() <strong class="jxr_keyword">throws</strong> PlcConnectionException {
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>          <strong class="jxr_keyword">return</strong> (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) <strong class="jxr_keyword">new</strong> PlcDriverManager().getConnection(<span class="jxr_string">"mock-for-edgent-integration://some-cool-url"</span>);
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      }
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>      <em class="jxr_comment">/*</em>
@@ -67,7 +67,7 @@
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>      @Test
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>      @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCtor1() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>          <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> mockConnection = getMockConnection();
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>          <a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> mockConnection = getMockConnection();
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>          PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(mockConnection);
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>          assertThat(mockConnection, sameInstance(adapter.getConnection()));
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>          <em class="jxr_comment">// and again... multiple adapter.getConnection() returns the same</em>
@@ -81,9 +81,9 @@
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>      @Test
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>      @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testCtor2() <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>          <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> mockConnection = getMockConnection();
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>          <a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> mockConnection = getMockConnection();
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>          PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(mockConnection.getUrl());
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>          <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> mockConnection2 = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>          <a name="MockConnection" href="../<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>pache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> mockConnection2 = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          assertThat(mockConnection, not(sameInstance(mockConnection2)));
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>          assertThat(mockConnection.getUrl(), sameInstance(mockConnection2.getUrl()));
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>          <em class="jxr_comment">// and again... multiple adapter.getConnection() returns the same</em>
@@ -91,7 +91,7 @@
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          adapter.close();
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>      }
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>  
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">private</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkRead(<a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection, PlcReadRequest request, T value) <strong class="jxr_keyword">throws</strong> InterruptedException, ExecutionException {
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">private</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkRead(<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection, PlcReadRequest request, T value) <strong class="jxr_keyword">throws</strong> InterruptedException, ExecutionException {
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <em class="jxr_comment">// this is really a tests of our mock tooling but knowing it's behaving as expected</em>
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>          <em class="jxr_comment">// will help identify problems in the adapter/supplier/consumer</em>
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          PlcField plcField = request.getFields().get(0);
@@ -107,7 +107,7 @@
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>      }
 <a class="jxr_linenumber" name="L100" href="#L100">100</a> 
 <a class="jxr_linenumber" name="L101" href="#L101">101</a> 
-<a class="jxr_linenumber" name="L102" href="#L102">102</a>     <strong class="jxr_keyword">private</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkWrite(<a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection, PlcWriteRequest request, T value) <strong class="jxr_keyword">throws</strong> InterruptedException, ExecutionException {
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>     <strong class="jxr_keyword">private</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkWrite(<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection, PlcWriteRequest request, T value) <strong class="jxr_keyword">throws</strong> InterruptedException, ExecutionException {
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>         <em class="jxr_comment">// this is really a tests of our mock tooling but knowing it's behaving as expected</em>
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>         <em class="jxr_comment">// will help identify problems in the adapter/supplier/consumer</em>
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>         PlcField plcField = request.getFields().get(0);
@@ -140,16 +140,16 @@
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>     @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testNewPlcReadRequest() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L134" href="#L134">134</a>         String addressStr = <span class="jxr_string">"MyReadWriteAddress/0"</span>;
-<a class="jxr_linenumber" name="L135" href="#L135">135</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a>(addressStr);
+<a class="jxr_linenumber" name="L135" href="#L135">135</a>         <a name="MockField" href="../../../../org/apache/plc4x/edgent<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>kField.html#MockField">MockField</a> address = <strong class="jxr_keyword">new</strong> <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>(addressStr);
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>         PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(getMockConnection());
-<a class="jxr_linenumber" name="L137" href="#L137">137</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L137" href="#L137">137</a>         <a name="MockConnection" href<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L138" href="#L138">138</a> 
 <a class="jxr_linenumber" name="L139" href="#L139">139</a>         {
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>             PlcReadRequest readRequest = adapter.readRequestBuilder().addItem(<span class="jxr_string">"test"</span>, addressStr).build();
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>             assertThat(readRequest.getNumberOfFields(), equalTo(1));
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>             assertThat(readRequest.getField(<span class="jxr_string">"test"</span>), notNullValue());
 <a class="jxr_linenumber" name="L143" href="#L143">143</a>             assertThat(readRequest.getField(<span class="jxr_string">"test"</span>), IsInstanceOf.instanceOf(MockField.<strong class="jxr_keyword">class</strong>));
-<a class="jxr_linenumber" name="L144" href="#L144">144</a>             assertThat(((MockField) readRequest.getField(<span class="jxr_string">"test"</span>)).getAddress(), equalTo(addressStr));
+<a class="jxr_linenumber" name="L144" href="#L144">144</a>             assertThat(((<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>) readRequest.getField(<span class="jxr_string">"test"</span>)).getAddress(), equalTo(addressStr));
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>             checkRead(connection, readRequest, <strong class="jxr_keyword">true</strong>);
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>             checkRead(connection, readRequest, false);
 <a class="jxr_linenumber" name="L147" href="#L147">147</a>         }
@@ -217,9 +217,9 @@
 <a class="jxr_linenumber" name="L209" href="#L209">209</a>     @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L210" href="#L210">210</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testNewPlcWriteRequest() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L211" href="#L211">211</a>         String addressStr = <span class="jxr_string">"MyReadWriteAddress/0"</span>;
-<a class="jxr_linenumber" name="L212" href="#L212">212</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a>(addressStr);
+<a class="jxr_linenumber" name="L212" href="#L212">212</a>         <a name="MockField" href="../../../../org/apache/plc4x/edgent<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>kField.html#MockField">MockField</a> address = <strong class="jxr_keyword">new</strong> <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>(addressStr);
 <a class="jxr_linenumber" name="L213" href="#L213">213</a>         PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(getMockConnection());
-<a class="jxr_linenumber" name="L214" href="#L214">214</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L214" href="#L214">214</a>         <a name="MockConnection" href<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L215" href="#L215">215</a> 
 <a class="jxr_linenumber" name="L216" href="#L216">216</a>         <em class="jxr_comment">/*{</em>
 <a class="jxr_linenumber" name="L217" href="#L217">217</a> <em class="jxr_comment">            TypeSafePlcWriteRequest&lt;Boolean&gt; request = PlcConnectionAdapter.newPlcWriteRequest(address, true);</em>
@@ -288,9 +288,9 @@
 <a class="jxr_linenumber" name="L280" href="#L280">280</a>     @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L281" href="#L281">281</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testNewSupplier() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L282" href="#L282">282</a>         String addressStr = <span class="jxr_string">"MyReadWriteAddress/0"</span>;
-<a class="jxr_linenumber" name="L283" href="#L283">283</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a>(addressStr);
+<a class="jxr_linenumber" name="L283" href="#L283">283</a>         <a name="MockField" href="../../../../org/apache/plc4x/edgent<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>kField.html#MockField">MockField</a> address = <strong class="jxr_keyword">new</strong> <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>(addressStr);
 <a class="jxr_linenumber" name="L284" href="#L284">284</a>         PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(getMockConnection());
-<a class="jxr_linenumber" name="L285" href="#L285">285</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L285" href="#L285">285</a>         <a name="MockConnection" href<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L286" href="#L286">286</a> 
 <a class="jxr_linenumber" name="L287" href="#L287">287</a>         <em class="jxr_comment">/*{</em>
 <a class="jxr_linenumber" name="L288" href="#L288">288</a> <em class="jxr_comment">            Supplier&lt;Boolean&gt; supplier = adapter.newSupplier(Boolean.class, addressStr);</em>
@@ -327,9 +327,9 @@
 <a class="jxr_linenumber" name="L319" href="#L319">319</a>     @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L320" href="#L320">320</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testNewSupplierNeg() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L321" href="#L321">321</a>         String addressStr = <span class="jxr_string">"MyReadWriteAddress/0"</span>;
-<a class="jxr_linenumber" name="L322" href="#L322">322</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a>(addressStr);
+<a class="jxr_linenumber" name="L322" href="#L322">322</a>         <a name="MockField" href="../../../../org/apache/plc4x/edgent<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>kField.html#MockField">MockField</a> address = <strong class="jxr_keyword">new</strong> <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>(addressStr);
 <a class="jxr_linenumber" name="L323" href="#L323">323</a>         PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(getMockConnection());
-<a class="jxr_linenumber" name="L324" href="#L324">324</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L324" href="#L324">324</a>         <a name="MockConnection" href<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L325" href="#L325">325</a> 
 <a class="jxr_linenumber" name="L326" href="#L326">326</a>         <em class="jxr_comment">/*Supplier&lt;String&gt; supplier = adapter.newSupplier(String.class, addressStr);</em>
 <a class="jxr_linenumber" name="L327" href="#L327">327</a> <em class="jxr_comment">        checkSupplier(2, connection, address, supplier, "one", "two", "three");*/</em>
@@ -337,11 +337,11 @@
 <a class="jxr_linenumber" name="L329" href="#L329">329</a>         adapter.close();
 <a class="jxr_linenumber" name="L330" href="#L330">330</a>     }
 <a class="jxr_linenumber" name="L331" href="#L331">331</a> 
-<a class="jxr_linenumber" name="L332" href="#L332">332</a>     <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkSupplier(<a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection, PlcField field, Supplier&lt;T&gt; supplier, Object... values) {
+<a class="jxr_linenumber" name="L332" href="#L332">332</a>     <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkSupplier(<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection, PlcField field, Supplier&lt;T&gt; supplier, Object... values) {
 <a class="jxr_linenumber" name="L333" href="#L333">333</a>         checkSupplier(0, connection, field, supplier, values);
 <a class="jxr_linenumber" name="L334" href="#L334">334</a>     }
 <a class="jxr_linenumber" name="L335" href="#L335">335</a> 
-<a class="jxr_linenumber" name="L336" href="#L336">336</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkSupplier(<strong class="jxr_keyword">int</strong> readFailureCountTrigger, <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection, PlcField field, Supplier&lt;T&gt; supplier, Object... values) {
+<a class="jxr_linenumber" name="L336" href="#L336">336</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkSupplier(<strong class="jxr_keyword">int</strong> readFailureCountTrigger, <a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection, PlcField field, Supplier&lt;T&gt; supplier, Object... values) {
 <a class="jxr_linenumber" name="L337" href="#L337">337</a>         <em class="jxr_comment">// verify that a read failure doesn't kill the consumer</em>
 <a class="jxr_linenumber" name="L338" href="#L338">338</a>         <em class="jxr_comment">// it logs (not verified) but returns null (as designed) and keeps working for the subsequent reads</em>
 <a class="jxr_linenumber" name="L339" href="#L339">339</a>         connection.setReadException(readFailureCountTrigger, <span class="jxr_string">"This is a mock read exception"</span>);
@@ -368,9 +368,9 @@
 <a class="jxr_linenumber" name="L360" href="#L360">360</a>     @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L361" href="#L361">361</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testNewConsumer1() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L362" href="#L362">362</a>         String addressStr = <span class="jxr_string">"MyReadWriteAddress/0"</span>;
-<a class="jxr_linenumber" name="L363" href="#L363">363</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a>(addressStr);
+<a class="jxr_linenumber" name="L363" href="#L363">363</a>         <a name="MockField" href="../../../../org/apache/plc4x/edgent<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>kField.html#MockField">MockField</a> address = <strong class="jxr_keyword">new</strong> <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>(addressStr);
 <a class="jxr_linenumber" name="L364" href="#L364">364</a>         PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(getMockConnection());
-<a class="jxr_linenumber" name="L365" href="#L365">365</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L365" href="#L365">365</a>         <a name="MockConnection" href<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L366" href="#L366">366</a> 
 <a class="jxr_linenumber" name="L367" href="#L367">367</a>         Consumer&lt;?&gt; consumer;
 <a class="jxr_linenumber" name="L368" href="#L368">368</a> 
@@ -403,9 +403,9 @@
 <a class="jxr_linenumber" name="L395" href="#L395">395</a>     @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L396" href="#L396">396</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testNewConsumer1Neg() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L397" href="#L397">397</a>         String addressStr = <span class="jxr_string">"MyReadWriteAddress/0"</span>;
-<a class="jxr_linenumber" name="L398" href="#L398">398</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a>(addressStr);
+<a class="jxr_linenumber" name="L398" href="#L398">398</a>         <a name="MockField" href="../../../../org/apache/plc4x/edgent<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>kField.html#MockField">MockField</a> address = <strong class="jxr_keyword">new</strong> <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>(addressStr);
 <a class="jxr_linenumber" name="L399" href="#L399">399</a>         PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(getMockConnection());
-<a class="jxr_linenumber" name="L400" href="#L400">400</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L400" href="#L400">400</a>         <a name="MockConnection" href<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L401" href="#L401">401</a> 
 <a class="jxr_linenumber" name="L402" href="#L402">402</a>         Consumer&lt;?&gt; consumer;
 <a class="jxr_linenumber" name="L403" href="#L403">403</a> 
@@ -415,11 +415,11 @@
 <a class="jxr_linenumber" name="L407" href="#L407">407</a>         adapter.close();
 <a class="jxr_linenumber" name="L408" href="#L408">408</a>     }
 <a class="jxr_linenumber" name="L409" href="#L409">409</a> 
-<a class="jxr_linenumber" name="L410" href="#L410">410</a>     <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkConsumer(<a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection, PlcField field, Consumer&lt;T&gt; consumer, Object... values) {
+<a class="jxr_linenumber" name="L410" href="#L410">410</a>     <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkConsumer(<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection, PlcField field, Consumer&lt;T&gt; consumer, Object... values) {
 <a class="jxr_linenumber" name="L411" href="#L411">411</a>         checkConsumer(0, connection, field, consumer, values);
 <a class="jxr_linenumber" name="L412" href="#L412">412</a>     }
 <a class="jxr_linenumber" name="L413" href="#L413">413</a> 
-<a class="jxr_linenumber" name="L414" href="#L414">414</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkConsumer(<strong class="jxr_keyword">int</strong> writeFailureCountTrigger, <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection, PlcField field, Consumer&lt;T&gt; consumer, Object... values) {
+<a class="jxr_linenumber" name="L414" href="#L414">414</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkConsumer(<strong class="jxr_keyword">int</strong> writeFailureCountTrigger, <a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection, PlcField field, Consumer&lt;T&gt; consumer, Object... values) {
 <a class="jxr_linenumber" name="L415" href="#L415">415</a>         <em class="jxr_comment">// verify that a write failure doesn't kill the consumer</em>
 <a class="jxr_linenumber" name="L416" href="#L416">416</a>         <em class="jxr_comment">// it logs (not verified) but keeps working for the subsequent writes</em>
 <a class="jxr_linenumber" name="L417" href="#L417">417</a>         connection.setWriteException(writeFailureCountTrigger, <span class="jxr_string">"This is a mock write exception"</span>);
@@ -458,9 +458,9 @@
 <a class="jxr_linenumber" name="L450" href="#L450">450</a>     @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L451" href="#L451">451</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testNewConsumer2() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L452" href="#L452">452</a>         String addressStr = <span class="jxr_string">"MyReadWriteAddress/0"</span>;
-<a class="jxr_linenumber" name="L453" href="#L453">453</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a>(addressStr);
+<a class="jxr_linenumber" name="L453" href="#L453">453</a>         <a name="MockField" href="../../../../org/apache/plc4x/edgent<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>kField.html#MockField">MockField</a> address = <strong class="jxr_keyword">new</strong> <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>(addressStr);
 <a class="jxr_linenumber" name="L454" href="#L454">454</a>         PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(getMockConnection());
-<a class="jxr_linenumber" name="L455" href="#L455">455</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L455" href="#L455">455</a>         <a name="MockConnection" href<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L456" href="#L456">456</a> 
 <a class="jxr_linenumber" name="L457" href="#L457">457</a>         Consumer&lt;JsonObject&gt; consumer;
 <a class="jxr_linenumber" name="L458" href="#L458">458</a> 
@@ -494,9 +494,9 @@
 <a class="jxr_linenumber" name="L486" href="#L486">486</a>     @Category(FastTests.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L487" href="#L487">487</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testNewConsumer2Neg() <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L488" href="#L488">488</a>         String addressStr = <span class="jxr_string">"MyReadWriteAddress/0"</span>;
-<a class="jxr_linenumber" name="L489" href="#L489">489</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a>(addressStr);
+<a class="jxr_linenumber" name="L489" href="#L489">489</a>         <a name="MockField" href="../../../../org/apache/plc4x/edgent<a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>kField.html#MockField">MockField</a> address = <strong class="jxr_keyword">new</strong> <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a>(addressStr);
 <a class="jxr_linenumber" name="L490" href="#L490">490</a>         PlcConnectionAdapter adapter = <strong class="jxr_keyword">new</strong> PlcConnectionAdapter(getMockConnection());
-<a class="jxr_linenumber" name="L491" href="#L491">491</a>         <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection = (MockConnection) adapter.getConnection();
+<a class="jxr_linenumber" name="L491" href="#L491">491</a>         <a name="MockConnection" href<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection = (<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>) adapter.getConnection();
 <a class="jxr_linenumber" name="L492" href="#L492">492</a> 
 <a class="jxr_linenumber" name="L493" href="#L493">493</a>         Consumer&lt;JsonObject&gt; consumer;
 <a class="jxr_linenumber" name="L494" href="#L494">494</a> 
@@ -508,12 +508,12 @@
 <a class="jxr_linenumber" name="L500" href="#L500">500</a>         adapter.close();
 <a class="jxr_linenumber" name="L501" href="#L501">501</a>     }
 <a class="jxr_linenumber" name="L502" href="#L502">502</a> 
-<a class="jxr_linenumber" name="L503" href="#L503">503</a>     <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkConsumerJson(<a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection, <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> address, Consumer&lt;JsonObject&gt; consumer, Object... values) {
+<a class="jxr_linenumber" name="L503" href="#L503">503</a>     <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkConsumerJson(<a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection, <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a> address, Consumer&lt;JsonObject&gt; consumer, Object... values) {
 <a class="jxr_linenumber" name="L504" href="#L504">504</a>         checkConsumerJson(0, connection, address, consumer, values);
 <a class="jxr_linenumber" name="L505" href="#L505">505</a>     }
 <a class="jxr_linenumber" name="L506" href="#L506">506</a> 
-<a class="jxr_linenumber" name="L507" href="#L507">507</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkConsumerJson(<strong class="jxr_keyword">int</strong> writeFailureCountTrigger, <a href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> connection,
-<a class="jxr_linenumber" name="L508" href="#L508">508</a>                                               <a href="../../../../org/apache/plc4x/edgent/mock/MockField.html">MockField</a> field, Consumer&lt;JsonObject&gt; consumer, Object... values) {
+<a class="jxr_linenumber" name="L507" href="#L507">507</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> &lt;T&gt; <strong class="jxr_keyword">void</strong> checkConsumerJson(<strong class="jxr_keyword">int</strong> writeFailureCountTrigger, <a name="MockConnection" href="../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> connection,
+<a class="jxr_linenumber" name="L508" href="#L508">508</a>                                               <a name="MockField" href="../../../../org/apache/plc4x/edgent/mock/MockField.html#MockField">MockField</a> field, Consumer&lt;JsonObject&gt; consumer, Object... values) {
 <a class="jxr_linenumber" name="L509" href="#L509">509</a>         <strong class="jxr_keyword">if</strong> (writeFailureCountTrigger &gt; 0) {
 <a class="jxr_linenumber" name="L510" href="#L510">510</a>             connection.setWriteException(writeFailureCountTrigger, <span class="jxr_string">"This is a mock write exception"</span>);
 <a class="jxr_linenumber" name="L511" href="#L511">511</a>         }

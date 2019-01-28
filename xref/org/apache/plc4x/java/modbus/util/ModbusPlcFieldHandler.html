@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_comment"> </em>
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  <em class="jxr_comment"> </em>
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -39,10 +39,10 @@
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> java.util.LinkedList;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.List;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/modbus/util/ModbusPlcFieldHandler.html">ModbusPlcFieldHandler</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/DefaultPlcFieldHandler.html">DefaultPlcFieldHandler</a> {
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="ModbusPlcFieldHandler" href="../../../../../../org/apache/plc4x/java/modbus/util/ModbusPlcFieldHandler.html#ModbusPlcFieldHandler">ModbusPlcFieldHandler</a> <strong class="jxr_keyword">extends</strong> <a name="DefaultPlcFieldHandler" href="../../../../../../org/apache/plc4x/java/base/connection/DefaultPlcFieldHandler.html#DefaultPlcFieldHandler">DefaultPlcFieldHandler</a> {
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>      @Override
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/api/model/PlcField.html">PlcField</a> createField(String fieldQuery) <strong class="jxr_keyword">throws</strong> PlcInvalidFieldException {
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">public</strong> <a name="PlcField" href="../../../../../../org/apache/plc4x/java/api/model/PlcField.html#PlcField">PlcField</a> createField(String fieldQuery) <strong class="jxr_keyword">throws</strong> <a name="PlcInvalidFieldException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcInvalidFieldException.html#PlcInvalidFieldException">PlcInvalidFieldException</a> {
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>          <strong class="jxr_keyword">if</strong> (MaskWriteRegisterModbusField.ADDRESS_PATTERN.matcher(fieldQuery).matches()) {
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>              <strong class="jxr_keyword">return</strong> MaskWriteRegisterModbusField.of(fieldQuery);
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>          } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (ReadDiscreteInputsModbusField.ADDRESS_PATTERN.matcher(fieldQuery).matches()) {
@@ -56,12 +56,12 @@
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>          } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (RegisterModbusField.ADDRESS_PATTERN.matcher(fieldQuery).matches()) {
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>              <strong class="jxr_keyword">return</strong> RegisterModbusField.of(fieldQuery);
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>          }
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>          <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcInvalidFieldException.html">PlcInvalidFieldException</a>(fieldQuery);
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>          <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcInvalidFieldException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcInvalidFieldException.html#PlcInvalidFieldException">PlcInvalidFieldException</a>(fieldQuery);
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>      }
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      @Override
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html">BaseDefaultFieldItem</a> encodeBoolean(<a href="../../../../../../org/apache/plc4x/java/api/model/PlcField.html">PlcField</a> field, Object[] values) {
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>          <a href="../../../../../../org/apache/plc4x/java/modbus/model/ModbusField.html">ModbusField</a> modbusField = (ModbusField) field;
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">public</strong> <a name="BaseDefaultFieldItem" href="../../../../../../org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html#BaseDefaultFieldItem">BaseDefaultFieldItem</a> encodeBoolean(<a name="PlcField" href="../../../../../../org/apache/plc4x/java/api/model/PlcField.html#PlcField">PlcField</a> field, Object[] values) {
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>          <a name="ModbusField" href=<a name="ModbusField" href="../../../../../../org/apache/plc4x/java/modbus/model/ModbusField.html#ModbusField">ModbusField</a>./../../org/apache/plc4x/java/modbus/model/ModbusField.html#ModbusField">ModbusField</a> modbusField = (<a name="ModbusField" href="../../../../../../org/apache/plc4x/java/modbus/model/ModbusField.html#ModbusField">ModbusField</a>) field;
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          List&lt;Boolean&gt; booleanValues = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          <strong class="jxr_keyword">for</strong> (Object value : values) {
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>              <strong class="jxr_keyword">if</strong> (value instanceof Boolean) {
@@ -97,12 +97,12 @@
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>                          <span class="jxr_string">" is not assignable to "</span> + modbusField + <span class="jxr_string">" fields."</span>);
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>              }
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>          }
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/messages/items/DefaultBooleanFieldItem.html">DefaultBooleanFieldItem</a>(booleanValues.toArray(<strong class="jxr_keyword">new</strong> Boolean[0]));
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="DefaultBooleanFieldItem" href="../../../../../../org/apache/plc4x/java/base/messages/items/DefaultBooleanFieldItem.html#DefaultBooleanFieldItem">DefaultBooleanFieldItem</a>(booleanValues.toArray(<strong class="jxr_keyword">new</strong> Boolean[0]));
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>      }
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>  
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>      @Override
-<a class="jxr_linenumber" name="L96" href="#L96">96</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html">BaseDefaultFieldItem</a> encodeByteArray(<a href="../../../../../../org/apache/plc4x/java/api/model/PlcField.html">PlcField</a> field, Object[] values) {
-<a class="jxr_linenumber" name="L97" href="#L97">97</a>          <a href="../../../../../../org/apache/plc4x/java/modbus/model/ModbusField.html">ModbusField</a> modbusField = (ModbusField) field;
+<a class="jxr_linenumber" name="L96" href="#L96">96</a>      <strong class="jxr_keyword">public</strong> <a name="BaseDefaultFieldItem" href="../../../../../../org/apache/plc4x/java/base/messages/items/BaseDefaultFieldItem.html#BaseDefaultFieldItem">BaseDefaultFieldItem</a> encodeByteArray(<a name="PlcField" href="../../../../../../org/apache/plc4x/java/api/model/PlcField.html#PlcField">PlcField</a> field, Object[] values) {
+<a class="jxr_linenumber" name="L97" href="#L97">97</a>          <a name="ModbusField" href=<a name="ModbusField" href="../../../../../../org/apache/plc4x/java/modbus/model/ModbusField.html#ModbusField">ModbusField</a>./../../org/apache/plc4x/java/modbus/model/ModbusField.html#ModbusField">ModbusField</a> modbusField = (<a name="ModbusField" href="../../../../../../org/apache/plc4x/java/modbus/model/ModbusField.html#ModbusField">ModbusField</a>) field;
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>          List&lt;Byte[]&gt; byteArrays = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>          <strong class="jxr_keyword">for</strong> (Object value : values) {
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>             <strong class="jxr_keyword">if</strong> (value instanceof byte[]) {
@@ -117,7 +117,7 @@
 <a class="jxr_linenumber" name="L109" href="#L109">109</a>                         <span class="jxr_string">" is not assignable to "</span> + modbusField + <span class="jxr_string">" fields."</span>);
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>             }
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>         }
-<a class="jxr_linenumber" name="L112" href="#L112">112</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/modbus/messages/items/DefaultModbusByteArrayFieldItem.html">DefaultModbusByteArrayFieldItem</a>(byteArrays.toArray(<strong class="jxr_keyword">new</strong> Byte[0][0]));
+<a class="jxr_linenumber" name="L112" href="#L112">112</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="DefaultModbusByteArrayFieldItem" href="../../../../../../org/apache/plc4x/java/modbus/messages/items/DefaultModbusByteArrayFieldItem.html#DefaultModbusByteArrayFieldItem">DefaultModbusByteArrayFieldItem</a>(byteArrays.toArray(<strong class="jxr_keyword">new</strong> Byte[0][0]));
 <a class="jxr_linenumber" name="L113" href="#L113">113</a>     }
 <a class="jxr_linenumber" name="L114" href="#L114">114</a> }
 </pre>

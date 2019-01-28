@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> * "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> * with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_comment"> *</em>
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment"> *   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment"> *   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> * Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> * software distributed under the License is distributed on an</em>
@@ -54,26 +54,26 @@
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment"> * One {@link ScrapeJob} gets split into multiple tasks.</em>
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  <em class="jxr_javadoccomment"> * One task for each source that is defined in the {@link org.apache.plc4x.java.scraper.config.JobConfiguration}.</em>
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/scraper/ScraperTask.html">ScraperTask</a> <strong class="jxr_keyword">implements</strong> Runnable {
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="ScraperTask" href="../../../../../org/apache/plc4x/java/scraper/ScraperTask.html#ScraperTask">ScraperTask</a> <strong class="jxr_keyword">implements</strong> Runnable {
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger LOGGER = LoggerFactory.getLogger(ScraperTask.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../org/apache/plc4x/java/PlcDriverManager.html">PlcDriverManager</a> driverManager;
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a name="PlcDriverManager" href="../../../../../org/apache/plc4x/java/PlcDriverManager.html#PlcDriverManager">PlcDriverManager</a> driverManager;
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String jobName;
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String connectionAlias;
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String connectionString;
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> Map&lt;String, String&gt; fields;
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">long</strong> requestTimeoutMs;
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> ExecutorService handlerService;
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html">ResultHandler</a> resultHandler;
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> <a name="ResultHandler" href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html#ResultHandler">ResultHandler</a> resultHandler;
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> AtomicLong requestCounter = <strong class="jxr_keyword">new</strong> AtomicLong(0);
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> AtomicLong successCounter = <strong class="jxr_keyword">new</strong> AtomicLong(0);
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> DescriptiveStatistics latencyStatistics = <strong class="jxr_keyword">new</strong> DescriptiveStatistics(1000);
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> DescriptiveStatistics failedStatistics = <strong class="jxr_keyword">new</strong> DescriptiveStatistics(1000);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/java/scraper/ScraperTask.html">ScraperTask</a>(<a href="../../../../../org/apache/plc4x/java/PlcDriverManager.html">PlcDriverManager</a> driverManager, String jobName, String connectionAlias, String connectionString,
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>                         Map&lt;String, String&gt; fields, <strong class="jxr_keyword">long</strong> requestTimeoutMs, ExecutorService handlerService, <a href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html">ResultHandler</a> resultHandler) {
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>      <strong class="jxr_keyword">public</strong> <a name="ScraperTask" href="../../../../../org/apache/plc4x/java/scraper/ScraperTask.html#ScraperTask">ScraperTask</a>(<a name="PlcDriverManager" href="../../../../../org/apache/plc4x/java/PlcDriverManager.html#PlcDriverManager">PlcDriverManager</a> driverManager, String jobName, String connectionAlias, String connectionString,
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>                         Map&lt;String, String&gt; fields, <strong class="jxr_keyword">long</strong> requestTimeoutMs, ExecutorService handlerService, <a name="ResultHandler" href="../../../../../org/apache/plc4x/java/scraper/ResultHandler.html#ResultHandler">ResultHandler</a> resultHandler) {
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>          Validate.notNull(driverManager);
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          Validate.notBlank(jobName);
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          Validate.notBlank(connectionAlias);
@@ -98,19 +98,19 @@
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>          requestCounter.incrementAndGet();
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>          StopWatch stopWatch = <strong class="jxr_keyword">new</strong> StopWatch();
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>          stopWatch.start();
-<a class="jxr_linenumber" name="L93" href="#L93">93</a>          <a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> connection = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>          <a name="PlcConnection" href="../../../../../org/apache/plc4x/java/api/PlcConnection.html#PlcConnection">PlcConnection</a> connection = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>          <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>              CompletableFuture&lt;PlcConnection&gt; future = CompletableFuture.supplyAsync(() -&gt; {
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>                  <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>                      <strong class="jxr_keyword">return</strong> driverManager.getConnection(connectionString);
-<a class="jxr_linenumber" name="L98" href="#L98">98</a>                  } <strong class="jxr_keyword">catch</strong> (PlcConnectionException e) {
+<a class="jxr_linenumber" name="L98" href="#L98">98</a>                  } <strong class="jxr_keyword">catch</strong> (<a name="PlcConnectionException" href="../../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> e) {
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>                      LOGGER.warn(<span class="jxr_string">"Unable to instantiate connection to "</span> + connectionString, e);
-<a class="jxr_linenumber" name="L100" href="#L100">100</a>                     <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html">PlcRuntimeException</a>(e);
+<a class="jxr_linenumber" name="L100" href="#L100">100</a>                     <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcRuntimeException" href="../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html#PlcRuntimeException">PlcRuntimeException</a>(e);
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>                 }
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>             }, handlerService);
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>             connection = future.get(10*requestTimeoutMs, TimeUnit.MILLISECONDS);
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>             LOGGER.trace(<span class="jxr_string">"Connection to {} established: {}"</span>, connectionString, connection);
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>             <a href="../../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html">PlcReadResponse</a> response;
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>             <a name="PlcReadResponse" href="../../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html#PlcReadResponse">PlcReadResponse</a> response;
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>             <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>                 PlcReadRequest.Builder builder = connection.readRequestBuilder();
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>                 fields.forEach((alias,qry) -&gt; {
@@ -149,7 +149,7 @@
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>         }
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>     }
 <a class="jxr_linenumber" name="L143" href="#L143">143</a> 
-<a class="jxr_linenumber" name="L144" href="#L144">144</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> validateResponse(<a href="../../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html">PlcReadResponse</a> response) {
+<a class="jxr_linenumber" name="L144" href="#L144">144</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> validateResponse(<a name="PlcReadResponse" href="../../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html#PlcReadResponse">PlcReadResponse</a> response) {
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>         Map&lt;String, PlcResponseCode&gt; failedFields = response.getFieldNames().stream()
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>             .filter(name -&gt; !PlcResponseCode.OK.equals(response.getResponseCode(name)))
 <a class="jxr_linenumber" name="L147" href="#L147">147</a>             .collect(Collectors.toMap(
@@ -161,7 +161,7 @@
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>         }
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>     }
 <a class="jxr_linenumber" name="L155" href="#L155">155</a> 
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>     <strong class="jxr_keyword">private</strong> Map&lt;String, Object&gt; transformResponseToMap(<a href="../../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html">PlcReadResponse</a> response) {
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>     <strong class="jxr_keyword">private</strong> Map&lt;String, Object&gt; transformResponseToMap(<a name="PlcReadResponse" href="../../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html#PlcReadResponse">PlcReadResponse</a> response) {
 <a class="jxr_linenumber" name="L157" href="#L157">157</a>         <strong class="jxr_keyword">return</strong> response.getFieldNames().stream()
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>             .collect(Collectors.toMap(
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>                 name -&gt; name,

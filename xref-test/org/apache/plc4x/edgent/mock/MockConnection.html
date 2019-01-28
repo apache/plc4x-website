@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -44,7 +44,7 @@
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> java.util.Map;
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.CompletableFuture;
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a> <strong class="jxr_keyword">extends</strong> org.apache.plc4x.java.base.connection.MockConnection <strong class="jxr_keyword">implements</strong> PlcReader, PlcWriter {
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="MockConnection" href="../../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a> <strong class="jxr_keyword">extends</strong> org.apache.plc4x.java.base.connection.MockConnection <strong class="jxr_keyword">implements</strong> PlcReader, PlcWriter {
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String url;
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> PlcAuthentication authentication;
@@ -57,11 +57,11 @@
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">private</strong> String writeExceptionMsg;
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> connected;
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a>(String url) {
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">public</strong> <a name="MockConnection" href="../../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>(String url) {
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>          <strong class="jxr_keyword">this</strong>(url, <strong class="jxr_keyword">null</strong>);
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>      }
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../org/apache/plc4x/edgent/mock/MockConnection.html">MockConnection</a>(String url, PlcAuthentication authentication) {
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">public</strong> <a name="MockConnection" href="../../../../../org/apache/plc4x/edgent/mock/MockConnection.html#MockConnection">MockConnection</a>(String url, PlcAuthentication authentication) {
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          <strong class="jxr_keyword">super</strong>();
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>          <strong class="jxr_keyword">this</strong>.url = url;
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">this</strong>.authentication = authentication;
@@ -84,7 +84,7 @@
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>  
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>      @Override
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>      <strong class="jxr_keyword">public</strong> PlcReadRequest.Builder readRequestBuilder() {
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcReadRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/edgent/mock/MockFieldHandler.html">MockFieldHandler</a>());
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>          <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcReadRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a name="MockFieldHandler" href="../../../../../org/apache/plc4x/edgent/mock/MockFieldHandler.html#MockFieldHandler">MockFieldHandler</a>());
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      }
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>      @Override
@@ -107,7 +107,7 @@
 <a class="jxr_linenumber" name="L99" href="#L99">99</a>  
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>     @Override
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>     <strong class="jxr_keyword">public</strong> PlcWriteRequest.Builder writeRequestBuilder() {
-<a class="jxr_linenumber" name="L102" href="#L102">102</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcWriteRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/edgent/mock/MockFieldHandler.html">MockFieldHandler</a>());
+<a class="jxr_linenumber" name="L102" href="#L102">102</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> DefaultPlcWriteRequest.Builder(<strong class="jxr_keyword">this</strong>, <strong class="jxr_keyword">new</strong> <a name="MockFieldHandler" href="../../../../../org/apache/plc4x/edgent/mock/MockFieldHandler.html#MockFieldHandler">MockFieldHandler</a>());
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>     }
 <a class="jxr_linenumber" name="L104" href="#L104">104</a> 
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>     @SuppressWarnings(<span class="jxr_string">"unchecked"</span>)

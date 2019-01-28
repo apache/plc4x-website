@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -44,16 +44,16 @@
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.TimeoutException;
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * Ported from &lt;a href="https://github.com/Beckhoff/ADS"&gt;github AdsLib&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <em class="jxr_javadoccomment"> * Ported from &lt;a href="<a href="https://github.com/Beckhoff/ADS" target="alexandria_uri">https://github.com/Beckhoff/ADS</a>"&gt;github AdsLib&lt;/a&gt;</em>
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>  @SuppressWarnings(<span class="jxr_string">"all"</span>)
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html">AdsLib</a> {
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="AdsLib" href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html#AdsLib">AdsLib</a> {
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>  
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger LOGGER = LoggerFactory.getLogger(AdsLib.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AmsRouter.html">AmsRouter</a> amsRouter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AmsRouter.html">AmsRouter</a>();
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <a name="AmsRouter" href="../../../../../../org/apache/plc4x/ja<a name="AmsRouter" href="../../../../../../org/apache/plc4x/java/ads/adslib/AmsRouter.html#AmsRouter">AmsRouter</a>slib/AmsRouter.html#AmsRouter">AmsRouter</a> amsRouter = <strong class="jxr_keyword">new</strong> <a name="AmsRouter" href="../../../../../../org/apache/plc4x/java/ads/adslib/AmsRouter.html#AmsRouter">AmsRouter</a>();
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AmsRouter.html">AmsRouter</a> GetRouter() {
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a name="AmsRouter" href="../../../../../../org/apache/plc4x/java/ads/adslib/AmsRouter.html#AmsRouter">AmsRouter</a> GetRouter() {
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>          <strong class="jxr_keyword">return</strong> amsRouter;
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>      }
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
@@ -62,7 +62,7 @@
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  <em class="jxr_javadoccomment">     * @param ams address of the target system</em>
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>  <em class="jxr_javadoccomment">     * @param ip  address of the target system</em>
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>  <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>  <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsAddRoute(AmsNetId ams, String ip) {
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>          <strong class="jxr_keyword">try</strong> {
@@ -88,7 +88,7 @@
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>  <em class="jxr_javadoccomment">     * an AdsPortOpenEx() call.</em>
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>  <em class="jxr_javadoccomment">     * @param port port number of an Ads port that had previously been opened with AdsPortOpenEx().</em>
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>  <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>  <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsPortCloseEx(<strong class="jxr_keyword">long</strong> port) {
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">return</strong> GetRouter().ClosePort((<strong class="jxr_keyword">int</strong>) port);
@@ -110,7 +110,7 @@
 <a class="jxr_linenumber" name="L102" href="#L102">102</a> <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="L103" href="#L103">103</a> <em class="jxr_javadoccomment">     * @param port  port number of an Ads port that had previously been opened with AdsPortOpenEx().</em>
 <a class="jxr_linenumber" name="L104" href="#L104">104</a> <em class="jxr_javadoccomment">     * @param pAddr Pointer to the structure of type {@code ImmutablePair&lt;AmsNetId, AmsPort&gt;}.</em>
-<a class="jxr_linenumber" name="L105" href="#L105">105</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L105" href="#L105">105</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L106" href="#L106">106</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsGetLocalAddressEx(<strong class="jxr_keyword">long</strong> port, Output&lt;ImmutablePair&lt;AmsNetId, AmsPort&gt;&gt; pAddr) {
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>         <strong class="jxr_keyword">return</strong> GetRouter().GetLocalAddress((<strong class="jxr_keyword">int</strong>) port, pAddr);
@@ -135,7 +135,7 @@
 <a class="jxr_linenumber" name="L127" href="#L127">127</a> <em class="jxr_javadoccomment">     * @param bufferLength Length of the data in bytes.</em>
 <a class="jxr_linenumber" name="L128" href="#L128">128</a> <em class="jxr_javadoccomment">     * @param buffer       Pointer to a data buffer that will receive the data.</em>
 <a class="jxr_linenumber" name="L129" href="#L129">129</a> <em class="jxr_javadoccomment">     * @param bytesRead    pointer to a variable. If successful, this variable will return the number of actually read data bytes.</em>
-<a class="jxr_linenumber" name="L130" href="#L130">130</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L130" href="#L130">130</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L131" href="#L131">131</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncReadReqEx2(<strong class="jxr_keyword">long</strong> port,
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>                                            ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr,
@@ -188,7 +188,7 @@
 <a class="jxr_linenumber" name="L180" href="#L180">180</a> <em class="jxr_javadoccomment">     * @param pAddr   Structure with NetId and port number of the ADS server.</em>
 <a class="jxr_linenumber" name="L181" href="#L181">181</a> <em class="jxr_javadoccomment">     * @param devName Pointer to a character string of at least 16 bytes, that will receive the name of the ADS device.</em>
 <a class="jxr_linenumber" name="L182" href="#L182">182</a> <em class="jxr_javadoccomment">     * @param version Address of a variable of type AdsVersion, which will receive the version number, revision number and the build number.</em>
-<a class="jxr_linenumber" name="L183" href="#L183">183</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L183" href="#L183">183</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L184" href="#L184">184</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L185" href="#L185">185</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncReadDeviceInfoReqEx(<strong class="jxr_keyword">long</strong> port, ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr, Output&lt;String&gt; devName, Output&lt;Triple&lt;Byte, Byte, Integer&gt;&gt; version) {
 <a class="jxr_linenumber" name="L186" href="#L186">186</a>         Output&lt;ImmutablePair&lt;AmsNetId, AmsPort&gt;&gt; localAmsNet = <strong class="jxr_keyword">new</strong> Output&lt;&gt;();
@@ -224,9 +224,9 @@
 <a class="jxr_linenumber" name="L216" href="#L216">216</a> <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="L217" href="#L217">217</a> <em class="jxr_javadoccomment">     * @param port     port number of an Ads port that had previously been opened with AdsPortOpenEx().</em>
 <a class="jxr_linenumber" name="L218" href="#L218">218</a> <em class="jxr_javadoccomment">     * @param pAddr    Structure with NetId and port number of the ADS server.</em>
-<a class="jxr_linenumber" name="L219" href="#L219">219</a> <em class="jxr_javadoccomment">     * @param adsState Address of a variable that will receive the ADS status (see data type [ADSSTATE](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/tcadsdll_enumadsstate.htm?id=17630))" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/tcadsdll_enumadsstate.htm?id=17630))</a>.</em>
+<a class="jxr_linenumber" name="L219" href="#L219">219</a> <em class="jxr_javadoccomment">     * @param adsState Address of a variable that will receive the ADS status (see data type [ADSSTATE](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/tcadsdll_enumadsstate.htm?id=17630))." target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/tcadsdll_enumadsstate.htm?id=17630)).</a></em>
 <a class="jxr_linenumber" name="L220" href="#L220">220</a> <em class="jxr_javadoccomment">     * @param devState Address of a variable that will receive the device status.</em>
-<a class="jxr_linenumber" name="L221" href="#L221">221</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L221" href="#L221">221</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L222" href="#L222">222</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L223" href="#L223">223</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncReadStateReqEx(<strong class="jxr_keyword">long</strong> port, ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr, Output&lt;Integer&gt; adsState, Output&lt;Integer&gt; devState) {
 <a class="jxr_linenumber" name="L224" href="#L224">224</a>         Output&lt;ImmutablePair&lt;AmsNetId, AmsPort&gt;&gt; localAmsNet = <strong class="jxr_keyword">new</strong> Output&lt;&gt;();
@@ -273,7 +273,7 @@
 <a class="jxr_linenumber" name="L265" href="#L265">265</a> <em class="jxr_javadoccomment">     * @param writeLength Length of the data, in bytes, send to the ADS server.</em>
 <a class="jxr_linenumber" name="L266" href="#L266">266</a> <em class="jxr_javadoccomment">     * @param writeData   Buffer with data send to the ADS server.</em>
 <a class="jxr_linenumber" name="L267" href="#L267">267</a> <em class="jxr_javadoccomment">     * @param bytesRead   pointer to a variable. If successful, this variable will return the number of actually read data bytes.</em>
-<a class="jxr_linenumber" name="L268" href="#L268">268</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L268" href="#L268">268</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L269" href="#L269">269</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L270" href="#L270">270</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncReadWriteReqEx2(<strong class="jxr_keyword">long</strong> port,
 <a class="jxr_linenumber" name="L271" href="#L271">271</a>                                                 ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr,
@@ -326,7 +326,7 @@
 <a class="jxr_linenumber" name="L318" href="#L318">318</a> <em class="jxr_javadoccomment">     * @param indexOffset  Index Offset.</em>
 <a class="jxr_linenumber" name="L319" href="#L319">319</a> <em class="jxr_javadoccomment">     * @param bufferLength Length of the data, in bytes, send to the ADS server.</em>
 <a class="jxr_linenumber" name="L320" href="#L320">320</a> <em class="jxr_javadoccomment">     * @param buffer       Buffer with data send to the ADS server.</em>
-<a class="jxr_linenumber" name="L321" href="#L321">321</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L321" href="#L321">321</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L322" href="#L322">322</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L323" href="#L323">323</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncWriteReqEx(<strong class="jxr_keyword">long</strong> port,
 <a class="jxr_linenumber" name="L324" href="#L324">324</a>                                            ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr,
@@ -376,7 +376,7 @@
 <a class="jxr_linenumber" name="L368" href="#L368">368</a> <em class="jxr_javadoccomment">     * @param devState     New device status.</em>
 <a class="jxr_linenumber" name="L369" href="#L369">369</a> <em class="jxr_javadoccomment">     * @param bufferLength Length of the additional data, in bytes, send to the ADS server.</em>
 <a class="jxr_linenumber" name="L370" href="#L370">370</a> <em class="jxr_javadoccomment">     * @param buffer       Buffer with additional data send to the ADS server.</em>
-<a class="jxr_linenumber" name="L371" href="#L371">371</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L371" href="#L371">371</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L372" href="#L372">372</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L373" href="#L373">373</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncWriteControlReqEx(<strong class="jxr_keyword">long</strong> port,
 <a class="jxr_linenumber" name="L374" href="#L374">374</a>                                                   ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr,
@@ -426,14 +426,14 @@
 <a class="jxr_linenumber" name="L418" href="#L418">418</a> <em class="jxr_javadoccomment">     * @param pFunc         Pointer to the structure describing the callback function.</em>
 <a class="jxr_linenumber" name="L419" href="#L419">419</a> <em class="jxr_javadoccomment">     * @param hUser         32-bit value that is passed to the callback function.</em>
 <a class="jxr_linenumber" name="L420" href="#L420">420</a> <em class="jxr_javadoccomment">     * @param pNotification Address of the variable that will receive the handle of the notification.</em>
-<a class="jxr_linenumber" name="L421" href="#L421">421</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L421" href="#L421">421</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L422" href="#L422">422</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L423" href="#L423">423</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncAddDeviceNotificationReqEx(<strong class="jxr_keyword">long</strong> port,
 <a class="jxr_linenumber" name="L424" href="#L424">424</a>                                                            ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr,
 <a class="jxr_linenumber" name="L425" href="#L425">425</a>                                                            IndexGroup indexGroup,
 <a class="jxr_linenumber" name="L426" href="#L426">426</a>                                                            IndexOffset indexOffset,
-<a class="jxr_linenumber" name="L427" href="#L427">427</a>                                                            <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html">AdsNotificationAttribute</a> attribute,
-<a class="jxr_linenumber" name="L428" href="#L428">428</a>                                                            <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html">PAdsNotificationFuncEx</a> pFunc,
+<a class="jxr_linenumber" name="L427" href="#L427">427</a>                                                            AdsNotificationAttribute attribute,
+<a class="jxr_linenumber" name="L428" href="#L428">428</a>                                                            PAdsNotificationFuncEx pFunc,
 <a class="jxr_linenumber" name="L429" href="#L429">429</a>                                                            <strong class="jxr_keyword">int</strong> hUser,
 <a class="jxr_linenumber" name="L430" href="#L430">430</a>                                                            Output&lt;Long&gt; pNotification) {
 <a class="jxr_linenumber" name="L431" href="#L431">431</a>         Output&lt;ImmutablePair&lt;AmsNetId, AmsPort&gt;&gt; localAmsNet = <strong class="jxr_keyword">new</strong> Output&lt;&gt;();
@@ -479,7 +479,7 @@
 <a class="jxr_linenumber" name="L471" href="#L471">471</a> <em class="jxr_javadoccomment">     * @param port               port number of an Ads port that had previously been opened with AdsPortOpenEx().</em>
 <a class="jxr_linenumber" name="L472" href="#L472">472</a> <em class="jxr_javadoccomment">     * @param pAddr              Structure with NetId and port number of the ADS server.</em>
 <a class="jxr_linenumber" name="L473" href="#L473">473</a> <em class="jxr_javadoccomment">     * @param notificationHandle Address of the variable that contains the handle of the notification.</em>
-<a class="jxr_linenumber" name="L474" href="#L474">474</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L474" href="#L474">474</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L475" href="#L475">475</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L476" href="#L476">476</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncDelDeviceNotificationReqEx(<strong class="jxr_keyword">long</strong> port, ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr, NotificationHandle notificationHandle) {
 <a class="jxr_linenumber" name="L477" href="#L477">477</a>         Output&lt;ImmutablePair&lt;AmsNetId, AmsPort&gt;&gt; localAmsNet = <strong class="jxr_keyword">new</strong> Output&lt;&gt;();
@@ -518,7 +518,7 @@
 <a class="jxr_linenumber" name="L510" href="#L510">510</a> <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="L511" href="#L511">511</a> <em class="jxr_javadoccomment">     * @param port    port number of an Ads port that had previously been opened with AdsPortOpenEx().</em>
 <a class="jxr_linenumber" name="L512" href="#L512">512</a> <em class="jxr_javadoccomment">     * @param timeout Buffer to store timeout value in ms.</em>
-<a class="jxr_linenumber" name="L513" href="#L513">513</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L513" href="#L513">513</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L514" href="#L514">514</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L515" href="#L515">515</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncGetTimeoutEx(<strong class="jxr_keyword">long</strong> port, Output&lt;Integer&gt; timeout) {
 <a class="jxr_linenumber" name="L516" href="#L516">516</a>         <strong class="jxr_keyword">return</strong> GetRouter().GetTimeout((<strong class="jxr_keyword">int</strong>) port, timeout);
@@ -529,7 +529,7 @@
 <a class="jxr_linenumber" name="L521" href="#L521">521</a> <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="L522" href="#L522">522</a> <em class="jxr_javadoccomment">     * @param port    port number of an Ads port that had previously been opened with AdsPortOpenEx().</em>
 <a class="jxr_linenumber" name="L523" href="#L523">523</a> <em class="jxr_javadoccomment">     * @param timeout Timeout in ms.</em>
-<a class="jxr_linenumber" name="L524" href="#L524">524</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663</a>)</em>
+<a class="jxr_linenumber" name="L524" href="#L524">524</a> <em class="jxr_javadoccomment">     * @return [ADS Return Code](<a href="http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)" target="alexandria_uri">http://infosys.beckhoff.de/content/1033/tc3_adsdll2/html/ads_returncodes.htm?id=17663)</a></em>
 <a class="jxr_linenumber" name="L525" href="#L525">525</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L526" href="#L526">526</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> Result AdsSyncSetTimeoutEx(<strong class="jxr_keyword">long</strong> port, <strong class="jxr_keyword">int</strong> timeout) {
 <a class="jxr_linenumber" name="L527" href="#L527">527</a>         <strong class="jxr_keyword">return</strong> GetRouter().SetTimeout((<strong class="jxr_keyword">int</strong>) port, timeout);
@@ -539,17 +539,17 @@
 <a class="jxr_linenumber" name="L531" href="#L531">531</a>     <em class="jxr_comment">// Utils</em>
 <a class="jxr_linenumber" name="L532" href="#L532">532</a> 
 <a class="jxr_linenumber" name="L533" href="#L533">533</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L534" href="#L534">534</a> <em class="jxr_javadoccomment">     * Ported from &lt;a href="https://github.com/Beckhoff/ADS"&gt;github AdsLib&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L534" href="#L534">534</a> <em class="jxr_javadoccomment">     * Ported from &lt;a href="<a href="https://github.com/Beckhoff/ADS" target="alexandria_uri">https://github.com/Beckhoff/ADS</a>"&gt;github AdsLib&lt;/a&gt;</em>
 <a class="jxr_linenumber" name="L535" href="#L535">535</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L536" href="#L536">536</a>     @FunctionalInterface
-<a class="jxr_linenumber" name="L537" href="#L537">537</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">interface</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html">PAdsNotificationFuncEx</a> {
+<a class="jxr_linenumber" name="L537" href="#L537">537</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">interface</strong> PAdsNotificationFuncEx {
 <a class="jxr_linenumber" name="L538" href="#L538">538</a>         <strong class="jxr_keyword">void</strong> notifyCallback(ImmutablePair&lt;AmsNetId, AmsPort&gt; pAddr, TimeStamp timeStamp, AdsNotificationSample notificationSample, <strong class="jxr_keyword">int</strong> hUser);
 <a class="jxr_linenumber" name="L539" href="#L539">539</a>     }
 <a class="jxr_linenumber" name="L540" href="#L540">540</a> 
 <a class="jxr_linenumber" name="L541" href="#L541">541</a>     <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L542" href="#L542">542</a> <em class="jxr_javadoccomment">     * Ported from &lt;a href="https://github.com/Beckhoff/ADS"&gt;github AdsLib&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L542" href="#L542">542</a> <em class="jxr_javadoccomment">     * Ported from &lt;a href="<a href="https://github.com/Beckhoff/ADS" target="alexandria_uri">https://github.com/Beckhoff/ADS</a>"&gt;github AdsLib&lt;/a&gt;</em>
 <a class="jxr_linenumber" name="L543" href="#L543">543</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L544" href="#L544">544</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html">AdsNotificationAttribute</a> {
+<a class="jxr_linenumber" name="L544" href="#L544">544</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> AdsNotificationAttribute {
 <a class="jxr_linenumber" name="L545" href="#L545">545</a> 
 <a class="jxr_linenumber" name="L546" href="#L546">546</a>         <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> TransmissionMode ADSTRANS_SERVERCYCLE = TransmissionMode.of(3);
 <a class="jxr_linenumber" name="L547" href="#L547">547</a> 
@@ -558,15 +558,15 @@
 <a class="jxr_linenumber" name="L550" href="#L550">550</a>         <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> MaxDelay maxDelay;
 <a class="jxr_linenumber" name="L551" href="#L551">551</a>         <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> CycleTime cycleTime;
 <a class="jxr_linenumber" name="L552" href="#L552">552</a> 
-<a class="jxr_linenumber" name="L553" href="#L553">553</a>         <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html">AdsNotificationAttribute</a>(Length length, TransmissionMode transmissionMode, MaxDelay maxDelay, CycleTime cycleTime) {
+<a class="jxr_linenumber" name="L553" href="#L553">553</a>         <strong class="jxr_keyword">public</strong> AdsNotificationAttribute(Length length, TransmissionMode transmissionMode, MaxDelay maxDelay, CycleTime cycleTime) {
 <a class="jxr_linenumber" name="L554" href="#L554">554</a>             <strong class="jxr_keyword">this</strong>.length = length;
 <a class="jxr_linenumber" name="L555" href="#L555">555</a>             <strong class="jxr_keyword">this</strong>.transmissionMode = transmissionMode;
 <a class="jxr_linenumber" name="L556" href="#L556">556</a>             <strong class="jxr_keyword">this</strong>.maxDelay = maxDelay;
 <a class="jxr_linenumber" name="L557" href="#L557">557</a>             <strong class="jxr_keyword">this</strong>.cycleTime = cycleTime;
 <a class="jxr_linenumber" name="L558" href="#L558">558</a>         }
 <a class="jxr_linenumber" name="L559" href="#L559">559</a> 
-<a class="jxr_linenumber" name="L560" href="#L560">560</a>         <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html">AdsNotificationAttribute</a> of(Length length, TransmissionMode transmissionMode, MaxDelay maxDelay, CycleTime cycleTime) {
-<a class="jxr_linenumber" name="L561" href="#L561">561</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/ads/adslib/AdsLib.html">AdsNotificationAttribute</a>(length, transmissionMode, maxDelay, cycleTime);
+<a class="jxr_linenumber" name="L560" href="#L560">560</a>         <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> AdsNotificationAttribute of(Length length, TransmissionMode transmissionMode, MaxDelay maxDelay, CycleTime cycleTime) {
+<a class="jxr_linenumber" name="L561" href="#L561">561</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> AdsNotificationAttribute(length, transmissionMode, maxDelay, cycleTime);
 <a class="jxr_linenumber" name="L562" href="#L562">562</a>         }
 <a class="jxr_linenumber" name="L563" href="#L563">563</a>     }
 <a class="jxr_linenumber" name="L564" href="#L564">564</a> 

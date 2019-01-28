@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -65,16 +65,16 @@
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  <em class="jxr_javadoccomment"> *   to replace multiple requests by one that includes multiple blocks.</em>
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>  <em class="jxr_javadoccomment"> * - Rearranging the order of request items could reduce the number of needed PDUs.</em>
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">DefaultS7MessageProcessor</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/S7MessageProcessor.html">S7MessageProcessor</a> {
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="DefaultS7MessageProcessor" href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html#DefaultS7MessageProcessor">DefaultS7MessageProcessor</a> <strong class="jxr_keyword">implements</strong> <a name="S7MessageProcessor" href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/S7MessageProcessor.html#S7MessageProcessor">S7MessageProcessor</a> {
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">private</strong> AtomicInteger tpduRefGen;
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>  
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">DefaultS7MessageProcessor</a>() {
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>      <strong class="jxr_keyword">public</strong> <a name="DefaultS7MessageProcessor" href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html#DefaultS7MessageProcessor">DefaultS7MessageProcessor</a>() {
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>          <strong class="jxr_keyword">this</strong>.tpduRefGen = <strong class="jxr_keyword">new</strong> AtomicInteger(1);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>      }
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      @Override
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>      <strong class="jxr_keyword">public</strong> Collection&lt;S7RequestMessage&gt; processRequest(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> request, <strong class="jxr_keyword">int</strong> pduSize) <strong class="jxr_keyword">throws</strong> PlcException {
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>      <strong class="jxr_keyword">public</strong> Collection&lt;S7RequestMessage&gt; processRequest(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> request, <strong class="jxr_keyword">int</strong> pduSize) <strong class="jxr_keyword">throws</strong> PlcException {
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>          <em class="jxr_comment">// The following considerations have to be taken into account:</em>
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          <em class="jxr_comment">// - The size of all parameters and payloads of a message cannot exceed the negotiated PDU size</em>
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          <em class="jxr_comment">// - When reading data, the size of the returned data cannot exceed the negotiated PDU size</em>
@@ -93,7 +93,7 @@
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>  
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>          Optional&lt;VarParameter&gt; varParameterOptional = request.getParameter(VarParameter.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">if</strong> (varParameterOptional.isPresent()) {
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>              <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> varParameter = varParameterOptional.get();
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>              <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a> varParameter = varParameterOptional.get();
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>  
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>              <em class="jxr_comment">// If this is a read operation, try to get as many items in as possible.</em>
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>              <strong class="jxr_keyword">if</strong>(varParameter.getType() == ParameterType.READ_VAR) {
@@ -110,15 +110,15 @@
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>         <strong class="jxr_keyword">return</strong> Collections.singletonList(request);
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>     }
 <a class="jxr_linenumber" name="L104" href="#L104">104</a> 
-<a class="jxr_linenumber" name="L105" href="#L105">105</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a> processReadVarParameter(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> request, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> varParameter, <strong class="jxr_keyword">int</strong> pduSize) {
+<a class="jxr_linenumber" name="L105" href="#L105">105</a>     <strong class="jxr_keyword">private</strong> S7CompositeRequestMessage processReadVarParameter(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> request, <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a> varParameter, <strong class="jxr_keyword">int</strong> pduSize) {
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         <em class="jxr_comment">// Create a new composite request message.</em>
-<a class="jxr_linenumber" name="L107" href="#L107">107</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a> compositeRequestMessage = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a>(request);
+<a class="jxr_linenumber" name="L107" href="#L107">107</a>         S7CompositeRequestMessage compositeRequestMessage = <strong class="jxr_keyword">new</strong> S7CompositeRequestMessage(request);
 <a class="jxr_linenumber" name="L108" href="#L108">108</a> 
 <a class="jxr_linenumber" name="L109" href="#L109">109</a>         <em class="jxr_comment">// Create a var parameter without any items (yet).</em>
-<a class="jxr_linenumber" name="L110" href="#L110">110</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> subVarParameter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(varParameter.getType(), <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;());
+<a class="jxr_linenumber" name="L110" href="#L110">110</a>         <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/<a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>el/params/VarParameter.html#VarParameter">VarParameter</a> subVarParameter = <strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(varParameter.getType(), <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;());
 <a class="jxr_linenumber" name="L111" href="#L111">111</a> 
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>         <em class="jxr_comment">// Create a sub message with only this empty parameter.</em>
-<a class="jxr_linenumber" name="L113" href="#L113">113</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> subMessage = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a>(
+<a class="jxr_linenumber" name="L113" href="#L113">113</a>         <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>del/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> subMessage = <strong class="jxr_keyword">new</strong> <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>(
 <a class="jxr_linenumber" name="L114" href="#L114">114</a>             request.getMessageType(), (<strong class="jxr_keyword">short</strong>) tpduRefGen.getAndIncrement(),
 <a class="jxr_linenumber" name="L115" href="#L115">115</a>             Collections.singletonList(subVarParameter), Collections.emptyList(), compositeRequestMessage);
 <a class="jxr_linenumber" name="L116" href="#L116">116</a> 
@@ -131,8 +131,8 @@
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>         <strong class="jxr_keyword">int</strong> initialResponseSize = S7ResponseSizeEstimator.getEstimatedResponseMessageSize(subMessage);
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>         <strong class="jxr_keyword">int</strong> curResponseSize = initialResponseSize;
 <a class="jxr_linenumber" name="L125" href="#L125">125</a> 
-<a class="jxr_linenumber" name="L126" href="#L126">126</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> preProcessedVarParameter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(varParameter.getType(), <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;());
-<a class="jxr_linenumber" name="L127" href="#L127">127</a>         <strong class="jxr_keyword">for</strong> (VarParameterItem varParameterItem : varParameter.getItems()) {
+<a class="jxr_linenumber" name="L126" href="#L126">126</a>         <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/<a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>/VarParameter.html#VarParameter">VarParameter</a> preProcessedVarParameter = <strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(varParameter.getType(), <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;());
+<a class="jxr_linenumber" name="L127" href="#L127">127</a>         <strong class="jxr_keyword">for</strong> (<a name="VarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> varParameterItem : varParameter.getItems()) {
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>             <em class="jxr_comment">// Use the S7RequestSizeCalculator to calculate the actual and estimated item sizes.</em>
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>             <strong class="jxr_keyword">int</strong> itemRequestSize = S7RequestSizeCalculator.getRequestItemTotalSize(
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>                 varParameterItem, <strong class="jxr_keyword">null</strong>);
@@ -144,7 +144,7 @@
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>                 <em class="jxr_comment">// The max response size is the size of the empty response, plus the type and num-items (each one byte) of one VarParameter, plus the size of the header one VarPayloadItem</em>
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>                 <strong class="jxr_keyword">int</strong> maxResponseSize = pduSize - (initialResponseSize + 2 + 4);
 <a class="jxr_linenumber" name="L138" href="#L138">138</a> 
-<a class="jxr_linenumber" name="L139" href="#L139">139</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> s7AnyVarParameterItem = ((S7AnyVarParameterItem) varParameterItem);
+<a class="jxr_linenumber" name="L139" href="#L139">139</a>                 <a name="S7AnyVarParameterItem" href="../../../.<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a> s7AnyVarParameterItem = ((<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>) varParameterItem);
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>                 <strong class="jxr_keyword">int</strong> maxNumElements = (<strong class="jxr_keyword">int</strong>) Math.floor(
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>                     (<strong class="jxr_keyword">double</strong>) maxResponseSize / (<strong class="jxr_keyword">double</strong>) s7AnyVarParameterItem.getDataType().getSizeInBytes());
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>                 <strong class="jxr_keyword">int</strong> sizeMaxNumElementInBytes = maxNumElements * s7AnyVarParameterItem.getDataType().getSizeInBytes();
@@ -153,7 +153,7 @@
 <a class="jxr_linenumber" name="L145" href="#L145">145</a> 
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>                 <strong class="jxr_keyword">while</strong>(remainingNumElements &gt; 0) {
 <a class="jxr_linenumber" name="L147" href="#L147">147</a>                     <strong class="jxr_keyword">int</strong> numCurElements = Math.min(remainingNumElements, maxNumElements);
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>                     <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html">VarParameterItem</a> subVarParameterItem = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a>(
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>                     <a name="VarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> subVarParameterItem = <strong class="jxr_keyword">new</strong> <a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>(
 <a class="jxr_linenumber" name="L149" href="#L149">149</a>                         s7AnyVarParameterItem.getSpecificationType(), s7AnyVarParameterItem.getMemoryArea(),
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>                         s7AnyVarParameterItem.getDataType(), numCurElements, s7AnyVarParameterItem.getDataBlockNumber(),
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>                         curByteOffset, (byte) 0);
@@ -171,7 +171,7 @@
 <a class="jxr_linenumber" name="L163" href="#L163">163</a> 
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>         <em class="jxr_comment">// For each var item of the original request, try adding them to the current sub-message</em>
 <a class="jxr_linenumber" name="L165" href="#L165">165</a>         <em class="jxr_comment">// as long as it or the resulting response does not exceed the max PDU size.</em>
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>         <strong class="jxr_keyword">for</strong> (VarParameterItem varParameterItem : preProcessedVarParameter.getItems()) {
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>         <strong class="jxr_keyword">for</strong> (<a name="VarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> varParameterItem : preProcessedVarParameter.getItems()) {
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>             <em class="jxr_comment">// Use the S7RequestSizeCalculator to calculate the actual and estimated item sizes.</em>
 <a class="jxr_linenumber" name="L168" href="#L168">168</a>             <strong class="jxr_keyword">int</strong> itemRequestSize = S7RequestSizeCalculator.getRequestItemTotalSize(
 <a class="jxr_linenumber" name="L169" href="#L169">169</a>                 varParameterItem, <strong class="jxr_keyword">null</strong>);
@@ -182,10 +182,10 @@
 <a class="jxr_linenumber" name="L174" href="#L174">174</a>             <em class="jxr_comment">// create a new sub-message and add this item to that.</em>
 <a class="jxr_linenumber" name="L175" href="#L175">175</a>             <strong class="jxr_keyword">if</strong> ((curRequestSize + itemRequestSize &gt; pduSize) || (curResponseSize + itemResponseSize &gt; pduSize)) {
 <a class="jxr_linenumber" name="L176" href="#L176">176</a>                 <em class="jxr_comment">// Create a new var parameter without any items (yet).</em>
-<a class="jxr_linenumber" name="L177" href="#L177">177</a>                 subVarParameter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(varParameter.getType(), <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;());
+<a class="jxr_linenumber" name="L177" href="#L177">177</a>                 subVarParameter = <strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(varParameter.getType(), <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;());
 <a class="jxr_linenumber" name="L178" href="#L178">178</a> 
 <a class="jxr_linenumber" name="L179" href="#L179">179</a>                 <em class="jxr_comment">// Create a new sub message with only this empty parameter.</em>
-<a class="jxr_linenumber" name="L180" href="#L180">180</a>                 subMessage = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a>(
+<a class="jxr_linenumber" name="L180" href="#L180">180</a>                 subMessage = <strong class="jxr_keyword">new</strong> <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>(
 <a class="jxr_linenumber" name="L181" href="#L181">181</a>                     request.getMessageType(), (<strong class="jxr_keyword">short</strong>) tpduRefGen.getAndIncrement(),
 <a class="jxr_linenumber" name="L182" href="#L182">182</a>                     Collections.singletonList(subVarParameter),
 <a class="jxr_linenumber" name="L183" href="#L183">183</a>                     Collections.emptyList(), compositeRequestMessage);
@@ -207,12 +207,12 @@
 <a class="jxr_linenumber" name="L199" href="#L199">199</a>         <strong class="jxr_keyword">return</strong> compositeRequestMessage;
 <a class="jxr_linenumber" name="L200" href="#L200">200</a>     }
 <a class="jxr_linenumber" name="L201" href="#L201">201</a> 
-<a class="jxr_linenumber" name="L202" href="#L202">202</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a> processWriteVarParameter(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> request, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> varParameter)
+<a class="jxr_linenumber" name="L202" href="#L202">202</a>     <strong class="jxr_keyword">private</strong> S7CompositeRequestMessage processWriteVarParameter(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> request, <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a> varParameter)
 <a class="jxr_linenumber" name="L203" href="#L203">203</a>             <strong class="jxr_keyword">throws</strong> PlcProtocolException {
 <a class="jxr_linenumber" name="L204" href="#L204">204</a>         <em class="jxr_comment">// Create a new composite request message.</em>
-<a class="jxr_linenumber" name="L205" href="#L205">205</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a> compositeRequestMessage = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a>(request);
+<a class="jxr_linenumber" name="L205" href="#L205">205</a>         S7CompositeRequestMessage compositeRequestMessage = <strong class="jxr_keyword">new</strong> S7CompositeRequestMessage(request);
 <a class="jxr_linenumber" name="L206" href="#L206">206</a> 
-<a class="jxr_linenumber" name="L207" href="#L207">207</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a> varPayload = request.getPayload(VarPayload.<strong class="jxr_keyword">class</strong>)
+<a class="jxr_linenumber" name="L207" href="#L207">207</a>         <a name="VarPayload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a> varPayload = request.getPayload(VarPayload.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L208" href="#L208">208</a>             .orElseThrow(() -&gt; <strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"Expecting payloads for a write request"</span>));
 <a class="jxr_linenumber" name="L209" href="#L209">209</a>         <strong class="jxr_keyword">if</strong>(varParameter.getItems().size() != varPayload.getItems().size()) {
 <a class="jxr_linenumber" name="L210" href="#L210">210</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"Number of items in parameter and payload don't match"</span>);
@@ -221,11 +221,11 @@
 <a class="jxr_linenumber" name="L213" href="#L213">213</a>         List&lt;VarPayloadItem&gt; payloadItems = varPayload.getItems();
 <a class="jxr_linenumber" name="L214" href="#L214">214</a> 
 <a class="jxr_linenumber" name="L215" href="#L215">215</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; parameterItems.size(); i++) {
-<a class="jxr_linenumber" name="L216" href="#L216">216</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html">VarParameterItem</a> varParameterItem = parameterItems.get(i);
-<a class="jxr_linenumber" name="L217" href="#L217">217</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> varPayloadItem = payloadItems.get(i);
+<a class="jxr_linenumber" name="L216" href="#L216">216</a>             <a name="VarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> varParameterItem = parameterItems.get(i);
+<a class="jxr_linenumber" name="L217" href="#L217">217</a>             <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> varPayloadItem = payloadItems.get(i);
 <a class="jxr_linenumber" name="L218" href="#L218">218</a> 
-<a class="jxr_linenumber" name="L219" href="#L219">219</a>             <strong class="jxr_keyword">if</strong> (varParameterItem instanceof S7AnyVarParameterItem) {
-<a class="jxr_linenumber" name="L220" href="#L220">220</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> s7AnyVarParameterItem = (S7AnyVarParameterItem) varParameterItem;
+<a class="jxr_linenumber" name="L219" href="#L219">219</a>             <strong class="jxr_keyword">if</strong> (varParameterItem instanceof <a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>) {
+<a class="jxr_linenumber" name="L220" href="#L220">220</a>                 <a name="S7AnyVarParameterItem" href="../../../<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>e/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a> s7AnyVarParameterItem = (<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>) varParameterItem;
 <a class="jxr_linenumber" name="L221" href="#L221">221</a>                 <strong class="jxr_keyword">int</strong> byteOffset = s7AnyVarParameterItem.getByteOffset();
 <a class="jxr_linenumber" name="L222" href="#L222">222</a>                 <strong class="jxr_keyword">if</strong> (s7AnyVarParameterItem.getDataType() == TransportSize.BOOL) {
 <a class="jxr_linenumber" name="L223" href="#L223">223</a>                     processBooleanWriteVarParameter(request, varParameter, varPayload, s7AnyVarParameterItem,
@@ -241,21 +241,21 @@
 <a class="jxr_linenumber" name="L233" href="#L233">233</a>         <strong class="jxr_keyword">return</strong> compositeRequestMessage;
 <a class="jxr_linenumber" name="L234" href="#L234">234</a>     }
 <a class="jxr_linenumber" name="L235" href="#L235">235</a> 
-<a class="jxr_linenumber" name="L236" href="#L236">236</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> processBooleanWriteVarParameter(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> request, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> varParameter, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a> varPayload,
-<a class="jxr_linenumber" name="L237" href="#L237">237</a>                                          <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> s7AnyVarParameterItem, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> varPayloadItem,
-<a class="jxr_linenumber" name="L238" href="#L238">238</a>                                          <strong class="jxr_keyword">int</strong> byteOffset, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a> compositeRequestMessage) {
+<a class="jxr_linenumber" name="L236" href="#L236">236</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> processBooleanWriteVarParameter(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> request, <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a> varParameter, <a name="VarPayload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a> varPayload,
+<a class="jxr_linenumber" name="L237" href="#L237">237</a>                                          <a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a> s7AnyVarParameterItem, <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> varPayloadItem,
+<a class="jxr_linenumber" name="L238" href="#L238">238</a>                                          <strong class="jxr_keyword">int</strong> byteOffset, S7CompositeRequestMessage compositeRequestMessage) {
 <a class="jxr_linenumber" name="L239" href="#L239">239</a>         <strong class="jxr_keyword">int</strong> curParameterByteOffset = byteOffset;
 <a class="jxr_linenumber" name="L240" href="#L240">240</a>         byte curParameterBitOffset = s7AnyVarParameterItem.getBitOffset();
 <a class="jxr_linenumber" name="L241" href="#L241">241</a>         byte curPayloadBitOffset = 0;
 <a class="jxr_linenumber" name="L242" href="#L242">242</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; s7AnyVarParameterItem.getNumElements(); i++) {
 <a class="jxr_linenumber" name="L243" href="#L243">243</a>             <em class="jxr_comment">// Create a new message with only one single value item in the var parameter.</em>
-<a class="jxr_linenumber" name="L244" href="#L244">244</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html">VarParameterItem</a> item = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a>(
+<a class="jxr_linenumber" name="L244" href="#L244">244</a>             <a name="VarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> item = <strong class="jxr_keyword">new</strong> <a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>(
 <a class="jxr_linenumber" name="L245" href="#L245">245</a>                 s7AnyVarParameterItem.getSpecificationType(),
 <a class="jxr_linenumber" name="L246" href="#L246">246</a>                 s7AnyVarParameterItem.getMemoryArea(),
 <a class="jxr_linenumber" name="L247" href="#L247">247</a>                 s7AnyVarParameterItem.getDataType(), (<strong class="jxr_keyword">short</strong>) 1,
 <a class="jxr_linenumber" name="L248" href="#L248">248</a>                 s7AnyVarParameterItem.getDataBlockNumber(),
 <a class="jxr_linenumber" name="L249" href="#L249">249</a>                 curParameterByteOffset, curParameterBitOffset);
-<a class="jxr_linenumber" name="L250" href="#L250">250</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/S7Parameter.html">S7Parameter</a> subVarParameter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(varParameter.getType(),
+<a class="jxr_linenumber" name="L250" href="#L250">250</a>             <a name="S7Parameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/S7Parameter.html#S7Parameter">S7Parameter</a> subVarParameter = <strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(varParameter.getType(),
 <a class="jxr_linenumber" name="L251" href="#L251">251</a>                 Collections.singletonList(item));
 <a class="jxr_linenumber" name="L252" href="#L252">252</a> 
 <a class="jxr_linenumber" name="L253" href="#L253">253</a>             <em class="jxr_comment">// Create a one-byte byte array and set it to 0x01, if the corresponding bit</em>
@@ -265,14 +265,14 @@
 <a class="jxr_linenumber" name="L257" href="#L257">257</a>             elementData[0] = (byte) ((varPayloadItem.getData()[curPayloadByteOffset] &gt;&gt; curPayloadBitOffset) &amp; 0x01);
 <a class="jxr_linenumber" name="L258" href="#L258">258</a> 
 <a class="jxr_linenumber" name="L259" href="#L259">259</a>             <em class="jxr_comment">// Create the new payload item.</em>
-<a class="jxr_linenumber" name="L260" href="#L260">260</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> itemPayload = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a>(
+<a class="jxr_linenumber" name="L260" href="#L260">260</a>             <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/j<a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>odel/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> itemPayload = <strong class="jxr_keyword">new</strong> <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>(
 <a class="jxr_linenumber" name="L261" href="#L261">261</a>                 varPayloadItem.getReturnCode(),
 <a class="jxr_linenumber" name="L262" href="#L262">262</a>                 varPayloadItem.getDataTransportSize(), elementData);
-<a class="jxr_linenumber" name="L263" href="#L263">263</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/S7Payload.html">S7Payload</a> subVarPayload = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a>(varPayload.getType(),
+<a class="jxr_linenumber" name="L263" href="#L263">263</a>             <a name="S7Payload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/S7Payload.html#S7Payload">S7Payload</a> subVarPayload = <strong class="jxr_keyword">new</strong> <a name="VarPayload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a>(varPayload.getType(),
 <a class="jxr_linenumber" name="L264" href="#L264">264</a>                 Collections.singletonList(itemPayload));
 <a class="jxr_linenumber" name="L265" href="#L265">265</a> 
 <a class="jxr_linenumber" name="L266" href="#L266">266</a>             <em class="jxr_comment">// Create a new sub message.</em>
-<a class="jxr_linenumber" name="L267" href="#L267">267</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> subMessage = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a>(
+<a class="jxr_linenumber" name="L267" href="#L267">267</a>             <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>del/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> subMessage = <strong class="jxr_keyword">new</strong> <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>(
 <a class="jxr_linenumber" name="L268" href="#L268">268</a>                 request.getMessageType(), (<strong class="jxr_keyword">short</strong>) tpduRefGen.getAndIncrement(),
 <a class="jxr_linenumber" name="L269" href="#L269">269</a>                 Collections.singletonList(subVarParameter),
 <a class="jxr_linenumber" name="L270" href="#L270">270</a>                 Collections.singletonList(subVarPayload),
@@ -294,22 +294,22 @@
 <a class="jxr_linenumber" name="L286" href="#L286">286</a>         }
 <a class="jxr_linenumber" name="L287" href="#L287">287</a>     }
 <a class="jxr_linenumber" name="L288" href="#L288">288</a> 
-<a class="jxr_linenumber" name="L289" href="#L289">289</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> processNonBooleanWriteVarParameter(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> request, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> varParameter, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a> varPayload,
-<a class="jxr_linenumber" name="L290" href="#L290">290</a>                                             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> s7AnyVarParameterItem, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> varPayloadItem,
-<a class="jxr_linenumber" name="L291" href="#L291">291</a>                                             <strong class="jxr_keyword">int</strong> byteOffset, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a> compositeRequestMessage) {
+<a class="jxr_linenumber" name="L289" href="#L289">289</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> processNonBooleanWriteVarParameter(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> request, <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a> varParameter, <a name="VarPayload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a> varPayload,
+<a class="jxr_linenumber" name="L290" href="#L290">290</a>                                             <a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a> s7AnyVarParameterItem, <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> varPayloadItem,
+<a class="jxr_linenumber" name="L291" href="#L291">291</a>                                             <strong class="jxr_keyword">int</strong> byteOffset, S7CompositeRequestMessage compositeRequestMessage) {
 <a class="jxr_linenumber" name="L292" href="#L292">292</a>         <strong class="jxr_keyword">int</strong> curByteOffset = byteOffset;
 <a class="jxr_linenumber" name="L293" href="#L293">293</a>         <strong class="jxr_keyword">int</strong> payloadPosition = 0;
 <a class="jxr_linenumber" name="L294" href="#L294">294</a>         <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; s7AnyVarParameterItem.getNumElements(); i++) {
 <a class="jxr_linenumber" name="L295" href="#L295">295</a>             <strong class="jxr_keyword">int</strong> elementSize = s7AnyVarParameterItem.getDataType().getSizeInBytes();
 <a class="jxr_linenumber" name="L296" href="#L296">296</a> 
 <a class="jxr_linenumber" name="L297" href="#L297">297</a>             <em class="jxr_comment">// Create a new message with only one single value item in the var parameter.</em>
-<a class="jxr_linenumber" name="L298" href="#L298">298</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html">VarParameterItem</a> itemParameter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a>(
+<a class="jxr_linenumber" name="L298" href="#L298">298</a>             <a name="VarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/VarParameterItem.html#VarParameterItem">VarParameterItem</a> itemParameter = <strong class="jxr_keyword">new</strong> <a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>(
 <a class="jxr_linenumber" name="L299" href="#L299">299</a>                 s7AnyVarParameterItem.getSpecificationType(),
 <a class="jxr_linenumber" name="L300" href="#L300">300</a>                 s7AnyVarParameterItem.getMemoryArea(),
 <a class="jxr_linenumber" name="L301" href="#L301">301</a>                 s7AnyVarParameterItem.getDataType(), (<strong class="jxr_keyword">short</strong>) 1,
 <a class="jxr_linenumber" name="L302" href="#L302">302</a>                 s7AnyVarParameterItem.getDataBlockNumber(),
 <a class="jxr_linenumber" name="L303" href="#L303">303</a>                 curByteOffset, (byte) 0);
-<a class="jxr_linenumber" name="L304" href="#L304">304</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/S7Parameter.html">S7Parameter</a> subVarParameter = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(varParameter.getType(),
+<a class="jxr_linenumber" name="L304" href="#L304">304</a>             <a name="S7Parameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/S7Parameter.html#S7Parameter">S7Parameter</a> subVarParameter = <strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(varParameter.getType(),
 <a class="jxr_linenumber" name="L305" href="#L305">305</a>                 Collections.singletonList(itemParameter));
 <a class="jxr_linenumber" name="L306" href="#L306">306</a> 
 <a class="jxr_linenumber" name="L307" href="#L307">307</a>             <em class="jxr_comment">// Split up the big array into a separate byte-array that contains a single element.</em>
@@ -318,14 +318,14 @@
 <a class="jxr_linenumber" name="L310" href="#L310">310</a>             payloadPosition += elementSize;
 <a class="jxr_linenumber" name="L311" href="#L311">311</a> 
 <a class="jxr_linenumber" name="L312" href="#L312">312</a>             <em class="jxr_comment">// Create the new payload item.</em>
-<a class="jxr_linenumber" name="L313" href="#L313">313</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> itemPayload = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a>(
+<a class="jxr_linenumber" name="L313" href="#L313">313</a>             <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/j<a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>odel/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> itemPayload = <strong class="jxr_keyword">new</strong> <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>(
 <a class="jxr_linenumber" name="L314" href="#L314">314</a>                 varPayloadItem.getReturnCode(),
 <a class="jxr_linenumber" name="L315" href="#L315">315</a>                 varPayloadItem.getDataTransportSize(), elementData);
-<a class="jxr_linenumber" name="L316" href="#L316">316</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/S7Payload.html">S7Payload</a> subVarPayload = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a>(varPayload.getType(),
+<a class="jxr_linenumber" name="L316" href="#L316">316</a>             <a name="S7Payload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/S7Payload.html#S7Payload">S7Payload</a> subVarPayload = <strong class="jxr_keyword">new</strong> <a name="VarPayload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a>(varPayload.getType(),
 <a class="jxr_linenumber" name="L317" href="#L317">317</a>                 Collections.singletonList(itemPayload));
 <a class="jxr_linenumber" name="L318" href="#L318">318</a> 
 <a class="jxr_linenumber" name="L319" href="#L319">319</a>             <em class="jxr_comment">// Create a new sub message.</em>
-<a class="jxr_linenumber" name="L320" href="#L320">320</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> subMessage = <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a>(
+<a class="jxr_linenumber" name="L320" href="#L320">320</a>             <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>del/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> subMessage = <strong class="jxr_keyword">new</strong> <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a>(
 <a class="jxr_linenumber" name="L321" href="#L321">321</a>                 request.getMessageType(), (<strong class="jxr_keyword">short</strong>) tpduRefGen.getAndIncrement(),
 <a class="jxr_linenumber" name="L322" href="#L322">322</a>                 Collections.singletonList(subVarParameter),
 <a class="jxr_linenumber" name="L323" href="#L323">323</a>                 Collections.singletonList(subVarPayload),
@@ -340,10 +340,10 @@
 <a class="jxr_linenumber" name="L332" href="#L332">332</a>     }
 <a class="jxr_linenumber" name="L333" href="#L333">333</a> 
 <a class="jxr_linenumber" name="L334" href="#L334">334</a>     @Override
-<a class="jxr_linenumber" name="L335" href="#L335">335</a>     <strong class="jxr_keyword">public</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html">S7ResponseMessage</a> processResponse(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> request, <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html">S7ResponseMessage</a> response) {
+<a class="jxr_linenumber" name="L335" href="#L335">335</a>     <strong class="jxr_keyword">public</strong> <a name="S7ResponseMessage" href="../../../../../../../org/a<a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a>s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> processResponse(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> request, <a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> response) {
 <a class="jxr_linenumber" name="L336" href="#L336">336</a>         <em class="jxr_comment">// If it's a split-up message, check if all parts are now acknowledged.</em>
 <a class="jxr_linenumber" name="L337" href="#L337">337</a>         <strong class="jxr_keyword">if</strong> (request.getParent() instanceof S7CompositeRequestMessage) {
-<a class="jxr_linenumber" name="L338" href="#L338">338</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a> parent = (S7CompositeRequestMessage) request.getParent();
+<a class="jxr_linenumber" name="L338" href="#L338">338</a>             S7CompositeRequestMessage parent = (S7CompositeRequestMessage) request.getParent();
 <a class="jxr_linenumber" name="L339" href="#L339">339</a> 
 <a class="jxr_linenumber" name="L340" href="#L340">340</a>             <em class="jxr_comment">// Add the response to the container so we can add it's information to the composite response.</em>
 <a class="jxr_linenumber" name="L341" href="#L341">341</a>             parent.addResponseMessage(response);
@@ -362,9 +362,9 @@
 <a class="jxr_linenumber" name="L354" href="#L354">354</a>         }
 <a class="jxr_linenumber" name="L355" href="#L355">355</a>     }
 <a class="jxr_linenumber" name="L356" href="#L356">356</a> 
-<a class="jxr_linenumber" name="L357" href="#L357">357</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html">S7ResponseMessage</a> getMergedResponseMessage(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> requestMessage,
+<a class="jxr_linenumber" name="L357" href="#L357">357</a>     <strong class="jxr_keyword">private</strong> <a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> getMergedResponseMessage(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> requestMessage,
 <a class="jxr_linenumber" name="L358" href="#L358">358</a>                                                        Collection&lt;? <strong class="jxr_keyword">extends</strong> S7ResponseMessage&gt; responses) {
-<a class="jxr_linenumber" name="L359" href="#L359">359</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MessageType.html">MessageType</a> messageType = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L359" href="#L359">359</a>         <a name="MessageType" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/types/MessageType.html#MessageType">MessageType</a> messageType = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L360" href="#L360">360</a>         <strong class="jxr_keyword">short</strong> tpduReference = requestMessage.getTpduReference();
 <a class="jxr_linenumber" name="L361" href="#L361">361</a>         List&lt;S7Parameter&gt; s7Parameters = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
 <a class="jxr_linenumber" name="L362" href="#L362">362</a>         List&lt;S7Payload&gt; s7Payloads = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
@@ -373,7 +373,7 @@
 <a class="jxr_linenumber" name="L365" href="#L365">365</a> 
 <a class="jxr_linenumber" name="L366" href="#L366">366</a>         <em class="jxr_comment">// This is neither a read request nor a write request, just merge all parameters together.</em>
 <a class="jxr_linenumber" name="L367" href="#L367">367</a>         <strong class="jxr_keyword">if</strong>(!varParameterOptional.isPresent()) {
-<a class="jxr_linenumber" name="L368" href="#L368">368</a>             <strong class="jxr_keyword">for</strong> (S7ResponseMessage response : responses) {
+<a class="jxr_linenumber" name="L368" href="#L368">368</a>             <strong class="jxr_keyword">for</strong> (<a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> response : responses) {
 <a class="jxr_linenumber" name="L369" href="#L369">369</a>                 messageType = response.getMessageType();
 <a class="jxr_linenumber" name="L370" href="#L370">370</a>                 s7Parameters.addAll(response.getParameters());
 <a class="jxr_linenumber" name="L371" href="#L371">371</a>                 s7Payloads.addAll(response.getPayloads());
@@ -384,7 +384,7 @@
 <a class="jxr_linenumber" name="L376" href="#L376">376</a>         <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L377" href="#L377">377</a>             List&lt;VarParameterItem&gt; parameterItems = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
 <a class="jxr_linenumber" name="L378" href="#L378">378</a>             List&lt;VarPayloadItem&gt; payloadItems = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
-<a class="jxr_linenumber" name="L379" href="#L379">379</a>             <strong class="jxr_keyword">for</strong> (S7ResponseMessage response : responses) {
+<a class="jxr_linenumber" name="L379" href="#L379">379</a>             <strong class="jxr_keyword">for</strong> (<a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> response : responses) {
 <a class="jxr_linenumber" name="L380" href="#L380">380</a>                 messageType = response.getMessageType();
 <a class="jxr_linenumber" name="L381" href="#L381">381</a>                 parameterItems.addAll(response.getParameter(VarParameter.<strong class="jxr_keyword">class</strong>)
 <a class="jxr_linenumber" name="L382" href="#L382">382</a>                     .orElseThrow(() -&gt; <strong class="jxr_keyword">new</strong> PlcRuntimeException(
@@ -395,15 +395,15 @@
 <a class="jxr_linenumber" name="L387" href="#L387">387</a> 
 <a class="jxr_linenumber" name="L388" href="#L388">388</a>             List&lt;VarParameterItem&gt; mergedParameterItems = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
 <a class="jxr_linenumber" name="L389" href="#L389">389</a>             List&lt;VarPayloadItem&gt; mergedPayloadItems = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
-<a class="jxr_linenumber" name="L390" href="#L390">390</a>             <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a> varParameter = varParameterOptional.get();
+<a class="jxr_linenumber" name="L390" href="#L390">390</a>             <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a> varParameter = varParameterOptional.get();
 <a class="jxr_linenumber" name="L391" href="#L391">391</a> 
 <a class="jxr_linenumber" name="L392" href="#L392">392</a>             <strong class="jxr_keyword">int</strong> responseOffset = 0;
 <a class="jxr_linenumber" name="L393" href="#L393">393</a>             <strong class="jxr_keyword">for</strong>(<strong class="jxr_keyword">int</strong> i = 0; i &lt; varParameter.getItems().size(); i++) {
-<a class="jxr_linenumber" name="L394" href="#L394">394</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> requestItem = (S7AnyVarParameterItem) varParameter.getItems().get(i);
+<a class="jxr_linenumber" name="L394" href="#L394">394</a>                 <a name="S7AnyVarParameterItem" href=<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>/org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a> requestItem = (<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>) varParameter.getItems().get(i);
 <a class="jxr_linenumber" name="L395" href="#L395">395</a> 
 <a class="jxr_linenumber" name="L396" href="#L396">396</a>                 <em class="jxr_comment">// Get the pairs of corresponding parameter and payload items.</em>
-<a class="jxr_linenumber" name="L397" href="#L397">397</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html">S7AnyVarParameterItem</a> responseParameterItem = (S7AnyVarParameterItem) parameterItems.get(0);
-<a class="jxr_linenumber" name="L398" href="#L398">398</a>                 <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a> responsePayloadItem = payloadItems.get(i + responseOffset);
+<a class="jxr_linenumber" name="L397" href="#L397">397</a>                 <a name="S7AnyVarParameterItem" href="../../../<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>e/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a> responseParameterItem = (<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>) parameterItems.get(0);
+<a class="jxr_linenumber" name="L398" href="#L398">398</a>                 <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a> responsePayloadItem = payloadItems.get(i + responseOffset);
 <a class="jxr_linenumber" name="L399" href="#L399">399</a>                 <strong class="jxr_keyword">int</strong> dataOffset = (responsePayloadItem.getData() != <strong class="jxr_keyword">null</strong>) ? responsePayloadItem.getData().length : 0;
 <a class="jxr_linenumber" name="L400" href="#L400">400</a> 
 <a class="jxr_linenumber" name="L401" href="#L401">401</a>                 <em class="jxr_comment">// The resulting parameter items is identical to the request parameter item.</em>
@@ -428,7 +428,7 @@
 <a class="jxr_linenumber" name="L420" href="#L420">420</a>                     <strong class="jxr_keyword">while</strong>(curSizeInBytes &lt; totalSizeInBytes) {
 <a class="jxr_linenumber" name="L421" href="#L421">421</a>                         responseOffset++;
 <a class="jxr_linenumber" name="L422" href="#L422">422</a>                         <em class="jxr_comment">// No need to process the parameters, we only need them to get the number of items.</em>
-<a class="jxr_linenumber" name="L423" href="#L423">423</a>                         responseParameterItem = (S7AnyVarParameterItem) parameterItems.get(i + responseOffset);
+<a class="jxr_linenumber" name="L423" href="#L423">423</a>                         responseParameterItem = (<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>) parameterItems.get(i + responseOffset);
 <a class="jxr_linenumber" name="L424" href="#L424">424</a>                         curSizeInBytes += responseParameterItem.getNumElements() * itemSizeInBytes;
 <a class="jxr_linenumber" name="L425" href="#L425">425</a> 
 <a class="jxr_linenumber" name="L426" href="#L426">426</a>                         <em class="jxr_comment">// Get the next payload item in the list.</em>
@@ -441,27 +441,27 @@
 <a class="jxr_linenumber" name="L433" href="#L433">433</a>                         }
 <a class="jxr_linenumber" name="L434" href="#L434">434</a>                     }
 <a class="jxr_linenumber" name="L435" href="#L435">435</a> 
-<a class="jxr_linenumber" name="L436" href="#L436">436</a>                     mergedPayloadItems.add(<strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html">VarPayloadItem</a>(DataTransportErrorCode.OK,
+<a class="jxr_linenumber" name="L436" href="#L436">436</a>                     mergedPayloadItems.add(<strong class="jxr_keyword">new</strong> <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>(DataTransportErrorCode.OK,
 <a class="jxr_linenumber" name="L437" href="#L437">437</a>                         responsePayloadItem.getDataTransportSize(), data));
 <a class="jxr_linenumber" name="L438" href="#L438">438</a>                 } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L439" href="#L439">439</a>                     mergedPayloadItems.add(responsePayloadItem);
 <a class="jxr_linenumber" name="L440" href="#L440">440</a>                 }
 <a class="jxr_linenumber" name="L441" href="#L441">441</a>             }
 <a class="jxr_linenumber" name="L442" href="#L442">442</a> 
-<a class="jxr_linenumber" name="L443" href="#L443">443</a>             s7Parameters.add(<strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html">VarParameter</a>(varParameter.getType(), mergedParameterItems));
-<a class="jxr_linenumber" name="L444" href="#L444">444</a>             s7Payloads.add(<strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html">VarPayload</a>(varParameter.getType(), mergedPayloadItems));
+<a class="jxr_linenumber" name="L443" href="#L443">443</a>             s7Parameters.add(<strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(varParameter.getType(), mergedParameterItems));
+<a class="jxr_linenumber" name="L444" href="#L444">444</a>             s7Payloads.add(<strong class="jxr_keyword">new</strong> <a name="VarPayload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a>(varParameter.getType(), mergedPayloadItems));
 <a class="jxr_linenumber" name="L445" href="#L445">445</a>         }
 <a class="jxr_linenumber" name="L446" href="#L446">446</a>         <em class="jxr_comment">// TODO: The error codes are wrong</em>
-<a class="jxr_linenumber" name="L447" href="#L447">447</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html">S7ResponseMessage</a>(messageType, tpduReference, s7Parameters, s7Payloads, (byte) 0xFF, (byte) 0xFF);
+<a class="jxr_linenumber" name="L447" href="#L447">447</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a>(messageType, tpduReference, s7Parameters, s7Payloads, (byte) 0xFF, (byte) 0xFF);
 <a class="jxr_linenumber" name="L448" href="#L448">448</a>     }
 <a class="jxr_linenumber" name="L449" href="#L449">449</a> 
-<a class="jxr_linenumber" name="L450" href="#L450">450</a>     <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a> <strong class="jxr_keyword">implements</strong> PlcProtocolMessage {
+<a class="jxr_linenumber" name="L450" href="#L450">450</a>     <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> S7CompositeRequestMessage <strong class="jxr_keyword">implements</strong> PlcProtocolMessage {
 <a class="jxr_linenumber" name="L451" href="#L451">451</a> 
-<a class="jxr_linenumber" name="L452" href="#L452">452</a>         <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> originalRequest;
+<a class="jxr_linenumber" name="L452" href="#L452">452</a>         <strong class="jxr_keyword">private</strong> <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> originalRequest;
 <a class="jxr_linenumber" name="L453" href="#L453">453</a>         <strong class="jxr_keyword">private</strong> List&lt;S7RequestMessage&gt; requestMessages;
 <a class="jxr_linenumber" name="L454" href="#L454">454</a>         <strong class="jxr_keyword">private</strong> List&lt;S7ResponseMessage&gt; responseMessages;
 <a class="jxr_linenumber" name="L455" href="#L455">455</a> 
-<a class="jxr_linenumber" name="L456" href="#L456">456</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/netty/strategies/DefaultS7MessageProcessor.html">S7CompositeRequestMessage</a>(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> originalRequest) {
+<a class="jxr_linenumber" name="L456" href="#L456">456</a>         S7CompositeRequestMessage(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> originalRequest) {
 <a class="jxr_linenumber" name="L457" href="#L457">457</a>             <strong class="jxr_keyword">this</strong>.originalRequest = originalRequest;
 <a class="jxr_linenumber" name="L458" href="#L458">458</a>             <strong class="jxr_keyword">this</strong>.requestMessages = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
 <a class="jxr_linenumber" name="L459" href="#L459">459</a>             <strong class="jxr_keyword">this</strong>.responseMessages = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
@@ -478,7 +478,7 @@
 <a class="jxr_linenumber" name="L470" href="#L470">470</a> <em class="jxr_javadoccomment">         * @return true if all children are acknowledged.</em>
 <a class="jxr_linenumber" name="L471" href="#L471">471</a> <em class="jxr_javadoccomment">         */</em>
 <a class="jxr_linenumber" name="L472" href="#L472">472</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> isAcknowledged() {
-<a class="jxr_linenumber" name="L473" href="#L473">473</a>             <strong class="jxr_keyword">for</strong> (S7RequestMessage requestMessage : requestMessages) {
+<a class="jxr_linenumber" name="L473" href="#L473">473</a>             <strong class="jxr_keyword">for</strong> (<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> requestMessage : requestMessages) {
 <a class="jxr_linenumber" name="L474" href="#L474">474</a>                 <strong class="jxr_keyword">if</strong>(!requestMessage.isAcknowledged()) {
 <a class="jxr_linenumber" name="L475" href="#L475">475</a>                     <strong class="jxr_keyword">return</strong> false;
 <a class="jxr_linenumber" name="L476" href="#L476">476</a>                 }
@@ -486,7 +486,7 @@
 <a class="jxr_linenumber" name="L478" href="#L478">478</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
 <a class="jxr_linenumber" name="L479" href="#L479">479</a>         }
 <a class="jxr_linenumber" name="L480" href="#L480">480</a> 
-<a class="jxr_linenumber" name="L481" href="#L481">481</a>         <strong class="jxr_keyword">void</strong> addRequestMessage(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html">S7RequestMessage</a> requestMessage) {
+<a class="jxr_linenumber" name="L481" href="#L481">481</a>         <strong class="jxr_keyword">void</strong> addRequestMessage(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> requestMessage) {
 <a class="jxr_linenumber" name="L482" href="#L482">482</a>             requestMessages.add(requestMessage);
 <a class="jxr_linenumber" name="L483" href="#L483">483</a>         }
 <a class="jxr_linenumber" name="L484" href="#L484">484</a> 
@@ -494,7 +494,7 @@
 <a class="jxr_linenumber" name="L486" href="#L486">486</a>             <strong class="jxr_keyword">return</strong> requestMessages;
 <a class="jxr_linenumber" name="L487" href="#L487">487</a>         }
 <a class="jxr_linenumber" name="L488" href="#L488">488</a> 
-<a class="jxr_linenumber" name="L489" href="#L489">489</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addResponseMessage(<a href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html">S7ResponseMessage</a> responseMessage) {
+<a class="jxr_linenumber" name="L489" href="#L489">489</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addResponseMessage(<a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> responseMessage) {
 <a class="jxr_linenumber" name="L490" href="#L490">490</a>             responseMessages.add(responseMessage);
 <a class="jxr_linenumber" name="L491" href="#L491">491</a>         }
 <a class="jxr_linenumber" name="L492" href="#L492">492</a> 

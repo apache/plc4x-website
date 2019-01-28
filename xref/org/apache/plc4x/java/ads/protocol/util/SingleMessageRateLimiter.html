@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -41,7 +41,7 @@
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  <em class="jxr_javadoccomment"> * Inspired by {@code ChannelTrafficShapingHandler} this limiter ensures only one message is sent at a time.</em>
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/protocol/util/SingleMessageRateLimiter.html">SingleMessageRateLimiter</a> <strong class="jxr_keyword">extends</strong> ChannelDuplexHandler {
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="SingleMessageRateLimiter" href="../../../../../../../org/apache/plc4x/java/ads/protocol/util/SingleMessageRateLimiter.html#SingleMessageRateLimiter">SingleMessageRateLimiter</a> <strong class="jxr_keyword">extends</strong> ChannelDuplexHandler {
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger LOGGER = LoggerFactory.getLogger(SingleMessageRateLimiter.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  
@@ -69,7 +69,7 @@
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>          sender = ctx.executor().scheduleAtFixedRate(() -&gt; {
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>              LOGGER.trace(<span class="jxr_string">"Woke up and doing work messageOnTheWay:{}, messageQueue:{}"</span>, messageOnTheWay, messagesQueue);
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>              <strong class="jxr_keyword">if</strong> (!messagesQueue.isEmpty() &amp;&amp; messageOnTheWay.compareAndSet(false, <strong class="jxr_keyword">true</strong>)) {
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>                  <a href="../../../../../../../org/apache/plc4x/java/ads/protocol/util/SingleMessageRateLimiter.html">ToSend</a> pop = messagesQueue.pop();
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>                  ToSend pop = messagesQueue.pop();
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>                  LOGGER.debug(<span class="jxr_string">"Sending {}"</span>, pop);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>                  pop.channelHandlerContext.writeAndFlush(pop.objectToSend, pop.promise);
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>                  LOGGER.debug(<span class="jxr_string">"Send {}"</span>, pop);
@@ -91,7 +91,7 @@
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          <strong class="jxr_keyword">if</strong> (messageOnTheWay.compareAndSet(false, <strong class="jxr_keyword">true</strong>)) {
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>              ctx.write(msg, promise);
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>          } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>              messagesQueue.add(<strong class="jxr_keyword">new</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/protocol/util/SingleMessageRateLimiter.html">ToSend</a>(ctx, msg, promise));
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>              messagesQueue.add(<strong class="jxr_keyword">new</strong> ToSend(ctx, msg, promise));
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          }
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>      }
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>  
@@ -109,12 +109,12 @@
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>         <strong class="jxr_keyword">super</strong>.exceptionCaught(ctx, cause);
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>     }
 <a class="jxr_linenumber" name="L103" href="#L103">103</a> 
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/protocol/util/SingleMessageRateLimiter.html">ToSend</a> {
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> ToSend {
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>         <strong class="jxr_keyword">final</strong> ChannelHandlerContext channelHandlerContext;
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         <strong class="jxr_keyword">final</strong> Object objectToSend;
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">final</strong> ChannelPromise promise;
 <a class="jxr_linenumber" name="L108" href="#L108">108</a> 
-<a class="jxr_linenumber" name="L109" href="#L109">109</a>         <strong class="jxr_keyword">private</strong> <a href="../../../../../../../org/apache/plc4x/java/ads/protocol/util/SingleMessageRateLimiter.html">ToSend</a>(ChannelHandlerContext channelHandlerContext, Object objectToSend, ChannelPromise promise) {
+<a class="jxr_linenumber" name="L109" href="#L109">109</a>         <strong class="jxr_keyword">private</strong> ToSend(ChannelHandlerContext channelHandlerContext, Object objectToSend, ChannelPromise promise) {
 <a class="jxr_linenumber" name="L110" href="#L110">110</a>             <strong class="jxr_keyword">this</strong>.channelHandlerContext = channelHandlerContext;
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>             <strong class="jxr_keyword">this</strong>.objectToSend = objectToSend;
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>             <strong class="jxr_keyword">this</strong>.promise = promise;

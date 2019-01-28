@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -39,7 +39,7 @@
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.apache.commons.lang3.StringUtils.leftPad;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.Assert.assertEquals;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/base/util/Assert.html">Assert</a> {
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="Assert" href="../../../../../../org/apache/plc4x/java/base/util/Assert.html#Assert">Assert</a> {
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> assertByteEquals(byte expected, byte actual) {
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>          String expectedHex = <span class="jxr_string">"0x"</span> + leftPad(toHexString(expected), 2, '0');
@@ -61,7 +61,7 @@
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>                      String dump = dump(expected);
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>                      description.appendText(<span class="jxr_string">"\n"</span>).appendText(cleanHexDump(dump));
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>                  } <strong class="jxr_keyword">catch</strong> (IOException e) {
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>                      <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html">PlcRuntimeException</a>(e);
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>                      <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcRuntimeException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html#PlcRuntimeException">PlcRuntimeException</a>(e);
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>                  }
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>              }
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>  
@@ -75,7 +75,7 @@
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>                      String dump = dump((byte[]) item);
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>                      description.appendText(<span class="jxr_string">"was "</span>).appendText(<span class="jxr_string">"\n"</span>).appendText(cleanHexDump(dump));
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>                  } <strong class="jxr_keyword">catch</strong> (IOException e) {
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>                      <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html">PlcRuntimeException</a>(e);
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>                      <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcRuntimeException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html#PlcRuntimeException">PlcRuntimeException</a>(e);
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>                  }
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>              }
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>          };

@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">     <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -48,7 +48,7 @@
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.Executors;
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.TimeUnit;
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/apache/plc4x/java/deltav/PoCInflux.html">PoCInflux</a> {
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="PoCInflux" href="../../../../../org/apache/plc4x/java/deltav/PoCInflux.html#PoCInflux">PoCInflux</a> {
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger logger = LoggerFactory.getLogger(PoCInflux.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  
@@ -63,7 +63,7 @@
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">private</strong> Map&lt;String, Map&lt;Short, String&gt;&gt; testpointFieldNames = <strong class="jxr_keyword">new</strong> HashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">private</strong> Map&lt;String, Map&lt;Short, Object&gt;&gt; testpointFieldValues = <strong class="jxr_keyword">new</strong> HashMap&lt;&gt;();
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../../org/apache/plc4x/java/deltav/PoCInflux.html">PoCInflux</a>(String inputPath) <strong class="jxr_keyword">throws</strong> Exception {
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">private</strong> <a name="PoCInflux" href="../../../../../org/apache/plc4x/java/deltav/PoCInflux.html#PoCInflux">PoCInflux</a>(String inputPath) <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          <strong class="jxr_keyword">if</strong>(inputPath == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>              PcapNetworkInterface nif = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>              <strong class="jxr_keyword">for</strong> (PcapNetworkInterface dev : Pcaps.findAllDevs()) {
@@ -1583,9 +1583,9 @@
 <a class="jxr_linenumber" name="L1575" href="#L1575">1575</a> 
 <a class="jxr_linenumber" name="L1576" href="#L1576">1576</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String[] args) <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L1577" href="#L1577">1577</a>         <strong class="jxr_keyword">if</strong>(args.length == 0) {
-<a class="jxr_linenumber" name="L1578" href="#L1578">1578</a>             <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/deltav/PoCInflux.html">PoCInflux</a>(<strong class="jxr_keyword">null</strong>);
+<a class="jxr_linenumber" name="L1578" href="#L1578">1578</a>             <strong class="jxr_keyword">new</strong> <a name="PoCInflux" href="../../../../../org/apache/plc4x/java/deltav/PoCInflux.html#PoCInflux">PoCInflux</a>(<strong class="jxr_keyword">null</strong>);
 <a class="jxr_linenumber" name="L1579" href="#L1579">1579</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L1580" href="#L1580">1580</a>             <strong class="jxr_keyword">new</strong> <a href="../../../../../org/apache/plc4x/java/deltav/PoCInflux.html">PoCInflux</a>(args[0]);
+<a class="jxr_linenumber" name="L1580" href="#L1580">1580</a>             <strong class="jxr_keyword">new</strong> <a name="PoCInflux" href="../../../../../org/apache/plc4x/java/deltav/PoCInflux.html#PoCInflux">PoCInflux</a>(args[0]);
 <a class="jxr_linenumber" name="L1581" href="#L1581">1581</a>         }
 <a class="jxr_linenumber" name="L1582" href="#L1582">1582</a>     }
 <a class="jxr_linenumber" name="L1583" href="#L1583">1583</a> 

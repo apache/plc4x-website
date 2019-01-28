@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -52,7 +52,7 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  <em class="jxr_javadoccomment"> * When poll() is invoked, the calling thread waits until the fetch flag is set for WAIT_LIMIT_MILLIS.</em>
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment"> * If the flag does not become true, the method returns null, otherwise a fetch is performed.</em>
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/apache/plc4x/kafka/Plc4xSourceTask.html">Plc4xSourceTask</a> <strong class="jxr_keyword">extends</strong> SourceTask {
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="Plc4xSourceTask" href="../../../../org/apache/plc4x/kafka/Plc4xSourceTask.html#Plc4xSourceTask">Plc4xSourceTask</a> <strong class="jxr_keyword">extends</strong> SourceTask {
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String TOPIC_CONFIG = <span class="jxr_string">"topic"</span>;
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String TOPIC_DOC = <span class="jxr_string">"Kafka topic to publish to"</span>;
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
@@ -88,7 +88,7 @@
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">private</strong> String url;
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>      <strong class="jxr_keyword">private</strong> List&lt;String&gt; queries;
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>  
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../org/apache/plc4x/java/api/PlcConnection.html">PlcConnection</a> plcConnection;
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>      <strong class="jxr_keyword">private</strong> <a name="PlcConnection" href="../../../../org/apache/plc4x/java/api/PlcConnection.html#PlcConnection">PlcConnection</a> plcConnection;
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>  
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      <em class="jxr_comment">// TODO: should we use shared (static) thread pool for this?</em>
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">private</strong> ScheduledExecutorService scheduler;
@@ -133,9 +133,9 @@
 <a class="jxr_linenumber" name="L125" href="#L125">125</a> 
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>     <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> openConnection() {
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L128" href="#L128">128</a>             plcConnection = <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/java/PlcDriverManager.html">PlcDriverManager</a>().getConnection(url);
+<a class="jxr_linenumber" name="L128" href="#L128">128</a>             plcConnection = <strong class="jxr_keyword">new</strong> <a name="PlcDriverManager" href="../../../../org/apache/plc4x/java/PlcDriverManager.html#PlcDriverManager">PlcDriverManager</a>().getConnection(url);
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>             plcConnection.connect();
-<a class="jxr_linenumber" name="L130" href="#L130">130</a>         } <strong class="jxr_keyword">catch</strong> (PlcConnectionException e) {
+<a class="jxr_linenumber" name="L130" href="#L130">130</a>         } <strong class="jxr_keyword">catch</strong> (<a name="PlcConnectionException" href="../../../../org/apache/plc4x/java/api/exceptions/PlcConnectionException.html#PlcConnectionException">PlcConnectionException</a> e) {
 <a class="jxr_linenumber" name="L131" href="#L131">131</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> ConnectException(<span class="jxr_string">"Could not establish a PLC connection"</span>, e);
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>         }
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>     }
@@ -145,7 +145,7 @@
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>             <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L138" href="#L138">138</a>                 plcConnection.close();
 <a class="jxr_linenumber" name="L139" href="#L139">139</a>             } <strong class="jxr_keyword">catch</strong> (Exception e) {
-<a class="jxr_linenumber" name="L140" href="#L140">140</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html">PlcRuntimeException</a>(<span class="jxr_string">"Caught exception while closing connection to PLC"</span>, e);
+<a class="jxr_linenumber" name="L140" href="#L140">140</a>                 <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> <a name="PlcRuntimeException" href="../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html#PlcRuntimeException">PlcRuntimeException</a>(<span class="jxr_string">"Caught exception while closing connection to PLC"</span>, e);
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>             }
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>         }
 <a class="jxr_linenumber" name="L143" href="#L143">143</a>     }
@@ -178,7 +178,7 @@
 <a class="jxr_linenumber" name="L170" href="#L170">170</a>     <strong class="jxr_keyword">private</strong> List&lt;SourceRecord&gt; doFetch() <strong class="jxr_keyword">throws</strong> InterruptedException {
 <a class="jxr_linenumber" name="L171" href="#L171">171</a>         <strong class="jxr_keyword">final</strong> CompletableFuture&lt;? <strong class="jxr_keyword">extends</strong> PlcReadResponse&gt; response = createReadRequest().execute();
 <a class="jxr_linenumber" name="L172" href="#L172">172</a>         <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L173" href="#L173">173</a>             <strong class="jxr_keyword">final</strong> <a href="../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html">PlcReadResponse</a> received = response.get(TIMEOUT_LIMIT_MILLIS, TimeUnit.MILLISECONDS);
+<a class="jxr_linenumber" name="L173" href="#L173">173</a>             <strong class="jxr_keyword">final</strong> <a name="PlcReadResponse" href="../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html#PlcReadResponse">PlcReadResponse</a> received = response.get(TIMEOUT_LIMIT_MILLIS, TimeUnit.MILLISECONDS);
 <a class="jxr_linenumber" name="L174" href="#L174">174</a>             <strong class="jxr_keyword">return</strong> extractValues(received);
 <a class="jxr_linenumber" name="L175" href="#L175">175</a>         } <strong class="jxr_keyword">catch</strong> (ExecutionException e) {
 <a class="jxr_linenumber" name="L176" href="#L176">176</a>             <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> ConnectException(<span class="jxr_string">"Could not fetch data from source"</span>, e);
@@ -187,7 +187,7 @@
 <a class="jxr_linenumber" name="L179" href="#L179">179</a>         }
 <a class="jxr_linenumber" name="L180" href="#L180">180</a>     }
 <a class="jxr_linenumber" name="L181" href="#L181">181</a> 
-<a class="jxr_linenumber" name="L182" href="#L182">182</a>     <strong class="jxr_keyword">private</strong> <a href="../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.html">PlcReadRequest</a> createReadRequest() {
+<a class="jxr_linenumber" name="L182" href="#L182">182</a>     <strong class="jxr_keyword">private</strong> <a name="PlcReadRequest" href="../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.html#PlcReadRequest">PlcReadRequest</a> createReadRequest() {
 <a class="jxr_linenumber" name="L183" href="#L183">183</a>         PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
 <a class="jxr_linenumber" name="L184" href="#L184">184</a>         <strong class="jxr_keyword">for</strong> (String query : queries) {
 <a class="jxr_linenumber" name="L185" href="#L185">185</a>             builder.addItem(query, query);
@@ -195,10 +195,10 @@
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>         <strong class="jxr_keyword">return</strong> builder.build();
 <a class="jxr_linenumber" name="L188" href="#L188">188</a>     }
 <a class="jxr_linenumber" name="L189" href="#L189">189</a> 
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>     <strong class="jxr_keyword">private</strong> List&lt;SourceRecord&gt; extractValues(<a href="../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html">PlcReadResponse</a> response) {
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>     <strong class="jxr_keyword">private</strong> List&lt;SourceRecord&gt; extractValues(<a name="PlcReadResponse" href="../../../../org/apache/plc4x/java/api/messages/PlcReadResponse.html#PlcReadResponse">PlcReadResponse</a> response) {
 <a class="jxr_linenumber" name="L191" href="#L191">191</a>         <strong class="jxr_keyword">final</strong> List&lt;SourceRecord&gt; result = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
 <a class="jxr_linenumber" name="L192" href="#L192">192</a>         <strong class="jxr_keyword">for</strong> (String query : queries) {
-<a class="jxr_linenumber" name="L193" href="#L193">193</a>             <strong class="jxr_keyword">final</strong> <a href="../../../../org/apache/plc4x/java/api/types/PlcResponseCode.html">PlcResponseCode</a> rc = response.getResponseCode(query);
+<a class="jxr_linenumber" name="L193" href="#L193">193</a>             <strong class="jxr_keyword">final</strong> <a name="PlcResponseCode" href="../../../../org/apache/plc4x/java/api/types/PlcResponseCode.html#PlcResponseCode">PlcResponseCode</a> rc = response.getResponseCode(query);
 <a class="jxr_linenumber" name="L194" href="#L194">194</a>             <strong class="jxr_keyword">if</strong> (!rc.equals(PlcResponseCode.OK))  {
 <a class="jxr_linenumber" name="L195" href="#L195">195</a>                 <strong class="jxr_keyword">continue</strong>;
 <a class="jxr_linenumber" name="L196" href="#L196">196</a>             }

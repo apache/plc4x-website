@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -39,24 +39,24 @@
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">import</strong> java.net.InetAddress;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.CompletableFuture;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html">EtherNetIpTcpPlcConnection</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../../org/apache/plc4x/java/ethernetip/connection/BaseEtherNetIpPlcConnection.html">BaseEtherNetIpPlcConnection</a> {
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="EtherNetIpTcpPlcConnection" href="../../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html#EtherNetIpTcpPlcConnection">EtherNetIpTcpPlcConnection</a> <strong class="jxr_keyword">extends</strong> <a name="BaseEtherNetIpPlcConnection" href="../../../../../../org/apache/plc4x/java/ethernetip/connection/BaseEtherNetIpPlcConnection.html#BaseEtherNetIpPlcConnection">BaseEtherNetIpPlcConnection</a> {
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>      <em class="jxr_comment">// Port 44818</em>
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> ETHERNET_IP_TCP_PORT = 0xAF12;
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger logger = LoggerFactory.getLogger(EtherNetIpTcpPlcConnection.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html">EtherNetIpTcpPlcConnection</a>(InetAddress address, String params) {
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>          <strong class="jxr_keyword">this</strong>(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/TcpSocketChannelFactory.html">TcpSocketChannelFactory</a>(address, ETHERNET_IP_TCP_PORT), params);
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">public</strong> <a name="EtherNetIpTcpPlcConnection" href="../../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html#EtherNetIpTcpPlcConnection">EtherNetIpTcpPlcConnection</a>(InetAddress address, String params) {
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>          <strong class="jxr_keyword">this</strong>(<strong class="jxr_keyword">new</strong> <a name="TcpSocketChannelFactory" href="../../../../../../org/apache/plc4x/java/base/connection/TcpSocketChannelFactory.html#TcpSocketChannelFactory">TcpSocketChannelFactory</a>(address, ETHERNET_IP_TCP_PORT), params);
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>          logger.info(<span class="jxr_string">"Configured EtherNetIpTcpPlcConnection with: host-name {}"</span>, address.getHostAddress());
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>      }
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html">EtherNetIpTcpPlcConnection</a>(InetAddress address, <strong class="jxr_keyword">int</strong> port, String params) {
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>          <strong class="jxr_keyword">this</strong>(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/connection/TcpSocketChannelFactory.html">TcpSocketChannelFactory</a>(address, port), params);
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">public</strong> <a name="EtherNetIpTcpPlcConnection" href="../../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html#EtherNetIpTcpPlcConnection">EtherNetIpTcpPlcConnection</a>(InetAddress address, <strong class="jxr_keyword">int</strong> port, String params) {
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>          <strong class="jxr_keyword">this</strong>(<strong class="jxr_keyword">new</strong> <a name="TcpSocketChannelFactory" href="../../../../../../org/apache/plc4x/java/base/connection/TcpSocketChannelFactory.html#TcpSocketChannelFactory">TcpSocketChannelFactory</a>(address, port), params);
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>          logger.info(<span class="jxr_string">"Configured EtherNetIpTcpPlcConnection with: host-name {}"</span>, address.getHostAddress());
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      }
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html">EtherNetIpTcpPlcConnection</a>(<a href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html">ChannelFactory</a> channelFactory, String params) {
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">public</strong> <a name="EtherNetIpTcpPlcConnection" href="../../../../../../org/apache/plc4x/java/ethernetip/connection/EtherNetIpTcpPlcConnection.html#EtherNetIpTcpPlcConnection">EtherNetIpTcpPlcConnection</a>(<a name="ChannelFactory" href="../../../../../../org/apache/plc4x/java/base/connection/ChannelFactory.html#ChannelFactory">ChannelFactory</a> channelFactory, String params) {
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>          <strong class="jxr_keyword">super</strong>(channelFactory, params);
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>      }
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  
@@ -69,15 +69,15 @@
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>                  pipeline.addLast(<strong class="jxr_keyword">new</strong> ChannelInboundHandlerAdapter() {
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>                      @Override
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>                      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> userEventTriggered(ChannelHandlerContext ctx, Object evt) <strong class="jxr_keyword">throws</strong> Exception {
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>                          <strong class="jxr_keyword">if</strong> (evt instanceof ConnectedEvent) {
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>                          <strong class="jxr_keyword">if</strong> (evt instanceof <a name="ConnectedEvent" href="../../../../../../org/apache/plc4x/java/base/events/ConnectedEvent.html#ConnectedEvent">ConnectedEvent</a>) {
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>                              sessionSetupCompleteFuture.complete(<strong class="jxr_keyword">null</strong>);
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>                          } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>                              <strong class="jxr_keyword">super</strong>.userEventTriggered(ctx, evt);
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>                          }
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>                      }
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>                  });
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>                  pipeline.addLast(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/ethernetip/netty/EnipCodec.html">EnipCodec</a>());
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>                  pipeline.addLast(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/ethernetip/netty/Plc4XEtherNetIpProtocol.html">Plc4XEtherNetIpProtocol</a>());
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>                  pipeline.addLast(<strong class="jxr_keyword">new</strong> <a name="EnipCodec" href="../../../../../../org/apache/plc4x/java/ethernetip/netty/EnipCodec.html#EnipCodec">EnipCodec</a>());
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>                  pipeline.addLast(<strong class="jxr_keyword">new</strong> <a name="Plc4XEtherNetIpProtocol" href="../../../../../../org/apache/plc4x/java/ethernetip/netty/Plc4XEtherNetIpProtocol.html#Plc4XEtherNetIpProtocol">Plc4XEtherNetIpProtocol</a>());
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>              }
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          };
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>      }
@@ -85,7 +85,7 @@
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>      @Override
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> sendChannelCreatedEvent() {
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          <em class="jxr_comment">// Send an event to the pipeline telling the Protocol filters what's going on.</em>
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>          channel.pipeline().fireUserEventTriggered(<strong class="jxr_keyword">new</strong> ConnectEvent());
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>          channel.pipeline().fireUserEventTriggered(<strong class="jxr_keyword">new</strong> <a name="ConnectEvent" href="../../../../../../org/apache/plc4x/java/base/events/ConnectEvent.html#ConnectEvent">ConnectEvent</a>());
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>      }
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>  
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>  }

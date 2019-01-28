@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -40,7 +40,7 @@
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">import</strong> java.util.LinkedList;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">import</strong> java.util.List;
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../../org/apache/plc4x/java/s7/netty/util/S7PlcFieldHandler.html">S7PlcFieldHandler</a> <strong class="jxr_keyword">extends</strong> DefaultPlcFieldHandler {
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="S7PlcFieldHandler" href="../../../../../../../org/apache/plc4x/java/s7/netty/util/S7PlcFieldHandler.html#S7PlcFieldHandler">S7PlcFieldHandler</a> <strong class="jxr_keyword">extends</strong> DefaultPlcFieldHandler {
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>      @Override
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>      <strong class="jxr_keyword">public</strong> PlcField createField(String fieldQuery) {
@@ -52,7 +52,7 @@
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>      @Override
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeBoolean(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>          <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>          <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>          <em class="jxr_comment">// All of these types are declared as Bit or Bit-String types.</em>
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>          <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>              <strong class="jxr_keyword">case</strong> BOOL:
@@ -68,7 +68,7 @@
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>  
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>      @Override
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeByte(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>          <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>          <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>          <em class="jxr_comment">// All of these types are declared as Bit or Bit-String types.</em>
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>          <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>              <strong class="jxr_keyword">case</strong> BYTE:
@@ -83,7 +83,7 @@
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>  
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>      @Override
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>      <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeShort(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>          <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>          <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>              <strong class="jxr_keyword">case</strong> WORD:
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>              <strong class="jxr_keyword">case</strong> INT:
@@ -96,7 +96,7 @@
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>  
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>      @Override
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>      <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeInteger(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>          <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>          <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>          <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>              <strong class="jxr_keyword">case</strong> DWORD:
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>              <strong class="jxr_keyword">case</strong> DINT:
@@ -109,7 +109,7 @@
 <a class="jxr_linenumber" name="L101" href="#L101">101</a> 
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>     @Override
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeBigInteger(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>             <strong class="jxr_keyword">case</strong> DWORD:
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>             <strong class="jxr_keyword">case</strong> DINT:
@@ -122,7 +122,7 @@
 <a class="jxr_linenumber" name="L114" href="#L114">114</a> 
 <a class="jxr_linenumber" name="L115" href="#L115">115</a>     @Override
 <a class="jxr_linenumber" name="L116" href="#L116">116</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeLong(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L117" href="#L117">117</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L117" href="#L117">117</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L118" href="#L118">118</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>             <strong class="jxr_keyword">case</strong> LWORD:
 <a class="jxr_linenumber" name="L120" href="#L120">120</a>             <strong class="jxr_keyword">case</strong> LINT:
@@ -135,7 +135,7 @@
 <a class="jxr_linenumber" name="L127" href="#L127">127</a> 
 <a class="jxr_linenumber" name="L128" href="#L128">128</a>     @Override
 <a class="jxr_linenumber" name="L129" href="#L129">129</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeFloat(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L130" href="#L130">130</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L130" href="#L130">130</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L131" href="#L131">131</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>             <strong class="jxr_keyword">case</strong> REAL:
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>                 <strong class="jxr_keyword">return</strong> internalEncodeFloatingPoint(field, values);
@@ -146,7 +146,7 @@
 <a class="jxr_linenumber" name="L138" href="#L138">138</a> 
 <a class="jxr_linenumber" name="L139" href="#L139">139</a>     @Override
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeDouble(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L141" href="#L141">141</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L141" href="#L141">141</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L142" href="#L142">142</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L143" href="#L143">143</a>             <strong class="jxr_keyword">case</strong> LREAL:
 <a class="jxr_linenumber" name="L144" href="#L144">144</a>                 <strong class="jxr_keyword">return</strong> internalEncodeFloatingPoint(field, values);
@@ -157,7 +157,7 @@
 <a class="jxr_linenumber" name="L149" href="#L149">149</a> 
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>     @Override
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeString(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L152" href="#L152">152</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>             <strong class="jxr_keyword">case</strong> CHAR:
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>             <strong class="jxr_keyword">case</strong> WCHAR:
@@ -171,7 +171,7 @@
 <a class="jxr_linenumber" name="L163" href="#L163">163</a> 
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>     @Override
 <a class="jxr_linenumber" name="L165" href="#L165">165</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeTime(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L168" href="#L168">168</a>             <strong class="jxr_keyword">case</strong> TIME:
 <a class="jxr_linenumber" name="L169" href="#L169">169</a>                 <strong class="jxr_keyword">return</strong> internalEncodeTemporal(field, values);
@@ -182,7 +182,7 @@
 <a class="jxr_linenumber" name="L174" href="#L174">174</a> 
 <a class="jxr_linenumber" name="L175" href="#L175">175</a>     @Override
 <a class="jxr_linenumber" name="L176" href="#L176">176</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeDate(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L177" href="#L177">177</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L177" href="#L177">177</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L178" href="#L178">178</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L179" href="#L179">179</a>             <strong class="jxr_keyword">case</strong> DATE:
 <a class="jxr_linenumber" name="L180" href="#L180">180</a>                 <strong class="jxr_keyword">return</strong> internalEncodeTemporal(field, values);
@@ -193,7 +193,7 @@
 <a class="jxr_linenumber" name="L185" href="#L185">185</a> 
 <a class="jxr_linenumber" name="L186" href="#L186">186</a>     @Override
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>     <strong class="jxr_keyword">public</strong> BaseDefaultFieldItem encodeDateTime(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L188" href="#L188">188</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L188" href="#L188">188</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L189" href="#L189">189</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L190" href="#L190">190</a>             <strong class="jxr_keyword">case</strong> DATE_AND_TIME:
 <a class="jxr_linenumber" name="L191" href="#L191">191</a>                 <strong class="jxr_keyword">return</strong> internalEncodeTemporal(field, values);
@@ -203,7 +203,7 @@
 <a class="jxr_linenumber" name="L195" href="#L195">195</a>     }
 <a class="jxr_linenumber" name="L196" href="#L196">196</a> 
 <a class="jxr_linenumber" name="L197" href="#L197">197</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeBoolean(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L198" href="#L198">198</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L198" href="#L198">198</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L199" href="#L199">199</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L200" href="#L200">200</a>             <strong class="jxr_keyword">case</strong> BOOL:
 <a class="jxr_linenumber" name="L201" href="#L201">201</a>             <strong class="jxr_keyword">case</strong> BYTE:
@@ -254,7 +254,7 @@
 <a class="jxr_linenumber" name="L246" href="#L246">246</a>     }
 <a class="jxr_linenumber" name="L247" href="#L247">247</a> 
 <a class="jxr_linenumber" name="L248" href="#L248">248</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeInteger(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L249" href="#L249">249</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L249" href="#L249">249</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L250" href="#L250">250</a> 
 <a class="jxr_linenumber" name="L251" href="#L251">251</a>         <em class="jxr_comment">// Initialize the constraints.</em>
 <a class="jxr_linenumber" name="L252" href="#L252">252</a>         BigInteger minValue;
@@ -397,7 +397,7 @@
 <a class="jxr_linenumber" name="L389" href="#L389">389</a>     }
 <a class="jxr_linenumber" name="L390" href="#L390">390</a> 
 <a class="jxr_linenumber" name="L391" href="#L391">391</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeFloatingPoint(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L392" href="#L392">392</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L392" href="#L392">392</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L393" href="#L393">393</a> 
 <a class="jxr_linenumber" name="L394" href="#L394">394</a>         <em class="jxr_comment">// Initialize the constraints.</em>
 <a class="jxr_linenumber" name="L395" href="#L395">395</a>         Double minValue;
@@ -463,7 +463,7 @@
 <a class="jxr_linenumber" name="L455" href="#L455">455</a>     }
 <a class="jxr_linenumber" name="L456" href="#L456">456</a> 
 <a class="jxr_linenumber" name="L457" href="#L457">457</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeString(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L458" href="#L458">458</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L458" href="#L458">458</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L459" href="#L459">459</a> 
 <a class="jxr_linenumber" name="L460" href="#L460">460</a>         <em class="jxr_comment">// Initialize the constraints.</em>
 <a class="jxr_linenumber" name="L461" href="#L461">461</a>         <strong class="jxr_keyword">int</strong> maxLength;
@@ -561,7 +561,7 @@
 <a class="jxr_linenumber" name="L553" href="#L553">553</a>     }
 <a class="jxr_linenumber" name="L554" href="#L554">554</a> 
 <a class="jxr_linenumber" name="L555" href="#L555">555</a>     <strong class="jxr_keyword">private</strong> BaseDefaultFieldItem internalEncodeTemporal(PlcField field, Object[] values) {
-<a class="jxr_linenumber" name="L556" href="#L556">556</a>         <a href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html">S7Field</a> s7Field = (S7Field) field;
+<a class="jxr_linenumber" name="L556" href="#L556">556</a>         <a name="S7Field" h<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>/../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a> s7Field = (<a name="S7Field" href="../../../../../../../org/apache/plc4x/java/s7/model/S7Field.html#S7Field">S7Field</a>) field;
 <a class="jxr_linenumber" name="L557" href="#L557">557</a>         <strong class="jxr_keyword">switch</strong> (s7Field.getDataType()) {
 <a class="jxr_linenumber" name="L558" href="#L558">558</a>             <strong class="jxr_keyword">case</strong> TIME:
 <a class="jxr_linenumber" name="L559" href="#L559">559</a>                 <em class="jxr_comment">// TODO: I think I should implement this some time ...</em>

@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment">"License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment">with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">  <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment">Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment">software distributed under the License is distributed on an</em>
@@ -61,7 +61,7 @@
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.ConcurrentHashMap;
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  <strong class="jxr_keyword">import</strong> java.util.concurrent.atomic.AtomicLong;
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>  
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/ethernetip/netty/Plc4XEtherNetIpProtocol.html">Plc4XEtherNetIpProtocol</a> <strong class="jxr_keyword">extends</strong> MessageToMessageCodec&lt;EnipPacket, PlcRequestContainer&lt;InternalPlcRequest, InternalPlcResponse&gt;&gt; {
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="Plc4XEtherNetIpProtocol" href="../../../../../../org/apache/plc4x/java/ethernetip/netty/Plc4XEtherNetIpProtocol.html#Plc4XEtherNetIpProtocol">Plc4XEtherNetIpProtocol</a> <strong class="jxr_keyword">extends</strong> MessageToMessageCodec&lt;EnipPacket, PlcRequestContainer&lt;InternalPlcRequest, InternalPlcResponse&gt;&gt; {
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger LOGGER = LoggerFactory.getLogger(Plc4XEtherNetIpProtocol.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>  
@@ -100,7 +100,7 @@
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> userEventTriggered(ChannelHandlerContext ctx, Object evt) <strong class="jxr_keyword">throws</strong> Exception {
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>          <em class="jxr_comment">// If the connection has just been established, start setting up the connection</em>
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>          <em class="jxr_comment">// by sending a connection request to the plc.</em>
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>          <strong class="jxr_keyword">if</strong> (evt instanceof ConnectEvent) {
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>          <strong class="jxr_keyword">if</strong> (evt instanceof <a name="ConnectEvent" href="../../../../../../org/apache/plc4x/java/base/events/ConnectEvent.html#ConnectEvent">ConnectEvent</a>) {
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>              LOGGER.debug(<span class="jxr_string">"EtherNet/IP Protocol Sending Connection Request"</span>);
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>  
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>              EnipPacket packet = <strong class="jxr_keyword">new</strong> EnipPacket(CommandCode.RegisterSession, 0, EnipStatus.EIP_SUCCESS,
@@ -127,10 +127,10 @@
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>         LOGGER.trace(<span class="jxr_string">"(&lt;--OUT): {}, {}, {}"</span>, ctx, msg, out);
 <a class="jxr_linenumber" name="L120" href="#L120">120</a>         <em class="jxr_comment">// Reset transactionId on overflow</em>
 <a class="jxr_linenumber" name="L121" href="#L121">121</a>         messageId.compareAndSet(Short.MAX_VALUE + 1L, 0);
-<a class="jxr_linenumber" name="L122" href="#L122">122</a>         <a href="../../../../../../org/apache/plc4x/java/api/messages/PlcRequest.html">PlcRequest</a> request = msg.getRequest();
-<a class="jxr_linenumber" name="L123" href="#L123">123</a>         <strong class="jxr_keyword">if</strong> (request instanceof PlcReadRequest) {
+<a class="jxr_linenumber" name="L122" href="#L122">122</a>         <a name="PlcRequest" href="../../../../../../org/apache/plc4x/java/api/messages/PlcRequest.html#PlcRequest">PlcRequest</a> request = msg.getRequest();
+<a class="jxr_linenumber" name="L123" href="#L123">123</a>         <strong class="jxr_keyword">if</strong> (request instanceof <a name="PlcReadRequest" href="../../../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.html#PlcReadRequest">PlcReadRequest</a>) {
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>             encodeReadRequest(msg, out);
-<a class="jxr_linenumber" name="L125" href="#L125">125</a>         } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (request instanceof PlcWriteRequest) {
+<a class="jxr_linenumber" name="L125" href="#L125">125</a>         } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (request instanceof <a name="PlcWriteRequest" href="../../../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.html#PlcWriteRequest">PlcWriteRequest</a>) {
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>             encodeWriteRequest(msg, out);
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>         } <em class="jxr_comment">/*else if(request instanceof PlcSubscriptionRequest) {</em>
 <a class="jxr_linenumber" name="L128" href="#L128">128</a> <em class="jxr_comment">            encodeSubscriptionRequest(msg, out);</em>
@@ -186,12 +186,12 @@
 <a class="jxr_linenumber" name="L178" href="#L178">178</a>             LOGGER.warn(<span class="jxr_string">"CIP Encapsulation not supported by remote, payload encapsulation must be handled by target and originator"</span>);
 <a class="jxr_linenumber" name="L179" href="#L179">179</a>         }
 <a class="jxr_linenumber" name="L180" href="#L180">180</a> 
-<a class="jxr_linenumber" name="L181" href="#L181">181</a>         <a href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html">InternalPlcReadRequest</a> request = (InternalPlcReadRequest) msg.getRequest();
+<a class="jxr_linenumber" name="L181" href="#L181">181</a>         <a name="InternalPlcReadRequest" h<a name="InternalPlcReadRequest" href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html#InternalPlcReadRequest">InternalPlcReadRequest</a>/org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html#InternalPlcReadRequest">InternalPlcReadRequest</a> request = (<a name="InternalPlcReadRequest" href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html#InternalPlcReadRequest">InternalPlcReadRequest</a>) msg.getRequest();
 <a class="jxr_linenumber" name="L182" href="#L182">182</a>         <strong class="jxr_keyword">for</strong> (String fieldName : request.getFieldNames()) {
-<a class="jxr_linenumber" name="L183" href="#L183">183</a>             <a href="../../../../../../org/apache/plc4x/java/api/model/PlcField.html">PlcField</a> field = request.getField(fieldName);
+<a class="jxr_linenumber" name="L183" href="#L183">183</a>             <a name="PlcField" href="../../../../../../org/apache/plc4x/java/api/model/PlcField.html#PlcField">PlcField</a> field = request.getField(fieldName);
 <a class="jxr_linenumber" name="L184" href="#L184">184</a> 
 <a class="jxr_linenumber" name="L185" href="#L185">185</a>             <em class="jxr_comment">// CIP Part</em>
-<a class="jxr_linenumber" name="L186" href="#L186">186</a>             <a href="../../../../../../org/apache/plc4x/java/ethernetip/model/EtherNetIpField.html">EtherNetIpField</a> enipField = (EtherNetIpField) field;
+<a class="jxr_linenumber" name="L186" href="#L186">186</a>             <a name="EtherNetIpField" hre<a name="EtherNetIpField" href="../../../../../../org/apache/plc4x/java/ethernetip/model/EtherNetIpField.html#EtherNetIpField">EtherNetIpField</a>../../org/apache/plc4x/java/ethernetip/model/EtherNetIpField.html#EtherNetIpField">EtherNetIpField</a> enipField = (<a name="EtherNetIpField" href="../../../../../../org/apache/plc4x/java/ethernetip/model/EtherNetIpField.html#EtherNetIpField">EtherNetIpField</a>) field;
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>             EPath.PaddedEPath path = <strong class="jxr_keyword">new</strong> EPath.PaddedEPath(<strong class="jxr_keyword">new</strong> LogicalSegment.ClassId(enipField.getObjectNumber()),
 <a class="jxr_linenumber" name="L188" href="#L188">188</a>                 <strong class="jxr_keyword">new</strong> LogicalSegment.InstanceId(enipField.getInstanceNumber()),
 <a class="jxr_linenumber" name="L189" href="#L189">189</a>                 <strong class="jxr_keyword">new</strong> LogicalSegment.AttributeId(enipField.getAttributeNumber()));
@@ -250,7 +250,7 @@
 <a class="jxr_linenumber" name="L242" href="#L242">242</a>                 handleListInterfaces(ctx, msg);
 <a class="jxr_linenumber" name="L243" href="#L243">243</a> 
 <a class="jxr_linenumber" name="L244" href="#L244">244</a>                 <em class="jxr_comment">// Here we're done connecting.</em>
-<a class="jxr_linenumber" name="L245" href="#L245">245</a>                 ctx.channel().pipeline().fireUserEventTriggered(<strong class="jxr_keyword">new</strong> ConnectedEvent());
+<a class="jxr_linenumber" name="L245" href="#L245">245</a>                 ctx.channel().pipeline().fireUserEventTriggered(<strong class="jxr_keyword">new</strong> <a name="ConnectedEvent" href="../../../../../../org/apache/plc4x/java/base/events/ConnectedEvent.html#ConnectedEvent">ConnectedEvent</a>());
 <a class="jxr_linenumber" name="L246" href="#L246">246</a>                 <strong class="jxr_keyword">break</strong>;
 <a class="jxr_linenumber" name="L247" href="#L247">247</a> 
 <a class="jxr_linenumber" name="L248" href="#L248">248</a>             <strong class="jxr_keyword">case</strong> ListServices:
@@ -293,7 +293,7 @@
 <a class="jxr_linenumber" name="L285" href="#L285">285</a> 
 <a class="jxr_linenumber" name="L286" href="#L286">286</a>             LOGGER.info(<span class="jxr_string">"EtherNet/IP session registered session-handle {}"</span>, sessionHandle);
 <a class="jxr_linenumber" name="L287" href="#L287">287</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L288" href="#L288">288</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"Got a non-success response."</span>));
+<a class="jxr_linenumber" name="L288" href="#L288">288</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Got a non-success response."</span>));
 <a class="jxr_linenumber" name="L289" href="#L289">289</a>         }
 <a class="jxr_linenumber" name="L290" href="#L290">290</a>     }
 <a class="jxr_linenumber" name="L291" href="#L291">291</a> 
@@ -316,7 +316,7 @@
 <a class="jxr_linenumber" name="L308" href="#L308">308</a>             nonCipInterfaces = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L309" href="#L309">309</a>             fieldConnectionMap = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L310" href="#L310">310</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L311" href="#L311">311</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"Got a non-success response."</span>));
+<a class="jxr_linenumber" name="L311" href="#L311">311</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Got a non-success response."</span>));
 <a class="jxr_linenumber" name="L312" href="#L312">312</a>         }
 <a class="jxr_linenumber" name="L313" href="#L313">313</a>     }
 <a class="jxr_linenumber" name="L314" href="#L314">314</a> 
@@ -340,7 +340,7 @@
 <a class="jxr_linenumber" name="L332" href="#L332">332</a>                 identityItem = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L333" href="#L333">333</a>             }
 <a class="jxr_linenumber" name="L334" href="#L334">334</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L335" href="#L335">335</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"Got a non-success response."</span>));
+<a class="jxr_linenumber" name="L335" href="#L335">335</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Got a non-success response."</span>));
 <a class="jxr_linenumber" name="L336" href="#L336">336</a>         }
 <a class="jxr_linenumber" name="L337" href="#L337">337</a>     }
 <a class="jxr_linenumber" name="L338" href="#L338">338</a> 
@@ -372,7 +372,7 @@
 <a class="jxr_linenumber" name="L364" href="#L364">364</a>                 }
 <a class="jxr_linenumber" name="L365" href="#L365">365</a>             }
 <a class="jxr_linenumber" name="L366" href="#L366">366</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L367" href="#L367">367</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"Got a non-success response."</span>));
+<a class="jxr_linenumber" name="L367" href="#L367">367</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Got a non-success response."</span>));
 <a class="jxr_linenumber" name="L368" href="#L368">368</a>         }
 <a class="jxr_linenumber" name="L369" href="#L369">369</a>     }
 <a class="jxr_linenumber" name="L370" href="#L370">370</a> 
@@ -405,7 +405,7 @@
 <a class="jxr_linenumber" name="L397" href="#L397">397</a>                 supportsClass0Or1UdpConnections = false;
 <a class="jxr_linenumber" name="L398" href="#L398">398</a>             }
 <a class="jxr_linenumber" name="L399" href="#L399">399</a>         } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L400" href="#L400">400</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> PlcProtocolException(<span class="jxr_string">"Got a non-success response."</span>));
+<a class="jxr_linenumber" name="L400" href="#L400">400</a>             ctx.channel().pipeline().fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Got a non-success response."</span>));
 <a class="jxr_linenumber" name="L401" href="#L401">401</a>         }
 <a class="jxr_linenumber" name="L402" href="#L402">402</a>     }
 <a class="jxr_linenumber" name="L403" href="#L403">403</a> 
@@ -423,7 +423,7 @@
 <a class="jxr_linenumber" name="L415" href="#L415">415</a>             <em class="jxr_comment">// TODO: Reset some sort of timer ...</em>
 <a class="jxr_linenumber" name="L416" href="#L416">416</a>         } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L417" href="#L417">417</a>             ctx.channel().pipeline().fireExceptionCaught(
-<a class="jxr_linenumber" name="L418" href="#L418">418</a>                 <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html">PlcProtocolException</a>(<span class="jxr_string">"Got a non-success flagged request."</span>));
+<a class="jxr_linenumber" name="L418" href="#L418">418</a>                 <strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Got a non-success flagged request."</span>));
 <a class="jxr_linenumber" name="L419" href="#L419">419</a>         }
 <a class="jxr_linenumber" name="L420" href="#L420">420</a>     }
 <a class="jxr_linenumber" name="L421" href="#L421">421</a> 
@@ -441,16 +441,16 @@
 <a class="jxr_linenumber" name="L433" href="#L433">433</a>         PlcRequestContainer&lt;InternalPlcRequest, InternalPlcResponse&gt; plcRequestContainer = requestsMap.get(senderContext);
 <a class="jxr_linenumber" name="L434" href="#L434">434</a>         <strong class="jxr_keyword">if</strong> (plcRequestContainer == <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L435" href="#L435">435</a>             ctx.channel().pipeline().fireExceptionCaught(
-<a class="jxr_linenumber" name="L436" href="#L436">436</a>                 <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html">PlcProtocolException</a>(<span class="jxr_string">"Unrelated payload received for message "</span> + msg));
+<a class="jxr_linenumber" name="L436" href="#L436">436</a>                 <strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Unrelated payload received for message "</span> + msg));
 <a class="jxr_linenumber" name="L437" href="#L437">437</a>             <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L438" href="#L438">438</a>         }
 <a class="jxr_linenumber" name="L439" href="#L439">439</a> 
-<a class="jxr_linenumber" name="L440" href="#L440">440</a>         <strong class="jxr_keyword">if</strong> (!(plcRequestContainer.getRequest() instanceof PlcReadRequest)) {
-<a class="jxr_linenumber" name="L441" href="#L441">441</a>             ctx.fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html">PlcProtocolException</a>(<span class="jxr_string">"Expecting a PlcReadRequest here."</span>));
+<a class="jxr_linenumber" name="L440" href="#L440">440</a>         <strong class="jxr_keyword">if</strong> (!(plcRequestContainer.getRequest() instanceof <a name="PlcReadRequest" href="../../../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.html#PlcReadRequest">PlcReadRequest</a>)) {
+<a class="jxr_linenumber" name="L441" href="#L441">441</a>             ctx.fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Expecting a PlcReadRequest here."</span>));
 <a class="jxr_linenumber" name="L442" href="#L442">442</a>             <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L443" href="#L443">443</a>         }
-<a class="jxr_linenumber" name="L444" href="#L444">444</a>         <a href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html">InternalPlcReadRequest</a> request = (InternalPlcReadRequest) plcRequestContainer.getRequest();
-<a class="jxr_linenumber" name="L445" href="#L445">445</a>         <a href="../../../../../../org/apache/plc4x/java/api/types/PlcResponseCode.html">PlcResponseCode</a> responseCode;
+<a class="jxr_linenumber" name="L444" href="#L444">444</a>         <a name="InternalPlcReadRequest" h<a name="InternalPlcReadRequest" href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html#InternalPlcReadRequest">InternalPlcReadRequest</a>/org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html#InternalPlcReadRequest">InternalPlcReadRequest</a> request = (<a name="InternalPlcReadRequest" href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadRequest.html#InternalPlcReadRequest">InternalPlcReadRequest</a>) plcRequestContainer.getRequest();
+<a class="jxr_linenumber" name="L445" href="#L445">445</a>         <a name="PlcResponseCode" href="../../../../../../org/apache/plc4x/java/api/types/PlcResponseCode.html#PlcResponseCode">PlcResponseCode</a> responseCode;
 <a class="jxr_linenumber" name="L446" href="#L446">446</a>         <strong class="jxr_keyword">if</strong> (msg.getStatus() != EnipStatus.EIP_SUCCESS) {
 <a class="jxr_linenumber" name="L447" href="#L447">447</a>             responseCode = PlcResponseCode.NOT_FOUND;
 <a class="jxr_linenumber" name="L448" href="#L448">448</a>         } <strong class="jxr_keyword">else</strong> {
@@ -459,17 +459,17 @@
 <a class="jxr_linenumber" name="L451" href="#L451">451</a> 
 <a class="jxr_linenumber" name="L452" href="#L452">452</a>         SendRRData sendRRDataCommand = (SendRRData) msg.getCommand();
 <a class="jxr_linenumber" name="L453" href="#L453">453</a>         <strong class="jxr_keyword">if</strong> (sendRRDataCommand == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L454" href="#L454">454</a>             ctx.fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html">PlcProtocolException</a>(<span class="jxr_string">"Expecting a SendRRData command here."</span>));
+<a class="jxr_linenumber" name="L454" href="#L454">454</a>             ctx.fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Expecting a SendRRData command here."</span>));
 <a class="jxr_linenumber" name="L455" href="#L455">455</a>             <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L456" href="#L456">456</a>         }
 <a class="jxr_linenumber" name="L457" href="#L457">457</a>         CpfItem[] items = sendRRDataCommand.getPacket().getItems();
 <a class="jxr_linenumber" name="L458" href="#L458">458</a>         <strong class="jxr_keyword">if</strong> (items.length != 2) {
-<a class="jxr_linenumber" name="L459" href="#L459">459</a>             ctx.fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html">PlcProtocolException</a>(<span class="jxr_string">"Expecting 2 items here."</span>));
+<a class="jxr_linenumber" name="L459" href="#L459">459</a>             ctx.fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Expecting 2 items here."</span>));
 <a class="jxr_linenumber" name="L460" href="#L460">460</a>             <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L461" href="#L461">461</a>         }
 <a class="jxr_linenumber" name="L462" href="#L462">462</a>         CpfItem payload = items[1];
 <a class="jxr_linenumber" name="L463" href="#L463">463</a>         <strong class="jxr_keyword">if</strong> (!(payload instanceof UnconnectedDataItemResponse)) {
-<a class="jxr_linenumber" name="L464" href="#L464">464</a>             ctx.fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html">PlcProtocolException</a>(<span class="jxr_string">"Item[1] should be of type UnconnectedDataItemResponse"</span>));
+<a class="jxr_linenumber" name="L464" href="#L464">464</a>             ctx.fireExceptionCaught(<strong class="jxr_keyword">new</strong> <a name="PlcProtocolException" href="../../../../../../org/apache/plc4x/java/api/exceptions/PlcProtocolException.html#PlcProtocolException">PlcProtocolException</a>(<span class="jxr_string">"Item[1] should be of type UnconnectedDataItemResponse"</span>));
 <a class="jxr_linenumber" name="L465" href="#L465">465</a>             <strong class="jxr_keyword">return</strong>;
 <a class="jxr_linenumber" name="L466" href="#L466">466</a>         }
 <a class="jxr_linenumber" name="L467" href="#L467">467</a>         UnconnectedDataItemResponse enipResponse = (UnconnectedDataItemResponse) payload;
@@ -486,10 +486,10 @@
 <a class="jxr_linenumber" name="L478" href="#L478">478</a>                 } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L479" href="#L479">479</a>                     value = -1;
 <a class="jxr_linenumber" name="L480" href="#L480">480</a>                 }
-<a class="jxr_linenumber" name="L481" href="#L481">481</a>                 <a href="../../../../../../org/apache/plc4x/java/base/messages/items/DefaultLongFieldItem.html">DefaultLongFieldItem</a> fieldItem = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/messages/items/DefaultLongFieldItem.html">DefaultLongFieldItem</a>((<strong class="jxr_keyword">long</strong>) value);
+<a class="jxr_linenumber" name="L481" href="#L481">481</a>                 <a name="DefaultLongFieldItem" href="../../../../../../org/apache/plc4x/ja<a name="DefaultLongFieldItem" href="../../../../../../org/apache/plc4x/java/base/messages/items/DefaultLongFieldItem.html#DefaultLongFieldItem">DefaultLongFieldItem</a>ms/DefaultLongFieldItem.html#DefaultLongFieldItem">DefaultLongFieldItem</a> fieldItem = <strong class="jxr_keyword">new</strong> <a name="DefaultLongFieldItem" href="../../../../../../org/apache/plc4x/java/base/messages/items/DefaultLongFieldItem.html#DefaultLongFieldItem">DefaultLongFieldItem</a>((<strong class="jxr_keyword">long</strong>) value);
 <a class="jxr_linenumber" name="L482" href="#L482">482</a>                 values.put(fieldName, <strong class="jxr_keyword">new</strong> ImmutablePair&lt;&gt;(responseCode, fieldItem));
 <a class="jxr_linenumber" name="L483" href="#L483">483</a>             }
-<a class="jxr_linenumber" name="L484" href="#L484">484</a>             <a href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadResponse.html">InternalPlcReadResponse</a> response = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/base/messages/DefaultPlcReadResponse.html">DefaultPlcReadResponse</a>(request, values);
+<a class="jxr_linenumber" name="L484" href="#L484">484</a>             <a name="InternalPlcReadResponse" href="../../../../../../org/apache/plc4x/java/base/messages/InternalPlcReadResponse.html#InternalPlcReadResponse">InternalPlcReadResponse</a> response = <strong class="jxr_keyword">new</strong> <a name="DefaultPlcReadResponse" href="../../../../../../org/apache/plc4x/java/base/messages/DefaultPlcReadResponse.html#DefaultPlcReadResponse">DefaultPlcReadResponse</a>(request, values);
 <a class="jxr_linenumber" name="L485" href="#L485">485</a>             plcRequestContainer.getResponseFuture().complete(response);
 <a class="jxr_linenumber" name="L486" href="#L486">486</a>         }
 <a class="jxr_linenumber" name="L487" href="#L487">487</a>     }

@@ -15,7 +15,7 @@
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> "License"); you may not use this file except in compliance</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> with the License.  You may obtain a copy of the License at</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.</a>0</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment">   <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a></em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_comment"> software distributed under the License is distributed on an</em>
@@ -55,7 +55,7 @@
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.mockito.Mockito.spy;
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  @Ignore(<span class="jxr_string">"Not yet implemented in modbus"</span>)
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/modbus/connection/ModbusSerialPlcConnectionTest.html">ModbusSerialPlcConnectionTest</a> {
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="ModbusSerialPlcConnectionTest" href="../../../../../../org/apache/plc4x/java/modbus/connection/ModbusSerialPlcConnectionTest.html#ModbusSerialPlcConnectionTest">ModbusSerialPlcConnectionTest</a> {
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger LOGGER = LoggerFactory.getLogger(ModbusSerialPlcConnectionTest.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  
@@ -89,18 +89,18 @@
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>          doReturn(embeddedChannel).when(serialChannelFactorySpied).createChannel(any());
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>          channelFactoryField.set(SUT, serialChannelFactorySpied);
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>          SUT.connect();
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>          <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/apache/plc4x/java/modbus/connection/ModbusSerialPlcConnectionTest.html">SerialSimulator</a>(embeddedChannel).start();
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>          <strong class="jxr_keyword">new</strong> SerialSimulator(embeddedChannel).start();
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      }
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>  
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/apache/plc4x/java/modbus/connection/ModbusSerialPlcConnectionTest.html">SerialSimulator</a> <strong class="jxr_keyword">extends</strong> Thread {
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">class</strong> SerialSimulator <strong class="jxr_keyword">extends</strong> Thread {
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>  
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          <strong class="jxr_keyword">private</strong> EmbeddedChannel embeddedChannel;
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>  
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>          <strong class="jxr_keyword">private</strong> <a href="../../../../../../org/apache/plc4x/java/modbus/connection/ModbusSerialPlcConnectionTest.html">SimulatorState</a> state = SimulatorState.RECEIVE_REQUEST;
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>          <strong class="jxr_keyword">private</strong> SimulatorState state = SimulatorState.RECEIVE_REQUEST;
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>  
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>          <strong class="jxr_keyword">private</strong> byte[] currentInvokeId = <strong class="jxr_keyword">new</strong> byte[0];
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>  
-<a class="jxr_linenumber" name="L95" href="#L95">95</a>          <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/apache/plc4x/java/modbus/connection/ModbusSerialPlcConnectionTest.html">SerialSimulator</a>(EmbeddedChannel embeddedChannel) {
+<a class="jxr_linenumber" name="L95" href="#L95">95</a>          <strong class="jxr_keyword">public</strong> SerialSimulator(EmbeddedChannel embeddedChannel) {
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>              <strong class="jxr_keyword">super</strong>(<span class="jxr_string">"Serial Simulator"</span>);
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>              <strong class="jxr_keyword">this</strong>.embeddedChannel = embeddedChannel;
 <a class="jxr_linenumber" name="L98" href="#L98">98</a>          }
@@ -215,7 +215,7 @@
 <a class="jxr_linenumber" name="L207" href="#L207">207</a>         }
 <a class="jxr_linenumber" name="L208" href="#L208">208</a>     }
 <a class="jxr_linenumber" name="L209" href="#L209">209</a> 
-<a class="jxr_linenumber" name="L210" href="#L210">210</a>     <strong class="jxr_keyword">private</strong> enum <a href="../../../../../../org/apache/plc4x/java/modbus/connection/ModbusSerialPlcConnectionTest.html">SimulatorState</a> {
+<a class="jxr_linenumber" name="L210" href="#L210">210</a>     <strong class="jxr_keyword">private</strong> enum SimulatorState {
 <a class="jxr_linenumber" name="L211" href="#L211">211</a>         RECEIVE_REQUEST,
 <a class="jxr_linenumber" name="L212" href="#L212">212</a>         ACK_MESSAGE,
 <a class="jxr_linenumber" name="L213" href="#L213">213</a>         SEND_RESPONSE,
