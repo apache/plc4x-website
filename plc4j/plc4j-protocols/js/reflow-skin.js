@@ -41,6 +41,26 @@
 var reflow = function () {
 
   var $window = $(window);
+  var $body = $('body');
+
+  var initTocTop = function() {
+    var tocTop = $('#toc-bar');
+    if (!tocTop.length) {
+      return;
+    }
+
+    tocTop.affix({
+      offset: {
+        top: tocTop.offset().top,
+        bottom: ($('footer').outerHeight(true) + $('.subfooter').outerHeight(true) - 70)
+        // padding of footer.
+      }
+    });
+
+    $body.scrollspy({
+      target: '#toc-scroll-target'
+    });
+  }
 
   var initTocSlidebar = function () {
     // toc aside bar
@@ -49,14 +69,14 @@ var reflow = function () {
       if ($('#toc-sidebar[data-spy=affix]').length) {
         $('#toc-sidebar').affix({
           offset: {
-            top: $('#toc-sidebar').offset().top,
+            top: $('#toc-sidebar').offset().top + $('#m-top-navbar').height(),
             bottom: ($('footer').outerHeight(true) + $('.subfooter').outerHeight(true) - 40)
             // padding of footer.
           }
         });
       }
     });
-    $('body').scrollspy({ target: '#toc-scroll-target' })
+    $body.scrollspy({ target: '#toc-scroll-target' })
   };
 
   var initCarousel = function () {
@@ -102,13 +122,9 @@ var reflow = function () {
       var $menuItem = menu.find('.dropdown-menu');
       var width = $menuItem.width();
       var mw = width + (menu.offset().left + menu.width());
-      var factor = 1;
       if (ww < mw) {
-        factor = -1;
-        $menuItem.css('top', menu.offset().top - $('#navbar').height());
-        $menuItem.css('left', factor * ($menuItem.width()), 'important');
+        $menuItem.css('left', -1 * (width), 'important');
       } else {
-        $menuItem.css('top', '0px');
         $menuItem.css('left', '100%');
       }
     });
@@ -118,6 +134,7 @@ var reflow = function () {
   return {
     init: function () {
       initCarousel();
+      initTocTop();
       initTocSlidebar();
       initHighlighting();
       initTopNavBar();
