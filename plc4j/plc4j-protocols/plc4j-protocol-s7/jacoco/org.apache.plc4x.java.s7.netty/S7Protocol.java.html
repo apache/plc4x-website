@@ -501,7 +501,7 @@ public class S7Protocol extends ChannelDuplexHandler {
                     }
                 }
 
-                // Eventually send the next message (if there is one).
+                // Try to send the next message (if there is one).
 <span class="nc" id="L505">                trySendingMessages(ctx);</span>
             }
 
@@ -808,7 +808,7 @@ public class S7Protocol extends ChannelDuplexHandler {
 
 <span class="fc" id="L809">                    logger.debug(&quot;S7 Message with id {} sent&quot;, s7RequestMessage.getTpduReference());</span>
 <span class="fc" id="L810">                }</span>
-                // TODO: Eventually remove this.
+                // TODO: Perhaps remove this.
                 break;
             } else {
                 break;
