@@ -169,8 +169,8 @@ public class SimulatedPlcConnection extends AbstractPlcConnection implements Plc
     private Consumer&lt;BaseDefaultFieldItem&gt; dispatchSubscriptionEvent(String name, InternalPlcSubscriptionHandle handle) {
 <span class="fc" id="L170">        return fieldItem -&gt; {</span>
 <span class="fc" id="L171">            InternalPlcConsumerRegistration plcConsumerRegistration = registrations.get(handle);</span>
-<span class="fc bfc" id="L172" title="All 2 branches covered.">            if (plcConsumerRegistration == null) {</span>
-<span class="fc" id="L173">                return;</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">            if (plcConsumerRegistration == null) {</span>
+<span class="nc" id="L173">                return;</span>
             }
 <span class="fc" id="L175">            int consumerHash = plcConsumerRegistration.getConsumerHash();</span>
 <span class="fc" id="L176">            Consumer&lt;PlcSubscriptionEvent&gt; consumer = consumerIdMap.get(consumerHash);</span>
