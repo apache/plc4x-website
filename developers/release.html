@@ -203,6 +203,7 @@
                         <li class="toplevel"><a href="#_toc_an_extra_step_for_incubator_podlings1" title="An extra step for incubator podlings">An extra step for incubator podlings</a></li>
                         <li class="toplevel"><a href="#_toc_releasing_after_a_successful_vote1" title="Releasing after a successful vote">Releasing after a successful vote</a></li>
                         <li class="toplevel"><a href="#_toc_releasing_the_maven_artifacts1" title="Releasing the Maven artifacts">Releasing the Maven artifacts</a></li>
+                        <li class="toplevel"><a href="#_toc_merge_back_release_version_to_master_branch1" title="Merge back release version to master branch">Merge back release version to master branch</a></li>
                         <li class="toplevel"><a href="#_toc_updating_jira1" title="Updating Jira">Updating Jira</a></li>
                         <li class="toplevel"><a href="#_toc_update_the_download_site1" title="Update the download site">Update the download site</a></li>
                         <li class="toplevel"><a href="#_toc_notifying_the_world1" title="Notifying the world">Notifying the world</a></li>
@@ -840,6 +841,29 @@ Apache PLC4X</code></pre>
    </div> 
    <div class="paragraph"> 
     <p>All release artifacts released to the Apache release repo, will automatically be synced to Maven central.</p> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="_toc_merge_back_release_version_to_master_branch1">Merge back release version to master branch</h3> 
+   <div class="paragraph"> 
+    <p>The master branch should always point to the last released version. This has to be done with git</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="prettyprint highlight"><code>git checkout master
+git merge {tag-of-release}</code></pre> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>When there are conflicts it could help to use the "theirs" merge strategy, i.e.,</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre class="prettyprint highlight"><code>git merge -X theirs {tag-of-release}</code></pre> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Possibly a manual conflict resolution has to be done afterwards. After that, changes need to be pushed.</p> 
    </div> 
   </div> 
   <div class="sect2"> 
