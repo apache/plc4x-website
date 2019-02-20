@@ -619,8 +619,8 @@ public class S7Protocol extends ChannelDuplexHandler {
 <span class="nc" id="L619">                payloadItems.add(payload);</span>
 <span class="nc" id="L620">                i += S7SizeHelper.getPayloadLength(payload);</span>
 
-                // It seems that one-byte payloads require a fill byte, but only if it's not the last item.
-<span class="nc bnc" id="L623" title="All 4 branches missed.">                if((length == 1) &amp;&amp; (userData.readableBytes() &gt; 0)) {</span>
+                // It seems that odd-byte payloads require a fill byte, but only if it's not the last item.
+<span class="nc bnc" id="L623" title="All 4 branches missed.">                if((length % 2== 1) &amp;&amp; (userData.readableBytes() &gt; 0)) {</span>
 <span class="nc" id="L624">                    userData.readByte();</span>
 <span class="nc" id="L625">                    i++;</span>
                 }
