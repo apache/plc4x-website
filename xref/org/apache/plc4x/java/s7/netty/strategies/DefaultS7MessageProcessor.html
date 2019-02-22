@@ -413,97 +413,89 @@
 <a class="jxr_linenumber" name="L405" href="#L405">405</a>                 <strong class="jxr_keyword">if</strong>(requestItem.getNumElements() != responseParameterItem.getNumElements()) {
 <a class="jxr_linenumber" name="L406" href="#L406">406</a>                     <strong class="jxr_keyword">int</strong> itemSizeInBytes = requestItem.getDataType().getSizeInBytes();
 <a class="jxr_linenumber" name="L407" href="#L407">407</a>                     <strong class="jxr_keyword">int</strong> totalSizeInBytes = requestItem.getNumElements() * itemSizeInBytes;
-<a class="jxr_linenumber" name="L408" href="#L408">408</a>                     byte[] data = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L409" href="#L409">409</a>                     <strong class="jxr_keyword">if</strong>(varParameter.getType() == ParameterType.READ_VAR) {
-<a class="jxr_linenumber" name="L410" href="#L410">410</a>                         data = <strong class="jxr_keyword">new</strong> byte[totalSizeInBytes];
-<a class="jxr_linenumber" name="L411" href="#L411">411</a>                         System.arraycopy(responsePayloadItem.getData(), 0, data, 0, responsePayloadItem.getData().length);
-<a class="jxr_linenumber" name="L412" href="#L412">412</a>                     }
-<a class="jxr_linenumber" name="L413" href="#L413">413</a> 
-<a class="jxr_linenumber" name="L414" href="#L414">414</a>                     <em class="jxr_comment">// Initialize the current size, this will be lower than the original, as the only</em>
-<a class="jxr_linenumber" name="L415" href="#L415">415</a>                     <em class="jxr_comment">// way to have different count, is if the request was split up.</em>
-<a class="jxr_linenumber" name="L416" href="#L416">416</a>                     <strong class="jxr_keyword">int</strong> curSizeInBytes = requestItem.getNumElements() * itemSizeInBytes;
-<a class="jxr_linenumber" name="L417" href="#L417">417</a> 
-<a class="jxr_linenumber" name="L418" href="#L418">418</a>                     <em class="jxr_comment">// Now iterate over the succeeding pairs of parameters and payloads till we have</em>
-<a class="jxr_linenumber" name="L419" href="#L419">419</a>                     <em class="jxr_comment">// found the original number of elements.</em>
-<a class="jxr_linenumber" name="L420" href="#L420">420</a>                     <strong class="jxr_keyword">while</strong>(curSizeInBytes &lt; totalSizeInBytes) {
-<a class="jxr_linenumber" name="L421" href="#L421">421</a>                         responseOffset++;
-<a class="jxr_linenumber" name="L422" href="#L422">422</a>                         <em class="jxr_comment">// No need to process the parameters, we only need them to get the number of items.</em>
-<a class="jxr_linenumber" name="L423" href="#L423">423</a>                         responseParameterItem = (<a name="S7AnyVarParameterItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/items/S7AnyVarParameterItem.html#S7AnyVarParameterItem">S7AnyVarParameterItem</a>) parameterItems.get(i + responseOffset);
-<a class="jxr_linenumber" name="L424" href="#L424">424</a>                         curSizeInBytes += responseParameterItem.getNumElements() * itemSizeInBytes;
-<a class="jxr_linenumber" name="L425" href="#L425">425</a> 
-<a class="jxr_linenumber" name="L426" href="#L426">426</a>                         <em class="jxr_comment">// Get the next payload item in the list.</em>
-<a class="jxr_linenumber" name="L427" href="#L427">427</a>                         responsePayloadItem = payloadItems.get(i + responseOffset);
-<a class="jxr_linenumber" name="L428" href="#L428">428</a> 
-<a class="jxr_linenumber" name="L429" href="#L429">429</a>                         <em class="jxr_comment">// Copy the data of this item behind the previous content.</em>
-<a class="jxr_linenumber" name="L430" href="#L430">430</a>                         <strong class="jxr_keyword">if</strong>(varParameter.getType() == ParameterType.READ_VAR) {
-<a class="jxr_linenumber" name="L431" href="#L431">431</a>                             System.arraycopy(responsePayloadItem.getData(), 0, data, dataOffset, responsePayloadItem.getData().length);
-<a class="jxr_linenumber" name="L432" href="#L432">432</a>                             dataOffset += responsePayloadItem.getData().length;
-<a class="jxr_linenumber" name="L433" href="#L433">433</a>                         }
-<a class="jxr_linenumber" name="L434" href="#L434">434</a>                     }
-<a class="jxr_linenumber" name="L435" href="#L435">435</a> 
-<a class="jxr_linenumber" name="L436" href="#L436">436</a>                     mergedPayloadItems.add(<strong class="jxr_keyword">new</strong> <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>(DataTransportErrorCode.OK,
-<a class="jxr_linenumber" name="L437" href="#L437">437</a>                         responsePayloadItem.getDataTransportSize(), data));
-<a class="jxr_linenumber" name="L438" href="#L438">438</a>                 } <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L439" href="#L439">439</a>                     mergedPayloadItems.add(responsePayloadItem);
-<a class="jxr_linenumber" name="L440" href="#L440">440</a>                 }
-<a class="jxr_linenumber" name="L441" href="#L441">441</a>             }
-<a class="jxr_linenumber" name="L442" href="#L442">442</a> 
-<a class="jxr_linenumber" name="L443" href="#L443">443</a>             s7Parameters.add(<strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(varParameter.getType(), mergedParameterItems));
-<a class="jxr_linenumber" name="L444" href="#L444">444</a>             s7Payloads.add(<strong class="jxr_keyword">new</strong> <a name="VarPayload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a>(varParameter.getType(), mergedPayloadItems));
-<a class="jxr_linenumber" name="L445" href="#L445">445</a>         }
-<a class="jxr_linenumber" name="L446" href="#L446">446</a>         <em class="jxr_comment">// TODO: The error codes are wrong</em>
-<a class="jxr_linenumber" name="L447" href="#L447">447</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a>(messageType, tpduReference, s7Parameters, s7Payloads, (byte) 0xFF, (byte) 0xFF);
-<a class="jxr_linenumber" name="L448" href="#L448">448</a>     }
-<a class="jxr_linenumber" name="L449" href="#L449">449</a> 
-<a class="jxr_linenumber" name="L450" href="#L450">450</a>     <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> S7CompositeRequestMessage <strong class="jxr_keyword">implements</strong> <a name="PlcProtocolMessage" href="../../../../../../../org/apache/plc4x/java/base/messages/PlcProtocolMessage.html#PlcProtocolMessage">PlcProtocolMessage</a> {
-<a class="jxr_linenumber" name="L451" href="#L451">451</a> 
-<a class="jxr_linenumber" name="L452" href="#L452">452</a>         <strong class="jxr_keyword">private</strong> <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> originalRequest;
-<a class="jxr_linenumber" name="L453" href="#L453">453</a>         <strong class="jxr_keyword">private</strong> List&lt;S7RequestMessage&gt; requestMessages;
-<a class="jxr_linenumber" name="L454" href="#L454">454</a>         <strong class="jxr_keyword">private</strong> List&lt;S7ResponseMessage&gt; responseMessages;
-<a class="jxr_linenumber" name="L455" href="#L455">455</a> 
-<a class="jxr_linenumber" name="L456" href="#L456">456</a>         S7CompositeRequestMessage(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> originalRequest) {
-<a class="jxr_linenumber" name="L457" href="#L457">457</a>             <strong class="jxr_keyword">this</strong>.originalRequest = originalRequest;
-<a class="jxr_linenumber" name="L458" href="#L458">458</a>             <strong class="jxr_keyword">this</strong>.requestMessages = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
-<a class="jxr_linenumber" name="L459" href="#L459">459</a>             <strong class="jxr_keyword">this</strong>.responseMessages = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
-<a class="jxr_linenumber" name="L460" href="#L460">460</a>         }
-<a class="jxr_linenumber" name="L461" href="#L461">461</a> 
-<a class="jxr_linenumber" name="L462" href="#L462">462</a>         @Override
-<a class="jxr_linenumber" name="L463" href="#L463">463</a>         <strong class="jxr_keyword">public</strong> <a name="PlcProtocolMessage" href="../../../../../../../org/apache/plc4x/java/base/messages/PlcProtocolMessage.html#PlcProtocolMessage">PlcProtocolMessage</a> getParent() {
-<a class="jxr_linenumber" name="L464" href="#L464">464</a>             <strong class="jxr_keyword">return</strong> originalRequest;
-<a class="jxr_linenumber" name="L465" href="#L465">465</a>         }
-<a class="jxr_linenumber" name="L466" href="#L466">466</a> 
-<a class="jxr_linenumber" name="L467" href="#L467">467</a>         <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="L468" href="#L468">468</a> <em class="jxr_javadoccomment">         * A {@link S7CompositeRequestMessage} is only acknowledged, if all children are acknowledged.</em>
-<a class="jxr_linenumber" name="L469" href="#L469">469</a> <em class="jxr_javadoccomment">         *</em>
-<a class="jxr_linenumber" name="L470" href="#L470">470</a> <em class="jxr_javadoccomment">         * @return true if all children are acknowledged.</em>
-<a class="jxr_linenumber" name="L471" href="#L471">471</a> <em class="jxr_javadoccomment">         */</em>
-<a class="jxr_linenumber" name="L472" href="#L472">472</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> isAcknowledged() {
-<a class="jxr_linenumber" name="L473" href="#L473">473</a>             <strong class="jxr_keyword">for</strong> (<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> requestMessage : requestMessages) {
-<a class="jxr_linenumber" name="L474" href="#L474">474</a>                 <strong class="jxr_keyword">if</strong>(!requestMessage.isAcknowledged()) {
-<a class="jxr_linenumber" name="L475" href="#L475">475</a>                     <strong class="jxr_keyword">return</strong> false;
-<a class="jxr_linenumber" name="L476" href="#L476">476</a>                 }
-<a class="jxr_linenumber" name="L477" href="#L477">477</a>             }
-<a class="jxr_linenumber" name="L478" href="#L478">478</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="L408" href="#L408">408</a>                     <strong class="jxr_keyword">if</strong>(varParameter.getType() == ParameterType.READ_VAR) {
+<a class="jxr_linenumber" name="L409" href="#L409">409</a>                         byte[] data = <strong class="jxr_keyword">new</strong> byte[totalSizeInBytes];
+<a class="jxr_linenumber" name="L410" href="#L410">410</a>                         System.arraycopy(responsePayloadItem.getData(), 0, data, 0, responsePayloadItem.getData().length);
+<a class="jxr_linenumber" name="L411" href="#L411">411</a> 
+<a class="jxr_linenumber" name="L412" href="#L412">412</a>                         <em class="jxr_comment">// Now iterate over the succeeding pairs of parameters and payloads till we have</em>
+<a class="jxr_linenumber" name="L413" href="#L413">413</a>                         <em class="jxr_comment">// found the original number of elements.</em>
+<a class="jxr_linenumber" name="L414" href="#L414">414</a>                         <strong class="jxr_keyword">while</strong> (dataOffset &lt; totalSizeInBytes) {
+<a class="jxr_linenumber" name="L415" href="#L415">415</a>                             responseOffset++;
+<a class="jxr_linenumber" name="L416" href="#L416">416</a> 
+<a class="jxr_linenumber" name="L417" href="#L417">417</a>                             <em class="jxr_comment">// Get the next payload item in the list.</em>
+<a class="jxr_linenumber" name="L418" href="#L418">418</a>                             responsePayloadItem = payloadItems.get(i + responseOffset);
+<a class="jxr_linenumber" name="L419" href="#L419">419</a> 
+<a class="jxr_linenumber" name="L420" href="#L420">420</a>                             <em class="jxr_comment">// Copy the data of this item behind the previous content.</em>
+<a class="jxr_linenumber" name="L421" href="#L421">421</a>                             <strong class="jxr_keyword">if</strong> (varParameter.getType() == ParameterType.READ_VAR) {
+<a class="jxr_linenumber" name="L422" href="#L422">422</a>                                 System.arraycopy(responsePayloadItem.getData(), 0, data, dataOffset, responsePayloadItem.getData().length);
+<a class="jxr_linenumber" name="L423" href="#L423">423</a>                                 dataOffset += responsePayloadItem.getData().length;
+<a class="jxr_linenumber" name="L424" href="#L424">424</a>                             }
+<a class="jxr_linenumber" name="L425" href="#L425">425</a>                         }
+<a class="jxr_linenumber" name="L426" href="#L426">426</a> 
+<a class="jxr_linenumber" name="L427" href="#L427">427</a>                         mergedPayloadItems.add(<strong class="jxr_keyword">new</strong> <a name="VarPayloadItem" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/items/VarPayloadItem.html#VarPayloadItem">VarPayloadItem</a>(DataTransportErrorCode.OK,
+<a class="jxr_linenumber" name="L428" href="#L428">428</a>                             responsePayloadItem.getDataTransportSize(), data));
+<a class="jxr_linenumber" name="L429" href="#L429">429</a>                     }
+<a class="jxr_linenumber" name="L430" href="#L430">430</a>                 } <strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L431" href="#L431">431</a>                     mergedPayloadItems.add(responsePayloadItem);
+<a class="jxr_linenumber" name="L432" href="#L432">432</a>                 }
+<a class="jxr_linenumber" name="L433" href="#L433">433</a>             }
+<a class="jxr_linenumber" name="L434" href="#L434">434</a> 
+<a class="jxr_linenumber" name="L435" href="#L435">435</a>             s7Parameters.add(<strong class="jxr_keyword">new</strong> <a name="VarParameter" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/params/VarParameter.html#VarParameter">VarParameter</a>(varParameter.getType(), mergedParameterItems));
+<a class="jxr_linenumber" name="L436" href="#L436">436</a>             s7Payloads.add(<strong class="jxr_keyword">new</strong> <a name="VarPayload" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/payloads/VarPayload.html#VarPayload">VarPayload</a>(varParameter.getType(), mergedPayloadItems));
+<a class="jxr_linenumber" name="L437" href="#L437">437</a>         }
+<a class="jxr_linenumber" name="L438" href="#L438">438</a>         <em class="jxr_comment">// TODO: The error codes are wrong</em>
+<a class="jxr_linenumber" name="L439" href="#L439">439</a>         <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a>(messageType, tpduReference, s7Parameters, s7Payloads, (byte) 0xFF, (byte) 0xFF);
+<a class="jxr_linenumber" name="L440" href="#L440">440</a>     }
+<a class="jxr_linenumber" name="L441" href="#L441">441</a> 
+<a class="jxr_linenumber" name="L442" href="#L442">442</a>     <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">class</strong> S7CompositeRequestMessage <strong class="jxr_keyword">implements</strong> <a name="PlcProtocolMessage" href="../../../../../../../org/apache/plc4x/java/base/messages/PlcProtocolMessage.html#PlcProtocolMessage">PlcProtocolMessage</a> {
+<a class="jxr_linenumber" name="L443" href="#L443">443</a> 
+<a class="jxr_linenumber" name="L444" href="#L444">444</a>         <strong class="jxr_keyword">private</strong> <a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> originalRequest;
+<a class="jxr_linenumber" name="L445" href="#L445">445</a>         <strong class="jxr_keyword">private</strong> List&lt;S7RequestMessage&gt; requestMessages;
+<a class="jxr_linenumber" name="L446" href="#L446">446</a>         <strong class="jxr_keyword">private</strong> List&lt;S7ResponseMessage&gt; responseMessages;
+<a class="jxr_linenumber" name="L447" href="#L447">447</a> 
+<a class="jxr_linenumber" name="L448" href="#L448">448</a>         S7CompositeRequestMessage(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> originalRequest) {
+<a class="jxr_linenumber" name="L449" href="#L449">449</a>             <strong class="jxr_keyword">this</strong>.originalRequest = originalRequest;
+<a class="jxr_linenumber" name="L450" href="#L450">450</a>             <strong class="jxr_keyword">this</strong>.requestMessages = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
+<a class="jxr_linenumber" name="L451" href="#L451">451</a>             <strong class="jxr_keyword">this</strong>.responseMessages = <strong class="jxr_keyword">new</strong> LinkedList&lt;&gt;();
+<a class="jxr_linenumber" name="L452" href="#L452">452</a>         }
+<a class="jxr_linenumber" name="L453" href="#L453">453</a> 
+<a class="jxr_linenumber" name="L454" href="#L454">454</a>         @Override
+<a class="jxr_linenumber" name="L455" href="#L455">455</a>         <strong class="jxr_keyword">public</strong> <a name="PlcProtocolMessage" href="../../../../../../../org/apache/plc4x/java/base/messages/PlcProtocolMessage.html#PlcProtocolMessage">PlcProtocolMessage</a> getParent() {
+<a class="jxr_linenumber" name="L456" href="#L456">456</a>             <strong class="jxr_keyword">return</strong> originalRequest;
+<a class="jxr_linenumber" name="L457" href="#L457">457</a>         }
+<a class="jxr_linenumber" name="L458" href="#L458">458</a> 
+<a class="jxr_linenumber" name="L459" href="#L459">459</a>         <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L460" href="#L460">460</a> <em class="jxr_javadoccomment">         * A {@link S7CompositeRequestMessage} is only acknowledged, if all children are acknowledged.</em>
+<a class="jxr_linenumber" name="L461" href="#L461">461</a> <em class="jxr_javadoccomment">         *</em>
+<a class="jxr_linenumber" name="L462" href="#L462">462</a> <em class="jxr_javadoccomment">         * @return true if all children are acknowledged.</em>
+<a class="jxr_linenumber" name="L463" href="#L463">463</a> <em class="jxr_javadoccomment">         */</em>
+<a class="jxr_linenumber" name="L464" href="#L464">464</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> isAcknowledged() {
+<a class="jxr_linenumber" name="L465" href="#L465">465</a>             <strong class="jxr_keyword">for</strong> (<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> requestMessage : requestMessages) {
+<a class="jxr_linenumber" name="L466" href="#L466">466</a>                 <strong class="jxr_keyword">if</strong>(!requestMessage.isAcknowledged()) {
+<a class="jxr_linenumber" name="L467" href="#L467">467</a>                     <strong class="jxr_keyword">return</strong> false;
+<a class="jxr_linenumber" name="L468" href="#L468">468</a>                 }
+<a class="jxr_linenumber" name="L469" href="#L469">469</a>             }
+<a class="jxr_linenumber" name="L470" href="#L470">470</a>             <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">true</strong>;
+<a class="jxr_linenumber" name="L471" href="#L471">471</a>         }
+<a class="jxr_linenumber" name="L472" href="#L472">472</a> 
+<a class="jxr_linenumber" name="L473" href="#L473">473</a>         <strong class="jxr_keyword">void</strong> addRequestMessage(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> requestMessage) {
+<a class="jxr_linenumber" name="L474" href="#L474">474</a>             requestMessages.add(requestMessage);
+<a class="jxr_linenumber" name="L475" href="#L475">475</a>         }
+<a class="jxr_linenumber" name="L476" href="#L476">476</a> 
+<a class="jxr_linenumber" name="L477" href="#L477">477</a>         <strong class="jxr_keyword">public</strong> List&lt;S7RequestMessage&gt; getRequestMessages() {
+<a class="jxr_linenumber" name="L478" href="#L478">478</a>             <strong class="jxr_keyword">return</strong> requestMessages;
 <a class="jxr_linenumber" name="L479" href="#L479">479</a>         }
 <a class="jxr_linenumber" name="L480" href="#L480">480</a> 
-<a class="jxr_linenumber" name="L481" href="#L481">481</a>         <strong class="jxr_keyword">void</strong> addRequestMessage(<a name="S7RequestMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7RequestMessage.html#S7RequestMessage">S7RequestMessage</a> requestMessage) {
-<a class="jxr_linenumber" name="L482" href="#L482">482</a>             requestMessages.add(requestMessage);
+<a class="jxr_linenumber" name="L481" href="#L481">481</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addResponseMessage(<a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> responseMessage) {
+<a class="jxr_linenumber" name="L482" href="#L482">482</a>             responseMessages.add(responseMessage);
 <a class="jxr_linenumber" name="L483" href="#L483">483</a>         }
 <a class="jxr_linenumber" name="L484" href="#L484">484</a> 
-<a class="jxr_linenumber" name="L485" href="#L485">485</a>         <strong class="jxr_keyword">public</strong> List&lt;S7RequestMessage&gt; getRequestMessages() {
-<a class="jxr_linenumber" name="L486" href="#L486">486</a>             <strong class="jxr_keyword">return</strong> requestMessages;
+<a class="jxr_linenumber" name="L485" href="#L485">485</a>         <strong class="jxr_keyword">public</strong> List&lt;S7ResponseMessage&gt; getResponseMessages() {
+<a class="jxr_linenumber" name="L486" href="#L486">486</a>             <strong class="jxr_keyword">return</strong> responseMessages;
 <a class="jxr_linenumber" name="L487" href="#L487">487</a>         }
-<a class="jxr_linenumber" name="L488" href="#L488">488</a> 
-<a class="jxr_linenumber" name="L489" href="#L489">489</a>         <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> addResponseMessage(<a name="S7ResponseMessage" href="../../../../../../../org/apache/plc4x/java/s7/netty/model/messages/S7ResponseMessage.html#S7ResponseMessage">S7ResponseMessage</a> responseMessage) {
-<a class="jxr_linenumber" name="L490" href="#L490">490</a>             responseMessages.add(responseMessage);
-<a class="jxr_linenumber" name="L491" href="#L491">491</a>         }
-<a class="jxr_linenumber" name="L492" href="#L492">492</a> 
-<a class="jxr_linenumber" name="L493" href="#L493">493</a>         <strong class="jxr_keyword">public</strong> List&lt;S7ResponseMessage&gt; getResponseMessages() {
-<a class="jxr_linenumber" name="L494" href="#L494">494</a>             <strong class="jxr_keyword">return</strong> responseMessages;
-<a class="jxr_linenumber" name="L495" href="#L495">495</a>         }
-<a class="jxr_linenumber" name="L496" href="#L496">496</a>     }
-<a class="jxr_linenumber" name="L497" href="#L497">497</a> 
-<a class="jxr_linenumber" name="L498" href="#L498">498</a> }
+<a class="jxr_linenumber" name="L488" href="#L488">488</a>     }
+<a class="jxr_linenumber" name="L489" href="#L489">489</a> 
+<a class="jxr_linenumber" name="L490" href="#L490">490</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017&#x2013;2019 <a href="https://www.apache.org/">The Apache Software Foundation</a>. All rights reserved.</div>
