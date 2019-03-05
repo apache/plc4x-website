@@ -35,26 +35,26 @@ public class UnknownCommand extends AmsPacket {
     private final transient ByteBuf remainingBytes;
 
     private UnknownCommand(AmsHeader amsHeader, ByteBuf remainingBytes) {
-<span class="fc" id="L38">        super(amsHeader);</span>
-<span class="fc" id="L39">        this.remainingBytes = requireNonNull(remainingBytes);</span>
-<span class="fc" id="L40">    }</span>
+<span class="nc" id="L38">        super(amsHeader);</span>
+<span class="nc" id="L39">        this.remainingBytes = requireNonNull(remainingBytes);</span>
+<span class="nc" id="L40">    }</span>
 
     private UnknownCommand(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, State stateId, Invoke invokeId, ByteBuf remainingBytes) {
-<span class="fc" id="L43">        super(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, stateId, invokeId);</span>
-<span class="fc" id="L44">        this.remainingBytes = requireNonNull(remainingBytes);</span>
-<span class="fc" id="L45">    }</span>
+<span class="nc" id="L43">        super(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, stateId, invokeId);</span>
+<span class="nc" id="L44">        this.remainingBytes = requireNonNull(remainingBytes);</span>
+<span class="nc" id="L45">    }</span>
 
     @Override
     public AdsData getAdsData() {
-<span class="pc" id="L49">        return () -&gt; remainingBytes;</span>
+<span class="nc" id="L49">        return () -&gt; remainingBytes;</span>
     }
 
     public static UnknownCommand of(AmsHeader amsHeader, ByteBuf remainingBytes) {
-<span class="fc" id="L53">        return new UnknownCommand(amsHeader, remainingBytes);</span>
+<span class="nc" id="L53">        return new UnknownCommand(amsHeader, remainingBytes);</span>
     }
 
     public static UnknownCommand of(AmsNetId targetAmsNetId, AmsPort targetAmsPort, AmsNetId sourceAmsNetId, AmsPort sourceAmsPort, State stateId, Invoke invokeId, ByteBuf remainingBytes) {
-<span class="fc" id="L57">        return new UnknownCommand(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, stateId, invokeId, remainingBytes);</span>
+<span class="nc" id="L57">        return new UnknownCommand(targetAmsNetId, targetAmsPort, sourceAmsNetId, sourceAmsPort, stateId, invokeId, remainingBytes);</span>
     }
 
     @Override
@@ -83,7 +83,7 @@ public class UnknownCommand extends AmsPacket {
 
     @Override
     public String toString() {
-<span class="fc" id="L86">        return &quot;UnknownCommand&quot;;</span>
+<span class="nc" id="L86">        return &quot;UnknownCommand&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

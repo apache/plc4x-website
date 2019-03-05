@@ -270,33 +270,33 @@ public class AdsTcpPlcConnection extends AdsAbstractPlcConnection implements Plc
     }
 
     public InternalPlcConsumerRegistration register(Consumer&lt;PlcSubscriptionEvent&gt; consumer, PlcSubscriptionHandle... handles) {
-<span class="fc" id="L273">        Objects.requireNonNull(consumer);</span>
-<span class="fc" id="L274">        Objects.requireNonNull(handles);</span>
-<span class="fc" id="L275">        InternalPlcSubscriptionHandle[] internalPlcSubscriptionHandles = new InternalPlcSubscriptionHandle[handles.length];</span>
-<span class="pc bpc" id="L276" title="1 of 2 branches missed.">        for (int i = 0; i &lt; handles.length; i++) {</span>
+<span class="nc" id="L273">        Objects.requireNonNull(consumer);</span>
+<span class="nc" id="L274">        Objects.requireNonNull(handles);</span>
+<span class="nc" id="L275">        InternalPlcSubscriptionHandle[] internalPlcSubscriptionHandles = new InternalPlcSubscriptionHandle[handles.length];</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        for (int i = 0; i &lt; handles.length; i++) {</span>
 <span class="nc" id="L277">            internalPlcSubscriptionHandles[i] = checkInternal(handles[i], InternalPlcSubscriptionHandle.class);</span>
         }
 
-<span class="fc" id="L280">        InternalPlcConsumerRegistration internalPlcConsumerRegistration = new DefaultPlcConsumerRegistration(this, consumer, internalPlcSubscriptionHandles);</span>
-<span class="fc" id="L281">        Map&lt;NotificationHandle, AdsSubscriptionHandle&gt; notificationHandleAdsSubscriptionHandleMap = Arrays.stream(internalPlcSubscriptionHandles)</span>
-<span class="pc" id="L282">            .map(subscriptionHandle -&gt; checkInternal(subscriptionHandle, AdsSubscriptionHandle.class))</span>
-<span class="fc" id="L283">            .collect(Collectors.toConcurrentMap(AdsSubscriptionHandle::getNotificationHandle, Function.identity()));</span>
+<span class="nc" id="L280">        InternalPlcConsumerRegistration internalPlcConsumerRegistration = new DefaultPlcConsumerRegistration(this, consumer, internalPlcSubscriptionHandles);</span>
+<span class="nc" id="L281">        Map&lt;NotificationHandle, AdsSubscriptionHandle&gt; notificationHandleAdsSubscriptionHandleMap = Arrays.stream(internalPlcSubscriptionHandles)</span>
+<span class="nc" id="L282">            .map(subscriptionHandle -&gt; checkInternal(subscriptionHandle, AdsSubscriptionHandle.class))</span>
+<span class="nc" id="L283">            .collect(Collectors.toConcurrentMap(AdsSubscriptionHandle::getNotificationHandle, Function.identity()));</span>
 
-<span class="fc" id="L285">        Consumer&lt;AdsDeviceNotificationRequest&gt; adsDeviceNotificationRequestConsumer =</span>
-<span class="fc" id="L286">            adsDeviceNotificationRequest -&gt; adsDeviceNotificationRequest.getAdsStampHeaders().forEach(adsStampHeader -&gt; {</span>
-<span class="fc" id="L287">                Instant timeStamp = adsStampHeader.getTimeStamp().getAsDate().toInstant();</span>
+<span class="nc" id="L285">        Consumer&lt;AdsDeviceNotificationRequest&gt; adsDeviceNotificationRequestConsumer =</span>
+<span class="nc" id="L286">            adsDeviceNotificationRequest -&gt; adsDeviceNotificationRequest.getAdsStampHeaders().forEach(adsStampHeader -&gt; {</span>
+<span class="nc" id="L287">                Instant timeStamp = adsStampHeader.getTimeStamp().getAsDate().toInstant();</span>
 
-<span class="fc" id="L289">                Map&lt;String, Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt;&gt; fields = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L290">                adsStampHeader.getAdsNotificationSamples()</span>
-<span class="fc" id="L291">                    .forEach(adsNotificationSample -&gt; {</span>
-<span class="fc" id="L292">                        NotificationHandle notificationHandle = adsNotificationSample.getNotificationHandle();</span>
-<span class="fc" id="L293">                        Data data = adsNotificationSample.getData();</span>
-<span class="fc" id="L294">                        AdsSubscriptionHandle adsSubscriptionHandle = notificationHandleAdsSubscriptionHandleMap.get(notificationHandle);</span>
-<span class="pc bpc" id="L295" title="1 of 2 branches missed.">                        if (adsSubscriptionHandle == null) {</span>
+<span class="nc" id="L289">                Map&lt;String, Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt;&gt; fields = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L290">                adsStampHeader.getAdsNotificationSamples()</span>
+<span class="nc" id="L291">                    .forEach(adsNotificationSample -&gt; {</span>
+<span class="nc" id="L292">                        NotificationHandle notificationHandle = adsNotificationSample.getNotificationHandle();</span>
+<span class="nc" id="L293">                        Data data = adsNotificationSample.getData();</span>
+<span class="nc" id="L294">                        AdsSubscriptionHandle adsSubscriptionHandle = notificationHandleAdsSubscriptionHandleMap.get(notificationHandle);</span>
+<span class="nc bnc" id="L295" title="All 2 branches missed.">                        if (adsSubscriptionHandle == null) {</span>
                             // TODO: we might want to refactor this so that we don't subscribe to everything in the first place.
                             // TODO: rather than we add a Consumer with the handle as key
-<span class="fc" id="L298">                            LOGGER.trace(&quot;We are not interested in this sample {} with handle {}&quot;, adsNotificationSample, notificationHandle);</span>
-<span class="fc" id="L299">                            return;</span>
+<span class="nc" id="L298">                            LOGGER.trace(&quot;We are not interested in this sample {} with handle {}&quot;, adsNotificationSample, notificationHandle);</span>
+<span class="nc" id="L299">                            return;</span>
                         }
 <span class="nc" id="L301">                        String plcFieldName = adsSubscriptionHandle.getPlcFieldName();</span>
 <span class="nc" id="L302">                        AdsDataType adsDataType = adsSubscriptionHandle.getAdsDataType();</span>
@@ -309,27 +309,27 @@ public class AdsTcpPlcConnection extends AdsAbstractPlcConnection implements Plc
 
 <span class="nc" id="L310">                    });</span>
                 try {
-<span class="fc" id="L312">                    PlcSubscriptionEvent subscriptionEventItem = new DefaultPlcSubscriptionEvent(timeStamp, fields);</span>
-<span class="fc" id="L313">                    consumer.accept(subscriptionEventItem);</span>
+<span class="nc" id="L312">                    PlcSubscriptionEvent subscriptionEventItem = new DefaultPlcSubscriptionEvent(timeStamp, fields);</span>
+<span class="nc" id="L313">                    consumer.accept(subscriptionEventItem);</span>
 <span class="nc" id="L314">                } catch (RuntimeException e) {</span>
 <span class="nc" id="L315">                    LOGGER.error(&quot;Can't dispatch adsStampHeader {}&quot;, adsStampHeader, e);</span>
-<span class="fc" id="L316">                }</span>
-<span class="fc" id="L317">            });</span>
+<span class="nc" id="L316">                }</span>
+<span class="nc" id="L317">            });</span>
 
         // Store the reference for so it can be uses for later
-<span class="fc" id="L320">        consumerRegistrations.put(internalPlcConsumerRegistration, adsDeviceNotificationRequestConsumer);</span>
+<span class="nc" id="L320">        consumerRegistrations.put(internalPlcConsumerRegistration, adsDeviceNotificationRequestConsumer);</span>
         // register the actual consumer.
-<span class="fc" id="L322">        getChannel().pipeline().get(Plc4x2AdsProtocol.class).addConsumer(adsDeviceNotificationRequestConsumer);</span>
+<span class="nc" id="L322">        getChannel().pipeline().get(Plc4x2AdsProtocol.class).addConsumer(adsDeviceNotificationRequestConsumer);</span>
 
-<span class="fc" id="L324">        return internalPlcConsumerRegistration;</span>
+<span class="nc" id="L324">        return internalPlcConsumerRegistration;</span>
     }
 
     @Override
     public void unregister(PlcConsumerRegistration plcConsumerRegistration) {
-<span class="fc" id="L329">        InternalPlcConsumerRegistration internalPlcConsumerRegistration = checkInternal(plcConsumerRegistration, InternalPlcConsumerRegistration.class);</span>
-<span class="fc" id="L330">        Consumer&lt;AdsDeviceNotificationRequest&gt; adsDeviceNotificationRequestConsumer = consumerRegistrations.remove(internalPlcConsumerRegistration);</span>
-<span class="pc bpc" id="L331" title="1 of 2 branches missed.">        if (adsDeviceNotificationRequestConsumer == null) {</span>
-<span class="fc" id="L332">            return;</span>
+<span class="nc" id="L329">        InternalPlcConsumerRegistration internalPlcConsumerRegistration = checkInternal(plcConsumerRegistration, InternalPlcConsumerRegistration.class);</span>
+<span class="nc" id="L330">        Consumer&lt;AdsDeviceNotificationRequest&gt; adsDeviceNotificationRequestConsumer = consumerRegistrations.remove(internalPlcConsumerRegistration);</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">        if (adsDeviceNotificationRequestConsumer == null) {</span>
+<span class="nc" id="L332">            return;</span>
         }
 <span class="nc" id="L334">        getChannel().pipeline().get(Plc4x2AdsProtocol.class).removeConsumer(adsDeviceNotificationRequestConsumer);</span>
 <span class="nc" id="L335">    }</span>

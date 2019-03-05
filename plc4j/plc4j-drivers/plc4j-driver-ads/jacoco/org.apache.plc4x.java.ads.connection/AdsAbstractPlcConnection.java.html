@@ -228,12 +228,12 @@ public abstract class AdsAbstractPlcConnection extends NettyPlcConnection implem
     protected &lt;T&gt; T getFromFuture(CompletableFuture&lt;T&gt; future, long timeout) {
         try {
 <span class="fc" id="L230">            return future.get(timeout, TimeUnit.MILLISECONDS);</span>
-<span class="fc" id="L231">        } catch (InterruptedException e) {</span>
-<span class="fc" id="L232">            LOGGER.warn(&quot;Interrupted!&quot;, e);</span>
-<span class="fc" id="L233">            Thread.currentThread().interrupt();</span>
-<span class="fc" id="L234">            throw new PlcRuntimeException(e);</span>
-<span class="fc" id="L235">        } catch (ExecutionException | TimeoutException e) {</span>
-<span class="fc" id="L236">            throw new PlcRuntimeException(e);</span>
+<span class="nc" id="L231">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L232">            LOGGER.warn(&quot;Interrupted!&quot;, e);</span>
+<span class="nc" id="L233">            Thread.currentThread().interrupt();</span>
+<span class="nc" id="L234">            throw new PlcRuntimeException(e);</span>
+<span class="nc" id="L235">        } catch (ExecutionException | TimeoutException e) {</span>
+<span class="nc" id="L236">            throw new PlcRuntimeException(e);</span>
         }
     }
 

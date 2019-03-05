@@ -65,7 +65,7 @@ public class AmsTcpHeader implements ByteReadable {
     }
 
     public static AmsTcpHeader of(long length) {
-<span class="fc" id="L68">        return new AmsTcpHeader(TcpLength.of(length));</span>
+<span class="nc" id="L68">        return new AmsTcpHeader(TcpLength.of(length));</span>
     }
 
     public static AmsTcpHeader of(LengthSupplier... lengthSuppliers) {
@@ -73,7 +73,7 @@ public class AmsTcpHeader implements ByteReadable {
     }
 
     public TcpLength getTcpLength() {
-<span class="fc bfc" id="L76" title="All 2 branches covered.">        return lengthSuppliers == null ? tcpLength : TcpLength.of(getCalculatedLength());</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        return lengthSuppliers == null ? tcpLength : TcpLength.of(getCalculatedLength());</span>
     }
 
     @Override
@@ -99,8 +99,8 @@ public class AmsTcpHeader implements ByteReadable {
 
     @Override
     public long getCalculatedLength() {
-<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (lengthSuppliers == null) {</span>
-<span class="fc" id="L103">            return tcpLength.getAsLong();</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (lengthSuppliers == null) {</span>
+<span class="nc" id="L103">            return tcpLength.getAsLong();</span>
         } else {
 <span class="fc" id="L105">            long aggregateLength = 0;</span>
 <span class="fc bfc" id="L106" title="All 2 branches covered.">            for (LengthSupplier supplier : lengthSuppliers) {</span>
