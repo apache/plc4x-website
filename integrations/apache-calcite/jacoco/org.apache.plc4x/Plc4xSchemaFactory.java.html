@@ -23,36 +23,46 @@ import org.apache.calcite.schema.SchemaFactory;
 import org.apache.calcite.schema.SchemaPlus;
 import org.apache.commons.lang3.Validate;
 import org.apache.plc4x.java.scraper.config.ScraperConfiguration;
+import org.apache.plc4x.java.scraper.exception.ScraperException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Map;
 
-<span class="fc" id="L30">public class Plc4xSchemaFactory implements SchemaFactory {</span>
+<span class="fc" id="L33">public class Plc4xSchemaFactory implements SchemaFactory {</span>
+<span class="fc" id="L34">    private static final Logger LOGGER = LoggerFactory.getLogger(Plc4xSchemaFactory.class);</span>
 
     @Override
     public Schema create(SchemaPlus parentSchema, String name, Map&lt;String, Object&gt; operand) {
         // Fetch config
-<span class="fc" id="L35">        Object config = operand.get(&quot;config&quot;);</span>
-<span class="fc" id="L36">        Validate.notNull(config, &quot;No configuration file given. Please specify operand 'config'...'&quot;);</span>
+<span class="fc" id="L39">        Object config = operand.get(&quot;config&quot;);</span>
+<span class="fc" id="L40">        Validate.notNull(config, &quot;No configuration file given. Please specify operand 'config'...'&quot;);</span>
         // Load configuration from file
         ScraperConfiguration configuration;
         try {
-<span class="fc" id="L40">            configuration = ScraperConfiguration.fromFile(config.toString());</span>
-<span class="nc" id="L41">        } catch (IOException e) {</span>
-<span class="nc" id="L42">            throw new IllegalArgumentException(&quot;Unable to load configuration file!&quot;, e);</span>
-<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">            configuration = ScraperConfiguration.fromFile(config.toString());</span>
+<span class="nc" id="L45">        } catch (IOException e) {</span>
+<span class="nc" id="L46">            throw new IllegalArgumentException(&quot;Unable to load configuration file!&quot;, e);</span>
+<span class="fc" id="L47">        }</span>
 
         // Fetch limit
-<span class="fc" id="L46">        Object limit = operand.get(&quot;limit&quot;);</span>
-<span class="fc" id="L47">        Validate.notNull(limit, &quot;No limit for the number of rows for a table. Please specify operand 'config'...'&quot;);</span>
+<span class="fc" id="L50">        Object limit = operand.get(&quot;limit&quot;);</span>
+<span class="fc" id="L51">        Validate.notNull(limit, &quot;No limit for the number of rows for a table. Please specify operand 'config'...'&quot;);</span>
         long parsedLimit;
         try {
-<span class="fc" id="L50">            parsedLimit = Long.parseLong(limit.toString());</span>
-<span class="nc" id="L51">        } catch (NumberFormatException e) {</span>
-<span class="nc" id="L52">            throw new IllegalArgumentException(&quot;Given limit '&quot; + limit + &quot;' cannot be parsed to valid long!&quot;, e);</span>
-<span class="fc" id="L53">        }</span>
+<span class="fc" id="L54">            parsedLimit = Long.parseLong(limit.toString());</span>
+<span class="nc" id="L55">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L56">            throw new IllegalArgumentException(&quot;Given limit '&quot; + limit + &quot;' cannot be parsed to valid long!&quot;, e);</span>
+<span class="fc" id="L57">        }</span>
         // Pass the configuration to the Schema
-<span class="fc" id="L55">        return new Plc4xSchema(configuration, parsedLimit);</span>
+        try {
+<span class="fc" id="L60">            return new Plc4xSchema(configuration, parsedLimit);</span>
+<span class="nc" id="L61">        } catch (ScraperException e) {</span>
+<span class="nc" id="L62">            LOGGER.warn(&quot;Could not evaluate Plc4xSchema&quot;,e);</span>
+            //ToDo Exception, but interface does not accept ... null is fishy
+<span class="nc" id="L64">            return null;</span>
+        }
     }
 
 }

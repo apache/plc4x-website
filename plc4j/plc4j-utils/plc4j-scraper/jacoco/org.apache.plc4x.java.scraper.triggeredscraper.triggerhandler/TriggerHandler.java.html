@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TriggerHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Utils: Scraper</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.scraper.triggeredscraper.triggerhandler</a> &gt; <span class="el_source">TriggerHandler.java</span></div><h1>TriggerHandler.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.apache.plc4x.java.scraper.triggeredscraper.triggerhandler;
+
+import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
+import org.apache.plc4x.java.api.messages.PlcReadRequest;
+import org.apache.plc4x.java.api.messages.PlcReadResponse;
+import org.apache.plc4x.java.scraper.exception.ScraperException;
+import org.apache.plc4x.java.scraper.triggeredscraper.TriggeredScrapeJobImpl;
+import org.apache.plc4x.java.scraper.triggeredscraper.TriggeredScraperTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * holds the handler for the regarding trigger-scraper on rising-trigger edge
+ */
+public class TriggerHandler {
+<span class="nc" id="L39">    private static final Logger LOGGER = LoggerFactory.getLogger(TriggerHandler.class);</span>
+    private static final String TRIGGER = &quot;trigger&quot;;
+
+    private final TriggerConfiguration triggerConfiguration;
+    private final TriggeredScraperTask parentScraperTask;
+
+    //used to enable trigger only on rising edge
+    private boolean lastTriggerState;
+
+<span class="nc" id="L48">    public TriggerHandler(String triggerStrategy, TriggeredScrapeJobImpl triggeredScrapeJob,TriggeredScraperTask parentScraperTask) throws ScraperException {</span>
+<span class="nc" id="L49">        this.triggerConfiguration = TriggerConfiguration.createConfiguration(triggerStrategy,triggeredScrapeJob);</span>
+<span class="nc" id="L50">        this.parentScraperTask = parentScraperTask;</span>
+<span class="nc" id="L51">        this.lastTriggerState = false;</span>
+<span class="nc" id="L52">    }</span>
+
+    /**
+     * checks rising edge of trigger event
+     * @return true on detection of rising edge, false otherwise
+     */
+    public boolean checkTrigger(){
+<span class="nc bnc" id="L59" title="All 3 branches missed.">        switch (this.triggerConfiguration.getTriggerType()){</span>
+            case SCHEDULED:
+                //used base scheduling -&gt; trigger is always true
+<span class="nc" id="L62">                return true;</span>
+            case S7_TRIGGER_VAR:
+<span class="nc" id="L64">                return checkS7TriggerVariable();</span>
+            default:
+                //should not happen
+<span class="nc" id="L67">                return false;</span>
+        }
+    }
+
+    /**
+     * acquires the given S7Field from S7 and evaluates if trigger is released
+     * @return true if rising-edge of trigger is detected, false otherwise
+     */
+    private boolean checkS7TriggerVariable(){
+
+<span class="nc" id="L77">        CompletableFuture&lt;PlcConnection&gt; future = CompletableFuture.supplyAsync(() -&gt; {</span>
+            try {
+<span class="nc" id="L79">                return parentScraperTask.getDriverManager().getConnection(parentScraperTask.getConnectionString());</span>
+<span class="nc" id="L80">            } catch (PlcConnectionException e) {</span>
+<span class="nc" id="L81">                LOGGER.warn(&quot;Unable to instantiate connection to &quot; + parentScraperTask.getConnectionString(), e);</span>
+<span class="nc" id="L82">                throw new PlcRuntimeException(e);</span>
+            }
+<span class="nc" id="L84">        }, parentScraperTask.getExecutorService());</span>
+<span class="nc" id="L85">        PlcConnection connection = null;</span>
+        try {
+<span class="nc" id="L87">            connection = future.get(parentScraperTask.getRequestTimeoutMs(), TimeUnit.MILLISECONDS);</span>
+<span class="nc" id="L88">            LOGGER.trace(&quot;Connection to {} established: {}&quot;, parentScraperTask.getConnectionString(), connection);</span>
+<span class="nc" id="L89">            PlcReadRequest.Builder builder = connection.readRequestBuilder();</span>
+<span class="nc" id="L90">            builder.addItem(TRIGGER, triggerConfiguration.getTriggerVariable());</span>
+<span class="nc" id="L91">            PlcReadResponse response = builder</span>
+<span class="nc" id="L92">                .build()</span>
+<span class="nc" id="L93">                .execute()</span>
+<span class="nc" id="L94">                .get(parentScraperTask.getRequestTimeoutMs(), TimeUnit.MILLISECONDS);</span>
+
+            //check if trigger condition from TriggerConfiguration is fulfilled
+<span class="nc" id="L97">            boolean trigger = triggerConfiguration.evaluateTrigger(response.getObject(TRIGGER));</span>
+
+            //only trigger scraping of data on rising edge of trigger
+<span class="nc bnc" id="L100" title="All 4 branches missed.">            if(trigger &amp;&amp; !this.lastTriggerState){</span>
+<span class="nc" id="L101">                this.lastTriggerState = true;</span>
+<span class="nc" id="L102">                return true;</span>
+            }
+            else{
+<span class="nc" id="L105">                this.lastTriggerState = trigger;</span>
+<span class="nc" id="L106">                return false;</span>
+            }
+
+<span class="nc" id="L109">        } catch (Exception e) {</span>
+            // Handle execution exception
+<span class="nc" id="L111">            parentScraperTask.handleException(e);</span>
+<span class="nc" id="L112">            return false;</span>
+        }
+        finally {
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            if (connection != null) {</span>
+                try {
+<span class="nc" id="L117">                    connection.close();</span>
+<span class="nc" id="L118">                } catch (Exception e) {</span>
+<span class="nc" id="L119">                    LOGGER.warn(&quot;Error on closing connection&quot;,e);</span>
+                    // intentionally do nothing
+<span class="nc" id="L121">                }</span>
+            }
+        }
+    }
+
+
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

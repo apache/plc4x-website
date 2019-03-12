@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScraperTaskImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Utils: Scraper</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.scraper</a> &gt; <span class="el_source">ScraperTaskImpl.java</span></div><h1>ScraperTaskImpl.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+package org.apache.plc4x.java.scraper;
+
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.time.StopWatch;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.plc4x.java.PlcDriverManager;
+import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.exceptions.PlcConnectionException;
+import org.apache.plc4x.java.api.exceptions.PlcRuntimeException;
+import org.apache.plc4x.java.api.messages.PlcReadRequest;
+import org.apache.plc4x.java.api.messages.PlcReadResponse;
+import org.apache.plc4x.java.api.types.PlcResponseCode;
+import org.apache.plc4x.java.scraper.config.JobConfigurationImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+/**
+ * Plc Scraper Task that scrapes one source.
+ * One {@link ScrapeJobImpl} gets split into multiple tasks.
+ * One task for each source that is defined in the {@link JobConfigurationImpl}.
+ *
+ * @deprecated Scraper is deprecated please use {@link org.apache.plc4x.java.scraper.triggeredscraper.TriggeredScrapeJobImpl} instead all functions are supplied as well see java-doc of {@link org.apache.plc4x.java.scraper.triggeredscraper.TriggeredScraperImpl}
+ */
+@Deprecated
+public class ScraperTaskImpl implements ScraperTask {
+
+<span class="fc" id="L55">    private static final Logger LOGGER = LoggerFactory.getLogger(ScraperTaskImpl.class);</span>
+
+    private final PlcDriverManager driverManager;
+    private final String jobName;
+    private final String connectionAlias;
+    private final String connectionString;
+    private final Map&lt;String, String&gt; fields;
+    private final long requestTimeoutMs;
+    private final ExecutorService handlerService;
+    private final ResultHandler resultHandler;
+
+<span class="fc" id="L66">    private final AtomicLong requestCounter = new AtomicLong(0);</span>
+<span class="fc" id="L67">    private final AtomicLong successCounter = new AtomicLong(0);</span>
+<span class="fc" id="L68">    private final DescriptiveStatistics latencyStatistics = new DescriptiveStatistics(1000);</span>
+<span class="fc" id="L69">    private final DescriptiveStatistics failedStatistics = new DescriptiveStatistics(1000);</span>
+
+    public ScraperTaskImpl(PlcDriverManager driverManager,
+                           String jobName,
+                           String connectionAlias,
+                           String connectionString,
+                           Map&lt;String, String&gt; fields,
+                           long requestTimeoutMs,
+                           ExecutorService handlerService,
+<span class="fc" id="L78">                           ResultHandler resultHandler) {</span>
+<span class="fc" id="L79">        Validate.notNull(driverManager);</span>
+<span class="fc" id="L80">        Validate.notBlank(jobName);</span>
+<span class="fc" id="L81">        Validate.notBlank(connectionAlias);</span>
+<span class="fc" id="L82">        Validate.notBlank(connectionString);</span>
+<span class="fc" id="L83">        Validate.notEmpty(fields);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        Validate.isTrue(requestTimeoutMs &gt; 0);</span>
+<span class="fc" id="L85">        Validate.notNull(resultHandler);</span>
+<span class="fc" id="L86">        this.driverManager = driverManager;</span>
+<span class="fc" id="L87">        this.jobName = jobName;</span>
+<span class="fc" id="L88">        this.connectionAlias = connectionAlias;</span>
+<span class="fc" id="L89">        this.connectionString = connectionString;</span>
+<span class="fc" id="L90">        this.fields = fields;</span>
+<span class="fc" id="L91">        this.requestTimeoutMs = requestTimeoutMs;</span>
+<span class="fc" id="L92">        this.handlerService = handlerService;</span>
+<span class="fc" id="L93">        this.resultHandler = resultHandler;</span>
+<span class="fc" id="L94">    }</span>
+
+    @Override
+    public void run() {
+        // Does a single fetch
+<span class="fc" id="L99">        LOGGER.trace(&quot;Start new scrape of task of job {} for connection {}&quot;, jobName, connectionAlias);</span>
+<span class="fc" id="L100">        requestCounter.incrementAndGet();</span>
+<span class="fc" id="L101">        StopWatch stopWatch = new StopWatch();</span>
+<span class="fc" id="L102">        stopWatch.start();</span>
+<span class="fc" id="L103">        PlcConnection connection = null;</span>
+        try {
+<span class="fc" id="L105">            CompletableFuture&lt;PlcConnection&gt; future = CompletableFuture.supplyAsync(() -&gt; {</span>
+                try {
+<span class="fc" id="L107">                    return driverManager.getConnection(connectionString);</span>
+<span class="fc" id="L108">                } catch (PlcConnectionException e) {</span>
+<span class="fc" id="L109">                    LOGGER.warn(&quot;Unable to instantiate connection to &quot; + connectionString, e);</span>
+<span class="fc" id="L110">                    throw new PlcRuntimeException(e);</span>
+                }
+            }, handlerService);
+<span class="fc" id="L113">            connection = future.get(10*requestTimeoutMs, TimeUnit.MILLISECONDS);</span>
+<span class="fc" id="L114">            LOGGER.trace(&quot;Connection to {} established: {}&quot;, connectionString, connection);</span>
+            PlcReadResponse response;
+            try {
+<span class="fc" id="L117">                PlcReadRequest.Builder builder = connection.readRequestBuilder();</span>
+<span class="fc" id="L118">                fields.forEach((alias,qry) -&gt; {</span>
+<span class="fc" id="L119">                    LOGGER.trace(&quot;Requesting: {} -&gt; {}&quot;, alias, qry);</span>
+<span class="fc" id="L120">                    builder.addItem(alias,qry);</span>
+<span class="fc" id="L121">                });</span>
+<span class="fc" id="L122">                response = builder</span>
+<span class="fc" id="L123">                    .build()</span>
+<span class="fc" id="L124">                    .execute()</span>
+<span class="fc" id="L125">                    .get(requestTimeoutMs, TimeUnit.MILLISECONDS);</span>
+<span class="nc" id="L126">            } catch (ExecutionException e) {</span>
+                // Handle execution exception
+<span class="nc" id="L128">                handleException(e);</span>
+<span class="nc" id="L129">                return;</span>
+<span class="fc" id="L130">            }</span>
+            // Add statistics
+<span class="fc" id="L132">            stopWatch.stop();</span>
+<span class="fc" id="L133">            latencyStatistics.addValue(stopWatch.getNanoTime());</span>
+<span class="fc" id="L134">            failedStatistics.addValue(0.0);</span>
+<span class="fc" id="L135">            successCounter.incrementAndGet();</span>
+            // Validate response
+<span class="fc" id="L137">            validateResponse(response);</span>
+            // Handle response (Async)
+<span class="fc" id="L139">            CompletableFuture.runAsync(() -&gt; resultHandler.handle(jobName, connectionAlias, transformResponseToMap(response)), handlerService);</span>
+<span class="fc" id="L140">        } catch (Exception e) {</span>
+<span class="fc" id="L141">            LOGGER.debug(&quot;Exception during scrape&quot;, e);</span>
+<span class="fc" id="L142">            handleException(e);</span>
+        } finally {
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            if (connection != null) {</span>
+                try {
+<span class="fc" id="L146">                    connection.close();</span>
+<span class="nc" id="L147">                } catch (Exception e) {</span>
+<span class="nc" id="L148">                    LOGGER.warn(&quot;Error on closing connection&quot;,e);</span>
+<span class="fc" id="L149">                }</span>
+            }
+        }
+<span class="fc" id="L152">    }</span>
+
+    private void validateResponse(PlcReadResponse response) {
+<span class="fc" id="L155">        Map&lt;String, PlcResponseCode&gt; failedFields = response.getFieldNames().stream()</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">            .filter(name -&gt; !PlcResponseCode.OK.equals(response.getResponseCode(name)))</span>
+<span class="fc" id="L157">            .collect(Collectors.toMap(</span>
+<span class="fc" id="L158">                Function.identity(),</span>
+                response::getResponseCode
+            ));
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        if (failedFields.size() &gt; 0) {</span>
+<span class="fc" id="L162">            handleErrorResponse(failedFields);</span>
+        }
+<span class="fc" id="L164">    }</span>
+
+    private Map&lt;String, Object&gt; transformResponseToMap(PlcReadResponse response) {
+<span class="fc" id="L167">        return response.getFieldNames().stream()</span>
+<span class="fc" id="L168">            .collect(Collectors.toMap(</span>
+<span class="fc" id="L169">                name -&gt; name,</span>
+                response::getObject
+            ));
+    }
+
+    @Override
+    public String getJobName() {
+<span class="fc" id="L176">        return jobName;</span>
+    }
+
+    @Override
+    public String getConnectionAlias() {
+<span class="fc" id="L181">        return connectionAlias;</span>
+    }
+
+    @Override
+    public long getRequestCounter() {
+<span class="fc" id="L186">        return requestCounter.get();</span>
+    }
+
+    @Override
+    public long getSuccessfullRequestCounter() {
+<span class="fc" id="L191">        return successCounter.get();</span>
+    }
+
+    @Override
+    public DescriptiveStatistics getLatencyStatistics() {
+<span class="fc" id="L196">        return latencyStatistics;</span>
+    }
+
+    @Override
+    public double getPercentageFailed() {
+<span class="fc" id="L201">        return 100.0*failedStatistics.getMean();</span>
+    }
+
+    @Override
+    public void handleException(Exception e) {
+<span class="fc" id="L206">        LOGGER.debug(&quot;Exception: &quot;, e);</span>
+<span class="fc" id="L207">        failedStatistics.addValue(1.0);</span>
+<span class="fc" id="L208">    }</span>
+
+    @Override
+    public void handleErrorResponse(Map&lt;String, PlcResponseCode&gt; failed) {
+<span class="fc" id="L212">        LOGGER.warn(&quot;Handling error responses: {}&quot;, failed);</span>
+<span class="fc" id="L213">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":42,"i1":42,"i2":42,"i3":42};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -50,7 +50,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfiguration.html" title="class in org.apache.plc4x.java.scraper.config"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationException.html" title="class in org.apache.plc4x.java.scraper.config"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html" target="_top">Frames</a></li>
@@ -108,8 +108,12 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <hr>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">Scraper is deprecated please use <a href="../../../../../../org/apache/plc4x/java/scraper/config/triggeredscraper/TriggeredScraperConfigurationBuilder.html" title="class in org.apache.plc4x.java.scraper.config.triggeredscraper"><code>TriggeredScraperConfigurationBuilder</code></a> instead all functions are supplied as well see java-doc of <a href="../../../../../../org/apache/plc4x/java/scraper/triggeredscraper/TriggeredScraperImpl.html" title="class in org.apache.plc4x.java.scraper.triggeredscraper"><code>TriggeredScraperImpl</code></a></span></div>
+</div>
 <br>
-<pre>public class <span class="typeNameLabel">ScraperConfigurationBuilder</span>
+<pre><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
+public class <span class="typeNameLabel">ScraperConfigurationBuilder</span>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
 </li>
 </ul>
@@ -129,7 +133,9 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html#ScraperConfigurationBuilder--">ScraperConfigurationBuilder</a></span>()</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html#ScraperConfigurationBuilder--">ScraperConfigurationBuilder</a></span>()</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -141,24 +147,36 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html" title="class in org.apache.plc4x.java.scraper.config">ScraperConfigurationBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html#addSource-java.lang.String-java.lang.String-">addSource</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;alias,
-         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;connectionString)</code>&nbsp;</td>
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html#addJobConfiguration-org.apache.plc4x.java.scraper.config.JobConfigurationImpl-">addJobConfiguration</a></span>(<a href="../../../../../../org/apache/plc4x/java/scraper/config/JobConfigurationImpl.html" title="class in org.apache.plc4x.java.scraper.config">JobConfigurationImpl</a>&nbsp;configuration)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfiguration.html" title="class in org.apache.plc4x.java.scraper.config">ScraperConfiguration</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html#build--">build</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html" title="class in org.apache.plc4x.java.scraper.config">ScraperConfigurationBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html#addSource-java.lang.String-java.lang.String-">addSource</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;alias,
+         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;connectionString)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../../../org/apache/plc4x/java/scraper/config/JobConfigurationBuilder.html" title="class in org.apache.plc4x.java.scraper.config">JobConfigurationBuilder</a></code></td>
+<td class="colFirst"><code><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfiguration.html" title="class in org.apache.plc4x.java.scraper.config">ScraperConfiguration</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html#build--">build</a></span>()</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../org/apache/plc4x/java/scraper/config/JobConfigurationImplBuilder.html" title="class in org.apache.plc4x.java.scraper.config">JobConfigurationImplBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html#job-java.lang.String-int-">job</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name,
-   int&nbsp;scrapeRateMs)</code>&nbsp;</td>
+   int&nbsp;scrapeRateMs)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -189,6 +207,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <li class="blockList">
 <h4>ScraperConfigurationBuilder</h4>
 <pre>public&nbsp;ScraperConfigurationBuilder()</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 </li>
 </ul>
 </li>
@@ -207,6 +226,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <h4>addSource</h4>
 <pre>public&nbsp;<a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html" title="class in org.apache.plc4x.java.scraper.config">ScraperConfigurationBuilder</a>&nbsp;addSource(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;alias,
                                              <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;connectionString)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 </li>
 </ul>
 <a name="job-java.lang.String-int-">
@@ -215,17 +235,29 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>job</h4>
-<pre>public&nbsp;<a href="../../../../../../org/apache/plc4x/java/scraper/config/JobConfigurationBuilder.html" title="class in org.apache.plc4x.java.scraper.config">JobConfigurationBuilder</a>&nbsp;job(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name,
-                                   int&nbsp;scrapeRateMs)</pre>
+<pre>public&nbsp;<a href="../../../../../../org/apache/plc4x/java/scraper/config/JobConfigurationImplBuilder.html" title="class in org.apache.plc4x.java.scraper.config">JobConfigurationImplBuilder</a>&nbsp;job(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;name,
+                                       int&nbsp;scrapeRateMs)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 </li>
 </ul>
 <a name="build--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>build</h4>
 <pre>public&nbsp;<a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfiguration.html" title="class in org.apache.plc4x.java.scraper.config">ScraperConfiguration</a>&nbsp;build()</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+</li>
+</ul>
+<a name="addJobConfiguration-org.apache.plc4x.java.scraper.config.JobConfigurationImpl-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>addJobConfiguration</h4>
+<pre>public&nbsp;void&nbsp;addJobConfiguration(<a href="../../../../../../org/apache/plc4x/java/scraper/config/JobConfigurationImpl.html" title="class in org.apache.plc4x.java.scraper.config">JobConfigurationImpl</a>&nbsp;configuration)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 </li>
 </ul>
 </li>
@@ -257,7 +289,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfiguration.html" title="class in org.apache.plc4x.java.scraper.config"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../org/apache/plc4x/java/scraper/config/ScraperConfigurationException.html" title="class in org.apache.plc4x.java.scraper.config"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?org/apache/plc4x/java/scraper/config/ScraperConfigurationBuilder.html" target="_top">Frames</a></li>

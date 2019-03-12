@@ -64,7 +64,7 @@
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>          connection.setDevice(mockDevice);
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          when(mockDevice.read(any())).thenReturn(Pair.of(PlcResponseCode.OK, <strong class="jxr_keyword">new</strong> DefaultStringFieldItem(<span class="jxr_string">"hallo"</span>)));
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>  
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>          ScraperTask scraperTask = <strong class="jxr_keyword">new</strong> ScraperTask(driverManager, <span class="jxr_string">"job1"</span>, <span class="jxr_string">"m1"</span>, <span class="jxr_string">"mock:scraper"</span>, Collections.singletonMap(<span class="jxr_string">"a"</span>, <span class="jxr_string">"b"</span>),
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>          ScraperTask scraperTask = <strong class="jxr_keyword">new</strong> ScraperTaskImpl(driverManager, <span class="jxr_string">"job1"</span>, <span class="jxr_string">"m1"</span>, <span class="jxr_string">"mock:scraper"</span>, Collections.singletonMap(<span class="jxr_string">"a"</span>, <span class="jxr_string">"b"</span>),
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>              1_000, ForkJoinPool.commonPool(), (j,a,m) -&gt; {});
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>          scraperTask.run();
@@ -81,7 +81,7 @@
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>              connection.setDevice(mockDevice);
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>              when(mockDevice.read(any())).thenReturn(Pair.of(PlcResponseCode.NOT_FOUND, <strong class="jxr_keyword">new</strong> DefaultStringFieldItem(<span class="jxr_string">"hallo"</span>)));
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>  
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>              ScraperTask scraperTask = <strong class="jxr_keyword">new</strong> ScraperTask(driverManager, <span class="jxr_string">"job1"</span>, <span class="jxr_string">"m1"</span>,
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>              ScraperTask scraperTask = <strong class="jxr_keyword">new</strong> ScraperTaskImpl(driverManager, <span class="jxr_string">"job1"</span>, <span class="jxr_string">"m1"</span>,
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>                  <span class="jxr_string">"mock:scraper"</span>, Collections.singletonMap(<span class="jxr_string">"a"</span>, <span class="jxr_string">"b"</span>), 1_000, ForkJoinPool.commonPool(), (j,a,m) -&gt; {});
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>  
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>              <em class="jxr_comment">// When</em>
@@ -96,7 +96,7 @@
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>              <em class="jxr_comment">// Given</em>
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>              when(driverManager.getConnection(anyString())).thenThrow(<strong class="jxr_keyword">new</strong> PlcConnectionException(<span class="jxr_string">"stfu"</span>));
 <a class="jxr_linenumber" name="L90" href="#L90">90</a>  
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>              ScraperTask scraperTask = <strong class="jxr_keyword">new</strong> ScraperTask(driverManager, <span class="jxr_string">"job1"</span>, <span class="jxr_string">"m1"</span>, <span class="jxr_string">"mock:scraper"</span>, Collections.singletonMap(<span class="jxr_string">"a"</span>, <span class="jxr_string">"b"</span>),
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>              ScraperTask scraperTask = <strong class="jxr_keyword">new</strong> ScraperTaskImpl(driverManager, <span class="jxr_string">"job1"</span>, <span class="jxr_string">"m1"</span>, <span class="jxr_string">"mock:scraper"</span>, Collections.singletonMap(<span class="jxr_string">"a"</span>, <span class="jxr_string">"b"</span>),
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>                  1_000, ForkJoinPool.commonPool(), (j,a,m) -&gt; {});
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>  
 <a class="jxr_linenumber" name="L94" href="#L94">94</a>              ScraperTask spy = spy(scraperTask);
@@ -109,7 +109,7 @@
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>         <strong class="jxr_keyword">void</strong> runByScheduler_handledGracefully() <strong class="jxr_keyword">throws</strong> PlcConnectionException {
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>             when(driverManager.getConnection(anyString())).thenThrow(<strong class="jxr_keyword">new</strong> PlcConnectionException(<span class="jxr_string">"stfu"</span>));
 <a class="jxr_linenumber" name="L103" href="#L103">103</a>             ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
-<a class="jxr_linenumber" name="L104" href="#L104">104</a>             ScraperTask scraperTask = <strong class="jxr_keyword">new</strong> ScraperTask(driverManager, <span class="jxr_string">"job1"</span>, <span class="jxr_string">"m1"</span>, <span class="jxr_string">"mock:scraper"</span>, Collections.singletonMap(<span class="jxr_string">"a"</span>, <span class="jxr_string">"b"</span>),
+<a class="jxr_linenumber" name="L104" href="#L104">104</a>             ScraperTask scraperTask = <strong class="jxr_keyword">new</strong> ScraperTaskImpl(driverManager, <span class="jxr_string">"job1"</span>, <span class="jxr_string">"m1"</span>, <span class="jxr_string">"mock:scraper"</span>, Collections.singletonMap(<span class="jxr_string">"a"</span>, <span class="jxr_string">"b"</span>),
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>                 1_000, ForkJoinPool.commonPool(), (j,a,m) -&gt; {});
 <a class="jxr_linenumber" name="L106" href="#L106">106</a> 
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>             Future&lt;?&gt; future = pool.scheduleAtFixedRate(scraperTask, 0, 10, TimeUnit.MILLISECONDS);

@@ -119,6 +119,7 @@
                         <li ><a  href="../xref-test/index.html"  title="Test Source Xref" >Test Source Xref</a></li>
                         <li ><a  href="../changelog.html"  title="Change Log" >Change Log</a></li>
                         <li ><a  href="../file-activity.html"  title="File Activity" >File Activity</a></li>
+                        <li ><a  href="../dependency-check-report.html"  title="dependency-check:aggregate" >dependency-check:aggregate</a></li>
                     </ul>
                 </li>
             </ul>
@@ -895,13 +896,13 @@ git merge {tag-of-release}</code></pre>
   <div class="sect2"> 
    <h3 id="_toc_update_the_download_site1">Update the download site</h3> 
    <div class="paragraph"> 
-    <p>The URL <a href="http://plc4x.apache.org/users/download.html" class="bare">http://plc4x.apache.org/users/download.html</a> has to be changed and the current release has to be listed there. This is done by changing the <code>download.adoc</code> under <code>src/site/users/</code>.</p> 
+    <p>The URL <a href="http://plc4x.apache.org/users/download.html" class="bare">http://plc4x.apache.org/users/download.html</a> has to be changed and the current release has to be listed there. This is done by changing the <code>download.adoc</code> under <code>src/site/users/</code> (<strong>in the develop branch, as this is where the site is generated from!</strong>)</p> 
    </div> 
    <div class="olist arabic"> 
     <ol class="arabic"> 
      <li> <p>Copy the last release down to <em>Previous Releases</em></p> </li> 
      <li> <p>Add the new Release under <em>Current Releases</em> and change all links.</p> </li> 
-     <li> <p>Update the sections for the changes according to the <em>RELEASE_NOTES</em> from the release <em>Note: Transfer all to ascii-doc notation to ensure correct rendering of the site</em></p> </li> 
+     <li> <p>Update the sections for the changes according to the <em>RELEASE_NOTES</em> from the release <em>Note: Transfer all to ascii-doc notation to ensure correct rendering of the site</em> <em>Also remove the JIRA TICKET ids in Front</em></p> </li> 
     </ol> 
    </div> 
   </div> 

@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -242,22 +242,26 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protoco
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#getSlot--">getSlot</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcField.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcField</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#parse-java.lang.String-">parse</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery)</code>&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html?is-external=true" title="class or interface in java.util.concurrent">CompletableFuture</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcReadResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcReadResponse</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#read-org.apache.plc4x.java.api.messages.PlcReadRequest-">read</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcReadRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcReadRequest</a>&nbsp;readRequest)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcReadRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcReadRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#readRequestBuilder--">readRequestBuilder</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#sendChannelCreatedEvent--">sendChannelCreatedEvent</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html?is-external=true" title="class or interface in java.util.concurrent">CompletableFuture</a>&lt;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteResponse.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteResponse</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#write-org.apache.plc4x.java.api.messages.PlcWriteRequest-">write</a></span>(<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteRequest.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteRequest</a>&nbsp;writeRequest)</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/messages/PlcWriteRequest.Builder.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.messages">PlcWriteRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/apache/plc4x/java/s7/connection/S7PlcConnection.html#writeRequestBuilder--">writeRequestBuilder</a></span>()</code>&nbsp;</td>
 </tr>
@@ -382,6 +386,22 @@ implements <a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protoco
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/NettyPlcConnection.html?is-external=true#sendChannelCreatedEvent--" title="class or interface in org.apache.plc4x.java.base.connection">sendChannelCreatedEvent</a></code>&nbsp;in class&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base/apidocs/org/apache/plc4x/java/base/connection/NettyPlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.base.connection">NettyPlcConnection</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="parse-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>parse</h4>
+<pre>public&nbsp;<a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/model/PlcField.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.model">PlcField</a>&nbsp;parse(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery)
+               throws <a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcInvalidFieldException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcInvalidFieldException</a></pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true#parse-java.lang.String-" title="class or interface in org.apache.plc4x.java.api">parse</a></code>&nbsp;in interface&nbsp;<code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/PlcConnection.html?is-external=true" title="class or interface in org.apache.plc4x.java.api">PlcConnection</a></code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="https://plc4x.apache.org/plc4j/plc4j-api/apidocs/org/apache/plc4x/java/api/exceptions/PlcInvalidFieldException.html?is-external=true" title="class or interface in org.apache.plc4x.java.api.exceptions">PlcInvalidFieldException</a></code></dd>
 </dl>
 </li>
 </ul>

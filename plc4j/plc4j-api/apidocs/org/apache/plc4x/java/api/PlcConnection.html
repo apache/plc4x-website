@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":18,"i5":6,"i6":6,"i7":6,"i8":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -123,7 +123,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseab
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -153,24 +153,30 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseab
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>default <a href="../../../../../org/apache/plc4x/java/api/model/PlcField.html" title="interface in org.apache.plc4x.java.api.model">PlcField</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html#parse-java.lang.String-">parse</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery)</code>
+<div class="block">Parse a fieldQuery for the given connection type.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/apache/plc4x/java/api/messages/PlcReadRequest.Builder.html" title="interface in org.apache.plc4x.java.api.messages">PlcReadRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html#readRequestBuilder--">readRequestBuilder</a></span>()</code>
 <div class="block">Obtain read request builder.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/apache/plc4x/java/api/messages/PlcSubscriptionRequest.Builder.html" title="interface in org.apache.plc4x.java.api.messages">PlcSubscriptionRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html#subscriptionRequestBuilder--">subscriptionRequestBuilder</a></span>()</code>
 <div class="block">Obtain subscription request builder.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../org/apache/plc4x/java/api/messages/PlcUnsubscriptionRequest.Builder.html" title="interface in org.apache.plc4x.java.api.messages">PlcUnsubscriptionRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html#unsubscriptionRequestBuilder--">unsubscriptionRequestBuilder</a></span>()</code>
 <div class="block">Obtain unsubscription request builder.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/apache/plc4x/java/api/messages/PlcWriteRequest.Builder.html" title="interface in org.apache.plc4x.java.api.messages">PlcWriteRequest.Builder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/plc4x/java/api/PlcConnection.html#writeRequestBuilder--">writeRequestBuilder</a></span>()</code>
 <div class="block">Obtain write request builder.</div>
@@ -234,6 +240,22 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseab
 <dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html?is-external=true#close--" title="class or interface in java.lang">close</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html?is-external=true" title="class or interface in java.lang">AutoCloseable</a></code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></code> - if shutting down the connection failed</dd>
+</dl>
+</li>
+</ul>
+<a name="parse-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>parse</h4>
+<pre>default&nbsp;<a href="../../../../../org/apache/plc4x/java/api/model/PlcField.html" title="interface in org.apache.plc4x.java.api.model">PlcField</a>&nbsp;parse(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;fieldQuery)
+                throws <a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcInvalidFieldException.html" title="class in org.apache.plc4x.java.api.exceptions">PlcInvalidFieldException</a></pre>
+<div class="block">Parse a fieldQuery for the given connection type.</div>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcRuntimeException.html" title="class in org.apache.plc4x.java.api.exceptions">PlcRuntimeException</a></code> - If the string cannot be parsed</dd>
+<dd><code><a href="../../../../../org/apache/plc4x/java/api/exceptions/PlcInvalidFieldException.html" title="class in org.apache.plc4x.java.api.exceptions">PlcInvalidFieldException</a></code></dd>
 </dl>
 </li>
 </ul>

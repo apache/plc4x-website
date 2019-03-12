@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScrapeJobImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PLC4J: Utils: Scraper</a> &gt; <a href="index.source.html" class="el_package">org.apache.plc4x.java.scraper</a> &gt; <span class="el_source">ScrapeJobImpl.java</span></div><h1>ScrapeJobImpl.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+package org.apache.plc4x.java.scraper;
+
+import org.apache.plc4x.java.scraper.config.JobConfigurationImpl;
+
+import java.util.Map;
+
+/**
+ * POJO Object to transport all Job information.
+ * Is generated from {@link org.apache.plc4x.java.scraper.config.ScraperConfiguration} by
+ * merging the sources and the {@link JobConfigurationImpl}.
+ *
+ * @deprecated Scraper is deprecated please use {@link org.apache.plc4x.java.scraper.triggeredscraper.TriggeredScrapeJobImpl} instead all functions are supplied as well see java-doc of {@link org.apache.plc4x.java.scraper.triggeredscraper.TriggeredScraperImpl}
+ */
+@Deprecated
+public class ScrapeJobImpl implements ScrapeJob {
+
+    private final String name;
+    private final long scrapeRate;
+    private final Map&lt;String, String&gt; connections;
+    private final Map&lt;String, String&gt; fields;
+
+<span class="fc" id="L41">    public ScrapeJobImpl(String name, long scrapeRate, Map&lt;String, String&gt; connections, Map&lt;String, String&gt; fields) {</span>
+<span class="fc" id="L42">        this.name = name;</span>
+<span class="fc" id="L43">        this.scrapeRate = scrapeRate;</span>
+<span class="fc" id="L44">        this.connections = connections;</span>
+<span class="fc" id="L45">        this.fields = fields;</span>
+<span class="fc" id="L46">    }</span>
+
+    @Override
+    public String getJobName() {
+<span class="fc" id="L50">        return name;</span>
+    }
+
+    @Override
+    public long getScrapeRate() {
+<span class="fc" id="L55">        return scrapeRate;</span>
+    }
+
+    @Override
+    public Map&lt;String, String&gt; getSourceConnections() {
+<span class="fc" id="L60">        return connections;</span>
+    }
+
+    @Override
+    public Map&lt;String, String&gt; getFields() {
+<span class="fc" id="L65">        return fields;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
