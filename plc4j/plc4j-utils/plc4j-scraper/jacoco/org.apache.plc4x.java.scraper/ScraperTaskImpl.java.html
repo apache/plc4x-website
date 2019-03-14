@@ -123,10 +123,10 @@ public class ScraperTaskImpl implements ScraperTask {
 <span class="fc" id="L123">                    .build()</span>
 <span class="fc" id="L124">                    .execute()</span>
 <span class="fc" id="L125">                    .get(requestTimeoutMs, TimeUnit.MILLISECONDS);</span>
-<span class="nc" id="L126">            } catch (ExecutionException e) {</span>
+<span class="fc" id="L126">            } catch (ExecutionException e) {</span>
                 // Handle execution exception
-<span class="nc" id="L128">                handleException(e);</span>
-<span class="nc" id="L129">                return;</span>
+<span class="fc" id="L128">                handleException(e);</span>
+<span class="fc" id="L129">                return;</span>
 <span class="fc" id="L130">            }</span>
             // Add statistics
 <span class="fc" id="L132">            stopWatch.stop();</span>
