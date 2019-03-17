@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  */
 //ToDo: Improve structure to make it more generic --&gt; PLC4X-89
 public class TriggerConfiguration{
-<span class="fc" id="L38">    private static final Logger LOGGER = LoggerFactory.getLogger(TriggerConfiguration.class);</span>
+<span class="fc" id="L38">    private static final Logger logger = LoggerFactory.getLogger(TriggerConfiguration.class);</span>
 
     private static final String S_7_TRIGGER_VAR = &quot;S7_TRIGGER_VAR&quot;;
     private static final String SCHEDULED = &quot;SCHEDULED&quot;;
@@ -44,7 +44,6 @@ public class TriggerConfiguration{
 
 <span class="fc" id="L45">    private static final Pattern TRIGGER_STRATEGY_PATTERN =</span>
 <span class="fc" id="L46">        Pattern.compile(&quot;\\((?&lt;strategy&gt;[A-Z_0-9]+),(?&lt;scheduledInterval&gt;\\d+)(,(\\((?&lt;triggerVar&gt;\\S+)\\))((?&lt;comp&gt;[!=&lt;&gt;]{1,2}))(\\((?&lt;compVar&gt;[a-z0-9.\\-]+)\\)))?\\)&quot;);</span>
-
 
     private final TriggerType triggerType;
     private final Long scrapeInterval;
@@ -56,8 +55,6 @@ public class TriggerConfiguration{
     private final Object compareValue;
     private final PlcField plcField;
 
-
-
     /**
      * default constructor when an S7Field should be used for triggering
      * @param triggerType type of trigger from enum
@@ -68,35 +65,36 @@ public class TriggerConfiguration{
      * @param triggeredScrapeJobImpl the job which is valid for the configuration
      * @throws ScraperException when something goes wrong with configuration
      */
-<span class="fc" id="L71">    public TriggerConfiguration(TriggerType triggerType, String scrapeInterval, String triggerVariable, String comparator, String compareValue, TriggeredScrapeJobImpl triggeredScrapeJobImpl) throws ScraperException {</span>
-<span class="fc" id="L72">        this.triggerType = triggerType;</span>
-<span class="fc" id="L73">        this.triggeredScrapeJobImpl = triggeredScrapeJobImpl;</span>
-<span class="fc" id="L74">        this.scrapeInterval = parseScrapeInterval(scrapeInterval);</span>
-<span class="fc" id="L75">        this.triggerVariable = triggerVariable;</span>
-<span class="fc" id="L76">        this.comparator = comparator;</span>
+<span class="fc" id="L68">    public TriggerConfiguration(TriggerType triggerType, String scrapeInterval, String triggerVariable, String comparator, String compareValue, TriggeredScrapeJobImpl triggeredScrapeJobImpl) throws ScraperException {</span>
+<span class="fc" id="L69">        this.triggerType = triggerType;</span>
+<span class="fc" id="L70">        this.triggeredScrapeJobImpl = triggeredScrapeJobImpl;</span>
+<span class="fc" id="L71">        this.scrapeInterval = parseScrapeInterval(scrapeInterval);</span>
+<span class="fc" id="L72">        this.triggerVariable = triggerVariable;</span>
+<span class="fc" id="L73">        this.comparator = comparator;</span>
 
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if(this.triggerType.equals(TriggerType.S7_TRIGGER_VAR)) {</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if(this.triggerType.equals(TriggerType.S7_TRIGGER_VAR)) {</span>
             //test for valid field-connection string, on exception quit job and return message to user
             try {
-<span class="fc" id="L81">                this.plcField = S7Field.of(triggerVariable);</span>
-<span class="fc" id="L82">            } catch (PlcInvalidFieldException e) {</span>
-<span class="fc" id="L83">                LOGGER.debug(e.getMessage(), e);</span>
-<span class="fc" id="L84">                String exceptionMessage = String.format(&quot;Invalid trigger Field for Job %s: %s&quot;, triggeredScrapeJobImpl.getJobName(), triggerVariable);</span>
-<span class="fc" id="L85">                throw new ScraperException(exceptionMessage);</span>
-<span class="fc" id="L86">            }</span>
+                // TODO: PLC4X-106 - Make the Scraper not depend on S7 directly
+<span class="fc" id="L79">                this.plcField = S7Field.of(triggerVariable);</span>
+<span class="fc" id="L80">            } catch (PlcInvalidFieldException e) {</span>
+<span class="fc" id="L81">                logger.debug(e.getMessage(), e);</span>
+<span class="fc" id="L82">                String exceptionMessage = String.format(&quot;Invalid trigger Field for Job %s: %s&quot;, triggeredScrapeJobImpl.getJobName(), triggerVariable);</span>
+<span class="fc" id="L83">                throw new ScraperException(exceptionMessage);</span>
+<span class="fc" id="L84">            }</span>
             //ToDo add more and other trigger
         }
         else{
-<span class="nc" id="L90">            String exceptionMessage = String.format(&quot;TriggerType %s is not yet implemented&quot;, this.triggerType);</span>
-<span class="nc" id="L91">            throw new ScraperException(exceptionMessage);</span>
+<span class="nc" id="L88">            String exceptionMessage = String.format(&quot;TriggerType %s is not yet implemented&quot;, this.triggerType);</span>
+<span class="nc" id="L89">            throw new ScraperException(exceptionMessage);</span>
         }
 
 
-<span class="fc" id="L95">        this.compareValue = convertCompareValue(compareValue);</span>
-<span class="fc" id="L96">        detectComparatorType();</span>
-<span class="fc" id="L97">        matchTypeAndComparator();</span>
+<span class="fc" id="L93">        this.compareValue = convertCompareValue(compareValue);</span>
+<span class="fc" id="L94">        detectComparatorType();</span>
+<span class="fc" id="L95">        matchTypeAndComparator();</span>
 
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L97">    }</span>
 
     /**
      * default constructor when scheduled trigger shall be performed
@@ -104,16 +102,15 @@ public class TriggerConfiguration{
      * @param scrapeInterval scrape interval of data from block
      * @throws ScraperException when something goes wrong with configuration
      */
-<span class="fc" id="L107">    public TriggerConfiguration(TriggerType triggerType, String scrapeInterval) throws ScraperException {</span>
-<span class="fc" id="L108">        this.triggerType = triggerType;</span>
-<span class="fc" id="L109">        this.scrapeInterval = parseScrapeInterval(scrapeInterval);</span>
-<span class="fc" id="L110">        this.triggerVariable = null;</span>
-<span class="fc" id="L111">        this.comparator = null;</span>
-<span class="fc" id="L112">        this.compareValue = null;</span>
-<span class="fc" id="L113">        this.plcField = null;</span>
-<span class="fc" id="L114">        this.comparatorType = null;</span>
-
-<span class="fc" id="L116">    }</span>
+<span class="fc" id="L105">    public TriggerConfiguration(TriggerType triggerType, String scrapeInterval) throws ScraperException {</span>
+<span class="fc" id="L106">        this.triggerType = triggerType;</span>
+<span class="fc" id="L107">        this.scrapeInterval = parseScrapeInterval(scrapeInterval);</span>
+<span class="fc" id="L108">        this.triggerVariable = null;</span>
+<span class="fc" id="L109">        this.comparator = null;</span>
+<span class="fc" id="L110">        this.compareValue = null;</span>
+<span class="fc" id="L111">        this.plcField = null;</span>
+<span class="fc" id="L112">        this.comparatorType = null;</span>
+<span class="fc" id="L113">    }</span>
 
     /**
      * parses String of scrape interval
@@ -123,12 +120,12 @@ public class TriggerConfiguration{
      */
     private long parseScrapeInterval(String scrapeInterval) throws ScraperException {
         try {
-<span class="fc" id="L126">            return Long.parseLong(scrapeInterval);</span>
+<span class="fc" id="L123">            return Long.parseLong(scrapeInterval);</span>
         }
-<span class="nc" id="L128">        catch (Exception e){</span>
-<span class="nc" id="L129">            handleException(e);</span>
-<span class="nc" id="L130">            String exceptionMessage = String.format(&quot;No valid numeric for scrapeInterval for Job %s: %s&quot;,triggeredScrapeJobImpl.getJobName(),scrapeInterval);</span>
-<span class="nc" id="L131">            throw new ScraperException(exceptionMessage);</span>
+<span class="nc" id="L125">        catch (Exception e){</span>
+<span class="nc" id="L126">            handleException(e);</span>
+<span class="nc" id="L127">            String exceptionMessage = String.format(&quot;No valid numeric for scrapeInterval for Job %s: %s&quot;,triggeredScrapeJobImpl.getJobName(),scrapeInterval);</span>
+<span class="nc" id="L128">            throw new ScraperException(exceptionMessage);</span>
         }
     }
 
@@ -139,54 +136,54 @@ public class TriggerConfiguration{
      * @throws ScraperException when something goes wrong
      */
     boolean evaluateTrigger(Object value) throws ScraperException {
-<span class="nc bnc" id="L142" title="All 2 branches missed.">        if(validateDataType().equals(Boolean.class)){</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if(validateDataType().equals(Boolean.class)){</span>
             boolean currentValue;
             boolean refValue;
             try{
-<span class="nc" id="L146">                currentValue = (boolean) value;</span>
-<span class="nc" id="L147">                refValue = (boolean) compareValue;</span>
+<span class="nc" id="L143">                currentValue = (boolean) value;</span>
+<span class="nc" id="L144">                refValue = (boolean) compareValue;</span>
             }
-<span class="nc" id="L149">            catch (Exception e){</span>
-<span class="nc" id="L150">                handleException(e);</span>
-<span class="nc" id="L151">                return false;</span>
-<span class="nc" id="L152">            }</span>
-<span class="nc bnc" id="L153" title="All 2 branches missed.">            if(this.comparatorType.equals(Comparators.EQUAL)){</span>
-<span class="nc bnc" id="L154" title="All 2 branches missed.">                return currentValue == refValue;</span>
+<span class="nc" id="L146">            catch (Exception e){</span>
+<span class="nc" id="L147">                handleException(e);</span>
+<span class="nc" id="L148">                return false;</span>
+<span class="nc" id="L149">            }</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">            if(this.comparatorType.equals(Comparators.EQUAL)){</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">                return currentValue == refValue;</span>
             }
             else {
-<span class="nc bnc" id="L157" title="All 2 branches missed.">                return currentValue != refValue;</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">                return currentValue != refValue;</span>
             }
         }
-<span class="nc bnc" id="L160" title="All 2 branches missed.">        if(validateDataType().equals(Double.class)) {</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        if(validateDataType().equals(Double.class)) {</span>
             double currentValue;
             double refValue;
             try{
-<span class="nc" id="L164">                currentValue = (double) value;</span>
-<span class="nc" id="L165">                refValue = (double) compareValue;</span>
+<span class="nc" id="L161">                currentValue = (double) value;</span>
+<span class="nc" id="L162">                refValue = (double) compareValue;</span>
             }
-<span class="nc" id="L167">            catch (Exception e){</span>
-<span class="nc" id="L168">                handleException(e);</span>
-<span class="nc" id="L169">                return false;</span>
-<span class="nc" id="L170">            }</span>
+<span class="nc" id="L164">            catch (Exception e){</span>
+<span class="nc" id="L165">                handleException(e);</span>
+<span class="nc" id="L166">                return false;</span>
+<span class="nc" id="L167">            }</span>
 
-<span class="nc bnc" id="L172" title="All 7 branches missed.">            switch (this.comparatorType) {</span>
+<span class="nc bnc" id="L169" title="All 7 branches missed.">            switch (this.comparatorType) {</span>
                 case EQUAL:
-<span class="nc" id="L174">                    return isApproximately(currentValue,refValue, TOLERANCE_FLOATING_EQUALITY);</span>
+<span class="nc" id="L171">                    return isApproximately(currentValue,refValue, TOLERANCE_FLOATING_EQUALITY);</span>
                 case UNEQUAL:
-<span class="nc bnc" id="L176" title="All 2 branches missed.">                    return !isApproximately(currentValue,refValue, TOLERANCE_FLOATING_EQUALITY);</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">                    return !isApproximately(currentValue,refValue, TOLERANCE_FLOATING_EQUALITY);</span>
                 case SMALLER:
-<span class="nc bnc" id="L178" title="All 2 branches missed.">                    return currentValue &lt; refValue;</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">                    return currentValue &lt; refValue;</span>
                 case SMALLER_EQUAL:
-<span class="nc bnc" id="L180" title="All 2 branches missed.">                    return currentValue &lt;= refValue;</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">                    return currentValue &lt;= refValue;</span>
                 case GREATER:
-<span class="nc bnc" id="L182" title="All 2 branches missed.">                    return currentValue &gt; refValue;</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">                    return currentValue &gt; refValue;</span>
                 case GREATER_EQUAL:
-<span class="nc bnc" id="L184" title="All 2 branches missed.">                    return currentValue &gt;= refValue;</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">                    return currentValue &gt;= refValue;</span>
             }
 
         }
         //should not happen, as fallback return false which always implies that no data is collected
-<span class="nc" id="L189">        return false;</span>
+<span class="nc" id="L186">        return false;</span>
     }
 
     /**
@@ -194,42 +191,42 @@ public class TriggerConfiguration{
      * @throws ScraperException when no valid comparator has been used
      */
     private void detectComparatorType() throws ScraperException {
-<span class="pc bpc" id="L197" title="1 of 7 branches missed.">        switch (this.comparator){</span>
+<span class="pc bpc" id="L194" title="1 of 7 branches missed.">        switch (this.comparator){</span>
             case &quot;==&quot;:
-<span class="fc" id="L199">                this.comparatorType= Comparators.EQUAL;</span>
-<span class="fc" id="L200">                break;</span>
+<span class="fc" id="L196">                this.comparatorType= Comparators.EQUAL;</span>
+<span class="fc" id="L197">                break;</span>
             case &quot;!=&quot;:
-<span class="fc" id="L202">                this.comparatorType= Comparators.UNEQUAL;</span>
-<span class="fc" id="L203">                break;</span>
+<span class="fc" id="L199">                this.comparatorType= Comparators.UNEQUAL;</span>
+<span class="fc" id="L200">                break;</span>
             case &quot;&lt;=&quot;:
-<span class="fc" id="L205">                this.comparatorType= Comparators.SMALLER_EQUAL;</span>
-<span class="fc" id="L206">                break;</span>
+<span class="fc" id="L202">                this.comparatorType= Comparators.SMALLER_EQUAL;</span>
+<span class="fc" id="L203">                break;</span>
             case &quot;&lt;&quot;:
-<span class="fc" id="L208">                this.comparatorType= Comparators.SMALLER;</span>
-<span class="fc" id="L209">                break;</span>
+<span class="fc" id="L205">                this.comparatorType= Comparators.SMALLER;</span>
+<span class="fc" id="L206">                break;</span>
             case &quot;&gt;=&quot;:
-<span class="fc" id="L211">                this.comparatorType= Comparators.GREATER_EQUAL;</span>
-<span class="fc" id="L212">                break;</span>
+<span class="fc" id="L208">                this.comparatorType= Comparators.GREATER_EQUAL;</span>
+<span class="fc" id="L209">                break;</span>
             case &quot;&gt;&quot;:
-<span class="fc" id="L214">                this.comparatorType= Comparators.GREATER;</span>
-<span class="fc" id="L215">                break;</span>
+<span class="fc" id="L211">                this.comparatorType= Comparators.GREATER;</span>
+<span class="fc" id="L212">                break;</span>
             default:
-<span class="nc" id="L217">                throw new ScraperException(&quot;Invalid comparator detected!&quot;);</span>
+<span class="nc" id="L214">                throw new ScraperException(&quot;Invalid comparator detected!&quot;);</span>
         }
-<span class="fc" id="L219">    }</span>
+<span class="fc" id="L216">    }</span>
 
     /**
      * matches data-type and comparator for a valid combination
      * @throws ScraperException when invalid combination is detected
      */
     private void matchTypeAndComparator() throws ScraperException {
-<span class="fc bfc" id="L226" title="All 2 branches covered.">        if(validateDataType().equals(Boolean.class)</span>
-<span class="fc bfc" id="L227" title="All 4 branches covered.">            &amp;&amp; !(this.comparatorType.equals(Comparators.EQUAL) || this.comparatorType.equals(Comparators.UNEQUAL))){</span>
-<span class="fc" id="L228">            String exceptionMessage = String.format(&quot;Trigger-Data-Type (%s) and Comparator (%s) do not match&quot;,this.plcField.getDefaultJavaType(),this.comparatorType);</span>
-<span class="fc" id="L229">            throw new ScraperException(exceptionMessage);</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        if(validateDataType().equals(Boolean.class)</span>
+<span class="fc bfc" id="L224" title="All 4 branches covered.">            &amp;&amp; !(this.comparatorType.equals(Comparators.EQUAL) || this.comparatorType.equals(Comparators.UNEQUAL))){</span>
+<span class="fc" id="L225">            String exceptionMessage = String.format(&quot;Trigger-Data-Type (%s) and Comparator (%s) do not match&quot;,this.plcField.getDefaultJavaType(),this.comparatorType);</span>
+<span class="fc" id="L226">            throw new ScraperException(exceptionMessage);</span>
         }
         //all other combinations are valid
-<span class="fc" id="L232">    }</span>
+<span class="fc" id="L229">    }</span>
 
     /**
      * defines the used base type for comparison
@@ -238,21 +235,21 @@ public class TriggerConfiguration{
      * ToDo check how to handle time-variables if needed
      */
     private Class&lt;?&gt; validateDataType() throws ScraperException {
-<span class="pc bpc" id="L241" title="1 of 2 branches missed.">        if(this.plcField!=null){</span>
-<span class="fc" id="L242">            Class&lt;?&gt; javaDataType = this.plcField.getDefaultJavaType();</span>
-<span class="fc bfc" id="L243" title="All 2 branches covered.">            if(!javaDataType.equals(Boolean.class)</span>
-<span class="fc bfc" id="L244" title="All 2 branches covered.">                &amp;&amp; !javaDataType.equals(Integer.class)</span>
-<span class="pc bpc" id="L245" title="1 of 2 branches missed.">                &amp;&amp; !javaDataType.equals(Long.class)</span>
-<span class="pc bpc" id="L246" title="1 of 2 branches missed.">                &amp;&amp; !javaDataType.equals(Double.class)</span>
+<span class="pc bpc" id="L238" title="1 of 2 branches missed.">        if(this.plcField!=null){</span>
+<span class="fc" id="L239">            Class&lt;?&gt; javaDataType = this.plcField.getDefaultJavaType();</span>
+<span class="fc bfc" id="L240" title="All 2 branches covered.">            if(!javaDataType.equals(Boolean.class)</span>
+<span class="fc bfc" id="L241" title="All 2 branches covered.">                &amp;&amp; !javaDataType.equals(Integer.class)</span>
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">                &amp;&amp; !javaDataType.equals(Long.class)</span>
+<span class="pc bpc" id="L243" title="1 of 2 branches missed.">                &amp;&amp; !javaDataType.equals(Double.class)</span>
             ){
-<span class="nc" id="L248">                String exceptionMessage = String.format(&quot;Unsupported plc-trigger variable %s with converted data-type %s used&quot;,this.plcField,this.plcField.getDefaultJavaType());</span>
-<span class="nc" id="L249">                throw new ScraperException(exceptionMessage);</span>
+<span class="nc" id="L245">                String exceptionMessage = String.format(&quot;Unsupported plc-trigger variable %s with converted data-type %s used&quot;,this.plcField,this.plcField.getDefaultJavaType());</span>
+<span class="nc" id="L246">                throw new ScraperException(exceptionMessage);</span>
             }
-<span class="fc" id="L251">            return javaDataType;</span>
+<span class="fc" id="L248">            return javaDataType;</span>
         }
         else{
-<span class="nc" id="L254">            String exceptionMessage = String.format(&quot;Unsupported plc-trigger variable %s with converted data-type %s used&quot;,this.plcField,this.plcField.getDefaultJavaType());</span>
-<span class="nc" id="L255">            throw new ScraperException(exceptionMessage);</span>
+<span class="nc" id="L251">            String exceptionMessage = String.format(&quot;Unsupported plc-trigger variable %s with converted data-type %s used&quot;,this.plcField,this.plcField.getDefaultJavaType());</span>
+<span class="nc" id="L252">            throw new ScraperException(exceptionMessage);</span>
         }
 
     }
@@ -264,36 +261,36 @@ public class TriggerConfiguration{
      * @throws ScraperException when something does not match or parsing fails
      */
     private Object convertCompareValue(String compareValue) throws ScraperException {
-<span class="fc" id="L267">        Class&lt;?&gt; javaDataType =validateDataType();</span>
-<span class="fc bfc" id="L268" title="All 2 branches covered.">        if(javaDataType.equals(Boolean.class)){</span>
-<span class="fc bfc" id="L269" title="All 3 branches covered.">            switch (compareValue){</span>
+<span class="fc" id="L264">        Class&lt;?&gt; javaDataType =validateDataType();</span>
+<span class="fc bfc" id="L265" title="All 2 branches covered.">        if(javaDataType.equals(Boolean.class)){</span>
+<span class="fc bfc" id="L266" title="All 3 branches covered.">            switch (compareValue){</span>
                 case &quot;1&quot;:
                 case &quot;true&quot;:
-<span class="fc" id="L272">                    return true;</span>
+<span class="fc" id="L269">                    return true;</span>
                 case &quot;0&quot;:
                 case &quot;false&quot;:
-<span class="fc" id="L275">                    return false;</span>
+<span class="fc" id="L272">                    return false;</span>
                 default:
-<span class="fc" id="L277">                    String exceptionMessage = String.format(&quot;No valid compare Value at DataType Boolean for trigger for Job %s: %s&quot;,triggeredScrapeJobImpl.getJobName(),compareValue);</span>
-<span class="fc" id="L278">                    throw new ScraperException(exceptionMessage);</span>
+<span class="fc" id="L274">                    String exceptionMessage = String.format(&quot;No valid compare Value at DataType Boolean for trigger for Job %s: %s&quot;,triggeredScrapeJobImpl.getJobName(),compareValue);</span>
+<span class="fc" id="L275">                    throw new ScraperException(exceptionMessage);</span>
             }
         }
-<span class="fc bfc" id="L281" title="All 2 branches covered.">        if(javaDataType.equals(Double.class)</span>
-<span class="pc bpc" id="L282" title="1 of 2 branches missed.">            || javaDataType.equals(Integer.class)</span>
-<span class="nc bnc" id="L283" title="All 2 branches missed.">            || javaDataType.equals(Long.class)){</span>
+<span class="fc bfc" id="L278" title="All 2 branches covered.">        if(javaDataType.equals(Double.class)</span>
+<span class="pc bpc" id="L279" title="1 of 2 branches missed.">            || javaDataType.equals(Integer.class)</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">            || javaDataType.equals(Long.class)){</span>
             try {
                 //everything fits to Double for conversion ... so for first step use only double
                 //ToDo if different handling dependent on specific datatype is needed then differ
-<span class="fc" id="L287">                return Double.parseDouble(compareValue);</span>
+<span class="fc" id="L284">                return Double.parseDouble(compareValue);</span>
             }
-<span class="fc" id="L289">            catch (Exception e){</span>
-<span class="fc" id="L290">                LOGGER.debug(e.getMessage(), e);</span>
-<span class="fc" id="L291">                String exceptionMessage = String.format(&quot;No valid compare Value at DataType Numeric for trigger for Job %s: %s&quot;,triggeredScrapeJobImpl.getJobName(),compareValue);</span>
-<span class="fc" id="L292">                throw new ScraperException(exceptionMessage);</span>
+<span class="fc" id="L286">            catch (Exception e){</span>
+<span class="fc" id="L287">                logger.debug(e.getMessage(), e);</span>
+<span class="fc" id="L288">                String exceptionMessage = String.format(&quot;No valid compare Value at DataType Numeric for trigger for Job %s: %s&quot;,triggeredScrapeJobImpl.getJobName(),compareValue);</span>
+<span class="fc" id="L289">                throw new ScraperException(exceptionMessage);</span>
             }
         }
-<span class="nc" id="L295">        String exceptionMessage = &quot;Invalid Datatype detected ... should not happen and be catcht earlier - please report&quot;;</span>
-<span class="nc" id="L296">        throw new ScraperException(exceptionMessage);</span>
+<span class="nc" id="L292">        String exceptionMessage = &quot;Invalid Datatype detected ... should not happen and be catcht earlier - please report&quot;;</span>
+<span class="nc" id="L293">        throw new ScraperException(exceptionMessage);</span>
     }
 
     /**
@@ -304,61 +301,61 @@ public class TriggerConfiguration{
      * @throws ScraperException when something goes wrong
      */
     public static TriggerConfiguration createConfiguration(String jobTriggerStrategy,TriggeredScrapeJobImpl triggeredScrapeJob) throws ScraperException {
-<span class="fc" id="L307">        Matcher matcher = TRIGGER_STRATEGY_PATTERN.matcher(jobTriggerStrategy);</span>
+<span class="fc" id="L304">        Matcher matcher = TRIGGER_STRATEGY_PATTERN.matcher(jobTriggerStrategy);</span>
 
-<span class="fc bfc" id="L309" title="All 2 branches covered.">        if(matcher.matches()){</span>
-<span class="fc" id="L310">            String strat = matcher.group(&quot;strategy&quot;);</span>
-<span class="fc" id="L311">            String scheduledMs = matcher.group(&quot;scheduledInterval&quot;);</span>
+<span class="fc bfc" id="L306" title="All 2 branches covered.">        if(matcher.matches()){</span>
+<span class="fc" id="L307">            String strat = matcher.group(&quot;strategy&quot;);</span>
+<span class="fc" id="L308">            String scheduledMs = matcher.group(&quot;scheduledInterval&quot;);</span>
 
-<span class="fc" id="L313">            LOGGER.debug(&quot;Strategy: {}, scheduled ms: {}&quot;,strat,scheduledMs);</span>
+<span class="fc" id="L310">            logger.debug(&quot;Strategy: {}, scheduled ms: {}&quot;,strat,scheduledMs);</span>
 
-<span class="fc" id="L315">            String triggerVar = matcher.group(&quot;triggerVar&quot;);</span>
-<span class="fc" id="L316">            String comparatorString = matcher.group(&quot;comp&quot;);</span>
-<span class="fc" id="L317">            String comparatorVariable = matcher.group(&quot;compVar&quot;);</span>
+<span class="fc" id="L312">            String triggerVar = matcher.group(&quot;triggerVar&quot;);</span>
+<span class="fc" id="L313">            String comparatorString = matcher.group(&quot;comp&quot;);</span>
+<span class="fc" id="L314">            String comparatorVariable = matcher.group(&quot;compVar&quot;);</span>
 
-<span class="fc bfc" id="L319" title="All 3 branches covered.">            switch (strat){</span>
+<span class="fc bfc" id="L316" title="All 3 branches covered.">            switch (strat){</span>
                 case S_7_TRIGGER_VAR:
-<span class="pc bpc" id="L321" title="2 of 6 branches missed.">                    if(triggerVar ==null || comparatorString==null || comparatorVariable==null){</span>
-<span class="fc" id="L322">                        throw new ScraperException(&quot;S7_TRIGGER_VAR trigger strategy needs the trigger-condition - information missing! given configString: &quot;+jobTriggerStrategy);</span>
+<span class="pc bpc" id="L318" title="2 of 6 branches missed.">                    if(triggerVar ==null || comparatorString==null || comparatorVariable==null){</span>
+<span class="fc" id="L319">                        throw new ScraperException(&quot;S7_TRIGGER_VAR trigger strategy needs the trigger-condition - information missing! given configString: &quot;+jobTriggerStrategy);</span>
                     }
-<span class="fc" id="L324">                    return new TriggerConfiguration(TriggerType.S7_TRIGGER_VAR,scheduledMs,triggerVar,comparatorString,comparatorVariable,triggeredScrapeJob);</span>
+<span class="fc" id="L321">                    return new TriggerConfiguration(TriggerType.S7_TRIGGER_VAR,scheduledMs,triggerVar,comparatorString,comparatorVariable,triggeredScrapeJob);</span>
                 case SCHEDULED:
-<span class="pc bpc" id="L326" title="2 of 6 branches missed.">                    if(triggerVar !=null || comparatorString!=null || comparatorVariable!=null){</span>
-<span class="fc" id="L327">                        throw new ScraperException(&quot;SCHEDULED trigger strategy must only be used with scheduled interval - nothing more!  given configString: &quot;+jobTriggerStrategy);</span>
+<span class="pc bpc" id="L323" title="2 of 6 branches missed.">                    if(triggerVar !=null || comparatorString!=null || comparatorVariable!=null){</span>
+<span class="fc" id="L324">                        throw new ScraperException(&quot;SCHEDULED trigger strategy must only be used with scheduled interval - nothing more!  given configString: &quot;+jobTriggerStrategy);</span>
                     }
-<span class="fc" id="L329">                    return new TriggerConfiguration(TriggerType.SCHEDULED,scheduledMs);</span>
+<span class="fc" id="L326">                    return new TriggerConfiguration(TriggerType.SCHEDULED,scheduledMs);</span>
                 default:
-<span class="fc" id="L331">                    throw new ScraperException(&quot;Unknown Trigger Strategy &quot;+strat);</span>
+<span class="fc" id="L328">                    throw new ScraperException(&quot;Unknown Trigger Strategy &quot;+strat);</span>
             }
 
 
         }
-<span class="fc" id="L336">        throw new ScraperException(&quot;Invalid trigger strategy string description: &quot;+jobTriggerStrategy);</span>
+<span class="fc" id="L333">        throw new ScraperException(&quot;Invalid trigger strategy string description: &quot;+jobTriggerStrategy);</span>
     }
 
     private void handleException(Exception e){
         //push up if needed
-<span class="nc" id="L341">        LOGGER.debug(&quot;Exception: &quot;, e);</span>
-<span class="nc" id="L342">    }</span>
+<span class="nc" id="L338">        logger.debug(&quot;Exception: &quot;, e);</span>
+<span class="nc" id="L339">    }</span>
 
     TriggerType getTriggerType() {
-<span class="fc" id="L345">        return triggerType;</span>
+<span class="fc" id="L342">        return triggerType;</span>
     }
 
     public long getScrapeInterval() {
-<span class="fc" id="L349">        return scrapeInterval;</span>
+<span class="fc" id="L346">        return scrapeInterval;</span>
     }
 
     String getTriggerVariable() {
-<span class="nc" id="L353">        return triggerVariable;</span>
+<span class="nc" id="L350">        return triggerVariable;</span>
     }
 
     Comparators getComparatorType() {
-<span class="fc" id="L357">        return comparatorType;</span>
+<span class="fc" id="L354">        return comparatorType;</span>
     }
 
     Object getCompareValue() {
-<span class="fc" id="L361">        return compareValue;</span>
+<span class="fc" id="L358">        return compareValue;</span>
     }
 
     /**
@@ -370,22 +367,22 @@ public class TriggerConfiguration{
      */
     private static boolean isApproximately(double self, double other, double within)
     {
-<span class="nc bnc" id="L373" title="All 2 branches missed.">        return Math.abs(self - other) &lt;= within;</span>
+<span class="nc bnc" id="L370" title="All 2 branches missed.">        return Math.abs(self - other) &lt;= within;</span>
     }
 
-<span class="fc" id="L376">    public enum  Comparators{</span>
-<span class="fc" id="L377">        EQUAL,</span>
-<span class="fc" id="L378">        UNEQUAL,</span>
-<span class="fc" id="L379">        GREATER,</span>
-<span class="fc" id="L380">        GREATER_EQUAL,</span>
-<span class="fc" id="L381">        SMALLER,</span>
-<span class="fc" id="L382">        SMALLER_EQUAL</span>
+<span class="fc" id="L373">    public enum  Comparators{</span>
+<span class="fc" id="L374">        EQUAL,</span>
+<span class="fc" id="L375">        UNEQUAL,</span>
+<span class="fc" id="L376">        GREATER,</span>
+<span class="fc" id="L377">        GREATER_EQUAL,</span>
+<span class="fc" id="L378">        SMALLER,</span>
+<span class="fc" id="L379">        SMALLER_EQUAL</span>
     }
 
     //ToDo replace constant TriggerType by more generic ones --&gt; PLC4X-89
-<span class="fc" id="L386">    public enum TriggerType {</span>
-<span class="fc" id="L387">        SCHEDULED,</span>
-<span class="fc" id="L388">        S7_TRIGGER_VAR</span>
+<span class="fc" id="L383">    public enum TriggerType {</span>
+<span class="fc" id="L384">        SCHEDULED,</span>
+<span class="fc" id="L385">        S7_TRIGGER_VAR</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
