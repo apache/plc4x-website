@@ -305,15 +305,15 @@
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:branch -DbranchName=rel/{minor-version} -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/{minor-version} -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version. So in case of preparing the release branch for <code>0.2.0-SNAPSHOT</code> the command would be the following:</p> 
+    <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version. So in case of preparing the release branch for <code>0.4.0-SNAPSHOT</code> the command would be the following:</p> 
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:branch -DbranchName=rel/0.2 -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.4 -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -321,7 +321,7 @@
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.2.1-SNAPSHOT: : 0.3.0-SNAPSHOT</pre> 
+     <pre>What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.4.1-SNAPSHOT: : 0.5.0-SNAPSHOT</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -331,7 +331,7 @@
     <p>This step now should perform quite quickly as no build and no tests are involved.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/0.2</code> branch is created.</p> 
+    <p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/0.4</code> branch is created.</p> 
    </div> 
   </div> 
   <div class="sect2"> 
@@ -396,11 +396,11 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:prepare -P with-cpp -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:prepare -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>(The <code>-P with-cpp</code> tells maven to activace the <code>with-cpp</code> profile which also enables the C++ modules and makes sure the versions of these modules are updated as part of the release) In general the plugin will now ask you 3 questions:</p> 
+    <p>(The <code>-P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release) In general the plugin will now ask you 3 questions:</p> 
    </div> 
    <div class="olist arabic"> 
     <ol class="arabic"> 
@@ -501,7 +501,7 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:perform</pre> 
+     <pre>mvn release:perform -DreleaseProfiles=apache-release,with-java,with-proxies</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -512,11 +512,14 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn clean deploy -P apache-release</pre> 
+     <pre>mvn clean deploy -P apache-release,with-java,with-proxies</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>This builds and tests the project as well as creates the JavaDocs, Source packages and signs each of these with your PGP key.</p> 
+    <p>As the <code>apache-release</code> profile is also activated, this builds and tests the project as well as creates the JavaDocs, Source packages and signs each of these with your PGP key.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>We are intentionally not adding the other profiles, as these either produce binary artifacts that usually only work on the system they were compiled on (C++, .Net) or we haven’t found a good way to distribute them via Maven yet (Python) or deployment is disabled anyway (sandbox).</p> 
    </div> 
    <div class="paragraph"> 
     <p>As this time the build is building with release versions, Maven will automatically choose the release url for deploying artifacts.</p> 
