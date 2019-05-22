@@ -289,7 +289,7 @@
     <p>For each new Major and Minor release we create a new branch at the beginning of a code-freeze phase.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>So if currently the project version in develop is <code>0.2.0-SNAPSHOT</code>, we create a branch <code>rel/0.2</code>.</p> 
+    <p>So if currently the project version in develop is <code>0.5.0-SNAPSHOT</code>, we create a branch <code>rel/0.5</code>.</p> 
    </div> 
    <div class="paragraph"> 
     <p>When creating the branch is exactly the moment in which the version in <code>develop</code> is incremented to the next minor version.</p> 
@@ -309,11 +309,11 @@
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version. So in case of preparing the release branch for <code>0.4.0-SNAPSHOT</code> the command would be the following:</p> 
+    <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version. So in case of preparing the release branch for <code>0.5.0-SNAPSHOT</code> the command would be the following:</p> 
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.4 -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.5 -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -321,7 +321,7 @@
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.4.1-SNAPSHOT: : 0.5.0-SNAPSHOT</pre> 
+     <pre>What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.5.1-SNAPSHOT: : 0.6.0-SNAPSHOT</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -411,6 +411,17 @@ Bug Fixes
    </div> 
    <div class="paragraph"> 
     <p>Usually for 1 and 3 the defaults are just fine, make sure the tag name is correct as this usually is different.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>We currently have a dependency to a SNAPSHOT dependency in the sandbox module. The release plugin will complain about this and we will not be able to release this way. As this in the sandbox module, we can force the plugin to continue by appending:</p> 
+   </div> 
+   <div class="literalblock"> 
+    <div class="content"> 
+     <pre>-DignoreSnapshots=true</pre> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>However it is important to check that nowhere else SNAPSHOT versions are referenced.</p> 
    </div> 
    <div class="paragraph"> 
     <p>What the plugin now does, is automatically execute the following operations:</p> 
