@@ -174,7 +174,7 @@
                         <li class="toplevel"><a href="#_toc_preparing_your_system_for_being_able_to_release1" title="Preparing your system for being able to release">Preparing your system for being able to release</a></li>
                         <li class="toplevel"><a href="#_toc_preparing_the_codebase_for_a_release1" title="Preparing the codebase for a release">Preparing the codebase for a release</a></li>
                         <li class="toplevel"><a href="#_toc_creating_a_release_branch1" title="Creating a release branch">Creating a release branch</a></li>
-                        <li class="toplevel"><a href="#_toc_preparing_develop_for_the_next_iteration" title="Preparing develop for the next iteration">Preparing develop for the next iteration</a></li>
+                        <li class="toplevel"><a href="#_toc_preparing_develop_for_the_next_iteration1" title="Preparing develop for the next iteration">Preparing develop for the next iteration</a></li>
                         <li class="toplevel"><a href="#_toc_release_stabilization_phase1" title="Release stabilization phase">Release stabilization phase</a></li>
                         <li class="toplevel"><a href="#_toc_preparing_a_release1" title="Preparing a release">Preparing a release</a></li>
                         <li class="divider-vertical"></li>
@@ -311,17 +311,17 @@
    <div class="paragraph"> 
     <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version. So in case of preparing the release branch for <code>0.5.0-SNAPSHOT</code> the command would be the following:</p> 
    </div> 
-   <div class="literalblock"> 
+   <div class="listingblock"> 
     <div class="content"> 
-     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.5 -DautoVersionSubmodules=true</pre> 
+     <pre>   mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.5 -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
     <p>The plugin will then aks for the version:</p> 
    </div> 
-   <div class="literalblock"> 
+   <div class="listingblock"> 
     <div class="content"> 
-     <pre>What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.5.1-SNAPSHOT: : 0.6.0-SNAPSHOT</pre> 
+     <pre>   What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.5.1-SNAPSHOT: : 0.6.0-SNAPSHOT</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -331,11 +331,11 @@
     <p>This step now should perform quite quickly as no build and no tests are involved.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/0.4</code> branch is created.</p> 
+    <p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/0.5</code> branch is created.</p> 
    </div> 
   </div> 
   <div class="sect2"> 
-   <h3 id="_toc_preparing_develop_for_the_next_iteration">Preparing <code>develop</code> for the next iteration</h3> 
+   <h3 id="_toc_preparing_develop_for_the_next_iteration1">Preparing <code>develop</code> for the next iteration</h3> 
    <div class="paragraph"> 
     <p>Now is a good time to add a new section to the <code>RELEASE_NOTES</code> document for the new <code>SNAPSHOT</code> version.</p> 
    </div> 
@@ -344,8 +344,8 @@
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code>==============================================================
-(Unreleased) Apache PLC4X 0.X.0-SNAPSHOT
+     <pre>==============================================================
+(Unreleased) Apache PLC4X 0.6.0-SNAPSHOT
 ==============================================================
 
 New Features
@@ -357,7 +357,7 @@ Incompatible changes
 Bug Fixes
 ---------
 
-// Rest of the file</code></pre> 
+// Rest of the file</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -405,8 +405,8 @@ Bug Fixes
    <div class="olist arabic"> 
     <ol class="arabic"> 
      <li> <p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix)</p> </li> 
-     <li> <p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>release/{release-version}</code></p> </li> 
-     <li> <p>The next development version (The version present in the pom after the release)</p> </li> 
+     <li> <p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>release/{release-version}</code> (<code>release/0.5.0</code> in our case)</p> </li> 
+     <li> <p>The next development version (The version present in the pom after the release) (<code>0.6.0</code> in our case)</p> </li> 
     </ol> 
    </div> 
    <div class="paragraph"> 
@@ -431,7 +431,7 @@ Bug Fixes
      <li> <p>Check we aren’t referencing any <code>SNAPSHOT</code> dependencies.</p> </li> 
      <li> <p>Update all pom versions to the release version.</p> </li> 
      <li> <p>Run a build with all tests</p> </li> 
-     <li> <p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release {tagname}</code>)</p> </li> 
+     <li> <p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release release/0.5.0</code>)</p> </li> 
      <li> <p>Push the commit</p> </li> 
      <li> <p>Tag the commit</p> </li> 
      <li> <p>Update all poms to the next development version.</p> </li> 
@@ -451,7 +451,7 @@ Bug Fixes
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>It is important that the commit with the message "[maven-release-plugin] prepare release XXX" is tagged with the release tag (in this case release/0.3.0)</p> 
+    <p>It is important that the commit with the message "[maven-release-plugin] prepare release release/0.5.0" is tagged with the release tag (in this case release/0.3.0)</p> 
    </div> 
    <div class="paragraph"> 
     <p>If you check the commit itself, it should mainly consist of version updates like this:</p> 
@@ -577,16 +577,16 @@ Bug Fixes
    <div class="paragraph"> 
     <p>The directory structure of this directory is as follows:</p> 
    </div> 
-   <div class="literalblock"> 
+   <div class="listingblock"> 
     <div class="content"> 
-     <pre>./KEYS
-./0.4.0/
-./0.4.0/rc1
-./0.4.0/rc1/README
-./0.4.0/rc1/RELEASE_NOTES
-./0.4.0/rc1/apache-plc4x-0.1.0-source-release.zip
-./0.4.0/rc1/apache-plc4x-0.1.0-source-release.zip.asc
-./0.4.0/rc1/apache-plc4x-0.1.0-source-release.zip.sha512</pre> 
+     <pre>   ./KEYS
+   ./0.5.0/
+   ./0.5.0/rc1
+   ./0.5.0/rc1/README
+   ./0.5.0/rc1/RELEASE_NOTES
+   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip
+   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip.asc
+   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip.sha512</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -615,19 +615,19 @@ Bug Fixes
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code>   E-Mail Topic:
-   [VOTE] Apache PLC4X 0.4.0 RC1
+     <pre>   E-Mail Topic:
+   [VOTE] Apache PLC4X 0.5.0 RC1
 
    Message:
-   Apache PLC4X 0.4.0 has been staged under [2] and it’s time to vote
+   Apache PLC4X 0.5.0 has been staged under [2] and it’s time to vote
    on accepting it for release. All Maven artifacts are available under [1].
    Voting will be open for 72hr.
 
    A minimum of 3 binding +1 votes and more binding +1 than binding -1
    are required to pass.
 
-   Release tag: release/0.4.0
-   Hash for the release tag: 8c1e0c1b85ce15814f2c08e0eec5d593951d168d
+   Release tag: release/0.5.0
+   Hash for the release tag: {replacethiswiththerealgitcommittag}
 
    Per [3] "Before voting +1 PMC members are required to download
    the signed source code package, compile it as provided, and test
@@ -641,10 +641,10 @@ Bug Fixes
    [ ]  -1 reject (explanation required)
 
 
-   [1] https://repository.apache.org/content/repositories/orgapacheplc4x-1010
-   [2] https://dist.apache.org/repos/dist/dev/plc4x/0.4.0/rc1
+   [1] https://repository.apache.org/content/repositories/orgapacheplc4x-{somefourdigitnumber}
+   [2] https://dist.apache.org/repos/dist/dev/plc4x/0.5.0/rc1
    [3] https://www.apache.org/dev/release.html#approving-a-release
-   [4] https://cwiki.apache.org/confluence/display/PLC4X/Validating+a+staged+Release</code></pre> 
+   [4] https://cwiki.apache.org/confluence/display/PLC4X/Validating+a+staged+Release</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -652,15 +652,15 @@ Bug Fixes
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code>   E-Mail Topic:
-   [DISCUSS] Apache PLC4X 0.4.0 RC1
+     <pre>   E-Mail Topic:
+   [DISCUSS] Apache PLC4X 0.5.0 RC1
 
    Message:
    This is the discussion thread for the corresponding VOTE thread.
 
    Please keep discussions in this thread to simplify the counting of votes.
 
-   If you have to vote -1 please mention a brief description on why and then take the details to this thread.</code></pre> 
+   If you have to vote -1 please mention a brief description on why and then take the details to this thread.</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -677,13 +677,13 @@ Bug Fixes
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code>    E-Mail Topic:
-    [RESULT] [DISCUSS] Apache PLC4X 0.1.0 RC1
+     <pre>    E-Mail Topic:
+    [RESULT] [DISCUSS] Apache PLC4X 0.5.0 RC1
 
     Message:
     So, the vote passes with 3 +1 votes by PMC members and one +1 vote by a non PMC member.
 
-    Chris</code></pre> 
+    Chris</pre> 
     </div> 
    </div> 
   </div> 
@@ -692,11 +692,11 @@ Bug Fixes
    <div class="paragraph"> 
     <p>As soon as the votes are finished and the results were in favor of a release, the staged artifacts can be released. This is done by moving them inside the Apache SVN.</p> 
    </div> 
-   <div class="literalblock"> 
+   <div class="listingblock"> 
     <div class="content"> 
-     <pre>svn move -m "Release Apache PLC4X 0.4.0" \
-    https://dist.apache.org/repos/dist/dev/plc4x/0.4.0/rc1 \
-    https://dist.apache.org/repos/dist/release/plc4x/0.4.0</pre> 
+     <pre>   svn move -m "Release Apache PLC4X 0.5.0" \
+       https://dist.apache.org/repos/dist/dev/plc4x/0.5.0/rc1 \
+       https://dist.apache.org/repos/dist/release/plc4x/0.5.0</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -745,8 +745,8 @@ Bug Fixes
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code>git checkout master
-git merge {tag-of-release}</code></pre> 
+     <pre>git checkout master
+git merge release/0.5.0</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -754,7 +754,7 @@ git merge {tag-of-release}</code></pre>
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code>git merge -X theirs {tag-of-release}</code></pre> 
+     <pre>git merge -X theirs release/0.5.0</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -778,7 +778,7 @@ git merge {tag-of-release}</code></pre>
    <div class="olist arabic"> 
     <ol class="arabic"> 
      <li> <p>Copy the last release down to <em>Previous Releases</em></p> </li> 
-     <li> <p>Point the download links of the last release to archive, e.g. <code><a href="http://archive.apache.org/dist/plc4x/0.3.0/apache-plc4x-0.3.0-source-release.zip" class="bare">http://archive.apache.org/dist/plc4x/0.3.0/apache-plc4x-0.3.0-source-release.zip</a></code></p> </li> 
+     <li> <p>Point the download links of the last release to archive, e.g. <code><a href="http://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip" class="bare">http://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip</a></code></p> </li> 
      <li> <p>Add the new Release under <em>Current Releases</em> and change all links. <em>Note: Please add an anchor for the toc</em></p> </li> 
      <li> <p>Update the sections for the changes according to the <em>RELEASE_NOTES</em> from the release <em>Note: Transfer all to ascii-doc notation to ensure correct rendering of the site</em> <em>Also remove the JIRA TICKET ids in Front</em></p> </li> 
     </ol> 
@@ -794,7 +794,7 @@ git merge {tag-of-release}</code></pre>
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code>    From:
+     <pre>    From:
 your apache email address
     To:
 announce@apache.org
@@ -807,8 +807,6 @@ dev@plc4x.apache.org
 
     Message:
 The Apache PLC4X team is pleased to announce the release of Apache PLC4X 0.5.0
-
-This is the first official release of PLC4X.
 
 PLC4X is a set of libraries for communicating with industrial programmable
 logic controllers (PLCs) using a variety of protocols but with a shared API.
@@ -833,11 +831,11 @@ Regards,
 The Apache PLC4X team
 
 [1] http://plc4x.apache.org
-[2] http://plc4x.apache.org/users/download.html</code></pre> 
+[2] http://plc4x.apache.org/users/download.html</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>It is important to note that you have to send this email from your apache email address or it will be rejected. This wasn’t very simple for me to setup. A general description can be found here: <a href="https://reference.apache.org/committer/email" class="bare">https://reference.apache.org/committer/email</a> Here’s what I did in google mail to allow sending of emails: <a href="https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html" class="bare">https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html</a> Note …​ you will be able to select the alternat sending address if you click into the recipients line of a new email (Not very intuitive).</p> 
+    <p>It is important to note that you have to send this email from your apache email address or it will be rejected. This wasn’t very simple for me to setup. A general description can be found here: <a href="https://reference.apache.org/committer/email" class="bare">https://reference.apache.org/committer/email</a> Here’s what I did in google mail to allow sending of emails: <a href="https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html" class="bare">https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html</a> Note …​ you will be able to select the alternate sending address if you click into the recipients line of a new email (Not very intuitive).</p> 
    </div> 
    <div class="paragraph"> 
     <p>After that email is out the door, you’re done. Congrats!</p> 

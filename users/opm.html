@@ -204,7 +204,7 @@
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code class="language-java" data-lang="java">public static void main(String[] args) {
+     <pre class="prettyprint highlight"><code data-lang="java">public static void main(String[] args) {
     PlcEntityManager em = new PlcEntityManager();
     MyEntity entity = em.connect(MyEntity.class, "s7://...");
     System.out.println(entity.getPressure());
@@ -216,7 +216,7 @@
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@PlcEntity
+     <pre class="prettyprint highlight"><code data-lang="java">@PlcEntity
 public class MyEntity {
 
     @PlcField("DB01:DW01:LONG")

@@ -174,6 +174,9 @@
                         <li class="toplevel"><a href="#_toc_providing_new_content1" title="Providing new content">Providing new content</a></li>
                         <li class="toplevel"><a href="#_toc_adding_links_to_menus1" title="Adding links to menus">Adding links to menus</a></li>
                         <li class="toplevel"><a href="#_toc_deploying_the_website1" title="Deploying the Website">Deploying the Website</a></li>
+                        <li class="divider-vertical"></li>
+                                    <li class="toplevel"><a href="#_toc_bells_and_whistles1" title="Bells and Whistles">Bells and Whistles</a></li>
+                        <li class="toplevel"><a href="#_toc_making_all_pom_properties_available_to_asciidoctor1" title="Making all pom properties available to asciidoctor">Making all pom properties available to asciidoctor</a></li>
           </ul>
         </div>
       </div> <!-- .container -->
@@ -390,6 +393,40 @@ In order to help you waste even more of that, we'll skip documenting anything.</
    </div> 
    <div class="paragraph"> 
     <p>As soon as content is updated in the <code>asf-site</code> the <code>gitpubsub</code> mechanism will make those changes available at <a href="https://plc4x.apache.org" class="bare">https://plc4x.apache.org</a></p> 
+   </div> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect1"> 
+ <h2 id="_toc_bells_and_whistles1">Bells and Whistles</h2> 
+ <div class="sectionbody"> 
+  <div class="sect2"> 
+   <h3 id="_toc_making_all_pom_properties_available_to_asciidoctor1">Making all pom properties available to asciidoctor</h3> 
+   <div class="paragraph"> 
+    <p>While trying to automate keeping the content of the release documentation up-to-date, we added a groovy script to automatically calculate some version numbers. Unfortunately it wasn’t possible to use these in asciidoctor using the normal <code>attributes</code> as the values aren’t set as soon as Maven configures the plugin.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>We came up with an option to still achieve this:</p> 
+   </div> 
+   <div class="ulist"> 
+    <ul> 
+     <li> <p>The <code>groovy-maven-plugin</code> sets the dynamic properties in the <code>provide-custom-properties</code> execution.</p> </li> 
+     <li> <p>Then we use the <code>properties-maven-plugin</code> to write all maven properties into a property file <code>target/pom.adoc</code>.</p> </li> 
+     <li> <p>As Asciidoctor doesn’t understand property files, we use the <code>replacer</code> to convert the content into an Asciidoctor property file in the <code>convert-property-to-adoc</code> execution.</p> </li> 
+     <li> <p>Now we provide access to the location of this file by setting the <code>pom-adoc</code> attribute.</p> </li> 
+     <li> <p>If we now need to access the properties, all we need to do, is to import the <code>pom.adoc</code> file with the following statement:</p> 
+      <div class="literalblock"> 
+       <div class="content"> 
+        <pre>include::{pom-adoc}[]</pre> 
+       </div> 
+      </div> </li> 
+     <li> <p>After this all maven properties can be accessed via:</p> 
+      <div class="literalblock"> 
+       <div class="content"> 
+        <pre>We are currently working on releasing ApachePLC4X {current-full-version}</pre> 
+       </div> 
+      </div> </li> 
+    </ul> 
    </div> 
   </div> 
  </div> 
