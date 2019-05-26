@@ -178,7 +178,7 @@
                                 <li><a href="#_toc_current_releases1" title="Current Releases">Current Releases</a></li>
                                 <li class="divider"></li>
                                               <li class="dropdown-submenu">
-                    <a href="#_toc_031_incubating_official_source_release__sha512___a" title="0.3.1 (incubating) Official source release [ SHA512 ] [ ASC ]">0.3.1 (incubating) Official source release [ SHA512 ] [ ASC ]</a>
+                    <a href="#_toc_040_official_source_release__sha512___asc_" title="0.4.0 Official source release [ SHA512 ] [ ASC ]">0.4.0 Official source release [ SHA512 ] [ ASC ]</a>
                     <ul class="dropdown-menu" role="menu">
                 <li><a href="#_toc_new_features1" title="New Features">New Features</a></li>
                 <li><a href="#_toc_incompatible_changes1" title="Incompatible changes">Incompatible changes</a></li>
@@ -188,17 +188,25 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" title="Previous Releases" class="dropdown-toggle" role="button" data-toggle="dropdown">Previous Releases <b class="caret"></b></a>
+                            <a href="#" title="Incubating Releases" class="dropdown-toggle" role="button" data-toggle="dropdown">Incubating Releases <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
                                 <!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
-                                <li><a href="#_toc_previous_releases1" title="Previous Releases">Previous Releases</a></li>
+                                <li><a href="#_toc_incubating_releases1" title="Incubating Releases">Incubating Releases</a></li>
                                 <li class="divider"></li>
                                               <li class="dropdown-submenu">
-                    <a href="#_toc_030_incubating_official_source_release__sha512___a" title="0.3.0 (incubating) Official source release [ SHA512 ] [ ASC ]">0.3.0 (incubating) Official source release [ SHA512 ] [ ASC ]</a>
+                    <a href="#_toc_031_incubating_official_source_release__sha512___a" title="0.3.1 (incubating) Official source release [ SHA512 ] [ ASC ]">0.3.1 (incubating) Official source release [ SHA512 ] [ ASC ]</a>
                     <ul class="dropdown-menu" role="menu">
                 <li><a href="#_toc_new_features2" title="New Features">New Features</a></li>
                 <li><a href="#_toc_incompatible_changes2" title="Incompatible changes">Incompatible changes</a></li>
                 <li><a href="#_toc_bug_fixes2" title="Bug Fixes">Bug Fixes</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a href="#_toc_030_incubating_official_source_release__sha512___a" title="0.3.0 (incubating) Official source release [ SHA512 ] [ ASC ]">0.3.0 (incubating) Official source release [ SHA512 ] [ ASC ]</a>
+                    <ul class="dropdown-menu" role="menu">
+                <li><a href="#_toc_new_features3" title="New Features">New Features</a></li>
+                <li><a href="#_toc_incompatible_changes3" title="Incompatible changes">Incompatible changes</a></li>
+                <li><a href="#_toc_bug_fixes3" title="Bug Fixes">Bug Fixes</a></li>
                     </ul>
                 </li>
                 <li class="dropdown-submenu">
@@ -230,13 +238,19 @@
   </div> 
   <div class="sect2"> 
    <h3 id="_toc_current_releases1">Current Releases</h3> 
-   <div class="sect3 3 1"> 
-    <h4 id="_toc_031_incubating_official_source_release__sha512___a">0.3.1 (incubating) Official <a href="https://www.apache.org/dyn/closer.lua/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip">source release</a> [ <a href="https://www.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.sha512">SHA512</a> ] [ <a href="https://www.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.asc">ASC</a> ]</h4> 
+   <div class="sect3 4 0"> 
+    <h4 id="_toc_040_official_source_release__sha512___asc_">0.4.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip">source release</a> [ <a href="https://www.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://www.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip.asc">ASC</a> ]</h4> 
+    <div class="paragraph"> 
+     <p>This is the first release of Apache PLC4X as top-level project.</p> 
+    </div> 
     <div class="sect4"> 
      <h5 id="_toc_new_features1">New Features</h5> 
      <div class="ulist"> 
       <ul> 
-       <li> <p>No new features</p> </li> 
+       <li> <p>The PlcConnection now supports a <code>ping</code> method to allow checking if an existing connection is still alive.</p> </li> 
+       <li> <p>Support of the OPC-UA protocol with the <code>opc-ua-driver</code>.</p> </li> 
+       <li> <p>Other Languages Support: — Added first versions of a C# .Net PLC4X API (<code>plc4net</code>) — Added first versions of a Python PLC4X API (<code>plc4py</code>)</p> </li> 
+       <li> <p>Added an Interop server which allows to relay requests from other languages to a Java Server</p> </li> 
       </ul> 
      </div> 
     </div> 
@@ -244,12 +258,37 @@
      <h5 id="_toc_incompatible_changes1">Incompatible changes</h5> 
      <div class="ulist"> 
       <ul> 
-       <li> <p>No incompatible changes.</p> </li> 
+       <li> <p>ElasticSearch example was updated to use ElasticSearch 7.0.1, this might cause problems with older Kibana versions.</p> </li> 
       </ul> 
      </div> 
     </div> 
     <div class="sect4"> 
      <h5 id="_toc_bug_fixes1">Bug Fixes</h5> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="_toc_incubating_releases1">Incubating Releases</h3> 
+   <div class="sect3"> 
+    <h4 id="_toc_031_incubating_official_source_release__sha512___a">0.3.1 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.sha512">SHA512</a> ] [ <a href="http://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.asc">ASC</a> ]</h4> 
+    <div class="sect4"> 
+     <h5 id="_toc_new_features2">New Features</h5> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>No new features</p> </li> 
+      </ul> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_incompatible_changes2">Incompatible changes</h5> 
+     <div class="ulist"> 
+      <ul> 
+       <li> <p>No incompatible changes.</p> </li> 
+      </ul> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_bug_fixes2">Bug Fixes</h5> 
      <div class="ulist"> 
       <ul> 
        <li> <p>The S7 driver didn’t correctly handle "fill-bytes" in multi-item read-responses and multi-item write-requests</p> </li> 
@@ -260,13 +299,10 @@
      </div> 
     </div> 
    </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="_toc_previous_releases1">Previous Releases</h3> 
    <div class="sect3 3 0"> 
-    <h4 id="_toc_030_incubating_official_source_release__sha512___a">0.3.0 (incubating) Official <a href="http://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip">source release</a> [ <a href="http://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.sha512">SHA512</a> ] [ <a href="http://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.asc">ASC</a> ]</h4> 
+    <h4 id="_toc_030_incubating_official_source_release__sha512___a">0.3.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.sha512">SHA512</a> ] [ <a href="http://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.asc">ASC</a> ]</h4> 
     <div class="sect4"> 
-     <h5 id="_toc_new_features2">New Features</h5> 
+     <h5 id="_toc_new_features3">New Features</h5> 
      <div class="ulist"> 
       <ul> 
        <li> <p>Object PLC Mapping (OPM) now has a Alias Registry to allow variable substitution at runtime and write support</p> </li> 
@@ -276,7 +312,7 @@
      </div> 
     </div> 
     <div class="sect4"> 
-     <h5 id="_toc_incompatible_changes2">Incompatible changes</h5> 
+     <h5 id="_toc_incompatible_changes3">Incompatible changes</h5> 
      <div class="ulist"> 
       <ul> 
        <li> <p>The 'plc4j-core' module has been merged into 'plc4j-api'. So there is no 'plc4j-core' module anymore. Just remove that dependency.</p> </li> 
@@ -285,7 +321,7 @@
      </div> 
     </div> 
     <div class="sect4"> 
-     <h5 id="_toc_bug_fixes2">Bug Fixes</h5> 
+     <h5 id="_toc_bug_fixes3">Bug Fixes</h5> 
      <div class="ulist"> 
       <ul> 
        <li> <p>Fixing dependency to the wrap url-handler</p> </li> 
@@ -298,7 +334,7 @@
     </div> 
    </div> 
    <div class="sect3 2 0"> 
-    <h4 id="_toc_020_incubating_official_source_release__sha512___a">0.2.0 (incubating) Official <a href="http://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip">source release</a> [ <a href="http://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip.sha512">SHA512</a> ] [ <a href="http://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip.asc">ASC</a> ]</h4> 
+    <h4 id="_toc_020_incubating_official_source_release__sha512___a">0.2.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip.sha512">SHA512</a> ] [ <a href="http://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip.asc">ASC</a> ]</h4> 
     <div class="sect4"> 
      <h5 id="_toc_changes1">Changes:</h5> 
      <div class="ulist"> 
@@ -312,7 +348,7 @@
     </div> 
    </div> 
    <div class="sect3 1 0"> 
-    <h4 id="_toc_010_incubating_official_source_release__sha512___a">0.1.0 (incubating) Official <a href="http://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip">source release</a> [ <a href="http://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://www.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip.asc">ASC</a> ]</h4> 
+    <h4 id="_toc_010_incubating_official_source_release__sha512___a">0.1.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://www.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip.asc">ASC</a> ]</h4> 
    </div> 
   </div> 
  </div> 
