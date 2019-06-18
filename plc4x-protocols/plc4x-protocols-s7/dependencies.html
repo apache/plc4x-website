@@ -123,7 +123,8 @@
                                 <!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
                                 <li><a href="#_toc_project_dependencies" title="Project Dependencies">Project Dependencies</a></li>
                                 <li class="divider"></li>
-                                              <li><a href="#_toc_test1" title="test">test</a></li>
+                                              <li><a href="#_toc_compile1" title="compile">compile</a></li>
+                <li><a href="#_toc_test1" title="test">test</a></li>
                             </ul>
                         </li>
                         <li class="divider-vertical"></li>
@@ -164,6 +165,31 @@
 <div class="section"> 
  <div class="page-header">
   <h2 id="_toc_project_dependencies">Project Dependencies</h2>
+ </div> 
+ <a name="Project_Dependencies_compile"></a> 
+ <div class="section"> 
+  <h3 id="_toc_compile1">compile</h3> 
+  <p>The following is a list of compile dependencies for this project. These dependencies are required to compile and run the application:</p> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>GroupId</th> 
+     <th>ArtifactId</th> 
+     <th>Version</th> 
+     <th>Type</th> 
+     <th>Licenses</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td>org.apache.plc4x</td> 
+     <td><a class="externalLink" href="https://plc4x.apache.org/plc4x-protocols/plc4x-protocols-plc4x">plc4x-protocols-plc4x</a></td> 
+     <td>0.4.0-SNAPSHOT</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
+    </tr> 
+   </tbody> 
+  </table> 
  </div> 
  <a name="Project_Dependencies_test"></a> 
  <div class="section"> 
@@ -207,6 +233,34 @@
      <td>2.0.6</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://raw.github.com/hunterhacker/jdom/master/LICENSE.txt">Similar to Apache License but with the acknowledgment clause removed</a></td> 
+    </tr> 
+    <tr class="b"> 
+     <td>org.junit.jupiter</td> 
+     <td><a class="externalLink" href="http://junit.org/junit5/">junit-jupiter-api</a></td> 
+     <td>5.2.0</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></td> 
+    </tr> 
+    <tr class="a"> 
+     <td>org.junit.jupiter</td> 
+     <td><a class="externalLink" href="http://junit.org/junit5/">junit-jupiter-engine</a></td> 
+     <td>5.2.0</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></td> 
+    </tr> 
+    <tr class="b"> 
+     <td>org.junit.jupiter</td> 
+     <td><a class="externalLink" href="http://junit.org/junit5/">junit-jupiter-params</a></td> 
+     <td>5.2.0</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></td> 
+    </tr> 
+    <tr class="a"> 
+     <td>org.junit.vintage</td> 
+     <td><a class="externalLink" href="http://junit.org/junit5/">junit-vintage-engine</a></td> 
+     <td>5.2.0</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></td> 
     </tr> 
    </tbody> 
   </table> 
@@ -267,78 +321,92 @@
      <td><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">The BSD License</a></td> 
     </tr> 
     <tr class="a"> 
+     <td>junit</td> 
+     <td><a class="externalLink" href="http://junit.org">junit</a></td> 
+     <td>4.12</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License 1.0</a></td> 
+    </tr> 
+    <tr class="b"> 
      <td>org.apache.daffodil</td> 
      <td><a class="externalLink" href="https://daffodil.apache.org">daffodil-core_2.12</a></td> 
      <td>2.3.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.apache.daffodil</td> 
      <td><a class="externalLink" href="https://daffodil.apache.org">daffodil-io_2.12</a></td> 
      <td>2.3.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.apache.daffodil</td> 
      <td><a class="externalLink" href="https://daffodil.apache.org">daffodil-lib_2.12</a></td> 
      <td>2.3.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.apache.daffodil</td> 
      <td><a class="externalLink" href="https://daffodil.apache.org">daffodil-runtime1-unparser_2.12</a></td> 
      <td>2.3.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.apache.daffodil</td> 
      <td><a class="externalLink" href="https://daffodil.apache.org">daffodil-runtime1_2.12</a></td> 
      <td>2.3.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.apache.daffodil</td> 
      <td><a class="externalLink" href="https://daffodil.apache.org">daffodil-tdml-lib_2.12</a></td> 
      <td>2.3.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.apache.daffodil</td> 
      <td><a class="externalLink" href="https://daffodil.apache.org">daffodil-tdml-processor_2.12</a></td> 
      <td>2.3.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.apiguardian</td> 
      <td><a class="externalLink" href="https://github.com/apiguardian-team/apiguardian">apiguardian-api</a></td> 
      <td>1.0.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.codehaus.woodstox</td> 
      <td><a class="externalLink" href="http://github.com/FasterXML/stax2-api">stax2-api</a></td> 
      <td>4.1</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">The BSD License</a></td> 
     </tr> 
+    <tr class="a"> 
+     <td>org.hamcrest</td> 
+     <td><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">hamcrest-core</a></td> 
+     <td>1.3</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></td> 
+    </tr> 
     <tr class="b"> 
-     <td>org.junit.jupiter</td> 
-     <td><a class="externalLink" href="http://junit.org/junit5/">junit-jupiter-api</a></td> 
-     <td>5.2.0</td> 
+     <td>org.junit.platform</td> 
+     <td><a class="externalLink" href="http://junit.org/junit5/">junit-platform-commons</a></td> 
+     <td>1.2.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></td> 
     </tr> 
     <tr class="a"> 
      <td>org.junit.platform</td> 
-     <td><a class="externalLink" href="http://junit.org/junit5/">junit-platform-commons</a></td> 
+     <td><a class="externalLink" href="http://junit.org/junit5/">junit-platform-engine</a></td> 
      <td>1.2.0</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></td> 
@@ -438,8 +506,23 @@
      </table> 
     </div> 
     <ul> 
-     <li>org.apache.plc4x:plc4x-protocols-test-utils:jar:0.5.0-SNAPSHOT (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep2"><i class="glyphicon glyphicon-info-sign"></i></button> 
+     <li>org.apache.plc4x:plc4x-protocols-plc4x:jar:0.4.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep2"><i class="glyphicon glyphicon-info-sign"></i></button> 
       <div id="_dep2" style="" class="collapse"> 
+       <table border="0" class="bodyTable table table-striped table-hover"> 
+        <thead> 
+         <tr class="a"> 
+          <th>Protocols: PLC4X</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr class="b"> 
+          <td> <p><b>Description: </b>Base protocol specifications for any form of PLC4X driver</p> <p><b>URL: </b><a class="externalLink" href="https://plc4x.apache.org/plc4x-protocols/plc4x-protocols-plc4x">https://plc4x.apache.org/plc4x-protocols/plc4x-protocols-plc4x</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div></li> 
+     <li>org.apache.plc4x:plc4x-protocols-test-utils:jar:0.5.0-SNAPSHOT (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep4"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep4" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -454,8 +537,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.daffodil:daffodil-tdml-lib_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep4"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep4" style="" class="collapse"> 
+       <li>org.apache.daffodil:daffodil-tdml-lib_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep6"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep6" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -470,8 +553,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>org.apache.daffodil:daffodil-io_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep6"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep6" style="" class="collapse"> 
+         <li>org.apache.daffodil:daffodil-io_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep8"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep8" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -486,8 +569,8 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>org.apache.daffodil:daffodil-lib_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep8"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep8" style="" class="collapse"> 
+       <li>org.apache.daffodil:daffodil-lib_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep10"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep10" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -501,8 +584,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.daffodil:daffodil-tdml-processor_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep10"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep10" style="" class="collapse"> 
+       <li>org.apache.daffodil:daffodil-tdml-processor_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep12"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep12" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -516,8 +599,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.scala-lang:scala-library:jar:2.12.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep12"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep12" style="" class="collapse"> 
+       <li>org.scala-lang:scala-library:jar:2.12.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep14"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep14" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -531,71 +614,167 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.junit.jupiter:junit-jupiter-api:jar:5.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep14"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep14" style="" class="collapse"> 
+      </ul></li> 
+     <li>org.junit.jupiter:junit-jupiter-api:jar:5.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep16"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep16" style="" class="collapse"> 
+       <table border="0" class="bodyTable table table-striped table-hover"> 
+        <thead> 
+         <tr class="a"> 
+          <th>JUnit Jupiter API</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr class="b"> 
+          <td> <p><b>Description: </b>Module "junit-jupiter-api" of JUnit 5.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org/junit5/">http://junit.org/junit5/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div> 
+      <ul> 
+       <li>org.apiguardian:apiguardian-api:jar:1.0.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep18"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep18" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
-            <th>JUnit Jupiter API</th> 
+            <th>org.apiguardian:apiguardian-api</th> 
            </tr> 
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>Module "junit-jupiter-api" of JUnit 5.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org/junit5/">http://junit.org/junit5/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td> 
+            <td> <p><b>Description: </b>@API Guardian</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/apiguardian-team/apiguardian">https://github.com/apiguardian-team/apiguardian</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache License, Version 2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+       <li>org.opentest4j:opentest4j:jar:1.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep20"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep20" style="" class="collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>org.opentest4j:opentest4j</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>Open Test Alliance for the JVM</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/ota4j-team/opentest4j">https://github.com/ota4j-team/opentest4j</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache License, Version 2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+       <li>org.junit.platform:junit-platform-commons:jar:1.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep22"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep22" style="" class="collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>JUnit Platform Commons</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>Module "junit-platform-commons" of JUnit 5.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org/junit5/">http://junit.org/junit5/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+      </ul></li> 
+     <li>org.junit.jupiter:junit-jupiter-params:jar:5.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep24"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep24" style="" class="collapse"> 
+       <table border="0" class="bodyTable table table-striped table-hover"> 
+        <thead> 
+         <tr class="a"> 
+          <th>JUnit Jupiter Params</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr class="b"> 
+          <td> <p><b>Description: </b>Module "junit-jupiter-params" of JUnit 5.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org/junit5/">http://junit.org/junit5/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div></li> 
+     <li>org.junit.jupiter:junit-jupiter-engine:jar:5.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep26"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep26" style="" class="collapse"> 
+       <table border="0" class="bodyTable table table-striped table-hover"> 
+        <thead> 
+         <tr class="a"> 
+          <th>JUnit Jupiter Engine</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr class="b"> 
+          <td> <p><b>Description: </b>Module "junit-jupiter-engine" of JUnit 5.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org/junit5/">http://junit.org/junit5/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div> 
+      <ul> 
+       <li>org.junit.platform:junit-platform-engine:jar:1.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep28"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep28" style="" class="collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>JUnit Platform Engine API</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>Module "junit-platform-engine" of JUnit 5.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org/junit5/">http://junit.org/junit5/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+      </ul></li> 
+     <li>org.junit.vintage:junit-vintage-engine:jar:5.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep30"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep30" style="" class="collapse"> 
+       <table border="0" class="bodyTable table table-striped table-hover"> 
+        <thead> 
+         <tr class="a"> 
+          <th>JUnit Vintage Engine</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr class="b"> 
+          <td> <p><b>Description: </b>Module "junit-vintage-engine" of JUnit 5.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org/junit5/">http://junit.org/junit5/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div> 
+      <ul> 
+       <li>junit:junit:jar:4.12 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep32"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep32" style="" class="collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>JUnit</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>JUnit is a unit testing framework for Java, created by Erich Gamma and Kent Beck.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License 1.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
         </div> 
         <ul> 
-         <li>org.apiguardian:apiguardian-api:jar:1.0.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep16"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep16" style="" class="collapse"> 
+         <li>org.hamcrest:hamcrest-core:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep34"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep34" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
-              <th>org.apiguardian:apiguardian-api</th> 
+              <th>Hamcrest Core</th> 
              </tr> 
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>@API Guardian</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/apiguardian-team/apiguardian">https://github.com/apiguardian-team/apiguardian</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache License, Version 2.0</a></p></td> 
-             </tr> 
-            </tbody> 
-           </table> 
-          </div></li> 
-         <li>org.opentest4j:opentest4j:jar:1.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep18"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep18" style="" class="collapse"> 
-           <table border="0" class="bodyTable table table-striped table-hover"> 
-            <thead> 
-             <tr class="a"> 
-              <th>org.opentest4j:opentest4j</th> 
-             </tr> 
-            </thead> 
-            <tbody> 
-             <tr class="b"> 
-              <td> <p><b>Description: </b>Open Test Alliance for the JVM</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/ota4j-team/opentest4j">https://github.com/ota4j-team/opentest4j</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache License, Version 2.0</a></p></td> 
-             </tr> 
-            </tbody> 
-           </table> 
-          </div></li> 
-         <li>org.junit.platform:junit-platform-commons:jar:1.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep20"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep20" style="" class="collapse"> 
-           <table border="0" class="bodyTable table table-striped table-hover"> 
-            <thead> 
-             <tr class="a"> 
-              <th>JUnit Platform Commons</th> 
-             </tr> 
-            </thead> 
-            <tbody> 
-             <tr class="b"> 
-              <td> <p><b>Description: </b>Module "junit-platform-commons" of JUnit 5.</p> <p><b>URL: </b><a class="externalLink" href="http://junit.org/junit5/">http://junit.org/junit5/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v20.html">Eclipse Public License v2.0</a></p></td> 
+              <td> <p><b>Description: </b>This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">https://github.com/hamcrest/JavaHamcrest/hamcrest-core</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
           </div></li> 
         </ul></li> 
       </ul></li> 
-     <li>org.apache.daffodil:daffodil-japi_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep22"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep22" style="" class="collapse"> 
+     <li>org.apache.daffodil:daffodil-japi_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep36"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep36" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -610,8 +789,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.daffodil:daffodil-core_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep24"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep24" style="" class="collapse"> 
+       <li>org.apache.daffodil:daffodil-core_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep38"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep38" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -626,8 +805,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>org.apache.daffodil:daffodil-runtime1-unparser_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep26"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep26" style="" class="collapse"> 
+         <li>org.apache.daffodil:daffodil-runtime1-unparser_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep40"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep40" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -642,8 +821,8 @@
            </table> 
           </div> 
           <ul> 
-           <li>org.apache.daffodil:daffodil-runtime1_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep28"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep28" style="" class="collapse"> 
+           <li>org.apache.daffodil:daffodil-runtime1_2.12:jar:2.3.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep42"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep42" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -659,12 +838,12 @@
             </div></li> 
           </ul></li> 
         </ul></li> 
-       <li>org.scala-lang.modules:scala-xml_2.12:jar:1.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep30"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep30" style="" class="collapse"></div></li> 
-       <li>org.scala-lang.modules:scala-parser-combinators_2.12:jar:1.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep32"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep32" style="" class="collapse"></div></li> 
-       <li>com.ibm.icu:icu4j:jar:62.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep34"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep34" style="" class="collapse"> 
+       <li>org.scala-lang.modules:scala-xml_2.12:jar:1.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep44"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep44" style="" class="collapse"></div></li> 
+       <li>org.scala-lang.modules:scala-parser-combinators_2.12:jar:1.1.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep46"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep46" style="" class="collapse"></div></li> 
+       <li>com.ibm.icu:icu4j:jar:62.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep48"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep48" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -678,8 +857,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>xerces:xercesImpl:jar:2.12.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep36"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep36" style="" class="collapse"> 
+       <li>xerces:xercesImpl:jar:2.12.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep50"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep50" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -694,8 +873,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>xml-apis:xml-apis:jar:1.4.01 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep38"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep38" style="" class="collapse"> 
+         <li>xml-apis:xml-apis:jar:1.4.01 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep52"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep52" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -710,10 +889,10 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>xml-resolver:xml-resolver:jar:1.2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep40"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep40" style="" class="collapse"></div></li> 
-       <li>commons-io:commons-io:jar:2.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep42"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep42" style="" class="collapse"> 
+       <li>xml-resolver:xml-resolver:jar:1.2 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep54"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep54" style="" class="collapse"></div></li> 
+       <li>commons-io:commons-io:jar:2.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep56"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep56" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -727,8 +906,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>jline:jline:jar:2.14.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep44"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep44" style="" class="collapse"> 
+       <li>jline:jline:jar:2.14.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep58"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep58" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -742,8 +921,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>com.fasterxml.woodstox:woodstox-core:jar:5.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep46"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep46" style="" class="collapse"> 
+       <li>com.fasterxml.woodstox:woodstox-core:jar:5.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep60"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep60" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -758,8 +937,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>org.codehaus.woodstox:stax2-api:jar:4.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep48"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep48" style="" class="collapse"> 
+         <li>org.codehaus.woodstox:stax2-api:jar:4.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep62"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep62" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -774,8 +953,8 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>com.fasterxml.jackson.core:jackson-core:jar:2.9.8 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep50"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep50" style="" class="collapse"> 
+       <li>com.fasterxml.jackson.core:jackson-core:jar:2.9.8 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep64"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep64" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -790,8 +969,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>commons-codec:commons-codec:jar:1.11 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep52"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep52" style="" class="collapse"> 
+     <li>commons-codec:commons-codec:jar:1.11 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep66"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep66" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -805,8 +984,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.jdom:jdom2:jar:2.0.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep54"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep54" style="" class="collapse"> 
+     <li>org.jdom:jdom2:jar:2.0.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep68"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep68" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -830,12 +1009,14 @@
  <p><b>Similar to Apache License but with the acknowledgment clause removed: </b>JDOM</p> 
  <p><b>The SAX License: </b>XML Commons External Components XML APIs</p> 
  <p><b>The Apache License, Version 2.0: </b>Woodstox, org.apiguardian:apiguardian-api, org.opentest4j:opentest4j</p> 
+ <p><b>Eclipse Public License 1.0: </b>JUnit</p> 
  <p><b>The BSD License: </b>JLine, Stax2 API</p> 
- <p><b>Apache License, Version 2.0: </b>Apache Commons Codec, Apache Commons IO, Protocols: S7, Protocols: Test-Utils, daffodil-core, daffodil-io, daffodil-japi, daffodil-lib, daffodil-runtime1, daffodil-runtime1-unparser, daffodil-tdml-lib, daffodil-tdml-processor</p> 
- <p><b>Eclipse Public License v2.0: </b>JUnit Jupiter API, JUnit Platform Commons</p> 
+ <p><b>Apache License, Version 2.0: </b>Apache Commons Codec, Apache Commons IO, Protocols: PLC4X, Protocols: S7, Protocols: Test-Utils, daffodil-core, daffodil-io, daffodil-japi, daffodil-lib, daffodil-runtime1, daffodil-runtime1-unparser, daffodil-tdml-lib, daffodil-tdml-processor</p> 
+ <p><b>Eclipse Public License v2.0: </b>JUnit Jupiter API, JUnit Jupiter Engine, JUnit Jupiter Params, JUnit Platform Commons, JUnit Platform Engine API, JUnit Vintage Engine</p> 
  <p><b>Unicode/ICU License: </b>ICU4J</p> 
  <p><b>The W3C License: </b>XML Commons External Components XML APIs</p> 
  <p><b>BSD 3-Clause: </b>Scala Library</p> 
+ <p><b>New BSD License: </b>Hamcrest Core</p> 
  <p><b>The Apache Software License, Version 2.0: </b>Jackson-core, XML Commons External Components XML APIs, Xerces2-j</p> 
 </div> 
 <a name="Dependency_File_Details"></a> 
@@ -907,6 +1088,15 @@
     <td>Yes</td> 
    </tr> 
    <tr class="b"> 
+    <td>junit-4.12.jar</td> 
+    <td>314.9 kB</td> 
+    <td>323</td> 
+    <td>286</td> 
+    <td>30</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+   </tr> 
+   <tr class="a"> 
     <td>daffodil-core_2.12-2.3.0.jar</td> 
     <td>2 MB</td> 
     <td>601</td> 
@@ -915,7 +1105,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>daffodil-io_2.12-2.3.0.jar</td> 
     <td>365 kB</td> 
     <td>167</td> 
@@ -924,7 +1114,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>daffodil-japi_2.12-2.3.0.jar</td> 
     <td>68.1 kB</td> 
     <td>59</td> 
@@ -933,7 +1123,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>daffodil-lib_2.12-2.3.0.jar</td> 
     <td>1.8 MB</td> 
     <td>1073</td> 
@@ -942,7 +1132,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>daffodil-runtime1-unparser_2.12-2.3.0.jar</td> 
     <td>470.5 kB</td> 
     <td>180</td> 
@@ -951,7 +1141,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>daffodil-runtime1_2.12-2.3.0.jar</td> 
     <td>3.2 MB</td> 
     <td>1638</td> 
@@ -960,7 +1150,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>daffodil-tdml-lib_2.12-2.3.0.jar</td> 
     <td>228.4 kB</td> 
     <td>95</td> 
@@ -969,7 +1159,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>daffodil-tdml-processor_2.12-2.3.0.jar</td> 
     <td>41.8 kB</td> 
     <td>23</td> 
@@ -978,9 +1168,18 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
+   <tr class="a"> 
+    <td>plc4x-protocols-plc4x-0.4.0-SNAPSHOT.jar</td> 
+    <td>4.6 kB</td> 
+    <td>13</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>-</td> 
+    <td>No</td> 
+   </tr> 
    <tr class="b"> 
     <td>plc4x-protocols-test-utils-0.5.0-SNAPSHOT.jar</td> 
-    <td>4.7 kB</td> 
+    <td>5.1 kB</td> 
     <td>12</td> 
     <td>1</td> 
     <td>1</td> 
@@ -1006,6 +1205,15 @@
     <td>Yes</td> 
    </tr> 
    <tr class="a"> 
+    <td>hamcrest-core-1.3.jar</td> 
+    <td>45 kB</td> 
+    <td>52</td> 
+    <td>45</td> 
+    <td>3</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+   </tr> 
+   <tr class="b"> 
     <td>jdom2-2.0.6.jar</td> 
     <td>304.9 kB</td> 
     <td>215</td> 
@@ -1014,7 +1222,7 @@
     <td>1.5</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>junit-jupiter-api-5.2.0.jar</td> 
     <td>108.2 kB</td> 
     <td>107</td> 
@@ -1023,7 +1231,25 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
+   <tr class="b"> 
+    <td>junit-jupiter-engine-5.2.0.jar</td> 
+    <td>142.9 kB</td> 
+    <td>99</td> 
+    <td>83</td> 
+    <td>7</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+   </tr> 
    <tr class="a"> 
+    <td>junit-jupiter-params-5.2.0.jar</td> 
+    <td>485.7 kB</td> 
+    <td>336</td> 
+    <td>303</td> 
+    <td>21</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+   </tr> 
+   <tr class="b"> 
     <td>junit-platform-commons-1.2.0.jar</td> 
     <td>78.3 kB</td> 
     <td>50</td> 
@@ -1032,7 +1258,25 @@
     <td>-</td> 
     <td>Yes</td> 
    </tr> 
+   <tr class="a"> 
+    <td>junit-platform-engine-1.2.0.jar</td> 
+    <td>89.9 kB</td> 
+    <td>78</td> 
+    <td>64</td> 
+    <td>6</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+   </tr> 
    <tr class="b"> 
+    <td>junit-vintage-engine-5.2.0.jar</td> 
+    <td>62.2 kB</td> 
+    <td>50</td> 
+    <td>36</td> 
+    <td>5</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+   </tr> 
+   <tr class="a"> 
     <td>opentest4j-1.1.0.jar</td> 
     <td>6.8 kB</td> 
     <td>10</td> 
@@ -1041,7 +1285,7 @@
     <td>1.6</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>scala-library-2.12.6.jar</td> 
     <td>5.3 MB</td> 
     <td>2542</td> 
@@ -1050,7 +1294,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>scala-parser-combinators_2.12-1.1.1.jar</td> 
     <td>226.6 kB</td> 
     <td>110</td> 
@@ -1059,7 +1303,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>scala-xml_2.12-1.1.0.jar</td> 
     <td>548.6 kB</td> 
     <td>249</td> 
@@ -1068,7 +1312,7 @@
     <td>1.8</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>xercesImpl-2.12.0.jar</td> 
     <td>1.4 MB</td> 
     <td>1045</td> 
@@ -1077,7 +1321,7 @@
     <td>1.3</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>xml-apis-1.4.01.jar</td> 
     <td>220.5 kB</td> 
     <td>391</td> 
@@ -1086,7 +1330,7 @@
     <td>1.1</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>xml-resolver-1.2.jar</td> 
     <td>84.1 kB</td> 
     <td>49</td> 
@@ -1095,7 +1339,7 @@
     <td>1.1</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <th>Total</th> 
     <th>Size</th> 
     <th>Entries</th> 
@@ -1104,23 +1348,32 @@
     <th>Java Version</th> 
     <th>Debug Information</th> 
    </tr> 
-   <tr class="b"> 
-    <td>27</td> 
-    <td>30.6 MB</td> 
-    <td>14491</td> 
-    <td>10393</td> 
-    <td>276</td> 
+   <tr class="a"> 
+    <td>34</td> 
+    <td>31.7 MB</td> 
+    <td>15442</td> 
+    <td>11210</td> 
+    <td>348</td> 
     <td>1.8</td> 
-    <td>25</td> 
+    <td>31</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>compile: 1</td> 
+    <td>compile: 4.6 kB</td> 
+    <td>compile: 13</td> 
+    <td>-</td> 
+    <td>-</td> 
+    <td>-</td> 
+    <td>-</td> 
    </tr> 
    <tr class="a"> 
-    <td>test: 27</td> 
-    <td>test: 30.6 MB</td> 
-    <td>test: 14491</td> 
-    <td>test: 10393</td> 
-    <td>test: 276</td> 
+    <td>test: 33</td> 
+    <td>test: 31.7 MB</td> 
+    <td>test: 15429</td> 
+    <td>test: 11210</td> 
+    <td>test: 348</td> 
     <td>-</td> 
-    <td>test: 25</td> 
+    <td>test: 31</td> 
    </tr> 
   </tbody> 
  </table> 
