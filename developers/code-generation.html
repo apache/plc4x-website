@@ -170,7 +170,35 @@
             </div> <!-- .navbar-header -->
         <div class="collapse navbar-collapse" id="toc-nav-collapse">
           <ul id="toc" class="nav navbar-nav">
-                                                <li class="toplevel"><a href="#_toc_code_generation1" title="Code Generation">Code Generation</a></li>
+                                                            <li class="toplevel"><a href="#_toc_code_generation1" title="Code Generation">Code Generation</a></li>
+                        <li class="toplevel"><a href="#_toc_introduction1" title="Introduction">Introduction</a></li>
+                        <li class="dropdown">
+                            <a href="#" title="The MSpec format" class="dropdown-toggle" role="button" data-toggle="dropdown">The MSpec format <b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
+                                <li><a href="#_toc_the_mspec_format1" title="The MSpec format">The MSpec format</a></li>
+                                <li class="divider"></li>
+                                              <li><a href="#_toc_simple_types1" title="Simple Types">Simple Types</a></li>
+                <li><a href="#_toc_complex_types1" title="Complex Types">Complex Types</a></li>
+                <li class="dropdown-submenu">
+                    <a href="#_toc_field_types_and_their_syntax1" title="Field Types and their Syntax">Field Types and their Syntax</a>
+                    <ul class="dropdown-menu" role="menu">
+                <li><a href="#_toc_const_field1" title="const Field">const Field</a></li>
+                <li><a href="#_toc_reserved_field1" title="reserved Field">reserved Field</a></li>
+                <li><a href="#_toc_field_field1" title="field Field">field Field</a></li>
+                <li><a href="#_toc_array_field1" title="array Field">array Field</a></li>
+                <li><a href="#_toc_optional_field1" title="optional Field">optional Field</a></li>
+                <li><a href="#_toc_implicit_field1" title="implicit Field">implicit Field</a></li>
+                <li><a href="#_toc_discriminator_field1" title="discriminator Field">discriminator Field</a></li>
+                <li><a href="#_toc_typeswitch_field1" title="typeSwitch Field">typeSwitch Field</a></li>
+                    </ul>
+                </li>
+                            </ul>
+                        </li>
+                        <li class="divider-vertical"></li>
+                                    <li class="toplevel"><a href="#_toc_problems_with_maven1" title="Problems with Maven">Problems with Maven</a></li>
+                        <li class="toplevel"><a href="#_toc_why_are_the_4_modules_released_separately1" title="Why are the 4 modules released separately?">Why are the 4 modules released separately?</a></li>
+                        <li class="toplevel"><a href="#_toc_why_are_the_protocol_and_language_dependencies_don" title="Why are the protocol and language dependencies done so strangely?">Why are the protocol and language dependencies done so strangely?</a></li>
           </ul>
         </div>
       </div> <!-- .container -->
@@ -186,6 +214,316 @@
   <h2 id="_toc_code_generation1">Code Generation</h2>
  </div> 
  <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>As hand-writing code for a lot of drivers in multiple languages would be quite a nightmare, we have invested a very large amount of time into finding a way to automate this.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>So in the end we need 3 parts:</p> 
+  </div> 
+  <div class="olist arabic"> 
+   <ol class="arabic"> 
+    <li> <p>Protocol definition</p> </li> 
+    <li> <p>Language template</p> </li> 
+    <li> <p>A maven plugin which generates the code</p> </li> 
+   </ol> 
+  </div> 
+  <div class="paragraph"> 
+   <p>This maven plugin uses a given protocol definition as well as a language template and generates code for reading/writing data in that protocol with the given language.</p> 
+  </div> 
+  <div class="imageblock"> 
+   <div class="content"> 
+    <img src="../images/code-generation-intro.png" alt="code generation intro" width="750" height="308" class="img-responsive"> 
+   </div> 
+  </div> 
+  <div class="paragraph"> 
+   <p>The <code>Types Base</code> module provides all the structures the <code>Protocol</code> modules output which are then used in the <code>Language</code> templates to generate code.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p><code>Protocol Base</code> and <code>Language Base</code> hereby just provide the interfaces that reference these types and provide the API for the <code>plc4x-maven-plugin</code> to use.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>These modules are also maintained in a repository which is separate from the rest of the PLC4X code.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>This is due to some restrictions in the Maven build system. If you are interested in understanding the reasons - please read the chapter on <code>Problems with Maven</code> near the end of this page.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Concrete protocol spec parsers and templates that actually generate code are implemented in derived modules.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Also didn’t we want to tie ourselves to only one way to specify protocols and to generate code.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>This adds another layer to the hierarchy.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>So for example in case of generating a Siemens S7 Driver for Java this would look like this:</p> 
+  </div> 
+  <div class="imageblock"> 
+   <div class="content"> 
+    <img src="../images/code-generation-intro-s7-java.png" alt="code generation intro s7 java" width="480" height="728" class="img-responsive"> 
+   </div> 
+  </div> 
+  <div class="paragraph"> 
+   <p>The dark blue parts are the ones released externally, the turquoise ones are part of the main PLC4X repo.</p> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="_toc_introduction1">Introduction</h3> 
+   <div class="paragraph"> 
+    <p>The maven plugin is built up very modular.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>So in general it is possible to add new forms of providing protocol definitions as well as language templates.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>For the formats of specifying a protocol we have tried out numerous tools and frameworks, however the results were never quite satisfying.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Usually using them required a large amount of workarounds, which made the solution quite complicated.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>In the end only DFDL and the corresponding Apache project <a href="https://daffodil.apache.org">Apache Daffodil (incubating)</a> seemed to provide what we were looking for.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>With this we were able to provide first driver versions fully specified in XML.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>The downside was, that the PLC4X community regarded this XML format as pretty complicated and when implementing an experimental code generator we quickly noticed that generating a nice object model would not be possible, due to the lack ability to model the inheritance of types in DFDL.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>In the end we came up with our own solution.</p> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="_toc_the_mspec_format1">The MSpec format</h3> 
+   <div class="paragraph"> 
+    <p>The <code>MSpec</code> format (Message Specification) was a result of a brainstorming session after evaluating a lot of other options.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>We simply sat down and started to write some imaginary format (<code>imaginary</code> was even the initial Name we used) and created parses for this afterwards and fine tuned spec and parsers as part of the process of implementing first protocols and language templates.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>It’s a text-based format and for example part of the spec for the S7 format looks like this:</p> 
+   </div> 
+   <div class="literalblock"> 
+    <div class="content"> 
+     <pre>[discriminatedType 'S7Message'
+    [const         uint 8  'protocolId'      '0x32']
+    [discriminator uint 8  'messageType']
+    [reserved      uint 16 '0x0000']
+    [field         uint 16 'tpduReference']
+    [implicit      uint 16 'parameterLength' 'parameter.lengthInBytes']
+    [implicit      uint 16 'payloadLength'   'payload.lengthInBytes']
+    [typeSwitch 'messageType'
+        ['0x01' S7MessageRequest
+        ]
+        ['0x03' S7MessageResponse
+            [field uint 8 'errorClass']
+            [field uint 8 'errorCode']
+        ]
+        ['0x07' S7MessageUserData
+        ]
+    ]
+    [field S7Parameter 'parameter' ['messageType']]
+    [field S7Payload   'payload'   ['messageType', 'parameter']]
+]</pre> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>So the root elements are always <code>discriminatedType</code> elements which have a name.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>An elements start is declared by an opening square bracket <code>[</code> and ended with a closing one <code>]</code>.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Every <code>discriminatedType</code> contains a list of fields that can have different types.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>The list of available types are:</p> 
+   </div> 
+   <div class="ulist"> 
+    <ul> 
+     <li> <p>const: expects a given value</p> </li> 
+     <li> <p>reserved: expects a given value, but only warns if condition is not meet</p> </li> 
+     <li> <p>field: simple or complex typed object</p> </li> 
+     <li> <p>array: array of simple or complex typed objects</p> </li> 
+     <li> <p>optional: simple or complex typed object, that is only present in some conditions</p> </li> 
+     <li> <p>implicit: a field required for parsing, but is usually defined though other data</p> </li> 
+     <li> <p>discriminator: special type of simple typed field which is used to determine the concrete type of an object (max one per type and always has to be accompanied with a <code>switch</code> field)</p> </li> 
+     <li> <p>typeSwitch: not a real field, but indicates the existence of sub-types, which are declared inline</p> </li> 
+    </ul> 
+   </div> 
+   <div class="paragraph"> 
+    <p>The full syntax and explanations of these type follow in the following chapters.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Another thing we have to explain are how types are specified.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>In general we distinguish between two types of types:</p> 
+   </div> 
+   <div class="ulist"> 
+    <ul> 
+     <li> <p>simple types</p> </li> 
+     <li> <p>complex types</p> </li> 
+    </ul> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_simple_types1">Simple Types</h4> 
+    <div class="paragraph"> 
+     <p>Simple types are usually raw data the format is:</p> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>{base-type} {size}</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>The base types available are currently:</p> 
+    </div> 
+    <div class="ulist"> 
+     <ul> 
+      <li> <p>bit: Simple boolean value</p> </li> 
+      <li> <p>uint: The input is treated as unsigned integer value</p> </li> 
+      <li> <p>int: The input is treated as signed integer value</p> </li> 
+      <li> <p>float: The input is treated as floating point number</p> </li> 
+      <li> <p>string: The input is treated as string</p> </li> 
+     </ul> 
+    </div> 
+    <div class="paragraph"> 
+     <p>The size value then provides how many <code>bits</code> should be read.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>So reading an unsigned byte would be: <code>uint 8</code>.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_complex_types1">Complex Types</h4> 
+    <div class="paragraph"> 
+     <p>In contrast to simple types, complex type references simply reference other complex types.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>How the parser should interpret them is defined in the referenced types definition.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>In the example above, for example the <code>S7Parameter</code> is defined in another part of the spec.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_field_types_and_their_syntax1">Field Types and their Syntax</h4> 
+    <div class="sect4"> 
+     <h5 id="_toc_const_field1">const Field</h5> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[const {type} {size} '{name}' '{reference}']</pre> 
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>A const field simply reads a given simple type and compares to a given reference value.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>It makes the parser throw an Exception if the value does not match.</p> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_reserved_field1">reserved Field</h5> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[reserved {type} {size} '{name}' '{reference}']</pre> 
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>In general this field type behaves exactly the same way as the <code>const</code> field, but with the difference, that it doesn’t throw an Exception if the reference is not matched, but instead allows to log the value.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>This is used in order to detect <code>reserved</code> fields in some protocols, where the manufacturer defined the field to be a given value, but with the option to use it in the future.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>This way the application will not break in the future if devices start using the field and it informs us that we should probably have a look at what the new values mean.</p> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_field_field1">field Field</h5> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_array_field1">array Field</h5> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_optional_field1">optional Field</h5> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_implicit_field1">implicit Field</h5> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_discriminator_field1">discriminator Field</h5> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_typeswitch_field1">typeSwitch Field</h5> 
+    </div> 
+   </div> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect1"> 
+ <h2 id="_toc_problems_with_maven1">Problems with Maven</h2> 
+ <div class="sectionbody"> 
+  <div class="sect2"> 
+   <h3 id="_toc_why_are_the_4_modules_released_separately1">Why are the 4 modules released separately?</h3> 
+   <div class="paragraph"> 
+    <p>We mentioned in the introduction, that the first 4 modules are maintained and released from outside the main PLC4X repository.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>This is due to some restrictions in Maven, which result from the way Maven generally works.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>The main problem is that when starting a build, in the <code>validate</code> phase, Maven goes through the configuration, downloads the plugins and configures these. This means that Maven also tries to download the dependencies of the plugins too.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>In case of using a Maven plugin in a project which also produces the maven plugin, this is guaranteed to fail - Especially during releases. While during normal development, Maven will probably just download the latest <code>SNAPSHOT</code> from our Maven repository and be happy with this and not complain that this version will be overwritten later on in the build. It will just use the new version as soon as it has to.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>During releases however the release plugin changes the version to a release version and then spawns a build. In this case the build will fail because there is no Plugin with that version to download. In this case the only option would be to manually build and install the plugin in the release version and to re-start the release (Which is not a nice thing for the release manager).</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>For this reason we have stripped down the plugin and it’s dependencies to an absolute minimum and have released (or will release) that separately from the rest, hoping due to the minimality of the dependencies that we will not have to do it very often.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>As soon as the tooling is released, the version is updated in the PLC4X build and the release version is used without any complications.</p> 
+   </div> 
+  </div> 
+  <div class="sect2"> 
+   <h3 id="_toc_why_are_the_protocol_and_language_dependencies_don">Why are the protocol and language dependencies done so strangely?</h3> 
+   <div class="paragraph"> 
+    <p>It would certainly be a lot cleaner, if we provided the modules as plugin dependencies.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>However, as we mentioned in the previous sub-chapter, Maven tries to download and configure the plugins prior to running the build. So during a release the new versions of the modules wouldn’t exist, this would cause the build to fail.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>We could release the protocol- and the language modules separately too, but we want the language and protocol modules to be part of the project, to not over-complicate things - especially during a release.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>So the Maven plugin is built in a way, that it uses the modules dependencies and creates it’s own Classloader to contain all of these modules at runtime.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>This brings the benefit of being able to utilize Maven’s capability of determining the build order and dynamically creating the modules build classpath.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Adding a normal dependency however would make Maven deploy the artifacts with the rest of the modules.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>We don’t want that as the modules are useless as soon as they have been used to generate the code.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>So we use a trick that is usually used in Web applications, for example: Here the vendor of a Servlet engine is expected to provide an implementation of the <code>Servlet API</code>. It is forbidden for an application to bring this along, but it is required to build the application.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>For this the Maven scope <code>provided</code>, which tells Maven to provide it during the build, but to exclude it from any applications it builds because it will be provided by the system running the application.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>This is not quite true, but it does the trick.</p> 
+   </div> 
+  </div> 
  </div> 
 </div>      </div>
     </div>
