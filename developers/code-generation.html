@@ -191,6 +191,7 @@
                 <li><a href="#_toc_implicit_field1" title="implicit Field">implicit Field</a></li>
                 <li><a href="#_toc_discriminator_field1" title="discriminator Field">discriminator Field</a></li>
                 <li><a href="#_toc_typeswitch_field1" title="typeSwitch Field">typeSwitch Field</a></li>
+                <li><a href="#_toc_parameters1" title="Parameters">Parameters</a></li>
                     </ul>
                 </li>
                             </ul>
@@ -303,7 +304,35 @@
     <p>We simply sat down and started to write some imaginary format (<code>imaginary</code> was even the initial Name we used) and created parses for this afterwards and fine tuned spec and parsers as part of the process of implementing first protocols and language templates.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>It’s a text-based format and for example part of the spec for the S7 format looks like this:</p> 
+    <p>It’s a text-based format.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>At the root level of these specs are a set of <code>type</code> or <code>discriminatedType</code> blocks.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p><code>type</code> elements are objects that are independent from the input.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>An example would be the <code>TPKTPacket</code> of the S7 format:</p> 
+   </div> 
+   <div class="literalblock"> 
+    <div class="content"> 
+     <pre>[type 'TPKTPacket'
+    [const    uint 8     'protocolId' '0x03']
+    [reserved uint 8     '0x00']
+    [implicit uint 16    'len'        'payload.lengthInBytes + 4']
+    [field    COTPPacket 'payload']
+]</pre> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
+    <p>A <code>discriminatedType</code> type is in contrast an object who’s content is dependent in the input.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>Every discriminated type can contain at most one <code>discriminator</code> field and exactly one <code>typeSwitch</code> element.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>For example part of the spec for the S7 format looks like this:</p> 
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
@@ -330,13 +359,13 @@
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>So the root elements are always <code>discriminatedType</code> elements which have a name.</p> 
+    <p>An types start is declared by an opening square bracket <code>[</code> and ended with a closing one <code>]</code>.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>An elements start is declared by an opening square bracket <code>[</code> and ended with a closing one <code>]</code>.</p> 
+    <p>Also to both provide a name as first argument.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>Every <code>discriminatedType</code> contains a list of fields that can have different types.</p> 
+    <p>Every type definition contains a list of fields that can have different types.</p> 
    </div> 
    <div class="paragraph"> 
     <p>The list of available types are:</p> 
@@ -349,8 +378,8 @@
      <li> <p>array: array of simple or complex typed objects</p> </li> 
      <li> <p>optional: simple or complex typed object, that is only present in some conditions</p> </li> 
      <li> <p>implicit: a field required for parsing, but is usually defined though other data</p> </li> 
-     <li> <p>discriminator: special type of simple typed field which is used to determine the concrete type of an object (max one per type and always has to be accompanied with a <code>switch</code> field)</p> </li> 
-     <li> <p>typeSwitch: not a real field, but indicates the existence of sub-types, which are declared inline</p> </li> 
+     <li> <p>discriminator: special type of simple typed field which is used to determine the concrete type of an object (max one per type and always has to be accompanied with a <code>switch</code> field) (reserved for <code>discriminatedType</code>)</p> </li> 
+     <li> <p>typeSwitch: not a real field, but indicates the existence of sub-types, which are declared inline (reserved for <code>discriminatedType</code>)</p> </li> 
     </ul> 
    </div> 
    <div class="paragraph"> 
@@ -360,7 +389,7 @@
     <p>Another thing we have to explain are how types are specified.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>In general we distinguish between two types of types:</p> 
+    <p>In general we distinguish between two types of types used in field definitions:</p> 
    </div> 
    <div class="ulist"> 
     <ul> 
@@ -383,15 +412,18 @@
     </div> 
     <div class="ulist"> 
      <ul> 
-      <li> <p>bit: Simple boolean value</p> </li> 
-      <li> <p>uint: The input is treated as unsigned integer value</p> </li> 
-      <li> <p>int: The input is treated as signed integer value</p> </li> 
-      <li> <p>float: The input is treated as floating point number</p> </li> 
-      <li> <p>string: The input is treated as string</p> </li> 
+      <li> <p><strong>bit</strong>: Simple boolean value</p> </li> 
+      <li> <p><strong>uint</strong>: The input is treated as unsigned integer value</p> </li> 
+      <li> <p><strong>int</strong>: The input is treated as signed integer value</p> </li> 
+      <li> <p><strong>float</strong>: The input is treated as floating point number</p> </li> 
+      <li> <p><strong>string</strong>: The input is treated as string</p> </li> 
      </ul> 
     </div> 
     <div class="paragraph"> 
      <p>The size value then provides how many <code>bits</code> should be read.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>In case of <code>string</code> types, it refers to the number of characters.</p> 
     </div> 
     <div class="paragraph"> 
      <p>So reading an unsigned byte would be: <code>uint 8</code>.</p> 
@@ -400,7 +432,7 @@
    <div class="sect3"> 
     <h4 id="_toc_complex_types1">Complex Types</h4> 
     <div class="paragraph"> 
-     <p>In contrast to simple types, complex type references simply reference other complex types.</p> 
+     <p>In contrast to simple types, complex type reference other complex types (Root elements of the spec document).</p> 
     </div> 
     <div class="paragraph"> 
      <p>How the parser should interpret them is defined in the referenced types definition.</p> 
@@ -415,7 +447,7 @@
      <h5 id="_toc_const_field1">const Field</h5> 
      <div class="literalblock"> 
       <div class="content"> 
-       <pre>[const {type} {size} '{name}' '{reference}']</pre> 
+       <pre>[const {simple-type} {size} '{name}' '{reference}']</pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -429,7 +461,7 @@
      <h5 id="_toc_reserved_field1">reserved Field</h5> 
      <div class="literalblock"> 
       <div class="content"> 
-       <pre>[reserved {type} {size} '{name}' '{reference}']</pre> 
+       <pre>[reserved {simple-type} {size} '{name}' '{reference}']</pre> 
       </div> 
      </div> 
      <div class="paragraph"> 
@@ -444,21 +476,142 @@
     </div> 
     <div class="sect4"> 
      <h5 id="_toc_field_field1">field Field</h5> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[field {simple-type} {size} '{name}']</pre> 
+      </div> 
+     </div> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[field {complex-type} '{name}']</pre> 
+      </div> 
+     </div> 
     </div> 
     <div class="sect4"> 
      <h5 id="_toc_array_field1">array Field</h5> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[arrayField {simple-type} {size} '{name}' {'count' or 'length'} '{count or length expression}']</pre> 
+      </div> 
+     </div> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[arrayField {complex-type} '{name}' {'count' or 'length'} '{count or length expression}']</pre> 
+      </div> 
+     </div> 
     </div> 
     <div class="sect4"> 
      <h5 id="_toc_optional_field1">optional Field</h5> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[optionalField {simple-type} {size} '{name}' '{optional-expression}']</pre> 
+      </div> 
+     </div> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[optionalField {complex-type} '{name}' '{optional-expression}']</pre> 
+      </div> 
+     </div> 
     </div> 
     <div class="sect4"> 
      <h5 id="_toc_implicit_field1">implicit Field</h5> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[implicit {simple-type} {size} '{name}' '{serialization-expression}']</pre> 
+      </div> 
+     </div> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[implicit {complex-type} '{name}' '{serialization-expression}']</pre> 
+      </div> 
+     </div> 
     </div> 
     <div class="sect4"> 
      <h5 id="_toc_discriminator_field1">discriminator Field</h5> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[discriminator {simple-type} {size} '{name}']</pre> 
+      </div> 
+     </div> 
     </div> 
     <div class="sect4"> 
      <h5 id="_toc_typeswitch_field1">typeSwitch Field</h5> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[typeSwitch '{arument-1}', '{arument-2}', ...
+    ['{argument-1-value-1}' {subtype-1-name}
+        ... Fields ...
+    ]
+    ['{vargument-1-value-2}', '{argument-2-value-1}' {subtype-2-name}
+        ... Fields ...
+    ]
+    ['{vargument-1-value-3}', '{argument-2-value-2}' {subtype-2-name}
+        ... Fields ...
+    ]</pre> 
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>A type switch element must contain a list of at least one argument expression.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Each sub-type declares a comma-separated list of concrete values.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>It must contain at most as many elements as arguments are declared for the type switch.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>The matching type is found during parsing by starting with the first argument.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>If it matches and there are no more values, the type is found, if more values are provided, they are compared to the other argument values.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>If no type is found, an exception is thrown.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Inside each sub-type can declare fields using a subset of the types (<code>discriminator</code> and <code>typeSwitch</code> can’t be used here)</p> 
+     </div> 
+    </div> 
+    <div class="sect4"> 
+     <h5 id="_toc_parameters1">Parameters</h5> 
+     <div class="paragraph"> 
+      <p>Some times it is necessary to pass along additional parameters.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>If a complex type requires parameters, these are declared in the header of that type.</p> 
+     </div> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[discriminatedType 'S7Payload' [uint 8 'messageType', S7Parameter 'parameter']
+    [typeSwitch 'parameter.discriminatorValues[0]', 'messageType'
+        ['0xF0' S7PayloadSetupCommunication]
+        ['0x04','0x01' S7PayloadReadVarRequest]
+        ['0x04','0x03' S7PayloadReadVarResponse
+            [arrayField S7VarPayloadDataItem 'items' count 'CAST(parameter, S7ParameterReadVarResponse).numItems']
+        ]
+        ['0x05','0x01' S7PayloadWriteVarRequest
+            [arrayField S7VarPayloadDataItem 'items' count 'COUNT(CAST(parameter, S7ParameterWriteVarRequest).items)']
+        ]
+        ['0x05','0x03' S7PayloadWriteVarResponse
+            [arrayField S7VarPayloadStatusItem 'items' count 'CAST(parameter, S7ParameterWriteVarResponse).numItems']
+        ]
+        ['0x00','0x07' S7PayloadUserData
+        ]
+    ]
+]</pre> 
+      </div> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Therefore wherever a complex type is referenced an additional list of parameters can be passed to the next type.</p> 
+     </div> 
+     <div class="paragraph"> 
+      <p>Here comes an example of this in above snippet:</p> 
+     </div> 
+     <div class="literalblock"> 
+      <div class="content"> 
+       <pre>[field S7Payload   'payload'   ['messageType', 'parameter']]</pre> 
+      </div> 
+     </div> 
     </div> 
    </div> 
   </div> 
