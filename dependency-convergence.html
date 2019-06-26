@@ -130,6 +130,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Modules <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                    <li ><a  href="plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
                     <li ><a  href="plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
@@ -196,6 +197,9 @@
                 <li><a href="#_toc_orgjunitplatformjunit-platform-engine1" title="org.junit.platform:junit-platform-engine">org.junit.platform:junit-platform-engine</a></li>
                 <li><a href="#_toc_orgopentest4jopentest4j1" title="org.opentest4j:opentest4j">org.opentest4j:opentest4j</a></li>
                 <li><a href="#_toc_orgslf4jslf4j-log4j121" title="org.slf4j:slf4j-log4j12">org.slf4j:slf4j-log4j12</a></li>
+                <li><a href="#_toc_orgapacheplc4xpluginsplc4x-code-generation-languag" title="org.apache.plc4x.plugins:plc4x-code-generation-language-base">org.apache.plc4x.plugins:plc4x-code-generation-language-base</a></li>
+                <li><a href="#_toc_orgapacheplc4xpluginsplc4x-code-generation-protoco" title="org.apache.plc4x.plugins:plc4x-code-generation-protocol-base">org.apache.plc4x.plugins:plc4x-code-generation-protocol-base</a></li>
+                <li><a href="#_toc_orgapacheplc4xpluginsplc4x-code-generation-types-b" title="org.apache.plc4x.plugins:plc4x-code-generation-types-base">org.apache.plc4x.plugins:plc4x-code-generation-types-base</a></li>
                             </ul>
                         </li>
           </ul>
@@ -231,15 +235,15 @@
   <tbody> 
    <tr class="b"> 
     <th>Number of modules:</th> 
-    <td>73</td> 
+    <td>79</td> 
    </tr> 
    <tr class="a"> 
     <th>Number of dependencies (NOD):</th> 
-    <td>363</td> 
+    <td>371</td> 
    </tr> 
    <tr class="b"> 
     <th>Number of unique artifacts (NOA):</th> 
-    <td>397</td> 
+    <td>405</td> 
    </tr> 
    <tr class="a"> 
     <th>Number of version-conflicting artifacts (NOC):</th> 
@@ -247,7 +251,7 @@
    </tr> 
    <tr class="b"> 
     <th>Number of SNAPSHOT artifacts (NOS):</th> 
-    <td>0</td> 
+    <td>3</td> 
    </tr> 
    <tr class="a"> 
     <th>Convergence (NOD/NOA):</th> 
@@ -255,7 +259,7 @@
    </tr> 
    <tr class="b"> 
     <th>Ready for release (100% convergence and no SNAPSHOTS):</th> 
-    <td><i class="glyphicon glyphicon-exclamation-sign"></i>&nbsp;<b>Error</b><br>You do not have 100% convergence.</td> 
+    <td><i class="glyphicon glyphicon-exclamation-sign"></i>&nbsp;<b>Error</b><br>You do not have 100% convergence.<br>You have SNAPSHOT dependencies.</td> 
    </tr> 
   </tbody> 
  </table> 
@@ -680,6 +684,10 @@
            <br> 
            <li>org.apache.plc4x:plc4j-api:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
            <br> 
+           <li>org.apache.plc4x:plc4j-build-utils-language-java:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
+           <br> 
+           <li>org.apache.plc4x:plc4j-build-utils:pom:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
+           <br> 
            <li>org.apache.plc4x:plc4j-connection-pool:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
            <br> 
            <li>org.apache.plc4x:plc4j-driver-ads:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
@@ -748,6 +756,8 @@
            <br> 
            <li>org.apache.plc4x:plc4j-scraper:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
            <br> 
+           <li>org.apache.plc4x:plc4j-utils-driver-base-java:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
+           <br> 
            <li>org.apache.plc4x:plc4j-utils-raw-sockets:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
            <br> 
            <li>org.apache.plc4x:plc4j-utils-test-utils:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
@@ -797,6 +807,10 @@
            <li>org.apache.plc4x:plc4j-apache-nifi:pom:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
            <br> 
            <li>org.apache.plc4x:plc4j-api:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
+           <br> 
+           <li>org.apache.plc4x:plc4j-build-utils-language-java:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
+           <br> 
+           <li>org.apache.plc4x:plc4j-build-utils:pom:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
            <br> 
            <li>org.apache.plc4x:plc4j-connection-pool:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
            <br> 
@@ -865,6 +879,8 @@
            <li>org.apache.plc4x:plc4j-protocols:pom:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
            <br> 
            <li>org.apache.plc4x:plc4j-scraper:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
+           <br> 
+           <li>org.apache.plc4x:plc4j-utils-driver-base-java:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
            <br> 
            <li>org.apache.plc4x:plc4j-utils-raw-sockets:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
            <br> 
@@ -956,6 +972,75 @@
    </tbody> 
   </table> 
  </div> 
+ <div class="section"> 
+  <h4 id="_toc_orgapacheplc4xpluginsplc4x-code-generation-languag">org.apache.plc4x.plugins:plc4x-code-generation-language-base</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.0.0-SNAPSHOT</td> 
+         <td> 
+          <ol style="list-style-type: decimal"> 
+           <li>org.apache.plc4x:plc4x-build-utils-language-base-freemarker:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.apache.plc4x.plugins:plc4x-code-generation-language-base:jar:1.0.0-SNAPSHOT:compile<br></li> 
+           <br> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="_toc_orgapacheplc4xpluginsplc4x-code-generation-protoco">org.apache.plc4x.plugins:plc4x-code-generation-protocol-base</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.0.0-SNAPSHOT</td> 
+         <td> 
+          <ol style="list-style-type: decimal"> 
+           <li>org.apache.plc4x:plc4x-build-utils-protocol-base-mspec:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.apache.plc4x.plugins:plc4x-code-generation-protocol-base:jar:1.0.0-SNAPSHOT:compile<br></li> 
+           <br> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="_toc_orgapacheplc4xpluginsplc4x-code-generation-types-b">org.apache.plc4x.plugins:plc4x-code-generation-types-base</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
+         <td width="25%">1.0.0-SNAPSHOT</td> 
+         <td> 
+          <ol style="list-style-type: decimal"> 
+           <li>org.apache.plc4x:plc4x-build-utils-language-base-freemarker:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.apache.plc4x.plugins:plc4x-code-generation-language-base:jar:1.0.0-SNAPSHOT:compile<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.apache.plc4x.plugins:plc4x-code-generation-types-base:jar:1.0.0-SNAPSHOT:compile<br></li> 
+           <br> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
 </div>      </div>
     </div>
   </div> <!-- /row -->
@@ -1006,6 +1091,7 @@
 
                 <ul class="nav nav-list">
                     <li class="nav-header">Modules</li>
+                    <li ><a  href="plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
                     <li ><a  href="plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
