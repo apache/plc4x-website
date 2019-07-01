@@ -194,6 +194,7 @@
                 <li><a href="#_toc_orgcodehausgroovygroovy-json1" title="org.codehaus.groovy:groovy-json">org.codehaus.groovy:groovy-json</a></li>
                 <li><a href="#_toc_orgcodehausgroovygroovy-templates1" title="org.codehaus.groovy:groovy-templates">org.codehaus.groovy:groovy-templates</a></li>
                 <li><a href="#_toc_orgcodehausgroovygroovy-xml1" title="org.codehaus.groovy:groovy-xml">org.codehaus.groovy:groovy-xml</a></li>
+                <li><a href="#_toc_orgcodehauswoodstoxstax2-api1" title="org.codehaus.woodstox:stax2-api">org.codehaus.woodstox:stax2-api</a></li>
                 <li><a href="#_toc_orgjunitplatformjunit-platform-engine1" title="org.junit.platform:junit-platform-engine">org.junit.platform:junit-platform-engine</a></li>
                 <li><a href="#_toc_orgopentest4jopentest4j1" title="org.opentest4j:opentest4j">org.opentest4j:opentest4j</a></li>
                 <li><a href="#_toc_orgslf4jslf4j-log4j121" title="org.slf4j:slf4j-log4j12">org.slf4j:slf4j-log4j12</a></li>
@@ -235,19 +236,19 @@
   <tbody> 
    <tr class="b"> 
     <th>Number of modules:</th> 
-    <td>76</td> 
+    <td>77</td> 
    </tr> 
    <tr class="a"> 
     <th>Number of dependencies (NOD):</th> 
-    <td>353</td> 
+    <td>360</td> 
    </tr> 
    <tr class="b"> 
     <th>Number of unique artifacts (NOA):</th> 
-    <td>385</td> 
+    <td>393</td> 
    </tr> 
    <tr class="a"> 
     <th>Number of version-conflicting artifacts (NOC):</th> 
-    <td>14</td> 
+    <td>15</td> 
    </tr> 
    <tr class="b"> 
     <th>Number of SNAPSHOT artifacts (NOS):</th> 
@@ -636,7 +637,7 @@
   </table> 
  </div> 
  <div class="section"> 
-  <h4 id="_toc_orgjunitplatformjunit-platform-engine1">org.junit.platform:junit-platform-engine</h4> 
+  <h4 id="_toc_orgcodehauswoodstoxstax2-api1">org.codehaus.woodstox:stax2-api</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
     <tr class="b"> 
@@ -645,6 +646,37 @@
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
         <tr class="a"> 
+         <td width="25%">3.1.4</td> 
+         <td> 
+          <ol style="list-style-type: decimal"> 
+           <li>org.apache.plc4x:plc4j-utils-protocol-test-utils:jar:0.5.0-SNAPSHOT<br>\-&nbsp;com.fasterxml.jackson.dataformat:jackson-dataformat-xml:jar:2.9.9:compile<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.codehaus.woodstox:stax2-api:jar:3.1.4:compile<br></li> 
+           <br> 
+          </ol></td> 
+        </tr> 
+        <tr class="b"> 
+         <td width="25%">4.1</td> 
+         <td> 
+          <ol style="list-style-type: decimal"> 
+           <li>org.apache.plc4x:plc4j-utils-protocol-test-utils:jar:0.5.0-SNAPSHOT<br>\-&nbsp;com.fasterxml.jackson.dataformat:jackson-dataformat-xml:jar:2.9.9:compile<br>&nbsp;&nbsp;&nbsp;\-&nbsp;com.fasterxml.woodstox:woodstox-core:jar:5.1.0:compile<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.codehaus.woodstox:stax2-api:jar:4.1:compile - omitted for conflict with 3.1.4)<br></li> 
+           <br> 
+          </ol></td> 
+        </tr> 
+       </tbody> 
+      </table></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h4 id="_toc_orgjunitplatformjunit-platform-engine1">org.junit.platform:junit-platform-engine</h4> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
+     <td> 
+      <table border="0" class="bodyTable table table-striped table-hover"> 
+       <tbody> 
+        <tr class="b"> 
          <td width="25%">1.2.0</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -754,6 +786,8 @@
            <br> 
            <li>org.apache.plc4x:plc4j-utils-driver-base-java:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
            <br> 
+           <li>org.apache.plc4x:plc4j-utils-protocol-test-utils:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
+           <br> 
            <li>org.apache.plc4x:plc4j-utils-raw-sockets:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
            <br> 
            <li>org.apache.plc4x:plc4j-utils-test-utils:jar:0.5.0-SNAPSHOT<br>+-&nbsp;org.junit.jupiter:junit-jupiter-engine:jar:5.2.0:test<br>|&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-engine:jar:1.2.0:test<br>\-&nbsp;org.junit.vintage:junit-vintage-engine:jar:5.2.0:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.2.0:test - omitted for duplicate)<br></li> 
@@ -764,7 +798,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.3.1</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -874,6 +908,8 @@
            <br> 
            <li>org.apache.plc4x:plc4j-utils-driver-base-java:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
            <br> 
+           <li>org.apache.plc4x:plc4j-utils-protocol-test-utils:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
+           <br> 
            <li>org.apache.plc4x:plc4j-utils-raw-sockets:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
            <br> 
            <li>org.apache.plc4x:plc4j-utils-test-utils:jar:0.5.0-SNAPSHOT<br>\-&nbsp;org.codehaus.groovy:groovy-test-junit5:jar:2.5.3:test<br>&nbsp;&nbsp;&nbsp;\-&nbsp;org.junit.platform:junit-platform-launcher:jar:1.3.1:test<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\-&nbsp;(org.junit.platform:junit-platform-engine:jar:1.3.1:test - omitted for conflict with 1.2.0)<br></li> 
@@ -894,12 +930,12 @@
   <h4 id="_toc_orgopentest4jopentest4j1">org.opentest4j:opentest4j</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.1.0</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -913,7 +949,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">1.1.1</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -937,12 +973,12 @@
   <h4 id="_toc_orgslf4jslf4j-log4j121">org.slf4j:slf4j-log4j12</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="a"> 
+        <tr class="b"> 
          <td width="25%">1.7.21</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -950,7 +986,7 @@
            <br> 
           </ol></td> 
         </tr> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.7.25</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -968,12 +1004,12 @@
   <h4 id="_toc_orgapacheplc4xpluginsplc4x-code-generation-languag">org.apache.plc4x.plugins:plc4x-code-generation-language-base</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.0.0-SNAPSHOT</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -991,12 +1027,12 @@
   <h4 id="_toc_orgapacheplc4xpluginsplc4x-code-generation-protoco">org.apache.plc4x.plugins:plc4x-code-generation-protocol-base</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.0.0-SNAPSHOT</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
@@ -1014,12 +1050,12 @@
   <h4 id="_toc_orgapacheplc4xpluginsplc4x-code-generation-types-b">org.apache.plc4x.plugins:plc4x-code-generation-types-base</h4> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <tbody> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td><i class="glyphicon glyphicon-exclamation-sign"></i></td> 
      <td> 
       <table border="0" class="bodyTable table table-striped table-hover"> 
        <tbody> 
-        <tr class="b"> 
+        <tr class="a"> 
          <td width="25%">1.0.0-SNAPSHOT</td> 
          <td> 
           <ol style="list-style-type: decimal"> 
