@@ -459,7 +459,7 @@
     ['{vargument-1-value-2}', '{argument-2-value-1}' {subtype-2-name}
         ... Fields ...
     ]
-    ['{vargument-1-value-3}', '{argument-2-value-2}' {subtype-2-name}
+    ['{vargument-1-value-3}', '{argument-2-value-2}' {subtype-2-name} [uint 8 'existing-attribute-1', uint 16 'existing-attribute-2']
         ... Fields ...
     ]</pre> 
      </div> 
@@ -484,6 +484,9 @@
     </div> 
     <div class="paragraph"> 
      <p>Inside each sub-type can declare fields using a subset of the types (<code>discriminator</code> and <code>typeSwitch</code> can’t be used here)</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>The third case in above code-snippet also passes a named attribute to the sub-type. The name must be identical to any argument or named field parsed before the switchType. These arguments are then available for expressions or passing on in the subtypes.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
