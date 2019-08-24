@@ -9,7 +9,7 @@
           
         <head>
     <meta charset="UTF-8" />
-    <title>Apache PLC4X® - Apache Freemarker</title>
+    <title>Apache PLC4X® - Example: DF1 MSpec</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
       <meta http-equiv="content-language" content="en" />
@@ -31,7 +31,7 @@
           });
         </script>
         </head> <!-- end : head -->
-    <body class="page-developers-code-gen-language-freemarker project-plc4x-parent">
+    <body class="page-developers-code-gen-protocol-df1 project-plc4x-parent">
 
     <div id="m-top-navbar" class="navbar  navbar-default navbar-fixed-top">
       <div class="container">
@@ -66,9 +66,9 @@
                     <li ><a  href="../../sonar.html"  title="Code Analysis" >Code Analysis</a></li>
                     <li class="dropdown-submenu ">
 <a  href="../index.html"  title="Code Generation" >Code Generation</a>                    <ul class="dropdown-menu">
-                        <li ><a  href="../protocol/mspec.html"  title="Protocol: MSpec Format" >Protocol: MSpec Format</a></li>
-                                        <li  class="active" ><a  href=""  title="Language: Apache Freemarker" >Language: Apache Freemarker</a></li>
-                        <li ><a  href="../protocol/df1.html"  title="Example: DF1 MSpec" >Example: DF1 MSpec</a></li>
+                        <li ><a  href="mspec.html"  title="Protocol: MSpec Format" >Protocol: MSpec Format</a></li>
+                        <li ><a  href="../language/freemarker.html"  title="Language: Apache Freemarker" >Language: Apache Freemarker</a></li>
+                                        <li  class="active" ><a  href=""  title="Example: DF1 MSpec" >Example: DF1 MSpec</a></li>
                     </ul>
                 </li>
                     <li ><a  href="../../ci.html"  title="Continuous Integration" >Continuous Integration</a></li>
@@ -177,8 +177,7 @@
             </div> <!-- .navbar-header -->
         <div class="collapse navbar-collapse" id="toc-nav-collapse">
           <ul id="toc" class="nav navbar-nav">
-                                                            <li class="toplevel"><a href="#_toc_apache_freemarker1" title="Apache Freemarker">Apache Freemarker</a></li>
-                        <li class="toplevel"><a href="#_toc_example_java_output1" title="Example Java output">Example Java output</a></li>
+                                                <li class="toplevel"><a href="#_toc_example_df1_mspec1" title="Example: DF1 MSpec">Example: DF1 MSpec</a></li>
           </ul>
         </div>
       </div> <!-- .container -->
@@ -191,123 +190,183 @@
       <div class="body-content">
 <div class="sect1"> 
  <div class="page-header">
-  <h2 id="_toc_apache_freemarker1">Apache Freemarker</h2>
+  <h2 id="_toc_example_df1_mspec1">Example: DF1 MSpec</h2>
  </div> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
-   <p>For the Freemarker language output we are using an unmodified version of <a href="https://freemarker.apache.org">Apache Freemarker</a> to generate output.</p> 
+   <p>The DF1 protocol has three basic messages: a command message, acknowledge and not acknowledge. A <code>0x10</code> is used as delimiter to differentiate between the messages and parts of the command message.</p> 
+  </div> 
+  <table class="tableblock frame-all grid-all" style="width: 25%;"> 
+   <colgroup> 
+    <col style="width: 50%;"> 
+    <col style="width: 50%;"> 
+   </colgroup> 
+   <thead> 
+    <tr> 
+     <th class="tableblock halign-center valign-top">ACK</th> 
+     <th class="tableblock halign-center valign-top">NAK</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">10 06</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">10 15</p></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <div class="paragraph"> 
+   <p>This is what a read command message looks like in full-duplex mode using CRC as checksum:</p> 
+  </div> 
+  <table class="tableblock frame-all grid-all stretch"> 
+   <colgroup> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6924%;"> 
+   </colgroup> 
+   <thead> 
+    <tr> 
+     <th class="tableblock halign-center valign-top">Name</th> 
+     <th class="tableblock halign-center valign-top">DLE</th> 
+     <th class="tableblock halign-center valign-top">STX</th> 
+     <th class="tableblock halign-center valign-top">DST</th> 
+     <th class="tableblock halign-center valign-top">SRC</th> 
+     <th class="tableblock halign-center valign-top">CMD</th> 
+     <th class="tableblock halign-center valign-top">STS</th> 
+     <th class="tableblock halign-center valign-top">TNS</th> 
+     <th class="tableblock halign-center valign-top">ADDR</th> 
+     <th class="tableblock halign-center valign-top">SIZE</th> 
+     <th class="tableblock halign-center valign-top">DLE</th> 
+     <th class="tableblock halign-center valign-top">ETX</th> 
+     <th class="tableblock halign-center valign-top">CRC</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">Value</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">02</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">01</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">00</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX XX</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX XX</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">02</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">03</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX XX</p></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <div class="paragraph"> 
+   <p>The according response with the requested byte data:</p> 
+  </div> 
+  <table class="tableblock frame-all grid-all stretch"> 
+   <colgroup> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6923%;"> 
+    <col style="width: 7.6924%;"> 
+   </colgroup> 
+   <thead> 
+    <tr> 
+     <th class="tableblock halign-center valign-top">Name</th> 
+     <th class="tableblock halign-center valign-top">DLE</th> 
+     <th class="tableblock halign-center valign-top">STX</th> 
+     <th class="tableblock halign-center valign-top">DST</th> 
+     <th class="tableblock halign-center valign-top">SRC</th> 
+     <th class="tableblock halign-center valign-top">CMD</th> 
+     <th class="tableblock halign-center valign-top">STS</th> 
+     <th class="tableblock halign-center valign-top">TNS</th> 
+     <th class="tableblock halign-center valign-top">DATA</th> 
+     <th class="tableblock halign-center valign-top">SIZE</th> 
+     <th class="tableblock halign-center valign-top">DLE</th> 
+     <th class="tableblock halign-center valign-top">ETX</th> 
+     <th class="tableblock halign-center valign-top">CRC</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">Value</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">02</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">41</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">00</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX XX</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX XX</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">02</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">03</p></td> 
+     <td class="tableblock halign-center valign-top"><p class="tableblock">XX XX</p></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <div class="paragraph"> 
+   <p>Every message starts with a <code>DLE = 0x10</code>. The second byte is used to differentiate what type of message will follow. In the case of a command message it is <code>0x02</code>. DST and SRC specify the target and source of the message. <code>CMD = 0x01</code> means an unprotected read is requested, the command response code is always attained with the addition of <code>0x40</code>. STS is a status byte, TNS is the transaction counter that is incremented by the master and used to recognize the specific message response. ADDR is the memory address being requested, size specifies how many bytes are to be read. DLE + ETX mark the end of the message, the last two bytes are the CRC that is calculated using the previously sent bytes.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>The boilerplate code for providing a PLC4X language module is located in the <code>org.apache.plc4x.plugins:plc4x-code-generation-language-base-freemarker</code> maven module, inside the <code>FreemarkerLanguageOutput</code> class.</p> 
+   <p>Here is the MSpec to model the behaviour:</p> 
+  </div> 
+  <div class="literalblock"> 
+   <div class="content"> 
+    <pre>[discriminatedType 'DF1Symbol'
+    [const            uint 8       'messageStart' '0x10']
+    [discriminator    uint 8       'symbolType']
+    [typeSwitch 'symbolType'
+        ['0x02' DF1SymbolMessageFrame
+            [simple   uint 8       'destinationAddress']
+            [simple   uint 8       'sourceAddress']
+            [simple   DF1Command   'command']
+            [const    uint 8       'messageEnd' '0x10']
+            [const    uint 8       'endTransaction' '0x03']
+            [checksum uint 16      'crc' 'STATIC_CALL("org.apache.plc4x.java.df1.util.DF1Utils.crcCheck", destinationAddress, sourceAddress, command)']
+        ]
+        ['0x06' DF1SymbolMessageFrameACK
+        ]
+        ['0x15' DF1SymbolMessageFrameNAK
+        ]
+    ]
+]
+
+[discriminatedType 'DF1Command'
+    [discriminator uint 8  'commandCode']
+    [simple    uint 8       'status']
+    [simple    uint 16      'transactionCounter']
+    [typeSwitch 'commandCode'
+        ['0x01' DF1UnprotectedReadRequest
+            [simple uint 16    'address']
+            [simple uint 8     'size']
+        ]
+        ['0x41' DF1UnprotectedReadResponse
+            [manualArray  uint 8 'data' terminated 'STATIC_CALL("org.apache.plc4x.java.df1.util.DF1Utils.dataTerminate", io)' 'STATIC_CALL("org.apache.plc4x.java.df1.util.DF1Utils.readData", io)' 'STATIC_CALL("org.apache.plc4x.java.df1.util.DF1Utils.writeData", io, element)' 'STATIC_CALL("org.apache.plc4x.java.df1.util.DF1Utils.dataLength", data)']
+        ]
+    ]
+]</pre> 
+   </div> 
   </div> 
   <div class="paragraph"> 
-   <p>This class configures a Freemarker context and provides standardized attributes inside this:</p> 
-  </div> 
-  <div class="ulist"> 
-   <ul> 
-    <li> <p>packageName: Java style package name which can be used to create some form of directory structure.</p> </li> 
-    <li> <p>typeName: Simple string type name</p> </li> 
-    <li> <p>type: <code>ComplexTypeDefinition</code> instance containing all the information for the type that code should be generated for.</p> </li> 
-    <li> <p>helper: As some times it is pretty complicated to create all the output in Freemarker, the helper allows to provide code that is used by the template that help with generating output.</p> </li> 
-   </ul> 
-  </div> 
-  <div class="paragraph"> 
-   <p>A Freemarker-based output module, has to provide a list of <code>Template</code> instances as well as provide a <code>FreemarkerLanguageTemplateHelper</code> instance.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>What the <code>FreemarkerLanguageOutput</code> then does, is iterate over all complex types provided by the protocol module, and then iterates over all templates the current language defines.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>The only convention used in this utility, is that the first line of output a template generates will be treated as the path relative to the base output directory.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>It will automatically create all needed intermediate directories and generate the rest of the input to the file specified by the first line.</p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>If this line is empty, the output is skipped for this instance.</p> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="_toc_example_java_output1">Example <code>Java</code> output</h3> 
-   <div class="literalblock"> 
-    <div class="content"> 
-     <pre>package org.apache.plc4x.language.java;
-
-import freemarker.template.*;
-import org.apache.plc4x.plugins.codegenerator.protocol.freemarker.FreemarkerLanguageOutput;
-import org.apache.plc4x.plugins.codegenerator.protocol.freemarker.FreemarkerLanguageTemplateHelper;
-import org.apache.plc4x.plugins.codegenerator.types.definitions.ComplexTypeDefinition;
-
-import java.io.*;
-import java.util.*;
-
-public class JavaLanguageOutput extends FreemarkerLanguageOutput {
-
-    @Override
-    public String getName() {
-        return "Java";
-    }
-
-    protected List&lt;Template&gt; getTemplates(Configuration freemarkerConfiguration) throws IOException {
-        return Arrays.asList(
-            freemarkerConfiguration.getTemplate("templates/java/pojo-template.ftlh"),
-            freemarkerConfiguration.getTemplate("templates/java/io-template.ftlh"));
-    }
-
-    protected FreemarkerLanguageTemplateHelper getHelper(Map&lt;String, ComplexTypeDefinition&gt; types) {
-        return new JavaLanguageTemplateHelper(types);
-    }
-
-}</pre> 
-    </div> 
-   </div> 
-   <div class="paragraph"> 
-    <p>As you can see, this output generates up to two files for every complex type.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>This is one file, providing the code for the POJO itself. The second one generates the IO-component, which contains all the code for parsing and serializing the corresponding POJO.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>In other languages, for example <code>C++</code> it’s possible to use a third one to generate Header files or for <code>Python</code> perhaps only one in total.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Here an example for a part of a template for generating Java POJOs:</p> 
-   </div> 
-   <div class="literalblock"> 
-    <div class="content"> 
-     <pre>${packageName?replace(".", "/")}/${typeName}.java
-/*
-  Licensed to the Apache Software Foundation (ASF) under one
-  or more contributor license agreements.  See the NOTICE file
-  distributed with this work for additional information
-  regarding copyright ownership.  The ASF licenses this file
-  to you under the Apache License, Version 2.0 (the
-  "License"); you may not use this file except in compliance
-  with the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing,
-  software distributed under the License is distributed on an
-  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-  KIND, either express or implied.  See the License for the
-  specific language governing permissions and limitations
-  under the License.
-*/
-
-package ${packageName};
-
-import org.apache.plc4x.java.utils.SizeAware;
-
-public&lt;#if type.abstract&gt; abstract&lt;/#if&gt; class ${typeName}&lt;#if type.parentType??&gt; extends ${type.parentType.name}&lt;/#if&gt; implements SizeAware {
-
-    ... SNIP ...
-
-}</pre> 
-    </div> 
-   </div> 
-   <div class="paragraph"> 
-    <p>So as you can see, the first line will generate the file-path of the to be generated output. Which is followed</p> 
-   </div> 
+   <p>The basic object is the DF1Symbol, where the second byte is used to distinguish between the different message types using a typeSwitch. In the case of a command message, the message frame contains the DF1Command to further differentiate between the command types. Currently only the unprotected read and its response are implemented.</p> 
   </div> 
  </div> 
 </div>      </div>
