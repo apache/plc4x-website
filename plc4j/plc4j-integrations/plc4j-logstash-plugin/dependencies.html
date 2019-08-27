@@ -31,7 +31,7 @@
           });
         </script>
         </head> <!-- end : head -->
-    <body class="page-dependencies project-plc4j-apache-kafka">
+    <body class="page-dependencies project-plc4j-logstash-plugin">
 
     <div id="m-top-navbar" class="navbar  navbar-default navbar-fixed-top">
       <div class="container">
@@ -126,7 +126,6 @@
                                               <li><a href="#_toc_compile1" title="compile">compile</a></li>
                 <li><a href="#_toc_runtime1" title="runtime">runtime</a></li>
                 <li><a href="#_toc_test1" title="test">test</a></li>
-                <li><a href="#_toc_provided1" title="provided">provided</a></li>
                             </ul>
                         </li>
                         <li class="divider-vertical"></li>
@@ -139,7 +138,7 @@
                                               <li><a href="#_toc_compile2" title="compile">compile</a></li>
                 <li><a href="#_toc_runtime2" title="runtime">runtime</a></li>
                 <li><a href="#_toc_test2" title="test">test</a></li>
-                <li><a href="#_toc_provided2" title="provided">provided</a></li>
+                <li><a href="#_toc_provided1" title="provided">provided</a></li>
                             </ul>
                         </li>
                         <li class="divider-vertical"></li>
@@ -187,32 +186,32 @@
    </thead> 
    <tbody> 
     <tr class="b"> 
-     <td>com.google.code.gson</td> 
-     <td><a class="externalLink" href="https://github.com/google/gson/gson">gson</a></td> 
-     <td>2.8.5</td> 
-     <td>jar</td> 
-     <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a></td> 
-    </tr> 
-    <tr class="a"> 
      <td>org.apache.plc4x</td> 
      <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-api">plc4j-api</a></td> 
      <td>0.5.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.apache.plc4x</td> 
      <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-utils/plc4j-connection-pool">plc4j-connection-pool</a></td> 
      <td>0.5.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.apache.plc4x</td> 
      <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-utils/plc4j-scraper">plc4j-scraper</a></td> 
      <td>0.5.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
+    </tr> 
+    <tr class="a"> 
+     <td>org.apache.plc4x</td> 
+     <td>plc4x-tools-logstash-core</td> 
+     <td>0.5.0-SNAPSHOT-7.3.0</td> 
+     <td>jar</td> 
+     <td>-</td> 
     </tr> 
     <tr class="b"> 
      <td>org.slf4j</td> 
@@ -382,38 +381,6 @@
      <td>2.24.5</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://github.com/mockito/mockito/blob/master/LICENSE">The MIT License</a></td> 
-    </tr> 
-   </tbody> 
-  </table> 
- </div> 
- <a name="Project_Dependencies_provided"></a> 
- <div class="section"> 
-  <h3 id="_toc_provided1">provided</h3> 
-  <p>The following is a list of provided dependencies for this project. These dependencies are required to compile the application, but should be provided by default when using the library:</p> 
-  <table border="0" class="bodyTable table table-striped table-hover"> 
-   <thead> 
-    <tr class="a"> 
-     <th>GroupId</th> 
-     <th>ArtifactId</th> 
-     <th>Version</th> 
-     <th>Type</th> 
-     <th>Licenses</th> 
-    </tr> 
-   </thead> 
-   <tbody> 
-    <tr class="b"> 
-     <td>org.apache.kafka</td> 
-     <td><a class="externalLink" href="https://kafka.apache.org">connect-api</a></td> 
-     <td>2.3.0</td> 
-     <td>jar</td> 
-     <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td> 
-    </tr> 
-    <tr class="a"> 
-     <td>org.apache.kafka</td> 
-     <td><a class="externalLink" href="https://kafka.apache.org">kafka-clients</a></td> 
-     <td>2.3.0</td> 
-     <td>jar</td> 
-     <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td> 
     </tr> 
    </tbody> 
   </table> 
@@ -646,202 +613,209 @@
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td> 
     </tr> 
     <tr class="a"> 
+     <td>com.google.code.gson</td> 
+     <td><a class="externalLink" href="https://github.com/google/gson/gson">gson</a></td> 
+     <td>2.8.5</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a></td> 
+    </tr> 
+    <tr class="b"> 
      <td>com.google.guava</td> 
      <td><a class="externalLink" href="https://github.com/google/guava/failureaccess">failureaccess</a></td> 
      <td>1.0.1</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>com.google.guava</td> 
      <td><a class="externalLink" href="https://github.com/google/guava/guava">guava</a></td> 
      <td>27.0.1-jre</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>com.google.guava</td> 
      <td><a class="externalLink" href="https://github.com/google/guava/listenablefuture">listenablefuture</a></td> 
      <td>9999.0-empty-to-avoid-conflict-with-guava</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>com.sun.activation</td> 
      <td><a class="externalLink" href="https://github.com/eclipse-ee4j/jaf/jakarta.activation">jakarta.activation</a></td> 
      <td>1.2.1</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">EDL 1.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>com.sun.istack</td> 
      <td><a class="externalLink" href="https://projects.eclipse.org/projects/ee4j/istack-commons/istack-commons-runtime">istack-commons-runtime</a></td> 
      <td>3.0.8</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">Eclipse Distribution License - v 1.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>com.sun.xml.fastinfoset</td> 
      <td><a class="externalLink" href="https://projects.eclipse.org/projects/ee4j.jaxb-impl/FastInfoset">FastInfoset</a></td> 
      <td>1.2.16</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.opensource.org/licenses/apache2.0.php">Apache License, Version 2.0</a><a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">Eclipse Distribution License - v 1.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>commons-io</td> 
      <td><a class="externalLink" href="http://commons.apache.org/proper/commons-io/">commons-io</a></td> 
      <td>2.6</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>commons-logging</td> 
      <td><a class="externalLink" href="http://commons.apache.org/proper/commons-logging/">commons-logging</a></td> 
      <td>1.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>io.netty</td> 
      <td><a class="externalLink" href="https://netty.io/netty-codec-http/">netty-codec-http</a></td> 
      <td>4.1.39.Final</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>io.netty</td> 
      <td><a class="externalLink" href="https://netty.io/netty-handler/">netty-handler</a></td> 
      <td>4.1.39.Final</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>jakarta.activation</td> 
      <td><a class="externalLink" href="https://github.com/eclipse-ee4j/jaf/jakarta.activation-api">jakarta.activation-api</a></td> 
      <td>1.2.1</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">EDL 1.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>jakarta.xml.bind</td> 
      <td><a class="externalLink" href="https://github.com/eclipse-ee4j/jaxb-api/jakarta.xml.bind-api">jakarta.xml.bind-api</a></td> 
      <td>2.3.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">Eclipse Distribution License - v 1.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.apache.commons</td> 
      <td><a class="externalLink" href="http://commons.apache.org/proper/commons-configuration/">commons-configuration2</a></td> 
      <td>2.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.apache.commons</td> 
      <td><a class="externalLink" href="http://commons.apache.org/proper/commons-text">commons-text</a></td> 
      <td>1.6</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.apache.plc4x</td> 
      <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocol-ads">plc4j-protocol-ads</a></td> 
      <td>0.5.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.apache.plc4x</td> 
      <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base-serial">plc4j-protocol-driver-base-serial</a></td> 
      <td>0.5.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.apache.plc4x</td> 
      <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocols-driver-bases/plc4j-protocol-driver-base-tcp">plc4j-protocol-driver-base-tcp</a></td> 
      <td>0.5.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.apache.plc4x</td> 
      <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocol-ethernet-ip">plc4j-protocol-ethernet-ip</a></td> 
      <td>0.5.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.apache.plc4x</td> 
      <td><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-protocols/plc4j-protocol-modbus">plc4j-protocol-modbus</a></td> 
      <td>0.5.0-SNAPSHOT</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.bouncycastle</td> 
      <td><a class="externalLink" href="http://www.bouncycastle.org/java.html">bcpkix-jdk15on</a></td> 
      <td>1.60</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.bouncycastle.org/licence.html">Bouncy Castle Licence</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.bouncycastle</td> 
      <td><a class="externalLink" href="http://www.bouncycastle.org/java.html">bcprov-jdk15on</a></td> 
      <td>1.60</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.bouncycastle.org/licence.html">Bouncy Castle Licence</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.eclipse.milo</td> 
      <td><a class="externalLink" href="https://github.com/eclipse/milo/opc-ua-stack/bsd-parser/bsd-parser-core">bsd-parser-core</a></td> 
      <td>0.3.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.html">Eclipse Public License - v 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.eclipse.milo</td> 
      <td><a class="externalLink" href="https://github.com/eclipse/milo/opc-ua-sdk/sdk-client">sdk-client</a></td> 
      <td>0.3.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.html">Eclipse Public License - v 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.eclipse.milo</td> 
      <td><a class="externalLink" href="https://github.com/eclipse/milo/opc-ua-sdk/sdk-core">sdk-core</a></td> 
      <td>0.3.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.html">Eclipse Public License - v 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.eclipse.milo</td> 
      <td><a class="externalLink" href="https://github.com/eclipse/milo/opc-ua-stack/stack-client">stack-client</a></td> 
      <td>0.3.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.html">Eclipse Public License - v 2.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.eclipse.milo</td> 
      <td><a class="externalLink" href="https://github.com/eclipse/milo/opc-ua-stack/stack-core">stack-core</a></td> 
      <td>0.3.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.html">Eclipse Public License - v 2.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.glassfish.jaxb</td> 
      <td><a class="externalLink" href="https://javaee.github.io/jaxb-v2/jaxb-runtime-parent/jaxb-runtime/">jaxb-runtime</a></td> 
      <td>2.3.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">Eclipse Distribution License - v 1.0</a></td> 
     </tr> 
-    <tr class="b"> 
+    <tr class="a"> 
      <td>org.glassfish.jaxb</td> 
      <td><a class="externalLink" href="https://javaee.github.io/jaxb-v2/jaxb-txw-parent/txw2/">txw2</a></td> 
      <td>2.3.2</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/org/documents/edl-v10.php">Eclipse Distribution License - v 1.0</a></td> 
     </tr> 
-    <tr class="a"> 
+    <tr class="b"> 
      <td>org.jvnet.staxex</td> 
      <td><a class="externalLink" href="https://projects.eclipse.org/projects/ee4j/stax-ex">stax-ex</a></td> 
      <td>1.8.1</td> 
@@ -934,7 +908,7 @@
  </div> 
  <a name="Project_Transitive_Dependencies_provided"></a> 
  <div class="section"> 
-  <h3 id="_toc_provided2">provided</h3> 
+  <h3 id="_toc_provided1">provided</h3> 
   <p>The following is a list of provided dependencies for this project. These dependencies are required to compile the application, but should be provided by default when using the library:</p> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <thead> 
@@ -953,34 +927,6 @@
      <td>1.2.3</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a><a class="externalLink" href="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html">GNU Lesser General Public License</a></td> 
-    </tr> 
-    <tr class="a"> 
-     <td>com.github.luben</td> 
-     <td><a class="externalLink" href="https://github.com/luben/zstd-jni">zstd-jni</a></td> 
-     <td>1.4.0-1</td> 
-     <td>jar</td> 
-     <td><a class="externalLink" href="https://opensource.org/licenses/BSD-2-Clause">BSD 2-Clause License</a></td> 
-    </tr> 
-    <tr class="b"> 
-     <td>javax.ws.rs</td> 
-     <td><a class="externalLink" href="https://github.com/eclipse-ee4j/jaxrs-api">javax.ws.rs-api</a></td> 
-     <td>2.1.1</td> 
-     <td>jar</td> 
-     <td><a class="externalLink" href="http://www.eclipse.org/legal/epl-2.0">EPL 2.0</a><a class="externalLink" href="https://www.gnu.org/software/classpath/license.html">GPL2 w/ CPE</a></td> 
-    </tr> 
-    <tr class="a"> 
-     <td>org.lz4</td> 
-     <td><a class="externalLink" href="https://github.com/lz4/lz4-java">lz4-java</a></td> 
-     <td>1.6.0</td> 
-     <td>jar</td> 
-     <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td> 
-    </tr> 
-    <tr class="b"> 
-     <td>org.xerial.snappy</td> 
-     <td>snappy-java</td> 
-     <td>1.1.7.3</td> 
-     <td>jar</td> 
-     <td>-</td> 
     </tr> 
    </tbody> 
   </table> 
@@ -1012,17 +958,17 @@
  <div class="section"> 
   <h3 id="_toc_dependency_tree">Dependency Tree</h3> 
   <ul> 
-   <li>org.apache.plc4x:plc4j-apache-kafka:jar:0.5.0-SNAPSHOT <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep0"><i class="glyphicon glyphicon-info-sign"></i></button> 
+   <li>org.apache.plc4x:plc4j-logstash-plugin:jar:0.5.0-SNAPSHOT <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep0"><i class="glyphicon glyphicon-info-sign"></i></button> 
     <div id="_dep0" style="" class="collapse"> 
      <table border="0" class="bodyTable table table-striped table-hover"> 
       <thead> 
        <tr class="a"> 
-        <th>PLC4J: Integrations: Apache Kafka</th> 
+        <th>PLC4J: Integrations: Logstash plugin</th> 
        </tr> 
       </thead> 
       <tbody> 
        <tr class="b"> 
-        <td> <p><b>Description: </b>Integration module for integrating PLC4X into Apache Kafka (Kafka-Connect-Plugin)</p> <p><b>URL: </b><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-integrations/plc4j-apache-kafka">https://plc4x.apache.org/plc4j/plc4j-integrations/plc4j-apache-kafka</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+        <td> <p><b>Description: </b>Integration module for integrating PLC4X into Elastic Logstash.</p> <p><b>URL: </b><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-integrations/plc4j-logstash-plugin">https://plc4x.apache.org/plc4j/plc4j-integrations/plc4j-logstash-plugin</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
        </tr> 
       </tbody> 
      </table> 
@@ -1043,8 +989,55 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.apache.plc4x:plc4j-scraper:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep4"><i class="glyphicon glyphicon-info-sign"></i></button> 
+     <li>org.apache.plc4x:plc4j-connection-pool:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep4"><i class="glyphicon glyphicon-info-sign"></i></button> 
       <div id="_dep4" style="" class="collapse"> 
+       <table border="0" class="bodyTable table table-striped table-hover"> 
+        <thead> 
+         <tr class="a"> 
+          <th>PLC4J: Utils: Connection Pool</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr class="b"> 
+          <td> <p><b>Description: </b>An implementation of a connection pool based on Apache Commons Pool.</p> <p><b>URL: </b><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-utils/plc4j-connection-pool">https://plc4x.apache.org/plc4j/plc4j-utils/plc4j-connection-pool</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div> 
+      <ul> 
+       <li>org.apache.commons:commons-pool2:jar:2.6.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep6"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep6" style="" class="collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>Apache Commons Pool</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>The Apache Commons Object Pooling Library.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-pool/">http://commons.apache.org/proper/commons-pool/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+       <li>org.apache.commons:commons-lang3:jar:3.7 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep8"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep8" style="" class="collapse"> 
+         <table border="0" class="bodyTable table table-striped table-hover"> 
+          <thead> 
+           <tr class="a"> 
+            <th>Apache Commons Lang</th> 
+           </tr> 
+          </thead> 
+          <tbody> 
+           <tr class="b"> 
+            <td> <p><b>Description: </b>Apache Commons Lang, a package of Java utility classes for the classes that are in java.lang's hierarchy, or are considered to be so standard as to justify existence in java.lang.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-lang/">http://commons.apache.org/proper/commons-lang/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+           </tr> 
+          </tbody> 
+         </table> 
+        </div></li> 
+      </ul></li> 
+     <li>org.apache.plc4x:plc4j-scraper:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep10"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep10" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1059,8 +1052,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>com.fasterxml.jackson.core:jackson-core:jar:2.9.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep6"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep6" style="" class="collapse"> 
+       <li>com.fasterxml.jackson.core:jackson-core:jar:2.9.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep12"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep12" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1074,8 +1067,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep8"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep8" style="" class="collapse"> 
+       <li>com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep14"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep14" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1089,8 +1082,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.9.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep10"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep10" style="" class="collapse"> 
+       <li>com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.9.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep16"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep16" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1105,8 +1098,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>org.yaml:snakeyaml:jar:1.23 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep12"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep12" style="" class="collapse"> 
+         <li>org.yaml:snakeyaml:jar:1.23 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep18"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep18" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1121,8 +1114,8 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>com.fasterxml.jackson.core:jackson-databind:jar:2.9.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep14"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep14" style="" class="collapse"> 
+       <li>com.fasterxml.jackson.core:jackson-databind:jar:2.9.9 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep20"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep20" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1136,8 +1129,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.commons:commons-math3:jar:3.5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep16"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep16" style="" class="collapse"> 
+       <li>org.apache.commons:commons-math3:jar:3.5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep22"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep22" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1151,38 +1144,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.commons:commons-pool2:jar:2.6.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep18"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep18" style="" class="collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>Apache Commons Pool</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>The Apache Commons Object Pooling Library.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-pool/">http://commons.apache.org/proper/commons-pool/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.apache.commons:commons-lang3:jar:3.7 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep20"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep20" style="" class="collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>Apache Commons Lang</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>Apache Commons Lang, a package of Java utility classes for the classes that are in java.lang's hierarchy, or are considered to be so standard as to justify existence in java.lang.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-lang/">http://commons.apache.org/proper/commons-lang/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.apache.commons:commons-collections4:jar:4.1 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep22"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep22" style="" class="collapse"> 
+       <li>org.apache.commons:commons-collections4:jar:4.1 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep24"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep24" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1196,8 +1159,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.plc4x:plc4j-protocol-s7:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep24"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep24" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-s7:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep26"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep26" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1212,8 +1175,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>io.netty:netty-codec:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep26"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep26" style="" class="collapse"> 
+         <li>io.netty:netty-codec:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep28"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep28" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1229,119 +1192,23 @@
           </div></li> 
         </ul></li> 
       </ul></li> 
-     <li>org.apache.plc4x:plc4j-connection-pool:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep28"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep28" style="" class="collapse"> 
-       <table border="0" class="bodyTable table table-striped table-hover"> 
-        <thead> 
-         <tr class="a"> 
-          <th>PLC4J: Utils: Connection Pool</th> 
-         </tr> 
-        </thead> 
-        <tbody> 
-         <tr class="b"> 
-          <td> <p><b>Description: </b>An implementation of a connection pool based on Apache Commons Pool.</p> <p><b>URL: </b><a class="externalLink" href="https://plc4x.apache.org/plc4j/plc4j-utils/plc4j-connection-pool">https://plc4x.apache.org/plc4j/plc4j-utils/plc4j-connection-pool</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
-         </tr> 
-        </tbody> 
-       </table> 
-      </div></li> 
-     <li>com.google.code.gson:gson:jar:2.8.5 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep30"><i class="glyphicon glyphicon-info-sign"></i></button> 
+     <li>org.apache.plc4x:plc4x-tools-logstash-core:jar:0.5.0-SNAPSHOT-7.3.0 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep30"><i class="glyphicon glyphicon-info-sign"></i></button> 
       <div id="_dep30" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
-          <th>Gson</th> 
+          <th>plc4x-tools-logstash-core</th> 
          </tr> 
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>Gson JSON library</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/google/gson/gson">https://github.com/google/gson/gson</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a></p></td> 
+          <td> <p><b>Description: </b>POM was created from install:install-file</p> <p><b>Project Licenses: </b>No licenses are defined for this project.</p></td> 
          </tr> 
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.apache.kafka:kafka-clients:jar:2.3.0 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep32"><i class="glyphicon glyphicon-info-sign"></i></button> 
+     <li>org.apache.plc4x:plc4j-driver-ads:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep32"><i class="glyphicon glyphicon-info-sign"></i></button> 
       <div id="_dep32" style="" class="collapse"> 
-       <table border="0" class="bodyTable table table-striped table-hover"> 
-        <thead> 
-         <tr class="a"> 
-          <th>Apache Kafka</th> 
-         </tr> 
-        </thead> 
-        <tbody> 
-         <tr class="b"> 
-          <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://kafka.apache.org">https://kafka.apache.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-         </tr> 
-        </tbody> 
-       </table> 
-      </div> 
-      <ul> 
-       <li>com.github.luben:zstd-jni:jar:1.4.0-1 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep34"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep34" style="" class="collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>zstd-jni</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>JNI bindings for Zstd native library that provides fast and high compression lossless algorithm for Java and all JVM languages.</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/luben/zstd-jni">https://github.com/luben/zstd-jni</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://opensource.org/licenses/BSD-2-Clause">BSD 2-Clause License</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.lz4:lz4-java:jar:1.6.0 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep36"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep36" style="" class="collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>LZ4 and xxHash</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>Java ports and bindings of the LZ4 compression algorithm and the xxHash hashing algorithm</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/lz4/lz4-java">https://github.com/lz4/lz4-java</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-       <li>org.xerial.snappy:snappy-java:jar:1.1.7.3 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep38"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep38" style="" class="collapse"></div></li> 
-      </ul></li> 
-     <li>org.apache.kafka:connect-api:jar:2.3.0 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep40"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep40" style="" class="collapse"> 
-       <table border="0" class="bodyTable table table-striped table-hover"> 
-        <thead> 
-         <tr class="a"> 
-          <th>Apache Kafka</th> 
-         </tr> 
-        </thead> 
-        <tbody> 
-         <tr class="b"> 
-          <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://kafka.apache.org">https://kafka.apache.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
-         </tr> 
-        </tbody> 
-       </table> 
-      </div> 
-      <ul> 
-       <li>javax.ws.rs:javax.ws.rs-api:jar:2.1.1 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep42"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep42" style="" class="collapse"> 
-         <table border="0" class="bodyTable table table-striped table-hover"> 
-          <thead> 
-           <tr class="a"> 
-            <th>javax.ws.rs-api</th> 
-           </tr> 
-          </thead> 
-          <tbody> 
-           <tr class="b"> 
-            <td> <p><b>Description: </b>Java API for RESTful Web Services</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/eclipse-ee4j/jaxrs-api">https://github.com/eclipse-ee4j/jaxrs-api</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-2.0">EPL 2.0</a>, <a class="externalLink" href="https://www.gnu.org/software/classpath/license.html">GPL2 w/ CPE</a></p></td> 
-           </tr> 
-          </tbody> 
-         </table> 
-        </div></li> 
-      </ul></li> 
-     <li>org.apache.plc4x:plc4j-driver-ads:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep44"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep44" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1356,8 +1223,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.plc4x:plc4j-protocol-ads:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep46"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep46" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-ads:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep34"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep34" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1372,8 +1239,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>com.github.snksoft:crc:jar:1.0.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep48"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep48" style="" class="collapse"> 
+         <li>com.github.snksoft:crc:jar:1.0.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep36"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep36" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1388,8 +1255,8 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>org.apache.plc4x:plc4j-protocol-driver-base:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep50"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep50" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-driver-base:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep38"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep38" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1403,8 +1270,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.plc4x:plc4j-protocol-driver-base-tcp:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep52"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep52" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-driver-base-tcp:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep40"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep40" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1418,8 +1285,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.plc4x:plc4j-protocol-driver-base-serial:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep54"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep54" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-driver-base-serial:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep42"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep42" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1434,8 +1301,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>com.fazecast:jSerialComm:jar:2.5.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep56"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep56" style="" class="collapse"> 
+         <li>com.fazecast:jSerialComm:jar:2.5.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep44"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep44" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1450,8 +1317,8 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>io.netty:netty-transport:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep58"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep58" style="" class="collapse"> 
+       <li>io.netty:netty-transport:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep46"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep46" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1466,8 +1333,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>io.netty:netty-resolver:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep60"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep60" style="" class="collapse"> 
+         <li>io.netty:netty-resolver:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep48"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep48" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1482,8 +1349,8 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>io.netty:netty-buffer:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep62"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep62" style="" class="collapse"> 
+       <li>io.netty:netty-buffer:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep50"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep50" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1497,8 +1364,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>io.netty:netty-common:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep64"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep64" style="" class="collapse"> 
+       <li>io.netty:netty-common:jar:4.1.39.Final (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep52"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep52" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1512,8 +1379,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.commons:commons-configuration2:jar:2.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep66"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep66" style="" class="collapse"> 
+       <li>org.apache.commons:commons-configuration2:jar:2.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep54"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep54" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1528,8 +1395,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>commons-logging:commons-logging:jar:1.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep68"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep68" style="" class="collapse"> 
+         <li>commons-logging:commons-logging:jar:1.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep56"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep56" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1545,8 +1412,8 @@
           </div></li> 
         </ul></li> 
       </ul></li> 
-     <li>org.apache.plc4x:plc4j-driver-ethernet-ip:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep70"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep70" style="" class="collapse"> 
+     <li>org.apache.plc4x:plc4j-driver-ethernet-ip:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep58"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep58" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1561,8 +1428,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.plc4x:plc4j-protocol-ethernet-ip:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep72"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep72" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-ethernet-ip:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep60"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep60" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1577,8 +1444,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>com.digitalpetri.enip:enip-core:jar:1.2.0 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep74"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep74" style="" class="collapse"> 
+         <li>com.digitalpetri.enip:enip-core:jar:1.2.0 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep62"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep62" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1593,8 +1460,8 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>com.digitalpetri.enip:cip-core:jar:1.2.0 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep76"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep76" style="" class="collapse"> 
+       <li>com.digitalpetri.enip:cip-core:jar:1.2.0 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep64"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep64" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1609,8 +1476,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>com.google.code.findbugs:jsr305:jar:3.0.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep78"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep78" style="" class="collapse"> 
+         <li>com.google.code.findbugs:jsr305:jar:3.0.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep66"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep66" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1626,8 +1493,8 @@
           </div></li> 
         </ul></li> 
       </ul></li> 
-     <li>org.apache.plc4x:plc4j-driver-modbus:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep80"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep80" style="" class="collapse"> 
+     <li>org.apache.plc4x:plc4j-driver-modbus:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep68"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep68" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1642,8 +1509,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.plc4x:plc4j-protocol-modbus:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep82"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep82" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-modbus:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep70"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep70" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1658,8 +1525,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>com.digitalpetri.modbus:modbus-core:jar:1.1.0 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep84"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep84" style="" class="collapse"> 
+         <li>com.digitalpetri.modbus:modbus-core:jar:1.1.0 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep72"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep72" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1674,8 +1541,8 @@
            </table> 
           </div></li> 
         </ul></li> 
-       <li>com.digitalpetri.modbus:modbus-codec:jar:1.1.0 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep86"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep86" style="" class="collapse"> 
+       <li>com.digitalpetri.modbus:modbus-codec:jar:1.1.0 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep74"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep74" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1690,8 +1557,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.apache.plc4x:plc4j-driver-opcua:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep88"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep88" style="" class="collapse"> 
+     <li>org.apache.plc4x:plc4j-driver-opcua:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep76"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep76" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1706,8 +1573,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.eclipse.milo:sdk-client:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep90"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep90" style="" class="collapse"> 
+       <li>org.eclipse.milo:sdk-client:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep78"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep78" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1722,8 +1589,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>org.eclipse.milo:sdk-core:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep92"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep92" style="" class="collapse"> 
+         <li>org.eclipse.milo:sdk-core:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep80"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep80" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1737,8 +1604,8 @@
             </tbody> 
            </table> 
           </div></li> 
-         <li>org.eclipse.milo:bsd-parser-core:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep94"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep94" style="" class="collapse"> 
+         <li>org.eclipse.milo:bsd-parser-core:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep82"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep82" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1751,10 +1618,27 @@
              </tr> 
             </tbody> 
            </table> 
-          </div></li> 
+          </div> 
+          <ul> 
+           <li>com.google.code.gson:gson:jar:2.8.5 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep84"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep84" style="" class="collapse"> 
+             <table border="0" class="bodyTable table table-striped table-hover"> 
+              <thead> 
+               <tr class="a"> 
+                <th>Gson</th> 
+               </tr> 
+              </thead> 
+              <tbody> 
+               <tr class="b"> 
+                <td> <p><b>Description: </b>Gson JSON library</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/google/gson/gson">https://github.com/google/gson/gson</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2.0</a></p></td> 
+               </tr> 
+              </tbody> 
+             </table> 
+            </div></li> 
+          </ul></li> 
         </ul></li> 
-       <li>org.eclipse.milo:stack-core:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep96"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep96" style="" class="collapse"> 
+       <li>org.eclipse.milo:stack-core:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep86"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep86" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1769,8 +1653,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>org.bouncycastle:bcprov-jdk15on:jar:1.60 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep98"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep98" style="" class="collapse"> 
+         <li>org.bouncycastle:bcprov-jdk15on:jar:1.60 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep88"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep88" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1784,8 +1668,8 @@
             </tbody> 
            </table> 
           </div></li> 
-         <li>org.bouncycastle:bcpkix-jdk15on:jar:1.60 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep100"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep100" style="" class="collapse"> 
+         <li>org.bouncycastle:bcpkix-jdk15on:jar:1.60 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep90"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep90" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1799,8 +1683,8 @@
             </tbody> 
            </table> 
           </div></li> 
-         <li>com.google.guava:guava:jar:27.0.1-jre (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep102"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep102" style="" class="collapse"> 
+         <li>com.google.guava:guava:jar:27.0.1-jre (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep92"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep92" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1815,8 +1699,8 @@
            </table> 
           </div> 
           <ul> 
-           <li>com.google.guava:failureaccess:jar:1.0.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep104"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep104" style="" class="collapse"> 
+           <li>com.google.guava:failureaccess:jar:1.0.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep94"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep94" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1830,8 +1714,8 @@
               </tbody> 
              </table> 
             </div></li> 
-           <li>com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep106"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep106" style="" class="collapse"> 
+           <li>com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep96"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep96" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1846,8 +1730,8 @@
              </table> 
             </div></li> 
           </ul></li> 
-         <li>io.netty:netty-handler:jar:4.1.39.Final (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep108"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep108" style="" class="collapse"> 
+         <li>io.netty:netty-handler:jar:4.1.39.Final (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep98"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep98" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1861,8 +1745,8 @@
             </tbody> 
            </table> 
           </div></li> 
-         <li>com.sun.activation:jakarta.activation:jar:1.2.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep110"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep110" style="" class="collapse"> 
+         <li>com.sun.activation:jakarta.activation:jar:1.2.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep100"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep100" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1876,8 +1760,8 @@
             </tbody> 
            </table> 
           </div></li> 
-         <li>org.glassfish.jaxb:jaxb-runtime:jar:2.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep112"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep112" style="" class="collapse"> 
+         <li>org.glassfish.jaxb:jaxb-runtime:jar:2.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep102"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep102" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -1892,8 +1776,8 @@
            </table> 
           </div> 
           <ul> 
-           <li>jakarta.xml.bind:jakarta.xml.bind-api:jar:2.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep114"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep114" style="" class="collapse"> 
+           <li>jakarta.xml.bind:jakarta.xml.bind-api:jar:2.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep104"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep104" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1907,8 +1791,8 @@
               </tbody> 
              </table> 
             </div></li> 
-           <li>org.glassfish.jaxb:txw2:jar:2.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep116"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep116" style="" class="collapse"> 
+           <li>org.glassfish.jaxb:txw2:jar:2.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep106"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep106" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1922,8 +1806,8 @@
               </tbody> 
              </table> 
             </div></li> 
-           <li>com.sun.istack:istack-commons-runtime:jar:3.0.8 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep118"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep118" style="" class="collapse"> 
+           <li>com.sun.istack:istack-commons-runtime:jar:3.0.8 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep108"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep108" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1937,8 +1821,8 @@
               </tbody> 
              </table> 
             </div></li> 
-           <li>org.jvnet.staxex:stax-ex:jar:1.8.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep120"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep120" style="" class="collapse"> 
+           <li>org.jvnet.staxex:stax-ex:jar:1.8.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep110"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep110" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1952,8 +1836,8 @@
               </tbody> 
              </table> 
             </div></li> 
-           <li>com.sun.xml.fastinfoset:FastInfoset:jar:1.2.16 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep122"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep122" style="" class="collapse"> 
+           <li>com.sun.xml.fastinfoset:FastInfoset:jar:1.2.16 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep112"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep112" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1967,8 +1851,8 @@
               </tbody> 
              </table> 
             </div></li> 
-           <li>jakarta.activation:jakarta.activation-api:jar:1.2.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep124"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep124" style="" class="collapse"> 
+           <li>jakarta.activation:jakarta.activation-api:jar:1.2.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep114"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep114" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -1984,8 +1868,8 @@
             </div></li> 
           </ul></li> 
         </ul></li> 
-       <li>org.eclipse.milo:stack-client:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep126"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep126" style="" class="collapse"> 
+       <li>org.eclipse.milo:stack-client:jar:0.3.2 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep116"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep116" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2000,8 +1884,8 @@
          </table> 
         </div> 
         <ul> 
-         <li>com.digitalpetri.netty:netty-channel-fsm:jar:0.3 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep128"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep128" style="" class="collapse"> 
+         <li>com.digitalpetri.netty:netty-channel-fsm:jar:0.3 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep118"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep118" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -2016,8 +1900,8 @@
            </table> 
           </div> 
           <ul> 
-           <li>com.digitalpetri.fsm:strict-machine:jar:0.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep130"><i class="glyphicon glyphicon-info-sign"></i></button> 
-            <div id="_dep130" style="" class="collapse"> 
+           <li>com.digitalpetri.fsm:strict-machine:jar:0.1 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep120"><i class="glyphicon glyphicon-info-sign"></i></button> 
+            <div id="_dep120" style="" class="collapse"> 
              <table border="0" class="bodyTable table table-striped table-hover"> 
               <thead> 
                <tr class="a"> 
@@ -2032,8 +1916,8 @@
              </table> 
             </div></li> 
           </ul></li> 
-         <li>io.netty:netty-codec-http:jar:4.1.39.Final (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep132"><i class="glyphicon glyphicon-info-sign"></i></button> 
-          <div id="_dep132" style="" class="collapse"> 
+         <li>io.netty:netty-codec-http:jar:4.1.39.Final (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep122"><i class="glyphicon glyphicon-info-sign"></i></button> 
+          <div id="_dep122" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
              <tr class="a"> 
@@ -2049,8 +1933,8 @@
           </div></li> 
         </ul></li> 
       </ul></li> 
-     <li>org.apache.plc4x:plc4j-driver-s7:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep134"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep134" style="" class="collapse"> 
+     <li>org.apache.plc4x:plc4j-driver-s7:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep124"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep124" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2065,8 +1949,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.plc4x:plc4j-protocol-iso-on-tcp:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep136"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep136" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-iso-on-tcp:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep126"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep126" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2080,8 +1964,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.apache.plc4x:plc4j-protocol-iso-tp:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep138"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep138" style="" class="collapse"> 
+       <li>org.apache.plc4x:plc4j-protocol-iso-tp:jar:0.5.0-SNAPSHOT (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep128"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep128" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2095,8 +1979,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>commons-io:commons-io:jar:2.6 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep140"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep140" style="" class="collapse"> 
+       <li>commons-io:commons-io:jar:2.6 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep130"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep130" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2111,8 +1995,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.apache.plc4x:plc4j-driver-simulated:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep142"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep142" style="" class="collapse"> 
+     <li>org.apache.plc4x:plc4j-driver-simulated:jar:0.5.0-SNAPSHOT (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep132"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep132" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2127,8 +2011,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apache.commons:commons-text:jar:1.6 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep144"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep144" style="" class="collapse"> 
+       <li>org.apache.commons:commons-text:jar:1.6 (runtime) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep134"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep134" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2143,8 +2027,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.slf4j:slf4j-api:jar:1.7.25 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep146"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep146" style="" class="collapse"> 
+     <li>org.slf4j:slf4j-api:jar:1.7.25 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep136"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep136" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2158,8 +2042,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>ch.qos.logback:logback-classic:jar:1.2.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep148"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep148" style="" class="collapse"> 
+     <li>ch.qos.logback:logback-classic:jar:1.2.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep138"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep138" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2174,8 +2058,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>ch.qos.logback:logback-core:jar:1.2.3 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep150"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep150" style="" class="collapse"> 
+       <li>ch.qos.logback:logback-core:jar:1.2.3 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep140"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep140" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2190,8 +2074,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>junit:junit:jar:4.12 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep152"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep152" style="" class="collapse"> 
+     <li>junit:junit:jar:4.12 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep142"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep142" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2205,8 +2089,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.junit.jupiter:junit-jupiter-api:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep154"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep154" style="" class="collapse"> 
+     <li>org.junit.jupiter:junit-jupiter-api:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep144"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep144" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2221,8 +2105,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apiguardian:apiguardian-api:jar:1.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep156"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep156" style="" class="collapse"> 
+       <li>org.apiguardian:apiguardian-api:jar:1.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep146"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep146" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2236,8 +2120,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.opentest4j:opentest4j:jar:1.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep158"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep158" style="" class="collapse"> 
+       <li>org.opentest4j:opentest4j:jar:1.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep148"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep148" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2251,8 +2135,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.junit.platform:junit-platform-commons:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep160"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep160" style="" class="collapse"> 
+       <li>org.junit.platform:junit-platform-commons:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep150"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep150" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2267,8 +2151,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.junit.jupiter:junit-jupiter-params:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep162"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep162" style="" class="collapse"> 
+     <li>org.junit.jupiter:junit-jupiter-params:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep152"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep152" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2282,8 +2166,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.junit.jupiter:junit-jupiter-engine:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep164"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep164" style="" class="collapse"> 
+     <li>org.junit.jupiter:junit-jupiter-engine:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep154"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep154" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2298,8 +2182,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.junit.platform:junit-platform-engine:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep166"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep166" style="" class="collapse"> 
+       <li>org.junit.platform:junit-platform-engine:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep156"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep156" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2314,8 +2198,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.junit.vintage:junit-vintage-engine:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep168"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep168" style="" class="collapse"> 
+     <li>org.junit.vintage:junit-vintage-engine:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep158"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep158" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2329,8 +2213,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.hamcrest:hamcrest-core:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep170"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep170" style="" class="collapse"> 
+     <li>org.hamcrest:hamcrest-core:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep160"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep160" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2344,8 +2228,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.hamcrest:hamcrest-library:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep172"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep172" style="" class="collapse"> 
+     <li>org.hamcrest:hamcrest-library:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep162"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep162" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2359,8 +2243,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.mockito:mockito-core:jar:2.24.5 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep174"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep174" style="" class="collapse"> 
+     <li>org.mockito:mockito-core:jar:2.24.5 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep164"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep164" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2375,8 +2259,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>net.bytebuddy:byte-buddy:jar:1.9.10 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep176"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep176" style="" class="collapse"> 
+       <li>net.bytebuddy:byte-buddy:jar:1.9.10 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep166"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep166" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2390,8 +2274,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>net.bytebuddy:byte-buddy-agent:jar:1.9.10 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep178"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep178" style="" class="collapse"> 
+       <li>net.bytebuddy:byte-buddy-agent:jar:1.9.10 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep168"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep168" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2405,8 +2289,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.objenesis:objenesis:jar:2.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep180"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep180" style="" class="collapse"> 
+       <li>org.objenesis:objenesis:jar:2.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep170"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep170" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2421,8 +2305,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.mockito:mockito-junit-jupiter:jar:2.24.5 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep182"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep182" style="" class="collapse"> 
+     <li>org.mockito:mockito-junit-jupiter:jar:2.24.5 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep172"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep172" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2436,8 +2320,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.assertj:assertj-core:jar:3.11.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep184"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep184" style="" class="collapse"> 
+     <li>org.assertj:assertj-core:jar:3.11.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep174"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep174" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2451,8 +2335,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.codehaus.groovy:groovy-test-junit5:jar:2.5.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep186"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep186" style="" class="collapse"> 
+     <li>org.codehaus.groovy:groovy-test-junit5:jar:2.5.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep176"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep176" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -2467,8 +2351,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.codehaus.groovy:groovy:jar:2.5.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep188"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep188" style="" class="collapse"> 
+       <li>org.codehaus.groovy:groovy:jar:2.5.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep178"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep178" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2482,8 +2366,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.junit.platform:junit-platform-launcher:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep190"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep190" style="" class="collapse"> 
+       <li>org.junit.platform:junit-platform-launcher:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep180"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep180" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -2510,22 +2394,20 @@
  <p><b>Eclipse Public License 1.0: </b>JUnit</p> 
  <p><b>MIT License: </b>SLF4J API Module</p> 
  <p><b>Eclipse Public License v2.0: </b>JUnit Jupiter API, JUnit Jupiter Engine, JUnit Jupiter Params, JUnit Platform Commons, JUnit Platform Engine API, JUnit Platform Launcher, JUnit Vintage Engine</p> 
- <p><b>GPL2 w/ CPE: </b>javax.ws.rs-api</p> 
  <p><b>GNU Lesser General Public License: </b>Logback Classic Module, Logback Core Module</p> 
- <p><b>BSD 2-Clause License: </b>zstd-jni</p> 
  <p><b>New BSD License: </b>Hamcrest Core, Hamcrest library</p> 
  <p><b>Bouncy Castle Licence: </b>Bouncy Castle PKIX, CMS, EAC, TSP, PKCS, OCSP, CMP, and CRMF APIs, Bouncy Castle Provider</p> 
  <p><b>GNU Lesser GPL, Version 3: </b>jSerialComm</p> 
  <p><b>Apache 2: </b>Objenesis</p> 
+ <p><b>Unknown: </b>plc4x-tools-logstash-core</p> 
  <p><b>BSD License: </b>com.github.snksoft:crc</p> 
  <p><b>EDL 1.0: </b>JavaBeans Activation Framework, JavaBeans Activation Framework API jar</p> 
  <p><b>Apache Software License, Version 2.0: </b>jSerialComm</p> 
  <p><b>The MIT License: </b>mockito-core, mockito-junit-jupiter</p> 
- <p><b>Apache License, Version 2.0: </b>Apache Commons Collections, Apache Commons Configuration, Apache Commons IO, Apache Commons Lang, Apache Commons Pool, Apache Commons Text, AssertJ fluent assertions, Netty/Buffer, Netty/Codec, Netty/Codec/HTTP, Netty/Common, Netty/Handler, Netty/Resolver, Netty/Transport, PLC4J: API, PLC4J: Driver: ADS, PLC4J: Driver: Ethernet/IP, PLC4J: Driver: Modbus, PLC4J: Driver: OPC UA, PLC4J: Driver: S7, PLC4J: Driver: Simulated, PLC4J: Integrations: Apache Kafka, PLC4J: Protocol: ADS, PLC4J: Protocol: Driver-Base: Base, PLC4J: Protocol: Driver-Base: Serial, PLC4J: Protocol: Driver-Base: TCP, PLC4J: Protocol: Ethernet/IP, PLC4J: Protocol: ISO TP, PLC4J: Protocol: ISO on TCP, PLC4J: Protocol: Modbus, PLC4J: Protocol: S7, PLC4J: Utils: Connection Pool, PLC4J: Utils: Scraper, SnakeYAML, cip-core, enip-core, fastinfoset, modbus-codec, modbus-core</p> 
+ <p><b>Apache License, Version 2.0: </b>Apache Commons Collections, Apache Commons Configuration, Apache Commons IO, Apache Commons Lang, Apache Commons Pool, Apache Commons Text, AssertJ fluent assertions, Netty/Buffer, Netty/Codec, Netty/Codec/HTTP, Netty/Common, Netty/Handler, Netty/Resolver, Netty/Transport, PLC4J: API, PLC4J: Driver: ADS, PLC4J: Driver: Ethernet/IP, PLC4J: Driver: Modbus, PLC4J: Driver: OPC UA, PLC4J: Driver: S7, PLC4J: Driver: Simulated, PLC4J: Integrations: Logstash plugin, PLC4J: Protocol: ADS, PLC4J: Protocol: Driver-Base: Base, PLC4J: Protocol: Driver-Base: Serial, PLC4J: Protocol: Driver-Base: TCP, PLC4J: Protocol: Ethernet/IP, PLC4J: Protocol: ISO TP, PLC4J: Protocol: ISO on TCP, PLC4J: Protocol: Modbus, PLC4J: Protocol: S7, PLC4J: Utils: Connection Pool, PLC4J: Utils: Scraper, SnakeYAML, cip-core, enip-core, fastinfoset, modbus-codec, modbus-core</p> 
  <p><b>Eclipse Distribution License - v 1.0: </b>Extended StAX API, JAXB Runtime, TXW2 Runtime, fastinfoset, istack common utility code runtime, jakarta.xml.bind-api</p> 
- <p><b>EPL 2.0: </b>javax.ws.rs-api</p> 
  <p><b>Eclipse Public License - v 2.0: </b>bsd-parser-core, sdk-client, sdk-core, stack-client, stack-core</p> 
- <p><b>The Apache Software License, Version 2.0: </b>Apache Commons Logging, Apache Commons Math, Apache Groovy, Apache Kafka, Byte Buddy (without dependencies), Byte Buddy Java agent, FindBugs-jsr305, Guava InternalFutureFailureAccess and InternalFutures, Guava ListenableFuture only, Guava: Google Core Libraries for Java, Jackson-annotations, Jackson-core, Jackson-dataformat-YAML, LZ4 and xxHash, jackson-databind</p> 
+ <p><b>The Apache Software License, Version 2.0: </b>Apache Commons Logging, Apache Commons Math, Apache Groovy, Byte Buddy (without dependencies), Byte Buddy Java agent, FindBugs-jsr305, Guava InternalFutureFailureAccess and InternalFutures, Guava ListenableFuture only, Guava: Google Core Libraries for Java, Jackson-annotations, Jackson-core, Jackson-dataformat-YAML, jackson-databind</p> 
  <p><b>Eclipse Public License - v 1.0: </b>Logback Classic Module, Logback Core Module</p> 
 </div> 
 <a name="Dependency_File_Details"></a> 
@@ -2674,16 +2556,6 @@
     <td>Yes</td> 
    </tr> 
    <tr class="a"> 
-    <td>zstd-jni-1.4.0-1.jar</td> 
-    <td>4 MB</td> 
-    <td>49</td> 
-    <td>10</td> 
-    <td>2</td> 
-    <td>1.6</td> 
-    <td>Yes</td> 
-    <td>No</td> 
-   </tr> 
-   <tr class="b"> 
     <td>crc-1.0.1.jar</td> 
     <td>6.4 kB</td> 
     <td>13</td> 
@@ -2693,7 +2565,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>jsr305-3.0.1.jar</td> 
     <td>19.9 kB</td> 
     <td>46</td> 
@@ -2703,7 +2575,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>gson-2.8.5.jar</td> 
     <td>241.6 kB</td> 
     <td>197</td> 
@@ -2713,7 +2585,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>failureaccess-1.0.1.jar</td> 
     <td>4.6 kB</td> 
     <td>15</td> 
@@ -2723,7 +2595,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>guava-27.0.1-jre.jar</td> 
     <td>2.7 MB</td> 
     <td>1985</td> 
@@ -2733,7 +2605,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar</td> 
     <td>2.2 kB</td> 
     <td>7</td> 
@@ -2743,7 +2615,7 @@
     <td>No</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>jakarta.activation-1.2.1.jar</td> 
     <td>65.7 kB</td> 
     <td>60</td> 
@@ -2753,7 +2625,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>istack-commons-runtime-3.0.8.jar</td> 
     <td>27.2 kB</td> 
     <td>37</td> 
@@ -2763,7 +2635,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>FastInfoset-1.2.16.jar</td> 
     <td>317.2 kB</td> 
     <td>185</td> 
@@ -2773,7 +2645,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>commons-io-2.6.jar</td> 
     <td>214.8 kB</td> 
     <td>146</td> 
@@ -2783,7 +2655,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>commons-logging-1.2.jar</td> 
     <td>61.8 kB</td> 
     <td>42</td> 
@@ -2793,7 +2665,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>netty-buffer-4.1.39.Final.jar</td> 
     <td>276.2 kB</td> 
     <td>129</td> 
@@ -2803,7 +2675,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>netty-codec-4.1.39.Final.jar</td> 
     <td>318.2 kB</td> 
     <td>220</td> 
@@ -2813,7 +2685,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>netty-codec-http-4.1.39.Final.jar</td> 
     <td>592.8 kB</td> 
     <td>381</td> 
@@ -2823,7 +2695,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>netty-common-4.1.39.Final.jar</td> 
     <td>599.7 kB</td> 
     <td>481</td> 
@@ -2833,7 +2705,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>netty-handler-4.1.39.Final.jar</td> 
     <td>436.7 kB</td> 
     <td>298</td> 
@@ -2843,7 +2715,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>netty-resolver-4.1.39.Final.jar</td> 
     <td>32.8 kB</td> 
     <td>38</td> 
@@ -2853,7 +2725,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>netty-transport-4.1.39.Final.jar</td> 
     <td>474.6 kB</td> 
     <td>387</td> 
@@ -2863,7 +2735,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>jakarta.activation-api-1.2.1.jar</td> 
     <td>44.4 kB</td> 
     <td>42</td> 
@@ -2873,21 +2745,11 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>jakarta.xml.bind-api-2.3.2.jar</td> 
     <td>115.5 kB</td> 
     <td>137</td> 
     <td>111</td> 
-    <td>7</td> 
-    <td>-</td> 
-    <td>Yes</td> 
-    <td>No</td> 
-   </tr> 
-   <tr class="b"> 
-    <td>javax.ws.rs-api-2.1.1.jar</td> 
-    <td>126.9 kB</td> 
-    <td>153</td> 
-    <td>138</td> 
     <td>7</td> 
     <td>-</td> 
     <td>Yes</td> 
@@ -2979,26 +2841,6 @@
     <td>143</td> 
     <td>125</td> 
     <td>6</td> 
-    <td>1.8</td> 
-    <td>Yes</td> 
-    <td>No</td> 
-   </tr> 
-   <tr class="b"> 
-    <td>connect-api-2.3.0.jar</td> 
-    <td>99.8 kB</td> 
-    <td>91</td> 
-    <td>70</td> 
-    <td>13</td> 
-    <td>1.8</td> 
-    <td>Yes</td> 
-    <td>No</td> 
-   </tr> 
-   <tr class="a"> 
-    <td>kafka-clients-2.3.0.jar</td> 
-    <td>2.7 MB</td> 
-    <td>1552</td> 
-    <td>1396</td> 
-    <td>48</td> 
     <td>1.8</td> 
     <td>Yes</td> 
     <td>No</td> 
@@ -3184,6 +3026,16 @@
     <td>No</td> 
    </tr> 
    <tr class="b"> 
+    <td>plc4x-tools-logstash-core-0.5.0-SNAPSHOT-7.3.0.jar</td> 
+    <td>592.3 kB</td> 
+    <td>449</td> 
+    <td>404</td> 
+    <td>35</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
     <td>apiguardian-api-1.1.0.jar</td> 
     <td>2.4 kB</td> 
     <td>8</td> 
@@ -3193,7 +3045,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>assertj-core-3.11.1.jar</td> 
     <td>4.1 MB</td> 
     <td>2802</td> 
@@ -3203,7 +3055,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>bcpkix-jdk15on-1.60.jar</td> 
     <td>796.5 kB</td> 
     <td>723</td> 
@@ -3213,7 +3065,7 @@
     <td>No</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>bcprov-jdk15on-1.60.jar</td> 
     <td>4.2 MB</td> 
     <td>3494</td> 
@@ -3223,7 +3075,7 @@
     <td>No</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>groovy-2.5.3.jar</td> 
     <td>5.5 MB</td> 
     <td>3731</td> 
@@ -3233,7 +3085,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>groovy-test-junit5-2.5.3.jar</td> 
     <td>13 kB</td> 
     <td>14</td> 
@@ -3243,7 +3095,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>bsd-parser-core-0.3.2.jar</td> 
     <td>39.9 kB</td> 
     <td>42</td> 
@@ -3253,7 +3105,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>sdk-client-0.3.2.jar</td> 
     <td>514.6 kB</td> 
     <td>440</td> 
@@ -3263,7 +3115,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>sdk-core-0.3.2.jar</td> 
     <td>99.2 kB</td> 
     <td>27</td> 
@@ -3273,7 +3125,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>stack-client-0.3.2.jar</td> 
     <td>92.5 kB</td> 
     <td>51</td> 
@@ -3283,7 +3135,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>stack-core-0.3.2.jar</td> 
     <td>1.1 MB</td> 
     <td>674</td> 
@@ -3293,7 +3145,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>jaxb-runtime-2.3.2.jar</td> 
     <td>1 MB</td> 
     <td>804</td> 
@@ -3303,7 +3155,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>txw2-2.3.2.jar</td> 
     <td>72.1 kB</td> 
     <td>69</td> 
@@ -3313,7 +3165,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>hamcrest-core-1.3.jar</td> 
     <td>45 kB</td> 
     <td>52</td> 
@@ -3323,7 +3175,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>hamcrest-library-1.3.jar</td> 
     <td>53.1 kB</td> 
     <td>46</td> 
@@ -3333,7 +3185,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>junit-jupiter-api-5.5.0.jar</td> 
     <td>141.8 kB</td> 
     <td>141</td> 
@@ -3343,7 +3195,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>junit-jupiter-engine-5.5.0.jar</td> 
     <td>214.9 kB</td> 
     <td>140</td> 
@@ -3353,7 +3205,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>junit-jupiter-params-5.5.0.jar</td> 
     <td>549.4 kB</td> 
     <td>367</td> 
@@ -3363,7 +3215,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>junit-platform-commons-1.5.0.jar</td> 
     <td>91.7 kB</td> 
     <td>58</td> 
@@ -3373,7 +3225,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>junit-platform-engine-1.5.0.jar</td> 
     <td>163.9 kB</td> 
     <td>133</td> 
@@ -3383,7 +3235,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>junit-platform-launcher-1.5.0.jar</td> 
     <td>99.6 kB</td> 
     <td>74</td> 
@@ -3393,7 +3245,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>junit-vintage-engine-5.5.0.jar</td> 
     <td>57.2 kB</td> 
     <td>44</td> 
@@ -3403,23 +3255,13 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>stax-ex-1.8.1.jar</td> 
     <td>38.1 kB</td> 
     <td>38</td> 
     <td>25</td> 
     <td>3</td> 
     <td>-</td> 
-    <td>Yes</td> 
-    <td>No</td> 
-   </tr> 
-   <tr class="a"> 
-    <td>lz4-java-1.6.0.jar</td> 
-    <td>640 kB</td> 
-    <td>102</td> 
-    <td>79</td> 
-    <td>3</td> 
-    <td>1.6</td> 
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
@@ -3474,16 +3316,6 @@
     <td>No</td> 
    </tr> 
    <tr class="a"> 
-    <td>snappy-java-1.1.7.3.jar</td> 
-    <td>2 MB</td> 
-    <td>88</td> 
-    <td>31</td> 
-    <td>2</td> 
-    <td>1.7</td> 
-    <td>Yes</td> 
-    <td>No</td> 
-   </tr> 
-   <tr class="b"> 
     <td>snakeyaml-1.23.jar</td> 
     <td>301.3 kB</td> 
     <td>247</td> 
@@ -3493,7 +3325,7 @@
     <td>Yes</td> 
     <td>No</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <th>Total</th> 
     <th>Size</th> 
     <th>Entries</th> 
@@ -3503,27 +3335,27 @@
     <th>Debug Information</th> 
     <th>Sealed</th> 
    </tr> 
-   <tr class="b"> 
-    <td>95</td> 
-    <td>47.9 MB</td> 
-    <td>29991</td> 
-    <td>27352</td> 
-    <td>1205</td> 
+   <tr class="a"> 
+    <td>90</td> 
+    <td>38.9 MB</td> 
+    <td>28405</td> 
+    <td>26032</td> 
+    <td>1165</td> 
     <td>1.8</td> 
-    <td>92</td> 
+    <td>87</td> 
     <td>1</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>compile: 23</td> 
-    <td>compile: 7.9 MB</td> 
-    <td>compile: 5284</td> 
-    <td>compile: 4732</td> 
-    <td>compile: 253</td> 
+    <td>compile: 8.2 MB</td> 
+    <td>compile: 5536</td> 
+    <td>compile: 4956</td> 
+    <td>compile: 280</td> 
     <td>-</td> 
     <td>compile: 23</td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>test: 21</td> 
     <td>test: 15.5 MB</td> 
     <td>test: 11273</td> 
@@ -3533,24 +3365,24 @@
     <td>test: 21</td> 
     <td>-</td> 
    </tr> 
-   <tr class="a"> 
-    <td>runtime: 44</td> 
-    <td>runtime: 14.4 MB</td> 
-    <td>runtime: 10980</td> 
-    <td>runtime: 9861</td> 
-    <td>runtime: 430</td> 
+   <tr class="b"> 
+    <td>runtime: 45</td> 
+    <td>runtime: 14.7 MB</td> 
+    <td>runtime: 11177</td> 
+    <td>runtime: 10041</td> 
+    <td>runtime: 438</td> 
     <td>-</td> 
-    <td>runtime: 41</td> 
+    <td>runtime: 42</td> 
     <td>runtime: 1</td> 
    </tr> 
-   <tr class="b"> 
-    <td>provided: 7</td> 
-    <td>provided: 10.1 MB</td> 
-    <td>provided: 2454</td> 
-    <td>provided: 2097</td> 
-    <td>provided: 111</td> 
+   <tr class="a"> 
+    <td>provided: 1</td> 
+    <td>provided: 471.9 kB</td> 
+    <td>provided: 419</td> 
+    <td>provided: 373</td> 
+    <td>provided: 36</td> 
     <td>-</td> 
-    <td>provided: 7</td> 
+    <td>provided: 1</td> 
     <td>-</td> 
    </tr> 
   </tbody> 
