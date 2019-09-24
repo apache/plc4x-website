@@ -346,7 +346,7 @@
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="prettyprint highlight"><code data-lang="java">    public SimpleType parse(ReadBuffer io, Object... args) throws ParseException {
+      <pre class="prettyprint highlight"><code data-lang="java">    public static SimpleType parse(ReadBuffer io) throws ParseException {
         int startPos = io.getPos();
         int curPos;
 
@@ -387,7 +387,7 @@
         return new SimpleType(arrCount, arrLen, arrTerm, manArrayCount, manArrayLen, manArrayTerm, man, opt, simp);
     }
 
-    public void serialize(WriteBuffer io, SimpleType value, Object... args) throws ParseException {
+    public static void serialize(WriteBuffer io, SimpleType value) throws ParseException {
 
         // Array Field (arrCount)
         if(value.getArrCount() != null) {
