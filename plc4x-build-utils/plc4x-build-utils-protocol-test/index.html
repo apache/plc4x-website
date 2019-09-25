@@ -310,9 +310,10 @@
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="prettyprint highlight"><code data-lang="java">    private final short[] arrCount;
-    private final short[] arrLen;
-    private final short[] arrTerm;
+      <pre class="prettyprint highlight"><code data-lang="java">    // Properties.
+    private final short[] arrCount;
+        this.simp = simp;
+    }
 
     public short[] getArrCount() {
         return arrCount;
@@ -321,8 +322,8 @@
     public short[] getArrLen() {
         return arrLen;
     }
+    }
 
-    public short[] getArrTerm() {
     @Override
     @JsonIgnore
     public int getLengthInBytes() {
@@ -335,10 +336,7 @@
         lengthInBits += 8 * arrLen.length;
 
         // Array field
-        lengthInBits += 8 * arrTerm.length;
-
-        return lengthInBits / 8;
-    }</code></pre> 
+        // A virtual field doesn't have any in- or output.</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -381,7 +379,7 @@
         short[] arrTerm = new short[_arrTermList.size()];
         for(int i = 0; i &lt; _arrTermList.size(); i++) {
             arrTerm[i] = (short) _arrTermList.get(i);
-        }
+        short simp = io.readUnsignedShort(8);
 
         // Create the instance
         return new SimpleType(arrCount, arrLen, arrTerm, manArrayCount, manArrayLen, manArrayTerm, man, opt, simp);
@@ -409,8 +407,7 @@
                 io.writeUnsignedShort(8, ((Number) element).shortValue());
             }
         }
-
-    }</code></pre> 
+        io.writeUnsignedShort(8, ((Number) (simp)).shortValue());</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -465,6 +462,8 @@
 */
 
 package org.apache.plc4x.java.test.readwrite;
+
+
 
 import com.fasterxml.jackson.annotation.*;
 import org.apache.plc4x.java.utils.Message;
