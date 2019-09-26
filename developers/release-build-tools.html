@@ -9,7 +9,7 @@
           
         <head>
     <meta charset="UTF-8" />
-    <title>Apache PLC4X® - Releasing PLC4X</title>
+    <title>Apache PLC4X® - Releasing PLC4X Build-Tools</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
       <meta http-equiv="content-language" content="en" />
@@ -31,7 +31,7 @@
           });
         </script>
         </head> <!-- end : head -->
-    <body class="page-developers-release project-plc4x-parent">
+    <body class="page-developers-release-build-tools project-plc4x-parent">
 
     <div id="m-top-navbar" class="navbar  navbar-default navbar-fixed-top">
       <div class="container">
@@ -76,8 +76,8 @@
                     <li ><a  href="decisions.html"  title="Decision Making" >Decision Making</a></li>
                     <li ><a  href="maturity.html"  title="Maturity" >Maturity</a></li>
                     <li ><a  href="preparing.html"  title="Preparing your Computer" >Preparing your Computer</a></li>
-                                    <li  class="active" ><a  href=""  title="Releasing" >Releasing</a></li>
-                    <li ><a  href="release-build-tools.html"  title="Releasing Build-Tools" >Releasing Build-Tools</a></li>
+                    <li ><a  href="release.html"  title="Releasing" >Releasing</a></li>
+                                    <li  class="active" ><a  href=""  title="Releasing Build-Tools" >Releasing Build-Tools</a></li>
                     <li ><a  href="team.html"  title="Team" >Team</a></li>
                     <li ><a  href="vm.html"  title="VM Access" >VM Access</a></li>
                     <li ><a  href="vpn.html"  title="VPN Access" >VPN Access</a></li>
@@ -176,10 +176,8 @@
             </div> <!-- .navbar-header -->
         <div class="collapse navbar-collapse" id="toc-nav-collapse">
           <ul id="toc" class="nav navbar-nav">
-                                                            <li class="toplevel"><a href="#_toc_releasing_plc4x1" title="Releasing PLC4X">Releasing PLC4X</a></li>
-                        <li class="toplevel"><a href="#_toc_preparing_your_system_for_being_able_to_release1" title="Preparing your system for being able to release">Preparing your system for being able to release</a></li>
-                        <li class="toplevel"><a href="#_toc_preparing_the_codebase_for_a_release1" title="Preparing the codebase for a release">Preparing the codebase for a release</a></li>
-                        <li class="toplevel"><a href="#_toc_creating_a_release_branch1" title="Creating a release branch">Creating a release branch</a></li>
+                                                            <li class="toplevel"><a href="#_toc_releasing_plc4x_build-tools" title="Releasing PLC4X Build-Tools">Releasing PLC4X Build-Tools</a></li>
+                        <li class="toplevel"><a href="#_toc_creating_a_release_branch_for_the_code-generation_" title="Creating a release branch (For the code-generation module)">Creating a release branch (For the code-generation module)</a></li>
                         <li class="toplevel"><a href="#_toc_preparing_develop_for_the_next_iteration1" title="Preparing develop for the next iteration">Preparing develop for the next iteration</a></li>
                         <li class="toplevel"><a href="#_toc_release_stabilization_phase1" title="Release stabilization phase">Release stabilization phase</a></li>
                         <li class="toplevel"><a href="#_toc_preparing_a_release1" title="Preparing a release">Preparing a release</a></li>
@@ -207,87 +205,26 @@
       <div class="body-content">
 <div class="sect1"> 
  <div class="page-header">
-  <h2 id="_toc_releasing_plc4x1">Releasing PLC4X</h2>
+  <h2 id="_toc_releasing_plc4x_build-tools">Releasing PLC4X Build-Tools</h2>
  </div> 
  <div class="sectionbody"> 
-  <div class="sect2"> 
-   <h3 id="_toc_preparing_your_system_for_being_able_to_release1">Preparing your system for being able to release</h3> 
-   <div class="paragraph"> 
-    <p>As part of the release process, Maven will upload maven release artifacts to a so-called staging repository.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>This can be thought of as an ad-hoc Maven repository that contains only the artifacts for one release. This helps reviewers to see what’s in the convenience maven package and to release that to the public repos with one click.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>But in order to be allowed to upload artifacts, your account has to be enabled for this and you have to tell Maven about your credentials.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>In order to do this, you should provide these credentials via <code>.m2/settings.xml</code>.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>So if you don’t already have one, you should create a <code>.m2</code> directory in your user home and inside that create a <code>settings.xml</code> file with at least this content:</p> 
-   </div> 
-   <div class="literalblock"> 
-    <div class="content"> 
-     <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd" xmlns="http://maven.apache.org/SETTINGS/1.1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;servers&gt;
-    &lt;!-- Apache Repo Settings --&gt;
-    &lt;server&gt;
-        &lt;id&gt;apache.snapshots.https&lt;/id&gt;
-        &lt;username&gt;{user-id}&lt;/username&gt;
-        &lt;password&gt;{user-pass}&lt;/password&gt;
-    &lt;/server&gt;
-    &lt;server&gt;
-        &lt;id&gt;apache.releases.https&lt;/id&gt;
-        &lt;username&gt;{user-id}&lt;/username&gt;
-        &lt;password&gt;{user-pass}&lt;/password&gt;
-    &lt;/server&gt;
-  &lt;/servers&gt;
-&lt;/settings&gt;</pre> 
-    </div> 
-   </div> 
-   <div class="paragraph"> 
-    <p>This tells maven to use above credentials as soon as a repository with the id <code>apache.snapshots.https</code> or <code>apache.releases.https</code> is being used. For a release all you need is the <code>releases</code> repo, but it is good to have the other in place as it enables you to also deploy SNAPSHOTs from your system. There repos are defined in the <code>apache</code> parent pom and is identical for all Apache projects.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Additionally all artifacts are automatically signed by the release build. In order to be able to do this you need to setup GPG.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>The key being used to sign the artifacts will have to be linked to your Apache E-Mail ({apache-id}@apache.org) and verified by at least one fellow Apache committer (Ideally more) that have trusted keys themselves. Usually for this you have to get in touch - in real life - with any Apache committer with a trusted key. Attending an <code>ApacheCon</code> is usually a great way to do this as usually every ApacheCon has a <code>Key Signing event</code> in it’s schedule. He can then sign your key and hereby enable you to sign Apache release artifacts.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>There’s a detailed description <a href="https://github.com/apache/incubator-pulsar/wiki/Create-GPG-keys-to-sign-release-artifacts">here</a>.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>If you happen to have multiple keys, adding the following profile to your <code>settings.xml</code> should help:</p> 
-   </div> 
-   <div class="literalblock"> 
-    <div class="content"> 
-     <pre>&lt;profile&gt;
-  &lt;id&gt;apache-release&lt;/id&gt;
-  &lt;properties&gt;
-    &lt;gpg.keyname&gt;5C60D6B9&lt;/gpg.keyname&gt;&lt;!-- Your GPG Keyname here --&gt;
-    &lt;!-- Use an agent: Prevents being asked for the password during the build --&gt;
-    &lt;gpg.useagent&gt;true&lt;/gpg.useagent&gt;
-    &lt;gpg.passphrase&gt;topsecret-password&lt;/gpg.passphrase&gt;
-  &lt;/properties&gt;
-&lt;/profile&gt;</pre> 
-    </div> 
-   </div> 
+  <div class="paragraph"> 
+   <p>In contrast to the main project, the <code>plc4x-build-tools</code> repository contains a loose collection of sub-projects.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>The main <code>pom.xml</code> in the root directory is mainly for allowing to import all modules into an IDE and shouldn’t be used for releases.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>If you want to release a part of the build-tools, please execute the following release steps in the parts sub-directory.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>In general the preparation steps for releasing a build-tool is equal to those of the main project. So please check <a href="release.html">here</a> (Chapters: <code>Preparing your system for being able to release</code> and <code>Preparing the codebase for a release</code>)</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>The rest of the steps are a lot simpler than those of the main project as there aren’t any profiles involved.</p> 
   </div> 
   <div class="sect2"> 
-   <h3 id="_toc_preparing_the_codebase_for_a_release1">Preparing the codebase for a release</h3> 
-   <div class="paragraph"> 
-    <p>Usually you will have to update the RELEASE_NOTES document to the new version. I would suggest doing this prior to the branch as otherwise you will definitely have to port it back to <code>develop</code>. So remove the <code>SNAPSHOT</code> and <code>(Unreleased)</code> markers from the file and add missing parts.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>Also if you are doing the first release in a new year, it is advisable to search for the old year and check if any occurrences are ok the way they are. Usually the <code>NOTICE</code> file has to be adjusted.</p> 
-   </div> 
-  </div> 
-  <div class="sect2"> 
-   <h3 id="_toc_creating_a_release_branch1">Creating a release branch</h3> 
+   <h3 id="_toc_creating_a_release_branch_for_the_code-generation_">Creating a release branch (For the code-generation module)</h3> 
    <div class="paragraph"> 
     <p>According to SemVer, we have: Major, Minor and Bugfix releases.</p> 
    </div> 
@@ -311,15 +248,15 @@
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/{minor-version} -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:branch -DbranchName=rel/code-generation/{minor-version} -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version. So in case of preparing the release branch for <code>0.5.0-SNAPSHOT</code> the command would be the following:</p> 
+    <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version. So in case of preparing the release branch for <code>{project.version}</code> the command would be the following:</p> 
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre>   mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.5 -DautoVersionSubmodules=true</pre> 
+     <pre>   mvn release:branch -DbranchName=rel/code-generation/0.5 -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -327,7 +264,7 @@
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre>   What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.5.1-SNAPSHOT: : 0.6.0-SNAPSHOT</pre> 
+     <pre>   What is the new working copy version for "PLC4X Build Tools: Code Generation"? (org.apache.plc4x.plugins:plc4x-code-generaton) 0.5.1-SNAPSHOT: : 0.6.0-SNAPSHOT</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -337,7 +274,7 @@
     <p>This step now should perform quite quickly as no build and no tests are involved.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/0.5</code> branch is created.</p> 
+    <p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/code-generation/0.5</code> branch is created.</p> 
    </div> 
   </div> 
   <div class="sect2"> 
@@ -395,6 +332,12 @@ Bug Fixes
   <div class="sect2"> 
    <h3 id="_toc_preparing_a_release1">Preparing a release</h3> 
    <div class="paragraph"> 
+    <p>Before you start preparing the release it is important to manually make the <code>RELEASE_NOTES</code> reflect the version we are planning on releasing.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>So be sure to remove the <code>(Unreleased)</code> and <code>SNAPSHOT</code> from the version.</p> 
+   </div> 
+   <div class="paragraph"> 
     <p>As especially when switching a lot between different branches, it is recommended to do a clean checkout of the repository. Otherwise a lot of directories can be left over, which would be included in the source-release zip. In order to prepare a release-candidate, the first step is switching to the corresponding release-branch.</p> 
    </div> 
    <div class="paragraph"> 
@@ -402,29 +345,21 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:prepare -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:prepare -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>(The <code>-P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release) In general the plugin will now ask you 3 questions:</p> 
+    <p>In general the plugin will now ask you 3 questions:</p> 
    </div> 
    <div class="olist arabic"> 
     <ol class="arabic"> 
      <li> <p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix)</p> </li> 
-     <li> <p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>release/{release-version}</code> (<code>release/0.5.0</code> in our case)</p> </li> 
+     <li> <p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>release/code-generation/{release-version}</code> (<code>release/code-generation/0.5.0</code> in our case)</p> </li> 
      <li> <p>The next development version (The version present in the pom after the release) (<code>0.6.0</code> in our case)</p> </li> 
     </ol> 
    </div> 
    <div class="paragraph"> 
     <p>Usually for 1 and 3 the defaults are just fine, make sure the tag name is correct as this usually is different.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>We currently have a dependency to a SNAPSHOT dependency in the sandbox module. The release plugin will complain about this and we will not be able to release this way. As this in the sandbox module, we can force the plugin to continue by appending:</p> 
-   </div> 
-   <div class="literalblock"> 
-    <div class="content"> 
-     <pre>-DignoreSnapshots=true</pre> 
-    </div> 
    </div> 
    <div class="paragraph"> 
     <p>However it is important to check that nowhere else SNAPSHOT versions are referenced.</p> 
@@ -437,7 +372,7 @@ Bug Fixes
      <li> <p>Check we aren’t referencing any <code>SNAPSHOT</code> dependencies.</p> </li> 
      <li> <p>Update all pom versions to the release version.</p> </li> 
      <li> <p>Run a build with all tests</p> </li> 
-     <li> <p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release release/0.5.0</code>)</p> </li> 
+     <li> <p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release release/code-generation/0.5.0</code>)</p> </li> 
      <li> <p>Push the commit</p> </li> 
      <li> <p>Tag the commit</p> </li> 
      <li> <p>Update all poms to the next development version.</p> </li> 
@@ -449,7 +384,7 @@ Bug Fixes
     <p>However this just prepared the git repository for the release, we have to perform the release to produce and stage the release artifacts.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>Please verify the git repository at: <a href="https://gitbox.apache.org/repos/asf?p=plc4x.git" class="bare">https://gitbox.apache.org/repos/asf?p=plc4x.git</a> is in the correct state. Please select the release branch and verify the commit log looks similar to this</p> 
+    <p>Please verify the git repository at: <a href="https://gitbox.apache.org/repos/asf?p=plc4x-build-tools.git" class="bare">https://gitbox.apache.org/repos/asf?p=plc4x-build-tools.git</a> is in the correct state. Please select the release branch and verify the commit log looks similar to this</p> 
    </div> 
    <div class="imageblock"> 
     <div class="content"> 
@@ -457,7 +392,7 @@ Bug Fixes
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>It is important that the commit with the message "[maven-release-plugin] prepare release release/0.5.0" is tagged with the release tag (in this case release/0.3.0)</p> 
+    <p>It is important that the commit with the message "[maven-release-plugin] prepare release release/code-generation/0.5.0" is tagged with the release tag (in this case release/code-generation/0.5.0)</p> 
    </div> 
    <div class="paragraph"> 
     <p>If you check the commit itself, it should mainly consist of version updates like this:</p> 
@@ -479,7 +414,7 @@ Bug Fixes
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>This now updates the versions again, but this time from the release version to the one we selected for the next development iteration (in this case 0.3.1-SNAPSHOT)</p> 
+    <p>This now updates the versions again, but this time from the release version to the one we selected for the next development iteration (in this case <code>0.6.0-SNAPSHOT</code>)</p> 
    </div> 
    <div class="admonitionblock note"> 
     <table> 
@@ -518,7 +453,7 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:perform -DreleaseProfiles=apache-release,with-java,with-proxies</pre> 
+     <pre>mvn release:perform</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -529,14 +464,11 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn clean deploy -P apache-release,with-java,with-proxies</pre> 
+     <pre>mvn clean deploy -P apache-release</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>As the <code>apache-release</code> profile is also activated, this builds and tests the project as well as creates the JavaDocs, Source packages and signs each of these with your PGP key.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>We are intentionally not adding the other profiles, as these either produce binary artifacts that usually only work on the system they were compiled on (C++, .Net) or we haven’t found a good way to distribute them via Maven yet (Python) or deployment is disabled anyway (sandbox).</p> 
+    <p>As the <code>apache-release</code> profile is activated, this builds and tests the project as well as creates the JavaDocs, Source packages and signs each of these with your PGP key.</p> 
    </div> 
    <div class="paragraph"> 
     <p>As this time the build is building with release versions, Maven will automatically choose the release url for deploying artifacts.</p> 
@@ -586,13 +518,13 @@ Bug Fixes
    <div class="listingblock"> 
     <div class="content"> 
      <pre>   ./KEYS
-   ./0.5.0/
-   ./0.5.0/rc1
-   ./0.5.0/rc1/README
-   ./0.5.0/rc1/RELEASE_NOTES
-   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip
-   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip.asc
-   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip.sha512</pre> 
+   ./0.5.0/build-tools/code-generation
+   ./0.5.0/build-tools/code-generation/rc1
+   ./0.5.0/build-tools/code-generation/rc1/README
+   ./0.5.0/build-tools/code-generation/rc1/RELEASE_NOTES
+   ./0.5.0/build-tools/code-generation/rc1/apache-plc4x-code-generation-0.5.0-source-release.zip
+   ./0.5.0/build-tools/code-generation/rc1/apache-plc4x-code-generation-0.5.0-source-release.zip.asc
+   ./0.5.0/build-tools/code-generation/rc1/apache-plc4x-code-generation-0.5.0-source-release.zip.sha512</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -622,17 +554,19 @@ Bug Fixes
    <div class="listingblock"> 
     <div class="content"> 
      <pre>   E-Mail Topic:
-   [VOTE] Apache PLC4X 0.5.0 RC1
+   [VOTE] Apache PLC4X Build-Tools Code-Generation {current-full-version RC1
 
    Message:
-   Apache PLC4X 0.5.0 has been staged under [2] and it’s time to vote
-   on accepting it for release. All Maven artifacts are available under [1].
-   Voting will be open for 72hr.
+   Apache PLC4X Build-Tools Code-Generation 0.5.0 has been staged under [2]
+   and it’s time to vote on accepting it for release.
+
+   All Maven artifacts are available under [1]. Voting will be open for 72hr.
 
    A minimum of 3 binding +1 votes and more binding +1 than binding -1
    are required to pass.
 
-   Release tag: release/0.5.0
+   Repository: https://gitbox.apache.org/repos/asf/plc4x-build-tools.git
+   Release tag: release/code-generation/0.5.0
    Hash for the release tag: {replacethiswiththerealgitcommittag}
 
    Per [3] "Before voting +1 PMC members are required to download
@@ -648,7 +582,7 @@ Bug Fixes
 
 
    [1] https://repository.apache.org/content/repositories/orgapacheplc4x-{somefourdigitnumber}
-   [2] https://dist.apache.org/repos/dist/dev/plc4x/0.5.0/rc1
+   [2] https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/0.5.0/rc1/
    [3] https://www.apache.org/dev/release.html#approving-a-release
    [4] https://cwiki.apache.org/confluence/display/PLC4X/Validating+a+staged+Release</pre> 
     </div> 
