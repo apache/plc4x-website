@@ -125,6 +125,7 @@
                                 <li class="divider"></li>
                                               <li><a href="#_toc_compile1" title="compile">compile</a></li>
                 <li><a href="#_toc_test1" title="test">test</a></li>
+                <li><a href="#_toc_provided1" title="provided">provided</a></li>
                             </ul>
                         </li>
                         <li class="divider-vertical"></li>
@@ -136,7 +137,7 @@
                                 <li class="divider"></li>
                                               <li><a href="#_toc_compile2" title="compile">compile</a></li>
                 <li><a href="#_toc_test2" title="test">test</a></li>
-                <li><a href="#_toc_provided1" title="provided">provided</a></li>
+                <li><a href="#_toc_provided2" title="provided">provided</a></li>
                             </ul>
                         </li>
                         <li class="divider-vertical"></li>
@@ -372,6 +373,31 @@
    </tbody> 
   </table> 
  </div> 
+ <a name="Project_Dependencies_provided"></a> 
+ <div class="section"> 
+  <h3 id="_toc_provided1">provided</h3> 
+  <p>The following is a list of provided dependencies for this project. These dependencies are required to compile the application, but should be provided by default when using the library:</p> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>GroupId</th> 
+     <th>ArtifactId</th> 
+     <th>Version</th> 
+     <th>Type</th> 
+     <th>Licenses</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td>org.osgi</td> 
+     <td><a class="externalLink" href="http://www.osgi.org/">osgi.cmpn</a></td> 
+     <td>6.0.0</td> 
+     <td>jar</td> 
+     <td><a class="externalLink" href="http://opensource.org/licenses/apache2.0.php">Apache License, Version 2.0</a></td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
 </div> 
 <a name="Project_Transitive_Dependencies"></a> 
 <div class="section"> 
@@ -402,7 +428,7 @@
     <tr class="a"> 
      <td>com.github.jinahya</td> 
      <td><a class="externalLink" href="https://github.com/jinahya/bit-io">bit-io</a></td> 
-     <td>1.4.2</td> 
+     <td>1.4.3</td> 
      <td>jar</td> 
      <td><a class="externalLink" href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
@@ -590,7 +616,7 @@
  </div> 
  <a name="Project_Transitive_Dependencies_provided"></a> 
  <div class="section"> 
-  <h3 id="_toc_provided1">provided</h3> 
+  <h3 id="_toc_provided2">provided</h3> 
   <p>The following is a list of provided dependencies for this project. These dependencies are required to compile the application, but should be provided by default when using the library:</p> 
   <table border="0" class="bodyTable table table-striped table-hover"> 
    <thead> 
@@ -750,7 +776,7 @@
          </table> 
         </div> 
         <ul> 
-         <li>com.github.jinahya:bit-io:jar:1.4.2 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep14"><i class="glyphicon glyphicon-info-sign"></i></button> 
+         <li>com.github.jinahya:bit-io:jar:1.4.3 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep14"><i class="glyphicon glyphicon-info-sign"></i></button> 
           <div id="_dep14" style="" class="collapse"> 
            <table border="0" class="bodyTable table table-striped table-hover"> 
             <thead> 
@@ -1075,8 +1101,23 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.slf4j:slf4j-api:jar:1.7.25 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep56"><i class="glyphicon glyphicon-info-sign"></i></button> 
+     <li>org.osgi:osgi.cmpn:jar:6.0.0 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep56"><i class="glyphicon glyphicon-info-sign"></i></button> 
       <div id="_dep56" style="" class="collapse"> 
+       <table border="0" class="bodyTable table table-striped table-hover"> 
+        <thead> 
+         <tr class="a"> 
+          <th>org.osgi:osgi.cmpn</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr class="b"> 
+          <td> <p><b>Description: </b>OSGi Compendium Release 6, Interfaces and Classes for use in compiling bundles.</p> <p><b>URL: </b><a class="externalLink" href="http://www.osgi.org/">http://www.osgi.org/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://opensource.org/licenses/apache2.0.php">Apache License, Version 2.0</a></p></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </div></li> 
+     <li>org.slf4j:slf4j-api:jar:1.7.25 (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep58"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep58" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1090,8 +1131,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>ch.qos.logback:logback-classic:jar:1.2.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep58"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep58" style="" class="collapse"> 
+     <li>ch.qos.logback:logback-classic:jar:1.2.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep60"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep60" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1106,8 +1147,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>ch.qos.logback:logback-core:jar:1.2.3 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep60"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep60" style="" class="collapse"> 
+       <li>ch.qos.logback:logback-core:jar:1.2.3 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep62"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep62" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1122,8 +1163,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>junit:junit:jar:4.12 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep62"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep62" style="" class="collapse"> 
+     <li>junit:junit:jar:4.12 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep64"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep64" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1137,8 +1178,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.junit.jupiter:junit-jupiter-api:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep64"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep64" style="" class="collapse"> 
+     <li>org.junit.jupiter:junit-jupiter-api:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep66"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep66" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1153,8 +1194,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.apiguardian:apiguardian-api:jar:1.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep66"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep66" style="" class="collapse"> 
+       <li>org.apiguardian:apiguardian-api:jar:1.1.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep68"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep68" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1168,8 +1209,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.opentest4j:opentest4j:jar:1.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep68"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep68" style="" class="collapse"> 
+       <li>org.opentest4j:opentest4j:jar:1.2.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep70"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep70" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1183,8 +1224,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.junit.platform:junit-platform-commons:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep70"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep70" style="" class="collapse"> 
+       <li>org.junit.platform:junit-platform-commons:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep72"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep72" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1199,8 +1240,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.junit.jupiter:junit-jupiter-params:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep72"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep72" style="" class="collapse"> 
+     <li>org.junit.jupiter:junit-jupiter-params:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep74"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep74" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1214,8 +1255,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.junit.jupiter:junit-jupiter-engine:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep74"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep74" style="" class="collapse"> 
+     <li>org.junit.jupiter:junit-jupiter-engine:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep76"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep76" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1230,8 +1271,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.junit.platform:junit-platform-engine:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep76"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep76" style="" class="collapse"> 
+       <li>org.junit.platform:junit-platform-engine:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep78"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep78" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1246,8 +1287,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.junit.vintage:junit-vintage-engine:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep78"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep78" style="" class="collapse"> 
+     <li>org.junit.vintage:junit-vintage-engine:jar:5.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep80"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep80" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1261,8 +1302,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.hamcrest:hamcrest-core:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep80"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep80" style="" class="collapse"> 
+     <li>org.hamcrest:hamcrest-core:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep82"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep82" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1276,8 +1317,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.hamcrest:hamcrest-library:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep82"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep82" style="" class="collapse"> 
+     <li>org.hamcrest:hamcrest-library:jar:1.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep84"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep84" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1291,8 +1332,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.mockito:mockito-core:jar:2.24.5 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep84"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep84" style="" class="collapse"> 
+     <li>org.mockito:mockito-core:jar:2.24.5 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep86"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep86" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1307,8 +1348,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>net.bytebuddy:byte-buddy:jar:1.9.10 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep86"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep86" style="" class="collapse"> 
+       <li>net.bytebuddy:byte-buddy:jar:1.9.10 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep88"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep88" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1322,8 +1363,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>net.bytebuddy:byte-buddy-agent:jar:1.9.10 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep88"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep88" style="" class="collapse"> 
+       <li>net.bytebuddy:byte-buddy-agent:jar:1.9.10 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep90"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep90" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1337,8 +1378,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.objenesis:objenesis:jar:2.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep90"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep90" style="" class="collapse"> 
+       <li>org.objenesis:objenesis:jar:2.6 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep92"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep92" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1353,8 +1394,8 @@
          </table> 
         </div></li> 
       </ul></li> 
-     <li>org.mockito:mockito-junit-jupiter:jar:2.24.5 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep92"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep92" style="" class="collapse"> 
+     <li>org.mockito:mockito-junit-jupiter:jar:2.24.5 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep94"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep94" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1368,8 +1409,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.assertj:assertj-core:jar:3.11.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep94"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep94" style="" class="collapse"> 
+     <li>org.assertj:assertj-core:jar:3.11.1 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep96"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep96" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1383,8 +1424,8 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>org.codehaus.groovy:groovy-test-junit5:jar:2.5.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep96"><i class="glyphicon glyphicon-info-sign"></i></button> 
-      <div id="_dep96" style="" class="collapse"> 
+     <li>org.codehaus.groovy:groovy-test-junit5:jar:2.5.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep98"><i class="glyphicon glyphicon-info-sign"></i></button> 
+      <div id="_dep98" style="" class="collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
          <tr class="a"> 
@@ -1399,8 +1440,8 @@
        </table> 
       </div> 
       <ul> 
-       <li>org.codehaus.groovy:groovy:jar:2.5.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep98"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep98" style="" class="collapse"> 
+       <li>org.codehaus.groovy:groovy:jar:2.5.3 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep100"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep100" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1414,8 +1455,8 @@
           </tbody> 
          </table> 
         </div></li> 
-       <li>org.junit.platform:junit-platform-launcher:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep100"><i class="glyphicon glyphicon-info-sign"></i></button> 
-        <div id="_dep100" style="" class="collapse"> 
+       <li>org.junit.platform:junit-platform-launcher:jar:1.5.0 (test) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep102"><i class="glyphicon glyphicon-info-sign"></i></button> 
+        <div id="_dep102" style="" class="collapse"> 
          <table border="0" class="bodyTable table table-striped table-hover"> 
           <thead> 
            <tr class="a"> 
@@ -1447,7 +1488,7 @@
  <p><b>Apache 2: </b>Objenesis</p> 
  <p><b>Apache License 2.0: </b>Metrics Core</p> 
  <p><b>The MIT License: </b>Checker Qual, mockito-core, mockito-junit-jupiter</p> 
- <p><b>Apache License, Version 2.0: </b>Apache Commons Codec, Apache Commons Lang, AssertJ fluent assertions, Netty/Buffer, Netty/Codec, Netty/Common, Netty/Handler, Netty/Resolver, Netty/Transport, PLC4J: API, PLC4J: Driver: Ethernet/IP, PLC4J: Protocol: Driver-Base: Base, PLC4J: Protocol: Driver-Base: TCP, PLC4J: Protocol: Ethernet/IP, PLC4J: Utils: Driver Base: Java, bit-io, cip-client, cip-core, enip-client, enip-core</p> 
+ <p><b>Apache License, Version 2.0: </b>Apache Commons Codec, Apache Commons Lang, AssertJ fluent assertions, Netty/Buffer, Netty/Codec, Netty/Common, Netty/Handler, Netty/Resolver, Netty/Transport, PLC4J: API, PLC4J: Driver: Ethernet/IP, PLC4J: Protocol: Driver-Base: Base, PLC4J: Protocol: Driver-Base: TCP, PLC4J: Protocol: Ethernet/IP, PLC4J: Utils: Driver Base: Java, bit-io, cip-client, cip-core, enip-client, enip-core, org.osgi:osgi.cmpn</p> 
  <p><b>MIT license: </b>Animal Sniffer Annotations</p> 
  <p><b>The Apache Software License, Version 2.0: </b>Apache Groovy, Byte Buddy (without dependencies), Byte Buddy Java agent, FindBugs-jsr305, Guava InternalFutureFailureAccess and InternalFutures, Guava ListenableFuture only, Guava: Google Core Libraries for Java, J2ObjC Annotations</p> 
  <p><b>Eclipse Public License - v 1.0: </b>Logback Classic Module, Logback Core Module</p> 
@@ -1521,8 +1562,8 @@
     <td>Yes</td> 
    </tr> 
    <tr class="b"> 
-    <td>bit-io-1.4.2.jar</td> 
-    <td>33.1 kB</td> 
+    <td>bit-io-1.4.3.jar</td> 
+    <td>33.5 kB</td> 
     <td>45</td> 
     <td>33</td> 
     <td>1</td> 
@@ -1711,7 +1752,7 @@
    </tr> 
    <tr class="a"> 
     <td>plc4j-protocol-driver-base-tcp-0.5.0-SNAPSHOT.jar</td> 
-    <td>6.7 kB</td> 
+    <td>6.8 kB</td> 
     <td>15</td> 
     <td>2</td> 
     <td>1</td> 
@@ -1908,6 +1949,15 @@
     <td>Yes</td> 
    </tr> 
    <tr class="a"> 
+    <td>osgi.cmpn-6.0.0.jar</td> 
+    <td>958.8 kB</td> 
+    <td>934</td> 
+    <td>333</td> 
+    <td>56</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+   </tr> 
+   <tr class="b"> 
     <td>slf4j-api-1.7.25.jar</td> 
     <td>41.2 kB</td> 
     <td>46</td> 
@@ -1916,7 +1966,7 @@
     <td>1.5</td> 
     <td>Yes</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <th>Total</th> 
     <th>Size</th> 
     <th>Entries</th> 
@@ -1925,16 +1975,16 @@
     <th>Java Version</th> 
     <th>Debug Information</th> 
    </tr> 
-   <tr class="a"> 
-    <td>50</td> 
-    <td>22.5 MB</td> 
-    <td>16869</td> 
-    <td>15596</td> 
-    <td>612</td> 
-    <td>1.8</td> 
-    <td>47</td> 
-   </tr> 
    <tr class="b"> 
+    <td>51</td> 
+    <td>23.5 MB</td> 
+    <td>17803</td> 
+    <td>15929</td> 
+    <td>668</td> 
+    <td>1.8</td> 
+    <td>48</td> 
+   </tr> 
+   <tr class="a"> 
     <td>compile: 17</td> 
     <td>compile: 2.9 MB</td> 
     <td>compile: 2265</td> 
@@ -1943,7 +1993,7 @@
     <td>-</td> 
     <td>compile: 17</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>test: 32</td> 
     <td>test: 19.1 MB</td> 
     <td>test: 14185</td> 
@@ -1952,14 +2002,14 @@
     <td>-</td> 
     <td>test: 29</td> 
    </tr> 
-   <tr class="b"> 
-    <td>provided: 1</td> 
-    <td>provided: 471.9 kB</td> 
-    <td>provided: 419</td> 
-    <td>provided: 373</td> 
-    <td>provided: 36</td> 
+   <tr class="a"> 
+    <td>provided: 2</td> 
+    <td>provided: 1.4 MB</td> 
+    <td>provided: 1353</td> 
+    <td>provided: 706</td> 
+    <td>provided: 92</td> 
     <td>-</td> 
-    <td>provided: 1</td> 
+    <td>provided: 2</td> 
    </tr> 
   </tbody> 
  </table> 
