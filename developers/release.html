@@ -296,7 +296,7 @@
     <p>For each new Major and Minor release we create a new branch at the beginning of a code-freeze phase.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>So if currently the project version in develop is <code>0.5.0-SNAPSHOT</code>, we create a branch <code>rel/0.5</code>.</p> 
+    <p>So if currently the project version in develop is <code>0.6.0-SNAPSHOT</code>, we create a branch <code>rel/0.6</code>.</p> 
    </div> 
    <div class="paragraph"> 
     <p>When creating the branch is exactly the moment in which the version in <code>develop</code> is incremented to the next minor version.</p> 
@@ -312,7 +312,7 @@
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/{minor-version} -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox,with-boost,with-logstash -DbranchName=rel/{minor-version} -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -320,7 +320,7 @@
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre>   mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.5 -DautoVersionSubmodules=true</pre> 
+     <pre>   mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.6 -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -328,7 +328,7 @@
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre>   What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.5.1-SNAPSHOT: : 0.6.0-SNAPSHOT</pre> 
+     <pre>   What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) 0.6.1-SNAPSHOT: : 0.7.0-SNAPSHOT</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -338,7 +338,7 @@
     <p>This step now should perform quite quickly as no build and no tests are involved.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/0.5</code> branch is created.</p> 
+    <p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/0.6</code> branch is created.</p> 
    </div> 
   </div> 
   <div class="sect2"> 
@@ -352,7 +352,7 @@
    <div class="listingblock"> 
     <div class="content"> 
      <pre>==============================================================
-(Unreleased) Apache PLC4X 0.6.0-SNAPSHOT
+(Unreleased) Apache PLC4X 0.7.0-SNAPSHOT
 ==============================================================
 
 New Features
@@ -403,32 +403,21 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:prepare -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:prepare -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox,with-boost,with-logstash -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>(The <code>-P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release) In general the plugin will now ask you 3 questions:</p> 
+    <p>(The <code>-P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox,with-boost,with-logstash</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release) In general the plugin will now ask you 3 questions:</p> 
    </div> 
    <div class="olist arabic"> 
     <ol class="arabic"> 
      <li> <p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix)</p> </li> 
-     <li> <p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>release/{release-version}</code> (<code>release/0.5.0</code> in our case)</p> </li> 
-     <li> <p>The next development version (The version present in the pom after the release) (<code>0.6.0</code> in our case)</p> </li> 
+     <li> <p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>release/{release-version}</code> (<code>release/0.6.0</code> in our case)</p> </li> 
+     <li> <p>The next development version (The version present in the pom after the release) (<code>{current-next-bugfix-version}</code> in our case)</p> </li> 
     </ol> 
    </div> 
    <div class="paragraph"> 
     <p>Usually for 1 and 3 the defaults are just fine, make sure the tag name is correct as this usually is different.</p> 
-   </div> 
-   <div class="paragraph"> 
-    <p>We currently have a dependency to a SNAPSHOT dependency in the sandbox module. The release plugin will complain about this and we will not be able to release this way. As this in the sandbox module, we can force the plugin to continue by appending:</p> 
-   </div> 
-   <div class="literalblock"> 
-    <div class="content"> 
-     <pre>-DignoreSnapshots=true</pre> 
-    </div> 
-   </div> 
-   <div class="paragraph"> 
-    <p>However it is important to check that nowhere else SNAPSHOT versions are referenced.</p> 
    </div> 
    <div class="paragraph"> 
     <p>What the plugin now does, is automatically execute the following operations:</p> 
@@ -438,7 +427,7 @@ Bug Fixes
      <li> <p>Check we aren’t referencing any <code>SNAPSHOT</code> dependencies.</p> </li> 
      <li> <p>Update all pom versions to the release version.</p> </li> 
      <li> <p>Run a build with all tests</p> </li> 
-     <li> <p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release release/0.5.0</code>)</p> </li> 
+     <li> <p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release release/0.6.0</code>)</p> </li> 
      <li> <p>Push the commit</p> </li> 
      <li> <p>Tag the commit</p> </li> 
      <li> <p>Update all poms to the next development version.</p> </li> 
@@ -458,7 +447,7 @@ Bug Fixes
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>It is important that the commit with the message "[maven-release-plugin] prepare release release/0.5.0" is tagged with the release tag (in this case release/0.3.0)</p> 
+    <p>It is important that the commit with the message "[maven-release-plugin] prepare release release/0.6.0" is tagged with the release tag (in this case release/0.3.0)</p> 
    </div> 
    <div class="paragraph"> 
     <p>If you check the commit itself, it should mainly consist of version updates like this:</p> 
@@ -587,13 +576,13 @@ Bug Fixes
    <div class="listingblock"> 
     <div class="content"> 
      <pre>   ./KEYS
-   ./0.5.0/
-   ./0.5.0/rc1
-   ./0.5.0/rc1/README
-   ./0.5.0/rc1/RELEASE_NOTES
-   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip
-   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip.asc
-   ./0.5.0/rc1/apache-plc4x-0.5.0-source-release.zip.sha512</pre> 
+   ./0.6.0/
+   ./0.6.0/rc1
+   ./0.6.0/rc1/README
+   ./0.6.0/rc1/RELEASE_NOTES
+   ./0.6.0/rc1/apache-plc4x-0.6.0-source-release.zip
+   ./0.6.0/rc1/apache-plc4x-0.6.0-source-release.zip.asc
+   ./0.6.0/rc1/apache-plc4x-0.6.0-source-release.zip.sha512</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -623,17 +612,17 @@ Bug Fixes
    <div class="listingblock"> 
     <div class="content"> 
      <pre>   E-Mail Topic:
-   [VOTE] Apache PLC4X 0.5.0 RC1
+   [VOTE] Apache PLC4X 0.6.0 RC1
 
    Message:
-   Apache PLC4X 0.5.0 has been staged under [2] and it’s time to vote
+   Apache PLC4X 0.6.0 has been staged under [2] and it’s time to vote
    on accepting it for release. All Maven artifacts are available under [1].
    Voting will be open for 72hr.
 
    A minimum of 3 binding +1 votes and more binding +1 than binding -1
    are required to pass.
 
-   Release tag: release/0.5.0
+   Release tag: release/0.6.0
    Hash for the release tag: {replacethiswiththerealgitcommittag}
 
    Per [3] "Before voting +1 PMC members are required to download
@@ -649,7 +638,7 @@ Bug Fixes
 
 
    [1] https://repository.apache.org/content/repositories/orgapacheplc4x-{somefourdigitnumber}
-   [2] https://dist.apache.org/repos/dist/dev/plc4x/0.5.0/rc1
+   [2] https://dist.apache.org/repos/dist/dev/plc4x/0.6.0/rc1
    [3] https://www.apache.org/dev/release.html#approving-a-release
    [4] https://cwiki.apache.org/confluence/display/PLC4X/Validating+a+staged+Release</pre> 
     </div> 
@@ -660,7 +649,7 @@ Bug Fixes
    <div class="listingblock"> 
     <div class="content"> 
      <pre>   E-Mail Topic:
-   [DISCUSS] Apache PLC4X 0.5.0 RC1
+   [DISCUSS] Apache PLC4X 0.6.0 RC1
 
    Message:
    This is the discussion thread for the corresponding VOTE thread.
@@ -685,7 +674,7 @@ Bug Fixes
    <div class="listingblock"> 
     <div class="content"> 
      <pre>    E-Mail Topic:
-    [RESULT] [VOTE] Apache PLC4X 0.5.0 RC1
+    [RESULT] [VOTE] Apache PLC4X 0.6.0 RC1
 
     Message:
     So, the vote passes with 3 +1 votes by PMC members and one +1 vote by a non PMC member.
@@ -701,9 +690,9 @@ Bug Fixes
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre>   svn move -m "Release Apache PLC4X 0.5.0" \
-       https://dist.apache.org/repos/dist/dev/plc4x/0.5.0/rc1 \
-       https://dist.apache.org/repos/dist/release/plc4x/0.5.0</pre> 
+     <pre>   svn move -m "Release Apache PLC4X 0.6.0" \
+       https://dist.apache.org/repos/dist/dev/plc4x/0.6.0/rc1 \
+       https://dist.apache.org/repos/dist/release/plc4x/0.6.0</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -753,7 +742,7 @@ Bug Fixes
    <div class="listingblock"> 
     <div class="content"> 
      <pre>git checkout master
-git merge release/0.5.0</pre> 
+git merge release/0.6.0</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -761,7 +750,7 @@ git merge release/0.5.0</pre>
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre>git merge -X theirs release/0.5.0</pre> 
+     <pre>git merge -X theirs release/0.6.0</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -785,7 +774,7 @@ git merge release/0.5.0</pre>
    <div class="olist arabic"> 
     <ol class="arabic"> 
      <li> <p>Copy the last release down to <em>Previous Releases</em></p> </li> 
-     <li> <p>Point the download links of the last release to archive, e.g. <code><a href="http://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip" class="bare">http://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip</a></code></p> </li> 
+     <li> <p>Point the download links of the last release to archive, e.g. <code><a href="http://archive.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip" class="bare">http://archive.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip</a></code></p> </li> 
      <li> <p>Add the new Release under <em>Current Releases</em> and change all links. <em>Note: Please add an anchor for the toc</em></p> </li> 
      <li> <p>Update the sections for the changes according to the <em>RELEASE_NOTES</em> from the release <em>Note: Transfer all to ascii-doc notation to ensure correct rendering of the site</em> <em>Also remove the JIRA TICKET ids in Front</em></p> </li> 
     </ol> 
@@ -810,10 +799,10 @@ announce@apache.org
 dev@plc4x.apache.org
 
     E-Mail Topic:
-[ANNOUNCE] Apache PLC4X 0.5.0 released
+[ANNOUNCE] Apache PLC4X 0.6.0 released
 
     Message:
-The Apache PLC4X team is pleased to announce the release of Apache PLC4X 0.5.0
+The Apache PLC4X team is pleased to announce the release of Apache PLC4X 0.6.0
 
 PLC4X is a set of libraries for communicating with industrial programmable
 logic controllers (PLCs) using a variety of protocols but with a shared API.
