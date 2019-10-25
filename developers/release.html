@@ -586,6 +586,15 @@ Bug Fixes
     </div> 
    </div> 
    <div class="paragraph"> 
+    <p>You can generally import the stuff, by preparing a directory structure like above locally and then using <code>svn import</code> to do the importing:</p> 
+   </div> 
+   <div class="listingblock"> 
+    <div class="content"> 
+     <pre>cd ./{current-full-version}
+svn import rc1 https://dist.apache.org/repos/dist/dev/plc4x/{current-full-version}/rc1 -m"Staging of rc1 of PLC4X {current-full-version}"</pre> 
+    </div> 
+   </div> 
+   <div class="paragraph"> 
     <p>The <code>KEYS</code> file contains the PGP public key which belongs to the private key used to sign the release artifacts.</p> 
    </div> 
    <div class="paragraph"> 
