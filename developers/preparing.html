@@ -135,8 +135,8 @@
                 <ul class="dropdown-menu">
                     <li ><a  href="../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
             </ul>
         </li>
             </ul>
@@ -249,7 +249,7 @@
    <p>However when building any of the parts of PLC4X there are some requirements the build is expecting you to have provided.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>In order to build at all you are required to have <code>Java</code> installed on your machine. We have tested the build with Java 8 up to Java 12. If a new version comes out, please give us a little time to handle any related issues, but we’ll probably fix them as soon as possible. However in the past with Oracle’s new release strategy, there have been a few bumps on the road.</p> 
+   <p>In order to build at all you are required to have <code>Java 8</code> installed on your machine. We have tested the build with Java 8 up to Java 13. If a new version comes out, please give us a little time to handle any related issues, but we’ll probably fix them as soon as possible. However in the past with Oracle’s new release strategy, there have been a few bumps on the road.</p> 
   </div> 
   <table class="tableblock frame-all grid-all stretch"> 
    <colgroup> 
@@ -264,7 +264,7 @@
      <td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td> 
     </tr> 
     <tr> 
-     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-java</code></p></td> 
+     <td class="tableblock halign-left valign-top"></td> 
      <td class="tableblock halign-left valign-top"><p class="tableblock">Builds Java API, drivers, integrations, examples</p></td> 
      <td class="tableblock halign-left valign-top"> 
       <div class="content"> 
@@ -326,12 +326,6 @@
         </ul> 
        </div> 
       </div></td> 
-    </tr> 
-    <tr> 
-     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-sandbox</code></p></td> 
-     <td class="tableblock halign-left valign-top"><p class="tableblock">Adds some experimental modules</p></td> 
-     <td class="tableblock halign-left valign-top"> 
-      <div class="content"></div></td> 
     </tr> 
    </tbody> 
   </table> 
@@ -868,7 +862,10 @@ echo 'export PATH="/usr/local/opt/bison/bin:$PATH"' &gt;&gt; ~/.bash_profile</pr
      <p>For Bison, please download the Setup installer version from <a href="http://gnuwin32.sourceforge.net/packages/bison.htm">here</a> (When using the zip version the bison.exe couldn’t find some DLL files) It seems the official 2.4.1 version has issues when installed in a directory which’s path contains spaces. Please make sure you replace the exe with a patched version form <a href="http://marin.jb.free.fr/bison/bison-2.4.1-modified.zip">here</a> (More infos on this issue <a href="https://sourceforge.net/p/gnuwin32/bugs/473/">here</a>)</p> 
     </div> 
     <div class="paragraph"> 
-     <p>Make sure it’s <code>bin</code> directory is added to your systems <code>PATH</code>. Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p> 
+     <p>It seems there are issues if these tools are installed in paths with spaces. So if it is for example installed in the 32 bit <code>Programs (x86)</code> directory, the build will probably fail.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Make sure all tools <code>bin</code> directories are added to your systems <code>PATH</code>. For tools like OpenSSL be sure to add the directory containing the <code>openssl.exe</code> (Usually the root directory). Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -955,8 +952,8 @@ echo 'export PATH="/usr/local/opt/bison/bin:$PATH"' &gt;&gt; ~/.bash_profile</pr
                     <li class="nav-header">Modules</li>
                     <li ><a  href="../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                 </ul>
 
             </div>

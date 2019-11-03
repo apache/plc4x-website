@@ -9,19 +9,19 @@
           
         <head>
     <meta charset="UTF-8" />
-    <title>Apache PLC4X® - About</title>
+    <title>Apache PLC4X® - Dependency Information</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
       <meta http-equiv="content-language" content="en" />
-                                                                <link href="../../css/bootstrap.min.css" rel="stylesheet" />
-                <link href="../../css/docs.css" rel="stylesheet" />
-    <link href="../../css/reflow-skin.css" rel="stylesheet" />
+                                                                <link href="../../../css/bootstrap.min.css" rel="stylesheet" />
+                <link href="../../../css/docs.css" rel="stylesheet" />
+    <link href="../../../css/reflow-skin.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="../../js/styles/default.min.css" />
+    <link rel="stylesheet" href="../../../js/styles/default.min.css" />
 
-    <link href="../../css/lightbox.css" rel="stylesheet" />
-    <link href="../../css/site.css" rel="stylesheet" />
-    <link href="../../css/print.css" rel="stylesheet" media="print" />
+    <link href="../../../css/lightbox.css" rel="stylesheet" />
+    <link href="../../../css/site.css" rel="stylesheet" />
+    <link href="../../../css/print.css" rel="stylesheet" media="print" />
 <script>
           document.addEventListener("DOMContentLoaded", function(event) {
             /* Add an image for promoting Apache events below the right banner */
@@ -31,7 +31,7 @@
           });
         </script>
         </head> <!-- end : head -->
-    <body class="page-index project-plc4x-tools-thrift">
+    <body class="page-dependency-info project-plc4j-hello-integration-iotdb">
 
     <div id="m-top-navbar" class="navbar  navbar-default navbar-fixed-top">
       <div class="container">
@@ -44,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                        <a class="navbar-brand" href="../..">Apache PLC4X</a>
+                        <a class="navbar-brand" href="../../..">Apache PLC4X</a>
         </div> <!-- .navbar-header -->
         <div class="collapse navbar-collapse" id="top-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -53,10 +53,11 @@
                 <ul class="dropdown-menu">
                     <li class="dropdown-submenu ">
 <a  href="project-info.html"  title="Project Information" >Project Information</a>                    <ul class="dropdown-menu">
-                        <li ><a  href="dependency-info.html"  title="Dependency Information" >Dependency Information</a></li>
+                        <li ><a  href="dependencies.html"  title="Dependencies" >Dependencies</a></li>
+                                        <li  class="active" ><a  href=""  title="Dependency Information" >Dependency Information</a></li>
                         <li ><a  href="dependency-management.html"  title="Dependency Management" >Dependency Management</a></li>
                         <li ><a  href="distribution-management.html"  title="Distribution Management" >Distribution Management</a></li>
-                                        <li  class="active" ><a  href=""  title="About" >About</a></li>
+                        <li ><a  href="index.html"  title="About" >About</a></li>
                         <li ><a  href="issue-management.html"  title="Issue Management" >Issue Management</a></li>
                         <li ><a  href="licenses.html"  title="Licenses" >Licenses</a></li>
                         <li ><a  href="mailing-lists.html"  title="Mailing Lists" >Mailing Lists</a></li>
@@ -116,7 +117,14 @@
             </div> <!-- .navbar-header -->
         <div class="collapse navbar-collapse" id="toc-nav-collapse">
           <ul id="toc" class="nav navbar-nav">
-                                                <li class="toplevel"><a href="#_toc_about_tools_thrift" title="About Tools: Thrift">About Tools: Thrift</a></li>
+                                                            <li class="toplevel"><a href="#_toc_dependency_information" title="Dependency Information">Dependency Information</a></li>
+                        <li class="toplevel"><a href="#_toc_apache_maven" title="Apache Maven">Apache Maven</a></li>
+                        <li class="toplevel"><a href="#_toc_apache_buildr" title="Apache Buildr">Apache Buildr</a></li>
+                        <li class="toplevel"><a href="#_toc_apache_ivy" title="Apache Ivy">Apache Ivy</a></li>
+                        <li class="toplevel"><a href="#_toc_groovy_grape" title="Groovy Grape">Groovy Grape</a></li>
+                        <li class="toplevel"><a href="#_toc_gradlegrails" title="Gradle/Grails">Gradle/Grails</a></li>
+                        <li class="toplevel"><a href="#_toc_scala_sbt" title="Scala SBT">Scala SBT</a></li>
+                        <li class="toplevel"><a href="#_toc_leiningen" title="Leiningen">Leiningen</a></li>
           </ul>
         </div>
       </div> <!-- .container -->
@@ -129,10 +137,66 @@
       <div class="body-content">
 <div class="section"> 
  <div class="page-header">
-  <h2 id="_toc_about_tools_thrift">About Tools: Thrift</h2>
+  <h2 id="_toc_dependency_information">Dependency Information</h2>
  </div> 
- <a name="About_Tools:_Thrift"></a> 
- <p>Local build of the Apache Thrift compiler.</p> 
+ <a name="Dependency_Information"></a> 
+ <div class="section"> 
+  <h3 id="_toc_apache_maven">Apache Maven</h3> 
+  <a name="Apache_Maven"></a> 
+  <div class="source"> 
+   <pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x.examples&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-hello-integration-iotdb&lt;/artifactId&gt;
+  &lt;version&gt;0.6.0-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</pre> 
+  </div> 
+ </div> 
+ <div class="section"> 
+  <h3 id="_toc_apache_buildr">Apache Buildr</h3> 
+  <a name="Apache_Buildr"></a> 
+  <div class="source"> 
+   <pre>'org.apache.plc4x.examples:plc4j-hello-integration-iotdb:jar:0.6.0-SNAPSHOT'</pre> 
+  </div> 
+ </div> 
+ <div class="section"> 
+  <h3 id="_toc_apache_ivy">Apache Ivy</h3> 
+  <a name="Apache_Ivy"></a> 
+  <div class="source"> 
+   <pre>&lt;dependency org="org.apache.plc4x.examples" name="plc4j-hello-integration-iotdb" rev="0.6.0-SNAPSHOT"&gt;
+  &lt;artifact name="plc4j-hello-integration-iotdb" type="jar" /&gt;
+&lt;/dependency&gt;</pre> 
+  </div> 
+ </div> 
+ <div class="section"> 
+  <h3 id="_toc_groovy_grape">Groovy Grape</h3> 
+  <a name="Groovy_Grape"></a> 
+  <div class="source"> 
+   <pre>@Grapes(
+@Grab(group='org.apache.plc4x.examples', module='plc4j-hello-integration-iotdb', version='0.6.0-SNAPSHOT')
+)</pre> 
+  </div> 
+ </div> 
+ <div class="section"> 
+  <h3 id="_toc_gradlegrails">Gradle/Grails</h3> 
+  <a name="Gradle.2FGrails"></a> 
+  <div class="source"> 
+   <pre>compile 'org.apache.plc4x.examples:plc4j-hello-integration-iotdb:0.6.0-SNAPSHOT'</pre> 
+  </div> 
+ </div> 
+ <div class="section"> 
+  <h3 id="_toc_scala_sbt">Scala SBT</h3> 
+  <a name="Scala_SBT"></a> 
+  <div class="source"> 
+   <pre>libraryDependencies += "org.apache.plc4x.examples" % "plc4j-hello-integration-iotdb" % "0.6.0-SNAPSHOT"</pre> 
+  </div> 
+ </div> 
+ <div class="section"> 
+  <h3 id="_toc_leiningen">Leiningen</h3> 
+  <a name="Leiningen"></a> 
+  <div class="source"> 
+   <pre>[org.apache.plc4x.examples/plc4j-hello-integration-iotdb "0.6.0-SNAPSHOT"]</pre> 
+  </div> 
+ </div> 
 </div>      </div>
     </div>
   </div> <!-- /row -->
@@ -149,10 +213,11 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">Reports</li>
                                     <li ><a  href="project-info.html"  title="Project Information" >Project Information <i class="glyphicon glyphicon-chevron-down"></i></a>        <ul class="nav nav-list">
-                    <li ><a  href="dependency-info.html"  title="Dependency Information" >Dependency Information</a></li>
+                    <li ><a  href="dependencies.html"  title="Dependencies" >Dependencies</a></li>
+                                    <li  class="active" ><a  href="#"  title="Dependency Information" >Dependency Information</a></li>
                     <li ><a  href="dependency-management.html"  title="Dependency Management" >Dependency Management</a></li>
                     <li ><a  href="distribution-management.html"  title="Distribution Management" >Distribution Management</a></li>
-                                    <li  class="active" ><a  href="#"  title="About" >About</a></li>
+                    <li ><a  href="index.html"  title="About" >About</a></li>
                     <li ><a  href="issue-management.html"  title="Issue Management" >Issue Management</a></li>
                     <li ><a  href="licenses.html"  title="Licenses" >Licenses</a></li>
                     <li ><a  href="mailing-lists.html"  title="Mailing Lists" >Mailing Lists</a></li>
@@ -206,15 +271,15 @@
   <!-- Le javascript
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../js/jquery.min.js"></script>
-  <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../../js/jquery.min.js"></script>
+  <script src="../../../js/bootstrap.min.js"></script>
 
-  <script src="../../js/lightbox.min.js"></script>
+  <script src="../../../js/lightbox.min.js"></script>
 
-  <script src="../../js/reflow-scroll.js"></script>
-	<script src="../../js/highlight.min.js"></script>
-  <script src="../../js/reflow-skin.js"></script>
-    <script src="../../js/anchor.min.js"></script>
+  <script src="../../../js/reflow-scroll.js"></script>
+	<script src="../../../js/highlight.min.js"></script>
+  <script src="../../../js/reflow-skin.js"></script>
+    <script src="../../../js/anchor.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
             anchors.options = {

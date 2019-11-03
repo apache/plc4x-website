@@ -135,8 +135,8 @@
                 <ul class="dropdown-menu">
                     <li ><a  href="../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
             </ul>
         </li>
             </ul>
@@ -195,19 +195,18 @@
  </div> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
-   <p>We are currently using two different CI systems.</p> 
+   <p>We are currently using Apache’s <code>Jenkins</code> as single CI system.</p> 
   </div> 
   <div class="ulist"> 
    <ul> 
     <li> <p>Apache’s Jenkins at: <a href="https://builds.apache.org/view/M-R/job/PLC4X/" class="bare">https://builds.apache.org/view/M-R/job/PLC4X/</a></p> </li> 
-    <li> <p>Travis at: <a href="https://travis-ci.org/apache/plc4x/" class="bare">https://travis-ci.org/apache/plc4x/</a></p> </li> 
    </ul> 
   </div> 
   <div class="paragraph"> 
-   <p>Hereby Apache Jenkins clearly is responsible for running the full testsuite with all integration-tests. Also only jobs on Apache Jenkins are allowed to publish SNAPSHOT versions of the Maven artifacts to Apaches Nexus.</p> 
+   <p>However we might add Travis for automatically building and testing Pull-Requests in the near future.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>Travis integrates perfectly into GitHub. We are using this to auto-check any pull-requests coming in.</p> 
+   <p>Hereby Apache Jenkins' clearly is responsible for running the full testsuite with all integration-tests. Also only jobs on Apache Jenkins are allowed to publish SNAPSHOT versions of the Maven artifacts to <code>Apaches Nexus</code> at: <a href="https://repository.apache.org" class="bare">https://repository.apache.org</a>.</p> 
   </div> 
   <div class="sect2"> 
    <h3 id="_toc_structure_of_the_jenkins_pipeline_build1">Structure of the Jenkins Pipeline build</h3> 
@@ -215,17 +214,38 @@
     <p>We are using the Jenkins <code>multi-branch pipeline plugin</code> to automatically setup build for branches based upon the build definition in the <code>Jenkinsfile</code> in the root of the project.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>In general it decides between building of the <code>master</code> branch and all others.</p> 
+    <p>In general it builds the <code>develop</code> branch and all branches starting with the prefix <code>feature/</code>. However when building the <code>develop</code> branch some additional steps are performed.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>When building <code>master</code> the build not only builds the project itself and runs all tests, it also runs the <code>sonarqube</code> analysis, deploys the artifacts built as well as generates and deploys the website.</p> 
+    <p>When building <code>develop</code> the build not only builds the project itself and runs all tests, it also runs the <code>sonarcloud</code> analysis, deploys the artifacts built to the <code>Apache Nexus</code> as well as generates and deploys the website.</p> 
    </div> 
    <div class="paragraph"> 
     <p>The general structure of the build is as follows:</p> 
    </div> 
-   <div class="imageblock"> 
+   <div class="listingblock"> 
     <div class="content"> 
-     <img src="../images/developers-ci-pipeline.svg" alt="developers ci pipeline" width="2176" height="200" class="img-responsive"> 
+     <pre>Failed to generate image: blockdiag failed: ERROR: got unexpected token: 19,82-19,83: Op '-&gt;'
+
+{
+  Start [shape = beginpoint];
+  Initialization [label = "Initialization"];
+  Cleanup [label = "Cleanup"];
+  Checkout [color = "#068D9D", textcolor="#FFFFFF"];
+  Build [label = "Build"];
+  BuildDevelop [label = "Build develop"];
+  CodeQuality [label = "Code Quality"];
+  Deploy [label = "Deploy"];
+  BuildSite [label = "Build Site"];
+  StageSite [label = "Stage site"];
+  DeploySite [label = "Deploy site"];
+  Finish [shape = endpoint];
+
+  Start -&gt; Initialization -&gt; Cleanup -&gt; Checkout;
+  Checkout -&gt; Build [label = "feature branch"];
+  Build -&gt; Finish;
+  Checkout -&gt; BuildDevelop [label = "develop"];
+  BuildDevelop -&gt; CodeQuality -&gt; Deploy -&gt; BuildSite -&gt; StageSite -&gt; DeploySite; -&gt; Finish;
+}</pre> 
     </div> 
    </div> 
   </div> 
@@ -267,8 +287,8 @@
                     <li class="nav-header">Modules</li>
                     <li ><a  href="../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                 </ul>
 
             </div>

@@ -135,8 +135,8 @@
                 <ul class="dropdown-menu">
                     <li ><a  href="../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
             </ul>
         </li>
             </ul>
@@ -312,7 +312,7 @@
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox,with-boost,with-logstash -DbranchName=rel/{minor-version} -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/{minor-version} -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -320,7 +320,7 @@
    </div> 
    <div class="listingblock"> 
     <div class="content"> 
-     <pre>   mvn release:branch -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox -DbranchName=rel/0.6 -DautoVersionSubmodules=true</pre> 
+     <pre>   mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/0.6 -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -403,11 +403,11 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:prepare -P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox,with-boost,with-logstash -DautoVersionSubmodules=true</pre> 
+     <pre>mvn release:prepare -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DautoVersionSubmodules=true</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
-    <p>(The <code>-P with-cpp,with-dotnet,with-java,with-proxies,with-python,with-sandbox,with-boost,with-logstash</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release) In general the plugin will now ask you 3 questions:</p> 
+    <p>(The <code>-P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release) In general the plugin will now ask you 3 questions:</p> 
    </div> 
    <div class="olist arabic"> 
     <ol class="arabic"> 
@@ -508,7 +508,7 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn release:perform -DreleaseProfiles=apache-release,with-java,with-proxies</pre> 
+     <pre>mvn release:perform -DreleaseProfiles=apache-release,with-proxies,with-logstash</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -519,7 +519,7 @@ Bug Fixes
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn clean deploy -P apache-release,with-java,with-proxies</pre> 
+     <pre>mvn clean deploy -P apache-release,with-proxies,with-logstash</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -884,8 +884,8 @@ The Apache PLC4X team
                     <li class="nav-header">Modules</li>
                     <li ><a  href="../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                 </ul>
 
             </div>

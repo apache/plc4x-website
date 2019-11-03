@@ -9,7 +9,7 @@
           
         <head>
     <meta charset="UTF-8" />
-    <title>Apache PLC4X® - Source Code Management</title>
+    <title>Apache PLC4X® - Project Plugin Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
       <meta http-equiv="content-language" content="en" />
@@ -31,7 +31,7 @@
           });
         </script>
         </head> <!-- end : head -->
-    <body class="page-scm project-interop-server">
+    <body class="page-plugin-management project-plc4j-hello-integration-iotdb">
 
     <div id="m-top-navbar" class="navbar  navbar-default navbar-fixed-top">
       <div class="container">
@@ -61,9 +61,9 @@
                         <li ><a  href="issue-management.html"  title="Issue Management" >Issue Management</a></li>
                         <li ><a  href="licenses.html"  title="Licenses" >Licenses</a></li>
                         <li ><a  href="mailing-lists.html"  title="Mailing Lists" >Mailing Lists</a></li>
-                        <li ><a  href="plugin-management.html"  title="Plugin Management" >Plugin Management</a></li>
+                                        <li  class="active" ><a  href=""  title="Plugin Management" >Plugin Management</a></li>
                         <li ><a  href="plugins.html"  title="Plugins" >Plugins</a></li>
-                                        <li  class="active" ><a  href=""  title="Source Code Management" >Source Code Management</a></li>
+                        <li ><a  href="scm.html"  title="Source Code Management" >Source Code Management</a></li>
                         <li ><a  href="summary.html"  title="Summary" >Summary</a></li>
                     </ul>
                 </li>
@@ -117,15 +117,7 @@
             </div> <!-- .navbar-header -->
         <div class="collapse navbar-collapse" id="toc-nav-collapse">
           <ul id="toc" class="nav navbar-nav">
-                                                <li class="toplevel"><a href="#_toc_overview" title="Overview">Overview</a></li>
-                        <li class="divider-vertical"></li>
-                        <li class="toplevel"><a href="#_toc_web_browser_access" title="Web Browser Access">Web Browser Access</a></li>
-                        <li class="divider-vertical"></li>
-                        <li class="toplevel"><a href="#_toc_anonymous_access" title="Anonymous Access">Anonymous Access</a></li>
-                        <li class="divider-vertical"></li>
-                        <li class="toplevel"><a href="#_toc_developer_access" title="Developer Access">Developer Access</a></li>
-                        <li class="divider-vertical"></li>
-                        <li class="toplevel"><a href="#_toc_access_from_behind_a_firewall" title="Access from Behind a Firewall">Access from Behind a Firewall</a></li>
+                                                <li class="toplevel"><a href="#_toc_project_plugin_management" title="Project Plugin Management">Project Plugin Management</a></li>
           </ul>
         </div>
       </div> <!-- .container -->
@@ -138,39 +130,220 @@
       <div class="body-content">
 <div class="section"> 
  <div class="page-header">
-  <h2 id="_toc_overview">Overview</h2>
+  <h2 id="_toc_project_plugin_management">Project Plugin Management</h2>
  </div> 
- <a name="Overview"></a> 
- <p>This project uses <a class="externalLink" href="https://git-scm.com/">Git</a> to manage its source code. Instructions on Git use can be found at <a class="externalLink" href="https://git-scm.com/documentation">https://git-scm.com/documentation</a>.</p> 
-</div> 
-<div class="section"> 
- <h2 id="_toc_web_browser_access">Web Browser Access</h2> 
- <a name="Web_Browser_Access"></a> 
- <p>The following is a link to a browsable version of the source repository:</p> 
- <div class="source"> 
-  <pre><a class="externalLink" href="https://github.com/apache/plc4x/plc4j/plc4j-utils/interop-server">https://github.com/apache/plc4x/plc4j/plc4j-utils/interop-server</a></pre> 
- </div> 
-</div> 
-<div class="section"> 
- <h2 id="_toc_anonymous_access">Anonymous Access</h2> 
- <a name="Anonymous_Access"></a> 
- <p>The source can be checked out anonymously from Git with this command (See <a class="externalLink" href="https://git-scm.com/docs/git-clone">https://git-scm.com/docs/git-clone</a>):</p> 
- <div class="source"> 
-  <pre>$ git clone https://gitbox.apache.org/repos/asf/plc4x.git</pre> 
- </div> 
-</div> 
-<div class="section"> 
- <h2 id="_toc_developer_access">Developer Access</h2> 
- <a name="Developer_Access"></a> 
- <p>Only project developers can access the Git tree via this method (See <a class="externalLink" href="https://git-scm.com/docs/git-clone">https://git-scm.com/docs/git-clone</a>).</p> 
- <div class="source"> 
-  <pre>$ git clone https://gitbox.apache.org/repos/asf/plc4x.git</pre> 
- </div> 
-</div> 
-<div class="section"> 
- <h2 id="_toc_access_from_behind_a_firewall">Access from Behind a Firewall</h2> 
- <a name="Access_from_Behind_a_Firewall"></a> 
- <p>Refer to the documentation of the SCM used for more information about access behind a firewall.</p> 
+ <a name="Project_Plugin_Management"></a> 
+ <table border="0" class="bodyTable table table-striped table-hover"> 
+  <thead> 
+   <tr class="a"> 
+    <th>GroupId</th> 
+    <th>ArtifactId</th> 
+    <th>Version</th> 
+   </tr> 
+  </thead> 
+  <tbody> 
+   <tr class="b"> 
+    <td>com.buschmais.jqassistant</td> 
+    <td><a class="externalLink" href="http://jqassistant.org/">jqassistant-maven-plugin</a></td> 
+    <td>1.6.0</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.antlr</td> 
+    <td><a class="externalLink" href="http://www.antlr.org/antlr4-maven-plugin">antlr4-maven-plugin</a></td> 
+    <td>4.7.2</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.felix</td> 
+    <td><a class="externalLink" href="http://felix.apache.org/components/bundle-plugin/">maven-bundle-plugin</a></td> 
+    <td>4.2.1</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/plugins/maven-antrun-plugin/">maven-antrun-plugin</a></td> 
+    <td>1.8</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-assembly-plugin/">maven-assembly-plugin</a></td> 
+    <td>3.1.1</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/plugins/maven-changelog-plugin/">maven-changelog-plugin</a></td> 
+    <td>2.3</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-clean-plugin/">maven-clean-plugin</a></td> 
+    <td>3.1.0</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-compiler-plugin/">maven-compiler-plugin</a></td> 
+    <td>3.7.0</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-dependency-plugin/">maven-dependency-plugin</a></td> 
+    <td>3.1.1</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/plugins/maven-deploy-plugin/">maven-deploy-plugin</a></td> 
+    <td>2.8.2</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/plugins/maven-docck-plugin/">maven-docck-plugin</a></td> 
+    <td>1.1</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-ear-plugin/">maven-ear-plugin</a></td> 
+    <td>3.0.1</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/enforcer/maven-enforcer-plugin">maven-enforcer-plugin</a></td> 
+    <td>1.4.1</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/surefire/maven-failsafe-plugin/">maven-failsafe-plugin</a></td> 
+    <td>2.22.2</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/plugins/maven-gpg-plugin/">maven-gpg-plugin</a></td> 
+    <td>1.6</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-help-plugin/">maven-help-plugin</a></td> 
+    <td>3.1.0</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/plugins/maven-install-plugin/">maven-install-plugin</a></td> 
+    <td>2.5.2</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-invoker-plugin/">maven-invoker-plugin</a></td> 
+    <td>3.1.0</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-jar-plugin/">maven-jar-plugin</a></td> 
+    <td>3.1.0</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-javadoc-plugin/">maven-javadoc-plugin</a></td> 
+    <td>3.0.1</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugin-tools/maven-plugin-plugin">maven-plugin-plugin</a></td> 
+    <td>3.5.2</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-project-info-reports-plugin/">maven-project-info-reports-plugin</a></td> 
+    <td>3.0.0</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/maven-release/maven-release-plugin/">maven-release-plugin</a></td> 
+    <td>2.5.3</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/plugins/maven-remote-resources-plugin/">maven-remote-resources-plugin</a></td> 
+    <td>1.5</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-resources-plugin/">maven-resources-plugin</a></td> 
+    <td>3.1.0</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="http://maven.apache.org/scm/maven-scm-plugin/">maven-scm-plugin</a></td> 
+    <td>1.9.5</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-scm-publish-plugin/">maven-scm-publish-plugin</a></td> 
+    <td>3.0.0</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-shade-plugin/">maven-shade-plugin</a></td> 
+    <td>3.2.1</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-site-plugin/">maven-site-plugin</a></td> 
+    <td>3.7.1</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-source-plugin/">maven-source-plugin</a></td> 
+    <td>3.0.1</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/surefire/maven-surefire-plugin/">maven-surefire-plugin</a></td> 
+    <td>2.22.2</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/surefire/maven-surefire-report-plugin/">maven-surefire-report-plugin</a></td> 
+    <td>2.22.0</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.maven.plugins</td> 
+    <td><a class="externalLink" href="https://maven.apache.org/plugins/maven-war-plugin/">maven-war-plugin</a></td> 
+    <td>3.2.2</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.apache.plc4x.plugins</td> 
+    <td><a class="externalLink" href="https://www.apache.org/plc4x-code-generaton/plc4x-maven-plugin/">plc4x-maven-plugin</a></td> 
+    <td>1.0.0</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.apache.rat</td> 
+    <td><a class="externalLink" href="https://creadur.apache.org/rat/apache-rat-plugin/">apache-rat-plugin</a></td> 
+    <td>0.13</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.codehaus.mojo</td> 
+    <td><a class="externalLink" href="http://www.mojohaus.org/buildnumber-maven-plugin/buildnumber-maven-plugin">buildnumber-maven-plugin</a></td> 
+    <td>1.4</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.codehaus.mojo</td> 
+    <td><a class="externalLink" href="http://www.mojohaus.org/clirr-maven-plugin/clirr-maven-plugin">clirr-maven-plugin</a></td> 
+    <td>2.8</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.jacoco</td> 
+    <td><a class="externalLink" href="http://jacoco-maven-plugin">jacoco-maven-plugin</a></td> 
+    <td>0.8.5</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.owasp</td> 
+    <td><a class="externalLink" href="https://github.com/jeremylong/DependencyCheck.git/dependency-check-maven">dependency-check-maven</a></td> 
+    <td>5.0.0-M1</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>org.sonarsource.scanner.maven</td> 
+    <td><a class="externalLink" href="http://sonarsource.github.io/sonar-scanner-maven/">sonar-maven-plugin</a></td> 
+    <td>3.6.0.1398</td> 
+   </tr> 
+  </tbody> 
+ </table> 
 </div>      </div>
     </div>
   </div> <!-- /row -->
@@ -195,9 +368,9 @@
                     <li ><a  href="issue-management.html"  title="Issue Management" >Issue Management</a></li>
                     <li ><a  href="licenses.html"  title="Licenses" >Licenses</a></li>
                     <li ><a  href="mailing-lists.html"  title="Mailing Lists" >Mailing Lists</a></li>
-                    <li ><a  href="plugin-management.html"  title="Plugin Management" >Plugin Management</a></li>
+                                    <li  class="active" ><a  href="#"  title="Plugin Management" >Plugin Management</a></li>
                     <li ><a  href="plugins.html"  title="Plugins" >Plugins</a></li>
-                                    <li  class="active" ><a  href="#"  title="Source Code Management" >Source Code Management</a></li>
+                    <li ><a  href="scm.html"  title="Source Code Management" >Source Code Management</a></li>
                     <li ><a  href="summary.html"  title="Summary" >Summary</a></li>
         </ul>
 </li>

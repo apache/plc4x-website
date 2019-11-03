@@ -135,8 +135,8 @@
                 <ul class="dropdown-menu">
                     <li ><a  href="../../../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../../../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../../../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../../../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../../../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
             </ul>
         </li>
             </ul>
@@ -186,13 +186,18 @@
                                 <!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
                                 <li><a href="#_toc_field_types_and_their_syntax1" title="Field Types and their Syntax">Field Types and their Syntax</a></li>
                                 <li class="divider"></li>
-                                              <li><a href="#_toc_const_field1" title="const Field">const Field</a></li>
-                <li><a href="#_toc_reserved_field1" title="reserved Field">reserved Field</a></li>
-                <li><a href="#_toc_field_field1" title="field Field">field Field</a></li>
-                <li><a href="#_toc_array_field1" title="array Field">array Field</a></li>
-                <li><a href="#_toc_optional_field1" title="optional Field">optional Field</a></li>
-                <li><a href="#_toc_implicit_field1" title="implicit Field">implicit Field</a></li>
+                                              <li><a href="#_toc_array_field1" title="array Field">array Field</a></li>
+                <li><a href="#_toc_checksum_field1" title="checksum Field">checksum Field</a></li>
+                <li><a href="#_toc_const_field1" title="const Field">const Field</a></li>
                 <li><a href="#_toc_discriminator_field1" title="discriminator Field">discriminator Field</a></li>
+                <li><a href="#_toc_implicit_field1" title="implicit Field">implicit Field</a></li>
+                <li><a href="#_toc_manualarray_field1" title="manualArray Field">manualArray Field</a></li>
+                <li><a href="#_toc_manual_field1" title="manual Field">manual Field</a></li>
+                <li><a href="#_toc_optional_field1" title="optional Field">optional Field</a></li>
+                <li><a href="#_toc_padding_field1" title="padding Field">padding Field</a></li>
+                <li><a href="#_toc_reserved_field1" title="reserved Field">reserved Field</a></li>
+                <li><a href="#_toc_simple_field1" title="simple Field">simple Field</a></li>
+                <li><a href="#_toc_virtual_field1" title="virtual Field">virtual Field</a></li>
                 <li><a href="#_toc_typeswitch_field1" title="typeSwitch Field">typeSwitch Field</a></li>
                 <li><a href="#_toc_parameters1" title="Parameters">Parameters</a></li>
                             </ul>
@@ -359,98 +364,256 @@
   <div class="sect2"> 
    <h3 id="_toc_field_types_and_their_syntax1">Field Types and their Syntax</h3> 
    <div class="sect3"> 
+    <h4 id="_toc_array_field1">array Field</h4> 
+    <div class="paragraph"> 
+     <p>An <code>array</code> field is exactly what you expect. It generates an field which is not a single-value element but an array or list of elements.</p> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[array {simple-type} {size} '{name}' {'count', 'length', 'terminated'} '{expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[array {complex-type} '{name}' {'count', 'length', 'terminated'} '{expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>Array types can be both simple and complex typed and have a name. An array field must specify the way it’s length is determined as well as an expression defining it’s length. Possible values are: - <code>count</code>: This means that exactly the number of elements are parsed as the <code>expression</code> specifies. - <code>length</code>: In this case a given number of bytes are being read. So if an element has been parsed and there are still bytes left, another element is parsed. - <code>terminated</code>: In this case the parser will continue reading elements until it encounters a termination sequence.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_checksum_field1">checksum Field</h4> 
+    <div class="paragraph"> 
+     <p>A checksum field can only operate on simple types.</p> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[checksum {simple-type} {size} '{name}' '{checksum-expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When parsing a given simple type is parsed and then the result is compared to the value the <code>checksum-expression</code> provides. If they don’t match an exception is thrown.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When serializing, the <code>checksum-expression</code> is evaluated and the result is then output.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>This field doesn’t keep any data in memory.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>See also: - implicit field: A checksum field is similar to an implicit field, however the <code>checksum-expression</code> is evaluated are parsing time and throws an exception if the values don’t match.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
     <h4 id="_toc_const_field1">const Field</h4> 
+    <div class="paragraph"> 
+     <p>A const field simply reads a given simple type and compares to a given reference value.</p> 
+    </div> 
     <div class="literalblock"> 
      <div class="content"> 
       <pre>[const {simple-type} {size} '{name}' '{reference}']</pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>A const field simply reads a given simple type and compares to a given reference value.</p> 
+     <p>When parsing it makes the parser throw an Exception if the parsed value does not match.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>It makes the parser throw an Exception if the value does not match.</p> 
+     <p>When serializing is simply outputs the expected constant.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>This field doesn’t keep any data in memory.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>See also: - implicit field: A const field is similar to an implicit field, however it compares the parsed input to the reference value and throws an exception if the values don’t match.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_discriminator_field1">discriminator Field</h4> 
+    <div class="paragraph"> 
+     <p>Discriminator fields are only used in `discriminatedType`s.</p> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[discriminator {simple-type} {size} '{name}']</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When parsing a discriminator fields result just in being a locally available variable.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When serializing is accesses the discriminated types constants and uses these as output.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>See also: - implicit field: A discriminator field is similar to an implicit field, however doesn’t provide a serialization expression as it uses the discrimination constants of the type it is. - discriminated types</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_implicit_field1">implicit Field</h4> 
+    <div class="paragraph"> 
+     <p>Implicit types are fields that get their value implicitly from the data they contain.</p> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[implicit {simple-type} {size} '{name}' '{serialization-expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When parsing an implicit type is available as a local variable and can be used by other expressions.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When serializing the serialization-expression is executed and the resulting value is output.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>This type of field is generally used for fields that handle numbers of elements or length values as these can be implicitly calculated at serialization time.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>This field doesn’t keep any data in memory.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_manualarray_field1">manualArray Field</h4> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[manualArray {simple-type} {size} '{name}' {'count', 'length', 'terminated'} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[manualArray {complex-type} '{name}' {'count', 'length', 'terminated'} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_manual_field1">manual Field</h4> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[manual {simple-type} {size} '{name}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[manual {complex-type} '{name}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_optional_field1">optional Field</h4> 
+    <div class="paragraph"> 
+     <p>An optional field is a type of field that can also be <code>null</code>.</p> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[optional {simple-type} {size} '{name}' '{optional-expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[optional {complex-type} '{name}' '{optional-expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When parsing the <code>optional-expression</code> is evaluated. If this results in`false` nothing is output, if it evaluates to <code>true</code> it is serialized as a <code>simple</code> field.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When serializing, if the field is <code>null</code> nothing is output, if it is not <code>null</code> it is serialized normally.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>See also: - simple field: In general <code>optional</code> fields are identical to <code>simple</code> fields except the ability to be <code>null</code> or be skipped.</p> 
+    </div> 
+   </div> 
+   <div class="sect3"> 
+    <h4 id="_toc_padding_field1">padding Field</h4> 
+    <div class="paragraph"> 
+     <p>A padding field outputs additional padding data, if an expression evaluates to <code>true</code>.</p> 
+    </div> 
+    <div class="literalblock"> 
+     <div class="content"> 
+      <pre>[padding {simple-type} {size} '{pading-value}' '{padding-expression}']</pre> 
+     </div> 
+    </div> 
+    <div class="paragraph"> 
+     <p>When parsing a <code>padding</code> field is just consumed without being made available as property or local valiable if the <code>padding-expression</code> evaluates to true. If it doesn’t, it is just skipped.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>This field doesn’t keep any data in memory.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="_toc_reserved_field1">reserved Field</h4> 
+    <div class="paragraph"> 
+     <p>Reserved fields are very similar to <code>const</code> fields, however they don’t throw exceptions, but instead log messages if the values don’t match.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>The reason for this is that in general reserved fields have the given value until they start to be used.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>If the field starts to be used this shouldn’t break existing applications, but it should raise a flag as it might make sense to update the drivers.</p> 
+    </div> 
     <div class="literalblock"> 
      <div class="content"> 
       <pre>[reserved {simple-type} {size} '{name}' '{reference}']</pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>In general this field type behaves exactly the same way as the <code>const</code> field, but with the difference, that it doesn’t throw an Exception if the reference is not matched, but instead allows to log the value.</p> 
+     <p>When parsing the values is parsed and the result is compared to the reference value. If the values don’t match, a log message is sent.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>This is used in order to detect <code>reserved</code> fields in some protocols, where the manufacturer defined the field to be a given value, but with the option to use it in the future.</p> 
+     <p>This field doesn’t keep any data in memory.</p> 
     </div> 
     <div class="paragraph"> 
-     <p>This way the application will not break in the future if devices start using the field and it informs us that we should probably have a look at what the new values mean.</p> 
+     <p>See also: - <code>const</code> field</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_toc_field_field1">field Field</h4> 
+    <h4 id="_toc_simple_field1">simple Field</h4> 
+    <div class="paragraph"> 
+     <p>Simple fields are the most common types of fields. A <code>simple</code> field directly mapped to a normally typed field.</p> 
+    </div> 
     <div class="literalblock"> 
      <div class="content"> 
-      <pre>[field {simple-type} {size} '{name}']</pre> 
+      <pre>[simple {simple-type} {size} '{name}']</pre> 
      </div> 
     </div> 
     <div class="literalblock"> 
      <div class="content"> 
-      <pre>[field {complex-type} '{name}']</pre> 
+      <pre>[simple {complex-type} '{name}']</pre> 
      </div> 
     </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="_toc_array_field1">array Field</h4> 
-    <div class="literalblock"> 
-     <div class="content"> 
-      <pre>[arrayField {simple-type} {size} '{name}' {'count' or 'length'} '{count or length expression}']</pre> 
-     </div> 
+    <div class="paragraph"> 
+     <p>When parsing, the given type is parsed (can’t be <code>null</code>) and saved in the corresponding model instance’s property field.</p> 
     </div> 
-    <div class="literalblock"> 
-     <div class="content"> 
-      <pre>[arrayField {complex-type} '{name}' {'count' or 'length'} '{count or length expression}']</pre> 
-     </div> 
+    <div class="paragraph"> 
+     <p>When serializing it is serialized normally.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
-    <h4 id="_toc_optional_field1">optional Field</h4> 
+    <h4 id="_toc_virtual_field1">virtual Field</h4> 
+    <div class="paragraph"> 
+     <p>Virtual fields have no impact on the input or output. They simply result in creating artificial get-methods in the generated model classes.</p> 
+    </div> 
     <div class="literalblock"> 
      <div class="content"> 
-      <pre>[optionalField {simple-type} {size} '{name}' '{optional-expression}']</pre> 
+      <pre>[virtual {simple-type} {size} '{name}' '{value-expression}']</pre> 
      </div> 
     </div> 
     <div class="literalblock"> 
      <div class="content"> 
-      <pre>[optionalField {complex-type} '{name}' '{optional-expression}']</pre> 
+      <pre>[virtual {complex-type} '{name}' '{value-expression}']</pre> 
      </div> 
     </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="_toc_implicit_field1">implicit Field</h4> 
-    <div class="literalblock"> 
-     <div class="content"> 
-      <pre>[implicit {simple-type} {size} '{name}' '{serialization-expression}']</pre> 
-     </div> 
-    </div> 
-    <div class="literalblock"> 
-     <div class="content"> 
-      <pre>[implicit {complex-type} '{name}' '{serialization-expression}']</pre> 
-     </div> 
-    </div> 
-   </div> 
-   <div class="sect3"> 
-    <h4 id="_toc_discriminator_field1">discriminator Field</h4> 
-    <div class="literalblock"> 
-     <div class="content"> 
-      <pre>[discriminator {simple-type} {size} '{name}']</pre> 
-     </div> 
+    <div class="paragraph"> 
+     <p>Instead of being bound to a property, the return value of a <code>virtual</code> property is created by evaluating the <code>value-expression</code>.</p> 
     </div> 
    </div> 
    <div class="sect3"> 
     <h4 id="_toc_typeswitch_field1">typeSwitch Field</h4> 
+    <div class="paragraph"> 
+     <p>These types of fields can only occur in discriminated types.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>A <code>discriminatedType</code> must contain <strong>exactly one</strong> <code>typeSwitch</code> field, as it defines the sub-types.</p> 
+    </div> 
     <div class="literalblock"> 
      <div class="content"> 
       <pre>[typeSwitch '{arument-1}', '{arument-2}', ...
@@ -466,7 +629,7 @@
      </div> 
     </div> 
     <div class="paragraph"> 
-     <p>A type switch element must contain a list of at least one argument expression.</p> 
+     <p>A type switch element must contain a list of at least one argument expression. Only the last option can stay empty, which results in a default type.</p> 
     </div> 
     <div class="paragraph"> 
      <p>Each sub-type declares a comma-separated list of concrete values.</p> 
@@ -488,6 +651,9 @@
     </div> 
     <div class="paragraph"> 
      <p>The third case in above code-snippet also passes a named attribute to the sub-type. The name must be identical to any argument or named field parsed before the switchType. These arguments are then available for expressions or passing on in the subtypes.</p> 
+    </div> 
+    <div class="paragraph"> 
+     <p>See also: - <code>discriminatedType</code></p> 
     </div> 
    </div> 
    <div class="sect3"> 
@@ -570,8 +736,8 @@
                     <li class="nav-header">Modules</li>
                     <li ><a  href="../../../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../../../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../../../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../../../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../../../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                 </ul>
 
             </div>

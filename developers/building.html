@@ -135,8 +135,8 @@
                 <ul class="dropdown-menu">
                     <li ><a  href="../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
             </ul>
         </li>
             </ul>
@@ -267,17 +267,19 @@
   <div class="sect2"> 
    <h3 id="_toc_building_plc4x_with_maven1">Building PLC4X with Maven</h3> 
    <div class="paragraph"> 
-    <p>In order to build only the parts you are interested in, we have partitioned the build into multiple parts. By enabling these, you add more modules to the build.</p> 
+    <p>In general all modules which are not considered production-ready are located in the <code>sandbox</code> section of the project.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>By not enabling any profile, only the <code>protocols</code> and part of the <code>tools</code> will be built, which is pretty useless.</p> 
+    <p>They are not built per default and are enabled by enabling the <code>with-sandbox</code> Maven profile.</p> 
    </div> 
    <div class="paragraph"> 
-    <p>The following profiles are available:</p> 
+    <p>As especially building the C++, and C# drivers requires building of some third party artifacts and increases build-time dramatically and requires setting up some additional third party tools, we have excluded these parts form the default Maven build.</p> 
+   </div> 
+   <div class="paragraph"> 
+    <p>The following profiles are available (<strong>They have to be enabled additionally to the <code>with-sandbox</code> profile</strong>):</p> 
    </div> 
    <div class="ulist"> 
     <ul> 
-     <li> <p><code>with-java</code>: Builds all Java related modules, integrations and examples</p> </li> 
      <li> <p><code>with-cpp</code>: Builds all C++ related modules, integrations and examples</p> </li> 
      <li> <p><code>with-dotnet</code>: Builds all C# and .Net related modules, integrations and examples</p> </li> 
      <li> <p><code>with-python</code>: Builds all Python related modules, integrations and examples</p> </li> 
@@ -291,13 +293,13 @@
         <div class="title">
           Warning 
         </div> </td> 
-       <td class="content"> All profiles except the <code>with-java</code> typically require some preparation and setup on your development machine, please read the <a href="preparing.html">Preparing your Computer</a> guide for a detailed description on this. </td> 
+       <td class="content"> As these profiles typically require some preparation and setup on your development machine, please read the <a href="preparing.html">Preparing your Computer</a> guide for a detailed description on this. </td> 
       </tr> 
      </tbody> 
     </table> 
    </div> 
    <div class="paragraph"> 
-    <p>Beyond that there is an additional profile <code>with-proxies</code> which will enable additional modules in each of the activated languages. This <code>proxies</code> module, uses Apache Thrift to generate modules for forwarding requests to an <code>interop server</code> which runs somewhere else or on the same machine.</p> 
+    <p>Beyond that there is an additional profile <code>with-proxies</code> which will enable additional modules in each of the activated languages. This <code>proxies</code> module, uses <code>Apache Thrift</code> to generate modules for forwarding requests to an <code>interop server</code> which runs somewhere else or on the same machine.</p> 
    </div> 
    <div class="admonitionblock warning"> 
     <table> 
@@ -317,7 +319,7 @@
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn -P with-java,with-cpp,with-dotnet,with-python,with-proxies,with-sandbox package</pre> 
+     <pre>mvn -P with-sandbox,with-cpp,with-dotnet,with-python,with-proxies install</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -328,7 +330,7 @@
    </div> 
    <div class="literalblock"> 
     <div class="content"> 
-     <pre>mvn -P with-java,with-cpp,with-dotnet,with-python,with-proxies,with-sandbox package -DskipTests</pre> 
+     <pre>mvn -P with-sandbox,with-cpp,with-dotnet,with-python,with-proxies install -DskipTests</pre> 
     </div> 
    </div> 
    <div class="paragraph"> 
@@ -425,8 +427,8 @@
                     <li class="nav-header">Modules</li>
                     <li ><a  href="../plc4x-build-utils/index.html"  title="PLC4X: Build Utils" >PLC4X: Build Utils</a></li>
                     <li ><a  href="../plc4x-protocols/index.html"  title="Protocols" >Protocols</a></li>
-                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                     <li ><a  href="../plc4j/index.html"  title="PLC4J" >PLC4J</a></li>
+                    <li ><a  href="../plc4x-tools/index.html"  title="Tools" >Tools</a></li>
                 </ul>
 
             </div>
