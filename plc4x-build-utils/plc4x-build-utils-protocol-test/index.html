@@ -344,7 +344,9 @@
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="prettyprint highlight"><code data-lang="java">    public static SimpleType parse(ReadBuffer io) throws ParseException {
+      <pre class="prettyprint highlight"><code data-lang="java">    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleTypeIO.class);
+
+    public static SimpleType parse(ReadBuffer io) throws ParseException {
         int startPos = io.getPos();
         int curPos;
 
@@ -378,7 +380,7 @@
         }
         short[] arrTerm = new short[_arrTermList.size()];
         for(int i = 0; i &lt; _arrTermList.size(); i++) {
-            arrTerm[i] = (short) _arrTermList.get(i);
+        // Simple Field (simp)
         short simp = io.readUnsignedShort(8);
 
         // Create the instance
@@ -406,8 +408,7 @@
             for(short element : value.getArrTerm()) {
                 io.writeUnsignedShort(8, ((Number) element).shortValue());
             }
-        }
-        io.writeUnsignedShort(8, ((Number) (simp)).shortValue());</code></pre> 
+        short simp = (short) value.getSimp();</code></pre> 
      </div> 
     </div> 
    </div> 
