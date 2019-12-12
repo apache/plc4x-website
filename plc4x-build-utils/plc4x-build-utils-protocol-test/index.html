@@ -310,8 +310,11 @@
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="prettyprint highlight"><code data-lang="java">    // Properties.
-    private final short[] arrCount;
+      <pre class="prettyprint highlight"><code data-lang="java">    // Constant values.
+    public static final short CON = 0x03;
+
+        this.man = man;
+        this.opt = opt;
         this.simp = simp;
     }
 
@@ -320,8 +323,8 @@
     }
 
     public short[] getArrLen() {
-        return arrLen;
-    }
+    public short getVirt() {
+        return (short) (valueExpression);
     }
 
     @Override
@@ -334,9 +337,7 @@
 
         // Array field
         lengthInBits += 8 * arrLen.length;
-
-        // Array field
-        // A virtual field doesn't have any in- or output.</code></pre> 
+        lengthInBits += 8;</code></pre> 
      </div> 
     </div> 
     <div class="paragraph"> 
@@ -352,7 +353,10 @@
 
         // Array field (arrCount)
         // Count array
-        int _arrCountCount = 5;
+        if(5 &gt; Integer.MAX_VALUE) {
+            throw new ParseException("Array count of " + (5) + " exceeds the maximum allowed count of " + Integer.MAX_VALUE);
+        }
+        int _arrCountCount = (int) 5;
         short[] arrCount = new short[_arrCountCount];
         for(int i = 0; i &lt; _arrCountCount; i++) {
             arrCount[i] = io.readUnsignedShort(8);
@@ -377,9 +381,9 @@
         while(!((boolean) (terminationExpression))) {
             _arrTermList.add(io.readUnsignedShort(8));
 
+            }
         }
-        short[] arrTerm = new short[_arrTermList.size()];
-        for(int i = 0; i &lt; _arrTermList.size(); i++) {
+
         // Simple Field (simp)
         short simp = io.readUnsignedShort(8);
 
@@ -405,10 +409,7 @@
 
         // Array Field (arrTerm)
         if(value.getArrTerm() != null) {
-            for(short element : value.getArrTerm()) {
-                io.writeUnsignedShort(8, ((Number) element).shortValue());
-            }
-        short simp = (short) value.getSimp();</code></pre> 
+        io.writeUnsignedShort(8, ((Number) (short) 0x00).shortValue());</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -464,10 +465,12 @@
 
 package org.apache.plc4x.java.test.readwrite;
 
-
+import org.apache.plc4x.java.test.readwrite.types.*;
 
 import com.fasterxml.jackson.annotation.*;
 import org.apache.plc4x.java.utils.Message;
+
+import java.math.BigInteger;
 
 
 public class SimpleType implements Message {
