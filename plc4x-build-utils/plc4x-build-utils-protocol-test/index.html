@@ -310,9 +310,12 @@
     </div> 
     <div class="listingblock"> 
      <div class="content"> 
-      <pre class="prettyprint highlight"><code data-lang="java">    // Constant values.
-    public static final short CON = 0x03;
+      <pre class="prettyprint highlight"><code data-lang="java">public class SimpleType implements Message {
 
+
+        this.manArrayCount = manArrayCount;
+        this.manArrayLen = manArrayLen;
+        this.manArrayTerm = manArrayTerm;
         this.man = man;
         this.opt = opt;
         this.simp = simp;
@@ -320,9 +323,9 @@
 
     public short[] getArrCount() {
         return arrCount;
+        return simp;
     }
 
-    public short[] getArrLen() {
     public short getVirt() {
         return (short) (valueExpression);
     }
@@ -334,9 +337,6 @@
 
         // Array field
         lengthInBits += 8 * arrCount.length;
-
-        // Array field
-        lengthInBits += 8 * arrLen.length;
         lengthInBits += 8;</code></pre> 
      </div> 
     </div> 
@@ -380,7 +380,7 @@
         List&lt;Short&gt; _arrTermList = new LinkedList&lt;&gt;();
         while(!((boolean) (terminationExpression))) {
             _arrTermList.add(io.readUnsignedShort(8));
-
+                LOGGER.info("Expected constant value " + 0x00 + " but got " + reserved + " for reserved field.");
             }
         }
 
@@ -391,25 +391,24 @@
         return new SimpleType(arrCount, arrLen, arrTerm, manArrayCount, manArrayLen, manArrayTerm, man, opt, simp);
     }
 
-    public static void serialize(WriteBuffer io, SimpleType value) throws ParseException {
+    public static void serialize(WriteBuffer io, SimpleType _value) throws ParseException {
 
         // Array Field (arrCount)
-        if(value.getArrCount() != null) {
-            for(short element : value.getArrCount()) {
+        if(_value.getArrCount() != null) {
+            for(short element : _value.getArrCount()) {
                 io.writeUnsignedShort(8, ((Number) element).shortValue());
             }
         }
 
         // Array Field (arrLen)
-        if(value.getArrLen() != null) {
-            for(short element : value.getArrLen()) {
+        if(_value.getArrLen() != null) {
+            for(short element : _value.getArrLen()) {
                 io.writeUnsignedShort(8, ((Number) element).shortValue());
             }
         }
 
         // Array Field (arrTerm)
-        if(value.getArrTerm() != null) {
-        io.writeUnsignedShort(8, ((Number) (short) 0x00).shortValue());</code></pre> 
+        // Reserved Field</code></pre> 
      </div> 
     </div> 
    </div> 
@@ -468,8 +467,11 @@ package org.apache.plc4x.java.test.readwrite;
 import org.apache.plc4x.java.test.readwrite.types.*;
 
 import com.fasterxml.jackson.annotation.*;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.plc4x.java.utils.Message;
 
+import java.util.Objects;
 import java.math.BigInteger;
 
 
@@ -597,6 +599,63 @@ public class SimpleType implements Message {
         // A virtual field doesn't have any in- or output.
 
         return lengthInBits / 8;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof SimpleType)) {
+            return false;
+        }
+        SimpleType that = (SimpleType) o;
+        return
+            (getArrCount() == that.getArrCount()) &amp;&amp;
+            (getArrLen() == that.getArrLen()) &amp;&amp;
+            (getArrTerm() == that.getArrTerm()) &amp;&amp;
+            (getManArrayCount() == that.getManArrayCount()) &amp;&amp;
+            (getManArrayLen() == that.getManArrayLen()) &amp;&amp;
+            (getManArrayTerm() == that.getManArrayTerm()) &amp;&amp;
+            (getMan() == that.getMan()) &amp;&amp;
+            (getOpt() == that.getOpt()) &amp;&amp;
+            (getSimp() == that.getSimp()) &amp;&amp;
+            true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            getArrCount(),
+            getArrLen(),
+            getArrTerm(),
+            getManArrayCount(),
+            getManArrayLen(),
+            getManArrayTerm(),
+            getMan(),
+            getOpt(),
+            getSimp()
+        );
+    }
+
+    @Override
+    public String toString() {
+        return toString(ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+    public String toString(ToStringStyle style) {
+        return new ToStringBuilder(this, style)
+            .append("arrCount", getArrCount())
+            .append("arrLen", getArrLen())
+            .append("arrTerm", getArrTerm())
+            .append("manArrayCount", getManArrayCount())
+            .append("manArrayLen", getManArrayLen())
+            .append("manArrayTerm", getManArrayTerm())
+            .append("man", getMan())
+            .append("opt", getOpt())
+            .append("simp", getSimp())
+            .append("virt", getVirt())
+            .toString();
     }
 
 }</code></pre> 
