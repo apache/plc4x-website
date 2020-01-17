@@ -207,7 +207,7 @@
     <div class="content"> 
      <pre class="prettyprint highlight"><code>&lt;dependency&gt;
   &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
-  &lt;artifactId&gt;plc4j-protocol-driver-base-test&lt;/artifactId&gt;
+  &lt;artifactId&gt;plc4j-transport-test&lt;/artifactId&gt;
   &lt;version&gt;${current.version}&lt;/version&gt;
   &lt;scope&gt;test&lt;/scope&gt;
 &lt;/dependency&gt;</code></pre> 
@@ -223,7 +223,7 @@
     <div class="content"> 
      <pre class="prettyprint highlight"><code>public interface MockDevice {
 
-    Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt; read(String fieldQuery);
+    Pair&lt;PlcResponseCode, PlcValue&gt; read(String fieldQuery);
 
     PlcResponseCode write(String fieldQuery, Object value);
 
@@ -269,9 +269,9 @@ PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("
     <div class="content"> 
      <pre class="prettyprint highlight"><code>MockDevice mockDevice = new MockDevice() {
 
-    Pair&lt;PlcResponseCode, BaseDefaultFieldItem&gt; read(String fieldQuery) {
+    Pair&lt;PlcResponseCode, PlcValue&gt; read(String fieldQuery) {
         System.out.println("I got a read to " + fieldQuery);
-        return Pair.of(PlcResponseCode.OK, new DefaultStringFieldItem("hello"));
+        return Pair.of(PlcResponseCode.OK, new PlcString("hello"));
     }
 
     PlcResponseCode write(String fieldQuery, Object value) {
@@ -302,7 +302,7 @@ PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("
 connection.setDevice(mockDevice);
 
 // Populate the Mock to avoid a NPE
-when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new DefaultStringFieldItem("hello")));
+when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new PlcString("hello")));
 
 // Some Demo code that uses the same Driver Manager and either the connection from above
 // or at least mock:my-mock-connection as connection string
@@ -330,7 +330,7 @@ PlcDriverManager driverManager = new PlcDriverManager();
 PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("mock:my-mock-connection");
 connection.setDevice(mockDevice);
 // Populate the Mock to avoid a NPE
-when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new DefaultStringFieldItem("hello")));
+when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new PlcString("hello")));
 
 // Some Demo code that uses the same Driver Manager and either the connection from above
 // or at least mock:my-mock-connection as connection string
