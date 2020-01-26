@@ -45,7 +45,7 @@
                 </li>
                     </ul>
         <ul class="nav navbar-nav ml-auto justify-content-end">
-            <li class="nav-item row valign-middle"">
+            <li class="nav-item row valign-middle">
                 <a href="http://www.apache.org/events/current-event.html" class="col"><img src="http://www.apache.org/events/current-event-234x60.png" alt="Apache Events"/></a>
                 <div class="col">
                     <a href="https://www.apache.org/" id="bannerRight"><img src="../images/apache_logo_small.png"  alt="Apache Software Foundation"/></a>
@@ -187,9 +187,9 @@
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="paragraph">
 <p>#Properties
-#Fri Jan 24 20:56:46 UTC 2020
+#Sun Jan 26 17:48:51 UTC 2020
 jmh.version=1.21
-plc4x-code-generation.version=1.1.0
+plc4x-code-generation.version=1.2.0-SNAPSHOT
 commons-codec.version=1.12
 hamcrest.version=1.3
 cmake.url=https\://github.com/Kitware/CMake/releases/download/v3.16.0/cmake-3.16.0-Linux-x86_64.tar.gz
@@ -939,7 +939,11 @@ Note &#8230;&#8203; you will be able to select the alternate sending address if 
                                     Copyright &#169;      2017&#x2013;2020 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
 All rights reserved.<br/>
                     Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
-                                                    </div>
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
             </div>
         </footer>
     </div>
@@ -951,5 +955,22 @@ All rights reserved.<br/>
 <script src="../js/jquery.slim.min.js"></script>
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
 </body>
 </html>
