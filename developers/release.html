@@ -185,110 +185,7 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="paragraph">
-<p>#Properties
-#Tue Feb 11 12:55:37 UTC 2020
-jmh.version=1.21
-plc4x-code-generation.version=1.2.0-SNAPSHOT
-commons-codec.version=1.12
-hamcrest.version=1.3
-cmake.url=https\://github.com/Kitware/CMake/releases/download/v3.16.0/cmake-3.16.0-Linux-x86_64.tar.gz
-gradlew.executable=./gradlew
-metrics-core.version=3.1.2
-gson.version=2.8.5
-lucene.version=8.3.0
-equalsverifier.version=3.0.2
-httpclient.version=4.5.10
-project.build.sourceEncoding=UTF-8
-cmake.root-dir=/home/jenkins/jenkins-slave/workspace/PLC4X_PLC4X_develop/target/cmake-3.16.0-Linux-x86_64
-os.suffix=linux
-project.build.outputTimestamp=2019-11-01T10\:30\:00Z
-logback.version=1.2.3
-sourceReleaseAssemblyDescriptor=source-release
-current-short-version=0.7
-commons-math3.version=3.6.1
-mockito.version=2.24.5
-commons-text.version=1.8
-jna.version=5.3.1
-groovy.version=2.5.8
-thrift.version=0.13.0
-netty.version=4.1.39.Final
-asciidoctorj.diagram.version=1.5.16
-asciidoctorj.version=2.0.0
-java.version=1.8.0_201
-organization.logo=https\://www.apache.org/images/asf_logo_wide_2016.png
-sonar.host.url=https\://builds.apache.org/analysis
-findbugs.version=3.0.1
-commons-lang.version=2.6
-elasticsearch.version=7.5.2
-snakeyaml.version=1.23
-boost.bootstrap.executable=./bootstrap.sh
-boost.build.executable=./b2
-jopt-simple.version=5.0.2
-project.reporting.outputencoding=UTF-8
-current-year=2020
-current-next-minor-version=0.8.0
-boost.url=https\://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz
-joda-time.version=2.10.5
-maven.compiler.target=1.7
-project.reporting.outputEncoding=UTF-8
-current-next-incremental-version=0.7.1
-logstash.version=7.4.0
-owasp-dependency-check.version=5.0.0-M1
-commons-pool2.version=2.8.0
-gpg.useagent=true
-junit.platform.version=1.3.2
-boost.version.underline-short=1_71
-spock.version=1.2-groovy-2.5
-freemarker.version=2.3.28
-surefire.version=2.22.0
-cmake.generator=Unix Makefiles
-pcap4j.version=1.8.2
-asciidoctor.maven.plugin.version=2.0.0-RC.1
-sonar.exclusions=**/generated-sources
-guava.version=27.0.1-jre
-cmake-version=3.16.0
-current-full-version=0.7.0
-thrift.make.executable=make
-commons-beanutils.version=1.9.4
-crc.version=1.0.1
-bouncycastle.version=1.60
-distMgmtSnapshotsName=Apache Development Snapshot Repository
-antlr.version=4.7.2
-spock-reports.version=1.6.1
-commons-configuration2.version=2.6
-maven.version=3.3.3
-arguments=
-slf4j.version=1.7.25
-jserialcom.version=2.5.1
-boost.version.underline=1_71_0
-thrift.compiler.executable=thrift
-xmlunit.version=2.6.3
-thrift.configure.executable=./configure
-cmake.child-dir=bin/cmake
-assertj.version=3.11.1
-commons-io.version=2.6
-distMgmtSnapshotsUrl=https\://repository.apache.org/content/repositories/snapshots
-maven.compiler.source=1.7
-commons-logging.version=1.2
-os.classifier=linux-x86_64
-thrift.bootstrap.executable=./bootstrap.sh
-assembly.tarLongFileMode=posix
-log4j.version=2.11.1
-byte-buddy.version=1.9.10
-junit.jupiter.version=5.5.0
-scala.version=2.12.6
-t-digest.version=3.2
-jackson.version=2.10.0
-commons-lang3.version=3.9
-boost.version=1.71.0
-asm.version=5.0.4
-junit.version=4.12
-commons-collections4.version=4.1
-:imagesdir: ../images/
-:icons: font</p>
-</div>
-<div class="sect1">
+            <div class="sect1">
 <h2 id="releasing_plc4x">Releasing PLC4X</h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -398,6 +295,10 @@ Usually the <code>NOTICE</code> file has to be adjusted.</p>
 This is the version the <code>develop</code> branch will be changed to.</p>
 </div>
 <div class="paragraph">
+<p>In contrast to normal builds, it is important to enable all profiles when creating the branch as only this way will all modules versions be updated.
+Otherwise the non-default modules on develop will reference the old version which will cause problems when building.</p>
+</div>
+<div class="paragraph">
 <p>The parameter <code>autoVersionSubmodules</code> will tell the release plugin to release all modules with the same version.
 Otherwise we would have to define the working copy version for each module.</p>
 </div>
@@ -408,7 +309,7 @@ Otherwise we would have to define the working copy version for each module.</p>
 </div>
 <div class="paragraph">
 <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version.
-So in case of preparing the release branch for <code>0.6.0-SNAPSHOT</code> the command would be the following:</p>
+So in case of preparing the release branch for <code>0.7.0-SNAPSHOT</code> the command would be the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -466,7 +367,7 @@ Bug Fixes
 <table>
 <tr>
 <td class="icon">
-<div class="title">Warning</div>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
 If you find anything here, you will need to pay attention during the release.
@@ -489,6 +390,11 @@ If you find anything here, you will need to pay attention during the release.
 </div>
 <div class="sect2">
 <h3 id="preparing_a_release">Preparing a release</h3>
+<div class="paragraph">
+<p>Same as with creating the branch it is important to enable all profiles when creating the branch as only this way will all modules versions be updated.
+Otherwise the non-default modules on develop will reference the old version which will cause problems when building.
+For people building with some of the additional profiles from the source release will be impossible.</p>
+</div>
 <div class="paragraph">
 <p>As especially when switching a lot between different branches, it is recommended to do a clean checkout of the repository.
 Otherwise a lot of directories can be left over, which would be included in the source-release zip.
@@ -565,7 +471,7 @@ is in the correct state. Please select the release branch and verify the commit 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="release-git-history.png" alt="release git history"/>
+<img src="../images/release-git-history.png" alt="release git history"/>
 </div>
 </div>
 <div class="paragraph">
@@ -576,7 +482,7 @@ is in the correct state. Please select the release branch and verify the commit 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="release-git-diff-prepare-release.png" alt="release git diff prepare release"/>
+<img src="../images/release-git-diff-prepare-release.png" alt="release git diff prepare release"/>
 </div>
 </div>
 <div class="paragraph">
@@ -587,7 +493,7 @@ is in the correct state. Please select the release branch and verify the commit 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="release-git-diff-next-development-iteration.png" alt="release git diff next development iteration"/>
+<img src="../images/release-git-diff-next-development-iteration.png" alt="release git diff next development iteration"/>
 </div>
 </div>
 <div class="paragraph">
@@ -597,7 +503,7 @@ is in the correct state. Please select the release branch and verify the commit 
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 If the commit history doesn&#8217;t look like this, something went wrong.

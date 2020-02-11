@@ -400,53 +400,6 @@ In order to help you waste even more of that, we'll skip documenting anything.</
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="bells_and_whistles">Bells and Whistles</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="making_all_pom_properties_available_to_asciidoctor">Making all pom properties available to asciidoctor</h3>
-<div class="paragraph">
-<p>While trying to automate keeping the content of the release documentation up-to-date, we added a groovy script to automatically calculate some version numbers.
-Unfortunately it wasn&#8217;t possible to use these in asciidoctor using the normal <code>attributes</code> as the values aren&#8217;t set as soon as Maven configures the plugin.</p>
-</div>
-<div class="paragraph">
-<p>We came up with an option to still achieve this:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The <code>groovy-maven-plugin</code> sets the dynamic properties in the <code>provide-custom-properties</code> execution.</p>
-</li>
-<li>
-<p>Then we use the <code>properties-maven-plugin</code> to write all maven properties into a property file <code>target/pom.adoc</code>.</p>
-</li>
-<li>
-<p>As Asciidoctor doesn&#8217;t understand property files, we use the <code>replacer</code> to convert the content into an Asciidoctor property file in the <code>convert-property-to-adoc</code> execution.</p>
-</li>
-<li>
-<p>Now we provide access to the location of this file by setting the <code>pom-adoc</code> attribute.</p>
-</li>
-<li>
-<p>If we now need to access the properties, all we need to do, is to import the <code>pom.adoc</code> file with the following statement:</p>
-<div class="literalblock">
-<div class="content">
-<pre>include::{pom-adoc}[]</pre>
-</div>
-</div>
-</li>
-<li>
-<p>After this all maven properties can be accessed via:</p>
-<div class="literalblock">
-<div class="content">
-<pre>We are currently working on releasing ApachePLC4X {current-full-version}</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
         </main>
         <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
             <div class="row justify-content-md-center" style="font-size: 13px">
