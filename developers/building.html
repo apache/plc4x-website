@@ -270,6 +270,9 @@ But there is a lot of good documentation out there.</p>
 <div class="ulist">
 <ul>
 <li>
+<p><code>with-sandbox</code>: Builds the modules which are not yet considered stable enough to become part of the main distribution</p>
+</li>
+<li>
 <p><code>with-cpp</code>: Builds all C++ related modules, integrations and examples</p>
 </li>
 <li>
@@ -309,11 +312,43 @@ Currently when enabling the <code>with-python</code> module, you are required to
 </table>
 </div>
 <div class="paragraph">
-<p>PLC4X is built by executing the following command (Example for building all modules):</p>
+<p>There are 3 more profiles that allow you to activate additional modules or functionality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>with-docker</code> : Some modules also provide the means to build <code>Docker</code> images. By enabling this profile these images are automatically built too</p>
+</li>
+<li>
+<p><code>with-logstash</code> : Builds the <code>Elastic Logstash</code> integration. Unfortunately Elasic has never released the core libraries publicly so we need to then also build <code>Logstash</code> locally. As soon as these core libraries are officially released in <code>Maven-Central</code>, this profile will be removed again.</p>
+</li>
+<li>
+<p><code>with-boost</code> : Builds a <code>C</code>/<code>C` Library used by both the `Apache Thrift` build as well as the `C</code> drivers. Unfortunately this is an extremely intense build so we have setup the PLC4X build to only require this profile to be activated once. If the resulting artifacts are installed in your <code>Maven-Local-Repo</code>, these will be re-used.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The minimum Apache PLC4X build will build only the <code>Java</code> modules without any experimental modules:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-sandbox,with-cpp,with-dotnet,with-python,with-proxies install</pre>
+<pre>mvn install</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to skip the running of tests (even if this is not encouraged) you can skip them all together.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn install -DskipTests</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All Apache PLC4X modules are built by executing the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn -P with-boost,with-cpp,with-docker,with-dotnet,with-logstash,with-sandbox,with-logstash,with-proxies,with-python,with-sandbox install</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -324,7 +359,7 @@ Currently when enabling the <code>with-python</code> module, you are required to
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-sandbox,with-cpp,with-dotnet,with-python,with-proxies install -DskipTests</pre>
+<pre>mvn -P with-boost,with-cpp,with-docker,with-dotnet,with-logstash,with-sandbox,with-logstash,with-proxies,with-python,with-sandbox install -DskipTests</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -345,22 +380,6 @@ Currently when enabling the <code>with-python</code> module, you are required to
 </div>
 </div>
 <div class="paragraph">
-<p>However this will generate the website for each module inside it&#8217;s <code>target/site</code> directory.
-Opening this in a browser and navigating from pages of one module to another will not work as these links expect a different directory structure.
-In order to create a fully navigatable version of the Website, the following command should be sufficient:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>mvn site site:stage</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will generate an additional <code>target/staging</code> directory which contains the fully functional version.</p>
-</div>
-<div class="paragraph">
-<p>A lot of documentation on Maven suggests to use the <code>site:site</code> goal directly instead of calling the <code>site</code> phase, but in case of PLC4X there is more than just the site generation that has to be executed.</p>
-</div>
-<div class="paragraph">
 <p>This is just a quick-start version of the site generation, for a fully detailed documentation please read the <a href="http://plc4x.apache.org/developers/website.html">Website</a> documentation page.</p>
 </div>
 </div>
@@ -372,7 +391,35 @@ We have tried to keep the number of profiles as low as possible.
 So far there is only one profile.</p>
 </div>
 <div class="sect3">
-<h4 id="debug_pom_profile">debug-pom profile</h4>
+<h4 id="apache_release_profile"><code>apache-release</code> profile</h4>
+<div class="paragraph">
+<p>This profile is automatically enabled on a release-build and it automatically creates some additional artifacts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JavaDoc artifact</p>
+</li>
+<li>
+<p>Sources artifact</p>
+</li>
+<li>
+<p>Source distribution assembly</p>
+</li>
+<li>
+<p>SHA512 checksum files for every artifact</p>
+</li>
+<li>
+<p>PGP signature files for every artifact</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Generally it is not required to enable ths profile unless you are interested in these Artifacts.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="debug_pom_profile"><code>debug-pom</code> profile</h4>
 <div class="paragraph">
 <p>Especially for Maven beginners, it might be difficult to understand why a module builds the way it does.
 Maven contains a lot of concepts to inherit and override settings.</p>
@@ -386,6 +433,24 @@ All Properties are expanded to the value Maven uses.</p>
 </div>
 <div class="paragraph">
 <p>So whenever Maven doesn&#8217;t behave the way you expect it to, just enable this profile and it should help you find out, what&#8217;s going on.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="development_profile"><code>development</code> profile</h4>
+<div class="paragraph">
+<p>This profile enables some extra strict enforcer rules. It is encouraged to activate this profile during development.</p>
+</div>
+<div class="paragraph">
+<p>In the <code>CI Build</code> this profile is enabled.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="skip_prerequisite_check_profile"><code>skip-prerequisite-check</code> profile</h4>
+<div class="paragraph">
+<p>Some times, actually only on the build-server we have encountered random failures of the <code>prerequisite check</code> build step.</p>
+</div>
+<div class="paragraph">
+<p>In order to still be able to build in this case, activating this profile simply disables these checks.</p>
 </div>
 </div>
 </div>
