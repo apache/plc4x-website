@@ -144,7 +144,7 @@
                                 
                                                                     
                                                                 <li class="nav-item">
-                            <a href="../developers/release-validation.html" class="nav-link">Release Validation</a>
+                            <strong class="nav-link">Release Validation</strong>
                             </li>
                                 
                                                                     
@@ -159,7 +159,7 @@
                                 
                                                                     
                                                                 <li class="nav-item">
-                            <strong class="nav-link">VM Access</strong>
+                            <a href="../developers/vm.html" class="nav-link">VM Access</a>
                             </li>
                                 
                                                                     
@@ -191,137 +191,113 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="the_plc4x_project_vm">The PLC4X Project VM</h2>
+<h2 id="validating_a_staged_release">Validating a staged release</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As, especially for the raw socket functionality of PLC4X, our project had higher demands on the infrastructure as other projects.
-Apache Infra kindly provided us with a dedicated VM.</p>
+<p>Note: On MacOS and Linux the first 4 steps can be automated. For details please read the section about tooling after this chapter.</p>
 </div>
-<div class="paragraph">
-<p>This is included as build agent into Apache&#8217;s Jenkins with the label <code>plc4x1</code> and is marked for exclusive usage by our project.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download all staged artifacts under the url specified in the release vote email into a directory we&#8217;ll now call <code>download-dir</code>.</p>
+</li>
+<li>
+<p>Verify the signature is correct:</p>
+<div class="literalblock">
+<div class="content">
+<pre>gpg --verify apache-plc4x-{current-full-version}-source-release.zip.asc apache-plc4x-{current-full-version}-source-release.zip</pre>
 </div>
-<div class="paragraph">
-<p>The host name of this machine is: <code>plc4x-vm.apache.org</code></p>
 </div>
-<div class="paragraph">
-<p>On this machine we can even <code>sudo</code> to perform operations only available to <code>root</code>.</p>
+</li>
+<li>
+<p>Check if the check is successful.</p>
+</li>
+<li>
+<p>Check if the signature references an Apache email address.</p>
+</li>
+<li>
+<p>Verify the SHA512 hashes:</p>
+<div class="literalblock">
+<div class="content">
+<pre>shasum -a512 apache-plc4x-{current-full-version}-source-release.zip</pre>
 </div>
-<div class="paragraph">
-<p>Project members can request access to the machine.</p>
+</div>
+</li>
+<li>
+<p>Unzip the archive:</p>
+<div class="literalblock">
+<div class="content">
+<pre>unzip apache-plc4x-{current-full-version}-source-release.zip</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify the existence of <code>LICENSE</code>, <code>NOTICE, `README</code>, <code>RELEASE_NOTES</code> files in the extracted source bundle.</p>
+</li>
+<li>
+<p>Verify the content of <code>LICENSE</code>, <code>NOTICE</code>, <code>README</code>, <code>RELEASE_NOTES</code> files in the extracted source bundle.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>(Especially pay attention to the year in the <code>NOTICE</code> file if this is the first release of the year)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>[RM] Verify the staged source README, RELEASE_NOTE files correspond to those in the extracted source bundle.</p>
+</li>
+<li>
+<p>[RM] Run RAT externally to ensure there are no surprises.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>TODO: Document this.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Search for <code>SNAPSHOT</code> references:</p>
+<div class="literalblock">
+<div class="content">
+<pre>find . -type f -name 'pom.xml' -exec grep -l "SNAPSHOT" {} \;</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Build the project according to the information in the README.md file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>[RM] Build the project with all <code>with-xyz</code> profiles and tests enabled and an empty maven local repo: by appendng <code>-Dmaven.repo.local=../.m2</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 <div class="sect2">
-<h3 id="requesting_access">Requesting access</h3>
+<h3 id="release_tooling">Release Tooling</h3>
 <div class="paragraph">
-<p>In order to be able to login, users need to add their SSH public key to their Apache ID first.</p>
+<p>In the <code>tools</code> directory we have a little script that can help downloading and checking the hashes and signatures automatically.</p>
 </div>
 <div class="paragraph">
-<p>This is done under the following url: <a href="https://id.apache.org/" class="bare">https://id.apache.org/</a></p>
-</div>
-<div class="paragraph">
-<p>Here just add the content in the follwoing format to one of the <code>SSH Key (authorized_keys line)</code> fields:</p>
+<p>In order to execute this, please change directories into the projects base directory and execute the following command:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDd10ykYAZLxHJVTER71IrrVVpyR8OBdlJd1aVwb67Ts+ueJjzo8ofQKLASaQw9EQOSfprGZW0sfzhepeJvbX0n1IfsRexoyIGlD8WzyX/UoLiRLPHFv+eSGJVlN90x/l+zps+yo3lq6qfuIqkXQQvB4aJBYsYC/jifpMLvx06zaUBPfdWIaGiBgaWbX/59Q0QsSpX5r8tgdA+XLw/8Zg5AbKazuS2Cm/soJCfQQ7km4bd/WtF5R5xvakVbyILMT8Dk9Hs9OfVL/RFGLYqX4bjy5uCTwPBrwlWqFyq1u7JR39i870XNgn+bIeChaZU098BGyBH/cWMGt7bTJQSKxksF2SZAHjt8Ga2Pl+J6MTW6/EPzIYENgvfOBVSlVaz9SlM26nel1+SHDND9dK/4gRNbujbmzHZLfTjMk7oc4R+WPCBIw99CFeShTKHSxhJKz/3KmcmuEHhNRBdMy+xHecr/r/Pax58a9VHXQqHbwES6tvC1gvM2uFSMKoaKtNkME4V7bPLbQcEF8tKz7/gKp6vp1IL0BdDMwZPodFPmbiJzqjvC38A++B5k0GAgWKYPVsenamZviFhRNGjjum/qxBnAF1FjpIocsEA0zQBYvvOPDpKl9KPRZ32ALHztnRfCEwltgnM1Sjinn4zQjxQs5mJBz2rjMGlkSzVjLoSo7khiBQ== my@email-address.com</pre>
+<pre>tools/download_staged_release.sh {current-full-version} 1</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(I just had to copy this line from my <code>~/.ssh/id_rsa.pub</code> file)</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-Note, the Email Address in the end doesn&#8217;t seem to matter, I simply added it for the sake of completeness. So if this doesn&#8217;t match your Apache email, this is not a problem.
-</td>
-</tr>
-</table>
+<p>This will download all the files into a directory: <code>downloaded-plc4x-0.7.01</code>.</p>
 </div>
 <div class="paragraph">
-<p>As soon as that&#8217;s done, access needs to be requested from Apache Infra.</p>
+<p>After that it will calculate the SHA512 hash and compare it with the staged hash.</p>
 </div>
 <div class="paragraph">
-<p>This is done using the Infra Jira at: <a href="https://issues.apache.org/jira" class="bare">https://issues.apache.org/jira</a></p>
-</div>
-<div class="paragraph">
-<p>Here make sure to select the Project <code>Infrastructure (INFRA)</code>.</p>
-</div>
-<div class="paragraph">
-<p>As soon as that&#8217;s handled by the Infra team, you should be ready to log-in on the machine.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="login_to_the_machine">Login to the machine</h3>
-<div class="paragraph">
-<p>Using SSH we should now be able to login to the VM.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>ssh apacheId@plc4x-vm.apache.org</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Be sure to use the username matching your Apache ID or the login will fail.</p>
-</div>
-<div class="paragraph">
-<p>If all wen&#8217;t well you should now be able to login to the machine using your apache user.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="doing_things_as_root">Doing things as <code>root</code></h3>
-<div class="paragraph">
-<p>Apache Infra is great at keeping things safe.
-Providing a sudo password directly would increase the danger of having this intercepted, therefore they are using a tool called <code>opiepasswd</code>.</p>
-</div>
-<div class="paragraph">
-<p>Instead of now entering a password, a challenge is displayed:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>myid@plc4x-vm:~$ sudo apt-get update
-otp-md5 496 pl8230
-Password:</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you now enter your normal password, you&#8217;ll simply get <code>permission denied</code> errors.</p>
-</div>
-<div class="paragraph">
-<p>In order to execute operations as root on the machine, you need to use an opie client.
-As with the latest version of Mac Catalina the existing clients no longer work and using a public web service is a really bad idea, Apache has a service to calculate:
-<a href="https://reference.apache.org/pdf.lua?/committer/opie" class="bare">https://reference.apache.org/pdf.lua?/committer/opie</a></p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>otp-md5 496 pl8230</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>into OPIE client&#8217;s <code>challenge</code> field.</p>
-</div>
-<div class="paragraph">
-<p>In the <code>password</code> field you provide your Apache LDAP password.</p>
-</div>
-<div class="paragraph">
-<p>When hitting enter or clicking on <code>Compute</code> the tool should automatically generate a response.</p>
-</div>
-<div class="paragraph">
-<p>Now all you need to do is copy &amp; paste that as password into your SSH client session.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="required_software">Required software</h3>
-<div class="paragraph">
-<p>For being able to build the charts and graphics as part of the site generation, we need to add some additional packages:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo apt-get install python-seqdiag
-sudo apt-get install python-nwdiag</pre>
-</div>
+<p>Last not least it will validate the PGP key and print out some information on it.</p>
 </div>
 </div>
 </div>

@@ -144,6 +144,11 @@
                                 
                                                                     
                                                                 <li class="nav-item">
+                            <a href="../developers/release-validation.html" class="nav-link">Release Validation</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
                             <a href="../developers/release-build-tools.html" class="nav-link">Releasing Build-Tools</a>
                             </li>
                                 
@@ -777,6 +782,26 @@ This is done by moving them inside the Apache SVN.</p>
 </div>
 <div class="paragraph">
 <p>All release artifacts released to the Apache release repo, will automatically be synced to Maven central.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="add_the_version_to_the_doap_file">Add the version to the DOAP file</h3>
+<div class="paragraph">
+<p>Now that the release is out, in the <code>develop</code> branch, update the <code>DOAP</code> file for plc4x.</p>
+</div>
+<div class="paragraph">
+<p>This is found at:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>src/site/resources-filtered/plc4x-doap.rdf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please add the just released version to the top of the versions.</p>
+</div>
+<div class="paragraph">
+<p>This file is needed for Apache&#8217;s tooling to automatically keep track of project release activity and we use this internally too to automatically update the documentation to always reference the latest released version automatically.</p>
 </div>
 </div>
 <div class="sect2">
