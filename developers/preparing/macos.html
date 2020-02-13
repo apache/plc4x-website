@@ -89,7 +89,7 @@
                             <a href="../../developers/preparing/linux.html" class="nav-link">Liunx</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../developers/preparing/macos.html" class="nav-link">Mac OS</a>
+                            <strong class="nav-link">Mac OS</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../developers/preparing/windows.html" class="nav-link">Windows</a>
@@ -147,7 +147,7 @@
                             <a href="../../developers/infrastructure/sonar.html" class="nav-link">Code Analysis</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Wiki</strong>
+                            <a href="../../developers/infrastructure/wiki.html" class="nav-link">Wiki</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../developers/infrastructure/vm.html" class="nav-link">Build VM</a>
@@ -206,16 +206,162 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="wiki">WIKI</h2>
+<h2 id="mac_os">Mac OS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We use Apache&#8217;s Confluence instance as Wiki, however most information is generally managed on this website.</p>
+<p>Most libraries on Mac are installed using <code>Homebrew</code>.</p>
 </div>
 <div class="paragraph">
-<p>This service is available here:</p>
+<p>Make sure <code>Homebrew</code> ist installed in order to install most of these.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="git">Git</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git --version</pre>
+</div>
 </div>
 <div class="paragraph">
-<p><a href="https://cwiki.apache.org/confluence/display/PLC4X" class="bare">https://cwiki.apache.org/confluence/display/PLC4X</a></p>
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>In order to install it, please execute the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>brew install git</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="libpcap">LibPCAP</h3>
+
+</div>
+<div class="sect2">
+<h3 id="gcc">gcc</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>gcc --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>It seems macOS comes with a version of gcc which is good enough for our usecases.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="g">g++</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>g++ --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>It seems macOS comes with a version of g++ which is good enough for our usecases.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dotnet">dotnet</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>dotnet --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Microsoft is offering an installer for MacOS which is available from <a href="https://dotnet.microsoft.com/download/dotnet-core/2.2">here</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="python">python</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>python --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get a version of 2.7 or higher reported, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>In order to install it, please execute the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>brew install python@2</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bison">bison</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>python --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get a version above 2.3 output, you don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>macOS comes with a pre-installed version of bison, however this version is 2.3 and hereby too old.
+So you need to update to a more recent version:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>brew install bison
+brew link bison --force
+echo 'export PATH="/usr/local/opt/bison/bin:$PATH"' &gt;&gt; ~/.bash_profile</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Be sure to reboot or at least restart your IDE or commandline in order for the changes to become effective.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="flex">flex</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>flex --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>It seems macOS comes with a version of flex which is good enough for our usecases.</p>
+</div>
 </div>
 </div>
 </div>

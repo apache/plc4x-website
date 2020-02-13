@@ -92,7 +92,7 @@
                             <a href="../../developers/preparing/macos.html" class="nav-link">Mac OS</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../developers/preparing/windows.html" class="nav-link">Windows</a>
+                            <strong class="nav-link">Windows</strong>
                             </li>
                             </ul>
             </li>
@@ -147,7 +147,7 @@
                             <a href="../../developers/infrastructure/sonar.html" class="nav-link">Code Analysis</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Wiki</strong>
+                            <a href="../../developers/infrastructure/wiki.html" class="nav-link">Wiki</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../developers/infrastructure/vm.html" class="nav-link">Build VM</a>
@@ -206,16 +206,207 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="wiki">WIKI</h2>
+<h2 id="windows">Windows</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="git">Git</h3>
 <div class="paragraph">
-<p>We use Apache&#8217;s Confluence instance as Wiki, however most information is generally managed on this website.</p>
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git --version</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>This service is available here:</p>
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://cwiki.apache.org/confluence/display/PLC4X" class="bare">https://cwiki.apache.org/confluence/display/PLC4X</a></p>
+<p>In order to install it, please download end execute the installer from <a href="https://git-scm.com/download/win">here</a> and make sure to have it add the git executable to your systems <code>PATH</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="libpcap">LibPCAP</h3>
+<div class="paragraph">
+<p>A special version of LibPCAP is available for Windows, which is called WinPCAP.
+It is available from <a href="https://www.winpcap.org/">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>However this is a based on a very old version (1.0) of LibPCAP and in order to read PCAPNG files we require a libpcap version 1.1.0 or greater.
+A patched windows version can be found here: <a href="https://sourceforge.net/projects/winpcap413-176/" class="bare">https://sourceforge.net/projects/winpcap413-176/</a>
+(At this location is a patched version based on libpcap 1.7.4)</p>
+</div>
+<div class="paragraph">
+<p>So in order to install things correctly:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>install the version WinPCP from above location.</p>
+</li>
+<li>
+<p>Then download the patched version from the sourceforge link and unpack it somewhere.</p>
+</li>
+<li>
+<p>After that copy bin\x64\wpcap.dll from archive to \Windows\System32</p>
+</li>
+<li>
+<p>Copy bin\wpcap.dll from archive to \Windows\SysWOW64</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After this all should be working.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gcc">gcc</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>gcc --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>On windows we will be using something called WinBuilds, which is sort of a package consisting of a typical build environment consisting of multiple build tools. So please look at the WinBuilds chapter at the end of the Windows section.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="g">g++</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>g++ --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>On windows we will be using something called WinBuilds, which is sort of a package consisting of a typical build environment consisting of multiple build tools. So please look at the WinBuilds chapter at the end of the Windows section.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dotnet">dotnet</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>dotnet --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Usually this is already installed on Windows machines.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="python">python</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>python --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>You can get Python from <a href="https://www.python.org/downloads/release/python-2716/">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>Make sure directory containing <code>python.exe</code> is added to your systems <code>PATH</code>.
+Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bison">bison</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bison --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>For Bison, please download the Setup installer version from <a href="http://gnuwin32.sourceforge.net/packages/bison.htm">here</a> (When using the zip version the bison.exe couldn&#8217;t find some DLL files)
+It seems the official 2.4.1 version has issues when installed in a directory which&#8217;s path contains spaces. Please make sure you replace the exe with a patched version form <a href="http://marin.jb.free.fr/bison/bison-2.4.1-modified.zip">here</a>
+(More infos on this issue <a href="https://sourceforge.net/p/gnuwin32/bugs/473/">here</a>)</p>
+</div>
+<div class="paragraph">
+<p>It seems there are issues if these tools are installed in paths with spaces.
+So if it is for example installed in the 32 bit <code>Programs (x86)</code> directory, the build will probably fail.</p>
+</div>
+<div class="paragraph">
+<p>Make sure all tools <code>bin</code> directories are added to your systems <code>PATH</code>.
+For tools like OpenSSL be sure to add the directory containing the <code>openssl.exe</code> (Usually the root directory).
+Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="flex">flex</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>flex --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Please download the Flex compiler from <a href="http://gnuwin32.sourceforge.net/packages/flex.htm">here</a> (Ideally download the binary zip distribution)</p>
+</div>
+<div class="paragraph">
+<p>Make sure it&#8217;s <code>bin</code> directory is added to your systems <code>PATH</code>.
+Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="winbuilds">WinBuilds</h3>
+<div class="paragraph">
+<p>He have tested WinBuilds with the bundle found <a href="http://win-builds.org/doku.php/download_and_installation_from_windows">here</a>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+Please use the installer. When using the zip distribution and manually adding that to the <code>PATH</code> the build will fail without a log output as some binaries can&#8217;t find some of the DLL files.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When running the installer, make sure to select the options:
+- Native Windows
+- x86_64
+Not quite sure which elements are really needed, better just install all of them.</p>
+</div>
+<div class="paragraph">
+<p>Make sure it&#8217;s <code>bin</code> directory is added to your systems <code>PATH</code>, however the installer should have taken care of this.
+Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p>
+</div>
 </div>
 </div>
 </div>

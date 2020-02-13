@@ -83,7 +83,7 @@
                                 
                                                                     
                                                                 <li class="nav-item">
-                            <a href="../../developers/preparing/index.html" class="nav-link">Preparing your Computer</a>
+                            <strong class="nav-link">Preparing your Computer</strong>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
                             <a href="../../developers/preparing/linux.html" class="nav-link">Liunx</a>
@@ -147,7 +147,7 @@
                             <a href="../../developers/infrastructure/sonar.html" class="nav-link">Code Analysis</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Wiki</strong>
+                            <a href="../../developers/infrastructure/wiki.html" class="nav-link">Wiki</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../developers/infrastructure/vm.html" class="nav-link">Build VM</a>
@@ -206,16 +206,127 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="wiki">WIKI</h2>
+<h2 id="preparing_your_computer">Preparing your Computer</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We use Apache&#8217;s Confluence instance as Wiki, however most information is generally managed on this website.</p>
+<p>Building a project like Apache PLC4X on multiple target operating-systems is quite a challenge, but I think we managed to make it as simple as possible.</p>
 </div>
 <div class="paragraph">
-<p>This service is available here:</p>
+<p>However when building any of the parts of PLC4X there are some requirements the build is expecting you to have provided.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://cwiki.apache.org/confluence/display/PLC4X" class="bare">https://cwiki.apache.org/confluence/display/PLC4X</a></p>
+<p>In order to build at all you are required to have <code>Java 8</code> installed on your machine.
+We have tested the build with Java 8 up to Java 13.
+If a new version comes out, please give us a little time to handle any related issues, but we&#8217;ll probably fix them as soon as possible.
+However in the past with Oracle&#8217;s new release strategy, there have been a few bumps on the road.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Requirements</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Builds Java API, drivers, integrations, examples</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Git</p>
+</li>
+<li>
+<p>LibPCAP (Optional)</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-cpp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Builds C++ API, drivers, integrations, examples</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>gcc</p>
+</li>
+<li>
+<p>g++</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-dotnet</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Builds C# and .Net API, drivers, integrations, examples</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>dotnet</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-python</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Builds Python API, drivers, integrations, examples</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>python (2.7)</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-proxies</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds proxy modules to each enabled language</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>bison</p>
+</li>
+<li>
+<p>flex</p>
+</li>
+<li>
+<p>python</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">`with-docker `</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds building of Docker images</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>docker</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following pages will describe how to provide these requirements sorted by operating system.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="linux.html">Linux</a></p>
+</li>
+<li>
+<p><a href="macos.html">Mac OS</a></p>
+</li>
+<li>
+<p><a href="windows.html">Windows</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>

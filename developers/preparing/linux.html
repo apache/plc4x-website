@@ -86,7 +86,7 @@
                             <a href="../../developers/preparing/index.html" class="nav-link">Preparing your Computer</a>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
-                            <a href="../../developers/preparing/linux.html" class="nav-link">Liunx</a>
+                            <strong class="nav-link">Liunx</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../developers/preparing/macos.html" class="nav-link">Mac OS</a>
@@ -147,7 +147,7 @@
                             <a href="../../developers/infrastructure/sonar.html" class="nav-link">Code Analysis</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Wiki</strong>
+                            <a href="../../developers/infrastructure/wiki.html" class="nav-link">Wiki</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../developers/infrastructure/vm.html" class="nav-link">Build VM</a>
@@ -206,16 +206,248 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="wiki">WIKI</h2>
+<h2 id="linux">Linux</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="git">Git</h3>
 <div class="paragraph">
-<p>We use Apache&#8217;s Confluence instance as Wiki, however most information is generally managed on this website.</p>
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git --version</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>This service is available here:</p>
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://cwiki.apache.org/confluence/display/PLC4X" class="bare">https://cwiki.apache.org/confluence/display/PLC4X</a></p>
+<p>Apt-based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install git</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yum based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo yum install git</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="libpcap">LibPCAP</h3>
+<div class="paragraph">
+<p>Apt-based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install libpcap-dev</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yum based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo yum install libpcap-devel</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gcc">gcc</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>gcc --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Apt-based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install gcc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yum based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo yum install gcc</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="g">g++</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>g++ --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Apt-based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install g++</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yum based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo yum install g++</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dotnet">dotnet</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>dotnet --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Microsoft has documented what is needed to install <code>.Net SDK</code> <a href="https://dotnet.microsoft.com/download/linux-package-manager/rhel/sdk-2.2.203">here</a></p>
+</div>
+<div class="paragraph">
+<p>For Ubuntu this would be:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install dotnet-sdk-2.2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For other distributions, please select the distribution in the drop-down menu and follow the instructions there.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="python">python</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>python --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get a version of 2.7 or higher reported, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Apt-based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install python-dev</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yum based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>yum install gcc
+cd /usr/src
+wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
+tar xzf Python-2.7.10.tgz
+cd Python-2.7.10
+./configure
+make altinstall</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bison">bison</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bison --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get a version above 2.3 output, you don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Apt-based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install bison</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yum based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo yum install bison-devel</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="flex">flex</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>flex --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Apt-based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install flex</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yum based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo yum install flex</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
