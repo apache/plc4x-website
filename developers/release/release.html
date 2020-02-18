@@ -209,6 +209,103 @@
 <h2 id="releasing_plc4x">Releasing PLC4X</h2>
 <div class="sectionbody">
 <div class="sect2">
+<h3 id="tldr">TL/DR</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Please be sure to execute the release with a Java version between 1.8 and 11 or the Karaf feature tests will not run.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Update the <code>RELEASE_NOTES</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Check year in <code>NOTICE</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Create release branch:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/{current-short-version} -DautoVersionSubmodules=true</pre>
+</div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Add a new section to the <code>RELEASE_NOTES</code> on <code>develop</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Prepare the release:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   mvn release:prepare -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DautoVersionSubmodules=true</pre>
+</div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Perform the release:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   mvn release:perform -DreleaseProfiles=apache-release,with-boost,with-proxies,with-logstash</pre>
+</div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Close the staging repo on <code>Nexus</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Stage the release artifacts in <code>SVN</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Vote on the mailing list</p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Move RC to the release section of <code>SVN</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Remove old releases in <code>SVN</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Release staging repo on <code>Nexus</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Add the version to the DOAP file on <code>develop</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Update Download site</p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Update Jira</p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Merge back release version to <code>master</code> branch</p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Send announce email</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="preparing_your_system_for_being_able_to_release">Preparing your system for being able to release</h3>
 <div class="paragraph">
 <p>As part of the release process, Maven will upload maven release artifacts to a so-called staging repository.</p>

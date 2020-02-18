@@ -220,60 +220,81 @@ On MacOS and Linux the first 4 steps can be automated. For details please read t
 </tr>
 </table>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist checklist">
+<ul class="checklist">
 <li>
-<p>Download all staged artifacts under the url specified in the release vote email into a directory we&#8217;ll now call <code>download-dir</code>.</p>
+<p><input type="checkbox" data-item-complete="0"/> Download all staged artifacts under the url specified in the release vote email into a directory we&#8217;ll now call <code>download-dir</code>.</p>
 </li>
 <li>
-<p>Verify the signature is correct:
+<p><input type="checkbox" data-item-complete="0"/> Verify the signature is correct:
 Additional Apache tutorial on how to verify downloads can be found <a href="http://www.apache.org/info/verification.html">here</a>.</p>
-<div class="listingblock">
-<div class="content">
-<pre>gpg --verify apache-plc4x-0.7.0-source-release.zip.asc apache-plc4x-#0.7.0-source-release.zip</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Check if the check is successful.</p>
-</li>
-<li>
-<p>Check if the signature references an Apache email address.</p>
-</li>
-<li>
-<p>Verify the SHA512 hashes:</p>
-<div class="listingblock">
-<div class="content">
-<pre>shasum -a512 apache-plc4x-0.7.0-source-release.zip</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Unzip the archive:</p>
-<div class="listingblock">
-<div class="content">
-<pre>unzip apache-plc4x-0.7.0-source-release.zip</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Verify the existence of <code>LICENSE</code>, <code>NOTICE, `README</code>, <code>RELEASE_NOTES</code> files in the extracted source bundle.</p>
-</li>
-<li>
-<p>Verify the content of <code>LICENSE</code>, <code>NOTICE</code>, <code>README</code>, `RELEASE_NOTES files in the extracted source bundle.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>(Especially pay attention to the year in the <code>NOTICE</code> file if this is the first release of the year)</p>
 </li>
 </ul>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre>gpg --verify apache-plc4x-{current-full-version}-source-release.zip.asc apache-plc4x-#{current-full-version}-source-release.zip</pre>
+</div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Check if the check is successful.</p>
 </li>
 <li>
-<p>[RM] Verify the staged source README, RELEASE_NOTE files correspond to those in the extracted source bundle.</p>
+<p><input type="checkbox" data-item-complete="0"/> Check if the signature references an Apache email address.</p>
 </li>
 <li>
-<p>[RM] Run RAT externally to ensure there are no surprises.</p>
+<p><input type="checkbox" data-item-complete="0"/> Verify the SHA512 hashes:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>shasum -a512 apache-plc4x-{current-full-version}-source-release.zip</pre>
+</div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Unzip the archive:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>unzip apache-plc4x-{current-full-version}-source-release.zip</pre>
+</div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Verify the existence of <code>LICENSE</code>, <code>NOTICE</code>, <code>README</code>, <code>RELEASE_NOTES</code> files in the extracted source bundle.</p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Verify the content of <code>LICENSE</code>, <code>NOTICE</code>, <code>README</code>, <code>RELEASE_NOTES</code> files in the extracted source bundle.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+(Especially pay attention to the year in the <code>NOTICE</code> file if this is the first release of the year)
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> [RM] Verify the staged source README, RELEASE_NOTE files correspond to those in the extracted source bundle.</p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"/> [RM] Run RAT externally to ensure there are no surprises.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -283,24 +304,24 @@ Additional Apache tutorial on how to verify downloads can be found <a href="http
 </div>
 </li>
 <li>
-<p>Search for <code>SNAPSHOT</code> references:</p>
+<p><input type="checkbox" data-item-complete="0"/> Search for <code>SNAPSHOT</code> references:</p>
+</li>
+</ul>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre>find . -type f -name 'pom.xml' -exec grep -l "SNAPSHOT" {} \;</pre>
 </div>
 </div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Build the project according to the information in the README.md file.</p>
 </li>
 <li>
-<p>Build the project according to the information in the README.md file.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>[RM] Build the project with all <code>with-xyz</code> profiles and tests enabled and an empty maven local repo: by appendng <code>-Dmaven.repo.local=../.m2</code>.</p>
+<p><input type="checkbox" data-item-complete="0"/> [RM] Build the project with all <code>with-xyz</code> profiles and tests enabled and an empty maven local repo: by appendng <code>-Dmaven.repo.local=../.m2</code>.</p>
 </li>
 </ul>
-</div>
-</li>
-</ol>
 </div>
 <div class="sect2">
 <h3 id="release_tooling">Release Tooling</h3>
