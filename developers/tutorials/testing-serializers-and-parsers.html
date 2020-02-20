@@ -115,7 +115,7 @@
                             <a href="../../developers/tutorials/writing-driver.html" class="nav-link">Writing Drivers</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../developers/tutorials/testing-serializers-and-parsers.html" class="nav-link">Testing Drivers</a>
+                            <strong class="nav-link">Testing Drivers</strong>
                             </li>
                             </ul>
             </li>
@@ -172,7 +172,7 @@
                             <a href="../../developers/release/release.html" class="nav-link">Releasing</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Validating</strong>
+                            <a href="../../developers/release/validation.html" class="nav-link">Validating</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../developers/release/build-tools.html" class="nav-link">Releasing Build-Tools</a>
@@ -208,146 +208,185 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="validating_a_staged_release">Validating a staged release</h2>
+            <h1>Testing Serializers and Parsers</h1>
+<div id="preamble">
 <div class="sectionbody">
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-On MacOS and Linux the first 4 steps can be automated. For details please read the section about tooling after this chapter.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Currently the build generates the serializers and parsers from a provided <code>mspec</code> specification.</p>
 </div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Download all staged artifacts under the url specified in the release vote email into a directory we&#8217;ll now call <code>download-dir</code>.</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Verify the signature is correct:
-Additional Apache tutorial on how to verify downloads can be found <a href="http://www.apache.org/info/verification.html">here</a>.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>A typical full round-trip test for the model, parsers and serializers would look as follows:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>gpg --verify apache-plc4x-{current-full-version}-source-release.zip.asc apache-plc4x-#{current-full-version}-source-release.zip</pre>
-</div>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Check if the check is successful.</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Check if the signature references an Apache email address.</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Verify the SHA512 hashes:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>shasum -a512 apache-plc4x-{current-full-version}-source-release.zip</pre>
-</div>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Unzip the archive:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>unzip apache-plc4x-{current-full-version}-source-release.zip</pre>
-</div>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Verify the existence of <code>LICENSE</code>, <code>NOTICE</code>, <code>README</code>, <code>RELEASE_NOTES</code> files in the extracted source bundle.</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Verify the content of <code>LICENSE</code>, <code>NOTICE</code>, <code>README</code>, <code>RELEASE_NOTES</code> files in the extracted source bundle.</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-(Especially pay attention to the year in the <code>NOTICE</code> file if this is the first release of the year)
-</td>
-</tr>
-</table>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><input type="checkbox" data-item-complete="0"/> [RM] Verify the staged source README, RELEASE_NOTE files correspond to those in the extracted source bundle.</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"/> [RM] Run RAT externally to ensure there are no surprises.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>TODO: Document this.</p>
+<p>Starting from a byte array</p>
+</li>
+<li>
+<p>The parser is used to parse the byte array</p>
+</li>
+<li>
+<p>The parsed model instance is compared with an expected model</p>
+</li>
+<li>
+<p>If the expected model matched the expected one the model is serialized back to a byte array</p>
+</li>
+<li>
+<p>The resulting byte array is compared to the original byte array</p>
+</li>
+<li>
+<p>If the byte arrays are identical, the round-trip is regarded ok</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Search for <code>SNAPSHOT</code> references:</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Doing this manually would require a lot of manual object construction and validation, so we created a framework for creating such tests.</p>
+</div>
+<div class="paragraph">
+<p>As XML, no matter what you think about it, allows simple and easy readable descriptions these tests are provided as <code>XML files</code>.</p>
+</div>
+<div class="paragraph">
+<p>All generated model classes allow parsing and serializing to XML via <code>Jackson</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="structure_of_a_test">Structure of a test</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A typical test looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>find . -type f -name 'pom.xml' -exec grep -l "SNAPSHOT" {} \;</pre>
+<pre>  &lt;testcase&gt;
+    &lt;name&gt;Read Input Registers Request&lt;/name&gt;
+    &lt;raw&gt;000000000006ff0408d20002&lt;/raw&gt;
+    &lt;root-type&gt;ModbusTcpADU&lt;/root-type&gt;
+    &lt;parser-arguments&gt;
+      &lt;response&gt;false&lt;/response&gt;
+    &lt;/parser-arguments&gt;
+    &lt;xml&gt;
+      &lt;ModbusTcpADU className="org.apache.plc4x.java.modbus.readwrite.ModbusTcpADU"&gt;
+        &lt;transactionIdentifier&gt;0&lt;/transactionIdentifier&gt;
+        &lt;unitIdentifier&gt;255&lt;/unitIdentifier&gt;
+        &lt;pdu className="org.apache.plc4x.java.modbus.readwrite.ModbusPDUReadInputRegistersRequest"&gt;
+          &lt;startingAddress&gt;2258&lt;/startingAddress&gt;
+          &lt;quantity&gt;2&lt;/quantity&gt;
+        &lt;/pdu&gt;
+      &lt;/ModbusTcpADU&gt;
+    &lt;/xml&gt;
+  &lt;/testcase&gt;</pre>
 </div>
 </div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><input type="checkbox" data-item-complete="0"/> Build the project according to the information in the README.md file.</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"/> [RM] Build the project with all <code>with-xyz</code> profiles and tests enabled and an empty maven local repo: by appendng <code>-Dmaven.repo.local=../.m2</code>.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="release_tooling">Release Tooling</h3>
 <div class="paragraph">
-<p>In the <code>tools</code> directory we have a little script that can help downloading and checking the hashes and signatures automatically.</p>
+<p>As you can see, the <code>name</code> provides a simple human readable name for the test which is used for reporting success and failure.</p>
 </div>
 <div class="paragraph">
-<p>In order to execute this, please change directories into the projects base directory and execute the following command:</p>
+<p>The <code>raw</code> element contains the <code>hex-representation</code> of the <code>binary input</code>.</p>
+</div>
+<div class="paragraph">
+<p>After that the <code>root-type</code> specifies the base type used for parsing this data. In above example the test will use the <code>ModbusTcpADUIO.serialize</code> and <code>ModbusTcpADUIO.parse</code> methods for serializing and parsing.</p>
+</div>
+<div class="paragraph">
+<p>Some parsers require additional parameters for parsing. In above example the Modbus protocol can&#8217;t decide if something is a request or response from the data itself, so we have to pass that information in using a <code>parser-arguments</code> argument.</p>
+</div>
+<div class="paragraph">
+<p>The final element is the <code>xml</code> element, which contains the XML representation of the parsed object.</p>
+</div>
+<div class="paragraph">
+<p>Each test implements exactly the test-strategy sketched above, however for comparing the parsed and the expected model, we use <code>XMLUint</code> to serialize the parsed model to XML and compare that to the given XML in the test-case declaration.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="structure_of_a_testsuite">Structure of a testsuite</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Multiple tests are usually wrapped into a testsuite document.</p>
+</div>
+<div class="paragraph">
+<p>In general this is just a container with a given testsuite <code>name</code> and a number of <code>testcase</code> elements.</p>
+</div>
+<div class="paragraph">
+<p>One important setting however controls the endianness of the protocol in general.</p>
+</div>
+<div class="paragraph">
+<p>This is controlled with a <code>bigEndian</code> attribute in the testsuite root element.</p>
+</div>
+<div class="paragraph">
+<p>An example testsuite document looks as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>tools/download_staged_release.sh 0.7.0 1</pre>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;test:testsuite xmlns:test="https://plc4x.apache.org/schemas/parser-serializer-testsuite.xsd"
+                bigEndian="true"&gt;
+
+  &lt;name&gt;Allen-Bradley DF1&lt;/name&gt;
+
+  &lt;testcase&gt;
+    ...
+  &lt;/testcase&gt;
+
+  &lt;testcase&gt;
+    ...
+  &lt;/testcase&gt;
+
+  &lt;testcase&gt;
+    ...
+  &lt;/testcase&gt;
+
+  &lt;testcase&gt;
+    ...
+  &lt;/testcase&gt;
+
+&lt;/test:testsuite&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the_junit_runner">The Junit runner</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All logic is implemented in the <code>plc4j-utils-test-utils</code> module, so make sure to add the following test-dependency:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4j-utils-test-utils&lt;/artifactId&gt;
+      &lt;version&gt;{project.version}&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will download all the files into a directory: <code>downloaded-plc4x-0.7.01</code>.</p>
+<p>In order to run these tests as part of the build, as a last step we need to create a test-runner class.</p>
 </div>
 <div class="paragraph">
-<p>After that it will calculate the SHA512 hash and compare it with the staged hash.</p>
+<p>This is generally just a hand-full of boilerplate code, telling the test which document to use for testing.</p>
 </div>
 <div class="paragraph">
-<p>Last not least it will validate the PGP key and print out some information on it.</p>
+<p>Following code snippet sort of looks the same for every testsuite:</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre>package org.apache.plc4x.java.modbus;
+
+import org.apache.plc4x.test.parserserializer.ParserSerializerTestsuiteRunner;
+
+public class ModbusIOTest extends ParserSerializerTestsuiteRunner {
+
+    public ModbusIOTest() {
+        super("/testsuite/ModbusTestsuite.xml");
+    }
+
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here the document <code>ModbusTestsuite.xml</code> is located in the directory: <code>src/test/resources/testsuite/</code>.</p>
 </div>
 </div>
 </div>
