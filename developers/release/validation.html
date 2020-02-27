@@ -298,16 +298,18 @@ Additional Apache tutorial on how to verify downloads can be found <a href="http
 </li>
 <li>
 <p><input type="checkbox" data-item-complete="0"/> [RM] Run RAT externally to ensure there are no surprises.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>TODO: Document this.</p>
 </li>
 </ul>
 </div>
-</li>
+<div class="listingblock">
+<div class="content">
+<pre>java -jar apache-rat-0.13.jar apache-plc4x-{current-full-version}-source-release.zip &gt; rat.log</pre>
+</div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
 <li>
-<p><input type="checkbox" data-item-complete="0"/> Search for <code>SNAPSHOT</code> references:</p>
+<p><i class="fa fa-square-o"></i> Search for <code>SNAPSHOT</code> references:</p>
 </li>
 </ul>
 </div>
@@ -325,6 +327,29 @@ Additional Apache tutorial on how to verify downloads can be found <a href="http
 <p><input type="checkbox" data-item-complete="0"/> [RM] Build the project with all <code>with-xyz</code> profiles and tests enabled and an empty maven local repo: by appendng <code>-Dmaven.repo.local=../.m2</code>.</p>
 </li>
 </ul>
+</div>
+<div class="sect2">
+<h3 id="using_rat">Using RAT</h3>
+<div class="paragraph">
+<p>Even if we are using RAT to ensure sources have headers in place, still the project can contain exclusions that hide things from the check.</p>
+</div>
+<div class="paragraph">
+<p>The only way to avoid missing important files is by running <code>RAT</code> externally.</p>
+</div>
+<div class="paragraph">
+<p>If you haven&#8217;t got it, yet please download it form <a href="https://creadur.apache.org/rat/download_rat.cgi">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>Also do I like to run RAT against the zip archive containing the source release as this way you avoid the problem of eventually scanning the binaries produced by the build (If you run RAT after building, it will complain about every jar and ever class file).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>java -jar apache-rat-0.13.jar apache-plc4x-0.7.0-source-release.zip > rat.log</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By piping the result into a text file gives you the chance to investigate the content more easily.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="release_tooling">Release Tooling</h3>
