@@ -232,13 +232,74 @@
 </div>
 <div class="sect2">
 <h3 id="current_releases">Current Releases</h3>
+<div class="sect3 6 0">
+<h4 id="release-0">0.6.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip">source release</a> [ <a href="https://www.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://www.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.6.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="paragraph">
+<p>This is the last release of PLC4X with the "handwritten" drivers.
+This Minor release will thus receive updates and fixes until
+most users have switched to 0.7 and above (with generated drivers).</p>
+</div>
+<div class="paragraph">
+<p>If you are using the S7 Driver you should update to this Version
+as the critical (memory leak) bug PLC4X-163 is fixed.</p>
+</div>
+<div class="sect4">
+<h5 id="new_features">New Features</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>PLC4X-168 A shorter S7 Field Syntax is Introduced.
+This release contains no furter features and mostly stabilization.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="incompatible_changes">Incompatible changes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Moved the C++, C# and Python drivers into the <code>sandbox</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="bug_fixes">Bug Fixes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Fixed Promise Chain for InternalPlcWriteRequest</p>
+</li>
+<li>
+<p>PLC4X-45 Add float support to Modbus Protocol</p>
+</li>
+<li>
+<p>PLC4X-164 Fix wrong NOT FOUND exception in OPC UA Driver</p>
+</li>
+<li>
+<p>PLC4X-166 Fixed Download Page</p>
+</li>
+<li>
+<p>PLC4X-163 Fixed Netty ByteBuf Leaks for S7 Driver</p>
+</li>
+<li>
+<p>PLC4X-158 Added Warning if no Pooled Driver is used for Scraper</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="previous_releases">Previous Releases</h3>
 <div class="sect3 5 0">
 <h4 id="release-0">0.5.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip">source release</a> [ <a href="https://www.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://www.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
 <p>This is the first release containing our new generated drivers (AB-ETH)</p>
 </div>
 <div class="sect4">
-<h5 id="new_features">New Features</h5>
+<h5 id="new_features_2">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -268,11 +329,11 @@
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes">Incompatible changes</h5>
+<h5 id="incompatible_changes_2">Incompatible changes</h5>
 
 </div>
 <div class="sect4">
-<h5 id="bug_fixes">Bug Fixes</h5>
+<h5 id="bug_fixes_2">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -294,16 +355,13 @@
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="previous_releases">Previous Releases</h3>
 <div class="sect3 4 0">
 <h4 id="release-0">0.4.0 Official <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
 <p>This is the first release of Apache PLC4X as top-level project.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_2">New Features</h5>
+<h5 id="new_features_3">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -322,7 +380,7 @@
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_2">Incompatible changes</h5>
+<h5 id="incompatible_changes_3">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -332,7 +390,7 @@
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_2">Bug Fixes</h5>
+<h5 id="bug_fixes_3">Bug Fixes</h5>
 
 </div>
 </div>
@@ -342,7 +400,7 @@
 <div class="sect3">
 <h4 id="0_3_1_incubating_official_source_release_sha512_asc">0.3.1 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_3">New Features</h5>
+<h5 id="new_features_4">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -352,7 +410,7 @@
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_3">Incompatible changes</h5>
+<h5 id="incompatible_changes_4">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -362,7 +420,7 @@
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_3">Bug Fixes</h5>
+<h5 id="bug_fixes_4">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -384,7 +442,7 @@
 <div class="sect3 3 0">
 <h4 id="release-0">0.3.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_4">New Features</h5>
+<h5 id="new_features_5">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -403,7 +461,7 @@ runtime environment</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_4">Incompatible changes</h5>
+<h5 id="incompatible_changes_5">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -420,7 +478,7 @@ a <code>plc4j-protocol-{name}</code> you now need to change this to
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_4">Bug Fixes</h5>
+<h5 id="bug_fixes_5">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
