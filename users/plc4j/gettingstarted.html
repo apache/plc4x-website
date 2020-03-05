@@ -322,8 +322,10 @@ So if a protocol doesn&#8217;t support subscription based communication it is ou
 </ul>
 </div>
 <div class="paragraph">
-<p>Therefore we use metadata to check programmatically, if a given feature is available:</p>
+<p>Therefore we use metadata to check programmatically, if a given feature is available.</p>
 </div>
+<div class="sect3">
+<h4 id="reading_data">Reading Data</h4>
 <div class="listingblock">
 <div class="content">
 <pre>// Check if this connection support reading of data.
@@ -335,12 +337,12 @@ if (!plcConnection.getMetadata().canRead()) {
 </div>
 <div class="paragraph">
 <p>As soon as you have ensured that a feature is available, you are ready to build a first request.
-This is done by getting a <code>PlcRequestBuilder</code>:</p>
+This is done by getting a <code>PlcReadRequest.Builder</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>// Create a new read request:
-// - Give the single item requested the alias name "value"
+// - Give the single item requested an alias name
 PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
 builder.addItem("value-1", "%Q0.4:BOOL");
 builder.addItem("value-2", "%Q0:BYTE");
@@ -458,6 +460,176 @@ For convenience the response object has single-argument methods for accessing th
 <p>PLC4X provides getters and setters for a wide variety of Java types and automatically handles the type conversion.
 However when for example trying to get a long-value as a byte and the long-value exceeds the range supported by the smaller type, a <code>RuntimeException</code> of type <code>PlcIncompatibleDatatypeException</code>.
 In order to avoid causing this exception to be thrown, however there are <code>isValid{TypeName}</code> methods that you can use to check if the value is compatible.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="writing_data">Writing Data</h4>
+<div class="paragraph">
+<p>In general the structure of code for writing data is extremely similar to that of reading data.</p>
+</div>
+<div class="paragraph">
+<p>So first it is advisable to check if this connection is even able to write data:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>// Check if this connection support writing of data.
+if (!plcConnection.getMetadata().canWrite()) {
+  logger.error("This connection doesn't support writing.");
+  return;
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As soon as we are sure that we can write, we create a new <code>PlcWriteRequest.Builder</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>// Create a new write request:
+// - Give the single item requested an alias name
+// - Pass in the data you want to write (for arrays, pass in one value for every element)
+PlcWriteRequest.Builder builder = plcConnection.writeRequestBuilder();
+builder.addItem("value-1", "%Q0.4:BOOL", true);
+builder.addItem("value-2", "%Q0:BYTE", (byte) 0xFF);
+builder.addItem("value-4", "%DB.DB1.4:INT[3]", 7, 23, 42);
+PlcWriteRequest writeRequest = builder.build();</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The same way read requests are sent to the PLC by issuing the <code>execute</code> method on the request object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>CompletableFuture&lt;? extends PlcWriteResponse&gt; asyncResponse = writeRequest.execute();
+asyncResponse.whenComplete((response, throwable) -&gt; {
+  ... process the response ...
+});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You could here also use the blocking option:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>PlcWriteResponse response = writeRequest.execute().get();</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As we don&#8217;t have to process the data itself, for the write request, it&#8217;s enough to simply check the return code for each field.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>for (String fieldName : response.getFieldNames()) {
+    if(response.getResponseCode(fieldName) == PlcResponseCode.OK) {
+        logger.info("Value[" + fieldName + "]: updated");
+    }
+    // Something went wrong, to output an error message instead.
+    else {
+        logger.error("Error[" + fieldName + "]: " + response.getResponseCode(fieldName).name());
+    }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="subscribing_to_data">Subscribing to Data</h4>
+<div class="paragraph">
+<p>Subscribing to data can be considered similar to reading data, at least the subscription itself if very similar to reading of data.</p>
+</div>
+<div class="paragraph">
+<p>First of all we first have to check if the connection supports this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>// Check if this connection support subscribing to data.
+if (!plcConnection.getMetadata().canSubscribe()) {
+    logger.error("This connection doesn't support subscribing.");
+    return;
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we&#8217;ll create the subscription request.</p>
+</div>
+<div class="paragraph">
+<p>The main difference is that while reading there is only one form how you could read, with subscriptions there are different forms of subscriptons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Change of state (Event is sent as soon as a value changes)</p>
+</li>
+<li>
+<p>Cyclic (The Event is sent in regular cyclic intervals)</p>
+</li>
+<li>
+<p>Event (The Event is usually explicitly sent form the PLC as a signal)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Therefore instead of using a normal <code>addItem</code>, there are tree different methods as you can see in the following examples.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>// Create a new subscription request:
+// - Give the single item requested an alias name
+PlcSubscriptionRequest.Builder builder = plcConnection.subscriptionRequestBuilder();
+builder.addChangeOfStateField("value-1", "{some address}");
+builder.addCyclicField("value-2", "{some address}", Duration.ofMillis(1000));
+builder.addEventField("value-3", "{some alarm address}");
+PlcSubscriptionRequest subscriptionRequest = builder.build();</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The <code>addCyclicField</code> method requires a third parameter <code>duration</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The request itself is executed exactly the same way the read and write operations are executed, using the <code>execute</code> method, therefore just the short synchronous version here (The async version works just as good)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>PlcSubscriptionResponse response = subscriptionRequest.execute().get();</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now comes the little more tricky part, as subscriptions are always asynchronous, we have to register a callback for the connection to call as soon as there is news available:</p>
+</div>
+<div class="paragraph">
+<p>In general you can&#8217;t say how many of your subscribed fields will be available in every callback so it is double important to check or iterate over the field names.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>for (String subscriptionName : response.getFieldNames()) {
+    final PlcSubscriptionHandle subscriptionHandle = response.getSubscriptionHandle(subscriptionName);
+    subscriptionHandle.register(plcSubscriptionEvent -&gt; {
+        for (String fieldName : plcSubscriptionEvent.getFieldNames()) {
+            System.out.println(plcSubscriptionEvent.getPlcValue(fieldName));
+        }
+    });
+}</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Here there currently is a double iteration over the field names, this will probably change soon.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
