@@ -150,9 +150,6 @@
                                             <li class="nav-item">
                             <strong class="nav-link">PCAP Replay</strong>
                             </li>
-                                            <li class="nav-item">
-                            <a href="../../users/transports/test.html" class="nav-link">Test</a>
-                            </li>
                             </ul>
             </li>
                                 
@@ -260,7 +257,104 @@
             <div class="sect1">
 <h2 id="pcap_replay">PCAP Replay</h2>
 <div class="sectionbody">
-
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 55.5556%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>pcap</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p>PCAP file replay</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-transport-pcap-replay&lt;/artifactId&gt;
+  &lt;version&gt;{current-last-released-version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transport Syntax:</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>{pcap-path}</pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path to the PCAP or PCAPNG file containing the network recording.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>replay-speed-factor</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Numeric value for changing the replay speed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1 = Normal speed (default)</p>
+</li>
+<li>
+<p>0 = Maximum speed</p>
+</li>
+<li>
+<p>0.5 = Half speed</p>
+</li>
+<li>
+<p>2 = Double speed</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>loop</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should the replay start at the beginning of the file as soon as the end is reached?</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>true = Automatically start again</p>
+</li>
+<li>
+<p>false = Stop at the end (default)</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
         </main>
