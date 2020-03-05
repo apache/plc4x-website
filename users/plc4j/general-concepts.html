@@ -367,6 +367,17 @@ This allows them to not only be used in passive-mode drivers for simply reading 
 <p>The last segment - <code>options</code> - can be used to fine tune some protocol or transport options to non-default values. For details on these options, please have a look at the <code>Protocol Documentation</code> and the <code>Transport Documentation</code>.</p>
 </div>
 <div class="paragraph">
+<p>The general structure of this part is always the same:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>?{option-1-name}={option-1-value}&amp;{option-2-name}={option-2-value}&amp;{option-3-name}={option-3-value}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So in general the options are stared with a <code>?</code> and then followed by <code>name-value</code> pairs, which are separated by ampersand characters <code>&amp;</code>.</p>
+</div>
+<div class="paragraph">
 <p>A driver for a given protocol however usually has a <code>default transport</code>, so sometimes it is possible to omit the transport code.</p>
 </div>
 <div class="paragraph">
