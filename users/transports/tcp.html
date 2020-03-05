@@ -136,7 +136,7 @@
                             <a href="../../users/transports/index.html" class="nav-link">Transports</a>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
-                            <a href="../../users/transports/tcp.html" class="nav-link">TCP</a>
+                            <strong class="nav-link">TCP</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/transports/udp.html" class="nav-link">UDP</a>
@@ -185,7 +185,7 @@
                             <a href="../../users/integrations/eclipse-ditto.html" class="nav-link">Eclipse Ditto</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Elastic Logstash</strong>
+                            <a href="../../users/integrations/elastic-logstash.html" class="nav-link">Elastic Logstash</a>
                             </li>
                             </ul>
             </li>
@@ -258,9 +258,68 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="elastic_logstash">Elastic Logstash</h2>
+<h2 id="tcp">TCP</h2>
 <div class="sectionbody">
-
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 55.5556%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>tcp</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p>TCP Socket Communication</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-transport-tcp&lt;/artifactId&gt;
+  &lt;version&gt;{current-last-released-version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transport Syntax:</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>{IP address or hostname}:{port}</pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The port can be omitted, if the protocol provides a default port value.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Options:</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p> <code>tcp</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>none</strong></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
         </main>

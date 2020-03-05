@@ -78,7 +78,7 @@
                             <a href="../../users/plc4j/gettingstarted.html" class="nav-link">Java</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/general-concepts.html" class="nav-link">General Conecpts</a>
+                            <strong class="nav-link">General Conecpts</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/plc4j/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
@@ -185,7 +185,7 @@
                             <a href="../../users/integrations/eclipse-ditto.html" class="nav-link">Eclipse Ditto</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Elastic Logstash</strong>
+                            <a href="../../users/integrations/elastic-logstash.html" class="nav-link">Elastic Logstash</a>
                             </li>
                             </ul>
             </li>
@@ -258,9 +258,136 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="elastic_logstash">Elastic Logstash</h2>
+<h2 id="general_concepts">General Concepts</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>On this page we&#8217;ll give a short introduction to the most important concepts that will help you understand Apache PLC4X better.</p>
+</div>
+<div class="paragraph">
+<p>The most important concepts from a user perspective are in general:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Connections&#8201;&#8212;&#8201;protocols&#8201;&#8212;&#8201;transports&#8201;&#8212;&#8201;configuration</p>
+</li>
+<li>
+<p>Addresses</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The two parts where we have built the PLC4X API to abstract are the <code>connection strings</code> and the <code>address strings</code>.</p>
+</div>
+<div class="paragraph">
+<p>Both are pretty dependent on the type of device you are planning to communicate with. However these can both be easily configured in an external configuration or passed in as arguments.</p>
+</div>
+<div class="sect2">
+<h3 id="connections">Connections</h3>
+<div class="paragraph">
+<p>In general a connection is a physical or logical connection between two endpoints.</p>
+</div>
+<div class="paragraph">
+<p>This connection uses a technical transport mechanism and passes data following a given protocol logic.
+Therefore we have modeled both of these aspects separately.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start with the <code>Transports</code>. The following are currently available, but they will probably be more soon:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>TCP</p>
+</li>
+<li>
+<p>UDP</p>
+</li>
+<li>
+<p>Raw Socket</p>
+</li>
+<li>
+<p>Serial Port</p>
+</li>
+<li>
+<p>PCAP replay</p>
+</li>
+<li>
+<p>Test</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>While TCP, UDP are based on the normal TCP and UDP stack of the operating system, Raw sockets directly provide low-level access to <code>Ethernet Frames</code>.
+This allows them to not only be used in passive-mode drivers for simply reading all network traffic, it also allows communicating with protocols that are Ethernet based, but don&#8217;t use TCP or UDP. This is usually the case with <code>Fieldbus</code> protocols which usually require lower latency than TCP and UDP can provide.</p>
+</div>
+<div class="paragraph">
+<p>The Serial Port transport simply reads and writes data to a given serial port.</p>
+</div>
+<div class="paragraph">
+<p>The probably most special forms of transport are currently the <code>PCAP replay</code> and the <code>Test</code> transport.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PCAP replay</code> transport allows recording network traffic using tools like <code>WreShark</code> and to simply replay these recorded <code>pcap</code> and <code>pcapng</code> files. This is really helpful for writing new drivers (especially passive mode drivers) without having to be connected to the real device.</p>
+</div>
+<div class="paragraph">
+<p>From a driver point of view there is actually no difference between a <code>Raw Socket</code> and a <code>PCAP replay</code> transport.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Test</code> transport is generally built for being used inside the PLC4X testsuite as it allows fine-grained access to the input and output of the drivers.</p>
+</div>
+<div class="paragraph">
+<p>With this we can explicitly control which data is passed into and retrieved from drivers and to validate this in unit- and integration-tests.</p>
+</div>
+<div class="sect3">
+<h4 id="connection_strings">Connection Strings</h4>
+<div class="paragraph">
+<p>A fully qualified PLC4X connection string would look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{driver code}:{transport code}://{transport config}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>driver code</code> generally selects the protocol we want to use, the <code>transport code</code> now selects the type of transport that should be used.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the selected transport mechanism the <code>transport config</code> tells the transport which resource it should use.</p>
+</div>
+<div class="paragraph">
+<p>For example with a <code>TCP</code> and <code>UDP</code> transport, this will be the <code>IP address</code> or <code>hostname</code> optionally followed by the <code>Port</code>.</p>
+</div>
+<div class="paragraph">
+<p>For a <code>Serial</code> transport this will be the <code>name of the serial interface</code>. <code>Raw Sockets</code> will require the <code>device name</code> and so on.</p>
+</div>
+<div class="paragraph">
+<p>For a full description of all transports and their options, please consult the <code>Transport Documentation</code>.</p>
+</div>
+<div class="paragraph">
+<p>The last segment - <code>options</code> - can be used to fine tune some protocol or transport options to non-default values. For details on these options, please have a look at the <code>Protocol Documentation</code> and the <code>Transport Documentation</code>.</p>
+</div>
+<div class="paragraph">
+<p>A driver for a given protocol however usually has a <code>default transport</code>, so sometimes it is possible to omit the transport code.</p>
+</div>
+<div class="paragraph">
+<p>Then this shorter version can be used. Please inspect the <code>Protocol Documentation</code> on <code>default transports</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{driver code}://{transport config}?{options}</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="addresses">Addresses</h3>
+<div class="paragraph">
+<p>Addresses are extremely dependent on the used protocol, as we usually decided to stick to the address formats that are used in that particular environments.</p>
+</div>
+<div class="paragraph">
+<p>Please check the <code>Protocol Documentation</code> on details about these address formats.</p>
+</div>
+</div>
 </div>
 </div>
         </main>
