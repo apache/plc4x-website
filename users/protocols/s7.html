@@ -78,7 +78,7 @@
                             <a href="../../users/plc4j/gettingstarted.html" class="nav-link">Java</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/general-concepts.html" class="nav-link">General Conecpts</a>
+                            <a href="../../users/plc4j/general-concepts.html" class="nav-link">General Concepts</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/plc4j/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
@@ -260,6 +260,8 @@
             <div class="sect1">
 <h2 id="s7_step7">S7 (Step7)</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="connection_string_options">Connection String Options</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 22.2222%;"/>
@@ -309,7 +311,7 @@
 <td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p><code>tcp</code></p>
+<p><code>tcp</code> (Default Port: 102)</p>
 </li>
 <li>
 <p><code>raw-socket</code></p>
@@ -456,6 +458,459 @@ Possible values are:</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+<div class="paragraph">
+<p>When programming Siemens PLCs, usually the tool used to do that is called TIA Portal.</p>
+</div>
+<div class="paragraph">
+<p>The PLC4X S7 Driver is therefore sticking to the address format defined by this tool as it simplifies exchanging address information.</p>
+</div>
+<div class="sect3">
+<h4 id="general_format">General Format</h4>
+<div class="paragraph">
+<p>In general all S7 addresses have this format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>%{Memory-Area}{start-address}:{Data-Type}[{array-size}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the array-part is omitted, the size-default of <code>1</code> is assumed.</p>
+</div>
+<div class="paragraph">
+<p>Generally there are two types of addresses:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Bit-Addresses {Memory-Area-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]</p>
+</li>
+<li>
+<p>Byte-Addresses {Memory-Area-Code}{Start-Byte-Address}:{Data-Type-Code}[{count}]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Bit addresses are only used if the datatype: <code>BOOL</code> is used.</p>
+</div>
+<div class="paragraph">
+<p>The array notation of these can be omitted. In this case a <code>Count</code> of 1 is used per default.</p>
+</div>
+<div class="paragraph">
+<p><code>Start-Byte-Address</code> and <code>Bit-Offset</code> in above list both represent unsigned integer values.</p>
+</div>
+<div class="paragraph">
+<p>In case of accessing data in the <code>data block</code> memory area, the syntax is quite a bit more complex:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]</p>
+</li>
+<li>
+<p>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:{Data-Type-Code}[{Count}]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These addresses can usually be copied directly out of TIA portal.
+However we also implemented a shorter version, as above version does have some unnecesary boilerplate parts (The <code>.DB</code> in the middle as well as the <code>Short-Data-Type-Code</code>)</p>
+</div>
+<div class="paragraph">
+<p>The shorter syntax looks like this:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>DB{Data-Block-Number}.{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]</p>
+</li>
+<li>
+<p>DB{Data-Block-Number}.{Start-Byte-Address}:{Data-Type-Code}[{Count}]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The S7 driver will handle both types of notation equally.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="memory_areas">Memory Areas</h4>
+<div class="paragraph">
+<p>The S7 driver currently allows access to the following memory areas.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Code</code> column represents the code that is used in above general address syntax:</p>
+</div>
+<div class="paragraph">
+<p>Not all S7 device types support the same full set of memory areas, so the last column gives more information on which types a given memory area is supported on.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 18.1818%;"/>
+<col style="width: 18.1818%;"/>
+<col style="width: 45.4545%;"/>
+<col style="width: 18.1819%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Supported PLC Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COUNTERS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMERS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIRECT_PERIPHERAL_ACCESS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INPUTS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Inputs (Digital and Analog &#8230;&#8203; usually Analog Inputs just have a start-address offset to separate them from the digital ones)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OUTPUTS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Outputs (Digital and Analog &#8230;&#8203; usually Analog Outputs just have a start-address offset to separate them from the digital ones)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLAGS_MARKERS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATA_BLOCKS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Memory areas containing user-defined data structures usually accessed by the integer data block number. Please note that data block addresses have a little more complex address format.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DBI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INSTANCE_DATA_BLOCKS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCAL_DATA</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="data_types">Data Types</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;"/>
+<col style="width: 10%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+<col style="width: 10%;"/>
+<col style="width: 10%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Short-Code</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Size in bits</th>
+<th class="tableblock halign-left valign-top"> Supported PLC Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Bit-Strings (Will all interpreted as sequence of boolean values in PLC4X)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Single boolean value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BYTE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Byte </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of 8 boolean values </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">W </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Word </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of 16 boolean values </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double-Word </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of 32 boolean values </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long-Word </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of 64 boolean values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Integer values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Small int </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bit integer (signed) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Small unsigned int </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bit integer (unsigned)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">W </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bit integer (signed)  </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">W </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unsigned integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bit integer (unsigned)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double integer </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bit integer (signed) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UDINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unsigned Double Integer </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bit integer (unsigned) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long integer </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bit integer (signed)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ULINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unsigned long integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bit integer (unsigned) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Floaring pooint values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bit IEEE 754 full precision floating point value (signed) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LREAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long Real </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bit IEEE 754 double precision floating point value (signed) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Character values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Character </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bit character </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WCHAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double byte character </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bit character value </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String 2 + n bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WSTRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double byte String      </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String of 16 bit characters 2 + n bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Temporal values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S5TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S5 Time </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S5 Time (like in duration)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_300, S7_400, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time (like in duration) (Minutes, Seconds, Milliseconds) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LTIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long Time </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long Time (like in duration) (Minutes, Seconds, Milliseconds, Microseconds, Nanoseconds)  </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME_OF_DAY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time of day </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time (like in 4:40PM) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE_AND_TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date and Time </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date and time (like in 03.05.2020 4:40 PM) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_300, S7_400, S7_1500</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="some_useful_tips">Some useful tips</h4>
+<div class="paragraph">
+<p>Especially when it comes to the input- and output addresses for analog channels, the start addresses are configurable and hereby don&#8217;t always start at the same address.
+In order to find out what addresses these ports have, please go to the <code>device setting</code> of your PLC in <code>TIA Portal</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/users/protocols/s7-tia-device-settings.png" alt="s7 tia device settings"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Especially pay attention to this part:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/users/protocols/s7-tia-io-settings.png" alt="s7 tia io settings"/>
+</div>
+</div>
+<div class="paragraph">
+<p>In above image you can see that this device has 8 digital inputs (<code>DI 8</code>) and 2 analog inputs (<code>AI 2_1</code>) as well as 6 digital outputs (<code>DQ 6</code>).</p>
+</div>
+<div class="paragraph">
+<p>The start addresses of the digital inputs and outputs start directly at <code>0</code>.</p>
+</div>
+<div class="paragraph">
+<p>The analog inputs however start at address <code>64</code>.</p>
+</div>
+<div class="paragraph">
+<p>Each digital input and output can be addresses by a single bit-address (start-address and offset) or can be read in a block by reading a full byte starting at the given start address without providing a bit offset.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
         </main>
