@@ -114,6 +114,9 @@
                             <a href="../../users/protocols/ethernet-ip.html" class="nav-link">EtherNet/IP</a>
                             </li>
                                             <li class="nav-item">
+                            <strong class="nav-link">Firmata</strong>
+                            </li>
+                                            <li class="nav-item">
                             <a href="../../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
                             </li>
                                             <li class="nav-item">
@@ -330,14 +333,18 @@
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>write</code></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Writing is only supported to digital addresses.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>subscribe</code></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Reading is supported for both digital and analog addresses. See <code>note</code> after this table however.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Options</p></td>
@@ -377,13 +384,13 @@ When subscribing to pins, these are configured to become read pins. When writing
 </div>
 <div class="paragraph">
 <p>The <code>start-address</code> and <code>array-size</code> are simple integer values.
-<code>special-config</code> can be used to fonfigure the digital input pin to something else than <code>INPUT</code>.</p>
+<code>special-config</code> can be used to configure the digital input pin to something else than <code>INPUT</code>.</p>
 </div>
 <div class="paragraph">
 <p>Currently the only supported option is <code>PULLUP</code> which configured the Arduino&#8217;s digital input pin to use it&#8217;s built in pullup-resistor.</p>
 </div>
 <div class="paragraph">
-<p>Both the <code>array-size</code> as well as the <code>special-config</code> parts are optional. So the fillowing addresses would also be valid:</p>
+<p>Both the <code>array-size</code> as well as the <code>special-config</code> parts are optional. So the following example addresses are valid:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -410,7 +417,29 @@ However in case of using the serial port (which will always be the case when usi
 </div>
 <div class="sect3">
 <h4 id="analog_addresses">Analog Addresses</h4>
-
+<div class="paragraph">
+<p>The full format for an analog address is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>analog:{start-address}[{array-size}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>start-address</code> and <code>array-size</code> are simple integer values.</p>
+</div>
+<div class="paragraph">
+<p>Both the <code>array-size</code> is optional. So the following example addresses are valid:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>analog:1
+analog:2[3]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A normal <code>Arduino Uno</code> is equipped with 6 analog inputs: 0-5</p>
+</div>
 </div>
 </div>
 </div>
