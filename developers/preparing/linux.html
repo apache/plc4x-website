@@ -266,6 +266,14 @@
 <pre>sudo yum install libpcap-devel</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Using libpcap usually requires root privileges, however the java process can be granted permission to do so by executing the following command.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>setcap cap_net_raw,cap_net_admin=eip /path/to/java</pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="gcc">gcc</h3>
