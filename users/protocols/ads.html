@@ -263,8 +263,64 @@
             <div class="sect1">
 <h2 id="adsams">ADS/AMS</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="structure_amstcp_packet">Structure AMS/TCP Packet</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">AMS/TCP Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMS Header</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADS Data</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Data array</th>
+<th class="tableblock halign-left valign-top">Size</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMS/TCP Header</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6 bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contains the length of the data packet.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AMS Header</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The AMS/TCP-Header contains the addresses of the transmitter and receiver. In addition the AMS error code , the ADS command Id and some other information.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADS Data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">n bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ADS data range contains the parameter of the single ADS commands. The structure of the data array depends on the ADS command. Some ADS commands require no additional data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="more_details_on">More details on</h3>
 <div class="paragraph">
-<p>For details about the protocol look here: <a href="http://www.beckhoff.com/" class="bare">http://www.beckhoff.com/</a></p>
+<p>For details about the protocol look here: <a href="http://www.beckhoff.com/" class="bare">http://www.beckhoff.com/</a>
+<a href="https://infosys.beckhoff.com/english.php?content=../content/1033/tcadsamsspec/html/tcadsamsspec_intro.htm">Structure AMS/TCP Packet</a></p>
+</div>
 </div>
 </div>
 </div>
