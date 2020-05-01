@@ -255,13 +255,9 @@ So please check <a href="release.html">here</a> (Chapters: <code>Preparing your 
 <p>Per default the plugin will ask for the working copy version during the build execution.
 This is the version the <code>develop</code> branch will be changed to.</p>
 </div>
-<div class="paragraph">
-<p>The parameter <code>autoVersionSubmodules</code> will tell the release plugin to release all modules with the same version.
-Otherwise we would have to define the working copy version for each module.</p>
-</div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:branch -DbranchName=rel/code-generation/{minor-version} -DautoVersionSubmodules=true</pre>
+<pre>mvn release:branch -DbranchName=rel/code-generation/{minor-version}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -270,7 +266,7 @@ So in case of preparing the release branch for <code>{project.version}</code> th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -DbranchName=rel/code-generation/0.7 -DautoVersionSubmodules=true</pre>
+<pre>   mvn release:branch -DbranchName=rel/code-generation/0.7</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -363,7 +359,7 @@ In order to prepare a release-candidate, the first step is switching to the corr
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:prepare -DautoVersionSubmodules=true</pre>
+<pre>mvn release:prepare</pre>
 </div>
 </div>
 <div class="paragraph">

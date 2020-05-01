@@ -247,7 +247,7 @@ Please be sure to execute the release with a Java version between 1.8 and 11 or 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/{current-short-version} -DautoVersionSubmodules=true</pre>
+<pre>   mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/{current-short-version}</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -262,7 +262,7 @@ Please be sure to execute the release with a Java version between 1.8 and 11 or 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:prepare -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DautoVersionSubmodules=true</pre>
+<pre>   mvn release:prepare -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -425,13 +425,9 @@ This is the version the <code>develop</code> branch will be changed to.</p>
 <p>In contrast to normal builds, it is important to enable all profiles when creating the branch as only this way will all modules versions be updated.
 Otherwise the non-default modules on develop will reference the old version which will cause problems when building.</p>
 </div>
-<div class="paragraph">
-<p>The parameter <code>autoVersionSubmodules</code> will tell the release plugin to release all modules with the same version.
-Otherwise we would have to define the working copy version for each module.</p>
-</div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/{minor-version} -DautoVersionSubmodules=true</pre>
+<pre>mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/{minor-version}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -440,7 +436,7 @@ So in case of preparing the release branch for <code>0.7.0-SNAPSHOT</code> the c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/0.7 -DautoVersionSubmodules=true</pre>
+<pre>   mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=rel/0.7</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -532,7 +528,7 @@ In order to prepare a release-candidate, the first step is switching to the corr
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:prepare -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DautoVersionSubmodules=true</pre>
+<pre>mvn release:prepare -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash</pre>
 </div>
 </div>
 <div class="paragraph">
