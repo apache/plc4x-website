@@ -261,7 +261,10 @@ Additional Apache tutorial on how to verify downloads can be found <a href="http
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>shasum -a512 apache-plc4x-{current-full-version}-source-release.zip</pre>
+<pre>shasum -a512 apache-plc4x-{current-full-version}-source-release.zip
+
+Alternatively (automatically compares the checkum):
+gsha512sum -c apache-plc4x-{current-full-version}-source-release.zip.sha512</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -316,7 +319,7 @@ Additional Apache tutorial on how to verify downloads can be found <a href="http
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
-<p><i class="fa fa-square-o"></i> Search for <code>SNAPSHOT</code> references:</p>
+<p><input type="checkbox" data-item-complete="0"/> Search for <code>SNAPSHOT</code> references:</p>
 </li>
 </ul>
 </div>
@@ -327,6 +330,9 @@ Additional Apache tutorial on how to verify downloads can be found <a href="http
 </div>
 <div class="ulist checklist">
 <ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"/> Search for <code>Copyright</code> references, and if they are in headers, make sure these files containing them are mentioned in the LICENSE file.</p>
+</li>
 <li>
 <p><input type="checkbox" data-item-complete="0"/> Build the project according to the information in the README.md file.</p>
 </li>
