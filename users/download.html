@@ -268,8 +268,95 @@
 </div>
 <div class="sect2">
 <h3 id="current_releases">Current Releases</h3>
-<div class="sect3 6 0">
-<h4 id="release-0">0.6.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="sect3">
+<h4 id="release-0_7_0">0.7.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="paragraph">
+<p>This version is the first after a major refactoring of the driver
+core. All previous driver versions are now considered deprecated
+and have been replaced by versions using the new driver structure
+and generated driver codebase.</p>
+</div>
+<div class="sect4">
+<h5 id="new_features">New Features</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Drivers now support structured types using PlcValues</p>
+</li>
+<li>
+<p>The EIP (EtherNet/IP) driver no longer requires an external
+library and is implemented fully in the PLC4X project</p>
+</li>
+<li>
+<p>The Modbus driver no longer requires an external library
+and is implemented fully in the PLC4X project</p>
+</li>
+<li>
+<p>The new S7 Driver supports writing multiple entries in one
+request (The API allowed this from the beginning now not
+every item is wrapped in a single request. It should bring
+significant performance gains when writing multiple vlaues)</p>
+</li>
+<li>
+<p>S7 Driver now supports String datatypes.</p>
+</li>
+<li>
+<p>OSGi : Implementation of Drivers/Transports as OSGi services
+to be able to use them in an OSGi container.</p>
+</li>
+<li>
+<p>New Firmata protocol driver</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="incompatible_changes">Incompatible changes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Due to the refactoring of the driver core there might be issues
+running drivers built against older core versions.</p>
+</li>
+<li>
+<p>This version doesn&#8217;t provide a Beckhoff AMS/ADS driver as this
+driver is still being ported to the new mspec format.</p>
+</li>
+<li>
+<p>All drivers connection strings now follow the same pattern:
+{protocol-code:(transport-code:)?//{transport-config}(?{params})?
+Please check the drivers documentation on our website:
+<a href="https://plc4x.apache.org/users/protocols/s7.html" class="bare">https://plc4x.apache.org/users/protocols/s7.html</a></p>
+</li>
+<li>
+<p>The karaf-feature modules are removed as the drivers now all
+provide both a feature.xml as well as a <code>kar</code> bundled archive</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="bug_fixes">Bug Fixes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>PLC4X-174  UDP Transport does not accept ports containing 0</p>
+</li>
+<li>
+<p>PLC4X-134  S7 is terminating the connection during handshake</p>
+</li>
+<li>
+<p>PLC4X-192  Support for conversion of complex connection string parameters</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="previous_releases">Previous Releases</h3>
+<div class="sect3">
+<h4 id="release-0_6_0">0.6.0 Official <a href="https://archive.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
 <p>This is the last release of PLC4X with the "handwritten" drivers.
 This Minor release will thus receive updates and fixes until
@@ -280,7 +367,7 @@ most users have switched to 0.7 and above (with generated drivers).</p>
 as the critical (memory leak) bug PLC4X-163 is fixed.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features">New Features</h5>
+<h5 id="new_features_2">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -291,7 +378,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes">Incompatible changes</h5>
+<h5 id="incompatible_changes_2">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -301,7 +388,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes">Bug Fixes</h5>
+<h5 id="bug_fixes_2">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -326,16 +413,13 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="previous_releases">Previous Releases</h3>
-<div class="sect3 5 0">
-<h4 id="release-0">0.5.0 Official <a href="https://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="sect3">
+<h4 id="release-0_5_0">0.5.0 Official <a href="https://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.5.0/apache-plc4x-0.5.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
 <p>This is the first release containing our new generated drivers (AB-ETH)</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_2">New Features</h5>
+<h5 id="new_features_3">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -365,11 +449,11 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_2">Incompatible changes</h5>
+<h5 id="incompatible_changes_3">Incompatible changes</h5>
 
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_2">Bug Fixes</h5>
+<h5 id="bug_fixes_3">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -391,13 +475,13 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 </div>
-<div class="sect3 4 0">
-<h4 id="release-0">0.4.0 Official <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="sect3">
+<h4 id="release-0_4_0">0.4.0 Official <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.4.0/apache-plc4x-0.4.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
 <p>This is the first release of Apache PLC4X as top-level project.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_3">New Features</h5>
+<h5 id="new_features_4">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -416,7 +500,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_3">Incompatible changes</h5>
+<h5 id="incompatible_changes_4">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -426,7 +510,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_3">Bug Fixes</h5>
+<h5 id="bug_fixes_4">Bug Fixes</h5>
 
 </div>
 </div>
@@ -436,7 +520,7 @@ This release contains no further features and mostly stabilization.</p>
 <div class="sect3">
 <h4 id="0_3_1_incubating_official_source_release_sha512_asc">0.3.1 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_4">New Features</h5>
+<h5 id="new_features_5">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -446,7 +530,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_4">Incompatible changes</h5>
+<h5 id="incompatible_changes_5">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -456,7 +540,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_4">Bug Fixes</h5>
+<h5 id="bug_fixes_5">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -475,10 +559,10 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 </div>
-<div class="sect3 3 0">
-<h4 id="release-0">0.3.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="sect3">
+<h4 id="release-0_3_0">0.3.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_5">New Features</h5>
+<h5 id="new_features_6">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -497,7 +581,7 @@ runtime environment</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_5">Incompatible changes</h5>
+<h5 id="incompatible_changes_6">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -514,7 +598,7 @@ a <code>plc4j-protocol-{name}</code> you now need to change this to
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_5">Bug Fixes</h5>
+<h5 id="bug_fixes_6">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -536,8 +620,8 @@ a <code>plc4j-protocol-{name}</code> you now need to change this to
 </div>
 </div>
 </div>
-<div class="sect3 2 0">
-<h4 id="release-0">0.2.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="sect3">
+<h4 id="release-0_2_0">0.2.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.2.0-incubating/apache-plc4x-incubating-0.2.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
 <h5 id="changes">Changes:</h5>
 <div class="ulist">
@@ -558,8 +642,8 @@ a <code>plc4j-protocol-{name}</code> you now need to change this to
 </div>
 </div>
 </div>
-<div class="sect3 1 0">
-<h4 id="release-0">0.1.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="sect3">
+<h4 id="release-0_1_0">0.1.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.1.0-incubating/apache-plc4x-incubating-0.1.0-source-release.zip.asc">ASC</a> ]</h4>
 
 </div>
 </div>

@@ -227,7 +227,12 @@ However this greatly depends on which parts you want to build.
 The <code>Java</code> modules hereby probably have the least demanding requirements.</p>
 </div>
 <div class="paragraph">
-<p>In order to build at all you are required to have <code>Java 8</code> installed on your machine.</p>
+<p>In order to build most Java parts of <code>PLC4X</code> you are required to have at least <code>Java 8</code> installed on your machine.
+Some integration modules and some other languages however may add some additional constraints to this.</p>
+</div>
+<div class="paragraph">
+<p>For example if you are using the <code>with-logstash</code> module to build the Logstash integration, you are required to use <code>Java 8</code> to <code>Java 11</code>, below and above doesn&#8217;t work.
+On the other side as soon as you&#8217;re building with the <code>with-c</code>, <code>with-cpp</code> or <code>with-proxies</code> you need to use at least <code>Java 11</code> as the <code>cmake-maven-plugin</code> requires at least this version.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -236,7 +241,19 @@ The <code>Java</code> modules hereby probably have the least demanding requireme
 <div class="title">Tip</div>
 </td>
 <td class="content">
-We have tested the build with Java 8 up to Java 13 (Latest version at the time of writing this document).
+Currently Java 11 is the sweet-spot for being able to build all parts of PLC4X.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+We have tested the build with Java 8 up to Java 14 (Latest version at the time of writing this document).
 </td>
 </tr>
 </table>
@@ -245,6 +262,21 @@ We have tested the build with Java 8 up to Java 13 (Latest version at the time o
 <p>If a new version comes out, please give us a little time to verify and handle any related issues.
 We&#8217;ll probably fix them as soon as possible.
 However in the past with Oracle&#8217;s new release strategy, there have been a few bumps on the road.</p>
+</div>
+<div class="paragraph">
+<p>Also will PLC4X build with any Maven version starting with <code>Maven 3.3.0</code> however the <code>with-c</code>, <code>with-cpp</code> and <code>with-proxies</code> profiles require at least <code>Maven 3.6</code> as the <code>cmake-maven-plugin</code> requires this.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Currently Maven 3.6 and above is required for being able to build all parts of PLC4X.
+</td>
+</tr>
+</table>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
