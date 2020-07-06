@@ -268,7 +268,272 @@
             <div class="sect1">
 <h2 id="scraper">Scraper</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>While the Apache PLC4X API allows simple access to PLC resources, if you want to continuously monitor some values and have them retrieved in a pre-defined interval, the core PLC4X API method is a little bit uncomfortable.</p>
+</div>
+<div class="paragraph">
+<p>Especially when you have multiple batches of data you want to have refreshed in different intervals.</p>
+</div>
+<div class="paragraph">
+<p>In this case you need to take care of the scheduling of queries, need to manage the connection state (Check if the connection is still available and to apply countermeasures, if there are problems)</p>
+</div>
+<div class="paragraph">
+<p>As we have encountered exactly the same problem for about every integration module we created, the Apache PLC4X team has created a tool called the <code>Scraper</code>.</p>
+</div>
+<div class="paragraph">
+<p>This tool automatically handles all of the tasks mentioned above.</p>
+</div>
+<div class="sect2">
+<h3 id="getting_started_with_the_scraper">Getting started with the <code>Scraper</code></h3>
+<div class="paragraph">
+<p>In general, you need 3 parts to work with the <code>Scraper</code>:</p>
+</div>
+<div class="paragraph">
+<p>1) A <code>Scraper</code> Configuration
+2) A <code>Scraper</code> Implementation
+3) A Handler to handle the results of <code>Scraper</code> jobs</p>
+</div>
+<div class="paragraph">
+<p>In the <code>Scraper</code> Configuration you define the so-called <code>jobs</code>.</p>
+</div>
+<div class="sect3">
+<h4 id="sources">Sources</h4>
+<div class="paragraph">
+<p>Sources define connections to PLCs using PLC4X drivers.</p>
+</div>
+<div class="paragraph">
+<p>Generally you can think of a <code>Source</code> as a PLC4X connection string, given an alias name.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="jobs">Jobs</h4>
+<div class="paragraph">
+<p>A <code>Job</code> defines which resources (PLC Addresses) should be collected from which <code>Sources</code> with a given <code>Trigger</code>.</p>
+</div>
+<div class="paragraph">
+<p>All resources in a job will be collected as a batch.</p>
+</div>
+<div class="paragraph">
+<p>Generally multiple types of triggers could theoretically be supported, but for now only a time triggered job (Aka <code>SCHEDULED</code>) is actually supported.</p>
+</div>
+<div class="paragraph">
+<p>In the near future we&#8217;re hoping that we will be able to support:
+- External triggers
+- Triggering collection based upon PLC-values</p>
+</div>
+<div class="paragraph">
+<p>But, as to now, this has not been implemented yet.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration_using_the_java_api">Configuration using the Java API</h3>
+<div class="paragraph">
+<p>The core of the Scraper configuration is the <code>ScraperConfigurationTriggeredImplBuilder</code> class.
+Use this to build the configuration objects used to bootstrap the Scraper.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ScraperConfigurationTriggeredImplBuilder builder = new ScraperConfigurationTriggeredImplBuilder();</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As soon as you have your <code>builder</code> instance, you should add at least one <code>source</code> to it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>builder.addSource({connectionName}, {plc4xConnectionString});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>connectionName</code> will be what we use when configuring the job to reference which source it should use to collect.</p>
+</div>
+<div class="paragraph">
+<p>In order to configure a <code>job</code> we have to get an instance of a <code>JobConfigurationTriggeredImplBuilder</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>JobConfigurationTriggeredImplBuilder jobBuilder = builder.job({jobName}, {triggerCommand});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This creates a new <code>job</code> with a given name which is executed based on the information in the <code>triggerCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>As mentioned above, we currently only support a time-scheduled collection.</p>
+</div>
+<div class="paragraph">
+<p>This genrally just requires one parameter: The number of <code>milliseconds</code> between each collection.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>SCHEDULED:1000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Above would schedule a collection every 1000ms - so once every second.</p>
+</div>
+<div class="paragraph">
+<p>Up to now this job would not be run anywhere, and it would also not collect anything.
+So in order to have the job actually do something, we should assign it a <code>source</code> to collect from.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>jobBuilder.source({connectionName});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we could theoretically collect on multiple sources, by simply calling the <code>source()</code> method multiple times.</p>
+</div>
+<div class="paragraph">
+<p>All sources would be collected at the same time, whenever the trigger tells it to.</p>
+</div>
+<div class="paragraph">
+<p>So the last thing we need to configure our first <code>Scraper</code> job, is to add a few fields for it to collect.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>jobBuilder.field({fieldName}, {fieldAddress});</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>field</code> method has to be called for every field we want to add to the current job configuration.
+It gives a PLC4X address string an easy to understand string name, just like when using the core PLC4X API.</p>
+</div>
+<div class="paragraph">
+<p>As soon as we&#8217;re done adding fields, we configure the job by calling the <code>build</code> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>jobBuilder.build();</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This configures the finished job and attaches that to the overall <code>Scraper</code> configuration of the scraper configuration.</p>
+</div>
+<div class="paragraph">
+<p>As soon as we&#8217;re done configuring jobs, we need to create the <code>Scraper</code> configuration by calling the <code>buiold</code> method on the <code>builder</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ScraperConfigurationTriggeredImpl scraperConfig = builder.build();</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running_the_scraper">Running the <code>Scraper</code></h3>
+<div class="paragraph">
+<p>In order to run the <code>Scraper</code>, the following boilerplate code is needed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>       try {
+            PlcDriverManager plcDriverManager = new PooledPlcDriverManager();
+            TriggerCollector triggerCollector = new TriggerCollectorImpl(plcDriverManager);
+            TriggeredScraperImpl scraper = new TriggeredScraperImpl(scraperConfig, (jobName, sourceName, results) -&gt; {
 
+                ...
+
+            }, triggerCollector);
+            scraper.start();
+            triggerCollector.start();
+        } catch (ScraperException e) {
+            log.error("Error starting the scraper", e);
+        }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At first a new <code>PooledPlcDriverManager</code> is created (It actually doesn&#8217;t have to be the pooled version, but we strongly suggest you use it as for some protocols the connection process is stressfull for the connected PLC).</p>
+</div>
+<div class="paragraph">
+<p>With this <code>plcDriverManager</code> we can then create a so-called <code>TriggerCollector</code>, which we pass in the driver manager as argument.</p>
+</div>
+<div class="paragraph">
+<p>Next comes the probably most important part: We configure the scraper, by binding a <code>Scraper Configuration</code>, a <code>ResultHandler</code> and a <code>TriggerCollector</code> together.</p>
+</div>
+<div class="paragraph">
+<p>After this, the scraper is ready to start, which is then done by calling <code>start</code> on the <code>scraper</code> as well as the <code>triggerCollector</code>.</p>
+</div>
+<div class="paragraph">
+<p>For the sake of clarity, here comes the definition of the <code>ResultHandler</code> interface:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>@FunctionalInterface
+public interface ResultHandler {
+
+    /**
+     * Callback handler.
+     * @param jobName name of the job (from config)
+     * @param connectionName alias of the connection (&lt;b&gt;not&lt;/b&gt; connection String)
+     * @param results Results in the form alias to result value
+     */
+    void handle(String jobName, String connectionName, Map&lt;String, Object&gt; results);
+
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration_using_a_json_or_yaml_file">Configuration using a <code>JSON</code> or <code>YAML</code> file</h3>
+<div class="paragraph">
+<p>As an alternative to using the Java API, the Scraper Configuration can also be read from a <code>JSON</code> or <code>YAML</code> document.</p>
+</div>
+<div class="paragraph">
+<p>Here come some examples:</p>
+</div>
+<div class="paragraph">
+<p>JSON:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+    "sources": {
+        "connectionName": "connectionString"
+    },
+    "jobs": [
+        {
+            "name": "jobName",
+            "triggerConfig": (SCHEDULED,10000)
+            "sources": [
+                "connectionName"
+            ],
+            "fields": {
+                "a": "{address-a}",
+                "b": "{address-b}"
+            }
+        }
+    ]
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>YAML:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>---
+sources:
+  connectionName: connectionString
+jobs:
+  - name: jobName
+    triggerConfig: (SCHEDULED,10000)
+    sources:
+      - connectionName
+    fields:
+      a: {address-a}
+      b: {address-b}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In both cases, you can create the <code>ScraperConfiguration</code> with the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ScraperConfiguration conf = ScraperConfiguration.fromFile("{path to the JSON or YAML file}", ScraperConfigurationTriggeredImpl.class);</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
         </main>
