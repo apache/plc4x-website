@@ -245,7 +245,7 @@ So please check <a href="release.html">here</a> (Chapters: <code>Preparing your 
 <p>For each new Major and Minor release we create a new branch at the beginning of a code-freeze phase.</p>
 </div>
 <div class="paragraph">
-<p>So if currently the project version in develop is <code>0.8.0-SNAPSHOT</code>, we create a branch <code>rel/0.8</code>.</p>
+<p>So if currently the project version in develop is <code>0.8.0-SNAPSHOT</code>, we create a branch <code>release/0.8</code>.</p>
 </div>
 <div class="paragraph">
 <p>When creating the branch is exactly the moment in which the version in <code>develop</code> is incremented to the next minor version.</p>
@@ -259,7 +259,7 @@ This is the version the <code>develop</code> branch will be changed to.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:branch -DbranchName=rel/code-generation/{minor-version}</pre>
+<pre>mvn release:branch -DbranchName=release/code-generation/{minor-version}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -268,7 +268,7 @@ So in case of preparing the release branch for <code>{project.version}</code> th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -DbranchName=rel/code-generation/0.8</pre>
+<pre>   mvn release:branch -DbranchName=release/code-generation/0.8</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -286,7 +286,7 @@ So in case of preparing the release branch for <code>{project.version}</code> th
 <p>This step now should perform quite quickly as no build and no tests are involved.</p>
 </div>
 <div class="paragraph">
-<p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/code-generation/0.8</code> branch is created.</p>
+<p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>release/code-generation/0.8</code> branch is created.</p>
 </div>
 </div>
 <div class="sect2">
