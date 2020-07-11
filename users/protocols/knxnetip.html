@@ -268,7 +268,176 @@
             <div class="sect1">
 <h2 id="knxnetip">KNXnet/IP</h2>
 <div class="sectionbody">
-
+<div class="sect2">
+<h3 id="connection_string_options">Connection String Options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 55.5556%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>knxnet-ip</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p>KNXnet/IP Protocol</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-knxnetip&lt;/artifactId&gt;
+  &lt;version&gt;{current-last-released-version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport:</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p> <code>udp</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compatible Transports:</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>udp</code> (Default Port: 3671)</p>
+</li>
+<li>
+<p><code>pcap-replay</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Options</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>knxproj-file-path</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Path to the <code>knxproj</code> file. The default KNXnet/IP protocol doesn&#8217;t provide all the information needed to be able to fully decode the messages. For this the user needs to provide the project file created in the KNX IDE <code>ETS5</code> to provide the missing information. Only if this file is provided, will the driver be able to decode the data entirely. If this parameter is omitted, only raw KNX payload will be returned.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>group-address-type</code> (3)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>KNX Addresses can be encoded in multiple ways. Which encoding is used, is too not provided by the protocol itself so it has to be provided externally:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3 Levels: {main-group (5 bit)}/{middle-group (3 bit)}/{sub-group (8 bit)}</p>
+</li>
+<li>
+<p>2 Levels: {main-group (5 bit)}/{sub-group (11 bit)}</p>
+</li>
+<li>
+<p>1 Level: {sub-group (16 bit)}</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The default is 3 levels. If the <code>knxproj-file-path</code> this information is provided by the file.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>connection-type</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type of connection used to communicate. Possible values are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>'LINK_LAYER' (default): The client becomes a participant of the KNX bus and gets it&#8217;s own individual KNX address.</p>
+</li>
+<li>
+<p>'RAW': The client gets unmanaged access to the bus (be careful with this)</p>
+</li>
+<li>
+<p>'BUSMONITOR': The client operates as a busmonitor where he can&#8217;t actively participate on the bus. Only one 'BUSMONITOR' connection is allowed at the same time on a KNXnet/IP gateway.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+<div class="paragraph">
+<p>KNX Addresses usually have one of the following structures:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3-level Address: <code>{main-group(0-15)}</code>/<code>{middle-group(0-15)}</code>/<code>{sub-group(0-255)}</code></p>
+</li>
+<li>
+<p>2-level Address: <code>{main-group(0-15)}</code>/<code>{sub-group(0-4095)}</code></p>
+</li>
+<li>
+<p>1-level Address: <code>{sub-group(0-65535)}</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Depending on the <code>group-address-type</code> configured in the connection string or defined in the knxproj-file configured by the <code>knxproj-file-path</code> connection string parameter, the corresponding address pattern has to be used.</p>
+</div>
+<div class="paragraph">
+<p>However, each segment allows using of the wildcard character <code>*</code>.
+If the addresses used in the KNX installation are structured, this way it is possible to, for example (depending on the scheme used):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Collect all information for a given level of your building: <code>1/<strong>/</strong></code></p>
+</li>
+<li>
+<p>Collect all information for a given room: <code>2/4/*</code></p>
+</li>
+<li>
+<p>Collect all information about heating in all rooms: <code><strong>/</strong>/50</code></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
         </main>
