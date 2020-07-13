@@ -333,6 +333,15 @@
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Only supported with <code>tcp</code> transport.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>subscribe</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
@@ -421,7 +430,7 @@
 <p>Depending on the <code>group-address-type</code> configured in the connection string or defined in the knxproj-file configured by the <code>knxproj-file-path</code> connection string parameter, the corresponding address pattern has to be used.</p>
 </div>
 <div class="paragraph">
-<p>However, each segment allows using of the wildcard character <code>*</code>.
+<p>However, when subscribing for events, each segment allows using of the wildcard character <code>*</code>.
 If the addresses used in the KNX installation are structured, this way it is possible to, for example (depending on the scheme used):</p>
 </div>
 <div class="ulist">
@@ -436,6 +445,18 @@ If the addresses used in the KNX installation are structured, this way it is pos
 <p>Collect all information about heating in all rooms: <code><strong>/</strong>/50</code></p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Don&#8217;t use wildcards when explicitly reading or writing data, this is only supported when subscribing to events.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
