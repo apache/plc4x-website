@@ -268,7 +268,59 @@
             <div class="sect1">
 <h2 id="apache_iotdb_incubating">Apache IotDB (Incubating)</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Apache IoTDB (incubating) is database for storing time serie data.
+Therefore, it can be a good solution for managing the data which is collected by PLC4x.</p>
+</div>
+<div class="sect2">
+<h3 id="data_model_concept">Data Model (Concept)</h3>
+<div class="paragraph">
+<p>Given a PLC address and some fields, we can consider the PLC as a <code>device</code> in IoTDB, and each field
+as a <code>measurement</code> in IoTDB. A couple of PLCs form a <code>storage group</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example, there is a virtual storage group <code>mi</code>, and a PLC <code>d1</code>, which has one field <code>RANDOM/foo:Integer</code>.
+Then, in IoTDB, we can get a time series like <code>root.mi.d1.foo</code> (or <code>root.mi.d1.RANDOM_foo_Integer</code>, as you like).
+Then, we can write data into IoTDB using JDBC with SQL or native API called session API.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example">Example</h3>
+<div class="paragraph">
+<p><a href="https://github.com/apache/plc4x/tree/develop/plc4j/examples/hello-integration-iotdb" class="bare">https://github.com/apache/plc4x/tree/develop/plc4j/examples/hello-integration-iotdb</a> shows an example
+to collect data using PLC4x and then writing data to IoTDB.</p>
+</div>
+<div class="paragraph">
+<p>To run the java example, some arguments are needed:</p>
+</div>
+<div class="paragraph">
+<p>e.g., <code>java -jar &#8230;&#8203;..  --connection-string simulated://127.0.0.1 --field-address RANDOM/foo:Integer  --polling-interval 1000 --iotdb-address 127.0.0.1:6667 --iotdb-user-name root --iotdb-user-password root --iotdb-sg mi --iotdb-device d1 --iotdb-datatype INT32 --use-jdbc false</code></p>
+</div>
+<div class="paragraph">
+<p>Then PLC4x will collect data from a simulated PLC device, which generate random integer per 1 second.
+IoTDB&#8217;s address is 127.0.0.1 and the port is 6667. The data will be stored in device <code>root.m1.d1</code>, and the measurement name is RANDOM_foo_Integer.</p>
+</div>
+<div class="paragraph">
+<p>If you are using IoTDB v0.10.0 with the default configuration, and do not manually create the above time series, then IoTDB will consider the data as float.
+So, after running the program a few secondes, you can query the data using IoTDB&#8217;s command line: <code>select * from root.mi.d1;</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>+-----------------------------+-----------------------------+
+|                         Time|root.mi.d1.RANDOM_foo_Integer|
++-----------------------------+-----------------------------+
+|2020-07-16T20:01:39.216+08:00|                -1.34242598E9|
+|2020-07-16T20:01:40.150+08:00|                 -9.4141104E7|
+|2020-07-16T20:01:41.154+08:00|                 1.40969664E9|
+|2020-07-16T20:01:42.155+08:00|                  9.5824531E8|
+|2020-07-16T20:01:43.157+08:00|                  -4.207406E7|
++-----------------------------+-----------------------------+</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The detailed usage about IoTDB can be found <a href="https://iotdb.apache.org/UserGuide/Master/Client/Programming%20-%20Native%20API.html" class="bare">https://iotdb.apache.org/UserGuide/Master/Client/Programming%20-%20Native%20API.html</a></p>
+</div>
+</div>
 </div>
 </div>
         </main>
