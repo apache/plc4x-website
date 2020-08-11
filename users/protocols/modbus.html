@@ -417,7 +417,7 @@
 <p>Discrete Input (Boolean / 1 bit)</p>
 </li>
 <li>
-<p>Input Register (Short / 16 bi)</p>
+<p>Input Register (Short / 16 bit)</p>
 </li>
 </ul>
 </div>
@@ -430,9 +430,21 @@
 <p>Coil (Boolean / 1 bit)</p>
 </li>
 <li>
-<p>Holding Register (Short / 16 bi)</p>
+<p>Holding Register (Short / 16 bit)</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Extended Registers (6x) - Function Code 20 - (Short / 16 bit)</p>
+</div>
+<div class="paragraph">
+<p>These are able to be referenced as a continuous data area 600000 - 699999. Internally this is converted to the file number/register format. File number 1 corresponds to the first 10000 registers (600000 - 609999), file number 2 the next 10000 (610000 - 619999) and so on.</p>
+</div>
+<div class="paragraph">
+<p>Note unlike the other areas this area starts at address 0.</p>
+</div>
+<div class="paragraph">
+<p>At the moment this implementation only supports reading the extended memory area.</p>
 </div>
 <div class="paragraph">
 <p>Here come the syntax descriptions of these addresses (Each address can reference either a single item or an array):</p>
@@ -483,6 +495,14 @@
 <p><code>holding-register:{start-address}</code> or <code>holding-register:{start-address}[{count}]</code> or <code>4{start-address}</code> or <code>4{start-address}[{count}]</code> or <code>4x{start-address}</code> or <code>4x{start-address}[{count}]</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Read/Write Short value, usually representing an analog output from the PLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extended Register</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>extended-register:{start-address}</code> or <code>extended-register:{start-address}[{count}]</code> or <code>6{start-address}</code> or <code>6{start-address}[{count}]</code> or <code>6x{start-address}</code> or <code>6x{start-address}[{count}]</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read/Write Short value,</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
 </tr>
 </tbody>
