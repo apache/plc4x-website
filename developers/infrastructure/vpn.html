@@ -237,9 +237,31 @@
 <div class="paragraph">
 <p>This VPN gateway is listening on port <code>vpn.plc4x.apache.org</code> on port <code>444</code> and should it should be possible to connect to it via OpenVPN.</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="../../images/plc4x-vpn-network.svg" alt="plc4x vpn network" width="1216" height="444"/>
+<pre>Failed to generate image: Could not find the 'nwdiag', 'nwdiag3' executable in PATH; add it to the PATH or specify its location using the 'nwdiag' document attribute
+{
+      network internet {
+        address = "X.X.X.0/28"
+
+        vpn.plc4x.a.o [address = "217.110.130.19"];
+        plc4x-vm.a.o [address = "62.210.60.247"];
+        committer-a;
+        committer-b;
+      }
+
+      network plc4x-iot-lab {
+        address = "10.10.64.x/24"
+
+        vpn.plc4x.a.o [address = "10.10.64.1"];
+        F-FBs-40MC [address = "10.10.64.10"];
+        S-S7-1212 [address = "10.10.64.20"];
+        S-KTP-400 [address = "10.10.64.25"];
+        WG-750-352 [address = "10.10.64.30"];
+        BH-C6920-0030 [address = "10.10.64.40"];
+        committer-int [address = "10.10.64.200"];
+    }
+}</pre>
 </div>
 </div>
 <div class="paragraph">
