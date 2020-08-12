@@ -134,43 +134,9 @@ As soon as a valid value was found the tool then output the detected constant va
 </div>
 <div class="sect2">
 <h3 id="structure_of_a_setup_communication_request">Structure of a Setup Communication Request</h3>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: Could not find the 'packetdiag', 'packetdiag3' executable in PATH; add it to the PATH or specify its location using the 'packetdiag' document attribute
-{
-    colwidth = 32
-
-    // ISO on TCP
-    * ISO on TCP Magic Number (0x03) [len = 8, color = "#068D9D"]
-    * Reserved (0x00) [len = 8, color = "#068D9D"]
-    * Packet Length (including ISO on TCP header) [len = 16, color = "#068D9D"]
-
-    // ISO Transport Protocol
-    * ISO TP Header Length\n(excluding length byte) [len = 8, color = "#53599A"]
-    * TPDU-Code\n(Data = 0xF0) [len = 4, color = "#AEECEF"]
-    * Signal CDT\n(0x00) [len = 4, color = "#53599A"]
-    // ISO TP Header (Fixed Part)
-    * Destination Reference (0x??)[len = 16, color = "#53599A"]
-    * Source Reference (0x??)[len = 16, color = "#53599A"]
-    * Protocol Class\n(Class 0 = 0x00) [len = 8, color = "#53599A"]
-
-    // S7
-    96-103: S7 Protocol Magic Byte (0x32) [color = "#6D9DC5"]
-    * Message Type (JOB = 0x01) [len = 8, color = "#AEECEF"]
-    * Reserved (0x0000) [len = 16, color = "#6D9DC5"]
-    * PDU Reference (0x??)[len = 16, color = "#6D9DC5"]
-    * S7 Parameters Length  (8 = 0x08) [len = 16, color = "#6D9DC5"]
-    * S7 Data Length (0 = 0x00) [len = 16, color = "#6D9DC5"]
-
-    // S7 Parameters
-    * Function\n(Setup Communication = 0xF0) [len = 8, color = "#AEECEF"]
-    * Reserved (0x00) [len = 8, color = "#6D9DC5"]
-    * Max AMQ Caller [len = 16, color = "#80DED9"]
-    * Max AMQ Callee [len = 16, color = "#80DED9"]
-    * PDU Size [len = 16, color = "#80DED9"]
-
-    // S7 Data
-}</pre>
+<img src="../../images/s7-setup-communication-request.svg" alt="s7 setup communication request" width="896" height="440"/>
 </div>
 </div>
 <div class="paragraph">

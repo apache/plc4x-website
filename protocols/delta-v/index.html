@@ -157,24 +157,9 @@ We are hereby assuming that the inner protocol is the version of the DeltaV prot
 <div class="paragraph">
 <p>The general structure of such a wrapper packet seems to look like this:</p>
 </div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: Could not find the 'packetdiag', 'packetdiag3' executable in PATH; add it to the PATH or specify its location using the 'packetdiag' document attribute
-{
-    colwidth = 32
-
-    * Header\n(Constant = 0xFACE) [len = 16]
-    * Payload Length [len = 16]
-    * Type [len = 16]
-    * Message Id [len = 16]
-    * Sender Id [len = 16]
-    * Timestamp [len = 24]
-    * 0x80/0x00 [len = 8]
-    * 0x04 [len = 8]
-    * 0x00 [len = 8]
-    * Payload [len = 64]
-    * Checksum [len = 16]
-}</pre>
+<img src="../../images/deltav-wrapper-packet.svg" alt="deltav wrapper packet" width="896" height="400"/>
 </div>
 </div>
 <div class="paragraph">
@@ -226,26 +211,9 @@ This is done by sending a packet back to the originator, but with a length of <c
 </div>
 <div class="sect3">
 <h4 id="connecting_an_os_to_a_controller">Connecting an OS to a Controller</h4>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: Could not find the 'seqdiag', 'seqdiag3' executable in PATH; add it to the PATH or specify its location using the 'seqdiag' document attribute
-{
-    Controller; OS;
-
-    edge_length = 400;
-    span_height = 18;
-    default_fontsize = 12;
-    activation = none;
-
-    OS -&gt;  Controller [label = "Type 0x0003 (Connection Request)"];
-    OS &lt;-  Controller [label = "Type 0x0004 (Connection Response)"];
-
-    OS -&gt;  Controller [label = "Type 0x0002 Subtype 0x0501 (Version Information)"];
-    OS &lt;-- Controller [label = "Ack"];
-
-    OS &lt;- Controller [label = "Type 0x0002 Subtype 0x0502 (Version Information)"];
-    OS --&gt; Controller [label = "Ack"];
-}</pre>
+<img src="../../images/deltav-connect.png" alt="deltav connect" width="656" height="364"/>
 </div>
 </div>
 </div>
@@ -267,20 +235,9 @@ So these messages have the exact same id as the following request being sent out
 <div class="paragraph">
 <p>But that is just an assumption.</p>
 </div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: no implicit conversion of nil into String
-{
-    Controller; OS;
-
-    edge_length = 400;
-    span_height = 18;
-    default_fontsize = 12;
-    activation = none;
-
-    OS -&gt; Controller [label = "Type 0x0006 (Sync)"];
-    OS &lt;-- Controller [label = "Type 0x0006 (Sync)"];
-}</pre>
+<img src="../../images/deltav-sync.png" alt="deltav sync" width="656" height="188"/>
 </div>
 </div>
 </div>
@@ -292,20 +249,9 @@ So these messages have the exact same id as the following request being sent out
 <div class="paragraph">
 <p>If the value of a subscribed value changes in the controller, a message type <code>0x0002</code> with sub-type <code>0x0403</code> is sent.</p>
 </div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: no implicit conversion of nil into String
-{
-    Controller; OS;
-
-    edge_length = 400;
-    span_height = 18;
-    default_fontsize = 12;
-    activation = none;
-
-    OS &lt;- Controller [label = "Type 0x0002 Subtype 0x0403 (...)"];
-    OS --&gt; Controller [label = "Ack"];
-}</pre>
+<img src="../../images/deltav-data.png" alt="deltav data" width="656" height="188"/>
 </div>
 </div>
 </div>
@@ -314,20 +260,9 @@ So these messages have the exact same id as the following request being sent out
 <div class="paragraph">
 <p>In general it seems as if all sub-types regarding events and alarms start with <code>0x03</code>.</p>
 </div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: no implicit conversion of nil into String
-{
-    Controller; OS;
-
-    edge_length = 400;
-    span_height = 18;
-    default_fontsize = 12;
-    activation = none;
-
-    OS &lt;- Controller [label = "Type 0x0002 Subtype 0x030? (...)"];
-    OS --&gt; Controller [label = "Ack"];
-}</pre>
+<img src="../../images/deltav-alarm.png" alt="deltav alarm" width="656" height="188"/>
 </div>
 </div>
 </div>
