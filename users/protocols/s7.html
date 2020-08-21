@@ -508,6 +508,22 @@ Possible values are:</p>
 </ul>
 </div>
 <div class="paragraph">
+<p>When reading a <code>STRING</code> datatype, currently 254 characters would automatically be fetched from the PLC.</p>
+</div>
+<div class="paragraph">
+<p>In order to limit the amount of data, we extended the <code>STRING</code> type declaration syntax to allow limiting this.</p>
+</div>
+<div class="paragraph">
+<p>With the following format less than 254 characters can be read:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:STRING({string-length})[{Count}]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p>These addresses can usually be copied directly out of TIA portal.
 However we also implemented a shorter version, as above version does have some unnecesary boilerplate parts (The <code>.DB</code> in the middle as well as the <code>Short-Data-Type-Code</code>)</p>
 </div>
@@ -521,6 +537,9 @@ However we also implemented a shorter version, as above version does have some u
 </li>
 <li>
 <p>DB{Data-Block-Number}.{Start-Byte-Address}:{Data-Type-Code}[{Count}]</p>
+</li>
+<li>
+<p>DB{Data-Block-Number}.{Start-Byte-Address}:STRING({string-length})[{Count}]</p>
 </li>
 </ul>
 </div>
