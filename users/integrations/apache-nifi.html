@@ -268,7 +268,253 @@
             <div class="sect1">
 <h2 id="apache_nifi">Apache NiFi</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Apache NiFi allows creating systems that process data around the concept of data-streams.</p>
+</div>
+<div class="paragraph">
+<p>Apache PLC4X provides both <code>Source</code> as well as <code>Sink</code> processors for accessing data in PLCs or writing data to them.</p>
+</div>
+<div class="sect2">
+<h3 id="setting_up_nifi">Setting Up NiFi</h3>
+<div class="paragraph">
+<p>Even if the documentation of NiFi states it works with any Java version above 1.8, this is not quite true.</p>
+</div>
+<div class="paragraph">
+<p>I have found that NiFi only works with Java versions below 11. With <code>Java 1.8</code> you are definitely on the safe-side.</p>
+</div>
+<div class="paragraph">
+<p>When starting with newer versions the start script just terminates after logging a statement that NiFi is now starting.</p>
+</div>
+<div class="paragraph">
+<p>Other than that, I haven&#8217;t encountered any other requirements.</p>
+</div>
+<div class="paragraph">
+<p>As soon as you have started NiFi using the <code>nifi.sh run</code> or <code>run-nifi.bat</code> the Web-UI of NiFi should be available at: <a href="http://localhost:8080/nifi/" class="bare">http://localhost:8080/nifi/</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It might take a few seconds for the Web-UI to show up &#8230;&#8203; so if you&#8217;re getting errors in the browser, give it some time to start.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling_plc4x_processors_in_nifi">Enabling PLC4X Processors in NiFi</h3>
+<div class="paragraph">
+<p>In order to enable <code>Apache PLC4X</code> support in <code>Apache NiFi</code> all you need to do, is to copy our <code>nar</code> archive into the Nifi installations <code>lib</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>You can either build the <code>nar</code> by building PLC4X and using the version in the <code>plc4j/integrations/apache-nifi/nifi-plc4x-nar/target</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>Or you can download a released version from Maven central: <a href="https://search.maven.org/search?q=plc4j-nifi-plc4x-nar" class="bare">https://search.maven.org/search?q=plc4j-nifi-plc4x-nar</a></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/empty-nifi-flow.png" alt="empty nifi flow"/>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using_a_plc4x_source_processor_in_nifi">Using a PLC4X Source Processor in NiFi</h3>
+<div class="paragraph">
+<p>Add a PLC4X Source processor to the canvas, click on the <code>Add processor</code> button and drag it into the canvas.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/add-processor.png" alt="add processor"/>
+</div>
+</div>
+<div class="paragraph">
+<p>A popup will appear in which you are presented the list of all available processors.</p>
+</div>
+<div class="paragraph">
+<p>Enter <code>PLC4X</code> in the search field and select the <code>Plc4xSourceProcessor</code> and click <code>Add</code> (I think you can also double-click on the processor)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/list-of-plc4x-processors.png" alt="list of plc4x processors"/>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you click on a Processor, it&#8217;s a little hard to see it&#8217;s selected as the selection is not highlighted.
+However, you can see a processor is selected as the bottom part shows the name of the selected processor.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As soon as your new processor is added to the canvas you need to configure it. Do this by double clicking on it (Or by right-clicking and selecting <code>Configure</code>)</p>
+</div>
+<div class="paragraph">
+<p>Here you now need to provide a <code>PLC4X connection string</code> and a <code>PLC resource address String</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PLC connection String</code> is just a normal PLC4X connection string. Please consult the documentation on using the different types of supported connections <a href="https://plc4x.apache.org/users/protocols/index.html">Here</a></p>
+</div>
+<div class="paragraph">
+<p>The <code>PLC resource address String</code> is a <code>;</code>-separarated list of <code>name-value-pairs</code>, where each <code>name</code> is assigned a <code>plc4x addrress</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For information on how an address string looks for the type of driver you are using, please check the documentation for the driver you are using <a href="https://plc4x.apache.org/users/protocols/index.html">Here</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>PLC connection String: s7://192.168.23.30
+PLC resource address String: time-value=%DB2:8:TIME;string-value=%DB2:30.0:STRING(10)</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configured-plc4x-source-processor.png" alt="configured plc4x source processor"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Before you save the processor there is one further setting that needs to be set.
+For this please change to the <code>Scheduling</code> tab and set the <code>Run Schedule</code> to let&#8217;s say 1 or 2 seconds.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configure-scheduling.png" alt="configure scheduling"/>
+</div>
+</div>
+<div class="paragraph">
+<p>If we don&#8217;t do this, NiFi will hammer the PLC with requests and in case of my S7 it will simply start denying accepting new connections.</p>
+</div>
+<div class="paragraph">
+<p>It will still say <code>Invalid</code> at the top, but this has nothing to do with your entries, it&#8217;s much more that this processor produces two data-streams: <code>SUCCESS</code> and <code>FAILURE</code>.
+These need to be connected next.</p>
+</div>
+<div class="paragraph">
+<p>After that&#8217;s done, click on <code>Apply</code>.</p>
+</div>
+<div class="paragraph">
+<p>But before we can do that, we need to add something we can connect them to.</p>
+</div>
+<div class="paragraph">
+<p>So we simply add another processor to the canvas: Using a <code>LogMessage</code> processor.
+This simply logs every bit of data to the NiFi log-system.</p>
+</div>
+<div class="paragraph">
+<p>As the <code>LogMessage</code> processor creates a stream of events every time a log message is logged, we need to configure it to auto-terminate that relationship.
+Do this by double-clicking on the processor and selecting the <code>Settings</code> tab.
+Here check the checkbox labeled <code>SUCCESS</code> in the section <code>Automatically Terminate Relationships</code> and then click <code>Apply</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configured-log-processors.png" alt="configured log processors"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can connect both processors.</p>
+</div>
+<div class="paragraph">
+<p>Notice the <code>arrow-icon</code> as soon as the mouse is over the Plc4xSourceProcessor?
+Click on this and start dragging. You notice that you now have a connection which you simply drag onto the log processor.
+As soon as you release the connection there, the two processors are now connected.</p>
+</div>
+<div class="paragraph">
+<p>As soon as you release the mouse, a popup will pop up and allow you to configure the connection. You can generally select which streams you want to connect.</p>
+</div>
+<div class="paragraph">
+<p>In this case we&#8217;ll simply connect the <code>SUCCESS</code> and the <code>FAILURE</code> stream to the log processor.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configuring-connection.png" alt="configuring connection"/>
+</div>
+</div>
+<div class="paragraph">
+<p>As soon as that&#8217;s done, you are finished configuring your flow.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configured-flow.png" alt="configured flow"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Last thing we now need to do, is to start the processors.
+Currently, they are stopped (You can see it with the red square icon)</p>
+</div>
+<div class="paragraph">
+<p>Do this by right-clicking on both processors and selecting <code>Start</code>.</p>
+</div>
+<div class="paragraph">
+<p>Now you should see an increasing number at the <code>Out</code> of the PLC4X Source and on the <code>In</code> of the Logging Processor.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/running-flow.png" alt="running flow"/>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling_debugging">Enabling debugging</h3>
+<div class="paragraph">
+<p>In order to be able to debug the PLC4X, please edit the <code>bin/nifi.sh</code> (On Mac &amp; Linux) and comment in the line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>BOOTSTRAP_DEBUG_PARAMS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Windows, you would need to manually add:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to the <code>run-nifi.bat</code> files <code>JAVA_ARGS</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you want NiFi so suspend at the start, so you can be sure to captue the entire execution, just change <code>suspend=n</code> to <code>suspend=y</code>.
+This will make NiFi pause till a remote debugging session is connected.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
         </main>

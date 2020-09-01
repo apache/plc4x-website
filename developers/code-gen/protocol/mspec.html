@@ -573,7 +573,9 @@ If they don&#8217;t match an exception is thrown.</p>
 <div class="sect3">
 <h4 id="padding_field">padding Field</h4>
 <div class="paragraph">
-<p>A padding field outputs additional padding data, if an expression evaluates to <code>true</code>.</p>
+<p>A padding field allows aligning of data blocks.
+It outputs additional padding data, given amount of times specified by padding expression.
+Padding is added only when result of expression is bigger than zero.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -581,7 +583,7 @@ If they don&#8217;t match an exception is thrown.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When parsing a <code>padding</code> field is just consumed without being made available as property or local valiable if the <code>padding-expression</code> evaluates to true.
+<p>When parsing a <code>padding</code> field is just consumed without being made available as property or local variable if the <code>padding-expression</code> evaluates to value greater than zero.
 If it doesn&#8217;t, it is just skipped.</p>
 </div>
 <div class="paragraph">

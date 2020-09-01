@@ -487,6 +487,29 @@ All Properties are expanded to the value Maven uses.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="use_the_compiled_library_with_gradle">Use the compiled library with Gradle</h3>
+<div class="paragraph">
+<p>Compiling the library as explained here add the new version in the local Maven repository (i.e. usually under <code>~/.m2/repository</code> on linux like systems), if you would like to use Gradle as Build Tool for your project you have just to use a local repository in your Gradle <code>build.gradle</code> file.</p>
+</div>
+<div class="paragraph">
+<p>Here there&#8217;s an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="groovy">repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation group: 'org.apache.plc4x', name: 'plc4j-api', version: '0.8.0-SNAPSHOT'
+    implementation group: 'org.apache.plc4x', name: 'plc4j-driver-s7', version: '0.8.0-SNAPSHOT'
+    implementation group: 'org.apache.plc4x', name: 'plc4j-connection-pool', version: '0.8.0-SNAPSHOT'
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
         </main>
