@@ -128,7 +128,7 @@
                             <a href="../../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Modbus (TCP/Serial)</strong>
+                            <strong class="nav-link">Modbus</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/opc-ua.html" class="nav-link">OPC UA</a>
@@ -319,16 +319,10 @@
 <td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p><code>tcp</code> (Default Port: 502)</p>
-</li>
-<li>
-<p><code>serial</code></p>
-</li>
-<li>
-<p><code>raw-socket</code></p>
-</li>
-<li>
-<p><code>pcap-replay</code></p>
+<p><code>tcp</code> (Default Port: 502)
+#- <code>serial</code>
+#- <code>raw-socket</code>
+#- <code>pcap-replay</code></p>
 </li>
 </ul>
 </div></div></td>
@@ -342,7 +336,7 @@
 <p><code>read</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>tcp</code> and <code>serial</code> transport.</p>
+<p>Only supported with <code>tcp</code> transport.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -351,16 +345,7 @@
 <p><code>write</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>tcp</code> and <code>serial</code> transport.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>subscribe</code> (passive)</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>raw-socket</code> and <code>pcap-replay</code>.</p>
+<p>Only supported with <code>tcp</code> transport.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -369,10 +354,10 @@
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>request-timeout</code> (1000ms)</p>
+<p><code>request-timeout</code> (ms)</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>Rack</code> value for the client (PLC4X device). Defaults to 1.</p>
+<p>Timeout after which a request is terminated. Defaults to 1000ms.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -381,7 +366,7 @@
 <p><code>unit-identifier</code> (1)</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>Slot</code> value for the client (PLC4X device). Defaults to 1.</p>
+<p>Unit-identifier that identifies the target PLC (On RS485 multiple Modbus Devices can be listening). Defaults to 1.</p>
 </div></div></td>
 </tr>
 </tbody>
