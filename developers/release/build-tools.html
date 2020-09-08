@@ -259,7 +259,7 @@ This is the version the <code>develop</code> branch will be changed to.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:branch -DbranchName=release/code-generation/{minor-version}</pre>
+<pre>mvn release:branch -DbranchName=releases/code-generation/{minor-version}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -268,7 +268,7 @@ So in case of preparing the release branch for <code>{project.version}</code> th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -DbranchName=release/code-generation/0.8</pre>
+<pre>   mvn release:branch -DbranchName=releases/code-generation/0.8</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -286,7 +286,7 @@ So in case of preparing the release branch for <code>{project.version}</code> th
 <p>This step now should perform quite quickly as no build and no tests are involved.</p>
 </div>
 <div class="paragraph">
-<p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>release/code-generation/0.8</code> branch is created.</p>
+<p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>releases/code-generation/0.8</code> branch is created.</p>
 </div>
 </div>
 <div class="sect2">
@@ -373,7 +373,7 @@ In order to prepare a release-candidate, the first step is switching to the corr
 <p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix)</p>
 </li>
 <li>
-<p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>release/code-generation/{release-version}</code> (<code>release/code-generation/0.8.0</code> in our case)</p>
+<p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>releases/code-generation/{release-version}</code> (<code>releases/code-generation/0.8.0</code> in our case)</p>
 </li>
 <li>
 <p>The next development version (The version present in the pom after the release) (<code>0.9.0</code> in our case)</p>
@@ -401,7 +401,7 @@ In order to prepare a release-candidate, the first step is switching to the corr
 <p>Run a build with all tests</p>
 </li>
 <li>
-<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release release/code-generation/0.8.0</code>)</p>
+<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release releases/code-generation/0.8.0</code>)</p>
 </li>
 <li>
 <p>Push the commit</p>
@@ -433,7 +433,7 @@ is in the correct state. Please select the release branch and verify the commit 
 </div>
 </div>
 <div class="paragraph">
-<p>It is important that the commit with the message "[maven-release-plugin] prepare release release/code-generation/0.8.0" is tagged with the release tag (in this case release/code-generation/0.8.0)</p>
+<p>It is important that the commit with the message "[maven-release-plugin] prepare release releases/code-generation/0.8.0" is tagged with the release tag (in this case releases/code-generation/0.8.0)</p>
 </div>
 <div class="paragraph">
 <p>If you check the commit itself, it should mainly consist of version updates like this:</p>
@@ -562,13 +562,21 @@ Here it automatically executes a maven build (You don&#8217;t have to do this, i
 <div class="listingblock">
 <div class="content">
 <pre>   ./KEYS
-   ./0.8.0/build-tools/code-generation
-   ./0.8.0/build-tools/code-generation/rc1
-   ./0.8.0/build-tools/code-generation/rc1/README
-   ./0.8.0/build-tools/code-generation/rc1/RELEASE_NOTES
-   ./0.8.0/build-tools/code-generation/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip
-   ./0.8.0/build-tools/code-generation/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip.asc
-   ./0.8.0/build-tools/code-generation/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip.sha512</pre>
+   ./build-tools/code-generation/0.8.0
+   ./build-tools/code-generation/0.8.0/rc1
+   ./build-tools/code-generation/0.8.0/rc1/README
+   ./build-tools/code-generation/0.8.0/rc1/RELEASE_NOTES
+   ./build-tools/code-generation/0.8.0/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip
+   ./build-tools/code-generation/0.8.0/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip.asc
+   ./build-tools/code-generation/0.8.0/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip.sha512</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I usually prepare exactly the same directory structure, starting with the 0.8.0 locally and then just import everything using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>svn import {current-full-version} https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{current-full-version} -m"Staging of rc1 of PLC4X Build-Tools (Code-Generation) {current-full-version}"</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -584,7 +592,7 @@ It should contain all the information needed.</p>
 Ideally you just copy them there from there.</p>
 </div>
 <div class="paragraph">
-<p>All of the three <code><strong>-source-relese.zip</strong></code> artifacts should be located in the directory: <code>target/checkout/target</code></p>
+<p>All of the three <code><strong>-source-relese.zip</strong></code> artifacts should be located in the directory: <code>code-generation/target/checkout/code-generation/target</code></p>
 </div>
 <div class="paragraph">
 <p>So after committing these files to SVN you are ready to start the vote.</p>
@@ -614,7 +622,7 @@ The following would be the one used to do our first TLP release:</p>
    are required to pass.
 
    Repository: https://gitbox.apache.org/repos/asf/plc4x-build-tools.git
-   Release tag: release/code-generation/0.8.0
+   Release tag: releases/code-generation/0.8.0
    Hash for the release tag: {replacethiswiththerealgitcommittag}
 
    Per [3] "Before voting +1 PMC members are required to download
