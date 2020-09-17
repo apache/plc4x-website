@@ -374,13 +374,141 @@
 </div>
 <div class="sect2">
 <h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+<div class="sect3">
+<h4 id="general_format">General Format</h4>
+<div class="paragraph">
+<p>In general all Modbus addresses have this format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{Memory-Area}{start-address}[{array-size}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the array-part is omitted, the size-default of <code>1</code> is assumed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="memory_areas">Memory Areas</h4>
+<div class="paragraph">
+<p>There are a number of memory areas defined in the Modbus specification.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Discrete Input Area</p>
+</li>
+<li>
+<p>Coil Area</p>
+</li>
+<li>
+<p>Input Register Area</p>
+</li>
+<li>
+<p>Holding Register</p>
+</li>
+<li>
+<p>Extended Register Area</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15.3846%;"/>
+<col style="width: 15.3846%;"/>
+<col style="width: 38.4615%;"/>
+<col style="width: 7.6923%;"/>
+<col style="width: 15.3846%;"/>
+<col style="width: 7.6924%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Memory Area Aliases</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Bit-Size</th>
+<th class="tableblock halign-left valign-top">Permissions</th>
+<th class="tableblock halign-left valign-top">Starting Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Discrete Input</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>discrete-input:</code> or <code>1</code> or <code>1x</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean input value, usually representing a binary input to the PLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read Only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coil</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>coil:</code> or <code>0</code> or <code>0x</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean value, usually representing a binary output from the PLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read/Write</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Input Register</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>input-register:</code> or <code>3</code> or <code>3x</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short input value, usually representing an analog input to the PLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read Only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Holding Register</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>holding-register:</code> or <code>4</code> or <code>4x</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short value, usually representing an analog output from the PLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read/Write</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extended Register</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>extended-register:</code> or <code>6</code> or <code>6x</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short value,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read Only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Initially the Modbus format allowed up to 10000 address to be specified or the discrete inputs, coils, input registers and holding registers.
+Later on, this was expanded to allow up 65536 address within each memory area (except the extended register area).
+When using the long address format i.e. input-registers:1 the addresses between 1 and 65535 are able to be specified.
+When using the shorter versions there are two formats available  i.e. 30001 and 300001.
+With the shorter format 3XXXX being limited to between 30001 and 39999, while the longer format 3XXXXX being limited to between 300001 and 365535.
+These memory areas all start at address 1.</p>
+</div>
+<div class="paragraph">
+<p>For the extended register area the addresses 0-99999 are able to be specified. These registers are mapped to file records with a length of 10000. Address 600000 corresponds to the first address in file record 0.
+Address 610000 is then the first address in the second file record and so on. It is noted that there is generally only 10 file records (600000 thru to 699999) however the spec allows for 65536 file records.
+Using the extended-register: format you are able to reference all of these, if the shorter format is used then it is limited to 699999.
+This memory area starts at address 0.
+At the moment this implementation only supports reading the extended memory area.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="data_types">Data Types</h4>
 <div class="paragraph">
 <p>In contrast to most other protocols Modbus only supports two datatypes.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Bit (Coil)</p>
+<p>Bit (Discrete Inputs/Coils)</p>
 </li>
 <li>
 <p>Short (2-bytes) (Registers)</p>
@@ -388,110 +516,153 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Some implementations implement more types based on these, such as 16 bit half-precision floating point types wrapped in a Register or joining multiple Coils or Registers to bigger data-types, but this is not handled by the Modbus specification.</p>
+<p>A lot of the time different data types are placed within 16 bit registers areas. Such as 32-Bit Floating Points values which could be placed within two adjoining registers, currently PLC4X doesn&#8217;t have a way to convert these before passing them to the user.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="some_useful_tips">Some useful tips</h4>
+<div class="paragraph">
+<p>Most memory areas start at address 1, except for the extended register area which starts at 0. These are both mapped to 0x0000 when it is sent in the Modbus protocol.</p>
 </div>
 <div class="paragraph">
-<p>Coils and Registers are generally separated into pure inputs which are read-only and writable versions.</p>
+<p>The input, holding and extended registers consist of 16-bit registers while the discrete input and coil areas consist of bits.</p>
 </div>
 <div class="paragraph">
-<p>Inputs (Read-Only):</p>
+<p>The Modbus function codes:-</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Discrete Input (Boolean / 1 bit)</p>
+<p>0x01 (Read Coils)</p>
 </li>
 <li>
-<p>Input Register (Short / 16 bit)</p>
+<p>0x02 (Read Discrete Inputs)</p>
+</li>
+<li>
+<p>0x03 (Read Holding Registers)</p>
+</li>
+<li>
+<p>0x04 (Read Input Registers)</p>
+</li>
+<li>
+<p>0x05 (Write Single Coil)</p>
+</li>
+<li>
+<p>0x06 (Write Single Register)</p>
+</li>
+<li>
+<p>0x0F (Write Multiple Coils)</p>
+</li>
+<li>
+<p>0x10 (Write Multiple Registers)</p>
+</li>
+<li>
+<p>0x14 (Read File Record)(Extended Register Read)</p>
+</li>
+<li>
+<p>0x15 (Write File Record)(Extended Register Write is not yet supported)</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect3">
+<h4 id="examples">Examples</h4>
 <div class="paragraph">
-<p>Output (Read/Write):</p>
+<p>To read 10 holding registers starting at address 20 the following examples are all valid.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Coil (Boolean / 1 bit)</p>
+<p>holding-register:20[10]</p>
 </li>
 <li>
-<p>Holding Register (Short / 16 bit)</p>
+<p>400020[10]</p>
+</li>
+<li>
+<p>4x00020[10]</p>
+</li>
+<li>
+<p>40020[10]</p>
+</li>
+<li>
+<p>4x0020[10]</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Extended Registers (6x) - Function Code 20 - (Short / 16 bit)</p>
+<p>To read 1 holding register at address 5678 the following examples are valid.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>holding-register:5678</p>
+</li>
+<li>
+<p>405678</p>
+</li>
+<li>
+<p>4x05678</p>
+</li>
+<li>
+<p>45678</p>
+</li>
+<li>
+<p>4x5678</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>These are able to be referenced as a continuous data area 600000 - 699999. Internally this is converted to the file number/register format. File number 1 corresponds to the first 10000 registers (600000 - 609999), file number 2 the next 10000 (610000 - 619999) and so on.</p>
+<p>To read 10 extended registers starting at address 50 the following examples are valid.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>extended-register:50[10]</p>
+</li>
+<li>
+<p>600050[10]</p>
+</li>
+<li>
+<p>6x00050[10]</p>
+</li>
+<li>
+<p>60050[10]</p>
+</li>
+<li>
+<p>6x0050[10]</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Note unlike the other areas this area starts at address 0.</p>
+<p>This corresponds to addresses 50-60 in file record 1.</p>
 </div>
 <div class="paragraph">
-<p>At the moment this implementation only supports reading the extended memory area.</p>
+<p>To read 10 extended registers starting at address 9995 the following examples are valid.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>extended-register:9995[10]</p>
+</li>
+<li>
+<p>609995[10]</p>
+</li>
+<li>
+<p>6x09995[10]</p>
+</li>
+<li>
+<p>69995[10]</p>
+</li>
+<li>
+<p>6x9995[10]</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Here come the syntax descriptions of these addresses (Each address can reference either a single item or an array):</p>
+<p>This corresponds to addresses 9995-9999 in file record 1 and addresses 0-5 in file record 2.
+Note that this request is split into 2 sub requests in the Modbus protocol.</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;"/>
-<col style="width: 20%;"/>
-<col style="width: 50%;"/>
-<col style="width: 10%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Address Syntax</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Bit-Size</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Discrete Input</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>discrete-input:{start-address}</code> or <code>discrete-input:{start-address}[{count}]</code> or <code>1{start-address}</code> or <code>1{start-address}[{count}]</code> or <code>1x{start-address}</code> or <code>1x{start-address}[{count}]</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read-only Boolean input value, usually representing a binary input to the PLC</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Input Register</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>input-register:{start-address}</code> or <code>input-register:{start-address}[{count}]</code> or <code>3{start-address}</code> or <code>3{start-address}[{count}]</code> or <code>3x{start-address}</code> or <code>3x{start-address}[{count}]</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read-only Short input value, usually representing an analog input to the PLC</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Coil</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>coil:{start-address}</code> or <code>coil:{start-address}[{count}]</code> or <code>0{start-address}</code> or <code>0{start-address}[{count}]</code> or <code>0x{start-address}</code> or <code>0x{start-address}[{count}]</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read/Write Boolean value, usually representing a binary output from the PLC</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Holding Register</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>holding-register:{start-address}</code> or <code>holding-register:{start-address}[{count}]</code> or <code>4{start-address}</code> or <code>4{start-address}[{count}]</code> or <code>4x{start-address}</code> or <code>4x{start-address}[{count}]</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read/Write Short value, usually representing an analog output from the PLC</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Extended Register</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>extended-register:{start-address}</code> or <code>extended-register:{start-address}[{count}]</code> or <code>6{start-address}</code> or <code>6{start-address}[{count}]</code> or <code>6x{start-address}</code> or <code>6x{start-address}[{count}]</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read/Write Short value,</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
-</tr>
-</tbody>
-</table>
+</div>
 </div>
 </div>
 </div>
