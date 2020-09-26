@@ -381,11 +381,12 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>{Memory-Area}{start-address}[{array-size}]</pre>
+<pre>{memory-Area}{start-address}:{data-type}[{array-size}]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the array-part is omitted, the size-default of <code>1</code> is assumed.</p>
+<p>If the array-size part is omitted, the size-default of <code>1</code> is assumed.
+If the data-type part is omitted, it defaults to BOOL for Coils and Discrete Inputs and INT for input, holding and extended registers.</p>
 </div>
 </div>
 <div class="sect3">
@@ -479,7 +480,7 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Short value,</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read Only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read/Write</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 </tr>
 </tbody>
@@ -496,27 +497,73 @@ These memory areas all start at address 1.</p>
 <p>For the extended register area the addresses 0-99999 are able to be specified. These registers are mapped to file records with a length of 10000. Address 600000 corresponds to the first address in file record 0.
 Address 610000 is then the first address in the second file record and so on. It is noted that there is generally only 10 file records (600000 thru to 699999) however the spec allows for 65536 file records.
 Using the extended-register: format you are able to reference all of these, if the shorter format is used then it is limited to 699999.
-This memory area starts at address 0.
-At the moment this implementation only supports reading the extended memory area.</p>
+This memory area starts at address 0.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="data_types">Data Types</h4>
 <div class="paragraph">
-<p>In contrast to most other protocols Modbus only supports two datatypes.</p>
+<p>The following data types are supported</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Bit (Discrete Inputs/Coils)</p>
+<p>BOOL (boolean)</p>
 </li>
 <li>
-<p>Short (2-bytes) (Registers)</p>
+<p>SINT (int 8)</p>
+</li>
+<li>
+<p>USINT (uint 8)</p>
+</li>
+<li>
+<p>BYTE (uint 8)</p>
+</li>
+<li>
+<p>INT (int 16)</p>
+</li>
+<li>
+<p>UINT (uint 16)</p>
+</li>
+<li>
+<p>WORD (uint 16)</p>
+</li>
+<li>
+<p>DINT (int 32)</p>
+</li>
+<li>
+<p>UDINT (uint 32)</p>
+</li>
+<li>
+<p>DWORD (uint 32)</p>
+</li>
+<li>
+<p>LINT (int 64)</p>
+</li>
+<li>
+<p>ULINT (uint 64)</p>
+</li>
+<li>
+<p>LWORD (uint 64)</p>
+</li>
+<li>
+<p>REAL (float)</p>
+</li>
+<li>
+<p>LREAL (double)</p>
+</li>
+<li>
+<p>CHAR (char)</p>
+</li>
+<li>
+<p>WCHAR (2 byte char)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>A lot of the time different data types are placed within 16 bit registers areas. Such as 32-Bit Floating Points values which could be placed within two adjoining registers, currently PLC4X doesn&#8217;t have a way to convert these before passing them to the user.</p>
+<p>This may have partial support but more testing is required.
+- STRING (char[]) - When reading returns an unsigned byte array.
+- WSTRING (2 byte char[]) - When reading returns an unsigned word array.</p>
 </div>
 </div>
 <div class="sect3">
@@ -528,7 +575,7 @@ At the moment this implementation only supports reading the extended memory area
 <p>The input, holding and extended registers consist of 16-bit registers while the discrete input and coil areas consist of bits.</p>
 </div>
 <div class="paragraph">
-<p>The Modbus function codes:-</p>
+<p>The following Modbus function codes are supported:-</p>
 </div>
 <div class="ulist">
 <ul>
@@ -560,7 +607,7 @@ At the moment this implementation only supports reading the extended memory area
 <p>0x14 (Read File Record)(Extended Register Read)</p>
 </li>
 <li>
-<p>0x15 (Write File Record)(Extended Register Write is not yet supported)</p>
+<p>0x15 (Write File Record)(Extended Register Write)</p>
 </li>
 </ul>
 </div>
@@ -568,24 +615,24 @@ At the moment this implementation only supports reading the extended memory area
 <div class="sect3">
 <h4 id="examples">Examples</h4>
 <div class="paragraph">
-<p>To read 10 holding registers starting at address 20 the following examples are all valid.</p>
+<p>To read 10 holding registers starting at address 20 and parse as Unsigned Integers the following examples are all valid.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>holding-register:20[10]</p>
+<p>holding-register:20:UINT[10]</p>
 </li>
 <li>
-<p>400020[10]</p>
+<p>400020:UINT[10]</p>
 </li>
 <li>
-<p>4x00020[10]</p>
+<p>4x00020:UINT[10]</p>
 </li>
 <li>
-<p>40020[10]</p>
+<p>40020:UINT[10]</p>
 </li>
 <li>
-<p>4x0020[10]</p>
+<p>4x0020:UINT[10]</p>
 </li>
 </ul>
 </div>
@@ -634,7 +681,7 @@ At the moment this implementation only supports reading the extended memory area
 </ul>
 </div>
 <div class="paragraph">
-<p>This corresponds to addresses 50-60 in file record 1.</p>
+<p>This corresponds to addresses 50-59 in file record 1.</p>
 </div>
 <div class="paragraph">
 <p>To read 10 extended registers starting at address 9995 the following examples are valid.</p>
