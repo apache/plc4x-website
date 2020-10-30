@@ -266,7 +266,7 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="modbus_tcpserial">Modbus (TCP/Serial)</h2>
+<h2 id="modbus_tcpudpserial">Modbus (TCP/UDP/Serial)</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="connection_string_options">Connection String Options</h3>
@@ -319,10 +319,10 @@
 <td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p><code>tcp</code> (Default Port: 502)
-#- <code>serial</code>
-#- <code>raw-socket</code>
-#- <code>pcap-replay</code></p>
+<p><code>tcp</code> (Default Port: 502)</p>
+</li>
+<li>
+<p><code>udp</code> (Default Port: 502)</p>
 </li>
 </ul>
 </div></div></td>
@@ -374,6 +374,28 @@
 </div>
 <div class="sect2">
 <h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+<div class="sect3">
+<h4 id="connection_string">Connection String</h4>
+<div class="paragraph">
+<p>Modbus has the following connection string format:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>modbus:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example connection string would look like:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>modbus:tcp://127.0.0.1:502</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the transport, port and option fields are optional.</p>
+</div>
+</div>
 <div class="sect3">
 <h4 id="general_format">General Format</h4>
 <div class="paragraph">
@@ -557,19 +579,6 @@ This memory area starts at address 0.</p>
 </li>
 <li>
 <p>WCHAR (2 byte char)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This may have partial support but more testing is required.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>STRING (char[]) - When reading returns an unsigned byte array.</p>
-</li>
-<li>
-<p>WSTRING (2 byte char[]) - When reading returns an unsigned word array.</p>
 </li>
 </ul>
 </div>
