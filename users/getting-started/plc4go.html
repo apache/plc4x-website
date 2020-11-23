@@ -83,13 +83,16 @@
                             <a href="../../users/gettingstarted.html" class="nav-link">Getting Started</a>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/gettingstarted.html" class="nav-link">Java</a>
+                            <strong class="nav-link">Go</strong>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/general-concepts.html" class="nav-link">General Concepts</a>
+                            <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Virtual Modbus</strong>
+                            <a href="../../users/getting-started/general-concepts.html" class="nav-link">General Concepts</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
                             </li>
                             </ul>
             </li>
@@ -266,563 +269,388 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="playing_around_with_apache_plc4x_with_a_virtual_modbus_plc">Playing around with Apache PLC4X with a virtual Modbus PLC</h2>
+<h2 id="getting_started">Getting Started</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>If you want to get started with Apache PLC4X, but don&#8217;t have any PLC at hand, this tutorial will demonstrate how you can use a virtual <code>Modbus Slave</code> software to simulate communication with <code>Modbus</code> enabled PLCs.</p>
-</div>
-<div class="paragraph">
-<p>Such a fully open-source software is <code>ModbusPal</code> which is available from <a href="http://modbuspal.sourceforge.net/">here</a>.</p>
-</div>
-<div class="paragraph">
-<p>All you need, is to download the file called <code>ModbusPal.jar</code>.</p>
-</div>
 <div class="sect2">
-<h3 id="setting_up_the_virtual_modbus_slave">Setting up the virtual Modbus Slave</h3>
+<h3 id="initializing_a_dummy_project">Initializing a dummy project</h3>
 <div class="paragraph">
-<p>In order to run the software, you just need to execute the following command in the same directory you downloaded the Jar to:</p>
+<p>Just in case you want to get started with <code>Go</code>. In this part we&#8217;ll setup a new <code>Go</code> project.
+If you are familiar with this, you can go to the next chapter.</p>
+</div>
+<div class="paragraph">
+<p>Be sure to have installed <code>Go</code> on your system by downloading and installing it from <a href="https://golang.org/">https://golang.org/</a>.</p>
+</div>
+<div class="paragraph">
+<p>Now that that&#8217;s done, create a new directory and console execute the following command:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>java -jar ModbusPal.jar</pre>
+<pre>go mod init main</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>After this you will see the ModbusPal UI, which will look like this:</p>
+<p>This will effectively only create a <code>go.mod</code> file, which is sort of like Go&#8217;s counterpart to a Maven pom.xml.</p>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>This should look like this:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-1.png" alt="ModbusPal 1" width="300"/>
+<pre class="prettyprint highlight"><code>module main
+
+go 1.14</code></pre>
 </div>
-<div class="title">Figure 1. ModbusPal Main UI</div>
-</div>
-<div class="paragraph">
-<p>Here be sure that the <code>TCP port</code> is set to <code>502</code> (Which is the default Modbus port).</p>
 </div>
 <div class="paragraph">
-<p>Next click on <code>Add</code> to add a new Modbus slave:</p>
+<p>Now we need to create a <code>app.go</code> file which will be our main program.</p>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>Create a file <code>app.go</code> with the following content:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-2.png" alt="ModbusPal 2" width="300"/>
+<pre>package main
+
+func main() {
+
+}</pre>
 </div>
-<div class="title">Figure 2. ModbusPal Add slave UI</div>
 </div>
 <div class="paragraph">
-<p>Select a <code>Slave ID</code> as well as a <code>name</code>.</p>
+<p>By executing the command:</p>
 </div>
-<div class="paragraph">
-<p>After clicking on <code>Add</code> your new Modbus slave is ready to start.</p>
-</div>
-<div class="imageblock">
+<div class="literalblock">
 <div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-3.png" alt="ModbusPal 3" width="300"/>
+<pre>go run app.go</pre>
 </div>
-<div class="title">Figure 3. ModbusPal Main UI with one started slave</div>
-</div>
-<div class="paragraph">
-<p>By clicking on the <code>Run</code> button your slave is generally ready to communicate.</p>
 </div>
 <div class="paragraph">
-<p>However up until now this new wouldn&#8217;t have anything to share as we haven&#8217;t created any resources, so it would be an empty slave.</p>
+<p>You will execute your first <code>Go</code> progran &#8230;&#8203; however the output is rather underwhelming ;-)</p>
 </div>
 <div class="paragraph">
-<p>So as last steps, we have to create some resources to access.</p>
+<p>You&#8217;re now ready to continue.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="using_the_plc4go_api_directly">Using the PLC4Go API directly</h3>
 <div class="paragraph">
-<p>In order do to this, click on the <code>eye</code> icon of your newly created slave.</p>
+<p>In order to write a valid PLC4X Go application, all you need, is to add a dependency to the <code>plc4go module</code>.
+Now all you need to do, is execute the following command:</p>
 </div>
-<div class="imageblock">
+<div class="literalblock">
 <div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-4.png" alt="ModbusPal 4" width="300"/>
+<pre>go get github.com/apache/plc4x/plc4go</pre>
 </div>
-<div class="title">Figure 4. ModbusPal Main UI with one slave</div>
-</div>
-<div class="paragraph">
-<p>This will bring up an editor in which we can add some so-called <code>Holding registers</code> and some <code>Coils</code>.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s start with adding some Holding registers.</p>
+<p>This will checkout the latest version of the Apache PLC4X <code>PLC4Go</code> module.
+As soon as we have released a PLC4Go version by adding the name of the release-tag will use an explicit version.</p>
 </div>
 <div class="paragraph">
-<p>So make sure <code>Holding registers</code> is selected and then click on the <code>Add</code> button:</p>
+<p>This will be checked out in our home directory in</p>
 </div>
-<div class="imageblock">
+<div class="literalblock">
 <div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-6.png" alt="ModbusPal 6" width="300"/>
+<pre>⁓/go/pkg/mod/github.com/apache/plc4/plc4go@v0.0.0-{some-commit-hash}</pre>
 </div>
-<div class="title">Figure 5. Holding register view</div>
 </div>
 <div class="paragraph">
-<p>The tool will suggest creating <code>65536</code> new registers, I usually create 10 or so.</p>
+<p>In contrast to the PLC4J version this already contains all supported drivers.
+Perhaps we&#8217;ll change this in the future, but for now all comes in one bundle.</p>
 </div>
-<div class="admonitionblock tip">
+<div class="paragraph">
+<p>Now you&#8217;re generally set to start writing your first <code>PLC4Go</code> program.</p>
+</div>
+<div class="sect3">
+<h4 id="connecting_to_a_plc">Connecting to a PLC</h4>
+<div class="paragraph">
+<p>In contrast to PLC4J, which uses the service lookup to find the <code>transports</code> and the <code>drivers</code> automatically, in <code>PLC4Go</code> they need to be manually registered at the driver manager.</p>
+</div>
+<div class="paragraph">
+<p>First we need to initialize the <code>PlcDriverManager</code> by registering the transports and drivers with it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    // Create a new instance of the PlcDriverManager
+	driverManager := plc4go.NewPlcDriverManager()
+
+    // Register the Transports
+    transports.RegisterTcpTransport(driverManager)
+    transports.RegisterUdpTransport(driverManager)
+
+    // Register the Drivers
+	drivers.RegisterKnxDriver(driverManager)
+	drivers.RegisterModbusDriver(driverManager)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now that the <code>PlcDriverManager</code> is configured, we can use it to get a new connection.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   	// Get a connection to a remote PLC
+	connectionRequestChanel := driverManager.GetConnection("modbus://192.168.23.30?unit-identifier=1")
+
+	// Wait for the driver to connect (or not)
+	connectionResult := &lt;-connectionRequestChanel
+
+    // Check if something went wrong
+    if connectionResult.Err != nil {
+	    fmt.Printf("Error connecting to PLC: %s", connectionResult.Err.Error())
+		return
+	}
+
+    // If all was ok, get the connection instance
+	connection := connectionResult.Connection
+
+	// Make sure the connection is closed at the end
+	defer connection.Close()</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In PLC4Go we make heavy use of Go <code>channels</code>, which are similar to <code>Futures</code> or <code>Promisses</code>.</p>
+</div>
+<div class="paragraph">
+<p>And please pay attention to the <code>defer</code> command.
+This adds a call to a stack of things that need to be called as soon as the program terminates.
+However in contrast to Java&#8217;s <code>try-finally</code> blocks, this isn&#8217;t executed at the end of the code-block, but really when the program terminates.
+So when working with many connections or when using connections in loops (if for example you are polling), then this will keep on piling up active connections, till either you are no longer able to connect cause your PLC denies connections or till you run out of memory.</p>
+</div>
+<div class="paragraph">
+<p>So if you only need the connection in a code block, be sure to explicitly close it after usage.</p>
+</div>
+<div class="paragraph">
+<p>After this code block we should be in possession of a <code>connection</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>If we simply want to check the connectivity, we can use the <code>Ping</code> function on the connection object.
+Depending on the protocol used, it will exeute a command which only will complete if the connection is available.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>	// Try to ping the remote device
+	pingResultChannel := connection.Ping()
+
+    // Wait for the Ping operation to finsh
+	pingResult := &lt;-pingResultChannel
+	if pingResult.Err != nil {
+	    fmt.Printf("Couldn't ping device: %s", pingResult.Err.Error())
+		return
+	}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reading_data">Reading Data</h4>
+<div class="paragraph">
+<p>Most probably you will want to read something from a PLC.
+This is done by a <code>PlcReadRequest</code>.</p>
+</div>
+<div class="paragraph">
+<p>First off all, it&#8217;s probably a good idea to check if this connection supports reading:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>	if !connection.GetMetadata().CanRead() {
+	    fmt.Printf("This connection doesn't support read operations")
+        return
+    }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In order to create and run such a <code>PlcReadRequest</code>, please add the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>	// Prepare a read-request
+	readRequestBuilder := connection.ReadRequestBuilder()
+	readRequestBuilder.AddItem("field1", "holding-register:1:REAL")
+	readRequestBuilder.AddItem("field2", "holding-register:3:REAL")
+	readRequest, err := readRequestBuilder.Build()
+	if err != nil {
+		t.Errorf("error preparing read-request: %s", connectionResult.Err.Error())
+		t.Fail()
+		return
+	}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have any errors in the addresses or whatever, you will get an <code>err</code> instead of a <code>readRequest</code>.</p>
+</div>
+<div class="paragraph">
+<p>For now, let&#8217;s assume you got all addresses correctly.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>	// Execute a read-request
+	readResponseChanel := readRequest.Execute()
+
+	// Wait for the response to finish
+	readRequestResult := &lt;-readResponseChanel
+	if readRequestResult.Err != nil {
+		t.Errorf("error executing read-request: %s", readRequestResult.Err.Error())
+		return
+	}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please note that in this case we want to return a triple: <code>PlcReadRequest</code>, <code>PlcReadResponse</code>, <code>err</code>.
+As this is not supported in <code>Go</code>, the <code>PlcReadRequestResult</code> will contain all of these 3 elements.</p>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Tip</div>
+<div class="title">Note</div>
 </td>
 <td class="content">
-When I use ths tool some times I have to click the <code>Add</code> button more than once as the editor doesn&#8217;t always open the first time.
+This will probably change soon. The API is still a bit in flux.
 </td>
 </tr>
 </table>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>Now in order to do something with the response:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-7.png" alt="ModbusPal 7" width="300"/>
+<pre>	// Do something with the response
+	value1 := readRequestResult.Response.GetValue("field1")
+	value2 := readRequestResult.Response.GetValue("field2")
+	fmt.Printf("\n\nResult field1: %f\n", value1.GetFloat32())
+	fmt.Printf("\n\nResult field1: %f\n", value2.GetFloat32())</pre>
 </div>
-<div class="title">Figure 6. Add Holding register dialog</div>
 </div>
 <div class="paragraph">
-<p>After this the <code>Holding register</code> tab should look like this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-9.png" alt="ModbusPal 9" width="300"/>
-</div>
-<div class="title">Figure 7. Add Holding register dialog</div>
-</div>
-<div class="paragraph">
-<p>Now do the same on the <code>Coils</code> tab, which should look like this after that:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-8.png" alt="ModbusPal 8" width="300"/>
-</div>
-<div class="title">Figure 8. Add Holding register dialog</div>
-</div>
-<div class="paragraph">
-<p>As a last step, I would suggest to open the <code>Console</code>.</p>
-</div>
-<div class="paragraph">
-<p>You can do this by clicking on the <code>Console</code> button of the main UI.</p>
-</div>
-<div class="paragraph">
-<p>This will open the following window:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../../images/tutorials/modbus/ModbusPal-5.png" alt="ModbusPal 5" width="300"/>
-</div>
-<div class="title">Figure 9. Console</div>
-</div>
-<div class="paragraph">
-<p>Here ModbusPal will log every important event &#8230;&#8203; especially when getting new connections from PLC4X.</p>
+<p>The <code>GetValue</code> function returns a <code>PlcValue</code> instance, this had accessors for the most general <code>Go</code> types.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="some_modbus_basics">Some Modbus basics</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In general Modbus only knows two types of data: <code>Coils</code> and <code>Registers</code>.</p>
-</div>
-<div class="paragraph">
-<p>Coils are always simple <code>bits</code> or <code>boolean</code> values and Registers are always <code>16 bit short values</code>.</p>
-</div>
-<div class="paragraph">
-<p>However there are different types of these and they have different names:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Discrete Inputs</code> (Boolean values) (read-only)</p>
-</li>
-<li>
-<p><code>Coils</code> (Boolean values) (read-write)</p>
-</li>
-<li>
-<p><code>Input Registers</code> (16 bit short values) (read-only)</p>
-</li>
-<li>
-<p><code>Holding Registers</code> (16 bit short values) (read-write)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>For Modbus there is no universally agreed upon notation for addresses, however as the addresses are extremely simple, in PLC4X we address these as follows:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Table Title</caption>
-<colgroup>
-<col style="width: 50%;"/>
-<col style="width: 50%;"/>
-</colgroup>
-<thead>
+<div class="sect3">
+<h4 id="writing_data">Writing Data</h4>
+<div class="admonitionblock note">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Modbus Type</th>
-<th class="tableblock halign-left valign-top">PLC4X Address Syntax</th>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Not implemented yet
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Discrete Inputs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>discrete-input:{start-number}</code> or <code>discrete-input:{start-number}[{number-of-elements}]</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Coils</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>coil:{start-number}</code> or <code>coil:{start-number}[{number-of-elements}]</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Input Registers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>input-register:{start-number}</code> or <code>input-register:{start-number}[{number-of-elements}]</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Holding Registers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>holding-register:{start-number}</code> or <code>holding-register:{start-number}[{number-of-elements}]</code></p></td>
-</tr>
-</tbody>
 </table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="subscribing_to_data">Subscribing to Data</h4>
 <div class="paragraph">
-<p>All addresses support a notation with and without a size. If the size is not specified, then PLC4X assumes a size of <code>1</code>.</p>
+<p>As the <code>Modbus</code> protocol, which we used in the above examples, doesn&#8217;t support subscriptions, we are uing the <code>KNX</code> protocol for a demonstration on the subscription API.</p>
 </div>
 <div class="paragraph">
-<p>A PLC4X connection-string generally has the same structure for all drivers:</p>
+<p>Subscribing to data can be considered similar to reading data, at least the subscription itself if very similar to reading of data.</p>
 </div>
-<div class="literalblock">
+<div class="paragraph">
+<p>We first have to check if the connection supports this:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<pre>{driver-name}:{transport-name}://{transport-config}?{parameters}</pre>
+<pre>	if !connection.GetMetadata().CanSubscribe() {
+	    fmt.Printf("This connection doesn't support subscriptions operations")
+        return
+    }</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The fragments <code>transport-name</code> and <code>parameters</code> herby are usually optional, as every driver can support a default-transport, which is used if the transport is omitted.
-Also are most drivers implemented in a way that doesn&#8217;t require any parameters.
-These are only required if the connection requires some non-default settings.</p>
+<p>Now we&#8217;ll create the subscription request.</p>
 </div>
 <div class="paragraph">
-<p>For Modbus the typical transports are:</p>
+<p>The main difference is that while reading there is only one form how you could read, with subscriptions there are different forms of subscriptons:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>tcp (transport-config is the ip or host-name of the slave and can be suffixed by a port separated from the ip/host with <code>:</code>)</p>
+<p>Change of state (Event is sent as soon as a value changes)</p>
 </li>
 <li>
-<p>serial (transport-config is the device name of the serial interface)</p>
+<p>Cyclic (The Event is sent in regular cyclic intervals)</p>
+</li>
+<li>
+<p>Event (The Event is usually explicitly sent form the PLC as a signal)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>If we have setup ModbusPal as described above and are running this on the same computer, the connection string to connect to this should be:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>modbus://localhost</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you stated ModbusPal on a port different from Modbus' default port <code>502</code> you would have to also provide this port in the connection string.</p>
-</div>
-<div class="paragraph">
-<p>So assuming you started it on port 1502, then the connection string would look as follows:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>modbus://localhost:1502</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="writing_code">Writing code</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In order to write a valid PLC4X Java application, all you need, is to add a dependency to the <code>api module</code>.
-When using Maven, all you need to do is add this dependency:</p>
+<p>Therefore instead of using a normal <code>AddItem</code>, there are tree different functions as you can see in the following examples.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
-      &lt;artifactId&gt;plc4j-api&lt;/artifactId&gt;
-      &lt;version&gt;{project-version}&lt;/version&gt;
-    &lt;/dependency&gt;</pre>
+<pre>	// Prepare a subscription-request
+    subscriptionRequestBuilder := connection.SubscriptionRequestBuilder()
+    subscriptionRequestBuilder.AddChangeOfStateItem("heating-actual-temperature", "*/*/10:DPT_Value_Temp")
+    subscriptionRequestBuilder.AddChangeOfStateItem("heating-target-temperature", "*/*/11:DPT_Value_Temp")
+    subscriptionRequestBuilder.AddCyclicItem("heating-valve-open", "*/*/12:DPT_OpenClose", 500 * time.Millisecond)
+    subscriptionRequestBuilder.AddItemHandler(knxEventHandler)
+    subscriptionRequest, err := subscriptionRequestBuilder.Build()
+    if err != nil {
+	    fmt.Printf("Error preparing subscription-request: %s", connectionResult.Err.Error())
+        return
+    }</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will allow you to write a valid application, that compiles fine.
-However in order to actually connect to a device using a given protocol, you need to add this protocol implementation to the classpath.</p>
-</div>
-<div class="paragraph">
-<p>For example in order to communicate using the <code>Modbus</code> protocol, you would need to add the following dependency:</p>
+<p>The <code>Event hadnler</code> for intercepting incoming events could look like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
-      &lt;artifactId&gt;plc4j-driver-modbus&lt;/artifactId&gt;
-      &lt;version&gt;{project-version}&lt;/version&gt;
-      &lt;scope&gt;runtime&lt;/scope&gt;
-    &lt;/dependency&gt;</pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="connecting">Connecting</h3>
-<div class="paragraph">
-<p>So as soon as your project has the API and a driver implementation available, you first need to get a <code>PlcConnection</code> instance.
-This is done via the <code>PlcDriverManager</code> by asking this to create an instance for a given <code>PLC4X connection string</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>String connectionString = "modbus://localhost";
-
-try (PlcConnection plcConnection = new PlcDriverManager().getConnection(connectionString)) {
-
-  ... do something with the connection here ...
-
-}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>PLC4X generally supports a very limited set of functions, which is not due to the fact, that we didn&#8217;t implement things, but that PLCs generally support a very limited set of functions.</p>
-</div>
-<div class="paragraph">
-<p>The basic functions supported by PLCs and therefore supported by PLC4X are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Read data</p>
-</li>
-<li>
-<p>Write data</p>
-</li>
-<li>
-<p>Subscribe for data</p>
-</li>
-<li>
-<p>Execute functions in the PLC</p>
-</li>
-<li>
-<p>List resources in the PLC</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In general we will try to offer as many features as possible.
-So if a protocol doesn&#8217;t support subscription based communication it is our goal to simulate this by polling in the background so it is transparent for the users.</p>
-</div>
-<div class="paragraph">
-<p>But there are some cases in which we can&#8217;t simulate or features are simply disabled intentionally:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>If a PLC and/or protocol don&#8217;t support executing of functions, we simply can&#8217;t provide this functionality.</p>
-</li>
-<li>
-<p>We will be providing stripped down versions of drivers, that for example intentionally don&#8217;t support any writing of data and executing of functions.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Therefore we use metadata to check programmatically, if a given feature is available:</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="reading_data">Reading Data</h3>
-<div class="listingblock">
-<div class="content">
-<pre>// Check if this connection support reading of data.
-if (!plcConnection.getMetadata().canRead()) {
-  logger.error("This connection doesn't support reading.");
-  return;
-}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As soon as you have ensured that a feature is available, you are ready to build a first request.
-This is done by getting a <code>PlcRequestBuilder</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>// Create a new read request:
-// - Give the single item requested the alias name "value"
-PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
-builder.addItem("value-1", "coil:1");
-builder.addItem("value-2", "coil:3[4]");
-builder.addItem("value-3", "holding-register:1");
-builder.addItem("value-4", "holding-register:3[4]");
-PlcReadRequest readRequest = builder.build();</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>So, as you can see, you prepare a request, by adding items to the request and in the end by calling the <code>build</code> method.
-Hereby the first string value is simply an alias you can give the the address as this is usually a more readable way.
-The second argument is then the address string itself.</p>
-</div>
-<div class="paragraph">
-<p>In above example we didn&#8217;t add <code>discrete-input</code> and <code>input-registers</code> as ModbusPal doesn&#8217;t seem to support these.</p>
-</div>
-<div class="paragraph">
-<p>The request is sent to the PLC by issuing the <code>execute</code> method on the request object:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>CompletableFuture&lt;? extends PlcReadResponse&gt; asyncResponse = readRequest.execute();
-asyncResponse.whenComplete((response, throwable) -&gt; {
-  ... process the response ...
-});</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In general all requests are executed asynchronously.
-So as soon as the request is fully processed, the callback gets called and will contain a <code>readResponse</code>, if everything went right or a <code>throwable</code> if there were problems.</p>
-</div>
-<div class="paragraph">
-<p>However if you want to write your code in a more synchronous fashion, the following alternative will provide this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>PlcReadResponse response = readRequest.execute().get();</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Processing of the responses is identical in both cases.
-The following example will demonstrate some of the options you have:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>for (String fieldName : response.getFieldNames()) {
-    if(response.getResponseCode(fieldName) == PlcResponseCode.OK) {
-        int numValues = response.getNumberOfValues(fieldName);
-        // If it's just one element, output just one single line.
-        if(numValues == 1) {
-            logger.info("Value[" + fieldName + "]: " + response.getObject(fieldName));
-        }
-        // If it's more than one element, output each in a single row.
-        else {
-            logger.info("Value[" + fieldName + "]:");
-            for(int i = 0; i &lt; numValues; i++) {
-                logger.info(" - " + response.getObject(fieldName, i));
-            }
+<pre>func knxEventHandler(event apiModel.PlcSubscriptionEvent) {
+    for _, fieldName := range event.GetFieldNames() {
+        if event.GetResponseCode(fieldName) == apiModel.PlcResponseCode_OK {
+            groupAddress := event.GetAddress(fieldName)
+            fmt.Printf("Got update for field %s with address %s. Value changed to: %s\n",
+                fieldName, groupAddress, event.GetValue(fieldName).GetString())
         }
     }
-    // Something went wrong, to output an error message instead.
-    else {
-        logger.error("Error[" + fieldName + "]: " + response.getResponseCode(fieldName).name());
-    }
 }</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>In the for loop, we are demonstrating how the user can iterate over the address aliases in the response.
-In case of an ordinary read request, this will be predefined by the items in the request, however in case of a subscription response, the response might only contain some of the items that were subscribed.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The <code>AddCyclicField</code> method requires a third parameter <code>duration</code> which specifies the interval, in which a given value is sent (even if it has not changed).
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Here the API differs slightly form the Java version, as in the request-builder itself you specify the reference to the callback handler which should be notified on incoming data. Howerver, we will be alliging all API variants as much as possible in the near future.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Before accessing the data, it is advisable to check if an item was correctly returned.
-This is done by the <code>getResponseCode</code> method for a given alias.
-If this is <code>PlcResponseCode.OK</code>, everything is ok, however it could be one of the following:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>NOT_FOUND</p>
-</li>
-<li>
-<p>ACCESS_DENIED</p>
-</li>
-<li>
-<p>INVALID_ADDRESS</p>
-</li>
-<li>
-<p>INVALID_DATATYPE</p>
-</li>
-<li>
-<p>INTERNAL_ERROR</p>
-</li>
-<li>
-<p>RESPONSE_PENDING</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Assuming the return code was <code>OK</code>, we can continue accessing the data.</p>
-</div>
-<div class="paragraph">
-<p>As some addresses support reading arrays, with the method <code>getNumberOfValues</code> the user can check how many items of a given type are returned.
-For convenience the response object has single-argument methods for accessing the data, which default to returning the first element.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>response.getObject(fieldName)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you want to access a given element number, please use the two-argument version instead:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>response.getObject(fieldName, 42)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>PLC4X provides getters and setters for a wide variety of Java types and automatically handles the type conversion.
-However when for example trying to get a long-value as a byte and the long-value exceeds the range supported by the smaller type, a <code>RuntimeException</code> of type <code>PlcIncompatibleDatatypeException</code>.
-In order to avoid causing this exception to be thrown, however there are <code>isValid{TypeName}</code> methods that you can use to check if the value is compatible.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="writing_data">Writing Data</h3>
-<div class="paragraph">
-<p>The code for writing is very similar to the code for reading, however when creating the write request, we have to pass in the data alongside the field definitions.</p>
-</div>
-<div class="paragraph">
-<p>While all of the 4 field types support reading from, only the <code>coil</code> and <code>holding-register</code> field types support writing to.
-If you attempt to write to these, this will result in errors.</p>
-</div>
-<div class="paragraph">
-<p>So again, we first check if this driver supports writing (Some drivers such as passive-mode drivers or read-only versions might generally not support writing):</p>
+<p>The request itself is executed exactly the same way the read and write operations are executed, using the <code>Execute</code> function.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>// Check if this connection support reading of data.
-if (!plcConnection.getMetadata().canWrite()) {
-  logger.error("This connection doesn't support writing.");
-  return;
-}</pre>
+<pre>    // Execute a subscription-request
+    subscriptionRequestResultChanel := subscriptionRequest.Execute()
+
+    // Wait for the response to finish
+    subscriptionRequestResult := &lt;-subscriptionRequestResultChanel
+    if subscriptionRequestResult.Err != nil {
+	    fmt.Printf("Error executing read-request: %s", subscriptionRequestResult.Err.Error())
+        return
+    }</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>As soon as you have ensured that a feature is available, you are ready to build a first request.
-This is done by getting a <code>PlcRequestBuilder</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>// Create a new read request:
-// - Give the single item requested the alias name "value"
-PlcWriteRequest.Builder builder = plcConnection.writeRequestBuilder();
-builder.addItem("value-1", "coil:1", true);
-builder.addItem("value-2", "coil:3[4]", true, false, true, true);
-builder.addItem("value-3", "holding-register:1", 42);
-builder.addItem("value-4", "holding-register:3[4]", 1, 2, 3, 4);
-PlcWriteRequest writeRequest = builder.build();</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can see that for every element that should be written, the same number of arguments have to be provided.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>PlcWriteResponse response = writeRequest.execute().get();</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Actually executing the write operation is almost identical to the reading, with the only difference, that the result only provides status codes and no values.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>for (String fieldName : response.getFieldNames()) {
-    if(response.getResponseCode(fieldName) == PlcResponseCode.OK) {
-        logger.info("Value[" + fieldName + "]: successfully written to device.");
-    }
-    // Something went wrong, to output an error message instead.
-    else {
-        logger.error("Error[" + fieldName + "]: " + response.getResponseCode(fieldName).name());
-    }
-}</pre>
 </div>
 </div>
 </div>

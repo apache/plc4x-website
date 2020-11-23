@@ -83,13 +83,16 @@
                             <a href="../../users/gettingstarted.html" class="nav-link">Getting Started</a>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/gettingstarted.html" class="nav-link">Java</a>
+                            <a href="../../users/getting-started/plc4go.html" class="nav-link">Go</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/general-concepts.html" class="nav-link">General Concepts</a>
+                            <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
+                            <a href="../../users/getting-started/general-concepts.html" class="nav-link">General Concepts</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
                             </li>
                             </ul>
             </li>
@@ -266,13 +269,346 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="apache_kafka">Apache Kafka</h2>
+<h2 id="apache_kafka"><a href="https://kafka.apache.org/">Apache Kafka</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Website: <a href="https://kafka.apache.org/">Apache Kafka</a></p>
+<p>Apache Kafka is an open-source distributed event streaming platform used by thousands of
+companies for high-performance data pipelines, streaming analytics, data integration, and
+mission-critical applications.</p>
+</div>
+</div>
+</div>
+<h1 id="plc4x_kafka_connectors" class="sect0">PLC4X Kafka Connectors</h1>
+<div class="paragraph">
+<p>The PLC4X connectors have the ability to pass data between Kafka and devices using industrial protocols.
+They can be built from source from the future 0.8 <a href="https://plc4x.apache.org/users/download.html">release</a> of
+PLC4X or from the latest snapshot from <a href="https://github.com/apache/plc4x">github</a>.</p>
+</div>
+<div class="sect1">
+<h2 id="introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A connect worker is basically a producer or consumer process with a standard api that Kafka can use to manage it. It is
+able to be run in two modes:-</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Standalone</p>
+</li>
+<li>
+<p>Distributed</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Apache Kafka® is a distributed streaming platform.</p>
+<p>Standalone allows you to run the connector locally from the command line without having to install the jar file on your
+Kafka brokers.
+In distributed mode the connector runs on the Kafka brokers, which requires you to install the jar file on all of your
+brokers. It allows the worker to be distrubuted across the Kafka brokers to provide redundancy and load balancing.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quickstart">Quickstart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to start a Kafka Connect system the following steps have to be performed:</p>
+</div>
+<div class="paragraph">
+<p>1) Download the latest version of Apache Kafka binaries from here: <a href="https://kafka.apache.org/downloads" class="bare">https://kafka.apache.org/downloads</a>.</p>
+</div>
+<div class="paragraph">
+<p>2) Unpack the archive.</p>
+</div>
+<div class="paragraph">
+<p>3) Copy the <code>target/plc4j-apache-kafka-0.8.0-uber-jar.jar</code> to the Kafka <code>libs</code> or plugin directory specified
+in the config/connect-distributed.properties file.</p>
+</div>
+<div class="paragraph">
+<p>4) Copy the files in the <code>config</code> to Kafka&#8217;s <code>config</code> directory.</p>
+</div>
+<div class="sect2">
+<h3 id="start_a_kafka_broker">Start a Kafka Broker</h3>
+<div class="paragraph">
+<p>1) Open 4 console windows and change directory into that directory
+2) Start Zookeeper:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin/zookeeper-server-start.sh config/zookeeper.properties</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>3) Start Kafka:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin/kafka-server-start.sh config/server.properties</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>4) Create the "test" topic:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>5) Start the consumer:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="source_connector">Source Connector</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The starting configuration for your connect worker is provided by a configuration file. However, once the worker has
+started the configuration can be changed using the connect REST API which is generally available on
+<a href="http://localhost:8083/connectors" class="bare">http://localhost:8083/connectors</a>. When running in distributed mode all the configuration needs to be done via the REST API.</p>
+</div>
+<div class="paragraph">
+<p>A sample configuration file is provided in the PLC4X Kafka integration repository in the <code>config/plc4x-source.properties</code> directory..
+This includes comments as well as meaningful properties that can be used with the worker.</p>
+</div>
+<div class="paragraph">
+<p>The configuration of the connectors via the REST interface expects the same properties as are specified within the
+example <code>config/plc4x-source.properties</code> file. These will need to be in JSON format and included with a couple of headers.
+An example below shows the format it expects:-</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>curl -X POST -H "Content-Type: application/json" --data '{"name": "plc-source-test", "config": {"connector.class":"org.apache.plc4x.kafka.Plc4xSourceConnector",
+// TODO: Continue here ...
+"tasks.max":"1", "file":"test.sink.txt", "topics":"connect-test" }}' http://localhost:8083/connectors</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="start_a_kafka_connect_source_worker_standalone">Start a Kafka Connect Source Worker (Standalone)</h3>
+<div class="paragraph">
+<p>Ideal for testing.</p>
+</div>
+<div class="paragraph">
+<p>1) Start Kafka connect:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin/connect-standalone.sh config/connect-standalone.properties config/plc4x-source.properties</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now watch the console window with the "kafka-console-consumer".</p>
+</div>
+<div class="paragraph">
+<p>If you want to debug the connector, be sure to set some environment variables before starting Kafka-Connect:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>export KAFKA_DEBUG=y; export DEBUG_SUSPEND_FLAG=y;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case the startup will suspend till an IDE is connected via a remote-debugging session.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="start_kafka_connect_source_worker_distributed_mode">Start Kafka Connect Source Worker (Distributed Mode)</h3>
+<div class="paragraph">
+<p>Ideal for production.</p>
+</div>
+<div class="paragraph">
+<p>In this case the state of the node is handled by Zookeeper and the configuration of the connectors are distributed via Kafka topics.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin/kafka-topics --create --zookeeper localhost:2181 --topic connect-configs --replication-factor 3 --partitions 1 --config cleanup.policy=compact
+bin/kafka-topics --create --zookeeper localhost:2181 --topic connect-offsets --replication-factor 3 --partitions 50 --config cleanup.policy=compact
+bin/kafka-topics --create --zookeeper localhost:2181 --topic connect-status --replication-factor 3 --partitions 10 --config cleanup.policy=compact</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting the worker is then as simple as this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin /connect-distributed.sh config/connect-distributed.properties</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configuration of the Connectors is then provided via REST interface:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>curl -X POST -H "Content-Type: application/json" --data '{"name": "plc-source-test", "config": {"connector.class":"org.apache.plc4x.kafka.Plc4xSourceConnector",
+// TODO: Continue here ...
+"tasks.max":"1", "file":"test.sink.txt", "topics":"connect-test" }}' http://localhost:8083/connectors</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sink_connector">Sink Connector</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See <code>config/sink.properties</code> for an example configuration.</p>
+</div>
+<div class="sect2">
+<h3 id="start_a_kafka_connect_sink_worker_standalone">Start a Kafka Connect Sink Worker (Standalone)</h3>
+<div class="paragraph">
+<p>Ideal for testing.</p>
+</div>
+<div class="paragraph">
+<p>1) Start Kafka connect:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin/connect-standalone.sh config/connect-standalone.properties config/plc4x-sink.properties</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now open console window with "kafka-console-producer".</p>
+</div>
+<div class="paragraph">
+<p>Producing to the kafka topic using the sample packet shown below should result all the values included in the payload
+being sent to the PLC using the mapping defined in the sink properties.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{"schema":
+    {"type":"struct","fields":
+        [{"type":"struct","fields":
+            [{"type":"boolean","optional":true,"field":"running"},
+             {"type":"boolean","optional":true,"field":"conveyorLeft"},
+             {"type":"boolean","optional":true,"field":"conveyorRight"},
+             {"type":"boolean","optional":true,"field":"load"},
+             {"type":"int32","optional":true,"field":"numLargeBoxes"},
+             {"type":"boolean","optional":true,"field":"unload"},
+             {"type":"boolean","optional":true,"field":"transferRight"},
+             {"type":"boolean","optional":true,"field":"transferLeft"},
+             {"type":"boolean","optional":true,"field":"conveyorEntry"},
+             {"type":"int32","optional":true,"field":"numSmallBoxes"}],
+        "optional":false,"name":"org.apache.plc4x.kafka.schema.Field","field":"fields"},
+    {"type":"int64","optional":false,"field":"timestamp"},
+    {"type":"int64","optional":true,"field":"expires"}],
+     "optional":false,"name":"org.apache.plc4x.kafka.schema.JobResult",
+     "doc":"PLC Job result. This contains all of the received PLCValues as well as a recieved timestamp"},
+"payload":
+    {"fields":
+        {"running":false,"conveyorLeft":true,
+         "conveyorRight":true,"load":false,
+         "numLargeBoxes":1630806456,
+         "unload":true,
+         "transferRight":false,
+         "transferLeft":true,
+         "conveyorEntry":false,
+         "numSmallBoxes":-1135309911},
+     "timestamp":1606047842350,
+     "expires":null}}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to debug the connector, be sure to set some environment variables before starting Kafka-Connect:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>export KAFKA_DEBUG=y; export DEBUG_SUSPEND_FLAG=y;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case the startup will suspend till an IDE is connected via a remote-debugging session.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="start_kafka_connect_sink_worker_distributed_mode">Start Kafka Connect Sink Worker (Distributed Mode)</h3>
+<div class="paragraph">
+<p>Ideal for production.</p>
+</div>
+<div class="paragraph">
+<p>In this case the state of the node is handled by Zookeeper and the configuration of the connectors are distributed via Kafka topics.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin/kafka-topics --create --zookeeper localhost:2181 --topic connect-configs --replication-factor 3 --partitions 1 --config cleanup.policy=compact
+bin/kafka-topics --create --zookeeper localhost:2181 --topic connect-offsets --replication-factor 3 --partitions 50 --config cleanup.policy=compact
+bin/kafka-topics --create --zookeeper localhost:2181 --topic connect-status --replication-factor 3 --partitions 10 --config cleanup.policy=compact</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting the worker is then as simple as this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bin /connect-distributed.sh config/connect-distributed.properties</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configuration of the Connectors is then provided via REST interface:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>curl -X POST -H "Content-Type: application/json" --data '{"name": "plc-sink-test", "config": {"connector.class":"org.apache.plc4x.kafka.Plc4xSinkConnector",
+// TODO: Continue here ...
+"tasks.max":"1", "file":"test.sink.txt", "topics":"connect-test" }}' http://localhost:8083/connectors</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="graceful_backoff">Graceful Backoff</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If an error occurs when reading or writing PLC addresses a graceful backoff has been implemented so that the PLC isn&#8217;t
+bombarded with requests. However as the number of connectors for each PLC should be limited to reduce the load on the PLC,
+the graceful backoff shouldn&#8217;t have a major impact.</p>
+</div>
+<div class="paragraph">
+<p>For the source connector the PLC4X scraper logic is able to handle randomized polling rates on failures, this is buffered within the
+connector, the poll rate of the connector has no affect on the PLC poll rate.</p>
+</div>
+<div class="paragraph">
+<p>For the sink connector, if a write fails it is retried a configurable number of times with a timeout between each time.
+A Retriable Exception is raised which provides jitter for the timing of the retries.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="schema_compatability">Schema Compatability</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PLC4X specifies a very basic schema and leaves the majority of the implementation to the user. It contains the
+following fields:-</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"fields": - This is a customized structure that is formed by the fields defined in the connector configuration.
+This allows the user to defined arbitary fields within here all based on the PLC4X data types.</p>
+</li>
+<li>
+<p>"timestamp": - This is the timestamp at which the PLC4X connector processed the PLC request.</p>
+</li>
+<li>
+<p>"expires": - This field is used by the sink connector. It allows it to discard the record if it is too old. A value
+of 0 or null indicates that the record some never be discarded no matter how old it is.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As the majority of the schema is left to the user to define we expect to be able to provide backward compatiblity
+between the base schemas.</p>
+</div>
+<div class="paragraph">
+<p>The schemas for the sink and source connectors are the same. This allows us to producer from one PLC and send the
+data to a sink.</p>
 </div>
 </div>
 </div>

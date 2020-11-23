@@ -83,13 +83,16 @@
                             <a href="../../users/gettingstarted.html" class="nav-link">Getting Started</a>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/gettingstarted.html" class="nav-link">Java</a>
+                            <a href="../../users/getting-started/plc4go.html" class="nav-link">Go</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/general-concepts.html" class="nav-link">General Concepts</a>
+                            <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/plc4j/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
+                            <a href="../../users/getting-started/general-concepts.html" class="nav-link">General Concepts</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
                             </li>
                             </ul>
             </li>
@@ -355,13 +358,14 @@
 <p><code>knxproj-file-path</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Path to the <code>knxproj</code> file. The default KNXnet/IP protocol doesn&#8217;t provide all the information needed to be able to fully decode the messages. For this the user needs to provide the project file created in the KNX IDE <code>ETS5</code> to provide the missing information. Only if this file is provided, will the driver be able to decode the data entirely. If this parameter is omitted, only raw KNX payload will be returned.</p>
+<p>Path to the <code>knxproj</code> file. The default KNXnet/IP protocol doesn&#8217;t provide all the information needed to be able to fully decode the messages. For this the user needs to provide the project file created in the KNX IDE <code>ETS5</code> to provide the missing information. Only if this file is provided, will the driver be able to decode the data entirely. If this parameter is omitted, only raw KNX payload will be returned.
+NOTE: This setting is currently only supported in the Java implementation</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>group-address-type</code> (3)</p>
+<p><code>group-address-num-levels</code> (3)</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>KNX Addresses can be encoded in multiple ways. Which encoding is used, is too not provided by the protocol itself so it has to be provided externally:</p>

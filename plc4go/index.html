@@ -115,10 +115,10 @@
                                     
                                                                                     <main role="main" class="ml-sm-auto px-4 w-100 h-100">
             <div class="sect1">
-<h2 id="about_plc4j">About PLC4J</h2>
+<h2 id="about_plc4go">About PLC4Go</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>PLC4J</code> is a sub-project of <code>PLC4X</code> with implementations based on <code>Java</code> targeted at runtimes for <code>Java 1.8</code> or above.</p>
+<p><code>PLC4Go</code> is a sub-project of <code>PLC4X</code> with implementations based on <code>Go</code>.</p>
 </div>
 <div class="paragraph">
 <p>One of PLC4X&#8217;s core principals is, that an application using PLC4X should be independent of the PLC or protocol being used.</p>
@@ -169,125 +169,60 @@ The format of an address greatly depends on the type of connection. Therefore <c
 <div class="paragraph">
 <p>Below code example connects to a remote Siemens S7 PLC using the S7/Step7 protocol and then reads the state of the <code>inputs</code> and <code>outputs</code> from this.</p>
 </div>
-<div class="paragraph">
-<p>It also demonstrates two ways this information can be accessed:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Synchronously (The application pauses, till the response is received)</p>
-</li>
-<li>
-<p>Asynchronously (The application continues and can</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="java">package org.apache.plc4x.java.examples.helloplc4x;
+<pre class="prettyprint highlight"><code data-lang="go">func HellpPlc4go() {
+	driverManager := plc4go.NewPlcDriverManager()
+	driverManager.RegisterDriver(modbus.NewModbusDriver())
+	driverManager.RegisterTransport(tcp.NewTcpTransport())
 
-import org.apache.plc4x.java.PlcDriverManager;
-import org.apache.plc4x.java.api.PlcConnection;
-import org.apache.plc4x.java.api.messages.PlcReadRequest;
-import org.apache.plc4x.java.api.messages.PlcReadResponse;
-import org.apache.plc4x.java.api.types.PlcResponseCode;
-import org.apache.plc4x.java.api.value.PlcValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+	// Get a connection to a remote PLC
+	crc := driverManager.GetConnection("modbus://192.168.23.30")
 
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
+	// Wait for the driver to connect (or not)
+	connectionResult := &lt;-crc
+	if connectionResult.Err != nil {
+		t.Errorf("error connecting to PLC: %s", connectionResult.Err.Error())
+		return
+	}
+	connection := connectionResult.Connection
 
-public class HelloPlc4x {
+	// Try to ping the remote device (This block is just optional)
+	pingResultChannel := connection.Ping()
+	pingResult := &lt;-pingResultChannel
+	if pingResult.Err != nil {
+		t.Errorf("couldn't ping device: %s", pingResult.Err.Error())
+		return
+	}
 
-    private static final Logger logger = LoggerFactory.getLogger(HelloPlc4x.class);
+	// Make sure the connection is closed at the end
+	defer connection.Close()
 
-    /**
-     * Example code do demonstrate using PLC4X.
-     *
-     * @param args ignored.
-     */
-    public static void main(String[] args) throws Exception {
-        CliOptions options = CliOptions.fromArgs(args);
-        if (options == null) {
-            CliOptions.printHelp();
-            // Could not parse.
-            System.exit(1);
-        }
+	// Prepare a read-request
+	rrb := connection.ReadRequestBuilder()
+	rrb.AddItem("field1", "holding-register:1:REAL")
+	rrb.AddItem("field2", "holding-register:3:REAL")
+	readRequest, err := rrb.Build()
+	if err != nil {
+		t.Errorf("error preparing read-request: %s", connectionResult.Err.Error())
+		return
+	}
 
-        // Establish a connection to the plc using the url provided as first argument
-        try (PlcConnection plcConnection = new PlcDriverManager().getConnection(options.getConnectionString())) {
+	// Execute a read-request
+	rrc := readRequest.Execute()
 
-            // Check if this connection support reading of data.
-            if (!plcConnection.getMetadata().canRead()) {
-                logger.error("This connection doesn't support reading.");
-                return;
-            }
+	// Wait for the response to finish
+	rrr := &lt;-rrc
+	if rrr.Err != nil {
+		t.Errorf("error executing read-request: %s", rrr.Err.Error())
+		return
+	}
 
-            // Create a new read request:
-            // - Give the single item requested the alias name "value"
-            PlcReadRequest.Builder builder = plcConnection.readRequestBuilder();
-            for (int i = 0; i &lt; options.getFieldAddress().length; i++) {
-                builder.addItem("value-" + options.getFieldAddress()[i], options.getFieldAddress()[i]);
-            }
-            PlcReadRequest readRequest = builder.build();
+	// Do something with the response
+	value := rrr.Response.GetValue("field")
 
-            //////////////////////////////////////////////////////////
-            // Read synchronously ...
-            // NOTICE: the ".get()" immediately lets this thread pause until
-            // the response is processed and available.
-            logger.info("Synchronous request ...");
-            PlcReadResponse syncResponse = readRequest.execute().get();
-            // Simply iterating over the field names returned in the response.
-            printResponse(syncResponse);
-
-            /*PlcValue asPlcValue = syncResponse.getAsPlcValue();
-            System.out.println(asPlcValue.toString());*/
-
-            //////////////////////////////////////////////////////////
-            // Read asynchronously ...
-            // Register a callback executed as soon as a response arrives.
-            /*logger.info("Asynchronous request ...");
-            CompletionStage&lt;? extends PlcReadResponse&gt; asyncResponse = readRequest.execute();
-            asyncResponse.whenComplete((readResponse, throwable) -&gt; {
-                if (readResponse != null) {
-                    printResponse(readResponse);
-                } else {
-                    logger.error("An error occurred: " + throwable.getMessage(), throwable);
-                }
-            });*/
-
-            // Give the async request a little time...
-            TimeUnit.MILLISECONDS.sleep(1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.exit(0);
-    }
-
-    private static void printResponse(PlcReadResponse response) {
-        for (String fieldName : response.getFieldNames()) {
-            if(response.getResponseCode(fieldName) == PlcResponseCode.OK) {
-                int numValues = response.getNumberOfValues(fieldName);
-                // If it's just one element, output just one single line.
-                if(numValues == 1) {
-                    logger.info("Value[" + fieldName + "]: " + response.getObject(fieldName));
-                }
-                // If it's more than one element, output each in a single row.
-                else {
-                    logger.info("Value[" + fieldName + "]:");
-                    for(int i = 0; i &lt; numValues; i++) {
-                        logger.info(" - " + response.getObject(fieldName, i));
-                    }
-                }
-            }
-            // Something went wrong, to output an error message instead.
-            else {
-                logger.error("Error[" + fieldName + "]: " + response.getResponseCode(fieldName).name());
-            }
-        }
-    }
-
+	// Do something sensible with the information
+	fmt.Printf("\n\nResult: %f\n", value)
 }</code></pre>
 </div>
 </div>
