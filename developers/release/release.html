@@ -319,6 +319,18 @@ Please be sure to execute the release with a Java version between 1.8 and 11 or 
 </div>
 <div class="sect2">
 <h3 id="preparing_your_system_for_being_able_to_release">Preparing your system for being able to release</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Be sure you are using a JDK and not a JRE, or the release will fail because the release can&#8217;t execute the <code>javadoc</code> executable.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>As part of the release process, Maven will upload maven release artifacts to a so-called staging repository.</p>
 </div>
@@ -372,6 +384,18 @@ He can then sign your key and hereby enable you to sign Apache release artifacts
 </div>
 <div class="paragraph">
 <p>There&#8217;s a detailed description <a href="https://github.com/apache/incubator-pulsar/wiki/Create-GPG-keys-to-sign-release-artifacts">here</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+However in contrast to that documentation, upload your key to the following servers: <code>pool.sks-keyservers.net</code> and <code>keyserver.ubuntu.com</code> as these are the ones Nexus is checking.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>If you happen to have multiple keys, adding the following profile to your <code>settings.xml</code> should help:</p>
