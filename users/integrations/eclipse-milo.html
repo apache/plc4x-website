@@ -83,7 +83,7 @@
                             <a href="../../users/gettingstarted.html" class="nav-link">Getting Started</a>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
-                            <strong class="nav-link">Go</strong>
+                            <a href="../../users/getting-started/plc4go.html" class="nav-link">Go</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
@@ -196,7 +196,7 @@
                             <a href="../../users/integrations/eclipse-ditto.html" class="nav-link">Eclipse Ditto</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/integrations/eclipse-milo.html" class="nav-link">Eclipse Milo OPC UA Server</a>
+                            <strong class="nav-link">Eclipse Milo OPC UA Server</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/integrations/elastic-logstash.html" class="nav-link">Elastic Logstash</a>
@@ -272,390 +272,177 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="getting_started">Getting Started</h2>
+<h2 id="introduction">Introduction</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="initializing_a_dummy_project">Initializing a dummy project</h3>
 <div class="paragraph">
-<p>Just in case you want to get started with <code>Go</code>. In this part we&#8217;ll setup a new <code>Go</code> project.
-If you are familiar with this, you can go to the next chapter.</p>
+<p>The PLC4X OPC UA server integration is based around the Eclipse Milo OPC UA server. It uses PLC4X to communicate with
+industrial devices effectively acting as a industrial OPC UA gateway.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="building_the_server">Building the server</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Be sure to have installed <code>Go</code> on your system by downloading and installing it from <a href="https://golang.org/">https://golang.org/</a>.</p>
-</div>
-<div class="paragraph">
-<p>Now that that&#8217;s done, create a new directory and console execute the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>go mod init main</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will effectively only create a <code>go.mod</code> file, which is sort of like Go&#8217;s counterpart to a Maven pom.xml.</p>
-</div>
-<div class="paragraph">
-<p>This should look like this:</p>
+<p>The OPC UA server can be built using maven as part of the PLC4X build.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code>module main
-
-go 1.14</code></pre>
+<pre class="prettyprint highlight"><code>mvn install</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now we need to create a <code>app.go</code> file which will be our main program.</p>
+<p>This creates a target directory within plc4x/plc4j/integrations/opcua-server containing a jar file which is the main java
+executable.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuration_file">Configuration File</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Create a file <code>app.go</code> with the following content:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>package main
-
-func main() {
-
-}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>By executing the command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>go run app.go</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You will execute your first <code>Go</code> progran &#8230;&#8203; however the output is rather underwhelming ;-)</p>
-</div>
-<div class="paragraph">
-<p>You&#8217;re now ready to continue.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="using_the_plc4go_api_directly">Using the PLC4Go API directly</h3>
-<div class="paragraph">
-<p>In order to write a valid PLC4X Go application, all you need, is to add a dependency to the <code>plc4go module</code>.
-Now all you need to do, is execute the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>go get github.com/apache/plc4x/plc4go</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will checkout the latest version of the Apache PLC4X <code>PLC4Go</code> module.
-As soon as we have released a PLC4Go version by adding the name of the release-tag will use an explicit version.</p>
-</div>
-<div class="paragraph">
-<p>This will be checked out in our home directory in</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>⁓/go/pkg/mod/github.com/apache/plc4/plc4go@v0.0.0-{some-commit-hash}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In contrast to the PLC4J version this already contains all supported drivers.
-Perhaps we&#8217;ll change this in the future, but for now all comes in one bundle.</p>
-</div>
-<div class="paragraph">
-<p>Now you&#8217;re generally set to start writing your first <code>PLC4Go</code> program.</p>
-</div>
-<div class="sect3">
-<h4 id="connecting_to_a_plc">Connecting to a PLC</h4>
-<div class="paragraph">
-<p>In contrast to PLC4J, which uses the service lookup to find the <code>transports</code> and the <code>drivers</code> automatically, in <code>PLC4Go</code> they need to be manually registered at the driver manager.</p>
-</div>
-<div class="paragraph">
-<p>First we need to initialize the <code>PlcDriverManager</code> by registering the transports and drivers with it.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>    // Create a new instance of the PlcDriverManager
-	driverManager := plc4go.NewPlcDriverManager()
-
-    // Register the Transports
-    transports.RegisterTcpTransport(driverManager)
-    transports.RegisterUdpTransport(driverManager)
-
-    // Register the Drivers
-	drivers.RegisterKnxDriver(driverManager)
-	drivers.RegisterModbusDriver(driverManager)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now that the <code>PlcDriverManager</code> is configured, we can use it to get a new connection.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>   	// Get a connection to a remote PLC
-	connectionRequestChanel := driverManager.GetConnection("modbus://192.168.23.30?unit-identifier=1")
-
-	// Wait for the driver to connect (or not)
-	connectionResult := &lt;-connectionRequestChanel
-
-    // Check if something went wrong
-    if connectionResult.Err != nil {
-	    fmt.Printf("Error connecting to PLC: %s", connectionResult.Err.Error())
-		return
-	}
-
-    // If all was ok, get the connection instance
-	connection := connectionResult.Connection
-
-	// Make sure the connection is closed at the end
-	defer connection.Close()</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In PLC4Go we make heavy use of Go <code>channels</code>, which are similar to <code>Futures</code> or <code>Promisses</code>.</p>
-</div>
-<div class="paragraph">
-<p>And please pay attention to the <code>defer</code> command.
-This adds a call to a stack of things that need to be called as soon as the program terminates.
-However in contrast to Java&#8217;s <code>try-finally</code> blocks, this isn&#8217;t executed at the end of the code-block, but really when the program terminates.
-So when working with many connections or when using connections in loops (if for example you are polling), then this will keep on piling up active connections, till either you are no longer able to connect cause your PLC denies connections or till you run out of memory.</p>
-</div>
-<div class="paragraph">
-<p>So if you only need the connection in a code block, be sure to explicitly close it after usage.</p>
-</div>
-<div class="paragraph">
-<p>After this code block we should be in possession of a <code>connection</code> instance.</p>
-</div>
-<div class="paragraph">
-<p>If we simply want to check the connectivity, we can use the <code>Ping</code> function on the connection object.
-Depending on the protocol used, it will exeute a command which only will complete if the connection is available.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>	// Try to ping the remote device
-	pingResultChannel := connection.Ping()
-
-    // Wait for the Ping operation to finsh
-	pingResult := &lt;-pingResultChannel
-	if pingResult.Err != nil {
-	    fmt.Printf("Couldn't ping device: %s", pingResult.Err.Error())
-		return
-	}</pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="reading_data">Reading Data</h4>
-<div class="paragraph">
-<p>Most probably you will want to read something from a PLC.
-This is done by a <code>PlcReadRequest</code>.</p>
-</div>
-<div class="paragraph">
-<p>First off all, it&#8217;s probably a good idea to check if this connection supports reading:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>	if !connection.GetMetadata().CanRead() {
-	    fmt.Printf("This connection doesn't support read operations")
-        return
-    }</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In order to create and run such a <code>PlcReadRequest</code>, please add the following code:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>	// Prepare a read-request
-	readRequestBuilder := connection.ReadRequestBuilder()
-	readRequestBuilder.AddItem("field1", "holding-register:1:REAL")
-	readRequestBuilder.AddItem("field2", "holding-register:3:REAL")
-	readRequest, err := readRequestBuilder.Build()
-	if err != nil {
-		t.Errorf("error preparing read-request: %s", connectionResult.Err.Error())
-		t.Fail()
-		return
-	}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you have any errors in the addresses or whatever, you will get an <code>err</code> instead of a <code>readRequest</code>.</p>
-</div>
-<div class="paragraph">
-<p>For now, let&#8217;s assume you got all addresses correctly.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>	// Execute a read-request
-	readResponseChanel := readRequest.Execute()
-
-	// Wait for the response to finish
-	readRequestResult := &lt;-readResponseChanel
-	if readRequestResult.Err != nil {
-		t.Errorf("error executing read-request: %s", readRequestResult.Err.Error())
-		return
-	}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Please note that in this case we want to return a triple: <code>PlcReadRequest</code>, <code>PlcReadResponse</code>, <code>err</code>.
-As this is not supported in <code>Go</code>, the <code>PlcReadRequestResult</code> will contain all of these 3 elements.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-This will probably change soon. The API is still a bit in flux.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Now in order to do something with the response:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>	// Do something with the response
-	value1 := readRequestResult.Response.GetValue("field1")
-	value2 := readRequestResult.Response.GetValue("field2")
-	fmt.Printf("\n\nResult field1: %f\n", value1.GetFloat32())
-	fmt.Printf("\n\nResult field1: %f\n", value2.GetFloat32())</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>GetValue</code> function returns a <code>PlcValue</code> instance, this had accessors for the most general <code>Go</code> types.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="writing_data">Writing Data</h4>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Not implemented yet
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="subscribing_to_data">Subscribing to Data</h4>
-<div class="paragraph">
-<p>As the <code>Modbus</code> protocol, which we used in the above examples, doesn&#8217;t support subscriptions, we are uing the <code>KNX</code> protocol for a demonstration on the subscription API.</p>
-</div>
-<div class="paragraph">
-<p>Subscribing to data can be considered similar to reading data, at least the subscription itself if very similar to reading of data.</p>
-</div>
-<div class="paragraph">
-<p>We first have to check if the connection supports this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>	if !connection.GetMetadata().CanSubscribe() {
-	    fmt.Printf("This connection doesn't support subscriptions operations")
-        return
-    }</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now we&#8217;ll create the subscription request.</p>
-</div>
-<div class="paragraph">
-<p>The main difference is that while reading there is only one form how you could read, with subscriptions there are different forms of subscriptons:</p>
+<p>The config.yml file is used to configure the server. The following root level settings should be configured.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Change of state (Event is sent as soon as a value changes)</p>
+<p><strong>version:</strong> The version is just an internal check to confirm that the right version of the configuration file
+is being used.</p>
 </li>
 <li>
-<p>Cyclic (The Event is sent in regular cyclic intervals)</p>
+<p><strong>dir:</strong> This is the directory to the security directory. This is where all configuration is stored including certificates.
+Be sure to secure this directory with the correct permissions.</p>
 </li>
 <li>
-<p>Event (The Event is usually explicitly sent form the PLC as a signal)</p>
+<p><strong>name:</strong> This is the name of the OPC UA server. It can be anything but shouldn&#8217;t contain spaces.</p>
+</li>
+<li>
+<p><strong>disableInsecureEndpoint:</strong> This is used to disable the remote insecure OPC UA endpoint.</p>
+</li>
+<li>
+<p><strong>tcpPort:</strong> this can be used to change the opc.tcp port.</p>
+</li>
+<li>
+<p><strong>httpPort:</strong> this can be used to change the http.tcp port.</p>
+</li>
+<li>
+<p><strong>devices:</strong> is a list of PLC&#8217;s or devices that the server should communicate with. Each device should include a
+name:, connectionString:, and a list of tags:.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Therefore instead of using a normal <code>AddItem</code>, there are tree different functions as you can see in the following examples.</p>
+<p>For each device within devices the following settings should be configured.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>name:</strong> This is the name of the device. It can anything as long as it doesn&#8217;t contain spaces.</p>
+</li>
+<li>
+<p><strong>connectionString:</strong> Can be any valid PLC4X connection string.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For each tag with tags the following settings should be configured:-</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>alias:</strong> This is the name of tag it can be anything but shouldn&#8217;t have spaces. This will be shown as the tag name within
+the OPC UA server tree. Be sure that this is unique within the configuration file.</p>
+</li>
+<li>
+<p><strong>address:</strong> This is any valid PLC4X address that matches the connection type.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An example configuration file is shown below.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>	// Prepare a subscription-request
-    subscriptionRequestBuilder := connection.SubscriptionRequestBuilder()
-    subscriptionRequestBuilder.AddChangeOfStateItem("heating-actual-temperature", "*/*/10:DPT_Value_Temp")
-    subscriptionRequestBuilder.AddChangeOfStateItem("heating-target-temperature", "*/*/11:DPT_Value_Temp")
-    subscriptionRequestBuilder.AddCyclicItem("heating-valve-open", "*/*/12:DPT_OpenClose", 500 * time.Millisecond)
-    subscriptionRequestBuilder.AddItemHandler(knxEventHandler)
-    subscriptionRequest, err := subscriptionRequestBuilder.Build()
-    if err != nil {
-	    fmt.Printf("Error preparing subscription-request: %s", connectionResult.Err.Error())
-        return
-    }</pre>
+<pre class="prettyprint highlight"><code>---
+version: "0.8"
+dir: {path-to-security-dir}
+name: "Plc4xOPCUAServer"
+disableInsecureEndpoint: true
+devices:
+    - name: "ModbusDevice"
+      connectionString: "modbus://127.0.0.1:502"
+      tags:
+        - alias: "TemporaryBOOLARRAY"
+          address: "000001:BOOL[10]"
+        - alias: "TemporaryWORD2"
+          address: "400002:WORD"
+        - alias: "TemporaryUINT3"
+          address: "400003:UINT"
+        - alias: "TemporaryINT4"
+          address: "400004:INT"
+        - alias: "TemporaryDINT5"
+          address: "400005:DINT[4]"
+        - alias: "TemporaryREAL6"
+          address: "400006:REAL"
+        - alias: "TemporaryREAL7"
+          address: "400007:REAL"
+        - alias: "TemporaryREAL8"
+          address: "400008:REAL"
+- name: "SimulationDevice"
+    connectionString: "simulated://127.0.0.1"
+    tags:
+        - alias: "Temporary"
+          address: "RANDOM/Temporary:Integer"
+tcpPort: 12687
+httpPort: 8445</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="running">Running</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To run the java executable execute:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code>java -jar plc4x-opcua-server-0.8.0-uber-jar.jar -c {path-to-config-file} -i</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>Event hadnler</code> for intercepting incoming events could look like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>func knxEventHandler(event apiModel.PlcSubscriptionEvent) {
-    for _, fieldName := range event.GetFieldNames() {
-        if event.GetResponseCode(fieldName) == apiModel.PlcResponseCode_OK {
-            groupAddress := event.GetAddress(fieldName)
-            fmt.Printf("Got update for field %s with address %s. Value changed to: %s\n",
-                fieldName, groupAddress, event.GetValue(fieldName).GetString())
-        }
-    }
-}</pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-The <code>AddCyclicField</code> method requires a third parameter <code>duration</code> which specifies the interval, in which a given value is sent (even if it has not changed).
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Here the API differs slightly form the Java version, as in the request-builder itself you specify the reference to the callback handler which should be notified on incoming data. Howerver, we will be alliging all API variants as much as possible in the near future.
-</td>
-</tr>
-</table>
+<p>This will start the OPC UA server with the interactive switch (-i). This prompts the server to ask for usernames and
+passwords upon startup. However, during normal operation the -i switch should be left out.</p>
 </div>
 <div class="paragraph">
-<p>The request itself is executed exactly the same way the read and write operations are executed, using the <code>Execute</code> function.</p>
+<p>If a certificate isn&#8217;t available at <strong>{path-to-security-dir}/security/plc4x-opcuaserver.pfx</strong> then a self signed is
+created. This certificate is password protected with the security password given during startup.</p>
+</div>
+<div class="paragraph">
+<p>If you place another certificate here make sure it is password protected and set the password by running the server
+again with --set-password switch.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>    // Execute a subscription-request
-    subscriptionRequestResultChanel := subscriptionRequest.Execute()
-
-    // Wait for the response to finish
-    subscriptionRequestResult := &lt;-subscriptionRequestResultChanel
-    if subscriptionRequestResult.Err != nil {
-	    fmt.Printf("Error executing read-request: %s", subscriptionRequestResult.Err.Error())
-        return
-    }</pre>
+<pre class="prettyprint highlight"><code>java -jar plc4x-opcua-server-0.8.0-uber-jar.jar -c {path-to-config-file} -i -s</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Once the OPC UA server is running you are able to connect to it from your favorite OPC UA client using the connection
+string.</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code>opc.tcp://{ip.address}:12687/plc4x</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Replacing the {ip.address} with the servers IP address.</p>
+</div>
+<div class="paragraph">
+<p>If you want to use an encrypted connection be sure to move the client certificate created in
+<strong>{path-to-security-dir}/security/pki/rejected</strong> to the trusted directory. Otherwise the client will receive a security error
+when trying to connect.</p>
 </div>
 </div>
 </div>
