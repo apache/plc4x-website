@@ -337,24 +337,48 @@ If you find anything here, you will need to pay attention during the release.
 <p>Now usually comes a phase in which last tests and checks should be performed.</p>
 </div>
 <div class="paragraph">
-<p>If any problems are found they have to be fixed in the release branch.</p>
+<p>If any problems are found they, have to be fixed in the release branch.</p>
 </div>
 <div class="paragraph">
-<p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems ans we no longer have the same versions.</p>
+<p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems and we no longer have the same versions.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="preparing_a_release">Preparing a release</h3>
 <div class="paragraph">
-<p>Before you start preparing the release it is important to manually make the <code>RELEASE_NOTES</code> reflect the version we are planning on releasing.</p>
+<p>Before you start preparing the release, it is important to manually make the <code>RELEASE_NOTES</code> reflect the version we are planning on releasing.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Be sure to ensure you have switched to the release branch before continuing.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>So be sure to remove the <code>(Unreleased)</code> and <code>SNAPSHOT</code> from the version.</p>
 </div>
 <div class="paragraph">
 <p>As especially when switching a lot between different branches, it is recommended to do a clean checkout of the repository.
-Otherwise a lot of directories can be left over, which would be included in the source-release zip.
+Otherwise, a lot of directories can be left over, which would be included in the source-release zip.
 In order to prepare a release-candidate, the first step is switching to the corresponding release-branch.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Be sure to ensure you have switched to the release branch before continuing.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>After that, the following command will to all preparation steps for the release:</p>
@@ -376,7 +400,7 @@ In order to prepare a release-candidate, the first step is switching to the corr
 <p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>releases/code-generation/{release-version}</code> (<code>releases/code-generation/0.8.0</code> in our case)</p>
 </li>
 <li>
-<p>The next development version (The version present in the pom after the release) (<code>0.9.0</code> in our case)</p>
+<p>The next development version (The version present in the pom after the release) (leave it as it is suggested by the plugin)</p>
 </li>
 </ol>
 </div>
@@ -384,10 +408,10 @@ In order to prepare a release-candidate, the first step is switching to the corr
 <p>Usually for 1 and 3 the defaults are just fine, make sure the tag name is correct as this usually is different.</p>
 </div>
 <div class="paragraph">
-<p>However it is important to check that nowhere else SNAPSHOT versions are referenced.</p>
+<p>However, it is important to check that nowhere else SNAPSHOT versions are referenced.</p>
 </div>
 <div class="paragraph">
-<p>What the plugin now does, is automatically execute the following operations:</p>
+<p>What the plugin now does, is automatically to execute the following operations:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -421,7 +445,7 @@ In order to prepare a release-candidate, the first step is switching to the corr
 </ol>
 </div>
 <div class="paragraph">
-<p>However this just prepared the git repository for the release, we have to perform the release to produce and stage the release artifacts.</p>
+<p>However, this just prepared the git repository for the release, we have to perform the release to produce and stage the release artifacts.</p>
 </div>
 <div class="paragraph">
 <p>Please verify the git repository at: <a href="https://gitbox.apache.org/repos/asf?p=plc4x-build-tools.git" class="bare">https://gitbox.apache.org/repos/asf?p=plc4x-build-tools.git</a>
@@ -487,7 +511,7 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 <p>And it will change the versions back and commit and push things.</p>
 </div>
 <div class="paragraph">
-<p>However it will not delete the tag in GIT (locally and remotely). So you have to do that manually or use a different tag next time.</p>
+<p>However, it will not delete the tag in GIT (locally and remotely). So you have to do that manually or use a different tag next time.</p>
 </div>
 <div class="sect2">
 <h3 id="performing_a_release">Performing a release</h3>
@@ -500,10 +524,10 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 </div>
 </div>
 <div class="paragraph">
-<p>This executes automatically as all information it requires is located in the <code>release.properties</code> file the <code>prepare</code> goal prepared.</p>
+<p>This executes automatically as all information it requires is located in the <code>release.properties</code> file the <code>prepare</code>-goal prepared.</p>
 </div>
 <div class="paragraph">
-<p>The first step is that the <code>perform</code> goal checks out the previously tagged revision into the root modules <code>target/checkout</code> directory.
+<p>The first step is that the <code>perform</code>-goal checks out the previously tagged revision into the root modules <code>target/checkout</code> directory.
 Here it automatically executes a maven build (You don&#8217;t have to do this, it&#8217;s just that you know what&#8217;s happening):</p>
 </div>
 <div class="literalblock">
@@ -518,7 +542,7 @@ Here it automatically executes a maven build (You don&#8217;t have to do this, i
 <p>As this time the build is building with release versions, Maven will automatically choose the release url for deploying artifacts.</p>
 </div>
 <div class="paragraph">
-<p>The way things are setup in the apache parent pom, is that release artifacts are deployed to a so-called <code>staging repository</code>.</p>
+<p>The way things are set up in the apache parent pom, is that release artifacts are deployed to a so-called <code>staging repository</code>.</p>
 </div>
 <div class="paragraph">
 <p>You can think of a <code>staging repository</code> as a dedicated repository created on the fly as soon as the first artifact comes in.</p>
@@ -592,10 +616,10 @@ It should contain all the information needed.</p>
 Ideally you just copy them there from there.</p>
 </div>
 <div class="paragraph">
-<p>All of the three <code><strong>-source-relese.zip</strong></code> artifacts should be located in the directory: <code>code-generation/target/checkout/code-generation/target</code></p>
+<p>The three <code><strong>-source-release.zip</strong></code> artifacts should be located in the directory: <code>code-generation/target/checkout/code-generation/target</code></p>
 </div>
 <div class="paragraph">
-<p>So after committing these files to SVN you are ready to start the vote.</p>
+<p>So, after committing these files to SVN, you are ready to start the vote.</p>
 </div>
 </div>
 <div class="sect2">
@@ -649,7 +673,7 @@ The following would be the one used to do our first TLP release:</p>
 <div class="listingblock">
 <div class="content">
 <pre>   E-Mail Topic:
-   [DISCUSS] Apache PLC4X 0.8.0 RC1
+   [DISCUSS] Apache PLC4X Build-Tools Code-Generation 0.8.0 RC1
 
    Message:
    This is the discussion thread for the corresponding VOTE thread.
@@ -669,7 +693,7 @@ The following would be the one used to do our first TLP release:</p>
 <p>The vote passes, if at least 3 <code>+1</code> votes are received and more <code>+1</code> are received than <code>-1</code>.</p>
 </div>
 <div class="paragraph">
-<p>After the 72 hour minimum wait period is over and we have fulfilled the requirement of at least 3 +1 votes and more +1 than -1, a final reply is sent to the vote thread with a prefix of <code>[RESULT]</code> in the title in which the summary of the vote is presented in an aggregated form.</p>
+<p>After the 72-our minimum wait period is over, and we have fulfilled the requirement of at least 3 +1 votes and more +1 than -1, a final reply is sent to the vote thread with a prefix of <code>[RESULT]</code> in the title in which the summary of the vote is presented in an aggregated form.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -686,7 +710,7 @@ The following would be the one used to do our first TLP release:</p>
 <div class="sect2">
 <h3 id="releasing_after_a_successful_vote">Releasing after a successful vote</h3>
 <div class="paragraph">
-<p>As soon as the votes are finished and the results were in favor of a release, the staged artifacts can be released.
+<p>As soon as the votes are finished, and the results were in favor of a release, the staged artifacts can be released.
 This is done by moving them inside the Apache SVN.</p>
 </div>
 <div class="listingblock">
@@ -717,7 +741,7 @@ This is done by moving them inside the Apache SVN.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>After this <a href="https://dist.apache.org/repos/dist/release/plc4x" class="bare">https://dist.apache.org/repos/dist/release/plc4x</a> should only contain the latest release directory.</p>
+<p>After this, <a href="https://dist.apache.org/repos/dist/release/plc4x" class="bare">https://dist.apache.org/repos/dist/release/plc4x</a> should only contain the latest release directory.</p>
 </div>
 </div>
 <div class="sect2">
