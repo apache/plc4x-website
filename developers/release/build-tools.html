@@ -245,7 +245,7 @@ So please check <a href="release.html">here</a> (Chapters: <code>Preparing your 
 <p>For each new Major and Minor release we create a new branch at the beginning of a code-freeze phase.</p>
 </div>
 <div class="paragraph">
-<p>So if currently the project version in develop is <code>0.8.0-SNAPSHOT</code>, we create a branch <code>release/0.8</code>.</p>
+<p>So if currently the project version in develop is <code>1.4.0-SNAPSHOT</code>, we create a branch <code>release/1.4</code>.</p>
 </div>
 <div class="paragraph">
 <p>When creating the branch is exactly the moment in which the version in <code>develop</code> is incremented to the next minor version.</p>
@@ -264,11 +264,11 @@ This is the version the <code>develop</code> branch will be changed to.</p>
 </div>
 <div class="paragraph">
 <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version.
-So in case of preparing the release branch for <code>{project.version}</code> the command would be the following:</p>
+So in case of preparing the release branch for <code>1.4.0</code> the command would be the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -DbranchName=releases/code-generation/0.8</pre>
+<pre>   mvn release:branch -DbranchName=releases/code-generation/1.4</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -276,7 +276,7 @@ So in case of preparing the release branch for <code>{project.version}</code> th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   What is the new working copy version for "PLC4X Build Tools: Code Generation"? (org.apache.plc4x.plugins:plc4x-code-generaton) 0.8.1-SNAPSHOT: : 0.9.0-SNAPSHOT</pre>
+<pre>   What is the new working copy version for "PLC4X Build Tools: Code Generation"? (org.apache.plc4x.plugins:plc4x-code-generaton) 1.4.1-SNAPSHOT: : 1.5.0-SNAPSHOT</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -286,7 +286,7 @@ So in case of preparing the release branch for <code>{project.version}</code> th
 <p>This step now should perform quite quickly as no build and no tests are involved.</p>
 </div>
 <div class="paragraph">
-<p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>releases/code-generation/0.8</code> branch is created.</p>
+<p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>releases/code-generation/1.4</code> branch is created.</p>
 </div>
 </div>
 <div class="sect2">
@@ -300,7 +300,7 @@ So in case of preparing the release branch for <code>{project.version}</code> th
 <div class="listingblock">
 <div class="content">
 <pre>==============================================================
-(Unreleased) Apache PLC4X 0.9.0-SNAPSHOT
+(Unreleased) Apache PLC4X 1.5.0-SNAPSHOT
 ==============================================================
 
 New Features
@@ -314,6 +314,9 @@ Bug Fixes
 
 // Rest of the file</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>After that please remove the <code>(Unreleased)</code> from the following section, as we are currently working on its release.</p>
 </div>
 <div class="paragraph">
 <p>Also be sure to do a quick full-text-search to check if the version was updated correctly everywhere.</p>
@@ -340,7 +343,7 @@ If you find anything here, you will need to pay attention during the release.
 <p>If any problems are found they, have to be fixed in the release branch.</p>
 </div>
 <div class="paragraph">
-<p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems and we no longer have the same versions.</p>
+<p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems, and we no longer have the same versions.</p>
 </div>
 </div>
 <div class="sect2">
@@ -375,7 +378,7 @@ In order to prepare a release-candidate, the first step is switching to the corr
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Be sure to ensure you have switched to the release branch before continuing.
+Again, just in case you missed the first warning: Be sure to ensure you have switched to the release branch before continuing.
 </td>
 </tr>
 </table>
@@ -394,10 +397,10 @@ Be sure to ensure you have switched to the release branch before continuing.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix)</p>
+<p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix, keep it as it is)</p>
 </li>
 <li>
-<p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>releases/code-generation/{release-version}</code> (<code>releases/code-generation/0.8.0</code> in our case)</p>
+<p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>releases/code-generation/{release-version}</code> (<code>releases/code-generation/1.4.0</code> in our case)</p>
 </li>
 <li>
 <p>The next development version (The version present in the pom after the release) (leave it as it is suggested by the plugin)</p>
@@ -425,7 +428,7 @@ Be sure to ensure you have switched to the release branch before continuing.
 <p>Run a build with all tests</p>
 </li>
 <li>
-<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release releases/code-generation/0.8.0</code>)</p>
+<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release releases/code-generation/1.4.0</code>)</p>
 </li>
 <li>
 <p>Push the commit</p>
@@ -453,18 +456,18 @@ is in the correct state. Please select the release branch and verify the commit 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/release-git-history.png" alt="release git history"/>
+<img src="../../images/release-git-history.png" alt="release git history"/>
 </div>
 </div>
 <div class="paragraph">
-<p>It is important that the commit with the message "[maven-release-plugin] prepare release releases/code-generation/0.8.0" is tagged with the release tag (in this case releases/code-generation/0.8.0)</p>
+<p>It is important that the commit with the message "[maven-release-plugin] prepare release releases/code-generation/1.4.0" is tagged with the release tag (in this case releases/code-generation/1.4.0)</p>
 </div>
 <div class="paragraph">
 <p>If you check the commit itself, it should mainly consist of version updates like this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/release-git-diff-prepare-release.png" alt="release git diff prepare release"/>
+<img src="../../images/release-git-diff-prepare-release.png" alt="release git diff prepare release"/>
 </div>
 </div>
 <div class="paragraph">
@@ -475,11 +478,11 @@ is in the correct state. Please select the release branch and verify the commit 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/release-git-diff-next-development-iteration.png" alt="release git diff next development iteration"/>
+<img src="../../images/release-git-diff-next-development-iteration.png" alt="release git diff next development iteration"/>
 </div>
 </div>
 <div class="paragraph">
-<p>This now updates the versions again, but this time from the release version to the one we selected for the next development iteration (in this case <code>0.9.0-SNAPSHOT</code>)</p>
+<p>This now updates the versions again, but this time from the release version to the one we selected for the next development iteration (in this case <code>1.4.1-SNAPSHOT</code>)</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -586,21 +589,21 @@ Here it automatically executes a maven build (You don&#8217;t have to do this, i
 <div class="listingblock">
 <div class="content">
 <pre>   ./KEYS
-   ./build-tools/code-generation/0.8.0
-   ./build-tools/code-generation/0.8.0/rc1
-   ./build-tools/code-generation/0.8.0/rc1/README
-   ./build-tools/code-generation/0.8.0/rc1/RELEASE_NOTES
-   ./build-tools/code-generation/0.8.0/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip
-   ./build-tools/code-generation/0.8.0/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip.asc
-   ./build-tools/code-generation/0.8.0/rc1/apache-plc4x-code-generation-0.8.0-source-release.zip.sha512</pre>
+   ./build-tools/code-generation/1.4.0
+   ./build-tools/code-generation/1.4.0/rc1
+   ./build-tools/code-generation/1.4.0/rc1/README
+   ./build-tools/code-generation/1.4.0/rc1/RELEASE_NOTES
+   ./build-tools/code-generation/1.4.0/rc1/apache-plc4x-code-generation-1.4.0-source-release.zip
+   ./build-tools/code-generation/1.4.0/rc1/apache-plc4x-code-generation-1.4.0-source-release.zip.asc
+   ./build-tools/code-generation/1.4.0/rc1/apache-plc4x-code-generation-1.4.0-source-release.zip.sha512</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>I usually prepare exactly the same directory structure, starting with the 0.8.0 locally and then just import everything using the following command:</p>
+<p>I usually prepare exactly the same directory structure, starting with the 1.4.0 locally and then just import everything using the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>svn import {current-full-version} https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{current-full-version} -m"Staging of rc1 of PLC4X Build-Tools (Code-Generation) {current-full-version}"</pre>
+<pre>svn import 1.4.0 https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/1.4.0 -m"Staging of rc1 of PLC4X Build-Tools (Code-Generation) 1.4.0"</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -634,10 +637,10 @@ The following would be the one used to do our first TLP release:</p>
 <div class="listingblock">
 <div class="content">
 <pre>   E-Mail Topic:
-   [VOTE] Apache PLC4X Build-Tools Code-Generation {current-full-version RC1
+   [VOTE] Apache PLC4X Build-Tools Code-Generation 1.4.0 RC1
 
    Message:
-   Apache PLC4X Build-Tools Code-Generation 0.8.0 has been staged under [2]
+   Apache PLC4X Build-Tools Code-Generation 1.4.0 has been staged under [2]
    and it’s time to vote on accepting it for release.
 
    All Maven artifacts are available under [1]. Voting will be open for 72hr.
@@ -646,7 +649,7 @@ The following would be the one used to do our first TLP release:</p>
    are required to pass.
 
    Repository: https://gitbox.apache.org/repos/asf/plc4x-build-tools.git
-   Release tag: releases/code-generation/0.8.0
+   Release tag: releases/code-generation/1.4.0
    Hash for the release tag: {replacethiswiththerealgitcommittag}
 
    Per [3] "Before voting +1 PMC members are required to download
@@ -662,7 +665,7 @@ The following would be the one used to do our first TLP release:</p>
 
 
    [1] https://repository.apache.org/content/repositories/orgapacheplc4x-{somefourdigitnumber}
-   [2] https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/0.8.0/rc1/
+   [2] https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/1.4.0/rc1/
    [3] https://www.apache.org/dev/release/validation.html#approving-a-release
    [4] https://plc4x.apache.org/developers/release/validation.html</pre>
 </div>
@@ -673,7 +676,7 @@ The following would be the one used to do our first TLP release:</p>
 <div class="listingblock">
 <div class="content">
 <pre>   E-Mail Topic:
-   [DISCUSS] Apache PLC4X Build-Tools Code-Generation 0.8.0 RC1
+   [DISCUSS] Apache PLC4X Build-Tools Code-Generation 1.4.0 RC1
 
    Message:
    This is the discussion thread for the corresponding VOTE thread.
@@ -698,7 +701,7 @@ The following would be the one used to do our first TLP release:</p>
 <div class="listingblock">
 <div class="content">
 <pre>    E-Mail Topic:
-    [RESULT] [VOTE] Apache PLC4X 0.8.0 RC1
+    [RESULT] [VOTE] Apache PLC4X Build-Tools Code-Generation 1.4.0 RC1
 
     Message:
     So, the vote passes with 3 +1 votes by PMC members and one +1 vote by a non PMC member.
@@ -715,9 +718,9 @@ This is done by moving them inside the Apache SVN.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   svn move -m "Release Apache PLC4X 0.8.0" \
-       https://dist.apache.org/repos/dist/dev/plc4x/0.8.0/rc1 \
-       https://dist.apache.org/repos/dist/release/plc4x/0.8.0</pre>
+<pre>   svn move -m "Release Apache PLC4X 1.4.0" \
+       https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/1.4.0/rc1 \
+       https://dist.apache.org/repos/dist/release/plc4x/build-tools/code-generation/1.4.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -768,123 +771,26 @@ This has to be done with git</p>
 <div class="listingblock">
 <div class="content">
 <pre>git checkout release
-git merge release/0.8.0</pre>
+git merge releases/code-generation/1.4.0</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When there are conflicts it could help to use the "theirs" merge strategy, i.e.,</p>
+<p>When there are conflicts it could help to use the <code>theirs</code> merge strategy, i.e.,</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>git merge -X theirs release/0.8.0</pre>
+<pre>git merge -X theirs releases/code-generation/1.4.0</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Possibly a manual conflict resolution has to be done afterwards. After that, changes need to
 be pushed.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="updating_jira">Updating Jira</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Set the released version to "released" and set the "release-date"</p>
-</li>
-<li>
-<p>Add the next version to the versions.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="update_the_download_site">Update the download site</h3>
 <div class="paragraph">
-<p>The URL <a href="http://plc4x.apache.org/users/download.html" class="bare">http://plc4x.apache.org/users/download.html</a> has to be changed and the current release
-has to be listed there.
-This is done by changing the <code>download.adoc</code> under <code>src/site/users/</code> (<strong>in the develop branch, as this is where the site is generated from!</strong>)</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Copy the last release down to <em>Previous Releases</em></p>
-</li>
-<li>
-<p>Point the download links of the last release to archive, e.g. <code><a href="http://archive.apache.org/dist/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip" class="bare">http://archive.apache.org/dist/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip</a></code></p>
-</li>
-<li>
-<p>Add the new Release under <em>Current Releases</em> and change all links.
-<em>Note: Please add an anchor for the toc</em></p>
-</li>
-<li>
-<p>Update the sections for the changes according to the <em>RELEASE_NOTES</em> from the release
-<em>Note: Transfer all to ascii-doc notation to ensure correct rendering of the site</em>
-<em>Also remove the JIRA TICKET ids in Front</em></p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="notifying_the_world">Notifying the world</h3>
-<div class="paragraph">
-<p>Make sure you have given the Apache mirrors time to fetch the release files by waiting at least 24 hours after moving the release candidate to the release part of the SVN.</p>
+<p>In contrast to main releases of PLC4X we won&#8217;t do any JIRA version updates, updating of the download page or notifying of the world email to <a href="mailto:announce@apache.org">announce@apache.org</a></p>
 </div>
 <div class="paragraph">
-<p>After that it is time to announce your release to the world:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>    From:
-your apache email address
-    To:
-announce@apache.org
-
-    CC:
-dev@plc4x.apache.org
-
-    E-Mail Topic:
-[ANNOUNCE] Apache PLC4X 0.8.0 released
-
-    Message:
-The Apache PLC4X team is pleased to announce the release of Apache PLC4X 0.8.0
-
-PLC4X is a set of libraries for communicating with industrial programmable
-logic controllers (PLCs) using a variety of protocols but with a shared API.
-
-The current release contains drivers able to communicate with industrial PLCs using one of the following protocols:
-
-  *   Siemens S7 (0x32)
-  *   Beckhoff ADS
-  *   Modbus
-  *   EtherNet/IP
-
-Beyond that we also provide integration modules for the following Apache projects and frameworks:
-
-  *   Apache Edgent (Incubating)
-  *   Apache Camel
-  *   Apache Kafka (Kafka Connect)
-
-Visit the Apache PLC4X website [1] for general information or
-the downloads page [2] for release notes and download information.
-
-Regards,
-The Apache PLC4X team
-
-[1] http://plc4x.apache.org
-[2] http://plc4x.apache.org/users/download.html</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>It is important to note that you have to send this email from your apache email address or it will be rejected.
-This wasn&#8217;t very simple for me to setup.
-A general description can be found here:
-<a href="https://reference.apache.org/committer/email" class="bare">https://reference.apache.org/committer/email</a>
-Here&#8217;s what I did in google mail to allow sending of emails:
-<a href="https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html" class="bare">https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html</a>
-Note &#8230;&#8203; you will be able to select the alternate sending address if you click into the recipients line of a new email (Not very intuitive).</p>
-</div>
-<div class="paragraph">
-<p>After that email is out the door, you&#8217;re done. Congrats!</p>
+<p>So now you&#8217;re done. Congrats!</p>
 </div>
 </div>
 </div>
