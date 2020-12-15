@@ -263,10 +263,9 @@ Additional Apache tutorial on how to verify downloads can be found <a href="http
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>shasum -a512 apache-plc4x-{current-full-version}-source-release.zip
+<pre>Mac/Linux: shasum -a512 apache-plc4x-{current-full-version}-source-release.zip
 
-Alternatively (automatically compares the checkum):
-gsha512sum -c apache-plc4x-{current-full-version}-source-release.zip.sha512</pre>
+Windows (PowerShell): Get-FileHash -Algorithm SHA512 .\apache-plc4x-code-generation-{current-full-version}-source-release.zip | Format-List</pre>
 </div>
 </div>
 <div class="ulist checklist">
