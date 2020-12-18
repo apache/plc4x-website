@@ -414,7 +414,11 @@ PlcReadRequest readRequest = builder.build();</pre>
 <div class="content">
 <pre>CompletableFuture&lt;? extends PlcReadResponse&gt; asyncResponse = readRequest.execute();
 asyncResponse.whenComplete((response, throwable) -&gt; {
-  ... process the response ...
+  try {
+    ... process the response ...
+  } catch (Exception e) {
+    ... Handle any errors ...
+  }
 });</pre>
 </div>
 </div>
@@ -427,7 +431,7 @@ So as soon as the request is fully processed, the callback gets called and will 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>PlcReadResponse response = readRequest.execute().get();</pre>
+<pre>PlcReadResponse response = readRequest.execute().get(5000, TimeUnit.MILLISECONDS);</pre>
 </div>
 </div>
 <div class="paragraph">

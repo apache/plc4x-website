@@ -346,69 +346,167 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">read</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The read interface allows to read the full range of supported PLC4X types in single and bulk requests</p>
-</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The read interface allows for reading the full range of supported PLC4X data types in single and bulk requests</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">write</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The write interface is capable of writting the overhanded base type. At the moment there are some issues with unsigned
-types because they represent the wrong datatype to write which will conflict with the corresponding target variable type.</p>
-</div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The write interface allows for writing the full range of supported PLC4X data types in single and bulk requests</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">subscribe</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Subscriptions are possible with events on event- and cyclic-basis</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Options</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">'Options'</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Key</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Type [default]</p>
+<p><code>Type [default]</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
+<p><code>Description</code></p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>discovery</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">discovery</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>boolean [<code>true</code>]</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Controls the feature of the discovery endpoint of an OPC UA server which every server will propagate over an '&lt;address&gt;/discovery' endpoint. The most common issue here ist that the most servers are not correct configured and propagate the wrong external IP- or URL-addresses. If that is the case you can disable the discovery by configuring it with an 'false' value.</p>
+<p>Controls the feature of the discovery endpoint of an OPC UA server which every server
+will propagate over an '&lt;address&gt;/discovery' endpoint. The most common issue here is that most servers are not correctly
+configured and propagate the wrong external IP or URL address. If that is the case you can disable the discovery by
+configuring it with a <code>false</code> value.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="address_format">Address Format</h3>
+<h3 id="connection_string">Connection String</h3>
 <div class="paragraph">
-<p>To read, write and subscribe data to a PLC4X device, the OPC UA driver uses the OPC variable declaration string.
-It includes the namespace(ns) of the hierarchy tree followed by the type of identifier string(s), numeric(i), binary(b) or guid(g) and its address.</p>
+<p>The OPC UA drivers uses the connection string</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>ns={namespace-index};[s|i|g|b]={Identifier}</pre>
+<pre>opcua:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example of this connection string would be:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:tcp://127.0.0.1:12686?discovery=true</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the transport, port and options fields are optional.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="address_format">Address Format</h3>
+<div class="paragraph">
+<p>To read, write and subscribe to data, the OPC UA driver uses the variable declaration string of the OPC UA server it is
+connecting to.
+It includes the namespace(<code>ns</code>) of the hierarchy tree followed by the type of identifier string(<code>s</code>), numeric(<code>i</code>),
+binary(<code>b</code>) or guid(<code>g</code>) and its address. The Data Type is an optional field, if it is not included a default data type
+is selected based on the datatype of the returned value. For Unsigned data types it needs to be included otherwise.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ns={namespace-index};[s|i|g|b]={Identifier}:{Data Type}</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="data_types">Data Types</h4>
+<div class="paragraph">
+<p>The following data types are supported</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BOOL (boolean)</p>
+</li>
+<li>
+<p>SINT (int 8)</p>
+</li>
+<li>
+<p>USINT (uint 8)</p>
+</li>
+<li>
+<p>BYTE (uint 8)</p>
+</li>
+<li>
+<p>INT (int 16)</p>
+</li>
+<li>
+<p>UINT (uint 16)</p>
+</li>
+<li>
+<p>WORD (uint 16)</p>
+</li>
+<li>
+<p>DINT (int 32)</p>
+</li>
+<li>
+<p>UDINT (uint 32)</p>
+</li>
+<li>
+<p>DWORD (uint 32)</p>
+</li>
+<li>
+<p>LINT (int 64)</p>
+</li>
+<li>
+<p>ULINT (uint 64)</p>
+</li>
+<li>
+<p>LWORD (uint 64)</p>
+</li>
+<li>
+<p>REAL (float)</p>
+</li>
+<li>
+<p>LREAL (double)</p>
+</li>
+<li>
+<p>CHAR (char)</p>
+</li>
+<li>
+<p>WCHAR (2 byte char)</p>
+</li>
+<li>
+<p>STRING (utf-8)</p>
+</li>
+<li>
+<p>WSTRING (utf-16)</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="example_of_a_valid_opc_ua_address">Example of a valid OPC UA address:</h4>
 <div class="paragraph">
+<p>The following are examples of valid addresses</p>
+</div>
+<div class="paragraph">
 <p>String address:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>ns=2;s=HelloWorld/ScalarTypes/Boolean</pre>
+<pre>ns=2;s=HelloWorld/ScalarTypes/Boolean
+ns=2;s=HelloWorld/ScalarTypes/Boolean:BOOL</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -416,7 +514,8 @@ It includes the namespace(ns) of the hierarchy tree followed by the type of iden
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>ns=1;i=1337</pre>
+<pre>ns=1;i=1337
+ns=1;i=1337:DINT</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -424,73 +523,19 @@ It includes the namespace(ns) of the hierarchy tree followed by the type of iden
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a</pre>
+<pre>ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a
+ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a:REAL</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="example_operations_with_plc4j">Example operations with PLC4J</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="read_value_of_an_plc_value">Read value of an PLC value</h3>
-<div class="listingblock">
-<div class="content">
-<pre>String BOOL_IDENTIFIER = "ns=2;s=HelloWorld/ScalarTypes/Boolean"; // String in opc ua format to describe target value
-String fieldName = "Bool"; // local unique key for the requested variable
-String connectionString = "opcua:tcp://127.0.0.1:12686/milo?discovery=false"; // Address of the opc ua server
-
-PlcConnection opcuaReadConnection =  new PlcDriverManager().getConnection(connectionString); // build connection
-PlcReadRequest.Builder builder = opcuaReadConnection.readRequestBuilder();
-builder.addItem(fieldName, BOOL_IDENTIFIER);
-PlcReadRequest request = builder.build();
-PlcReadResponse response = opcuaConnection.read(request).get();
-
-if(response.getResponseCode(fieldName) == PlcResponseCode.OK){
-    Boolean plcBooleanValue = response.getBoolean();
-}</pre>
+<div class="paragraph">
+<p>Note the Identifiers <code>s</code>,<code>i</code>,<code>b</code> and <code>g</code> specify the format of the address not the data type of the returned value.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="write_value_of_an_plc_value">Write value of an PLC value</h3>
-<div class="listingblock">
-<div class="content">
-<pre>String BOOL_IDENTIFIER = "ns=2;s=HelloWorld/ScalarTypes/Boolean"; // String in opc ua format to describe target value
-String fieldName = "Bool"; // local unique key for the requested variable
-String connectionString = "opcua:tcp://127.0.0.1:12686/milo?discovery=false"; // Address of the opc ua server
-
-PlcConnection opcuaReadConnection =  new PlcDriverManager().getConnection(connectionString); // build connection
-PlcWriteRequest.Builder wBuilder = opcuaConnection.writeRequestBuilder();
-wBuilder.addItem(fieldName, BOOL_IDENTIFIER, true);
-PlcWriteRequest writeRequest = wBuilder.build();
-PlcWriteResponse wResponse = opcuaConnection.write(writeRequest).get();
-
-if(wResponse.getResponseCode(fieldName) == PlcResponseCode.OK){
-    // Todo ...
-}</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="subscribe_plc_events">Subscribe PLC events</h3>
-<div class="listingblock">
-<div class="content">
-<pre>String fieldAddress = "ns=2;s=HelloWorld/ScalarTypes/String"; // String in opc ua format to describe target value
-String fieldName = "field1"; // local unique key for the requested variable
-String connectionString = "opcua:tcp://127.0.0.1:12686/milo?discovery=false"; // Address of the opc ua server
-
-PlcConnection opcuaSubConnection =  new PlcDriverManager().getConnection(connectionString); // build connection
-PlcSubscriptionRequest.Builder subBuilder =  opcuaSubConnection.subscriptionRequestBuilder(); // get builder
-subBuilder.addChangeOfStateField(fieldName, fieldAddress); // add the tuple of fieldName and Address to the request
-PlcSubscriptionRequest subReq = subBuilder.build(); // build the request
-PlcSubscriptionResponse subResp = subReq.execute().get(); // execute the build up of a subscription
-Consumer&lt;PlcSubscriptionEvent&gt; consumer = plcSubscriptionEvent -&gt; System.out.println("Your Information"); // create a consumer function for the subscription
-PlcConsumerRegistration registration = subResp.getSubscriptionHandle(fieldName).register(consumer); // add the consumer to the created subscription  of the request and access it over the  SubscriptionHandler
-registration.unregister(); // Unsubscribe</pre>
-</div>
+<h3 id="some_useful_tips">Some useful tips</h3>
+<div class="paragraph">
+<p>The namespace (e.g. <code>ns=2</code>) within the address is specific to the server you are connecting to.</p>
 </div>
 </div>
 <div class="sect2">
@@ -525,10 +570,7 @@ The OPC Unified Architecture (UA), released in 2008, is a platform independent s
 <div class="sect2">
 <h3 id="more_details">More details</h3>
 <div class="paragraph">
-<p>At the moment, the underlying stack to accomplish the OPC UA functionallity is the eclipse project milo which is a powerfull server-side and client-side driver to enable the OPC UA capabilties. The Milo server SDK is also used to implement the bridge server functionallity inside of the sandbox.</p>
-</div>
-<div class="paragraph">
-<p><a href="https://projects.eclipse.org/projects/iot.milo">Eclipse Milo - Project</a></p>
+<p>The client SDK within the <a href="https://projects.eclipse.org/projects/iot.milo">Eclipse Milo</a> project is used as the basis for the PLC4X OPC UA driver.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 </table>
