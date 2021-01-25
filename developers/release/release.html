@@ -251,7 +251,7 @@ Please be sure to execute the release with a Java version between 1.8 and 11 or 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash -DbranchName=release/{current-short-version}</pre>
+<pre>   mvn release:branch -P with-boost,with-c,with-docker,with-dotnet,with-go,with-logstash,with-python,with-sandbox -DbranchName=release/{current-short-version}</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -266,7 +266,7 @@ Please be sure to execute the release with a Java version between 1.8 and 11 or 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:prepare -P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash</pre>
+<pre>   mvn release:prepare -P with-boost,with-c,with-docker,with-dotnet,with-go,with-logstash,with-python,with-sandbox</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -278,7 +278,7 @@ Please be sure to execute the release with a Java version between 1.8 and 11 or 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:perform -DreleaseProfiles=apache-release,with-boost,with-proxies,with-logstash</pre>
+<pre>   mvn release:perform -DreleaseProfiles=apache-release,with-logstash</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -341,7 +341,7 @@ Be sure you are using a JDK and not a JRE, or the release will fail because the 
 This helps reviewers to see what&#8217;s in the convenience maven package and to release that to the public repos with one click.</p>
 </div>
 <div class="paragraph">
-<p>But in order to be allowed to upload artifacts, your account has to be enabled for this and you have to tell Maven about your credentials.</p>
+<p>In order to be allowed to upload artifacts, your account has to be enabled for this, and you have to tell Maven about your credentials.</p>
 </div>
 <div class="paragraph">
 <p>In order to do this, you should provide these credentials via <code>.m2/settings.xml</code>.</p>
@@ -376,12 +376,12 @@ For a release all you need is the <code>releases</code> repo, but it is good to 
 There repos are defined in the <code>apache</code> parent pom and is identical for all Apache projects.</p>
 </div>
 <div class="paragraph">
-<p>Additionally all artifacts are automatically signed by the release build. In order to be able to do this you need to setup GPG.</p>
+<p>Additionally, all artifacts are automatically signed by the release build. In order to be able to do this you need to set up GPG.</p>
 </div>
 <div class="paragraph">
 <p>The key being used to sign the artifacts will have to be linked to your Apache E-Mail ({apache-id}@apache.org) and verified by at least one fellow Apache committer (Ideally more) that have trusted keys themselves.
 Usually for this you have to get in touch - in real life - with any Apache committer with a trusted key.
-Attending an <code>ApacheCon</code> is usually a great way to do this as usually every ApacheCon has a <code>Key Signing event</code> in it&#8217;s schedule.
+Attending an <code>ApacheCon</code> is usually a great way to do this as usually every ApacheCon has a <code>Key Signing event</code> in its schedule.
 He can then sign your key and hereby enable you to sign Apache release artifacts.</p>
 </div>
 <div class="paragraph">
@@ -394,7 +394,7 @@ He can then sign your key and hereby enable you to sign Apache release artifacts
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-However in contrast to that documentation, upload your key to the following servers: <code>pool.sks-keyservers.net</code> and <code>keyserver.ubuntu.com</code> as these are the ones Nexus is checking.
+However, in contrast to that documentation, upload your key to the following servers: <code>pool.sks-keyservers.net</code> and <code>keyserver.ubuntu.com</code> as these are the ones Nexus is checking.
 </td>
 </tr>
 </table>
@@ -416,13 +416,13 @@ However in contrast to that documentation, upload your key to the following serv
 </div>
 </div>
 <div class="paragraph">
-<p>Currently there is a Java-Version sweet-spot for being able to release all modules and that is Java 11.</p>
+<p>Currently, there is a Java-Version sweet-spot for being able to release all modules and that is Java 11.</p>
 </div>
 <div class="paragraph">
 <p>So be sure to set <code>Java 11</code> as the java version used to do the release.</p>
 </div>
 <div class="paragraph">
-<p>Also at least <code>Maven 3.6</code> is required for CMake.</p>
+<p>Also, at least <code>Maven 3.6</code> is required for CMake.</p>
 </div>
 <div class="paragraph">
 <p>Ideally use the Maven-Wrapper to ensure the Maven version fits the build.</p>
@@ -436,7 +436,7 @@ I would suggest doing this prior to the branch as otherwise you will definitely 
 So remove the <code>SNAPSHOT</code> and <code>(Unreleased)</code> markers from the file and add missing parts.</p>
 </div>
 <div class="paragraph">
-<p>Also if you are doing the first release in a new year, it is advisable to search for the old year and check if any occurrences are ok the way they are.
+<p>Also, if you are doing the first release in a new year, it is advisable to search for the old year and check if any occurrences are ok the way they are.
 Usually the <code>NOTICE</code> file has to be adjusted.</p>
 </div>
 </div>
@@ -463,11 +463,11 @@ This is the version the <code>develop</code> branch will be changed to.</p>
 </div>
 <div class="paragraph">
 <p>In contrast to normal builds, it is important to enable all profiles when creating the branch as only this way will all modules versions be updated.
-Otherwise the non-default modules on develop will reference the old version which will cause problems when building.</p>
+Otherwise, the non-default modules on develop will reference the old version which will cause problems when building.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:branch -P with-boost,with-c,with-cpp,with-docker,with-dotnet,with-logstash,with-proxies,with-python,with-sandbox -DbranchName=release/{minor-version}</pre>
+<pre>mvn release:branch -P with-boost,with-c,with-docker,with-dotnet,with-logstash,with-python,with-sandbox -DbranchName=release/{minor-version}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -476,7 +476,7 @@ So in case of preparing the release branch for <code>0.8.0-SNAPSHOT</code> the c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-boost,with-c,with-cpp,with-docker,with-dotnet,with-logstash,with-proxies,with-python,with-sandbox -DbranchName=release/0.8</pre>
+<pre>   mvn release:branch -P with-boost,with-c,with-docker,with-dotnet,with-logstash,with-python,with-sandbox -DbranchName=release/0.8</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -488,13 +488,13 @@ So in case of preparing the release branch for <code>0.8.0-SNAPSHOT</code> the c
 </div>
 </div>
 <div class="paragraph">
-<p>Where the suggested default is manually overridden.</p>
+<p>Here the suggested default has to be manually overridden.</p>
 </div>
 <div class="paragraph">
 <p>This step now should perform quite quickly as no build and no tests are involved.</p>
 </div>
 <div class="paragraph">
-<p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>release/0.8</code> branch is created.</p>
+<p>However, in the end the versions of the <code>develop</code> branch are updated and a new <code>release/0.8</code> branch is created.</p>
 </div>
 </div>
 <div class="sect2">
@@ -545,22 +545,22 @@ If you find anything here, you will need to pay attention during the release.
 <p>Now usually comes a phase in which last tests and checks should be performed.</p>
 </div>
 <div class="paragraph">
-<p>If any problems are found they have to be fixed in the release branch.</p>
+<p>If any problems are found, they have to be fixed in the release branch.</p>
 </div>
 <div class="paragraph">
-<p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems ans we no longer have the same versions.</p>
+<p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems, and we no longer have the same versions.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="preparing_a_release">Preparing a release</h3>
 <div class="paragraph">
 <p>Same as with creating the branch it is important to enable all profiles when creating the branch as only this way will all modules versions be updated.
-Otherwise the non-default modules on develop will reference the old version which will cause problems when building.
-For people building with some of the additional profiles from the source release will be impossible.</p>
+Otherwise, the non-default modules on develop will reference the old version which will cause problems when building.
+For people building with some additional profiles from the source release will be impossible.</p>
 </div>
 <div class="paragraph">
 <p>As especially when switching a lot between different branches, it is recommended to do a clean checkout of the repository.
-Otherwise a lot of directories can be left over, which would be included in the source-release zip.
+Otherwise, a lot of directories can be left over, which would be included in the source-release zip.
 In order to prepare a release-candidate, the first step is switching to the corresponding release-branch.</p>
 </div>
 <div class="paragraph">
@@ -568,11 +568,11 @@ In order to prepare a release-candidate, the first step is switching to the corr
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:prepare -P with-boost,with-c,with-cpp,with-docker,with-dotnet,with-logstash,with-proxies,with-python,with-sandbox</pre>
+<pre>mvn release:prepare -P with-boost,with-c,with-docker,with-dotnet,with-go,with-logstash,with-python,with-sandbox</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(The <code>-P with-sandbox,with-cpp,with-boost,with-dotnet,with-python,with-proxies,with-logstash</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release)
+<p>(The <code>-P with-boost,with-c,with-docker,with-dotnet,with-go,with-logstash,with-python,with-sandbox</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release)
 In general the plugin will now ask you 3 questions:</p>
 </div>
 <div class="olist arabic">
@@ -626,7 +626,7 @@ In general the plugin will now ask you 3 questions:</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>However this just prepared the git repository for the release, we have to perform the release to produce and stage the release artifacts.</p>
+<p>However, this just prepared the git repository for the release, we have to perform the release to produce and stage the release artifacts.</p>
 </div>
 <div class="paragraph">
 <p>Please verify the git repository at: <a href="https://gitbox.apache.org/repos/asf?p=plc4x.git" class="bare">https://gitbox.apache.org/repos/asf?p=plc4x.git</a>
@@ -689,10 +689,10 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 </div>
 </div>
 <div class="paragraph">
-<p>And it will change the versions back and commit and push things.</p>
+<p>It will change the versions back and commit and push things.</p>
 </div>
 <div class="paragraph">
-<p>However it will not delete the tag in GIT (locally and remotely). So you have to do that manually or use a different tag next time.</p>
+<p>However, it will not delete the tag in GIT (locally and remotely). So you have to do that manually or use a different tag next time.</p>
 </div>
 <div class="sect2">
 <h3 id="performing_a_release">Performing a release</h3>
@@ -705,15 +705,15 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 </div>
 </div>
 <div class="paragraph">
-<p>This executes automatically as all information it requires is located in the <code>release.properties</code> file the <code>prepare</code> goal prepared.</p>
+<p>This executes automatically as all information it requires is located in the <code>release.properties</code> file the <code>prepare</code>-goal prepared.</p>
 </div>
 <div class="paragraph">
-<p>The first step is that the <code>perform</code> goal checks out the previously tagged revision into the root modules <code>target/checkout</code> directory.
+<p>The first step is that the <code>perform</code>-goal checks out the previously tagged revision into the root modules <code>target/checkout</code> directory.
 Here it automatically executes a maven build (You don&#8217;t have to do this, it&#8217;s just that you know what&#8217;s happening):</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn clean deploy -P apache-release,with-boots,with-proxies,with-logstash</pre>
+<pre>mvn clean deploy -P with-logstash</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -726,7 +726,7 @@ Here it automatically executes a maven build (You don&#8217;t have to do this, i
 <p>As this time the build is building with release versions, Maven will automatically choose the release url for deploying artifacts.</p>
 </div>
 <div class="paragraph">
-<p>The way things are setup in the apache parent pom, is that release artifacts are deployed to a so-called <code>staging repository</code>.</p>
+<p>The way things are set up in the apache parent pom, is that release artifacts are deployed to a so-called <code>staging repository</code>.</p>
 </div>
 <div class="paragraph">
 <p>You can think of a <code>staging repository</code> as a dedicated repository created on the fly as soon as the first artifact comes in.</p>
@@ -801,10 +801,10 @@ It should contain all the information needed.</p>
 Ideally you just copy them there from there.</p>
 </div>
 <div class="paragraph">
-<p>All of the three <code><strong>-source-relese.zip</strong></code> artifacts should be located in the directory: <code>target/checkout/target</code></p>
+<p>All three <code><strong>-source-relese.zip</strong></code> artifacts should be located in the directory: <code>target/checkout/target</code></p>
 </div>
 <div class="paragraph">
-<p>So after committing these files to SVN you are ready to start the vote.</p>
+<p>After committing these files to SVN you are ready to start the vote.</p>
 </div>
 </div>
 <div class="sect2">
@@ -876,7 +876,7 @@ If you have to vote -1 please mention a brief description on why and then take t
 <p>The vote passes, if at least 3 <code>+1</code> votes are received and more <code>+1</code> are received than <code>-1</code>.</p>
 </div>
 <div class="paragraph">
-<p>After the 72 hour minimum wait period is over and we have fulfilled the requirement of at least 3 +1 votes and more +1 than -1, a final reply is sent to the vote thread with a prefix of <code>[RESULT]</code> in the title in which the summary of the vote is presented in an aggregated form.</p>
+<p>After the 72-hour minimum wait period is over and we have fulfilled the requirement of at least 3 +1 votes and more +1 than -1, a final reply is sent to the vote thread with a prefix of <code>[RESULT]</code> in the title in which the summary of the vote is presented in an aggregated form.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -891,7 +891,7 @@ So, the vote passes with {number of +1 votes} +1 votes by PMC members {number of
 <div class="sect2">
 <h3 id="releasing_after_a_successful_vote">Releasing after a successful vote</h3>
 <div class="paragraph">
-<p>As soon as the votes are finished and the results were in favor of a release, the staged artifacts can be released.
+<p>As soon as the votes are finished, and the results were in favor of a release, the staged artifacts can be released.
 This is done by moving them inside the Apache SVN.</p>
 </div>
 <div class="listingblock">
@@ -928,7 +928,7 @@ This is done by moving them inside the Apache SVN.</p>
 <div class="sect2">
 <h3 id="releasing_the_maven_artifacts">Releasing the Maven artifacts</h3>
 <div class="paragraph">
-<p>The probably simplest part is releasing the Maven artifacts.</p>
+<p>Probably the simplest part is releasing the Maven artifacts.</p>
 </div>
 <div class="paragraph">
 <p>In order to do this, the release manager logs into Nexus at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a>, selects the staging repository and clicks on the <code>Release</code> button.</p>
@@ -957,7 +957,7 @@ This is done by moving them inside the Apache SVN.</p>
 <p>Please add the just released version to the top of the versions.</p>
 </div>
 <div class="paragraph">
-<p>This file is needed for Apache&#8217;s tooling to automatically keep track of project release activity and we use this internally too to automatically update the documentation to always reference the latest released version automatically.</p>
+<p>This file is needed for Apache&#8217;s tooling to automatically keep track of project release activity, and we use this internally too to automatically update the documentation to always reference the latest released version automatically.</p>
 </div>
 </div>
 <div class="sect2">
@@ -973,7 +973,7 @@ git merge release/0.8.0</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When there are conflicts it could help to use the "theirs" merge strategy, i.e.,</p>
+<p>When there are conflicts it could help to use the <code>theirs</code> merge strategy, i.e.,</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1001,8 +1001,7 @@ be pushed.</p>
 <div class="sect2">
 <h3 id="update_the_download_site">Update the download site</h3>
 <div class="paragraph">
-<p>The URL <a href="http://plc4x.apache.org/users/download.html" class="bare">http://plc4x.apache.org/users/download.html</a> has to be changed and the current release
-has to be listed there.
+<p>The URL <a href="http://plc4x.apache.org/users/download.html" class="bare">http://plc4x.apache.org/users/download.html</a> has to be changed, and the current release has to be listed there.
 This is done by changing the <code>download.adoc</code> under <code>src/site/users/</code> (<strong>in the develop branch, as this is where the site is generated from!</strong>)</p>
 </div>
 <div class="olist arabic">
@@ -1054,16 +1053,26 @@ logic controllers (PLCs) using a variety of protocols but with a shared API.
 
 The current release contains drivers able to communicate with industrial PLCs using one of the following protocols:
 
-  *   Siemens S7 (0x32)
+  *   AB-ETH
   *   Beckhoff ADS
+  *   CanOpen
+  *   EtherNet/IP / EIP
+  *   Firmata
+  *   KNXNet/IP
   *   Modbus
-  *   EtherNet/IP
+  *   OPC UA
+  *   Siemens S7 (0x32)
 
 Beyond that we also provide integration modules for the following Apache projects and frameworks:
 
-  *   Apache Edgent (Incubating)
+  *   Apache Calcite
   *   Apache Camel
+  *   Apache Edgent (Incubating / Retired)
   *   Apache Kafka (Kafka Connect)
+  *   Apache NiFi
+  *   Logstash
+
+It also provides an `OPC UA Server` which can act as a bridge between legacy systems and OPC UA.
 
 Visit the Apache PLC4X website [1] for general information or
 the downloads page [2] for release notes and download information.
@@ -1076,11 +1085,11 @@ The Apache PLC4X team
 </div>
 </div>
 <div class="paragraph">
-<p>It is important to note that you have to send this email from your apache email address or it will be rejected.
-This wasn&#8217;t very simple for me to setup.
+<p>It is important to note that you have to send this email from your apache email address, or it will be rejected.
+This wasn&#8217;t very simple for me to set up.
 A general description can be found here:
 <a href="https://reference.apache.org/committer/email" class="bare">https://reference.apache.org/committer/email</a>
-Here&#8217;s what I did in google mail to allow sending of emails:
+Here&#8217;s what I did in Google Mail to allow sending of emails:
 <a href="https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html" class="bare">https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html</a>
 Note &#8230;&#8203; you will be able to select the alternate sending address if you click into the recipients line of a new email (Not very intuitive).</p>
 </div>
