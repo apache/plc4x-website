@@ -701,7 +701,7 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:perform</pre>
+<pre>mvn release:perform -DreleaseProfiles=apache-release,with-logstash</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -713,7 +713,7 @@ Here it automatically executes a maven build (You don&#8217;t have to do this, i
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn clean deploy -P with-logstash</pre>
+<pre>mvn clean deploy -P apache-release,with-logstash</pre>
 </div>
 </div>
 <div class="paragraph">
