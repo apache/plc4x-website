@@ -449,7 +449,7 @@ Usually the <code>NOTICE</code> file has to be adjusted.</p>
 <p>For each new Major and Minor release we create a new branch at the beginning of a code-freeze phase.</p>
 </div>
 <div class="paragraph">
-<p>So if currently the project version in develop is <code>0.9.0-SNAPSHOT</code>, we create a branch <code>release/0.9</code>.</p>
+<p>So if currently the project version in develop is <code>0.9.0-SNAPSHOT</code>, we create a branch <code>rel/0.9</code>.</p>
 </div>
 <div class="paragraph">
 <p>When creating the branch is exactly the moment in which the version in <code>develop</code> is incremented to the next minor version.</p>
@@ -969,7 +969,7 @@ This has to be done with git</p>
 <div class="listingblock">
 <div class="content">
 <pre>git checkout release
-git merge release/0.9.0</pre>
+git merge v0.9.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -977,7 +977,7 @@ git merge release/0.9.0</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>git merge -X theirs release/0.9.0</pre>
+<pre>git merge -X theirs v0.9.0</pre>
 </div>
 </div>
 <div class="paragraph">
