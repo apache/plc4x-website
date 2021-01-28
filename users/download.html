@@ -291,6 +291,146 @@
 <div class="sect2">
 <h3 id="current_releases">Current Releases</h3>
 <div class="sect3">
+<h4 id="release-0_7_0">0.8.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="paragraph">
+<p>This is an ordinary PLC4X release, containing changes that
+accumulated over time. It doesn&#8217;t have an explicit focus on
+a particular topic.</p>
+</div>
+<div class="sect4">
+<h5 id="new_features">New Features</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The KNXnet/IP Driver now supports writing of values.</p>
+</li>
+<li>
+<p>The Modbus driver now supports more common notations of Modbus addresses using a pure-numeric notation.</p>
+</li>
+<li>
+<p>The ADS, KNX, Modbus, S7 and simulated drivers have been updated to support the IEC 61131-3 data-types.</p>
+</li>
+<li>
+<p>We are now including PLC4Go as PLC4X implementation in the programming language Go(lang)</p>
+</li>
+<li>
+<p>Integration with the Milo OPC UA Server is now available.</p>
+</li>
+<li>
+<p>Kafka Connect workers have been updated source and sink connectors are now included.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="incompatible_changes">Incompatible changes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The syntax of the S7 addresses changed slightly allowing to provide a string length. Without this, a STRING datatype will read 254 characters, by adding the size in round brackets to the type name will use the specified number.</p>
+<div class="literalblock">
+<div class="content">
+<pre>Examples:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Read one String which is max 10 chars long:
+%DB2:30:STRING(10)</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Read an array of 3 Strings where each is max 10 chars long:
+%DB2:30:STRING(10)[3]</pre>
+</div>
+</div>
+</li>
+<li>
+<p>The PLCValue types have been refactored to align with the types defined in IEC 61131-3 (<a href="https://en.wikipedia.org/wiki/IEC_61131-3" class="bare">https://en.wikipedia.org/wiki/IEC_61131-3</a>) directly using the older Java types (PlcBoolean) is no longer possible.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="bug_fixes">Bug Fixes</h5>
+<div class="paragraph">
+<p>A lot of testing was done regarding the IEC 61131-3 data-types.
+This resulted in numerous bugfixes in many protocols.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>PLC4X-132  [S7] Communication to S7 PLC dies in some situations</p>
+</li>
+<li>
+<p>PLC4X-206  When writing short values exceptions are thrown while preparing the write request.</p>
+</li>
+<li>
+<p>PLC4X-207  No registered handler found for message TPKTPacket[], using default decode method - Communication with S7 and Modbus device hangs</p>
+</li>
+<li>
+<p>PLC4X-209  [S7] When writing INT and DINT values the Write operation fails with an internal error</p>
+</li>
+<li>
+<p>PLC4X-210  [KNX] When running a KNX Tunneling Subscription for a longer time there are packets that kill the connection</p>
+</li>
+<li>
+<p>PLC4X-211  PlcValues seem to always return "true" on the isXYZ" checks.</p>
+</li>
+<li>
+<p>PLC4X-212  When writing multiple values in one request the item status is not correctly set</p>
+</li>
+<li>
+<p>PLC4X-213  [Modbus] The Modbus driver doesn&#8217;t handle error responses gracefully</p>
+</li>
+<li>
+<p>PLC4X-214  [Modbus] Holding register addresses have an offset of 1 (Not reading the correct address)</p>
+</li>
+<li>
+<p>PLC4X-215  Drivers using the BaseOptimizer (SingleFieldOptimizer) don&#8217;t handle error responses gracefully</p>
+</li>
+<li>
+<p>PLC4X-218  [Scraper] After stopping the scraper still the statistics are logged and the application doesn&#8217;t terminate</p>
+</li>
+<li>
+<p>PLC4X-239  Read DTL (Date and Time)</p>
+</li>
+<li>
+<p>PLC4X-240  Protocol error in reading string</p>
+</li>
+<li>
+<p>PLC4X-246  S7 driver hangs on read</p>
+</li>
+<li>
+<p>PLC4X-245  [Modbus] Apache NiFi processor throws java.io.IOException after a while</p>
+</li>
+<li>
+<p>PLC4X-255  Kafka Connector Source Task doesn&#8217;t block within poll() resulting in high CPU usage.</p>
+</li>
+<li>
+<p>PLC4X-261  Pooled connection manager returns a connection that isn&#8217;t connected in some situations.</p>
+</li>
+<li>
+<p>PLC4X-272  When splitting up large requests, too big sub-requests are generated (S7)</p>
+</li>
+<li>
+<p>PLC4X-256  ReadBuffer truncate last byte of even small payloads</p>
+</li>
+<li>
+<p>PLC4X-262  Error in reading Array</p>
+</li>
+<li>
+<p>PLC4X-270  Ads driver does not accept double-digit array indexes</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="previous_releases">Previous Releases</h3>
+<div class="sect3">
 <h4 id="release-0_7_0">0.7.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
 <p>This version is the first after a major refactoring of the driver
@@ -299,7 +439,7 @@ and have been replaced by versions using the new driver structure
 and generated driver codebase.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features">New Features</h5>
+<h5 id="new_features_2">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -333,7 +473,7 @@ to be able to use them in an OSGi container.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes">Incompatible changes</h5>
+<h5 id="incompatible_changes_2">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -358,7 +498,7 @@ provide both a feature.xml as well as a <code>kar</code> bundled archive</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes">Bug Fixes</h5>
+<h5 id="bug_fixes_2">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -374,9 +514,6 @@ provide both a feature.xml as well as a <code>kar</code> bundled archive</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="previous_releases">Previous Releases</h3>
 <div class="sect3">
 <h4 id="release-0_6_0">0.6.0 Official <a href="https://archive.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.6.0/apache-plc4x-0.6.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
@@ -389,7 +526,7 @@ most users have switched to 0.7 and above (with generated drivers).</p>
 as the critical (memory leak) bug PLC4X-163 is fixed.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_2">New Features</h5>
+<h5 id="new_features_3">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -400,7 +537,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_2">Incompatible changes</h5>
+<h5 id="incompatible_changes_3">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -410,7 +547,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_2">Bug Fixes</h5>
+<h5 id="bug_fixes_3">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -441,7 +578,7 @@ This release contains no further features and mostly stabilization.</p>
 <p>This is the first release containing our new generated drivers (AB-ETH)</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_3">New Features</h5>
+<h5 id="new_features_4">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -471,11 +608,11 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_3">Incompatible changes</h5>
+<h5 id="incompatible_changes_4">Incompatible changes</h5>
 
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_3">Bug Fixes</h5>
+<h5 id="bug_fixes_4">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -503,7 +640,7 @@ This release contains no further features and mostly stabilization.</p>
 <p>This is the first release of Apache PLC4X as top-level project.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_4">New Features</h5>
+<h5 id="new_features_5">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -522,7 +659,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_4">Incompatible changes</h5>
+<h5 id="incompatible_changes_5">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -532,7 +669,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_4">Bug Fixes</h5>
+<h5 id="bug_fixes_5">Bug Fixes</h5>
 
 </div>
 </div>
@@ -542,7 +679,7 @@ This release contains no further features and mostly stabilization.</p>
 <div class="sect3">
 <h4 id="0_3_1_incubating_official_source_release_sha512_asc">0.3.1 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_5">New Features</h5>
+<h5 id="new_features_6">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -552,7 +689,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_5">Incompatible changes</h5>
+<h5 id="incompatible_changes_6">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -562,7 +699,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_5">Bug Fixes</h5>
+<h5 id="bug_fixes_6">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -584,7 +721,7 @@ This release contains no further features and mostly stabilization.</p>
 <div class="sect3">
 <h4 id="release-0_3_0">0.3.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_6">New Features</h5>
+<h5 id="new_features_7">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -603,7 +740,7 @@ runtime environment</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_6">Incompatible changes</h5>
+<h5 id="incompatible_changes_7">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -620,7 +757,7 @@ a <code>plc4j-protocol-{name}</code> you now need to change this to
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_6">Bug Fixes</h5>
+<h5 id="bug_fixes_7">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
