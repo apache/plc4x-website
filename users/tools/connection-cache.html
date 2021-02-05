@@ -223,7 +223,7 @@
                             <a href="../../users/tools/capture-replay.html" class="nav-link">Capture Replay</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Connection Pool</strong>
+                            <a href="../../users/tools/connection-pool.html" class="nav-link">Connection Pool</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/tools/opm.html" class="nav-link">Object PLC Mapping (OPM)</a>
@@ -282,78 +282,62 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="connection_pool">Connection Pool</h2>
-<div class="sectionbody">
+            <div class="sect2">
+<h3 id="the_connection_cache_concept">The Connection Cache concept</h3>
 <div class="paragraph">
-<p>There are situations where you don&#8217;t want to carry around connections in your code.</p>
+<p>There&#8217;s an another version of pool manager with similar target but different implementation.</p>
 </div>
 <div class="paragraph">
-<p>For example if you have a microservice application, you might have multiple services accessing PLC data.</p>
+<p>The idea behind this second pool driver is that a connection could be lost for a lot of external reason, without the possibility to handle those from the plc4x point of view (e.g. the cable is unplugged in a reading session). In the Cached Pool Manager every connection could be used for only a limited period of time, at the end the connection is no more valid and must be returned to the poll.</p>
 </div>
 <div class="paragraph">
-<p>Keeping an open connection for each of these is rather problematic as in contrast to modern computers, PLCs usually are only able to manage a small number of concurrent connections.</p>
-</div>
-<div class="paragraph">
-<p>I think a Siemens S7-1200 is limited to 7 concurrent connections and a Siemens LOGO can&#8217;t do more than 3.</p>
-</div>
-<div class="paragraph">
-<p>One alternative would be to open and close the connections all the time.
-This however puts an unnecessary stress on the PLCs as for protocols like the S7 or the ADS protocol a handshake of multiple requests and responses has to be executed before being able to communicate.</p>
-</div>
-<div class="paragraph">
-<p>As usually these services only require ad-hoc access to a PLC, it would be ideal to share connections between services.</p>
-</div>
-<div class="paragraph">
-<p>Another problem occurs when you open a connection and keep it open for a prolonged time period.
-Here it can happen quite often that a connection is terminated because the PLC has been turned off.</p>
-</div>
-<div class="paragraph">
-<p>Per default the PLC connection has no means of automatically re-connecting.</p>
-</div>
-<div class="paragraph">
-<p>The <code>PooledPlcDriverManager</code> can help you with both of these scenarios.</p>
-</div>
-<div class="sect2">
-<h3 id="the_pooledplcdrivermanager">The PooledPlcDriverManager</h3>
-<div class="paragraph">
-<p>The <code>PooledPlcDriverManager</code> is a wrapper around the normal <code>PlcDriverManager</code>.</p>
-</div>
-<div class="paragraph">
-<p>The main difference is that as soon as a connection is requested, it will look if one already exists and return that.</p>
-</div>
-<div class="paragraph">
-<p>If no connection exists it will create a new one and keep it in the pool.</p>
-</div>
-<div class="paragraph">
-<p>There are no API differences from using the normal <code>PlcDriverManager</code> so you call <code>createConnection</code> and <code>close</code> just like with the normal PLC4X API.</p>
-</div>
-<div class="paragraph">
-<p>The structure of the code is now more or less like if you would create a new connection for every request and close it afterwards.</p>
-</div>
-<div class="paragraph">
-<p>Another benefit of the <code>PooledPlcDriverManager</code> is that it will check a connection for any problems before returning it to the client.</p>
-</div>
-<div class="paragraph">
-<p>So if a connection was terminated, it will detect this and create a new connection.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="example">Example</h3>
-<div class="paragraph">
-<p>Here comes a little example program utilizing the <code>PooledPlcDriverManager</code>:</p>
+<p>Even in the Cached Pool Manager, getting a connection from the pool is effortless so the typical live cycle of a connection is:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="java">    PlcDriverManager driverManager = new PooledPlcDriverManager();
-
-    // This just simulates a scenario where a lot of connections would be created and immediately destroyed again.
-    for(int i = 0; i &lt; 100; i++) {
-        try(PlcConnection connection = driverManager.getConnection("...")) {
-
-            ... do something ... (please refer to the PLC4J getting started for details)
-
-        }
+<pre class="prettyprint highlight"><code>Get a connection -&gt; use the connection -&gt; return the connection to the pool</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the Cached Pool Manager a watchdog will invalidate any open connection at the end of it&#8217;s live time even if no answer came back from the PLC; in this case the library could continue to talk to the PLC with some other connections fetched from the pool.</p>
+</div>
+<div class="paragraph">
+<p>Let explain this concept in more detail using the Cached Pool with an example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">    public static void main(String[] args) throws Exception {
+        String connectionString = "s7://192.168.1.192";
+            PlcDriverManager manager = new PlcDriverManager();
+            PlcDriverManager cached = new CachedDriverManager(connectionString,() -&gt; manager.getConnection(connectionString));
+            for (int i = 0; i &lt; 10000; i++) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                    try (PlcConnection conn = cached.getConnection(connectionString)) {
+                        if (conn.isConnected()){
+                            PlcReadRequest.Builder builder = conn.readRequestBuilder();
+                            builder.addItem("PollingValue", "%DB1:4.0:BOOL");
+                            PlcReadRequest readRequest = builder.build();
+                            PlcReadResponse syncResponse = readRequest.execute().get(2000, TimeUnit.MILLISECONDS);
+                            printResponse(syncResponse);
+                        } else {
+                            logger.info("PLC is not connected, let's try again to connect");
+                            conn.connect();
+                        }
+                    }
+                } catch (PlcConnectionException e){
+                    logger.error("Connection exception in trying to connect", e);
+                } catch (CancellationException  e){
+                    logger.error("Polling Thread canceled", e);
+                } catch (IllegalStateException e){
+                    logger.error("Error in Netty state machine", e);
+                } catch (ExecutionException e){
+                    logger.error("Interrupted Exception fired", e);
+                } catch (TimeoutException e) {
+                    logger.error("Timeout exception fired", e);
+                }
+            }
+        System.exit(0);
     }</code></pre>
 </div>
 </div>
@@ -364,12 +348,37 @@ Here it can happen quite often that a connection is terminated because the PLC h
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When sharing connections between multiple services, be sure to share the instance of the <code>PooledPldDriverManager</code> as otherwise you will result in having multiple pools.
+<div class="paragraph">
+<p>To use the Connection Cache you have to add to Maven the latest version of <code>plc4j-connection-cache</code> and import <code>CachedDriverManager</code> into your code</p>
+</div>
 </td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>In this snippet of code there are some considerations that are worth to be underlined.</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>try-with-resources</code> statement (i.e. <code>try (PlcConnection conn = cached.getConnection(connectionString))</code>) ensure that an open connection will be automatically closed and returned to the pool after the use. As said before if the connection get stuck for any reason, after a fixed amount of time will be killed by a software watchdog (i.e. the amount of time is now fixed to 5000 ms, will be configurable in the future);</p>
+</li>
+<li>
+<p>Check if the PLC is connected before reading some data is always advisable (i.e. <code>conn.isConnected()</code>) but this doesn&#8217;t mean that the PLC will be ready to answer to the connection, it means that the initial handshake went good and plc4x has the needed information to talk with the PLC;</p>
+</li>
+<li>
+<p>the use of <code>get()</code> must be done with a timeout (i.e. <code>readRequest.execute().get(2000, TimeUnit.MILLISECONDS)</code>). After the timeout amount of time a <code>TimeoutException</code> will be fired. In the code this is trapped and signaled with a simple line of log. This case could happen because the PLC for some reason could decide to not answer or the physical connection could have some problem;</p>
+</li>
+<li>
+<p>the <code>PlcConnectionException</code> is a connection error that could happen in the handshaking phase between the PLC4x library and the PLC. It&#8217;s a generic error;</p>
+</li>
+<li>
+<p>the <code>IllegalStateException</code> is a Netty library exception which could happen in some really troubled connection, mostly if a physical disconnection happen.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All the others exceptions (i.e. <code>ExecutionException</code> and <code>CancellationException</code>) are thread java related exceptions; in this example these are caught to show how plc4x could be used to handle all the external problems that could happen in talking to a PLC and could recover from them.</p>
 </div>
 </div>
         </main>
