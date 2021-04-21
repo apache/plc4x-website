@@ -316,7 +316,7 @@ If you are familiar with this, you can go to the next chapter.</p>
 <div class="content">
 <pre class="prettyprint highlight"><code>module main
 
-go 1.14</code></pre>
+go 1.16</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -481,10 +481,10 @@ This is done by a <code>PlcReadRequest</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre>	// Prepare a read-request
-	readRequestBuilder := connection.ReadRequestBuilder()
-	readRequestBuilder.AddItem("field1", "holding-register:1:REAL")
-	readRequestBuilder.AddItem("field2", "holding-register:3:REAL")
-	readRequest, err := readRequestBuilder.Build()
+	readRequest, err := connection.ReadRequestBuilder().
+	    AddItem("field1", "holding-register:1:REAL").
+	    AddItem("field2", "holding-register:3:REAL").
+        Build()
 	if err != nil {
 		t.Errorf("error preparing read-request: %s", connectionResult.Err.Error())
 		t.Fail()
@@ -602,12 +602,12 @@ Not implemented yet
 <div class="listingblock">
 <div class="content">
 <pre>	// Prepare a subscription-request
-    subscriptionRequestBuilder := connection.SubscriptionRequestBuilder()
-    subscriptionRequestBuilder.AddChangeOfStateItem("heating-actual-temperature", "*/*/10:DPT_Value_Temp")
-    subscriptionRequestBuilder.AddChangeOfStateItem("heating-target-temperature", "*/*/11:DPT_Value_Temp")
-    subscriptionRequestBuilder.AddCyclicItem("heating-valve-open", "*/*/12:DPT_OpenClose", 500 * time.Millisecond)
-    subscriptionRequestBuilder.AddItemHandler(knxEventHandler)
-    subscriptionRequest, err := subscriptionRequestBuilder.Build()
+    subscriptionRequest, err := connection.SubscriptionRequestBuilder().
+        AddChangeOfStateItem("heating-actual-temperature", "*/*/10:DPT_Value_Temp").
+        AddChangeOfStateItem("heating-target-temperature", "*/*/11:DPT_Value_Temp").
+        AddCyclicItem("heating-valve-open", "*/*/12:DPT_OpenClose", 500 * time.Millisecond).
+        AddItemHandler(knxEventHandler).
+        Build()
     if err != nil {
 	    fmt.Printf("Error preparing subscription-request: %s", connectionResult.Err.Error())
         return
