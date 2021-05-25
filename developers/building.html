@@ -359,9 +359,6 @@ Currently when enabling the <code>with-python</code> module, you are required to
 <p><code>with-docker</code> : Some modules also provide the means to build <code>Docker</code> images. By enabling this profile these images are automatically built too</p>
 </li>
 <li>
-<p><code>with-logstash</code> : Builds the <code>Elastic Logstash</code> integration. Unfortunately Elasic has never released the core libraries publicly so we need to then also build <code>Logstash</code> locally. As soon as these core libraries are officially released in <code>Maven-Central</code>, this profile will be removed again.</p>
-</li>
-<li>
 <p><code>with-boost</code> : Builds a <code>C</code>/<code>C` Library used by both the `Apache Thrift` build as well as the `C</code> drivers. Unfortunately this is an extremely intense build so we have setup the PLC4X build to only require this profile to be activated once. If the resulting artifacts are installed in your <code>Maven-Local-Repo</code>, these will be re-used.</p>
 </li>
 </ul>
@@ -387,7 +384,7 @@ Currently when enabling the <code>with-python</code> module, you are required to
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-boost,with-cpp,with-docker,with-dotnet,with-logstash,with-sandbox,with-logstash,with-proxies,with-python,with-sandbox install</pre>
+<pre>mvn -P with-boost,with-cpp,with-docker,with-dotnet,with-sandbox,with-logstash,with-proxies,with-python,with-sandbox install</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -398,7 +395,7 @@ Currently when enabling the <code>with-python</code> module, you are required to
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-boost,with-cpp,with-docker,with-dotnet,with-logstash,with-sandbox,with-logstash,with-proxies,with-python,with-sandbox install -DskipTests</pre>
+<pre>mvn -P with-boost,with-cpp,with-docker,with-dotnet,with-sandbox,with-logstash,with-proxies,with-python,with-sandbox install -DskipTests</pre>
 </div>
 </div>
 <div class="paragraph">
