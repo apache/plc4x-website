@@ -387,6 +387,24 @@ configured and propagate the wrong external IP or URL address. If that is the ca
 configuring it with a <code>false</code> value.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>username</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A username to authenticate to the OPCUA server with.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>password</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A password to authenticate to the OPCUA server with.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -405,7 +423,7 @@ configuring it with a <code>false</code> value.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>opcua:tcp://127.0.0.1:12686?discovery=true</pre>
+<pre>opcua:tcp://127.0.0.1:12686?discovery=true&amp;username=admin&amp;password=password</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -563,12 +581,6 @@ The OPC Unified Architecture (UA), released in 2008, is a platform independent s
 <p>Comprehensive information modeling: for defining complex information</p>
 </li>
 </ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="more_details">More details</h3>
-<div class="paragraph">
-<p>The client SDK within the <a href="https://projects.eclipse.org/projects/iot.milo">Eclipse Milo</a> project is used as the basis for the PLC4X OPC UA driver.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 </table>
