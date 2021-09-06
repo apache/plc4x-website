@@ -95,7 +95,7 @@
                             <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/getting-started/using-snapshots.html" class="nav-link">Using SNAPSHOTS</a>
+                            <strong class="nav-link">Using SNAPSHOTS</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/getting-started/general-concepts.html" class="nav-link">General Concepts</a>
@@ -221,7 +221,7 @@
                             <a href="../../users/tools/index.html" class="nav-link">Tools</a>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
-                            <strong class="nav-link">Capture Replay</strong>
+                            <a href="../../users/tools/capture-replay.html" class="nav-link">Capture Replay</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/tools/connection-pool.html" class="nav-link">Connection Pool</a>
@@ -287,87 +287,53 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="capture_replay">Capture Replay</h2>
+<h2 id="using_snapshot_versions">Using SNAPSHOT versions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some times the problem with industry protocols is, that the most interesting protocols live in places that are not very welcoming to IT folks.</p>
+<p>Especially when it comes to trying to verify if an issue you are facing has already been fixed in the development version, you might want to or be asked to try out the absolute latest version of PLC4X. You can generally do this by adding "-SNAPSHOT" to the version number of PLC4X.</p>
 </div>
 <div class="paragraph">
-<p>Either too hot or too cold and usually no good coffee around.</p>
+<p>We also provide convenience built <code>SNAPSHOT</code> versions, however are these not automatically synced with <code>Maven Central</code>. So Maven will not automatically be able to find them.</p>
 </div>
 <div class="paragraph">
-<p>The <code>Capture Replay</code> tool is a little helper, that can possibly help with this.</p>
+<p>Our <code>SNAPSHOT</code> versions are deployed on the <code>Apache Maven repository</code>.</p>
 </div>
 <div class="paragraph">
-<p>Especially when it comes to developing passive mode drivers this tool can come in very handy.</p>
+<p>In order to access these, you need to add the following block to your <code>pom.xml</code> file:</p>
 </div>
-<div class="paragraph">
-<p>It allows to replay recorded network traffic and to directly intercept this traffic in any passive mode drivers.</p>
-</div>
-<div class="paragraph">
-<p>Possibly it could also work with non passive drivers, but I expect synchronization to be tricky.</p>
-</div>
-<div class="sect2">
-<h3 id="getting_a_capture">Getting a Capture</h3>
-<div class="paragraph">
-<p>In order to create a capture I usually connect a device running <code>WireShark</code> to the network.</p>
-</div>
-<div class="paragraph">
-<p>Ideally to the replication port of a network switch so I can record all the traffic.</p>
-</div>
-<div class="paragraph">
-<p>An alternative would be to run <code>WireShark</code> on one of the PCs/Servers having access to the traffic I&#8217;m interested in.
-So if for example I wanted to work on a driver for control system <code>X</code>, capturing the traffic on one of the <code>X</code> servers is probably the simplest way to do it.
-If complicance rules prevent ths a third option would be to use a network tap to record the capture.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="replaying_the_capture">Replaying the Capture</h3>
-<div class="paragraph">
-<p>Now you need to copy the <code>pcapng</code> file ideally to your development system.</p>
-</div>
-<div class="paragraph">
-<p>The capture can be replayed by the tool you find in <code>plc4j/tools/capture-replay</code>.</p>
-</div>
-<div class="paragraph">
-<p>Here simply look for the <code>target/plc4j-capture-replay-0.8.0-uber-jar.jar</code> and run:</p>
-</div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>java -jar target/plc4j-capture-replay-{current-last-released-version}-uber-jar.jar --input-file {path to capture} --output-device {name of the network device} --replay-speed 1 --loop true</pre>
+<pre>  &lt;!-- Make Snapshots of Apache projects available --&gt;
+  &lt;repositories&gt;
+    &lt;repository&gt;
+      &lt;id&gt;apache-snapshots&lt;/id&gt;
+      &lt;url&gt;https://repository.apache.org/content/repositories/snapshots&lt;/url&gt;
+      &lt;releases&gt;
+        &lt;enabled&gt;false&lt;/enabled&gt;
+      &lt;/releases&gt;
+      &lt;snapshots&gt;
+        &lt;enabled&gt;true&lt;/enabled&gt;
+      &lt;/snapshots&gt;
+    &lt;/repository&gt;
+  &lt;/repositories&gt;
+
+  &lt;!-- Make Snapshots of Apache plugins available --&gt;
+  &lt;pluginRepositories&gt;
+    &lt;pluginRepository&gt;
+      &lt;id&gt;apache-snapshots&lt;/id&gt;
+      &lt;url&gt;https://repository.apache.org/content/repositories/snapshots&lt;/url&gt;
+      &lt;releases&gt;
+        &lt;enabled&gt;false&lt;/enabled&gt;
+      &lt;/releases&gt;
+      &lt;snapshots&gt;
+        &lt;enabled&gt;true&lt;/enabled&gt;
+      &lt;/snapshots&gt;
+    &lt;/pluginRepository&gt;
+  &lt;/pluginRepositories&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The options <code>input-file</code> and <code>output-device</code> are mandatory, the rest is optional:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>input-file</code> specifies the path to the capture file (pcapng)</p>
-</li>
-<li>
-<p><code>output-device</code> name of the network device that will be used for output (name listed when running <code>ifconfig</code> on Linux and Mac or <code>ipconfig</code> on Windows)</p>
-</li>
-<li>
-<p><code>replay-speed</code> Speed the replay will be played back. 1 is real time, 0 or less is <code>as fast as possible</code>, 0.5 is 50% slower than the original and 2 is twice as fast</p>
-</li>
-<li>
-<p><code>loop</code> if set to true it will automatically start replaying the capture from the start as soon as the end is reached</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-The replay-speed is ideal to see how your driver can cope with different volumes of traffic. So even if your driver is currently working fine, consider using this tool in order to find out if your system could cope with 50% more nodes or increased polling intervals etc.
-</td>
-</tr>
-</table>
-</div>
+<p>After adding this block, you should be able to also use <code>SNAPSHOT</code> versions.</p>
 </div>
 </div>
 </div>
