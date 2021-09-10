@@ -255,7 +255,7 @@ Please be sure to execute the release with a Java version between 1.8 and 11 or 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-boost,with-c,with-docker,with-dotnet,with-go,with-python,with-sandbox -DbranchName=rel/{current-short-version}</pre>
+<pre>   mvn release:branch -P with-c,with-dotnet,with-go,with-python,with-sandbox -DbranchName=rel/{current-short-version}</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -270,7 +270,7 @@ Please be sure to execute the release with a Java version between 1.8 and 11 or 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:prepare -P with-boost,with-c,with-docker,with-dotnet,with-go,with-python,with-sandbox</pre>
+<pre>   mvn release:prepare -P with-c,with-dotnet,with-go,with-python,with-sandbox</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -471,7 +471,7 @@ Otherwise, the non-default modules on develop will reference the old version whi
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:branch -P with-boost,with-c,with-cpp,with-docker,with-dotnet,with-go,with-python,with-sandbox -DbranchName=rel/{minor-version}</pre>
+<pre>mvn release:branch -P with-c,with-dotnet,with-go,with-python,with-sandbox -DbranchName=rel/{minor-version}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -480,7 +480,7 @@ So in case of preparing the release branch for <code>0.9.0-SNAPSHOT</code> the c
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-boost,with-c,with-cpp,with-docker,with-dotnet,with-go,with-python,with-sandbox -DbranchName=rel/0.9</pre>
+<pre>   mvn release:branch -P with-c,with-dotnet,with-go,with-python,with-sandbox -DbranchName=rel/0.9</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -572,11 +572,11 @@ In order to prepare a release-candidate, the first step is switching to the corr
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:prepare -P with-boost,with-c,with-docker,with-dotnet,with-go,with-python,with-sandbox</pre>
+<pre>mvn release:prepare -P with-c,with-dotnet,with-go,with-python,with-sandbox</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(The <code>-P with-boost,with-c,with-docker,with-dotnet,with-go,with-python,with-sandbox</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release)
+<p>(The <code>-P with-c,with-dotnet,with-go,with-python,with-sandbox</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release)
 In general the plugin will now ask you 3 questions:</p>
 </div>
 <div class="olist arabic">
@@ -705,7 +705,7 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:perform -DreleaseProfiles=apache-release</pre>
+<pre>mvn release:perform</pre>
 </div>
 </div>
 <div class="paragraph">
