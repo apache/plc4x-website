@@ -356,7 +356,7 @@ Especially in the <code>sandbox</code> there may be parts that are not formally 
 <p><input type="checkbox" data-item-complete="0"/> Build the project according to the information in the README.md file.</p>
 </li>
 <li>
-<p><input type="checkbox" data-item-complete="0"/> [RM] Build the project with all <code>with-xyz</code> profiles and tests enabled and an empty maven local repo: by appendng <code>-Dmaven.repo.local=../.m2</code>.</p>
+<p><input type="checkbox" data-item-complete="0"/> [RM] Build the project with all <code>with-xyz</code> profiles and tests enabled and an empty maven local repo: by appending <code>-Dmaven.repo.local=../.m2</code> (On windows use <code>-D"maven.repo.local"="../.m2"</code>).</p>
 </li>
 </ul>
 </div>
@@ -386,7 +386,7 @@ Especially in the <code>sandbox</code> there may be parts that are not formally 
 <div class="sect2">
 <h3 id="release_tooling">Release Tooling</h3>
 <div class="paragraph">
-<p>In the <code>tools</code> directory we have a little script that can help downloading and checking the hashes and signatures automatically.</p>
+<p>In the <code>tools</code> directory we have a little script that can help with downloading and checking the hashes and signatures automatically.</p>
 </div>
 <div class="paragraph">
 <p>In order to execute this, please change directories into the projects base directory and execute the following command:</p>
@@ -404,6 +404,35 @@ Especially in the <code>sandbox</code> there may be parts that are not formally 
 </div>
 <div class="paragraph">
 <p>Last not least it will validate the PGP key and print out some information on it.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="template_for_the_email_for_voting">Template for the email for voting</h3>
+<div class="listingblock">
+<div class="content">
+<pre>+1/-1 (binding)
+
+Name
+
+[] Download all staged artifacts under the url specified in the release vote email.
+[] Verify the signature is correct.
+[] Check if the signature references an Apache email address.
+[] Verify the SHA512 hashes.
+[] Unzip the archive.
+[] Verify the existence of LICENSE, NOTICE, README, RELEASE_NOTES files in the extracted source bundle.
+[] Verify the content of LICENSE, NOTICE, README, RELEASE_NOTES files in the extracted source bundle.
+[] [RM] Verify the staged source README, RELEASE_NOTE files correspond to those in the extracted source bundle.
+[] [RM] Run RAT externally to ensure there are no surprises.
+[] Search for SNAPSHOT references: Only found some in the dummy website copy in the integration-tests
+[] Search for Copyright references, and if they are in headers, make sure these files containing them are mentioned in the LICENSE file.
+[] Build the project according to the information in the README.md file.
+[] [RM] Build the project with all with-xyz profiles and tests enabled and an empty maven local repo.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If everything is ok, I put "OK" int the square brackets.
+If there are minor issues, I put "MINOR" in there and, if it&#8217;s a short reason, I put an explanation at the end of the line. If it&#8217;s longer I put a longer section after the checklist.
+If there are major issues, I put "FAIL" in there and comment the same way as with minor issues.</p>
 </div>
 </div>
 </div>
