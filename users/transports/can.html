@@ -159,7 +159,7 @@
                                 
                                                                     
                                                                 <li class="nav-item">
-                            <strong class="nav-link">Transports</strong>
+                            <a href="../../users/transports/index.html" class="nav-link">Transports</a>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
                             <a href="../../users/transports/tcp.html" class="nav-link">TCP</a>
@@ -287,30 +287,101 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="transports">Transports</h2>
+<h2 id="can">CAN</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A CAN transport is a special category of transport which can bring CAN frame data to various drivers.
+All of these transports are meant to follow basic CAN frame data semantics.</p>
+</div>
+<div class="paragraph">
+<p>Each CAN transport must provide a <code>CANFrameBuilder</code> interface realization.
+This builder can be used by drivers which implement application layer protocols on top of CAN bus.
+The builder allow constructing requests which should be passed to the bus operations.</p>
+</div>
+<div class="paragraph">
+<p>Note this API is available since Apache PLC4X 0.9.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 55.5556%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>not available</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>This transport ships only additional API on top of existing Apache PLC4X Transport API.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p>CAN</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-transport-can&lt;/artifactId&gt;
+  &lt;version&gt;{current-last-released-version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Options:</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><strong>none</strong>, an abstract transport</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Main purpose of this transport is basic unification of various CAN bus APIs.
+There is no unified way to access CAN (beside SocketCAN for linux) across multiple platforms.
+We brought this simplistic facade-alike API to serve very basic project needs.
+Its main purpose is to let transport implementer bridge with actual transport or another library.
+With as little effort as possible.</p>
+</div>
+<div class="paragraph">
+<p>Major advantage of CAN transport facade is possibility to implement application layer protocols in a fully portable way.
+This flexibility is not guaranteed with SocketCAN alone.</p>
+</div>
+<div class="paragraph">
+<p>The CAN transport responsibility is to bring CAN data to driver implementer.
+This API does not enforce, require or promote a low level bus operations.
+In this regard, these operations can be made by library available for specific CAN adapter in use.</p>
+</div>
+<div class="sect2">
+<h3 id="developer_notes">Developer notes</h3>
+<div class="paragraph">
+<p>Usage of CAN transport APIs is recommended for portability reasons.
+Please have a look on <a href="../protocols/can.html">CAN</a> describe usage of CAN driver adapter with CAN transport facade.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="compatible_can_transports">Compatible CAN transports</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="tcp.html">TCP</a></p>
-</li>
-<li>
-<p><a href="udp.html">UDP</a></p>
-</li>
-<li>
-<p><a href="raw-socket.html">Raw Socket</a></p>
-</li>
-<li>
-<p><a href="serial.html">Serial Port</a></p>
-</li>
-<li>
-<p><a href="can.html">CAN bus</a></p>
-</li>
-<li>
 <p><a href="socketcan.html">SocketCAN</a></p>
-</li>
-<li>
-<p><a href="pcap-replay.html">PCAP replay</a></p>
 </li>
 </ul>
 </div>
