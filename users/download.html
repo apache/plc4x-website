@@ -295,7 +295,7 @@
 <div class="sect2">
 <h3 id="current_releases">Current Releases</h3>
 <div class="sect3">
-<h4 id="release-0_8_0">0.8.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip.asc">ASC</a> ]</h4>
+<h4 id="release-0_9_0">0.9.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.9.0/apache-plc4x-0.9.0-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.9.0/apache-plc4x-0.9.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.9.0/apache-plc4x-0.9.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
 <p>This is an ordinary PLC4X release, containing changes that
 accumulated over time. It doesn&#8217;t have an explicit focus on
@@ -303,6 +303,72 @@ a particular topic.</p>
 </div>
 <div class="sect4">
 <h5 id="new_features">New Features</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The OPC UA driver has been replaced with a native driver. Previously
+Eclipse Milo was being used.</p>
+</li>
+<li>
+<p>Permit customized package names for code generation</p>
+</li>
+<li>
+<p>Added an initial draft of a Discover and Browse API to PLC4J</p>
+</li>
+<li>
+<p>Replaced the OPC-UA driver using Eclipse Milo with a our own, fully
+generated, version</p>
+</li>
+<li>
+<p>PLC4Go now supports many more drivers</p>
+</li>
+<li>
+<p>PLC4Go received a huge internal refactoring and cleanup</p>
+</li>
+<li>
+<p>Major cleanup of PLC4C</p>
+</li>
+<li>
+<p>S7 Driver now supports event and alarm handling on some S7 models</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="incompatible_changes">Incompatible changes</h5>
+
+</div>
+<div class="sect4">
+<h5 id="bug_fixes">Bug Fixes</h5>
+<div class="paragraph">
+<p>PLC4X-200   OPC-UA Driver not connecting if params string is not provided
+PLC4X-201   OPC-UA PlcList underlying type not compatible with Eclipse Milo
+PLC4X-202   OPC-UA Driver cannot write Unsigned Types
+PLC4X-276   [S7] The most of the supported types don&#8217;t work correctly
+PLC4X-278   Double Reading Error
+PLC4X-279   nioEventLoopGroup thread proliferation
+PLC4X-280   ADS route request swapped positions of route name and address
+PLC4X-291   DefaultPlcSubscriptionField cannot be cast to class OpcuaField
+PLC4X-298   [S7] When writing REAL values the Write
+operation fails with an internal error
+PLC4X-299   Modbus - Kafka Connect Configuration
+PLC4X-312   CAN NOT READ STRING FROM S7 PLC
+PLC4X-314   CAN NOT WRITING MANY DATA TO S7 ONE TIME</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="previous_releases">Previous Releases</h3>
+<div class="sect3">
+<h4 id="release-0_8_0">0.8.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.8.0/apache-plc4x-0.8.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="paragraph">
+<p>This is an ordinary PLC4X release, containing changes that
+accumulated over time. It doesn&#8217;t have an explicit focus on
+a particular topic.</p>
+</div>
+<div class="sect4">
+<h5 id="new_features_2">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -327,7 +393,7 @@ a particular topic.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes">Incompatible changes</h5>
+<h5 id="incompatible_changes_2">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -357,7 +423,7 @@ a particular topic.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes">Bug Fixes</h5>
+<h5 id="bug_fixes_2">Bug Fixes</h5>
 <div class="paragraph">
 <p>A lot of testing was done regarding the IEC 61131-3 data-types.
 This resulted in numerous bugfixes in many protocols.</p>
@@ -431,9 +497,6 @@ This resulted in numerous bugfixes in many protocols.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="previous_releases">Previous Releases</h3>
 <div class="sect3">
 <h4 id="release-0_7_0">0.7.0 Official <a href="https://archive.apache.org/dist/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.7.0/apache-plc4x-0.7.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
@@ -443,7 +506,7 @@ and have been replaced by versions using the new driver structure
 and generated driver codebase.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_2">New Features</h5>
+<h5 id="new_features_3">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -477,7 +540,7 @@ to be able to use them in an OSGi container.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_2">Incompatible changes</h5>
+<h5 id="incompatible_changes_3">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -502,7 +565,7 @@ provide both a feature.xml as well as a <code>kar</code> bundled archive</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_2">Bug Fixes</h5>
+<h5 id="bug_fixes_3">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -530,7 +593,7 @@ most users have switched to 0.7 and above (with generated drivers).</p>
 as the critical (memory leak) bug PLC4X-163 is fixed.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_3">New Features</h5>
+<h5 id="new_features_4">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -541,7 +604,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_3">Incompatible changes</h5>
+<h5 id="incompatible_changes_4">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -551,7 +614,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_3">Bug Fixes</h5>
+<h5 id="bug_fixes_4">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -582,7 +645,7 @@ This release contains no further features and mostly stabilization.</p>
 <p>This is the first release containing our new generated drivers (AB-ETH)</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_4">New Features</h5>
+<h5 id="new_features_5">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -612,11 +675,11 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_4">Incompatible changes</h5>
+<h5 id="incompatible_changes_5">Incompatible changes</h5>
 
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_4">Bug Fixes</h5>
+<h5 id="bug_fixes_5">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -644,7 +707,7 @@ This release contains no further features and mostly stabilization.</p>
 <p>This is the first release of Apache PLC4X as top-level project.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_5">New Features</h5>
+<h5 id="new_features_6">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -663,7 +726,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_5">Incompatible changes</h5>
+<h5 id="incompatible_changes_6">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -673,7 +736,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_5">Bug Fixes</h5>
+<h5 id="bug_fixes_6">Bug Fixes</h5>
 
 </div>
 </div>
@@ -683,7 +746,7 @@ This release contains no further features and mostly stabilization.</p>
 <div class="sect3">
 <h4 id="0_3_1_incubating_official_source_release_sha512_asc">0.3.1 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_6">New Features</h5>
+<h5 id="new_features_7">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -693,7 +756,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_6">Incompatible changes</h5>
+<h5 id="incompatible_changes_7">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -703,7 +766,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_6">Bug Fixes</h5>
+<h5 id="bug_fixes_7">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -725,7 +788,7 @@ This release contains no further features and mostly stabilization.</p>
 <div class="sect3">
 <h4 id="release-0_3_0">0.3.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_7">New Features</h5>
+<h5 id="new_features_8">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -744,7 +807,7 @@ runtime environment</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="incompatible_changes_7">Incompatible changes</h5>
+<h5 id="incompatible_changes_8">Incompatible changes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -761,7 +824,7 @@ a <code>plc4j-protocol-{name}</code> you now need to change this to
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_7">Bug Fixes</h5>
+<h5 id="bug_fixes_8">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
