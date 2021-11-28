@@ -269,10 +269,10 @@
 <p>Concrete protocol spec parsers and templates that actually generate code are implemented in derived modules.</p>
 </div>
 <div class="paragraph">
-<p>Also didn&#8217;t we want to tie ourselves to only one way to specify protocols and to generate code.</p>
+<p>We didn&#8217;t want to tie ourselves to only one way to specify protocols and to generate code. Generally multiple types of formats for specifying drivers are thinkable and the same way multiple ways of generating code are possible. Currently however we only have one parser: <code>MSpec</code> and one generator: <code>Freemarker</code>.</p>
 </div>
 <div class="paragraph">
-<p>This adds another layer to the hierarchy.</p>
+<p>These add more layers to the hierarchy.</p>
 </div>
 <div class="paragraph">
 <p>So for example in case of generating a Siemens S7 Driver for Java this would look like this:</p>
@@ -300,7 +300,7 @@
 <p>Usually using them required a large amount of workarounds, which made the solution quite complicated.</p>
 </div>
 <div class="paragraph">
-<p>In the end only DFDL and the corresponding Apache project <a href="https://daffodil.apache.org">Apache Daffodil (incubating)</a> seemed to provide what we were looking for.</p>
+<p>In the end only DFDL and the corresponding Apache project <a href="https://daffodil.apache.org">Apache Daffodil</a> seemed to provide what we were looking for.</p>
 </div>
 <div class="paragraph">
 <p>With this we were able to provide first driver versions fully specified in XML.</p>
@@ -321,7 +321,20 @@
 <p>In general all you need to specify, is the <code>protocolName</code> and the <code>languageName</code>.</p>
 </div>
 <div class="paragraph">
-<p>There is also an additional parameter: <code>outputDir</code>, which defaults to <code>${project.build.directory}/generated-sources/plc4x/</code> and usually shouldn&#8217;t require being changed.</p>
+<p>An additional option <code>outputFlavor</code> allows generating multiple versions of a driver for a given language. This can come in handy if we want to be able to generate <code>read-only</code> or <code>passive mode</code> driver variants.</p>
+</div>
+<div class="paragraph">
+<p>Last, not least, we have a pretty generic <code>options</code> config option, which is a Map type.</p>
+</div>
+<div class="paragraph">
+<p>With options is it possible to pass generic options to the code-generation. So if a driver or language requires further customization, these options can be used.</p>
+</div>
+<div class="paragraph">
+<p>Currently, the <code>Java</code> module makes use of such an option for specifying the Java <code>package</code> the generated code uses.
+If no <code>package</code> option is provided, the default package <code>org.apache.plc4x.{language-name}.{protocol-name}.{output-flavor}</code> is used, but especially when generating custom drivers, which are not part of the Apache PLC4X project, different package names are better suited. So in these cases, the user can simply override the default package name.</p>
+</div>
+<div class="paragraph">
+<p>There is also an additional parameter: <code>outputDir</code>, which defaults to <code>${project.build.directory}/generated-sources/plc4x/</code> and usually shouldn&#8217;t require being changed in case of a <code>Java</code> project, but usually requires tweaking when generating code for other languages.</p>
 </div>
 <div class="paragraph">
 <p>Here&#8217;s an example of a driver pom for building a <code>S7</code> driver for <code>java</code>:</p>
@@ -375,6 +388,7 @@
             &lt;configuration&gt;
               &lt;protocolName&gt;s7&lt;/protocolName&gt;
               &lt;languageName&gt;java&lt;/languageName&gt;
+              &lt;outputFlavor&gt;read-write&lt;/outputFlavor&gt;
             &lt;/configuration&gt;
           &lt;/execution&gt;
         &lt;/executions&gt;
@@ -410,7 +424,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>So the plugin configuration is pretty straight forward, all that is specified, is the <code>protocolName</code> and the <code>languageName</code>.</p>
+<p>So the plugin configuration is pretty straight forward, all that is specified, is the <code>protocolName</code>, <code>languageName</code> and the <code>output-flavor</code>.</p>
 </div>
 <div class="paragraph">
 <p>The dependency:</p>
@@ -428,7 +442,7 @@
 <p>For example contains all classes the generated code relies on.</p>
 </div>
 <div class="paragraph">
-<p>The definitions of both the <code>s7</code> protocol as well as the <code>java</code> language are provided by the two dependencies:</p>
+<p>The definitions of both the <code>s7</code> protocol and <code>java</code> language are provided by the two dependencies:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -456,7 +470,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>The reason for why the dependencies are added as code-dependencies and why the scope is set the way it is is described in the <a href="#why_are_the_protocol_and_language_dependencies_done_so_strangely">Why are the protocol and language dependencies done so strangely?</a> section.</p>
+<p>The reason for why the dependencies are added as code-dependencies and why the scope is set the way it is, is described in the <a href="#why_are_the_protocol_and_language_dependencies_done_so_strangely">Why are the protocol and language dependencies done so strangely?</a> section.</p>
 </div>
 </div>
 <div class="sect2">
@@ -496,7 +510,7 @@ public interface Protocol {
      * @return the Map of types that need to be generated.
      * @throws GenerationException if anything goes wrong parsing.
      */
-    Map&lt;String, ComplexTypeDefinition&gt; getTypeDefinitions() throws GenerationException;
+    Map&lt;String, TypeDefinition&gt; getTypeDefinitions() throws GenerationException;
 
 }</pre>
 </div>
@@ -506,7 +520,7 @@ public interface Protocol {
 They could even be hard coded.</p>
 </div>
 <div class="paragraph">
-<p>However we have currently implemented utilities for universally providing input:</p>
+<p>However, we have currently implemented utilities for universally providing input:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -543,8 +557,18 @@ public interface LanguageOutput {
      */
     String getName();
 
-    void generate(File outputDir, String packageName, Map&lt;String, ComplexTypeDefinition&gt; types)
-        throws GenerationException;
+    List&lt;String&gt; supportedOutputFlavors();
+
+    /**
+     * An additional method which allows generator to have a hint which options are supported by it.
+     * This method might be used to improve user experience and warn, if set options are ones generator does not support.
+     *
+     * @return Set containing names of options this language output can accept.
+     */
+    Set&lt;String&gt; supportedOptions();
+
+    void generate(File outputDir, String languageName, String protocolName, String outputFlavor,
+        Map&lt;String, TypeDefinition&gt; types, Map&lt;String, String&gt; options) throws GenerationException;
 
 }</pre>
 </div>
@@ -553,7 +577,7 @@ public interface LanguageOutput {
 <p>The file for registering Language modules is located at: <code>META-INF/services/org.apache.plc4x.plugins.codegenerator.language.LanguageOutput</code></p>
 </div>
 <div class="paragraph">
-<p>Same as with the protocol modules, the language modules could too be implemented in any thinkable way, however we have already implemented some helpers for using:</p>
+<p>Same as with the protocol modules, the language modules could also be implemented in any thinkable way, however we have already implemented some helpers for using:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -575,7 +599,7 @@ public interface LanguageOutput {
 <p>This is due to some restrictions in Maven, which result from the way Maven generally works.</p>
 </div>
 <div class="paragraph">
-<p>The main problem is that when starting a build, in the <code>validate</code> phase, Maven goes through the configuration, downloads the plugins and configures these.
+<p>The main problem is that when starting a build, in the <code>validate</code>-phase, Maven goes through the configuration, downloads the plugins and configures these.
 This means that Maven also tries to download the dependencies of the plugins too.</p>
 </div>
 <div class="paragraph">
@@ -589,7 +613,7 @@ In this case the build will fail because there is no Plugin with that version to
 In this case the only option would be to manually build and install the plugin in the release version and to re-start the release (Which is not a nice thing for the release manager).</p>
 </div>
 <div class="paragraph">
-<p>For this reason we have stripped down the plugin and it&#8217;s dependencies to an absolute minimum and have released (or will release) that separately from the rest, hoping due to the minimality of the dependencies that we will not have to do it very often.</p>
+<p>For this reason we have stripped down the plugin and its dependencies to an absolute minimum and have released (or will release) that separately from the rest, hoping due to the minimality of the dependencies that we will not have to do it very often.</p>
 </div>
 <div class="paragraph">
 <p>As soon as the tooling is released, the version is updated in the PLC4X build and the release version is used without any complications.</p>
@@ -608,7 +632,7 @@ So during a release the new versions of the modules wouldn&#8217;t exist, this w
 <p>We could release the protocol- and the language modules separately too, but we want the language and protocol modules to be part of the project, to not over-complicate things - especially during a release.</p>
 </div>
 <div class="paragraph">
-<p>So the Maven plugin is built in a way, that it uses the modules dependencies and creates it&#8217;s own Classloader to contain all of these modules at runtime.</p>
+<p>So the Maven plugin is built in a way, that it uses the modules dependencies and creates its own Classloader to contain all of these modules at runtime.</p>
 </div>
 <div class="paragraph">
 <p>This brings the benefit of being able to utilize Maven&#8217;s capability of determining the build order and dynamically creating the modules build classpath.</p>
@@ -625,7 +649,7 @@ Here the vendor of a Servlet engine is expected to provide an implementation of 
 It is forbidden for an application to bring this along, but it is required to build the application.</p>
 </div>
 <div class="paragraph">
-<p>For this the Maven scope <code>provided</code>, which tells Maven to provide it during the build, but to exclude it from any applications it builds because it will be provided by the system running the application.</p>
+<p>For this the Maven scope <code>provided</code>, which tells Maven to provide it during the build, but to exclude it from any applications it builds, because it will be provided by the system running the application.</p>
 </div>
 <div class="paragraph">
 <p>This is not quite true, but it does the trick.</p>

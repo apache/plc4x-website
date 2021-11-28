@@ -252,10 +252,32 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>A Freemarker-based output module, has to provide a list of <code>Template</code> instances as well as provide a <code>FreemarkerLanguageTemplateHelper</code> instance.</p>
+<p>A Freemarker-based output module, has to provide a set of <code>Template</code> instances as well as provide a <code>FreemarkerLanguageTemplateHelper</code> instance.</p>
 </div>
 <div class="paragraph">
-<p>What the <code>FreemarkerLanguageOutput</code> then does, is iterate over all complex types provided by the protocol module, and then iterates over all templates the current language defines.</p>
+<p>In general, we distinguish between these types of templates:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Spec Templates</code> (Global output generated once per driver in total)</p>
+</li>
+<li>
+<p><code>Complex Type Templates</code> (Generates output for a complex type)</p>
+</li>
+<li>
+<p><code>Enum Templates</code> (Generates output for enum types)</p>
+</li>
+<li>
+<p><code>DataIO Templates</code> (Generates output for reading and writing PlcValues, which are our PLC4X form of presenting input and output data to our users)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For each of these, the developer can provide a list of templates, which then can generate multiple files per type (Which is important for languages such as <code>C</code> where for every type we need to generate a <code>Header file (.h)</code> and an <code>Implementation (.c)</code>)</p>
+</div>
+<div class="paragraph">
+<p>What the <code>FreemarkerLanguageOutput</code> then does, is iterate over all types provided by the protocol module, and then iterate over all templates the current language defines.</p>
 </div>
 <div class="paragraph">
 <p>The only convention used in this utility, is that the first line of output a template generates will be treated as the path relative to the base output directory.</p>
@@ -264,7 +286,7 @@
 <p>It will automatically create all needed intermediate directories and generate the rest of the input to the file specified by the first line.</p>
 </div>
 <div class="paragraph">
-<p>If this line is empty, the output is skipped for this instance.</p>
+<p>If this line is empty, the output is skipped for this type.</p>
 </div>
 <div class="sect2">
 <h3 id="example_java_output">Example <code>Java</code> output</h3>
@@ -272,50 +294,120 @@
 <div class="content">
 <pre>package org.apache.plc4x.language.java;
 
-import freemarker.template.*;
+import com.google.googlejavaformat.java.Formatter;
+import com.google.googlejavaformat.java.FormatterException;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import org.apache.commons.io.FileUtils;
 import org.apache.plc4x.plugins.codegenerator.protocol.freemarker.FreemarkerLanguageOutput;
 import org.apache.plc4x.plugins.codegenerator.protocol.freemarker.FreemarkerLanguageTemplateHelper;
-import org.apache.plc4x.plugins.codegenerator.types.definitions.ComplexTypeDefinition;
+import org.apache.plc4x.plugins.codegenerator.types.definitions.TypeDefinition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class JavaLanguageOutput extends FreemarkerLanguageOutput {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JavaLanguageOutput.class);
+
+    private final Formatter formatter = new Formatter();
 
     @Override
     public String getName() {
         return "Java";
     }
 
-    protected List&lt;Template&gt; getTemplates(Configuration freemarkerConfiguration) throws IOException {
+    @Override
+    public Set&lt;String&gt; supportedOptions() {
+        return Collections.singleton("package");
+    }
+
+    @Override
+    public List&lt;String&gt; supportedOutputFlavors() {
+        return Arrays.asList("read-write", "read-only", "passive");
+    }
+
+    @Override
+    protected List&lt;Template&gt; getSpecTemplates(Configuration freemarkerConfiguration) {
+        return Collections.emptyList();
+    }
+
+    @Override
+    protected List&lt;Template&gt; getComplexTypeTemplates(Configuration freemarkerConfiguration) throws IOException {
         return Arrays.asList(
-            freemarkerConfiguration.getTemplate("templates/java/pojo-template.ftlh"),
-            freemarkerConfiguration.getTemplate("templates/java/io-template.ftlh"));
+            freemarkerConfiguration.getTemplate("templates/java/pojo-template.java.ftlh"),
+            freemarkerConfiguration.getTemplate("templates/java/io-template.java.ftlh"));
     }
 
-    protected FreemarkerLanguageTemplateHelper getHelper(Map&lt;String, ComplexTypeDefinition&gt; types) {
-        return new JavaLanguageTemplateHelper(types);
+    @Override
+    protected List&lt;Template&gt; getEnumTypeTemplates(Configuration freemarkerConfiguration) throws IOException {
+        return Collections.singletonList(
+            freemarkerConfiguration.getTemplate("templates/java/enum-template.java.ftlh"));
     }
 
+    @Override
+    protected List&lt;Template&gt; getDataIoTemplates(Configuration freemarkerConfiguration) throws IOException {
+        return Collections.singletonList(
+            freemarkerConfiguration.getTemplate("templates/java/data-io-template.java.ftlh"));
+    }
+
+    @Override
+    protected FreemarkerLanguageTemplateHelper getHelper(TypeDefinition thisType, String protocolName, String flavorName, Map&lt;String, TypeDefinition&gt; types,
+                                                         Map&lt;String, String&gt; options) {
+        return new JavaLanguageTemplateHelper(thisType, protocolName, flavorName, types, options);
+    }
+
+    @Override
+    protected void postProcessTemplateOutput(File outputFile) {
+        try {
+            FileUtils.writeStringToFile(
+                outputFile,
+                formatter.formatSourceAndFixImports(
+                    FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8)
+                ),
+                StandardCharsets.UTF_8
+            );
+        } catch (IOException | FormatterException e) {
+            LOGGER.error("Error formatting {}", outputFile, e);
+        }
+    }
 }</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, this output generates up to two files for every complex type.</p>
+<p>The <code>getName</code> method returns <code>Java</code>, this is what needs to be defined in the <code>plc4x-maven-plugin</code> configuration in the <code>language</code> option in order to select this output format.</p>
 </div>
 <div class="paragraph">
-<p>This is one file, providing the code for the POJO itself.
-The second one generates the IO-component, which contains all the code for parsing and serializing the corresponding POJO.</p>
+<p><code>supportedOptions</code> tells the plugin which <code>option</code> tags this code-generation output supports. In case of the <code>Java</code> output, this is only the <code>package</code> option, which defines the package name of the generated output.</p>
 </div>
 <div class="paragraph">
-<p>In other languages, for example <code>C++</code> it&#8217;s possible to use a third one to generate Header files or for <code>Python</code> perhaps only one in total.</p>
+<p>With <code>supportedOutputFlavors</code> we tell the user, that in general we support the three options: <code>read-write</code>, <code>read-only</code> and <code>passive</code> as valid inputs for the <code>outputFlavor</code> config option of the code-generation plugin.</p>
+</div>
+<div class="paragraph">
+<p>In this case Java doesn&#8217;t require any global files being generated for java, so we simply return an empty collection.</p>
+</div>
+<div class="paragraph">
+<p>For complex types, we currently use two templates (however this will soon be reduced to one). So for every complex type in a protocol definition, the templates: <code>templates/java/pojo-template.java.ftlh</code> and <code>templates/java/io-template.java.ftlh</code> will be executed.</p>
+</div>
+<div class="paragraph">
+<p>In case of enum types, only one template is being used.</p>
+</div>
+<div class="paragraph">
+<p>Same as for data-io.</p>
+</div>
+<div class="paragraph">
+<p>The next important method is the <code>getHelper</code> method, which returns an object, that is passed to the templates with the name <code>helper</code>. As mentioned before, a lot of operations would be too complex to implement in pure Freemarker code, so with these helpers every language can provide a helper utility for handling the complex operations.</p>
 </div>
 <div class="paragraph">
 <p>Here an example for a part of a template for generating Java POJOs:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>${packageName?replace(".", "/")}/${typeName}.java
+<pre>${helper.packageName(protocolName, languageName, outputFlavor)?replace(".", "/")}/${type.name}.java
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -334,11 +426,13 @@ The second one generates the IO-component, which contains all the code for parsi
  * specific language governing permissions and limitations
  * under the License.
  */
-package ${packageName};
+package ${helper.packageName(protocolName, languageName, outputFlavor)};
 
-import org.apache.plc4x.java.utils.SizeAware;
+... imports ...
 
-public&lt;#if type.abstract&gt; abstract&lt;/#if&gt; class ${typeName}&lt;#if type.parentType??&gt; extends ${type.parentType.name}&lt;/#if&gt; implements SizeAware {
+// Code generated by code-generation. DO NOT EDIT.
+
+public&lt;#if type.isDiscriminatedParentTypeDefinition()&gt; abstract&lt;/#if&gt; class ${type.name}&lt;#if type.parentType??&gt; extends ${type.parentType.name}&lt;/#if&gt; implements Message {
 
     ... SNIP ...
 
@@ -346,8 +440,10 @@ public&lt;#if type.abstract&gt; abstract&lt;/#if&gt; class ${typeName}&lt;#if ty
 </div>
 </div>
 <div class="paragraph">
-<p>So as you can see, the first line will generate the file-path of the to be generated output.
-Which is followed</p>
+<p>So as you can see, the first line will generate the file-path of the to be generated output.</p>
+</div>
+<div class="paragraph">
+<p>As when creating more and more outputs for different languages, we have realized, that a lot of the code needed in the <code>Helper</code> utility repeats, we therefore introduced a so-called <code>BaseFreemarkerLanguageTemplateHelper</code> which contains a lot of stuff, that is important when generating new language output.</p>
 </div>
 </div>
 </div>
