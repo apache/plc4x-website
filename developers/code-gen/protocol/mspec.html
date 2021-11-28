@@ -247,7 +247,7 @@
 <div class="literalblock">
 <div class="content">
 <pre>[type TPKTPacket
-    [const    uint 8     protocolId '0x03']
+    [const    uint 8     protocolId 0x03]
     [reserved uint 8     '0x00']
     [implicit uint 16    len        'payload.lengthInBytes + 4']
     [field    COTPPacket 'payload']
@@ -266,7 +266,7 @@
 <div class="literalblock">
 <div class="content">
 <pre>[discriminatedType S7Message
-    [const         uint 8  protocolId      '0x32']
+    [const         uint 8  protocolId      0x32]
     [discriminator uint 8  messageType]
     [reserved      uint 16 '0x0000']
     [field         uint 16 'tpduReference']
@@ -462,7 +462,7 @@ If they don&#8217;t match an exception is thrown.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[const {simple-type} {size} '{name}' '{reference}']</pre>
+<pre>[const {simple-type} {size} '{name}' {reference}]</pre>
 </div>
 </div>
 <div class="paragraph">
