@@ -230,16 +230,16 @@
 <p>The <code>MSpec</code> format (Message Specification) was a result of a brainstorming session after evaluating a lot of other options.</p>
 </div>
 <div class="paragraph">
-<p>We simply sat down and started to write some imaginary format (<code>imaginary</code> was even the initial Name we used) and created parses for this afterwards and fine tuned spec and parsers as part of the process of implementing first protocols and language templates.</p>
+<p>We simply sat down and started to write some imaginary format (<code>imaginary</code> was even the initial Name we used) and created parses for this afterwards and fine-tuned spec and parsers as part of the process of implementing first protocols and language templates.</p>
 </div>
 <div class="paragraph">
 <p>It&#8217;s a text-based format.</p>
 </div>
 <div class="paragraph">
-<p>At the root level of these specs are a set of <code>type</code> or <code>discriminatedType</code> blocks.</p>
+<p>At the root level of these specs are a set of <code>type</code>, <code>discriminatedType</code>, <code>dataIo</code> and <code>enum</code> blocks.</p>
 </div>
 <div class="paragraph">
-<p><code>type</code> elements are objects that are independent from the input.</p>
+<p><code>type</code> elements are objects who&#8217;s content is independent of the input.</p>
 </div>
 <div class="paragraph">
 <p>An example would be the <code>TPKTPacket</code> of the S7 format:</p>
@@ -255,10 +255,10 @@
 </div>
 </div>
 <div class="paragraph">
-<p>A <code>discriminatedType</code> type is in contrast an object who&#8217;s content is dependent in the input.</p>
+<p>A <code>discriminatedType</code> type, in contrast, is an object who&#8217;s content and structure is influenced by the input.</p>
 </div>
 <div class="paragraph">
-<p>Every discriminated type can contain at most one <code>discriminator</code> field and exactly one <code>typeSwitch</code> element.</p>
+<p>Every discriminated type can contain an arbitrary number of <code>discriminator</code> fields and exactly one <code>typeSwitch</code> element.</p>
 </div>
 <div class="paragraph">
 <p>For example part of the spec for the S7 format looks like this:</p>
@@ -269,29 +269,29 @@
     [const         uint 8  protocolId      0x32]
     [discriminator uint 8  messageType]
     [reserved      uint 16 '0x0000']
-    [field         uint 16 'tpduReference']
+    [simple        uint 16 tpduReference]
     [implicit      uint 16 parameterLength 'parameter.lengthInBytes']
     [implicit      uint 16 payloadLength   'payload.lengthInBytes']
     [typeSwitch 'messageType'
         ['0x01' S7MessageRequest
         ]
         ['0x03' S7MessageResponse
-            [field uint 8 'errorClass']
-            [field uint 8 'errorCode']
+            [simple uint 8 errorClass]
+            [simple uint 8 errorCode ]
         ]
         ['0x07' S7MessageUserData
         ]
     ]
-    [field S7Parameter 'parameter' ['messageType']]
-    [field S7Payload   'payload'   ['messageType', 'parameter']]
+    [simple S7Parameter('messageType')            parameter]
+    [simple S7Payload('messageType', 'parameter') payload  ]
 ]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>An types start is declared by an opening square bracket <code>[</code> and ended with a closing one <code>]</code>.</p>
+<p>A types start is declared by an opening square bracket <code>[</code> and ended with a closing one <code>]</code>.</p>
 </div>
 <div class="paragraph">
-<p>Also to both provide a name as first argument.</p>
+<p>Also, to both provide a name as first argument.</p>
 </div>
 <div class="paragraph">
 <p>Every type definition contains a list of fields that can have different types.</p>
@@ -302,28 +302,55 @@
 <div class="ulist">
 <ul>
 <li>
-<p>const: expects a given value</p>
+<p>abstract: used in the parent type declaration do declare a field that has to be defined with the identical type in all sub-types (reserved for <code>discriminatedType</code>).</p>
 </li>
 <li>
-<p>reserved: expects a given value, but only warns if condition is not meet</p>
+<p>array: array of simple or complex typed objects.</p>
 </li>
 <li>
-<p>field: simple or complex typed object</p>
+<p>checksum: used for calculating and verifying checksum values.</p>
 </li>
 <li>
-<p>array: array of simple or complex typed objects</p>
+<p>const: expects a given value and causes a hard exception if the value doesn&#8217;t match.</p>
 </li>
 <li>
-<p>optional: simple or complex typed object, that is only present in some conditions</p>
+<p>discriminator: special type of simple typed field which is used to determine the concrete type of object (reserved for <code>discriminatedType</code>).</p>
 </li>
 <li>
-<p>implicit: a field required for parsing, but is usually defined though other data</p>
+<p>enum: special form of field, used if an enum types property is to be used instead of it&#8217;s primary value.</p>
 </li>
 <li>
-<p>discriminator: special type of simple typed field which is used to determine the concrete type of an object (max one per type and always has to be accompanied with a <code>switch</code> field) (reserved for <code>discriminatedType</code>)</p>
+<p>implicit: a field required for parsing, but is usually defined though other data, so it&#8217;s not stored in the object, but calculated on serialization.</p>
 </li>
 <li>
-<p>typeSwitch: not a real field, but indicates the existence of sub-types, which are declared inline (reserved for <code>discriminatedType</code>)</p>
+<p>assert: generally similar to <code>constant</code> fields, however do they throw <code>AssertionExceptions</code> instead of hard <code>ParseExceptions</code>. They are used in combination with optional fields.</p>
+</li>
+<li>
+<p>manualArray: like an array field, however the logic for serializing, parsing, number of elements and size have to be provided manually.</p>
+</li>
+<li>
+<p>manual: simple field, where the logic for parsing, serializing and size have to be provided manually.</p>
+</li>
+<li>
+<p>optional: simple or complex typed object, that is only present if an optional condition expression evaluates to <code>true</code> and no <code>AssertionException</code> is thrown when parsing the referenced type.</p>
+</li>
+<li>
+<p>padding: field used to add padding data to make datastructures aligned.</p>
+</li>
+<li>
+<p>reserved: expects a given value, but only warns if condition is not meet.</p>
+</li>
+<li>
+<p>simple: simple or complex typed object.</p>
+</li>
+<li>
+<p>typeSwitch: not a real field, but indicates the existence of sub-types, which are declared inline (reserved for <code>discriminatedType</code>).</p>
+</li>
+<li>
+<p>unknown: field used to declare parts of a message that still has to be defined. Generally used when reverse-engineering a protocol. Messages with <code>unknown</code> fields can only be parsed and not serialized.</p>
+</li>
+<li>
+<p>virtual: generates a field in the message, that is generally only used for simplification. It&#8217;s not used for parsing or serializing.</p>
 </li>
 </ul>
 </div>
@@ -334,7 +361,7 @@
 <p>Another thing we have to explain are how types are specified.</p>
 </div>
 <div class="paragraph">
-<p>In general we distinguish between two types of types used in field definitions:</p>
+<p>In general, we distinguish between two types of types used in field definitions:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -362,30 +389,41 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>bit</strong>: Simple boolean value</p>
+<p><strong>bit</strong>: Simple boolean value or bit.</p>
 </li>
 <li>
-<p><strong>uint</strong>: The input is treated as unsigned integer value</p>
+<p><strong>byte</strong>: Special value fixed to 8 bit, which defaults to either signed or unsigned depending on the programming language (Java it defaults to signed integer values and in C and Go it defaults to unsigned integers).</p>
 </li>
 <li>
-<p><strong>int</strong>: The input is treated as signed integer value</p>
+<p><strong>uint</strong>: The input is treated as unsigned integer value.</p>
 </li>
 <li>
-<p><strong>float</strong>: The input is treated as floating point number</p>
+<p><strong>int</strong>: The input is treated as signed integer value.</p>
 </li>
 <li>
-<p><strong>string</strong>: The input is treated as string</p>
+<p><strong>float</strong>: The input is treated as floating point number.</p>
+</li>
+<li>
+<p><strong>string</strong>: The input is treated as string.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The size value then provides how many <code>bits</code> should be read.</p>
-</div>
-<div class="paragraph">
-<p>In case of <code>string</code> types, it refers to the number of characters.</p>
+<p>All above types take a <code>size</code> value which provides how many <code>bits</code> should be read.
+All except the <code>bit</code> type, which is fixed to one single bit.</p>
 </div>
 <div class="paragraph">
 <p>So reading an unsigned byte would be: <code>uint 8</code>.</p>
+</div>
+<div class="paragraph">
+<p>There is currently one special type, reserved for string values, whose length is determined by an expression instead of a fixed number of bits. It is considered a variable length string:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>vstring</strong>: The input is treated as a variable length string and requires an expression tp provide the number of bits to read.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
