@@ -372,13 +372,11 @@
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo apt-get install apt-transport-https
+<pre>wget http://ftp.us.debian.org/debian/pool/main/i/icu/libicu57_57.1-6+deb9u4_amd64.deb
+sudo dpkg -i libicu57_57.1-6+deb9u4_amd64.deb
+wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt-get install apt-transport-https
 sudo apt-get update
 sudo apt-get install dotnet-sdk-2.2</pre>
 </div>
@@ -420,6 +418,28 @@ tar xzf Python-2.7.10.tgz
 cd Python-2.7.10
 ./configure
 make altinstall</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="python_setuptools">Python setuptools</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>python -c "import setuptools"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If this just exists and doesn&#8217;t report an error, you&#8217;re ok. If it complains about "No module named setuptools", then you need to install it.</p>
+</div>
+<div class="paragraph">
+<p>Apt-based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install python-setuptools</pre>
 </div>
 </div>
 </div>
