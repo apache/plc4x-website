@@ -250,11 +250,38 @@
 It is available from <a href="https://npcap.com/">here</a>.</p>
 </div>
 <div class="paragraph">
-<p>Additional tasks to enable Java to find the pcap executables may need to be done.
-Follow the instructions <a href="https://github.com/kaitoy/pcap4j#about-native-library-loading">here</a></p>
+<p>So in order to install things correctly:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>install the version Npcap from above location.</p>
+</li>
+<li>
+<p>Add <code>%SystemRoot%\System32\Npcap\</code> to your System&#8217;s <code>PATH</code></p>
+</li>
+<li>
+<p>Possibly reboot</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>After this all should be working.</p>
+</div>
+<div class="paragraph">
+<p>If not, have a look here for possible help: <a href="https://github.com/kaitoy/pcap4j#about-native-library-loading">here</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If you had WinPcap installed, you need to uninstall this and make sure the files <code>Packet.dll</code> and <code>wpcap.dll</code> are deleted in the <code>%SystemRoot%\System32\</code> directory. Otherwise <code>pcap4j</code> will incorrectly detect a wrong version.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
