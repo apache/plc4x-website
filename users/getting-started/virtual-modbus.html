@@ -530,7 +530,7 @@ These are only required if the connection requires some non-default settings.</p
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>modbus://localhost</pre>
+<pre>modbus-tcp://localhost</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -541,7 +541,7 @@ These are only required if the connection requires some non-default settings.</p
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>modbus://localhost:1502</pre>
+<pre>modbus-tcp://localhost:1502</pre>
 </div>
 </div>
 </div>
@@ -587,7 +587,7 @@ This is done via the <code>PlcDriverManager</code> by asking this to create an i
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>String connectionString = "modbus://localhost";
+<pre>String connectionString = "modbus-tcp://localhost";
 
 try (PlcConnection plcConnection = new PlcDriverManager().getConnection(connectionString)) {
 

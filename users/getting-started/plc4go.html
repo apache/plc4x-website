@@ -407,7 +407,7 @@ Perhaps we&#8217;ll change this in the future, but for now all comes in one bund
 <div class="listingblock">
 <div class="content">
 <pre>   	// Get a connection to a remote PLC
-	connectionRequestChanel := driverManager.GetConnection("modbus://192.168.23.30?unit-identifier=1")
+	connectionRequestChanel := driverManager.GetConnection("modbus-tcp://192.168.23.30?unit-identifier=1")
 
 	// Wait for the driver to connect (or not)
 	connectionResult := &lt;-connectionRequestChanel
