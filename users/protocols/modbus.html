@@ -149,6 +149,9 @@
                             <a href="../../users/protocols/opc-ua.html" class="nav-link">OPC UA</a>
                             </li>
                                             <li class="nav-item">
+                            <a href="../../users/protocols/plc4x.html" class="nav-link">PLC4X (Proxy)</a>
+                            </li>
+                                            <li class="nav-item">
                             <a href="../../users/protocols/s7.html" class="nav-link">S7 (Step7)</a>
                             </li>
                                             <li class="nav-item">
@@ -310,7 +313,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
 <td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>modbus</code></p>
+<p><code>modbus-tcp</code>, <code>modbus-adu</code>, <code>modbus-ascii</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -347,6 +350,9 @@
 <li>
 <p><code>udp</code> (Default Port: 502)</p>
 </li>
+<li>
+<p><code>serial</code></p>
+</li>
 </ul>
 </div></div></td>
 </tr>
@@ -355,20 +361,14 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
 <p><code>read</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>tcp</code> transport.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
 <p><code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>tcp</code> transport.</p>
 </div></div></td>
 </tr>
 <tr>

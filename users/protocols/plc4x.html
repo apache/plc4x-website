@@ -128,7 +128,7 @@
                             <a href="../../users/protocols/canopen.html" class="nav-link">CANopen</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">DeltaV</strong>
+                            <a href="../../users/protocols/deltav.html" class="nav-link">DeltaV</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/df1.html" class="nav-link">DF1</a>
@@ -149,7 +149,7 @@
                             <a href="../../users/protocols/opc-ua.html" class="nav-link">OPC UA</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/protocols/plc4x.html" class="nav-link">PLC4X (Proxy)</a>
+                            <strong class="nav-link">PLC4X (Proxy)</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/s7.html" class="nav-link">S7 (Step7)</a>
@@ -292,9 +292,132 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="deltav">DeltaV</h2>
+<h2 id="plc4x_proxy_tcp">PLC4X (Proxy) (TCP)</h2>
 <div class="sectionbody">
-
+<div class="sect2">
+<h3 id="connection_string_options">Connection String Options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 55.5556%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>plc4x</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p>PLC4X (Proxy-Protocol)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-plc4x&lt;/artifactId&gt;
+  &lt;version&gt;{current-last-released-version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport:</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>tcp</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Options</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>remote-connection-string</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>URL-Encoded connection string to use on the proxy side to reach the given PLC.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>request-timeout</code> (5000ms)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout for operations (Defaults to 5s)</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+<div class="sect3">
+<h4 id="connection_string">Connection String</h4>
+<div class="paragraph">
+<p>The <code>plc4x</code> protocol connection has the following connection string format:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>plc4x:{transport}://{ip-address/hostname}:{port}?remote-connection-string={url-encoded-connection-string}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example connection string would look like:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>plc4x://127.0.0.1?remote-connection-string=simulated%3A%2F%2Flocalhost</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the transport, port and option fields are optional.
+The remote connection string: <code>simulated://localhost</code> is encoded as <code>simulated%3A%2F%2Flocalhost</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="general_format">General Format</h4>
+<div class="paragraph">
+<p>The address format is simply the address format of the used remote connection.
+So if you specify a remote connection as <code>simulated</code>, please follow the address format of that driver.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
         </main>
