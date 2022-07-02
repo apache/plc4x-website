@@ -307,23 +307,6 @@ If you had WinPcap installed, you need to uninstall this and make sure the files
 </div>
 </div>
 <div class="sect2">
-<h3 id="g">g++</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>g++ --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>On windows we will be using something called WinBuilds, which is sort of a package consisting of a typical build environment consisting of multiple build tools. So please look at the WinBuilds chapter at the end of the Windows section.</p>
-</div>
-</div>
-<div class="sect2">
 <h3 id="dotnet">dotnet</h3>
 <div class="paragraph">
 <p>Checking:</p>
@@ -366,58 +349,9 @@ Also make sure you restarted your IDE and or console window after changing the <
 </div>
 </div>
 <div class="sect2">
-<h3 id="bison">bison</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>bison --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>For Bison, please download the Setup installer version from <a href="http://gnuwin32.sourceforge.net/packages/bison.htm">here</a> (When using the zip version the bison.exe couldn&#8217;t find some DLL files)
-It seems the official 2.4.1 version has issues when installed in a directory which&#8217;s path contains spaces. Please make sure you replace the exe with a patched version form <a href="http://marin.jb.free.fr/bison/bison-2.4.1-modified.zip">here</a>
-(More infos on this issue <a href="https://sourceforge.net/p/gnuwin32/bugs/473/">here</a>)</p>
-</div>
-<div class="paragraph">
-<p>It seems there are issues if these tools are installed in paths with spaces.
-So if it is for example installed in the 32 bit <code>Programs (x86)</code> directory, the build will probably fail.</p>
-</div>
-<div class="paragraph">
-<p>Make sure all tools <code>bin</code> directories are added to your systems <code>PATH</code>.
-For tools like OpenSSL be sure to add the directory containing the <code>openssl.exe</code> (Usually the root directory).
-Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="flex">flex</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>flex --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>Please download the Flex compiler from <a href="http://gnuwin32.sourceforge.net/packages/flex.htm">here</a> (Ideally download the binary zip distribution)</p>
-</div>
-<div class="paragraph">
-<p>Make sure it&#8217;s <code>bin</code> directory is added to your systems <code>PATH</code>.
-Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p>
-</div>
-</div>
-<div class="sect2">
 <h3 id="winbuilds">WinBuilds</h3>
 <div class="paragraph">
-<p>He have tested WinBuilds with the bundle found <a href="http://win-builds.org/doku.php/download_and_installation_from_windows">here</a>.</p>
+<p>We have tested WinBuilds with the bundle found <a href="http://win-builds.org/doku.php/download_and_installation_from_windows">here</a>.</p>
 </div>
 <div class="admonitionblock warning">
 <table>

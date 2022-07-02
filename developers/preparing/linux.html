@@ -249,7 +249,7 @@
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo apt install git</pre>
+<pre>sudo apt-get install git</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -288,7 +288,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Some times I had to set the uid to execute the java executable with the permissions of the owner (root) &#8230;&#8203; however this is quite sub-optimal solution.</p>
+<p>Sometimes I had to set the uid to execute the java executable with the permissions of the owner (root) &#8230;&#8203; however this is quite sub-optimal solution.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -327,36 +327,6 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="g">g++</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>g++ --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>Apt-based systems:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo apt-get install g++</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Yum based systems:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo yum install g++</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
 <h3 id="dotnet">dotnet</h3>
 <div class="paragraph">
 <p>Checking:</p>
@@ -377,13 +347,11 @@
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>wget http://ftp.us.debian.org/debian/pool/main/i/icu/libicu57_57.1-6+deb9u4_amd64.deb
-sudo dpkg -i libicu57_57.1-6+deb9u4_amd64.deb
-wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+<pre>wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 sudo apt-get update
-sudo apt-get install dotnet-sdk-2.2</pre>
+sudo apt-get install dotnet-sdk-6.0</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -397,18 +365,18 @@ sudo apt-get install dotnet-sdk-2.2</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>python --version</pre>
+<pre>python3 --version</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you get a version of 2.7 or higher reported, you probably don&#8217;t need to do anything.</p>
+<p>If you get a version of 3.3 or higher reported, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
 <p>Apt-based systems:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo apt-get install python-dev python-is-python3</pre>
+<pre>sudo apt-get install python3 python3-venv</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -416,95 +384,30 @@ sudo apt-get install dotnet-sdk-2.2</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>yum install gcc
-cd /usr/src
-wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
-tar xzf Python-2.7.10.tgz
-cd Python-2.7.10
-./configure
-make altinstall</pre>
+<pre>yum intall python3</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="python_setuptools">Python setuptools</h3>
+<h3 id="python_venv">Python venv</h3>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>python -c "import setuptools"</pre>
+<pre>python3 -Im ensurepip</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If this just exists and doesn&#8217;t report an error, you&#8217;re ok. If it complains about "No module named setuptools", then you need to install it.</p>
+<p>If you are getting anything else than a: <code>No module named ensurepip</code>, you&#8217;re ok.
+It seems that this manually needs to be installed on some systems.</p>
 </div>
 <div class="paragraph">
 <p>Apt-based systems:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo apt-get install python-setuptools</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="bison">bison</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>bison --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get a version above 2.3 output, you don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>Apt-based systems:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo apt-get install bison</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Yum based systems:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo yum install bison-devel</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="flex">flex</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>flex --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>Apt-based systems:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo apt-get install flex</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Yum based systems:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo yum install flex</pre>
+<pre>sudo apt-get install python3-venv</pre>
 </div>
 </div>
 </div>

@@ -295,23 +295,6 @@ So it&#8217;s best to update to a newer version using brew:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="g">g++</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>g++ --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>It seems macOS comes with a version of g++ which is good enough for our usecases.</p>
-</div>
-</div>
-<div class="sect2">
 <h3 id="dotnet">dotnet</h3>
 <div class="paragraph">
 <p>Checking:</p>
@@ -343,7 +326,7 @@ So it&#8217;s best to update to a newer version using brew:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>python3 --version</pre>
+<pre>python --version</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -354,53 +337,41 @@ So it&#8217;s best to update to a newer version using brew:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>brew install python</pre>
+<pre>brew install pyenv</pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="bison">bison</h3>
 <div class="paragraph">
-<p>Checking:</p>
+<p>Then use pyenv to install python:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>bison --version</pre>
+<pre>pyenv install 3.9.13</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you get a version above 2.3 output, you don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>macOS comes with a pre-installed version of bison, however this version is 2.3 and hereby too old.
-So you need to update to a more recent version:</p>
+<p>Then set this as the global python version:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>brew install bison
-brew link bison --force
-echo 'export PATH="/usr/local/opt/bison/bin:$PATH"' &gt;&gt; ~/.bash_profile</pre>
+<pre>pyenv global 3.9.13</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Be sure to reboot or at least restart your IDE or commandline in order for the changes to become effective.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="flex">flex</h3>
-<div class="paragraph">
-<p>Checking:</p>
+<p>And add pyenv to the PATH:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>flex --version</pre>
+<pre>echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.zshrc
+$ echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.bash_profile</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
+<p>After opening a new terminal, <code>python</code> should be configured</p>
 </div>
-<div class="paragraph">
-<p>It seems macOS comes with a version of flex which is good enough for our usecases.</p>
+<div class="literalblock">
+<div class="content">
+<pre>python --version</pre>
+</div>
 </div>
 </div>
 </div>
