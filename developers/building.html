@@ -314,16 +314,19 @@ But there is a lot of good documentation out there.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>with-sandbox</code>: Builds the modules which are not yet considered stable enough to become part of the main distribution</p>
-</li>
-<li>
-<p><code>with-cpp</code>: Builds all C++ related modules, integrations and examples</p>
+<p><code>with-c</code>: Builds all C related modules, integrations and examples</p>
 </li>
 <li>
 <p><code>with-dotnet</code>: Builds all C# and .Net related modules, integrations and examples</p>
 </li>
 <li>
-<p><code>with-python</code>: Builds all Python related modules, integrations and examples</p>
+<p><code>with-go</code>: Builds all Go related modules, integrations and examples</p>
+</li>
+<li>
+<p><code>with-python</code>: Builds all Python related modules, integrations and examples (Also requires <code>with-sandbox</code>)</p>
+</li>
+<li>
+<p><code>with-sandbox</code>: Builds the modules which are not yet considered stable enough to become part of the main distribution</p>
 </li>
 </ul>
 </div>
@@ -389,7 +392,7 @@ Currently when enabling the <code>with-python</code> module, you are required to
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-boost,with-cpp,with-docker,with-dotnet,with-sandbox,with-logstash,with-proxies,with-python,with-sandbox install</pre>
+<pre>mvn -P with-c,with-dotnet,with-go,with-python,with-sandbox install</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -400,11 +403,11 @@ Currently when enabling the <code>with-python</code> module, you are required to
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-boost,with-cpp,with-docker,with-dotnet,with-sandbox,with-logstash,with-proxies,with-python,with-sandbox install -DskipTests</pre>
+<pre>mvn -P with-c,with-dotnet,with-go,with-python,with-sandbox install -DskipTests</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will not skip the compilation of tests however.</p>
+<p>This will not skip the compilation of tests, however.</p>
 </div>
 </div>
 <div class="sect2">

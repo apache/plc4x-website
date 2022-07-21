@@ -243,9 +243,6 @@ The <code>Java</code> modules hereby probably have the least demanding requireme
 <p>In order to build most Java parts of <code>PLC4X</code> you are required to have at least <code>Java 9</code> installed on your machine.
 Some integration modules and some other languages however may add some additional constraints to this.</p>
 </div>
-<div class="paragraph">
-<p>As soon as you&#8217;re building with the <code>with-c</code>, <code>with-cpp</code> or <code>with-proxies</code> you need to use at least <code>Java 11</code> as the <code>cmake-maven-plugin</code> requires at least this version.</p>
-</div>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -253,19 +250,7 @@ Some integration modules and some other languages however may add some additiona
 <div class="title">Tip</div>
 </td>
 <td class="content">
-Currently, Java 11 is the sweet-spot for being able to build all parts of PLC4X.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-We have tested the build with Java 11 up to Java 16 (Latest version at the time of writing this document).
+We have tested the build with Java 11 up to Java 18 (Latest version at the time of writing this document).
 </td>
 </tr>
 </table>
@@ -276,7 +261,7 @@ We&#8217;ll probably fix them as soon as possible.
 However, in the past with Oracle&#8217;s new release strategy, there have been a few bumps on the road.</p>
 </div>
 <div class="paragraph">
-<p>Also will PLC4X build with any Maven version starting with <code>Maven 3.3.0</code> however the <code>with-c</code>, <code>with-cpp</code> and <code>with-proxies</code> profiles require at least <code>Maven 3.6</code> as the <code>cmake-maven-plugin</code> requires this.</p>
+<p>Also will PLC4X build with any Maven version starting with <code>Maven 3.3.0</code> however the <code>with-c</code> profile requires at least <code>Maven 3.6</code> as the <code>cmake-maven-plugin</code> requires this.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -285,7 +270,7 @@ However, in the past with Oracle&#8217;s new release strategy, there have been a
 <div class="title">Tip</div>
 </td>
 <td class="content">
-Currently Maven 3.6 and above is required for being able to build all parts of PLC4X.
+Currently, Maven 3.6 and above is required for being able to build all parts of PLC4X.
 </td>
 </tr>
 </table>
@@ -317,18 +302,9 @@ Currently Maven 3.6 and above is required for being able to build all parts of P
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-cpp</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Builds C++ API, drivers, integrations, examples</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p>gcc</p>
-</li>
-<li>
-<p>g++</p>
-</li>
-</ul>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-c</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Builds C API, drivers, integrations, examples</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-dotnet</code></p></td>
@@ -347,35 +323,10 @@ Currently Maven 3.6 and above is required for being able to build all parts of P
 <td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>python (2.7)</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-proxies</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds proxy modules to each enabled language</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p>bison</p>
+<p>python (min 3.7)</p>
 </li>
 <li>
-<p>flex</p>
-</li>
-<li>
-<p>python</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>with-docker</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds building of Docker images</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p>docker</p>
+<p>pyenv</p>
 </li>
 </ul>
 </div></div></td>
