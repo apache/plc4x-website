@@ -267,42 +267,9 @@ Each message is called a <code>TPDU</code> (Transport Protocol Data Unit):</p>
 </div>
 <div class="sect3">
 <h4 id="connection_request_tpdu">Connection Request TPDU</h4>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: Could not find the 'packetdiag', 'packetdiag3' executable in PATH; add it to the PATH or specify its location using the 'packetdiag' document attribute
-{
-    colwidth = 32
-
-    // ISO on TCP
-    * ISO on TCP Magic Number (0x03) [len = 8, color = "#068D9D"]
-    * Reserved (0x00) [len = 8, color = "#068D9D"]
-    * Packet Length (including ISO on TCP header) [len = 16, color = "#068D9D"]
-
-    // ISO Transport Protocol
-    * ISO TP Header Length\n(excluding length byte) [len = 8, color = "#53599A"]
-    * TPDU-Code\n(CR = 0xE0) [len = 4, color = "#AEECEF"]
-    * Signal CDT\n(0x00) [len = 4, color = "#53599A"]
-    // ISO TP Header (Fixed Part)
-    * Destination Reference [len = 16, color = "#53599A"]
-    * Source Reference [len = 16, color = "#53599A"]
-    * Protocol Class\n(Class 0 = 0x00) [len = 8, color = "#53599A"]
-
-    // ISO TP Header (Variable Part / Parameters)
-    * Parameter Code\n(TPDU Size = 0xC0) [len = 8, color = "#53599A"]
-    * Parameter Length\n(1 = 0x01) [len = 8, color = "#53599A"]
-    * Parameter Value\n(TPDU Size 1024 = 0x0A) [len = 8, color = "#53599A"]
-
-    * Parameter Code\n(Calling TSAP = 0xC1) [len = 8, color = "#53599A"]
-    * Parameter Length (2 = 0x02) [len = 8, color = "#53599A"]
-    * Device Group\n(PG/PC = 0x01) [len = 8, color = "#53599A"]
-    * TSAP Id (0x00) [len = 8, color = "#53599A"]
-
-    * Parameter Code\n(Called TSAP = 0xC2) [len = 8, color = "#53599A"]
-    * Parameter Length (2 = 0x02) [len = 8, color = "#53599A"]
-    * Device Group\n(Others = 0x03) [len = 8, color = "#53599A"]
-    * Rack Number[len = 4, color = "#80DED9"]
-    * Slot Number[len = 4, color = "#80DED9"]
-}</pre>
+<img src="../../images/s7-connect-request.svg" alt="s7 connect request" width="896" height="360"/>
 </div>
 </div>
 <div class="paragraph">
@@ -333,24 +300,9 @@ Each message is called a <code>TPDU</code> (Transport Protocol Data Unit):</p>
 </div>
 <div class="sect3">
 <h4 id="data_tpdu">Data TPDU</h4>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: no implicit conversion of nil into String
-{
-    colwidth = 32
-
-    // ISO on TCP
-    * ISO on TCP Magic Number (0x03) [len = 8, color = "#068D9D"]
-    * Reserved (0x00) [len = 8, color = "#068D9D"]
-    * Packet Length (including ISO on TCP header) [len = 16, color = "#068D9D"]
-
-    // ISO Transport Protocol
-    * ISO TP Header Length\n(excluding length byte) [len = 8, color = "#53599A"]
-    * TPDU-Code\n(DATA = 0xF0) [len = 4, color = "#AEECEF"]
-    * Signal CDT\n(0x00) [len = 4, color = "#53599A"]
-    * TPDU-NR/EOT [len = 8, color = "#53599A"]
-
-}</pre>
+<img src="../../images/s7-data.svg" alt="s7 data" width="896" height="200"/>
 </div>
 </div>
 <div class="paragraph">
@@ -372,31 +324,9 @@ Each message is called a <code>TPDU</code> (Transport Protocol Data Unit):</p>
 </div>
 <div class="sect3">
 <h4 id="disconnect_request_tpdu">Disconnect Request TPDU</h4>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: no implicit conversion of nil into String
-{
-    colwidth = 32
-
-    // ISO on TCP
-    * ISO on TCP Magic Number (0x03) [len = 8, color = "#068D9D"]
-    * Reserved (0x00) [len = 8, color = "#068D9D"]
-    * Packet Length (including ISO on TCP header) [len = 16, color = "#068D9D"]
-
-    // ISO Transport Protocol
-    * ISO TP Header Length\n(excluding length byte) [len = 8, color = "#53599A"]
-    * TPDU-Code\n(DR = 0x80) [len = 4, color = "#AEECEF"]
-    * Signal CDT\n(0x00) [len = 4, color = "#53599A"]
-    * Destination Reference [len = 16, color = "#53599A"]
-    * Source Reference [len = 16, color = "#53599A"]
-    * Reason [len = 8, color = "#53599A"]
-
-    // ISO TP Header (Variable Part / Parameters) (Optional)
-    * Parameter Code\n(Disconnect Additional Information = 0xE0) [len = 8, color = "#53599A"]
-    * Parameter Length\n(1 ... 128) [len = 8, color = "#53599A"]
-    * Parameter Data\n(Custom user data) [len = 24, color = "#53599A"]
-
-}</pre>
+<img src="../../images/s7-disconnect-request.svg" alt="s7 disconnect request" width="896" height="280"/>
 </div>
 </div>
 <div class="paragraph">

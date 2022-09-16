@@ -162,24 +162,9 @@ We are hereby assuming that the inner protocol is the version of the DeltaV prot
 <div class="paragraph">
 <p>The general structure of such a wrapper packet seems to look like this:</p>
 </div>
-<div class="listingblock">
+<div class="imageblock">
 <div class="content">
-<pre>Failed to generate image: Could not find the 'packetdiag', 'packetdiag3' executable in PATH; add it to the PATH or specify its location using the 'packetdiag' document attribute
-{
-    colwidth = 32
-
-    * Header\n(Constant = 0xFACE) [len = 16]
-    * Payload Length [len = 16]
-    * Type [len = 16]
-    * Message Id [len = 16]
-    * Sender Id [len = 16]
-    * Timestamp [len = 24]
-    * 0x80/0x00 [len = 8]
-    * 0x04 [len = 8]
-    * 0x00 [len = 8]
-    * Payload [len = 64]
-    * Checksum [len = 16]
-}</pre>
+<img src="../../images/deltav-wrapper-packet.svg" alt="deltav wrapper packet" width="896" height="400"/>
 </div>
 </div>
 <div class="paragraph">
