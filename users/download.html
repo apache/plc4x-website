@@ -302,7 +302,73 @@
 <div class="sect2">
 <h3 id="current_releases">Current Releases</h3>
 <div class="sect3">
-<h4 id="0_9_1_official_source_release_sha512_asc">0.9.1 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.9.1/apache-plc4x-0.9.1-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.9.1/apache-plc4x-0.9.1-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.9.1/apache-plc4x-0.9.1-source-release.zip.asc">ASC</a> ]</h4>
+<h4 id="0_10_0_official_source_release_sha512_asc">0.10.0 Official <a href="https://www.apache.org/dyn/closer.lua/plc4x/0.10.0/apache-plc4x-0.10.0-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.10.0/apache-plc4x-0.10.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.10.0/apache-plc4x-0.10.0-source-release.zip.asc">ASC</a> ]</h4>
+<div class="paragraph">
+<p>A lot of the work in this version went into refactoring and
+cleaning up our code generation. The code generation itself is
+now a lot cleaner and simpler as well as the code generated
+for Java. We also added a number of new field-types to allow
+implementing more sophisticated protocols. PLC4C now should
+also support all of the constructs mspec has to offer.</p>
+</div>
+<div class="sect4">
+<h5 id="new_features">New Features</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Implemented a <code>PLC4X-Server</code> and <code>PLC4X-Driver</code> that allows
+using the server as a proxy for communicating with PLCs.</p>
+</li>
+<li>
+<p>The Modbus driver is now also available in the variants:
+"modbus-rtu" and "modbus-ascii" (Both using Serial
+communication, which however can be tunneled through a
+"tcp" and "udp" transport)</p>
+</li>
+<li>
+<p>The KNX driver in Java now supports reading "knxproj" files
+exported from the new ETS version 6.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="bug_fixes">Bug Fixes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The name of the Modbus TCP driver was changed from "modbus"
+to "modbus-tcp".</p>
+</li>
+<li>
+<p>Removed the Apache Edgent (incubating) integration and
+examples related, as Edgent is abandoned and there were
+CVEs reported, which will not be fixed.</p>
+</li>
+<li>
+<p>We have replaced the BitString types with BYTE, WORD, DWORD,
+and LWORD which generally match their unsigned integer
+counterparts. So we are no longer returning lists of boolean
+values for any of these types.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="previous_releases">Previous Releases</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Fixed a big bug in the KNX Datapoint decoding, which caused
+byte-aligned data types to parse with an offset of 8 bit.
+(This bug affected both the Java and the Go driver)</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="0_9_1_official_source_release_sha512_asc">0.9.1 Official <a href="https://archive.apache.org/dist/plc4x/0.9.1/apache-plc4x-0.9.1-source-release.zip">source release</a> [ <a href="https://downloads.apache.org/plc4x/0.9.1/apache-plc4x-0.9.1-source-release.zip.sha512">SHA512</a> ] [ <a href="https://downloads.apache.org/plc4x/0.9.1/apache-plc4x-0.9.1-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
 <p>This is a bugfix release aiming at directly fixing CVE-2021-43083 as well as updating the dependency to Log4J 2.14.0 which was affected by CVE-2021-44228</p>
 </div>
@@ -310,7 +376,7 @@
 <p>Please note that CVE-2021-43083 only affects the PLC4C part of PLC4X.</p>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes">Bug Fixes</h5>
+<h5 id="bug_fixes_2">Bug Fixes</h5>
 <div class="paragraph">
 <p>CVE-2021-43083 Apache PLC4X 0.9.0 Buffer overflow in PLC4C via crafted server response</p>
 </div>
@@ -318,7 +384,7 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="previous_releases">Previous Releases</h3>
+<h3 id="previous_releases_2">Previous Releases</h3>
 <div class="sect3">
 <h4 id="release-0_9_0">0.9.0 Official <a href="https://archive.apache.org/dist/plc4x/0.9.0/apache-plc4x-0.9.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/plc4x/0.9.0/apache-plc4x-0.9.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/plc4x/0.9.0/apache-plc4x-0.9.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="paragraph">
@@ -327,7 +393,7 @@ accumulated over time. It doesn&#8217;t have an explicit focus on
 a particular topic.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features">New Features</h5>
+<h5 id="new_features_2">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -360,7 +426,7 @@ Eclipse Milo was being used.</p>
 
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_2">Bug Fixes</h5>
+<h5 id="bug_fixes_3">Bug Fixes</h5>
 <div class="paragraph">
 <p>PLC4X-200   OPC-UA Driver not connecting if params string is not provided
 PLC4X-201   OPC-UA PlcList underlying type not compatible with Eclipse Milo
@@ -386,7 +452,7 @@ accumulated over time. It doesn&#8217;t have an explicit focus on
 a particular topic.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_2">New Features</h5>
+<h5 id="new_features_3">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -441,7 +507,7 @@ a particular topic.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_3">Bug Fixes</h5>
+<h5 id="bug_fixes_4">Bug Fixes</h5>
 <div class="paragraph">
 <p>A lot of testing was done regarding the IEC 61131-3 data-types.
 This resulted in numerous bugfixes in many protocols.</p>
@@ -524,7 +590,7 @@ and have been replaced by versions using the new driver structure
 and generated driver codebase.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_3">New Features</h5>
+<h5 id="new_features_4">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -583,7 +649,7 @@ provide both a feature.xml as well as a <code>kar</code> bundled archive</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_4">Bug Fixes</h5>
+<h5 id="bug_fixes_5">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -611,7 +677,7 @@ most users have switched to 0.7 and above (with generated drivers).</p>
 as the critical (memory leak) bug PLC4X-163 is fixed.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_4">New Features</h5>
+<h5 id="new_features_5">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -632,7 +698,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_5">Bug Fixes</h5>
+<h5 id="bug_fixes_6">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -663,7 +729,7 @@ This release contains no further features and mostly stabilization.</p>
 <p>This is the first release containing our new generated drivers (AB-ETH)</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_5">New Features</h5>
+<h5 id="new_features_6">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -697,7 +763,7 @@ This release contains no further features and mostly stabilization.</p>
 
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_6">Bug Fixes</h5>
+<h5 id="bug_fixes_7">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -725,7 +791,7 @@ This release contains no further features and mostly stabilization.</p>
 <p>This is the first release of Apache PLC4X as top-level project.</p>
 </div>
 <div class="sect4">
-<h5 id="new_features_6">New Features</h5>
+<h5 id="new_features_7">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -754,7 +820,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_7">Bug Fixes</h5>
+<h5 id="bug_fixes_8">Bug Fixes</h5>
 
 </div>
 </div>
@@ -764,7 +830,7 @@ This release contains no further features and mostly stabilization.</p>
 <div class="sect3">
 <h4 id="0_3_1_incubating_official_source_release_sha512_asc">0.3.1 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.1-incubating/apache-plc4x-incubating-0.3.1-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_7">New Features</h5>
+<h5 id="new_features_8">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -784,7 +850,7 @@ This release contains no further features and mostly stabilization.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_8">Bug Fixes</h5>
+<h5 id="bug_fixes_9">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -806,7 +872,7 @@ This release contains no further features and mostly stabilization.</p>
 <div class="sect3">
 <h4 id="release-0_3_0">0.3.0 (incubating) Official <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip">source release</a> [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.sha512">SHA512</a> ] [ <a href="https://archive.apache.org/dist/incubator/plc4x/0.3.0-incubating/apache-plc4x-incubating-0.3.0-source-release.zip.asc">ASC</a> ]</h4>
 <div class="sect4">
-<h5 id="new_features_8">New Features</h5>
+<h5 id="new_features_9">New Features</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -842,7 +908,7 @@ a <code>plc4j-protocol-{name}</code> you now need to change this to
 </div>
 </div>
 <div class="sect4">
-<h5 id="bug_fixes_9">Bug Fixes</h5>
+<h5 id="bug_fixes_10">Bug Fixes</h5>
 <div class="ulist">
 <ul>
 <li>
