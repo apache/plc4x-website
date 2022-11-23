@@ -451,7 +451,7 @@ When I use ths tool some times I have to click the <code>Add</code> button more 
 <p>Coils are always simple <code>bits</code> or <code>boolean</code> values and Registers are always <code>16 bit short values</code>.</p>
 </div>
 <div class="paragraph">
-<p>However there are different types of these and they have different names:</p>
+<p>However, there are different types of these and they have different names:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -533,7 +533,7 @@ These are only required if the connection requires some non-default settings.</p
 </ul>
 </div>
 <div class="paragraph">
-<p>If we have setup ModbusPal as described above and are running this on the same computer, the connection string to connect to this should be:</p>
+<p>If we have set up ModbusPal as described above and are running this on the same computer, the connection string to connect to this should be:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -571,7 +571,7 @@ When using Maven, all you need to do is add this dependency:</p>
 </div>
 <div class="paragraph">
 <p>This will allow you to write a valid application, that compiles fine.
-However in order to actually connect to a device using a given protocol, you need to add this protocol implementation to the classpath.</p>
+However, in order to actually connect to a device using a given protocol, you need to add this protocol implementation to the classpath.</p>
 </div>
 <div class="paragraph">
 <p>For example in order to communicate using the <code>Modbus</code> protocol, you would need to add the following dependency:</p>
@@ -629,8 +629,8 @@ try (PlcConnection plcConnection = new PlcDriverManager().getConnection(connecti
 </ul>
 </div>
 <div class="paragraph">
-<p>In general we will try to offer as many features as possible.
-So if a protocol doesn&#8217;t support subscription based communication it is our goal to simulate this by polling in the background so it is transparent for the users.</p>
+<p>In general, we will try to offer as many features as possible.
+So if a protocol doesn&#8217;t support subscription based communication it is our goal to simulate this by polling in the background, so it is transparent for the users.</p>
 </div>
 <div class="paragraph">
 <p>But there are some cases in which we can&#8217;t simulate or features are simply disabled intentionally:</p>
@@ -646,7 +646,7 @@ So if a protocol doesn&#8217;t support subscription based communication it is ou
 </ul>
 </div>
 <div class="paragraph">
-<p>Therefore we use metadata to check programmatically, if a given feature is available:</p>
+<p>Therefore, we use metadata to check programmatically, if a given feature is available:</p>
 </div>
 </div>
 <div class="sect2">
@@ -700,7 +700,7 @@ asyncResponse.whenComplete((response, throwable) -&gt; {
 So as soon as the request is fully processed, the callback gets called and will contain a <code>readResponse</code>, if everything went right or a <code>throwable</code> if there were problems.</p>
 </div>
 <div class="paragraph">
-<p>However if you want to write your code in a more synchronous fashion, the following alternative will provide this:</p>
+<p>However, if you want to write your code in a more synchronous fashion, the following alternative will provide this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -712,6 +712,7 @@ So as soon as the request is fully processed, the callback gets called and will 
 The following example will demonstrate some of the options you have:</p>
 </div>
 <div class="listingblock">
+<div class="title">Up to version 0.10.0</div>
 <div class="content">
 <pre>for (String fieldName : response.getFieldNames()) {
     if(response.getResponseCode(fieldName) == PlcResponseCode.OK) {
@@ -731,6 +732,31 @@ The following example will demonstrate some of the options you have:</p>
     // Something went wrong, to output an error message instead.
     else {
         logger.error("Error[" + fieldName + "]: " + response.getResponseCode(fieldName).name());
+    }
+}</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">SNAPSHOT version</div>
+<div class="content">
+<pre>for (String tagName : response.getTagNames()) {
+    if(response.getResponseCode(tagName) == PlcResponseCode.OK) {
+        int numValues = response.getNumberOfValues(tagName);
+        // If it's just one element, output just one single line.
+        if(numValues == 1) {
+            logger.info("Value[" + tagName + "]: " + response.getObject(tagName));
+        }
+        // If it's more than one element, output each in a single row.
+        else {
+            logger.info("Value[" + tagName + "]:");
+            for(int i = 0; i &lt; numValues; i++) {
+                logger.info(" - " + response.getObject(tagName, i));
+            }
+        }
+    }
+    // Something went wrong, to output an error message instead.
+    else {
+        logger.error("Error[" + tagName + "]: " + response.getResponseCode(tagName).name());
     }
 }</pre>
 </div>
@@ -788,7 +814,7 @@ For convenience the response object has single-argument methods for accessing th
 </div>
 <div class="paragraph">
 <p>PLC4X provides getters and setters for a wide variety of Java types and automatically handles the type conversion.
-However when for example trying to get a long-value as a byte and the long-value exceeds the range supported by the smaller type, a <code>RuntimeException</code> of type <code>PlcIncompatibleDatatypeException</code>.
+However, when for example trying to get a long-value as a byte and the long-value exceeds the range supported by the smaller type, a <code>RuntimeException</code> of type <code>PlcIncompatibleDatatypeException</code>.
 In order to avoid causing this exception to be thrown, however there are <code>isValid{TypeName}</code> methods that you can use to check if the value is compatible.</p>
 </div>
 </div>
@@ -798,7 +824,7 @@ In order to avoid causing this exception to be thrown, however there are <code>i
 <p>The code for writing is very similar to the code for reading, however when creating the write request, we have to pass in the data alongside the field definitions.</p>
 </div>
 <div class="paragraph">
-<p>While all of the 4 field types support reading from, only the <code>coil</code> and <code>holding-register</code> field types support writing to.
+<p>While all 4 field types support reading from, only the <code>coil</code> and <code>holding-register</code> field types support writing to.
 If you attempt to write to these, this will result in errors.</p>
 </div>
 <div class="paragraph">

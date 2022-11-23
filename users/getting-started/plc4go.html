@@ -486,11 +486,27 @@ This is done by a <code>PlcReadRequest</code>.</p>
 <p>In order to create and run such a <code>PlcReadRequest</code>, please add the following code:</p>
 </div>
 <div class="listingblock">
+<div class="title">Up to version 0.10.0</div>
 <div class="content">
 <pre>	// Prepare a read-request
 	readRequest, err := connection.ReadRequestBuilder().
 		AddQuery("field1", "holding-register:1:REAL").
 		AddQuery("field2", "holding-register:3:REAL").
+        Build()
+	if err != nil {
+		t.Errorf("error preparing read-request: %s", connectionResult.Err.Error())
+		t.Fail()
+		return
+	}</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">SNAPSHOT version</div>
+<div class="content">
+<pre>	// Prepare a read-request
+	readRequest, err := connection.ReadRequestBuilder().
+		AddTagAddress("tag1", "holding-register:1:REAL").
+		AddTagAddress("tag2", "holding-register:3:REAL").
         Build()
 	if err != nil {
 		t.Errorf("error preparing read-request: %s", connectionResult.Err.Error())
@@ -588,7 +604,7 @@ Not implemented yet
 <p>Now we&#8217;ll create the subscription request.</p>
 </div>
 <div class="paragraph">
-<p>The main difference is that while reading there is only one form how you could read, with subscriptions there are different forms of subscriptons:</p>
+<p>The main difference is that while reading there is only one form how you could read, with subscriptions there are different forms of subscriptions:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -607,6 +623,7 @@ Not implemented yet
 <p>Therefore instead of using a normal <code>AddItem</code>, there are tree different functions as you can see in the following examples.</p>
 </div>
 <div class="listingblock">
+<div class="title">Up to version 0.10.0</div>
 <div class="content">
 <pre>	// Prepare a subscription-request
     subscriptionRequest, err := connection.SubscriptionRequestBuilder().
@@ -621,10 +638,27 @@ Not implemented yet
     }</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">SNAPSHOT version</div>
+<div class="content">
+<pre>	// Prepare a subscription-request
+    subscriptionRequest, err := connection.SubscriptionRequestBuilder().
+        AddChangeOfStateTagAddress("heating-actual-temperature", "*/*/10:DPT_Value_Temp").
+        AddChangeOfStateTagAddress("heating-target-temperature", "*/*/11:DPT_Value_Temp").
+        AddCyclicTagAddress("heating-valve-open", "*/*/12:DPT_OpenClose", 500 * time.Millisecond).
+        AddItemHandler(knxEventHandler).
+        Build()
+    if err != nil {
+	    fmt.Printf("Error preparing subscription-request: %s", connectionResult.Err.Error())
+        return
+    }</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>The <code>Event hadnler</code> for intercepting incoming events could look like this:</p>
 </div>
 <div class="listingblock">
+<div class="title">Up to version 0.10.0</div>
 <div class="content">
 <pre>func knxEventHandler(event apiModel.PlcSubscriptionEvent) {
     for _, fieldName := range event.GetFieldNames() {
@@ -637,6 +671,20 @@ Not implemented yet
 }</pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="title">SNAPSHOT version</div>
+<div class="content">
+<pre>func knxEventHandler(event apiModel.PlcSubscriptionEvent) {
+    for _, tagName := range event.GetTagNames() {
+        if event.GetResponseCode(tagName) == apiModel.PlcResponseCode_OK {
+            groupAddress := event.GetTag(tagName).GetAddressString()
+            fmt.Printf("Got update for tag %s with address %s. Value changed to: %s\n",
+                tagName, groupAddress, event.GetValue(tagName).GetString())
+        }
+    }
+}</pre>
+</div>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -644,7 +692,7 @@ Not implemented yet
 <div class="title">Note</div>
 </td>
 <td class="content">
-The <code>AddCyclicField</code> method requires a third parameter <code>duration</code> which specifies the interval, in which a given value is sent (even if it has not changed).
+The <code>AddCyclicField</code>/<code>AddCyclicTagAddress</code> method requires a third parameter <code>duration</code> which specifies the interval, in which a given value is sent (even if it has not changed).
 </td>
 </tr>
 </table>
@@ -656,7 +704,7 @@ The <code>AddCyclicField</code> method requires a third parameter <code>duration
 <div class="title">Note</div>
 </td>
 <td class="content">
-Here the API differs slightly form the Java version, as in the request-builder itself you specify the reference to the callback handler which should be notified on incoming data. Howerver, we will be alliging all API variants as much as possible in the near future.
+Here the API differs slightly form the Java version, as in the request-builder itself you specify the reference to the callback handler which should be notified on incoming data. However, we will be aligning all API variants as much as possible in the near future.
 </td>
 </tr>
 </table>
