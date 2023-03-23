@@ -134,7 +134,7 @@
                             <a href="../../users/protocols/df1.html" class="nav-link">DF1</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">EtherNet/IP</strong>
+                            <a href="../../users/protocols/ethernet-ip.html" class="nav-link">EtherNet/IP</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/firmata.html" class="nav-link">Firmata</a>
@@ -143,7 +143,7 @@
                             <a href="../../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/protocols/logix.html" class="nav-link">Logix</a>
+                            <strong class="nav-link">Logix</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/modbus.html" class="nav-link">Modbus</a>
@@ -300,7 +300,7 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="ethernetip">EtherNet/IP</h2>
+<h2 id="logix">Logix</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="connection_string_options">Connection String Options</h3>
@@ -321,13 +321,13 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
 <td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>eip</code></p>
+<p><code>logix</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
 <td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p>EtherNet/IP Protocol</p>
+<p>Logix CIP/EIP</p>
 </div></div></td>
 </tr>
 <tr>
@@ -349,24 +349,28 @@
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compatible Transports:</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>tcp</code> (Default Port: 44818)</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
 <p><code>read</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Read tags from a PLC4X device</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
 <p><code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Write values to tags on a PLC4X device</p>
 </div></div></td>
 </tr>
 <tr>
@@ -375,111 +379,120 @@
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>backplane</code></p>
+<p><code>communicationPath</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>backplane</code> value for the client (PLC4X device). Mandatory.</p>
+<p>The communication path allows for connection routing across multiple backplanes. It uses a common format found in logix controllers.
+It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 (Ethernet), followed by a slot in the case of a backplane address,
+or if using Ethernet an ip address. e.g. [1,4,2,192.168.0.1,1,1] - Routes to the 4th slot in the first rack, which is a ethernet module, it then connects to the address 192.168.0.1, then finds the module in slot 1.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>slot</code></p>
+<p><code>backplane</code> (1)</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>slot</code> value for the client (PLC4X device). Mandatory.</p>
+<p>Without using routing information the backplane defaults to 1. This is overridden if communicationPath is provided.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>slot</code> (1)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The slot within the backplane the CPU is located.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="address_format">Address Format</h3>
+<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+<div class="sect3">
+<h4 id="connection_string">Connection String</h4>
 <div class="paragraph">
-<p>To read and write data to a PLC4X device, the EtherNet/IP driver uses symbolic segments.
- This is used to refer to objects through their symbolic names. This makes reading data a lot easier, as you do not
- need to specify the Datatype for reading.</p>
+<p>Logix has the following connection string format:-</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>%{tagname}[{startIndex}]:{numberOfElements}
-%{tagname}[{startIndex}]:{numberOfElements}:{DataType}</pre>
+<pre>logix:tcp://{ip-address}:{port}?{options}</pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;"/>
-<col style="width: 50%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tagname</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">symbolic name of the Data</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Start Index (optional)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">if the data is an array, we can specify a starting index from where we want to read</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number of elements (optional)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">if the data is an array, we can specify the number of elements we want to read. Use this in combination with the starting index to get the exact scope you want.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DataType (writing)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the Data-type of the value you want to write (mandatory)</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>An example connection string would look like:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>logix:tcp://127.0.0.1:502?communicationPath=[1,1]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the port and option fields are optional.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="general_format">General Format</h4>
+<div class="paragraph">
+<p>In general all Logix addresses have this format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{address}:{data-type}[{array-size}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the array-size part is omitted, the size-default of <code>1</code> is assumed.
+If the data-type part is omitted, the data type from the controller is used
+The address format matches that found in the controller.</p>
+</div>
+</div>
 <div class="sect3">
 <h4 id="data_types">Data Types</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;"/>
-<col style="width: 50%;"/>
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">To store</th>
-<th class="tableblock halign-left valign-top">Use this data type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bit array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DWORD (32-bit boolean array)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8-bit integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SINT</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">16-bit integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DINT</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LINT</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit float</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>The following data types are supported</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BOOL (boolean)</p>
+</li>
+<li>
+<p>SINT (int 8)</p>
+</li>
+<li>
+<p>USINT (uint 8)</p>
+</li>
+<li>
+<p>BYTE (uint 8)</p>
+</li>
+<li>
+<p>INT (int 16)</p>
+</li>
+<li>
+<p>UINT (uint 16)</p>
+</li>
+<li>
+<p>WORD (uint 16)</p>
+</li>
+<li>
+<p>DINT (int 32)</p>
+</li>
+<li>
+<p>UDINT (uint 32)</p>
+</li>
+<li>
+<p>DWORD (uint 32)</p>
+</li>
+<li>
+<p>LINT (int 64)</p>
+</li>
+<li>
+<p>REAL (float)</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
