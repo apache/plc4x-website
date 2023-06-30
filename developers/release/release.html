@@ -446,6 +446,21 @@ However, in contrast to that documentation, upload your key to the following ser
 <div class="paragraph">
 <p>Ideally use the Maven-Wrapper to ensure the Maven version fits the build.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+On some systems (mainly Mac) gpg signing can result in errors like:
+    <code><code>[INFO] --- maven-gpg-plugin:3.0.1:sign (sign-release-artifacts) @ plc4x-parent ---
+    gpg: signing failed: Inappropriate ioctl for device</code></code>
+    In this case adding the following helps: <code>export GPG_TTY=$(tty)</code>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="preparing_the_codebase_for_a_release">Preparing the codebase for a release</h3>
