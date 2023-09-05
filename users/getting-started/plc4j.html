@@ -202,9 +202,6 @@
                             <a href="../../users/integrations/apache-camel.html" class="nav-link">Apache Camel</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/integrations/apache-edgent.html" class="nav-link">Apache Edgent</a>
-                            </li>
-                                            <li class="nav-item">
                             <a href="../../users/integrations/apache-iotdb.html" class="nav-link">Apache IoTDB</a>
                             </li>
                                             <li class="nav-item">
@@ -358,6 +355,12 @@ try (PlcConnection plcConnection = new PlcDriverManager().getConnection(connecti
 <div class="ulist">
 <ul>
 <li>
+<p>Discover Devices</p>
+</li>
+<li>
+<p>List resources in the PLC</p>
+</li>
+<li>
 <p>Read data</p>
 </li>
 <li>
@@ -366,17 +369,11 @@ try (PlcConnection plcConnection = new PlcDriverManager().getConnection(connecti
 <li>
 <p>Subscribe for data</p>
 </li>
-<li>
-<p>Execute functions in the PLC</p>
-</li>
-<li>
-<p>List resources in the PLC</p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>In general we will try to offer as many features as possible.
-So if a protocol doesn&#8217;t support subscription based communication it is our goal to simulate this by polling in the background so it is transparent for the users.</p>
+<p>In general, we will try to offer as many features as possible.
+So if a protocol doesn&#8217;t support subscription based communication it is our goal to simulate this by polling in the background, so it is transparent for the users (This simulation feature hasn&#8217;t been implemented yet though, but it&#8217;s on our roadmap).</p>
 </div>
 <div class="paragraph">
 <p>But there are some cases in which we can&#8217;t simulate or features are simply disabled intentionally:</p>
@@ -384,15 +381,15 @@ So if a protocol doesn&#8217;t support subscription based communication it is ou
 <div class="ulist">
 <ul>
 <li>
-<p>If a PLC and/or protocol don&#8217;t support executing of functions, we simply can&#8217;t provide this functionality.</p>
+<p>If a PLC and/or protocol don&#8217;t support writing or browsing, we simply can&#8217;t provide this functionality.</p>
 </li>
 <li>
-<p>We will be providing stripped down versions of drivers, that for example intentionally don&#8217;t support any writing of data and executing of functions.</p>
+<p>Also do we plan on providing stripped down versions of drivers, that for example intentionally don&#8217;t support any writing of data.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Therefore we use metadata to check programmatically, if a given feature is available.</p>
+<p>Therefore, we use metadata to check programmatically, if a given feature is available.</p>
 </div>
 <div class="sect3">
 <h4 id="reading_data">Reading Data</h4>
@@ -441,7 +438,7 @@ asyncResponse.whenComplete((response, throwable) -&gt; {
 </div>
 <div class="paragraph">
 <p>In general all requests are executed asynchronously.
-So as soon as the request is fully processed, the callback gets called and will contain a <code>readResponse</code>, if everything went right or a <code>throwable</code> if there were problems.</p>
+As soon as the request is fully processed, the callback gets called and will contain a <code>readResponse</code>, if everything went right or a <code>throwable</code> if there were problems.</p>
 </div>
 <div class="paragraph">
 <p>However, if you want to write your code in a more synchronous fashion, the following alternative will provide this:</p>
@@ -452,8 +449,10 @@ So as soon as the request is fully processed, the callback gets called and will 
 </div>
 </div>
 <div class="paragraph">
-<p>Processing of the responses is identical in both cases.
-The following example will demonstrate some of the options you have:</p>
+<p>Processing of the responses is identical in both cases in the synchronous approach you however need to catch any exceptions.</p>
+</div>
+<div class="paragraph">
+<p>The following example will demonstrate some of the options you have:</p>
 </div>
 <div class="listingblock">
 <div class="title">Up to version 0.10.0</div>
@@ -481,7 +480,7 @@ The following example will demonstrate some of the options you have:</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">SNAPSHOT version</div>
+<div class="title">SNAPSHOT version (The general process is still the same we however cleaned up some naming)</div>
 <div class="content">
 <pre>for (String tagName : response.getTagNames()) {
     if(response.getResponseCode(tagName) == PlcResponseCode.OK) {
@@ -506,7 +505,7 @@ The following example will demonstrate some of the options you have:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the for loop, we are demonstrating how the user can iterate over the address aliases in the response.
+<p>In the for-loop, we are demonstrating how the user can iterate over the tag aliases in the response.
 In case of an ordinary read request, this will be predefined by the items in the request, however in case of a subscription response, the response might only contain some of the items that were subscribed.</p>
 </div>
 <div class="paragraph">
@@ -540,7 +539,7 @@ If this is <code>PlcResponseCode.OK</code>, everything is ok, however it could b
 <p>Assuming the return code was <code>OK</code>, we can continue accessing the data.</p>
 </div>
 <div class="paragraph">
-<p>As some addresses support reading arrays, with the method <code>getNumberOfValues</code> the user can check how many items of a given type are returned.
+<p>As some tags support reading arrays, with the method <code>getNumberOfValues</code> the user can check how many items of a given type are returned.
 For convenience the response object has single-argument methods for accessing the data, which default to returning the first element.</p>
 </div>
 <div class="literalblock">
@@ -645,7 +644,7 @@ asyncResponse.whenComplete((response, throwable) -&gt; {
 </div>
 </div>
 <div class="listingblock">
-<div class="title">SNAPSHOT version</div>
+<div class="title">SNAPSHOT version (The general process is still the same we however cleaned up some naming)</div>
 <div class="content">
 <pre>for (String tagName : response.getTagNames()) {
     if(response.getResponseCode(tagName) == PlcResponseCode.OK) {
@@ -696,7 +695,7 @@ if (!plcConnection.getMetadata().canSubscribe()) {
 </ul>
 </div>
 <div class="paragraph">
-<p>Therefore instead of using a normal <code>addItem</code>, there are tree different methods as you can see in the following examples.</p>
+<p>Therefore instead of using a normal <code>addItem</code> or <code>addTag</code> in newer versions, there are tree different methods as you can see in the following examples.</p>
 </div>
 <div class="listingblock">
 <div class="title">Up to version 0.10.0</div>
@@ -746,7 +745,8 @@ The <code>addCyclicField</code>/<code>addCyclicTagAddress</code> method requires
 <p>Now comes the little more tricky part, as subscriptions are always asynchronous, we have to register a callback for the connection to call as soon as there is news available:</p>
 </div>
 <div class="paragraph">
-<p>In general you can&#8217;t say how many of your subscribed fields will be available in every callback so it is double important to check or iterate over the field names.</p>
+<p>In general, you can&#8217;t say how many of your subscribed fields will be available in every callback.
+So it is double important to check or iterate over the field names.</p>
 </div>
 <div class="listingblock">
 <div class="title">Up to version 0.10.0</div>
