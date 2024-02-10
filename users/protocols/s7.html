@@ -230,9 +230,6 @@
                             <a href="../../users/tools/capture-replay.html" class="nav-link">Capture Replay</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/tools/connection-pool.html" class="nav-link">Connection Pool</a>
-                            </li>
-                                            <li class="nav-item">
                             <a href="../../users/tools/connection-cache.html" class="nav-link">Connection Cache</a>
                             </li>
                                             <li class="nav-item">
@@ -347,6 +344,18 @@
 </div>
 <div class="paragraph">
 <p>Although this driver is developed using Siemens Hardware, it should be functional with VIPA brand equipment, which is a version (clone) of the S7-300, with more memory and functionalities. If you have one of these devices and you are in your best disposition to carry out communication tests, we would be very grateful if you collaborate with the results in the development list and placing the model and firmware version that you have used.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/note.png" alt="Note"/>
+</td>
+<td class="content">
+When trying to connect to a Siemens <code>LOGO</code> device, it is important to add one connection option, as Siemens seems to have only partially implemented the protocol, the device simply terminates the connection as soon as our driver tried to read the SZL table in order to find out which type of S7 device it is talking to. This can be disabled by passing in the type of PLC. For a Siemens LOGO device therefore please add <code>?controller-type=LOGO</code> to the connection string.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
