@@ -397,24 +397,178 @@
 will propagate over an '&lt;address&gt;/discovery' endpoint. The most common issue here is that most servers are not correctly
 configured and propagate the wrong external IP or URL address. If that is the case you can disable the discovery by
 configuring it with a <code>false</code> value.</p>
+</div>
+<div class="paragraph">
+<p>The discovery phase is always conducted using <code>NONE</code> security policy.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>securityPolicy</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>username</code></p>
+<p><code>NONE</code></p>
 </div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The security policy applied to communication channel between driver and OPC UA server.
+Default value assumes. Possible options are <code>NONE</code>, <code>Basic128Rsa15</code>, <code>Basic256</code>, <code>Basic256Sha256</code>, <code>Aes128_Sha256_RsaOaep</code>, <code>Aes256_Sha256_RsaPss</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>messageSecurity</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>SIGN_ENCRYPT</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The security policy applied to messages exchanged after handshake phase.
+Possible options are <code>NONE</code>, <code>SIGN</code>, <code>SIGN_ENCRYPT</code>.
+This option is effective only when <code>securityPolicy</code> turns encryption (anything beyond <code>NONE</code>).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serverCertificateFile</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Filesystem location where server certificate is located, supported formats are <code>DER</code> and <code>PEM</code>.
+This option is required when <code>discovery</code> is disabled and <code>securityPolicy</code> is not <code>NONE</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyStoreFile</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Keystore file used to lookup client certificate and its private key.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyStoreType</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>pkcs12</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Keystore type used to access keystore and private key, defaults to PKCS (for Java 11+).
+Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>dks</code>, <code>jceks</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyStorePassword</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java keystore password used to access keystore and private key.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trustStoreFile</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The trust store file used to verify server certificates and its chain.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trustStoreType</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>pkcs12</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Keystore type used to access keystore and private key, defaults to PKCS (for Java 11+).
+Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>dks</code>, <code>jceks</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trustStorePassword</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Password used to open trust store.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>username</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A username to authenticate to the OPCUA server with.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>password</code></p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A password to authenticate to the OPCUA server with.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">TCP encoding options</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding.receiveBufferSize</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>65535</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum size of received TCP transport message chunk value in bytes.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding.sendBufferSize</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>65535</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum size of sent transport message chunk.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding.maxMessageSize</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>2097152</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum size of complete message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding.maxChunkCount</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>64</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum number of chunks for both sent and received messages.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Timeout options</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>channelLifetime</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>3600000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Time for which negotiated secure channel, its keys and session remains open. Value in milliseconds, by default 60 minutes.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sessionTimeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>120000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Expiry time for opened secure session, value in milliseconds. Defaults to 2 minutes.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>negotiationTimeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>60000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout for all negotiation steps prior acceptance of application level operations - this timeout applies to open secure channel, create session and close calls. Defaults to 60 seconds.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>requestTimeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>30000</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout for read/write/subscribe calls. Value in milliseconds.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -440,6 +594,71 @@ configuring it with a <code>false</code> value.</p>
 </div>
 <div class="paragraph">
 <p>Note the transport, port and options fields are optional.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="secure_communication">Secure communication</h3>
+<div class="paragraph">
+<p>The secure channel implementation within Apache PLC4X project have been tested against existing open source server implementations.
+This includes Eclipse Milo (all modes) as well as OPC Foundation .NET server (except <code>Basic128Rsa15</code>).
+Manual tests proven that driver is able to communicate with OPC UA server launched on PLCs as well as commercial simulators.</p>
+</div>
+<div class="paragraph">
+<p>Depending on actual configuration of remote end there might be necessity to prepare client certificate.
+Preparation of certificate is beyond driver, however in case when no client certificate is provided, it will be auto-generated to establish a session.</p>
+</div>
+<div class="paragraph">
+<p>The security modes differ between themselves by strength of applied signature and encryption algorithms.
+Driver is able to communicate with single security mode at the time.
+Additionally, to security policy it is possible to specify <code>messageSecurity</code> option which indicates expected security settings after initial handshake.
+By default, this option is set to <code>SIGN_ENCRYPT</code> which imposes high security settings and full encryption of exchanged message payloads.
+In case when additional diagnostics is needed payloads has to be traced through TRACE level log entries.
+The <code>SIGN</code> mode gives possibility o browse packets in tools such wireshark.</p>
+</div>
+<div class="sect3">
+<h4 id="certificate_verification">Certificate verification</h4>
+<div class="paragraph">
+<p>The OPC UA specification defines its own procedures for certificate validation.
+In order to simplify implementation by default server certificate validation is relaxed.
+Unless explicitly disabled through configuration of <code>trustStoreFile</code> all server certificates will be accepted without validation.</p>
+</div>
+<div class="paragraph">
+<p>In case when secure communication is enabled the <code>trustStoreFile</code> option might be used to point certificates which client should accept.
+The acceptance rely on regular TLS checks (expiry date, certificate path etc.), does not validate OPC UA specific parts such as application URI.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="negotiation_procedure">Negotiation procedure</h4>
+<div class="paragraph">
+<p>Depending on settings driver might or might not attempt to discover endpoints from remote server.
+In case when <code>discovery</code> option is set to <code>true</code> driver will look up server certificate through connection attempt.
+The discovery option also enables checks of server endpoints for matching security settings.</p>
+</div>
+<div class="paragraph">
+<p>Once initial discovery is completed and driver finds endpoint matching its security settings it will launch second connection attempt which will switch to configured security mode.</p>
+</div>
+<div class="paragraph">
+<p>Each connection attempt made by driver attempt to use limits described in table above.
+Role of these options is declaration of values accepted and expected by client.
+Once server returns its limits (<code>Acknowledge</code> for supplied <code>Hello</code> call) driver picks values from these.
+The only one note is that driver takes minimum of local receive and remote send buffer size.
+It does same with local send and remote receive buffer.</p>
+</div>
+<div class="paragraph">
+<p>Usual values of <code>sendBufferSize</code> and <code>receiveBufferSize</code> PLC devices remain at 8196 bytes.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Due to lack of complete implementation of negotiation and chunking logic the OPC UA driver prior Apache PLC4X 0.11 release could supply calls exceeding server limits.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect2">
