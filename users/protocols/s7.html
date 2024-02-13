@@ -86,13 +86,22 @@
                                 
                                                                     
                                                                 <li class="nav-item">
-                            <a href="../../users/gettingstarted.html" class="nav-link">Getting Started</a>
+                            <a href="../../users/getting-started/index.html" class="nav-link">Getting Started</a>
                                     <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4c.html" class="nav-link">C</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4cs.html" class="nav-link">C#</a>
+                            </li>
                                             <li class="nav-item">
                             <a href="../../users/getting-started/plc4go.html" class="nav-link">Go</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4py.html" class="nav-link">Python</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/getting-started/using-snapshots.html" class="nav-link">Using SNAPSHOTS</a>
@@ -122,10 +131,16 @@
                             <a href="../../users/protocols/ads.html" class="nav-link">ADS/AMS</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/protocols/bacnetip.html" class="nav-link">BACnet/IP</a>
+                            <a href="../../users/protocols/bacnet.html" class="nav-link">BACnet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/c-bus.html" class="nav-link">C-Bus</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/canopen.html" class="nav-link">CANopen</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ctrlx.html" class="nav-link">CtrlX</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/deltav.html" class="nav-link">DeltaV</a>
@@ -134,10 +149,16 @@
                             <a href="../../users/protocols/df1.html" class="nav-link">DF1</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/protocols/ethernet-ip.html" class="nav-link">EtherNet/IP</a>
+                            <a href="../../users/protocols/eip.html" class="nav-link">EtherNet/IP</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/firmata.html" class="nav-link">Firmata</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/genericcan.html" class="nav-link">Generic CAN</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/iec-60870.html" class="nav-link">IEC-60870</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
@@ -146,10 +167,13 @@
                             <a href="../../users/protocols/logix.html" class="nav-link">Logix</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/protocols/modbus.html" class="nav-link">Modbus</a>
+                            <a href="../../users/protocols/modbus.html" class="nav-link">Modbus (TCP/RTU/ASCII)</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/protocols/opc-ua.html" class="nav-link">OPC UA</a>
+                            <a href="../../users/protocols/opcua.html" class="nav-link">OPC UA</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/open-protocol.html" class="nav-link">Open-Protocol (Torque-Tools)</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/plc4x.html" class="nav-link">PLC4X (Proxy)</a>
@@ -444,8 +468,295 @@ In the following, reference will be made to the Java-based driver, which impleme
 <div class="paragraph">
 <p>The SCHEMA and DOMAINE NAME are almost standard for any URL and do not require further explanation. The PARAMETERS that define the behavior of the driver are defined in the following table.</p>
 </div>
-<div class="sect4">
-<h5 id="connection_string_parametes_for_s7_driver">Connection string parametes for S7 driver</h5>
+</div>
+</div>
+<div class="sect2">
+<h3 id="connection_string_options">Connection String Options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 33.3336%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Default Value</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Required</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p>Siemens S7 (Basic)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>s7</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-s7&lt;/artifactId&gt;
+  &lt;version&gt;{current-last-released-version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>tcp</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supported Transports</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>tcp</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-rack</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Rack value for the client (PLC4X device).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-slot</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Slot value for the client (PLC4X device).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-tsap</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local Transport Service Access Point.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-rack</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Rack value for the remote main CPU (PLC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-slot</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Slot value for the remote main CPU (PLC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-rack2</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Rack value for the remote secondary CPU (PLC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-slot2</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Slot value for the remote secondary CPU (PLC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-tsap</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Remote Transport Service Access Point.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pdu-size</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1024</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum size of a data-packet sent to and received from the remote PLC. During the connection process both parties will negotiate a maximum size both parties can work with and is equal or smaller than the given value is used. The driver will automatically split up large requests to not exceed this value in a request or expected response.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>max-amq-caller</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>8</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum number of unconfirmed requests the PLC will accept in parallel before discarding with errors. This parameter also will be negotiated during the connection process and the maximum both parties can work with and is equal or smaller than the given value is used. The driver will automatically take care not exceeding this value while processing requests. Too many requests can cause a growing queue.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>max-amq-callee</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>8</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum number of unconfirmed responses or requests PLC4X will accept in parallel before discarding with errors. This option is available for completeness and is correctly handled out during the connection process, however it is currently not enforced on PLC4X’s side. So if a PLC would send more messages than agreed upon, these would still be processed.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>controller-type</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>As part of the connection process, usually the PLC4X S7 driver would try to identify the remote device. However some devices seem to have problems with this and hang up or cause other problems. In such a case, providing the controller-type will skip the identification process and hereby avoid this type of problem. Possible values are:/n- S7_300
+- S7_400
+- S7_1200
+- S7-1500
+- LOGO</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>This is the maximum waiting time for reading on the TCP channel. As there is no traffic, it must be assumed that the connection with the interlocutor was lost and it must be restarted. When the channel is closed, the "fail over" is carried out in case of having the secondary channel, or it is expected that it will be restored automatically, which is done every 4 seconds.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ping</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Time for supervision of TCP channels. If the channel is not active, a safe stop of the EventLoop must be performed, to ensure that no additional tasks are created.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ping-time</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If your application requires sampling times greater than the set "read-timeout" time, it is important that the PING option is activated, this will prevent the TCP channel from being closed unnecessarily.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>retry-time</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Time value in seconds at which the execution of the PING will be scheduled. Generally set by developer experience, but generally should be the same as (read-timeout / 2).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Transport config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">- <code>tcp</code></p></td>
+</tr>
+</tbody>
+</table>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 22.2222%;"/>
@@ -460,46 +771,6 @@ In the following, reference will be made to the Java-based driver, which impleme
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>s7</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p>Siemens S7 Protocol</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="listingblock">
-<div class="content">
-<pre>&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
-  &lt;artifactId&gt;plc4j-driver-s7&lt;/artifactId&gt;
-  &lt;version&gt;{current-last-released-version}&lt;/version&gt;
-&lt;/dependency&gt;</pre>
-</div>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport:</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p> <code>tcp</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compatible Transports:</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><code>tcp</code> (Default Port: 102)</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
 </tr>
@@ -521,203 +792,8 @@ In the following, reference will be made to the Java-based driver, which impleme
 <p>Only supported with <code>tcp</code> transport.</p>
 </div></div></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Options</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>local-rack</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>Rack</code> value for the client (PLC4X device). Defaults to 1.
-Default value: 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>local-slot</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>Slot</code> value for the client (PLC4X device). Defaults to 1.
-Default value: 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>local-tsap</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>tsap</code> .
-Default value: 0</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>remote-rack</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>Rack</code> value for the remote main CPU (PLC). Defaults to 0.
-Default value: 0</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>remote-slot</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>Slot</code> value for the remote main CPU (PLC). Defaults to 0.
-Default value: 0</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>remote-rack2</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>Rack</code> value for the remote secondary CPU (PLC). Defaults to 0.
-Default value: 0</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>remote-slot2</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>Slot</code> value for the remote secondary CPU (PLC). Defaults to 0.
-Default value: 0</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>remote-tsap</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>tsap</code> .
-Default value: 0</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>pdu-size</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Maximum size of a data-packet sent to and received from the remote PLC.
-During the connection process both parties will negotiate a maximum size both parties can work with and is equal or smaller than the given value is used.
-The driver will automatically split up large requests to not exceed this value in a request or expected response.
-Default value: 1024 bytes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>max-amq-caller</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Maximum number of unconfirmed requests the PLC will accept in parallel before discarding with errors.
-This parameter also will be negotiated during the connection process and the maximum both parties can work with and is equal or smaller than the given value is used.
-The driver will automatically take care not exceeding this value while processing requests. Too many requests can cause a growing queue.
-Default value: 8</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>max-amq-callee</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Maximum number of unconfirmed responses or requests PLC4X will accept in parallel before discarding with errors.
-This option is available for completeness and is correctly handled out during the connection process, however it is currently not enforced on PLC4X&#8217;s side.
-So if a PLC would send more messages than agreed upon, these would still be processed.
-Default value: 8</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>controller-type</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>As part of the connection process, usually the PLC4X S7 driver would try to identify the remote device.
-However some devices seem to have problems with this and hang up or cause other problems.
-In such a case, providing the <code>controller-type</code> will skip the identification process and hereby avoid this type of problem.
-Possible values are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>S7_300</code></p>
-</li>
-<li>
-<p><code>S7_400</code></p>
-</li>
-<li>
-<p><code>S7_1200</code></p>
-</li>
-<li>
-<p><code>S7_1500</code></p>
-</li>
-<li>
-<p><code>LOGO</code></p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>read-timeout</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>This is the maximum waiting time for reading on the TCP channel.
-As there is no traffic, it must be assumed that the connection with the interlocutor was lost and it must be restarted.
-When the channel is closed, the "fail over" is carried out in case of having the secondary channel, or it is expected that it will be restored automatically, which is done every 4 seconds.
-Default value: 8 seconds.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>retry-time</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time for supervision of TCP channels. If the channel is not active, a safe stop of the EventLoop must be performed, to ensure that no additional tasks are created.
-Default value: 4 seconds</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>ping</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>If your application requires sampling times greater than the set "read-timeout" time, it is important that the PING option is activated, this will prevent the TCP channel from being closed unnecessarily.
-Default value: false</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>ping-time</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time value in seconds at which the execution of the PING will be scheduled.
-Generally set by developer experience, but generally should be the same as (read-timeout / 2).
-Default value: -1 seconds</p>
-</div></div></td>
-</tr>
 </tbody>
 </table>
-</div>
-</div>
 <div class="sect3">
 <h4 id="two">TWO</h4>
 <div class="paragraph">

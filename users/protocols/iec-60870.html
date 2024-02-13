@@ -146,7 +146,7 @@
                             <a href="../../users/protocols/deltav.html" class="nav-link">DeltaV</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">DF1</strong>
+                            <a href="../../users/protocols/df1.html" class="nav-link">DF1</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/eip.html" class="nav-link">EtherNet/IP</a>
@@ -158,7 +158,7 @@
                             <a href="../../users/protocols/genericcan.html" class="nav-link">Generic CAN</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/protocols/iec-60870.html" class="nav-link">IEC-60870</a>
+                            <strong class="nav-link">IEC-60870</strong>
                             </li>
                                             <li class="nav-item">
                             <a href="../../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
@@ -320,9 +320,99 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="df1">DF1</h2>
+<h2 id="iec_60870">IEC-60870</h2>
 <div class="sectionbody">
-
+<div class="sect2">
+<h3 id="connection_string_options">Connection String Options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 33.3336%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Default Value</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Required</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p>IEC 60870-5-104</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>iec-60870-5-104</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-iec-60870&lt;/artifactId&gt;
+  &lt;version&gt;{current-last-released-version}&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>tcp</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supported Transports</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>tcp</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>4000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Default timeout for all types of requests.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Transport config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">- <code>tcp</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
         </main>

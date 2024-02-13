@@ -86,13 +86,22 @@
                                 
                                                                     
                                                                 <li class="nav-item">
-                            <a href="../users/gettingstarted.html" class="nav-link">Getting Started</a>
+                            <a href="../users/getting-started/index.html" class="nav-link">Getting Started</a>
                                     <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../users/getting-started/plc4c.html" class="nav-link">C</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../users/getting-started/plc4cs.html" class="nav-link">C#</a>
+                            </li>
                                             <li class="nav-item">
                             <a href="../users/getting-started/plc4go.html" class="nav-link">Go</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../users/getting-started/plc4j.html" class="nav-link">Java</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../users/getting-started/plc4py.html" class="nav-link">Python</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../users/getting-started/using-snapshots.html" class="nav-link">Using SNAPSHOTS</a>
@@ -122,10 +131,16 @@
                             <a href="../users/protocols/ads.html" class="nav-link">ADS/AMS</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../users/protocols/bacnetip.html" class="nav-link">BACnet/IP</a>
+                            <a href="../users/protocols/bacnet.html" class="nav-link">BACnet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../users/protocols/c-bus.html" class="nav-link">C-Bus</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../users/protocols/canopen.html" class="nav-link">CANopen</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../users/protocols/ctrlx.html" class="nav-link">CtrlX</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../users/protocols/deltav.html" class="nav-link">DeltaV</a>
@@ -134,10 +149,16 @@
                             <a href="../users/protocols/df1.html" class="nav-link">DF1</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../users/protocols/ethernet-ip.html" class="nav-link">EtherNet/IP</a>
+                            <a href="../users/protocols/eip.html" class="nav-link">EtherNet/IP</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../users/protocols/firmata.html" class="nav-link">Firmata</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../users/protocols/genericcan.html" class="nav-link">Generic CAN</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../users/protocols/iec-60870.html" class="nav-link">IEC-60870</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
@@ -146,10 +167,13 @@
                             <a href="../users/protocols/logix.html" class="nav-link">Logix</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../users/protocols/modbus.html" class="nav-link">Modbus</a>
+                            <a href="../users/protocols/modbus.html" class="nav-link">Modbus (TCP/RTU/ASCII)</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../users/protocols/opc-ua.html" class="nav-link">OPC UA</a>
+                            <a href="../users/protocols/opcua.html" class="nav-link">OPC UA</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../users/protocols/open-protocol.html" class="nav-link">Open-Protocol (Torque-Tools)</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../users/protocols/plc4x.html" class="nav-link">PLC4X (Proxy)</a>
@@ -308,10 +332,13 @@
 <p>Apache PLC4X allows you to communicate directly with your industrial Hardware, without having to retrofit it.</p>
 </div>
 <div class="paragraph">
-<p>This is possible, as PLC4X implements drivers for the most common industrial communication protocols and uses these to access industrial hardware using a shared API.</p>
+<p>This is possible, as PLC4X implements the protocols for the most common industrial communication protocols and uses these to communicate with the various types of devices. The one thing that separates PLC4X from most other, mostly commercial drivers, is that we don&#8217;t try to implement each protocol that it would be a certifiable protocol-stack, but concentrate on making a core set of operations available the identical way over all drivers.</p>
 </div>
 <div class="paragraph">
-<p>Currently we support the following protocols:</p>
+<p>This allows users to develop software mostly independent of the actual type of hardware used.</p>
+</div>
+<div class="paragraph">
+<p>Currently, we support the following protocols:</p>
 </div>
 <div id="protocolCarousel" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -502,6 +529,88 @@
 <br/>
 <br/>
 <div class="paragraph">
+<p>Another speciality, which is why it&#8217;s called PLC4 <strong>X</strong> and not PLC4 <strong>J</strong>, is that we generally try to make our drivers available in various programming languages. In contrast to other projects, we don&#8217;t do this by wrapping C-type libraries with stubs for various languages, we generate most of our code and are hereby able to build implementation native to the language being used, which lets us take full advantage of the corresponding programming language features and concepts.</p>
+</div>
+<div id="protocolCarousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="col-md-12 col-lg-4">
+        <div class="card h-100 p-5 justify-content-center"
+             onclick="location.href='getting-started/plc4c.adoc';" style="cursor:pointer;">
+          <div class="d-flex align-items-center justify-content-center h-100">
+            <img src="images/languages/c_logo.png" alt="Card image cap">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><b>C</b></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item active">
+      <div class="col-md-12 col-lg-4">
+        <div class="card h-100 p-5 justify-content-center"
+             onclick="location.href='getting-started/plc4cs.adoc';" style="cursor:pointer;">
+          <div class="d-flex align-items-center justify-content-center h-100">
+            <img src="images/languages/cs_logo.png" alt="Card image cap">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><b>C#</b></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item active">
+      <div class="col-md-12 col-lg-4">
+        <div class="card h-100 p-5 justify-content-center"
+             onclick="location.href='getting-started/plc4go.adoc';" style="cursor:pointer;">
+          <div class="d-flex align-items-center justify-content-center h-100">
+            <img src="images/languages/go_logo.png" alt="Card image cap">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><b>Go</b></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item active">
+      <div class="col-md-12 col-lg-4">
+        <div class="card h-100 p-5 justify-content-center"
+             onclick="location.href='getting-started/plc4j.adoc';" style="cursor:pointer;">
+          <div class="d-flex align-items-center justify-content-center h-100">
+            <img src="images/languages/java_logo.png" alt="Card image cap">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><b>Java</b></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item active">
+      <div class="col-md-12 col-lg-4">
+        <div class="card h-100 p-5 justify-content-center"
+             onclick="location.href='getting-started/plc4py.adoc';" style="cursor:pointer;">
+          <div class="d-flex align-items-center justify-content-center h-100">
+            <img src="images/languages/python_logo.png" alt="Card image cap">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><b>Python</b></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#protocolCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#protocolCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<br/>
+<br/>
+<div class="paragraph">
 <p>Besides providing access to devices using one of above protocols, Apache PLC4X also ships with integration modules for the following tools and frameworks.</p>
 </div>
                     <div id="integrationCarousel" class="carousel slide" data-ride="carousel">
@@ -528,19 +637,6 @@
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title"><b>Apache Camel™</b></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-md-12 col-lg-4">
-                                    <div class="card h-100 p-5 justify-content-center"
-                                         onclick="location.href='integrations/apache-edgent.html';" style="cursor:pointer;">
-                                        <div class="d-flex align-items-center justify-content-center h-100">
-                                            <img src="../images/integrations/apache_edgent_logo.png" alt="Card image cap">
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title"><b>Apache Edgent™ (retired)</b></h5>
                                         </div>
                                     </div>
                                 </div>
@@ -612,6 +708,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="carousel-item">
+                                <div class="col-md-12 col-lg-4">
+                                    <div class="card h-100 p-5 justify-content-center"
+                                         onclick="location.href='https://hop.apache.org';"
+                                         style="cursor:pointer;">
+                                        <div class="d-flex align-items-center justify-content-center h-100">
+                                            <img src="images/integrations/apache_hop_logo.png" alt="Card image cap">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><b>Apache Hop™</b></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <a class="carousel-control-prev" href="#integrationCarousel" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -630,7 +740,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p><a href="tools/connection-pool.html">Connection Pool</a> (Connection Pool for PLC connections)</p>
+<p><a href="tools/connection-cache.html">Connection Cache</a> (Connection Cache for PLC connections)</p>
 </li>
 <li>
 <p><a href="tools/opm.html">Object PLC Mapping (OPM)</a> (Object PLC Mapping - Like JPA for PLC data)</p>
@@ -639,7 +749,7 @@
 <p><a href="tools/scraper.html">Scraper</a> (Util for automating fetching PLC data using a variety of triggers)</p>
 </li>
 <li>
-<p><a href="tools/testing.html">Testing-Utils</a> (Want to build/test an application without having a PLC &#8230;&#8203; this is the tool for you)</p>
+<p><a href="tools/testing.html">Testing-Utils</a> (Want to build/test an application without having a PLC? &#8230;&#8203; this is the tool for you)</p>
 </li>
 </ul>
 </div>
