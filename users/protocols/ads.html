@@ -416,25 +416,16 @@ Source <a href="https://infosys.beckhoff.com/english.php?content=../content/1033
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">``</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>STRUCT</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>target-ams-net-id</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>STRUCT</p>
+<p>STRING</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>required</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>AMS-Net-Id of the target.</p>
+<p>AMS-Net-Id of the target. An AMS-Net-Id has the regular format of an IPv4 IP-Address, however with 6 segments instead of 4.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -453,14 +444,14 @@ Source <a href="https://infosys.beckhoff.com/english.php?content=../content/1033
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>source-ams-net-id</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>STRUCT</p>
+<p>STRING</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>required</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>AMS-Net-Id of the source.</p>
+<p>AMS-Net-Id of the source. An AMS-Net-Id has the regular format of an IPv4 IP-Address, however with 6 segments instead of 4.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -507,6 +498,45 @@ Source <a href="https://infosys.beckhoff.com/english.php?content=../content/1033
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">- <code>tcp</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.keep-alive</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should keep-alive packets be sent?</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should packets be sent instantly or should we give the OS some time to aggregate data.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.default-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout after which a connection will be treated as disconnected.</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
