@@ -419,7 +419,7 @@ So if a protocol doesn&#8217;t support subscription based communication it is ou
 <div class="listingblock">
 <div class="content">
 <pre>// Check if this connection support reading of data.
-if (!plcConnection.getMetadata().canRead()) {
+if (!plcConnection.getMetadata().isReadSupported()) {
   logger.error("This connection doesn't support reading.");
   return;
 }</pre>
@@ -572,7 +572,7 @@ In order to avoid causing this exception to be thrown, however there are <code>i
 <div class="listingblock">
 <div class="content">
 <pre>// Check if this connection support writing of data.
-if (!plcConnection.getMetadata().canWrite()) {
+if (!plcConnection.getMetadata().isWriteSupported()) {
   logger.error("This connection doesn't support writing.");
   return;
 }</pre>
@@ -640,7 +640,7 @@ asyncResponse.whenComplete((response, throwable) -&gt; {
 <div class="listingblock">
 <div class="content">
 <pre>// Check if this connection support subscribing to data.
-if (!plcConnection.getMetadata().canSubscribe()) {
+if (!plcConnection.getMetadata().isSubscribeSupported()) {
     logger.error("This connection doesn't support subscribing.");
     return;
 }</pre>
