@@ -1,0 +1,864 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>PLC4X &#x2013; [Untitled]</title>
+    <script src="../../../js/jquery.slim.min.js" type="text/javascript"></script>
+    <!--script src="../../../js/popper.min.js" type="javascript"></script-->
+    <script src="../../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- The tooling for adding images and links to Apache events -->
+    <script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../../../css/all.min.css" type="text/css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css" type="text/css"/>
+    <!-- Some Maven Site defaults -->
+    <link rel="stylesheet" href="../../../css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="../../../css/maven-theme.css" type="text/css"/>
+    <!-- The PLC4X version of a bootstrap theme -->
+    <link rel="stylesheet" href="../../../css/themes/plc4x.css" type="text/css" id="pagestyle"/>
+    <!-- A custom style for printing content -->
+    <link rel="stylesheet" href="../../../css/print.css" type="text/css" media="print"/>
+
+            <meta http-equiv="Content-Language" content="en"/>
+            
+</head>
+<body class="composite">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center border-bottom">
+    <!--a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a-->
+    <a href="https://plc4x.apache.org/" id="bannerLeft"><img src="../../../images/apache_plc4x_logo_small.png"  alt="Apache PLC4X"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+                                                                                <li class="nav-item">
+                                    <a class="nav-link" href="../../../users/index.html">Users</a>
+                </li>
+                                            <li class="nav-item active">
+                                    <a class="nav-link" href="../../../developers/index.html">Developers</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../../apache/index.html">Apache</a>
+                </li>
+                    </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item row valign-middle">
+                <a class="acevent" data-format="wide" data-mode="light" data-event="random" style="width:240px;height:60px;"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row h-100">
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/issues.html" class="nav-link">Bug & Issue Tracker</a>
+                            </li>
+                                
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/index.html" class="nav-link">Section Home</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/preparing/index.html" class="nav-link">Preparing your Computer</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/preparing/linux.html" class="nav-link">Linux</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/preparing/macos.html" class="nav-link">Mac OS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/preparing/windows.html" class="nav-link">Windows</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/building.html" class="nav-link">Building</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/contributing.html" class="nav-link">Contributing</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/tutorials/index.html" class="nav-link">Tutorials</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/tutorials/writing-driver.html" class="nav-link">Writing Drivers</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/tutorials/testing-serializers-and-parsers.html" class="nav-link">Testing Drivers</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/code-gen/index.html" class="nav-link">Code Generation</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <strong class="nav-link">Protocol: MSpec Format</strong>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/code-gen/language/freemarker.html" class="nav-link">Language: Apache Freemarker</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/code-gen/protocol/df1.html" class="nav-link">Example: DF1 MSpec</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/protocols/index.html" class="nav-link">Protocols</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/protocols/ads/protocol.html" class="nav-link">ADS/AMS</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/infrastructure/index.html" class="nav-link">Infrastructure</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/ci.html" class="nav-link">Continuous Integration</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/issues.html" class="nav-link">Bug & Issue Tracker</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/sonar.html" class="nav-link">Code Analysis</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/wiki.html" class="nav-link">Wiki</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/vm.html" class="nav-link">Build VM</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/website.html" class="nav-link">Website</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/vpn.html" class="nav-link">IoT VPN</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/release/index.html" class="nav-link">Releasing</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/release/release.html" class="nav-link">Releasing</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/release/validation.html" class="nav-link">Validating</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/release/build-tools.html" class="nav-link">Releasing Build-Tools</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/tools.html" class="nav-link">Tools</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/team.html" class="nav-link">Team</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/decisions.html" class="nav-link">Decision Making</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/maturity.html" class="nav-link">Maturity</a>
+                            </li>
+                                                    
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                                    </ul>
+        </div>
+        </nav>
+                                            <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
+            <div class="sect1">
+<h2 id="the_mspec_format">The MSpec format</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>MSpec</code> format (Message Specification) was a result of a brainstorming session after evaluating a lot of other options.</p>
+</div>
+<div class="paragraph">
+<p>We simply sat down and started to write some imaginary format (<code>imaginary</code> was even the initial Name we used) and created parses for this afterwards and fine-tuned spec and parsers as part of the process of implementing first protocols and language templates.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s a text-based format.</p>
+</div>
+<div class="paragraph">
+<p>At the root level of these specs are a set of <code>type</code>, <code>discriminatedType</code>, <code>dataIo</code> and <code>enum</code> blocks.</p>
+</div>
+<div class="paragraph">
+<p><code>type</code> elements are objects who&#8217;s content is independent of the input.</p>
+</div>
+<div class="paragraph">
+<p>An example would be the <code>TPKTPacket</code> of the S7 format:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[type TPKTPacket
+    [const    uint 8     protocolId 0x03]
+    [reserved uint 8     '0x00']
+    [implicit uint 16    len        'payload.lengthInBytes + 4']
+    [field    COTPPacket 'payload']
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>discriminatedType</code> type, in contrast, is an object who&#8217;s content and structure is influenced by the input.</p>
+</div>
+<div class="paragraph">
+<p>Every discriminated type can contain an arbitrary number of <code>discriminator</code> fields and exactly one <code>typeSwitch</code> element.</p>
+</div>
+<div class="paragraph">
+<p>For example part of the spec for the S7 format looks like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[discriminatedType S7Message
+    [const         uint 8  protocolId      0x32]
+    [discriminator uint 8  messageType]
+    [reserved      uint 16 '0x0000']
+    [simple        uint 16 tpduReference]
+    [implicit      uint 16 parameterLength 'parameter.lengthInBytes']
+    [implicit      uint 16 payloadLength   'payload.lengthInBytes']
+    [typeSwitch 'messageType'
+        ['0x01' S7MessageRequest
+        ]
+        ['0x03' S7MessageResponse
+            [simple uint 8 errorClass]
+            [simple uint 8 errorCode ]
+        ]
+        ['0x07' S7MessageUserData
+        ]
+    ]
+    [simple S7Parameter('messageType')            parameter]
+    [simple S7Payload('messageType', 'parameter') payload  ]
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A types start is declared by an opening square bracket <code>[</code> and ended with a closing one <code>]</code>.</p>
+</div>
+<div class="paragraph">
+<p>Also, to both provide a name as first argument.</p>
+</div>
+<div class="paragraph">
+<p>Every type definition contains a list of fields that can have different types.</p>
+</div>
+<div class="paragraph">
+<p>The list of available types are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>abstract: used in the parent type declaration do declare a field that has to be defined with the identical type in all sub-types (reserved for <code>discriminatedType</code>).</p>
+</li>
+<li>
+<p>array: array of simple or complex typed objects.</p>
+</li>
+<li>
+<p>checksum: used for calculating and verifying checksum values.</p>
+</li>
+<li>
+<p>const: expects a given value and causes a hard exception if the value doesn&#8217;t match.</p>
+</li>
+<li>
+<p>discriminator: special type of simple typed field which is used to determine the concrete type of object (reserved for <code>discriminatedType</code>).</p>
+</li>
+<li>
+<p>enum: special form of field, used if an enum types property is to be used instead of it&#8217;s primary value.</p>
+</li>
+<li>
+<p>implicit: a field required for parsing, but is usually defined though other data, so it&#8217;s not stored in the object, but calculated on serialization.</p>
+</li>
+<li>
+<p>assert: generally similar to <code>constant</code> fields, however do they throw <code>AssertionExceptions</code> instead of hard <code>ParseExceptions</code>. They are used in combination with optional fields.</p>
+</li>
+<li>
+<p>manualArray: like an array field, however the logic for serializing, parsing, number of elements and size have to be provided manually.</p>
+</li>
+<li>
+<p>manual: simple field, where the logic for parsing, serializing and size have to be provided manually.</p>
+</li>
+<li>
+<p>optional: simple or complex typed object, that is only present if an optional condition expression evaluates to <code>true</code> and no <code>AssertionException</code> is thrown when parsing the referenced type.</p>
+</li>
+<li>
+<p>padding: field used to add padding data to make datastructures aligned.</p>
+</li>
+<li>
+<p>reserved: expects a given value, but only warns if condition is not meet.</p>
+</li>
+<li>
+<p>simple: simple or complex typed object.</p>
+</li>
+<li>
+<p>typeSwitch: not a real field, but indicates the existence of sub-types, which are declared inline (reserved for <code>discriminatedType</code>).</p>
+</li>
+<li>
+<p>unknown: field used to declare parts of a message that still has to be defined. Generally used when reverse-engineering a protocol. Messages with <code>unknown</code> fields can only be parsed and not serialized.</p>
+</li>
+<li>
+<p>virtual: generates a field in the message, that is generally only used for simplification. It&#8217;s not used for parsing or serializing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The full syntax and explanations of these type follow in the following chapters.</p>
+</div>
+<div class="paragraph">
+<p>Another thing we have to explain are how types are specified.</p>
+</div>
+<div class="paragraph">
+<p>In general, we distinguish between two types of types used in field definitions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>simple types</p>
+</li>
+<li>
+<p>complex types</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="simple_types">Simple Types</h3>
+<div class="paragraph">
+<p>Simple types are usually raw data the format is:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{base-type} {size}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The base types available are currently:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>bit</strong>: Simple boolean value or bit.</p>
+</li>
+<li>
+<p><strong>byte</strong>: Special value fixed to 8 bit, which defaults to either signed or unsigned depending on the programming language (Java it defaults to signed integer values and in C and Go it defaults to unsigned integers).</p>
+</li>
+<li>
+<p><strong>uint</strong>: The input is treated as unsigned integer value.</p>
+</li>
+<li>
+<p><strong>int</strong>: The input is treated as signed integer value.</p>
+</li>
+<li>
+<p><strong>float</strong>: The input is treated as floating point number.</p>
+</li>
+<li>
+<p><strong>string</strong>: The input is treated as string.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All above types take a <code>size</code> value which provides how many <code>bits</code> should be read.
+All except the <code>bit</code> type, which is fixed to one single bit.</p>
+</div>
+<div class="paragraph">
+<p>So reading an unsigned byte would be: <code>uint 8</code>.</p>
+</div>
+<div class="paragraph">
+<p>There is currently one special type, reserved for string values, whose length is determined by an expression instead of a fixed number of bits. It is considered a variable length string:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>vstring</strong>: The input is treated as a variable length string and requires an expression tp provide the number of bits to read.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="complex_types">Complex Types</h3>
+<div class="paragraph">
+<p>In contrast to simple types, complex type reference other complex types (Root elements of the spec document).</p>
+</div>
+<div class="paragraph">
+<p>How the parser should interpret them is defined in the referenced types definition.</p>
+</div>
+<div class="paragraph">
+<p>In the example above, for example the <code>S7Parameter</code> is defined in another part of the spec.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="field_types_and_their_syntax">Field Types and their Syntax</h3>
+<div class="sect3">
+<h4 id="array_field">array Field</h4>
+<div class="paragraph">
+<p>An <code>array</code> field is exactly what you expect.
+It generates an field which is not a single-value element but an array or list of elements.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[array {simple-type} {size} '{name}' {'count', 'length', 'terminated'} '{expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[array {complex-type} '{name}' {'count', 'length', 'terminated'} '{expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Array types can be both simple and complex typed and have a name.
+An array field must specify the way it&#8217;s length is determined as well as an expression defining it&#8217;s length.
+Possible values are:
+- <code>count</code>: This means that exactly the number of elements are parsed as the <code>expression</code> specifies.
+- <code>length</code>: In this case a given number of bytes are being read. So if an element has been parsed and there are still bytes left, another element is parsed.
+- <code>terminated</code>: In this case the parser will continue reading elements until it encounters a termination sequence.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="checksum_field">checksum Field</h4>
+<div class="paragraph">
+<p>A checksum field can only operate on simple types.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[checksum {simple-type} {size} '{name}' '{checksum-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing a given simple type is parsed and then the result is compared to the value the <code>checksum-expression</code> provides.
+If they don&#8217;t match an exception is thrown.</p>
+</div>
+<div class="paragraph">
+<p>When serializing, the <code>checksum-expression</code> is evaluated and the result is then output.</p>
+</div>
+<div class="paragraph">
+<p>Note: As quite often a checksum is calculated based on the byte data of a message read up to the checksum, an artificial variable is available in expressions called <code>checksumRawData</code> of type <code>byte[]</code> which contains an array of all the byte data read in the current message element and it&#8217;s sub types in case of a discriminated type.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- implicit field: A checksum field is similar to an implicit field, however the <code>checksum-expression</code> is evaluated are parsing time and throws an exception if the values don&#8217;t match.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="const_field">const Field</h4>
+<div class="paragraph">
+<p>A const field simply reads a given simple type and compares to a given reference value.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[const {simple-type} {size} '{name}' {reference}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing it makes the parser throw an Exception if the parsed value does not match.</p>
+</div>
+<div class="paragraph">
+<p>When serializing is simply outputs the expected constant.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- implicit field: A const field is similar to an implicit field, however it compares the parsed input to the reference value and throws an exception if the values don&#8217;t match.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="discriminator_field">discriminator Field</h4>
+<div class="paragraph">
+<p>Discriminator fields are only used in `discriminatedType`s.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[discriminator {simple-type} {size} '{name}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing a discriminator fields result just in being a locally available variable.</p>
+</div>
+<div class="paragraph">
+<p>When serializing is accesses the discriminated types constants and uses these as output.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- implicit field: A discriminator field is similar to an implicit field, however doesn&#8217;t provide a serialization expression as it uses the discrimination constants of the type it is.
+- discriminated types</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implicit_field">implicit Field</h4>
+<div class="paragraph">
+<p>Implicit types are fields that get their value implicitly from the data they contain.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[implicit {simple-type} {size} '{name}' '{serialization-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing an implicit type is available as a local variable and can be used by other expressions.</p>
+</div>
+<div class="paragraph">
+<p>When serializing the serialization-expression is executed and the resulting value is output.</p>
+</div>
+<div class="paragraph">
+<p>This type of field is generally used for fields that handle numbers of elements or length values as these can be implicitly calculated at serialization time.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="manualarray_field">manualArray Field</h4>
+<div class="literalblock">
+<div class="content">
+<pre>[manualArray {simple-type} {size} '{name}' {'count', 'length', 'terminated'} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[manualArray {complex-type} '{name}' {'count', 'length', 'terminated'} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="manual_field">manual Field</h4>
+<div class="literalblock">
+<div class="content">
+<pre>[manual {simple-type} {size} '{name}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[manual {complex-type} '{name}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="optional_field">optional Field</h4>
+<div class="paragraph">
+<p>An optional field is a type of field that can also be <code>null</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[optional {simple-type} {size} '{name}' '{optional-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[optional {complex-type} '{name}' '{optional-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing the <code>optional-expression</code> is evaluated. If this results in`false` nothing is output, if it evaluates to <code>true</code> it is serialized as a <code>simple</code> field.</p>
+</div>
+<div class="paragraph">
+<p>When serializing, if the field is <code>null</code> nothing is output, if it is not <code>null</code> it is serialized normally.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- simple field: In general <code>optional</code> fields are identical to <code>simple</code> fields except the ability to be <code>null</code> or be skipped.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="padding_field">padding Field</h4>
+<div class="paragraph">
+<p>A padding field allows aligning of data blocks.
+It outputs additional padding data, given amount of times specified by padding expression.
+Padding is added only when result of expression is bigger than zero.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[padding {simple-type} {size} '{pading-value}' '{padding-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing a <code>padding</code> field is just consumed without being made available as property or local variable if the <code>padding-expression</code> evaluates to value greater than zero.
+If it doesn&#8217;t, it is just skipped.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reserved_field">reserved Field</h4>
+<div class="paragraph">
+<p>Reserved fields are very similar to <code>const</code> fields, however they don&#8217;t throw exceptions, but instead log messages if the values don&#8217;t match.</p>
+</div>
+<div class="paragraph">
+<p>The reason for this is that in general reserved fields have the given value until they start to be used.</p>
+</div>
+<div class="paragraph">
+<p>If the field starts to be used this shouldn&#8217;t break existing applications, but it should raise a flag as it might make sense to update the drivers.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[reserved {simple-type} {size} '{name}' '{reference}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing the values is parsed and the result is compared to the reference value.
+If the values don&#8217;t match, a log message is sent.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- <code>const</code> field</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="simple_field">simple Field</h4>
+<div class="paragraph">
+<p>Simple fields are the most common types of fields.
+A <code>simple</code> field directly mapped to a normally typed field.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[simple {simple-type} {size} '{name}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[simple {complex-type} '{name}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing, the given type is parsed (can&#8217;t be <code>null</code>) and saved in the corresponding model instance&#8217;s property field.</p>
+</div>
+<div class="paragraph">
+<p>When serializing it is serialized normally.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="virtual_field">virtual Field</h4>
+<div class="paragraph">
+<p>Virtual fields have no impact on the input or output.
+They simply result in creating artificial get-methods in the generated model classes.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[virtual {simple-type} {size} '{name}' '{value-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[virtual {complex-type} '{name}' '{value-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead of being bound to a property, the return value of a <code>virtual</code> property is created by evaluating the <code>value-expression</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="typeswitch_field">typeSwitch Field</h4>
+<div class="paragraph">
+<p>These types of fields can only occur in discriminated types.</p>
+</div>
+<div class="paragraph">
+<p>A <code>discriminatedType</code> must contain <strong>exactly one</strong> <code>typeSwitch</code> field, as it defines the sub-types.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[typeSwitch '{arument-1}', '{arument-2}', ...
+    ['{argument-1-value-1}' {subtype-1-name}
+        ... Fields ...
+    ]
+    ['{vargument-1-value-2}', '{argument-2-value-1}' {subtype-2-name}
+        ... Fields ...
+    ]
+    ['{vargument-1-value-3}', '{argument-2-value-2}' {subtype-2-name} [uint 8 'existing-attribute-1', uint 16 'existing-attribute-2']
+        ... Fields ...
+    ]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A type switch element must contain a list of at least one argument expression.
+Only the last option can stay empty, which results in a default type.</p>
+</div>
+<div class="paragraph">
+<p>Each sub-type declares a comma-separated list of concrete values.</p>
+</div>
+<div class="paragraph">
+<p>It must contain at most as many elements as arguments are declared for the type switch.</p>
+</div>
+<div class="paragraph">
+<p>The matching type is found during parsing by starting with the first argument.</p>
+</div>
+<div class="paragraph">
+<p>If it matches and there are no more values, the type is found, if more values are provided, they are compared to the other argument values.</p>
+</div>
+<div class="paragraph">
+<p>If no type is found, an exception is thrown.</p>
+</div>
+<div class="paragraph">
+<p>Inside each sub-type can declare fields using a subset of the types (<code>discriminator</code> and <code>typeSwitch</code> can&#8217;t be used here)</p>
+</div>
+<div class="paragraph">
+<p>The third case in above code-snippet also passes a named attribute to the sub-type.
+The name must be identical to any argument or named field parsed before the switchType.
+These arguments are then available for expressions or passing on in the subtypes.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- <code>discriminatedType</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="parameters">Parameters</h4>
+<div class="paragraph">
+<p>Some times it is necessary to pass along additional parameters.</p>
+</div>
+<div class="paragraph">
+<p>If a complex type requires parameters, these are declared in the header of that type.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[discriminatedType S7Payload(uint 8 'messageType', S7Parameter 'parameter')
+    [typeSwitch 'parameter.discriminatorValues[0]', 'messageType'
+        ['0xF0' S7PayloadSetupCommunication]
+        ['0x04','0x01' S7PayloadReadVarRequest]
+        ['0x04','0x03' S7PayloadReadVarResponse
+            [arrayField S7VarPayloadDataItem 'items' count 'CAST(parameter, S7ParameterReadVarResponse).numItems']
+        ]
+        ['0x05','0x01' S7PayloadWriteVarRequest
+            [arrayField S7VarPayloadDataItem 'items' count 'COUNT(CAST(parameter, S7ParameterWriteVarRequest).items)']
+        ]
+        ['0x05','0x03' S7PayloadWriteVarResponse
+            [arrayField S7VarPayloadStatusItem 'items' count 'CAST(parameter, S7ParameterWriteVarResponse).numItems']
+        ]
+        ['0x00','0x07' S7PayloadUserData
+        ]
+    ]
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Therefore wherever a complex type is referenced an additional list of parameters can be passed to the next type.</p>
+</div>
+<div class="paragraph">
+<p>Here comes an example of this in above snippet:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[field S7Payload   'payload'   ['messageType', 'parameter']]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
+            <div class="row justify-content-md-center" style="font-size: 13px">
+                <div class="col col-6 text-center">
+                                    Copyright &#169;      2017&#x2013;2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+All rights reserved.<br/>
+                    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../../js/jquery.slim.min.js"></script>
+<script src="../../../js/popper.min.js"></script>
+<script src="../../../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+</body>
+</html>

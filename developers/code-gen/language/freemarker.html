@@ -1,0 +1,509 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>PLC4X &#x2013; [Untitled]</title>
+    <script src="../../../js/jquery.slim.min.js" type="text/javascript"></script>
+    <!--script src="../../../js/popper.min.js" type="javascript"></script-->
+    <script src="../../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- The tooling for adding images and links to Apache events -->
+    <script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../../../css/all.min.css" type="text/css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css" type="text/css"/>
+    <!-- Some Maven Site defaults -->
+    <link rel="stylesheet" href="../../../css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="../../../css/maven-theme.css" type="text/css"/>
+    <!-- The PLC4X version of a bootstrap theme -->
+    <link rel="stylesheet" href="../../../css/themes/plc4x.css" type="text/css" id="pagestyle"/>
+    <!-- A custom style for printing content -->
+    <link rel="stylesheet" href="../../../css/print.css" type="text/css" media="print"/>
+
+            <meta http-equiv="Content-Language" content="en"/>
+            
+</head>
+<body class="composite">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center border-bottom">
+    <!--a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a-->
+    <a href="https://plc4x.apache.org/" id="bannerLeft"><img src="../../../images/apache_plc4x_logo_small.png"  alt="Apache PLC4X"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+                                                                                <li class="nav-item">
+                                    <a class="nav-link" href="../../../users/index.html">Users</a>
+                </li>
+                                            <li class="nav-item active">
+                                    <a class="nav-link" href="../../../developers/index.html">Developers</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../../apache/index.html">Apache</a>
+                </li>
+                    </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item row valign-middle">
+                <a class="acevent" data-format="wide" data-mode="light" data-event="random" style="width:240px;height:60px;"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row h-100">
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/issues.html" class="nav-link">Bug & Issue Tracker</a>
+                            </li>
+                                
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/index.html" class="nav-link">Section Home</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/preparing/index.html" class="nav-link">Preparing your Computer</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/preparing/linux.html" class="nav-link">Linux</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/preparing/macos.html" class="nav-link">Mac OS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/preparing/windows.html" class="nav-link">Windows</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/building.html" class="nav-link">Building</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/contributing.html" class="nav-link">Contributing</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/tutorials/index.html" class="nav-link">Tutorials</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/tutorials/writing-driver.html" class="nav-link">Writing Drivers</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/tutorials/testing-serializers-and-parsers.html" class="nav-link">Testing Drivers</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/code-gen/index.html" class="nav-link">Code Generation</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/code-gen/protocol/mspec.html" class="nav-link">Protocol: MSpec Format</a>
+                            </li>
+                                            <li class="nav-item">
+                            <strong class="nav-link">Language: Apache Freemarker</strong>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/code-gen/protocol/df1.html" class="nav-link">Example: DF1 MSpec</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/protocols/index.html" class="nav-link">Protocols</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/protocols/ads/protocol.html" class="nav-link">ADS/AMS</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/infrastructure/index.html" class="nav-link">Infrastructure</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/ci.html" class="nav-link">Continuous Integration</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/issues.html" class="nav-link">Bug & Issue Tracker</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/sonar.html" class="nav-link">Code Analysis</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/wiki.html" class="nav-link">Wiki</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/vm.html" class="nav-link">Build VM</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/website.html" class="nav-link">Website</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/infrastructure/vpn.html" class="nav-link">IoT VPN</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/release/index.html" class="nav-link">Releasing</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../../developers/release/release.html" class="nav-link">Releasing</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/release/validation.html" class="nav-link">Validating</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../../developers/release/build-tools.html" class="nav-link">Releasing Build-Tools</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/tools.html" class="nav-link">Tools</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/team.html" class="nav-link">Team</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/decisions.html" class="nav-link">Decision Making</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../../developers/maturity.html" class="nav-link">Maturity</a>
+                            </li>
+                                                    
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                                    </ul>
+        </div>
+        </nav>
+                                            <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
+            <div class="sect1">
+<h2 id="apache_freemarker">Apache Freemarker</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For the Freemarker language output we are using an unmodified version of <a href="https://freemarker.apache.org">Apache Freemarker</a> to generate output.</p>
+</div>
+<div class="paragraph">
+<p>The boilerplate code for providing a PLC4X language module is located in the <code>org.apache.plc4x.plugins:plc4x-code-generation-language-base-freemarker</code> maven module, inside the <code>FreemarkerLanguageOutput</code> class.</p>
+</div>
+<div class="paragraph">
+<p>This class configures a Freemarker context and provides standardized attributes inside this:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>packageName: Java style package name which can be used to create some form of directory structure.</p>
+</li>
+<li>
+<p>typeName: Simple string type name</p>
+</li>
+<li>
+<p>type: <code>ComplexTypeDefinition</code> instance containing all the information for the type that code should be generated for.</p>
+</li>
+<li>
+<p>helper: As some times it is pretty complicated to create all the output in Freemarker, the helper allows to provide code that is used by the template that help with generating output.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A Freemarker-based output module, has to provide a set of <code>Template</code> instances as well as provide a <code>FreemarkerLanguageTemplateHelper</code> instance.</p>
+</div>
+<div class="paragraph">
+<p>In general, we distinguish between these types of templates:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Spec Templates</code> (Global output generated once per driver in total)</p>
+</li>
+<li>
+<p><code>Complex Type Templates</code> (Generates output for a complex type)</p>
+</li>
+<li>
+<p><code>Enum Templates</code> (Generates output for enum types)</p>
+</li>
+<li>
+<p><code>DataIO Templates</code> (Generates output for reading and writing PlcValues, which are our PLC4X form of presenting input and output data to our users)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For each of these, the developer can provide a list of templates, which then can generate multiple files per type (Which is important for languages such as <code>C</code> where for every type we need to generate a <code>Header file (.h)</code> and an <code>Implementation (.c)</code>)</p>
+</div>
+<div class="paragraph">
+<p>What the <code>FreemarkerLanguageOutput</code> then does, is iterate over all types provided by the protocol module, and then iterate over all templates the current language defines.</p>
+</div>
+<div class="paragraph">
+<p>The only convention used in this utility, is that the first line of output a template generates will be treated as the path relative to the base output directory.</p>
+</div>
+<div class="paragraph">
+<p>It will automatically create all needed intermediate directories and generate the rest of the input to the file specified by the first line.</p>
+</div>
+<div class="paragraph">
+<p>If this line is empty, the output is skipped for this type.</p>
+</div>
+<div class="sect2">
+<h3 id="example_java_output">Example <code>Java</code> output</h3>
+<div class="literalblock">
+<div class="content">
+<pre>package org.apache.plc4x.language.java;
+
+import com.google.googlejavaformat.java.Formatter;
+import com.google.googlejavaformat.java.FormatterException;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import org.apache.commons.io.FileUtils;
+import org.apache.plc4x.plugins.codegenerator.protocol.freemarker.FreemarkerLanguageOutput;
+import org.apache.plc4x.plugins.codegenerator.protocol.freemarker.FreemarkerLanguageTemplateHelper;
+import org.apache.plc4x.plugins.codegenerator.types.definitions.TypeDefinition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
+public class JavaLanguageOutput extends FreemarkerLanguageOutput {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JavaLanguageOutput.class);
+
+    private final Formatter formatter = new Formatter();
+
+    @Override
+    public String getName() {
+        return "Java";
+    }
+
+    @Override
+    public Set&lt;String&gt; supportedOptions() {
+        return Collections.singleton("package");
+    }
+
+    @Override
+    public List&lt;String&gt; supportedOutputFlavors() {
+        return Arrays.asList("read-write", "read-only", "passive");
+    }
+
+    @Override
+    protected List&lt;Template&gt; getSpecTemplates(Configuration freemarkerConfiguration) {
+        return Collections.emptyList();
+    }
+
+    @Override
+    protected List&lt;Template&gt; getComplexTypeTemplates(Configuration freemarkerConfiguration) throws IOException {
+        return Arrays.asList(
+            freemarkerConfiguration.getTemplate("templates/java/pojo-template.java.ftlh"),
+            freemarkerConfiguration.getTemplate("templates/java/io-template.java.ftlh"));
+    }
+
+    @Override
+    protected List&lt;Template&gt; getEnumTypeTemplates(Configuration freemarkerConfiguration) throws IOException {
+        return Collections.singletonList(
+            freemarkerConfiguration.getTemplate("templates/java/enum-template.java.ftlh"));
+    }
+
+    @Override
+    protected List&lt;Template&gt; getDataIoTemplates(Configuration freemarkerConfiguration) throws IOException {
+        return Collections.singletonList(
+            freemarkerConfiguration.getTemplate("templates/java/data-io-template.java.ftlh"));
+    }
+
+    @Override
+    protected FreemarkerLanguageTemplateHelper getHelper(TypeDefinition thisType, String protocolName, String flavorName, Map&lt;String, TypeDefinition&gt; types,
+                                                         Map&lt;String, String&gt; options) {
+        return new JavaLanguageTemplateHelper(thisType, protocolName, flavorName, types, options);
+    }
+
+    @Override
+    protected void postProcessTemplateOutput(File outputFile) {
+        try {
+            FileUtils.writeStringToFile(
+                outputFile,
+                formatter.formatSourceAndFixImports(
+                    FileUtils.readFileToString(outputFile, StandardCharsets.UTF_8)
+                ),
+                StandardCharsets.UTF_8
+            );
+        } catch (IOException | FormatterException e) {
+            LOGGER.error("Error formatting {}", outputFile, e);
+        }
+    }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>getName</code> method returns <code>Java</code>, this is what needs to be defined in the <code>plc4x-maven-plugin</code> configuration in the <code>language</code> option in order to select this output format.</p>
+</div>
+<div class="paragraph">
+<p><code>supportedOptions</code> tells the plugin which <code>option</code> tags this code-generation output supports. In case of the <code>Java</code> output, this is only the <code>package</code> option, which defines the package name of the generated output.</p>
+</div>
+<div class="paragraph">
+<p>With <code>supportedOutputFlavors</code> we tell the user, that in general we support the three options: <code>read-write</code>, <code>read-only</code> and <code>passive</code> as valid inputs for the <code>outputFlavor</code> config option of the code-generation plugin.</p>
+</div>
+<div class="paragraph">
+<p>In this case Java doesn&#8217;t require any global files being generated for java, so we simply return an empty collection.</p>
+</div>
+<div class="paragraph">
+<p>For complex types, we currently use two templates (however this will soon be reduced to one). So for every complex type in a protocol definition, the templates: <code>templates/java/pojo-template.java.ftlh</code> and <code>templates/java/io-template.java.ftlh</code> will be executed.</p>
+</div>
+<div class="paragraph">
+<p>In case of enum types, only one template is being used.</p>
+</div>
+<div class="paragraph">
+<p>Same as for data-io.</p>
+</div>
+<div class="paragraph">
+<p>The next important method is the <code>getHelper</code> method, which returns an object, that is passed to the templates with the name <code>helper</code>. As mentioned before, a lot of operations would be too complex to implement in pure Freemarker code, so with these helpers every language can provide a helper utility for handling the complex operations.</p>
+</div>
+<div class="paragraph">
+<p>Here an example for a part of a template for generating Java POJOs:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>${helper.packageName(protocolName, languageName, outputFlavor)?replace(".", "/")}/${type.name}.java
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package ${helper.packageName(protocolName, languageName, outputFlavor)};
+
+... imports ...
+
+// Code generated by code-generation. DO NOT EDIT.
+
+public&lt;#if type.isDiscriminatedParentTypeDefinition()&gt; abstract&lt;/#if&gt; class ${type.name}&lt;#if type.parentType??&gt; extends ${type.parentType.name}&lt;/#if&gt; implements Message {
+
+    ... SNIP ...
+
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So as you can see, the first line will generate the file-path of the to be generated output.</p>
+</div>
+<div class="paragraph">
+<p>As when creating more and more outputs for different languages, we have realized, that a lot of the code needed in the <code>Helper</code> utility repeats, we therefore introduced a so-called <code>BaseFreemarkerLanguageTemplateHelper</code> which contains a lot of stuff, that is important when generating new language output.</p>
+</div>
+</div>
+</div>
+</div>
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
+            <div class="row justify-content-md-center" style="font-size: 13px">
+                <div class="col col-6 text-center">
+                                    Copyright &#169;      2017&#x2013;2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+All rights reserved.<br/>
+                    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../../js/jquery.slim.min.js"></script>
+<script src="../../../js/popper.min.js"></script>
+<script src="../../../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+</body>
+</html>

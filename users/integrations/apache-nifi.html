@@ -1,0 +1,615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>PLC4X &#x2013; [Untitled]</title>
+    <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
+    <!--script src="../../js/popper.min.js" type="javascript"></script-->
+    <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- The tooling for adding images and links to Apache events -->
+    <script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../../css/all.min.css" type="text/css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css"/>
+    <!-- Some Maven Site defaults -->
+    <link rel="stylesheet" href="../../css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/maven-theme.css" type="text/css"/>
+    <!-- The PLC4X version of a bootstrap theme -->
+    <link rel="stylesheet" href="../../css/themes/plc4x.css" type="text/css" id="pagestyle"/>
+    <!-- A custom style for printing content -->
+    <link rel="stylesheet" href="../../css/print.css" type="text/css" media="print"/>
+
+            <meta http-equiv="Content-Language" content="en"/>
+            
+</head>
+<body class="composite">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center border-bottom">
+    <!--a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a-->
+    <a href="https://plc4x.apache.org/" id="bannerLeft"><img src="../../images/apache_plc4x_logo_small.png"  alt="Apache PLC4X"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+                                                                                <li class="nav-item active">
+                                    <a class="nav-link" href="../../users/index.html">Users</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../developers/index.html">Developers</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../apache/index.html">Apache</a>
+                </li>
+                    </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item row valign-middle">
+                <a class="acevent" data-format="wide" data-mode="light" data-event="random" style="width:240px;height:60px;"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row h-100">
+                                            
+                                                                    
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
+                            <a href="../../users/index.html" class="nav-link">Section Home</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/download.html" class="nav-link">Download</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/adopters.html" class="nav-link">Adopters</a>
+                            </li>
+                                
+                                                                    
+                                            
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/commercial-support.html" class="nav-link">Commercial support</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/getting-started/index.html" class="nav-link">Getting Started</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4c.html" class="nav-link">C</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4cs.html" class="nav-link">C#</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4go.html" class="nav-link">Go</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4py.html" class="nav-link">Python</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/using-snapshots.html" class="nav-link">Using SNAPSHOTS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/general-concepts.html" class="nav-link">General Concepts</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/blogs-videos-and-slides.html" class="nav-link">Blogs, Videos and Slides</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/protocols/index.html" class="nav-link">Protocols</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ab-eth.html" class="nav-link">AB-ETH</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ads.html" class="nav-link">ADS/AMS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/bacnet.html" class="nav-link">BACnet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/c-bus.html" class="nav-link">C-Bus</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/canopen.html" class="nav-link">CANopen</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ctrlx.html" class="nav-link">CtrlX</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/deltav.html" class="nav-link">DeltaV</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/df1.html" class="nav-link">DF1</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/eip.html" class="nav-link">EtherNet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/firmata.html" class="nav-link">Firmata</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/genericcan.html" class="nav-link">Generic CAN</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/iec-60870.html" class="nav-link">IEC-60870</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/logix.html" class="nav-link">Logix</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/modbus.html" class="nav-link">Modbus (TCP/RTU/ASCII)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/opcua.html" class="nav-link">OPC UA</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/open-protocol.html" class="nav-link">Open-Protocol (Torque-Tools)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/plc4x.html" class="nav-link">PLC4X (Proxy)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/profinet.html" class="nav-link">PROFINET</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/s7.html" class="nav-link">S7 (Step7)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/simulated.html" class="nav-link">Simulated</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/transports/index.html" class="nav-link">Transports</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/transports/tcp.html" class="nav-link">TCP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/udp.html" class="nav-link">UDP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/serial.html" class="nav-link">Serial</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/socketcan.html" class="nav-link">SocketCAN</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/raw-socket.html" class="nav-link">Raw Socket</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/pcap-replay.html" class="nav-link">PCAP Replay</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/integrations/index.html" class="nav-link">Integrations</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-calcite.html" class="nav-link">Apache Calcite</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-camel.html" class="nav-link">Apache Camel</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-iotdb.html" class="nav-link">Apache IoTDB</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-kafka.html" class="nav-link">Apache Kafka</a>
+                            </li>
+                                            <li class="nav-item">
+                            <strong class="nav-link">Apache NiFi</strong>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-streampipes.html" class="nav-link">Apache StreamPipes</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/eclipse-ditto.html" class="nav-link">Eclipse Ditto</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/eclipse-milo.html" class="nav-link">Eclipse Milo OPC UA Server</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/tools/index.html" class="nav-link">Tools</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/tools/capture-replay.html" class="nav-link">Capture Replay</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/connection-cache.html" class="nav-link">Connection Cache</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/opm.html" class="nav-link">Object PLC Mapping (OPM)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/scraper.html" class="nav-link">Scraper</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/testing.html" class="nav-link">PLC4X without a PLC and Unit Testing</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/industry40.html" class="nav-link">Industry 4.0 with Apache</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/security.html" class="nav-link">Security</a>
+                            </li>
+                                                    
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                                    </ul>
+        </div>
+        </nav>
+                                            <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
+            <div class="sect1">
+<h2 id="apache_nifi">Apache NiFi</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache NiFi allows creating systems that process data around the concept of data-streams.</p>
+</div>
+<div class="paragraph">
+<p>Apache PLC4X provides both <code>Source</code> as well as <code>Sink</code> processors for accessing data in PLCs or writing data to them.</p>
+</div>
+<div class="sect2">
+<h3 id="setting_up_nifi">Setting Up NiFi</h3>
+<div class="paragraph">
+<p>Even if the documentation of NiFi states it works with any Java version above 1.8, this is not quite true.</p>
+</div>
+<div class="paragraph">
+<p>I have found that NiFi only works with Java versions below 11. With <code>Java 1.8</code> you are definitely on the safe-side.</p>
+</div>
+<div class="paragraph">
+<p>When starting with newer versions the start script just terminates after logging a statement that NiFi is now starting.</p>
+</div>
+<div class="paragraph">
+<p>Other than that, I haven&#8217;t encountered any other requirements.</p>
+</div>
+<div class="paragraph">
+<p>As soon as you have started NiFi using the <code>nifi.sh run</code> or <code>run-nifi.bat</code> the Web-UI of NiFi should be available at: <a href="http://localhost:8080/nifi/" class="bare">http://localhost:8080/nifi/</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It might take a few seconds for the Web-UI to show up &#8230;&#8203; so if you&#8217;re getting errors in the browser, give it some time to start.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling_plc4x_processors_in_nifi">Enabling PLC4X Processors in NiFi</h3>
+<div class="paragraph">
+<p>In order to enable <code>Apache PLC4X</code> support in <code>Apache NiFi</code> all you need to do, is to copy our <code>nar</code> archive into the Nifi installations <code>lib</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>You can either build the <code>nar</code> by building PLC4X and using the version in the <code>plc4j/integrations/apache-nifi/nifi-plc4x-nar/target</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>Or you can download a released version from Maven central: <a href="https://search.maven.org/search?q=plc4j-nifi-plc4x-nar" class="bare">https://search.maven.org/search?q=plc4j-nifi-plc4x-nar</a></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/empty-nifi-flow.png" alt="empty nifi flow"/>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using_a_plc4x_source_processor_in_nifi">Using a PLC4X Source Processor in NiFi</h3>
+<div class="paragraph">
+<p>Add a PLC4X Source processor to the canvas, click on the <code>Add processor</code> button and drag it into the canvas.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/add-processor.png" alt="add processor"/>
+</div>
+</div>
+<div class="paragraph">
+<p>A popup will appear in which you are presented the list of all available processors.</p>
+</div>
+<div class="paragraph">
+<p>Enter <code>PLC4X</code> in the search field and select the <code>Plc4xSourceProcessor</code> and click <code>Add</code> (I think you can also double-click on the processor)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/list-of-plc4x-processors.png" alt="list of plc4x processors"/>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you click on a Processor, it&#8217;s a little hard to see it&#8217;s selected as the selection is not highlighted.
+However, you can see a processor is selected as the bottom part shows the name of the selected processor.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As soon as your new processor is added to the canvas you need to configure it. Do this by double clicking on it (Or by right-clicking and selecting <code>Configure</code>)</p>
+</div>
+<div class="paragraph">
+<p>Here you now need to provide a <code>PLC4X connection string</code> and a <code>PLC resource address String</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PLC connection String</code> is just a normal PLC4X connection string. Please consult the documentation on using the different types of supported connections <a href="https://plc4x.apache.org/users/protocols/index.html">Here</a></p>
+</div>
+<div class="paragraph">
+<p>The <code>PLC resource address String</code> is a <code>;</code>-separarated list of <code>name-value-pairs</code>, where each <code>name</code> is assigned a <code>plc4x addrress</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For information on how an address string looks for the type of driver you are using, please check the documentation for the driver you are using <a href="https://plc4x.apache.org/users/protocols/index.html">Here</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>PLC connection String: s7://192.168.23.30
+PLC resource address String: time-value=%DB2:8:TIME;string-value=%DB2:30.0:STRING(10)</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configured-plc4x-source-processor.png" alt="configured plc4x source processor"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Before you save the processor there is one further setting that needs to be set.
+For this please change to the <code>Scheduling</code> tab and set the <code>Run Schedule</code> to let&#8217;s say 1 or 2 seconds.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configure-scheduling.png" alt="configure scheduling"/>
+</div>
+</div>
+<div class="paragraph">
+<p>If we don&#8217;t do this, NiFi will hammer the PLC with requests and in case of my S7 it will simply start denying accepting new connections.</p>
+</div>
+<div class="paragraph">
+<p>It will still say <code>Invalid</code> at the top, but this has nothing to do with your entries, it&#8217;s much more that this processor produces two data-streams: <code>SUCCESS</code> and <code>FAILURE</code>.
+These need to be connected next.</p>
+</div>
+<div class="paragraph">
+<p>After that&#8217;s done, click on <code>Apply</code>.</p>
+</div>
+<div class="paragraph">
+<p>But before we can do that, we need to add something we can connect them to.</p>
+</div>
+<div class="paragraph">
+<p>So we simply add another processor to the canvas: Using a <code>LogMessage</code> processor.
+This simply logs every bit of data to the NiFi log-system.</p>
+</div>
+<div class="paragraph">
+<p>As the <code>LogMessage</code> processor creates a stream of events every time a log message is logged, we need to configure it to auto-terminate that relationship.
+Do this by double-clicking on the processor and selecting the <code>Settings</code> tab.
+Here check the checkbox labeled <code>SUCCESS</code> in the section <code>Automatically Terminate Relationships</code> and then click <code>Apply</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configured-log-processors.png" alt="configured log processors"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can connect both processors.</p>
+</div>
+<div class="paragraph">
+<p>Notice the <code>arrow-icon</code> as soon as the mouse is over the Plc4xSourceProcessor?
+Click on this and start dragging. You notice that you now have a connection which you simply drag onto the log processor.
+As soon as you release the connection there, the two processors are now connected.</p>
+</div>
+<div class="paragraph">
+<p>As soon as you release the mouse, a popup will pop up and allow you to configure the connection. You can generally select which streams you want to connect.</p>
+</div>
+<div class="paragraph">
+<p>In this case we&#8217;ll simply connect the <code>SUCCESS</code> and the <code>FAILURE</code> stream to the log processor.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configuring-connection.png" alt="configuring connection"/>
+</div>
+</div>
+<div class="paragraph">
+<p>As soon as that&#8217;s done, you are finished configuring your flow.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/configured-flow.png" alt="configured flow"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Last thing we now need to do, is to start the processors.
+Currently, they are stopped (You can see it with the red square icon)</p>
+</div>
+<div class="paragraph">
+<p>Do this by right-clicking on both processors and selecting <code>Start</code>.</p>
+</div>
+<div class="paragraph">
+<p>Now you should see an increasing number at the <code>Out</code> of the PLC4X Source and on the <code>In</code> of the Logging Processor.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/integrations/nifi/running-flow.png" alt="running flow"/>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="enabling_debugging">Enabling debugging</h3>
+<div class="paragraph">
+<p>In order to be able to debug the PLC4X, please edit the <code>bin/nifi.sh</code> (On Mac &amp; Linux) and comment in the line:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>BOOTSTRAP_DEBUG_PARAMS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Windows, you would need to manually add:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to the <code>run-nifi.bat</code> files <code>JAVA_ARGS</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you want NiFi so suspend at the start, so you can be sure to captue the entire execution, just change <code>suspend=n</code> to <code>suspend=y</code>.
+This will make NiFi pause till a remote debugging session is connected.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
+            <div class="row justify-content-md-center" style="font-size: 13px">
+                <div class="col col-6 text-center">
+                                    Copyright &#169;      2017&#x2013;2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+All rights reserved.<br/>
+                    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../js/jquery.slim.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,1061 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>PLC4X &#x2013; [Untitled]</title>
+    <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
+    <!--script src="../../js/popper.min.js" type="javascript"></script-->
+    <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- The tooling for adding images and links to Apache events -->
+    <script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../../css/all.min.css" type="text/css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css"/>
+    <!-- Some Maven Site defaults -->
+    <link rel="stylesheet" href="../../css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/maven-theme.css" type="text/css"/>
+    <!-- The PLC4X version of a bootstrap theme -->
+    <link rel="stylesheet" href="../../css/themes/plc4x.css" type="text/css" id="pagestyle"/>
+    <!-- A custom style for printing content -->
+    <link rel="stylesheet" href="../../css/print.css" type="text/css" media="print"/>
+
+            <meta http-equiv="Content-Language" content="en"/>
+            
+</head>
+<body class="composite">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center border-bottom">
+    <!--a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a-->
+    <a href="https://plc4x.apache.org/" id="bannerLeft"><img src="../../images/apache_plc4x_logo_small.png"  alt="Apache PLC4X"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+                                                                                <li class="nav-item active">
+                                    <a class="nav-link" href="../../users/index.html">Users</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../developers/index.html">Developers</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../apache/index.html">Apache</a>
+                </li>
+                    </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item row valign-middle">
+                <a class="acevent" data-format="wide" data-mode="light" data-event="random" style="width:240px;height:60px;"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row h-100">
+                                            
+                                                                    
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
+                            <a href="../../users/index.html" class="nav-link">Section Home</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/download.html" class="nav-link">Download</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/adopters.html" class="nav-link">Adopters</a>
+                            </li>
+                                
+                                                                    
+                                            
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/commercial-support.html" class="nav-link">Commercial support</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/getting-started/index.html" class="nav-link">Getting Started</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4c.html" class="nav-link">C</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4cs.html" class="nav-link">C#</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4go.html" class="nav-link">Go</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4py.html" class="nav-link">Python</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/using-snapshots.html" class="nav-link">Using SNAPSHOTS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/general-concepts.html" class="nav-link">General Concepts</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/blogs-videos-and-slides.html" class="nav-link">Blogs, Videos and Slides</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/protocols/index.html" class="nav-link">Protocols</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ab-eth.html" class="nav-link">AB-ETH</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ads.html" class="nav-link">ADS/AMS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/bacnet.html" class="nav-link">BACnet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/c-bus.html" class="nav-link">C-Bus</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/canopen.html" class="nav-link">CANopen</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ctrlx.html" class="nav-link">CtrlX</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/deltav.html" class="nav-link">DeltaV</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/df1.html" class="nav-link">DF1</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/eip.html" class="nav-link">EtherNet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/firmata.html" class="nav-link">Firmata</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/genericcan.html" class="nav-link">Generic CAN</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/iec-60870.html" class="nav-link">IEC-60870</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/logix.html" class="nav-link">Logix</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/modbus.html" class="nav-link">Modbus (TCP/RTU/ASCII)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <strong class="nav-link">OPC UA</strong>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/open-protocol.html" class="nav-link">Open-Protocol (Torque-Tools)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/plc4x.html" class="nav-link">PLC4X (Proxy)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/profinet.html" class="nav-link">PROFINET</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/s7.html" class="nav-link">S7 (Step7)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/simulated.html" class="nav-link">Simulated</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/transports/index.html" class="nav-link">Transports</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/transports/tcp.html" class="nav-link">TCP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/udp.html" class="nav-link">UDP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/serial.html" class="nav-link">Serial</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/socketcan.html" class="nav-link">SocketCAN</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/raw-socket.html" class="nav-link">Raw Socket</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/pcap-replay.html" class="nav-link">PCAP Replay</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/integrations/index.html" class="nav-link">Integrations</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-calcite.html" class="nav-link">Apache Calcite</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-camel.html" class="nav-link">Apache Camel</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-iotdb.html" class="nav-link">Apache IoTDB</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-kafka.html" class="nav-link">Apache Kafka</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-nifi.html" class="nav-link">Apache NiFi</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-streampipes.html" class="nav-link">Apache StreamPipes</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/eclipse-ditto.html" class="nav-link">Eclipse Ditto</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/eclipse-milo.html" class="nav-link">Eclipse Milo OPC UA Server</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/tools/index.html" class="nav-link">Tools</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/tools/capture-replay.html" class="nav-link">Capture Replay</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/connection-cache.html" class="nav-link">Connection Cache</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/opm.html" class="nav-link">Object PLC Mapping (OPM)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/scraper.html" class="nav-link">Scraper</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/testing.html" class="nav-link">PLC4X without a PLC and Unit Testing</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/industry40.html" class="nav-link">Industry 4.0 with Apache</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/security.html" class="nav-link">Security</a>
+                            </li>
+                                                    
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                                    </ul>
+        </div>
+        </nav>
+                                            <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
+            <div class="sect1">
+<h2 id="opc_ua">OPC UA</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="connection_string_options">Connection String Options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 33.3336%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Default Value</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Required</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p>Opcua</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>opcua</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-opcua&lt;/artifactId&gt;
+  &lt;version&gt;0.12.0&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>tcp</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supported Transports</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>tcp</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>protocol-code</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transport-code</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transport-config</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>discovery</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Controls the feature of the discovery endpoint of an OPC UA server which every server
+will propagate over an '&lt;address&gt;/discovery' endpoint. The most common issue here is that most servers are not correctly
+configured and propagate the wrong external IP or URL address. If that is the case you can disable the discovery by
+configuring it with a <code>false</code> value.</p>
+</div>
+<div class="paragraph">
+<p>The discovery phase is always conducted using <code>NONE</code> security policy.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>username</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A username to authenticate to the OPCUA server with.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A password to authenticate to the OPCUA server with.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>security-policy</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>NONE</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The security policy applied to communication channel between driver and OPC UA server.
+Default value assumes. Possible options are <code>NONE</code>, <code>Basic128Rsa15</code>, <code>Basic256</code>, <code>Basic256Sha256</code>, <code>Aes128_Sha256_RsaOaep</code>, <code>Aes256_Sha256_RsaPss</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message-security</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SIGN_ENCRYPT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The security policy applied to messages exchanged after handshake phase.
+Possible options are <code>NONE</code>, <code>SIGN</code>, <code>SIGN_ENCRYPT</code>.
+This option is effective only when <code>securityPolicy</code> turns encryption (anything beyond <code>NONE</code>).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key-store-file</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The Keystore file used to lookup client certificate and its private key.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>pkcs12</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Keystore type used to access keystore and private key, defaults to PKCS (for Java 11+).
+Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>dks</code>, <code>jceks</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java keystore password used to access keystore and private key.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>server-certificate-file</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Filesystem location where server certificate is located, supported formats are <code>DER</code> and <code>PEM</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trust-store-file</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The trust store file used to verify server certificates and its chain.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trust-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>pkcs12</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Keystore type used to access keystore and private key, defaults to PKCS (for Java 11+).
+Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>dks</code>, <code>jceks</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trust-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Password used to open trust store.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>channel-lifetime</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>LONG</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>3600000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Time for which negotiated secure channel, its keys and session remains open. Value in milliseconds, by default 60 minutes.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>session-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>LONG</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>120000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Expiry time for opened secure session, value in milliseconds. Defaults to 2 minutes.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>negotiation-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>LONG</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>60000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout for all negotiation steps prior acceptance of application level operations - this timeout applies to open secure channel, create session and close calls. Defaults to 60 seconds.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>LONG</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>30000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout for read/write/subscribe calls. Value in milliseconds.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding.receive-buffer-size</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>65535</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum size of received TCP transport message chunk value in bytes.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding.send-buffer-size</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>65535</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum size of sent transport message chunk.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding.max-message-size</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>2097152</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum size of complete message.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encoding.max-chunk-count</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>64</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum number of chunks for both sent and received messages.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Transport config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
+<h4>tcp</h4>
+</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.keep-alive</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should keep-alive packets be sent?</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should packets be sent instantly or should we give the OS some time to aggregate data.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.default-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout after which a connection will be treated as disconnected.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 55.5556%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Value</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The read interface allows for reading the full range of supported PLC4X data types in single and bulk requests</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The write interface allows for writing the full range of supported PLC4X data types in single and bulk requests</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Subscriptions are possible with events on event- and cyclic-basis</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="connection_string">Connection String</h3>
+<div class="paragraph">
+<p>The OPC UA drivers uses the connection string</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example of this connection string would be:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:tcp://127.0.0.1:12686?discovery=true&amp;username=admin&amp;password=password</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the transport, port and options fields are optional.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="secure_communication">Secure communication</h3>
+<div class="paragraph">
+<p>The secure channel implementation within Apache PLC4X project have been tested against existing open source server implementations.
+This includes Eclipse Milo (all modes) as well as OPC Foundation .NET server (except <code>Basic128Rsa15</code>).
+Manual tests proven that driver is able to communicate with OPC UA server launched on PLCs as well as commercial simulators.</p>
+</div>
+<div class="paragraph">
+<p>Depending on actual configuration of remote end there might be necessity to prepare client certificate.
+Preparation of certificate is beyond driver, however in case when no client certificate is provided, it will be auto-generated to establish a session.</p>
+</div>
+<div class="paragraph">
+<p>The security modes differ between themselves by strength of applied signature and encryption algorithms.
+Driver is able to communicate with single security mode at the time.
+Additionally, to security policy it is possible to specify <code>messageSecurity</code> option which indicates expected security settings after initial handshake.
+By default, this option is set to <code>SIGN_ENCRYPT</code> which imposes high security settings and full encryption of exchanged message payloads.
+In case when additional diagnostics is needed payloads has to be traced through TRACE level log entries.
+The <code>SIGN</code> mode gives possibility o browse packets in tools such wireshark.</p>
+</div>
+<div class="sect3">
+<h4 id="certificate_verification">Certificate verification</h4>
+<div class="paragraph">
+<p>The OPC UA specification defines its own procedures for certificate validation.
+In order to simplify implementation by default server certificate validation is relaxed.
+Unless explicitly disabled through configuration of <code>trustStoreFile</code> all server certificates will be accepted without validation.</p>
+</div>
+<div class="paragraph">
+<p>In case when secure communication is enabled the <code>trustStoreFile</code> option might be used to point certificates which client should accept.
+The acceptance rely on regular TLS checks (expiry date, certificate path etc.), does not validate OPC UA specific parts such as application URI.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="negotiation_procedure">Negotiation procedure</h4>
+<div class="paragraph">
+<p>Depending on settings driver might or might not attempt to discover endpoints from remote server.
+In case when <code>discovery</code> option is set to <code>true</code> driver will look up server certificate through connection attempt.
+The discovery option also enables checks of server endpoints for matching security settings.</p>
+</div>
+<div class="paragraph">
+<p>Once initial discovery is completed and driver finds endpoint matching its security settings it will launch second connection attempt which will switch to configured security mode.</p>
+</div>
+<div class="paragraph">
+<p>Each connection attempt made by driver attempt to use limits described in table above.
+Role of these options is declaration of values accepted and expected by client.
+Once server returns its limits (<code>Acknowledge</code> for supplied <code>Hello</code> call) driver picks values from these.
+The only one note is that driver takes minimum of local receive and remote send buffer size.
+It does same with local send and remote receive buffer.</p>
+</div>
+<div class="paragraph">
+<p>Usual values of <code>sendBufferSize</code> and <code>receiveBufferSize</code> PLC devices remain at 8196 bytes.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Due to lack of complete implementation of negotiation and chunking logic the OPC UA driver prior Apache PLC4X 0.11 release could supply calls exceeding server limits.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="address_format">Address Format</h3>
+<div class="paragraph">
+<p>To read, write and subscribe to data, the OPC UA driver uses the variable declaration string of the OPC UA server it is
+connecting to.
+It includes the namespace(<code>ns</code>) of the hierarchy tree followed by the type of identifier string(<code>s</code>), numeric(<code>i</code>),
+binary(<code>b</code>) or guid(<code>g</code>) and its address. The Data Type is an optional field, if it is not included a default data type
+is selected based on the datatype of the returned value. For Unsigned data types it needs to be included otherwise.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ns={namespace-index};[s|i|g|b]={Identifier};{Data Type}</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="data_types">Data Types</h4>
+<div class="paragraph">
+<p>The following data types are supported</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BOOL (boolean)</p>
+</li>
+<li>
+<p>SINT (int 8)</p>
+</li>
+<li>
+<p>USINT (uint 8)</p>
+</li>
+<li>
+<p>BYTE (uint 8)</p>
+</li>
+<li>
+<p>INT (int 16)</p>
+</li>
+<li>
+<p>UINT (uint 16)</p>
+</li>
+<li>
+<p>WORD (uint 16)</p>
+</li>
+<li>
+<p>DINT (int 32)</p>
+</li>
+<li>
+<p>UDINT (uint 32)</p>
+</li>
+<li>
+<p>DWORD (uint 32)</p>
+</li>
+<li>
+<p>LINT (int 64)</p>
+</li>
+<li>
+<p>ULINT (uint 64)</p>
+</li>
+<li>
+<p>LWORD (uint 64)</p>
+</li>
+<li>
+<p>REAL (float)</p>
+</li>
+<li>
+<p>LREAL (double)</p>
+</li>
+<li>
+<p>CHAR (char)</p>
+</li>
+<li>
+<p>WCHAR (2 byte char)</p>
+</li>
+<li>
+<p>STRING (utf-8)</p>
+</li>
+<li>
+<p>WSTRING (utf-16)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="example_of_a_valid_opc_ua_address">Example of a valid OPC UA address:</h4>
+<div class="paragraph">
+<p>The following are examples of valid addresses</p>
+</div>
+<div class="paragraph">
+<p>String address:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ns=2;s=HelloWorld/ScalarTypes/Boolean
+ns=2;s=HelloWorld/ScalarTypes/Boolean;BOOL</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Numeric address</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ns=1;i=1337
+ns=1;i=1337;DINT</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>GUID address:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a
+ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;REAL</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the Identifiers <code>s</code>,<code>i</code>,<code>b</code> and <code>g</code> specify the format of the address not the data type of the returned value.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="some_useful_tips">Some useful tips</h3>
+<div class="paragraph">
+<p>The namespace (e.g. <code>ns=2</code>) within the address is specific to the server you are connecting to.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="more_details_on_opc_ua">More details on OPC UA</h3>
+<div class="paragraph">
+<p><a href="https://opcfoundation.org/about/opc-technologies/opc-ua/">OPC UA</a>
+The OPC Unified Architecture (UA), released in 2008, is a platform independent service-oriented architecture that integrates all the functionality of the individual OPC Classic specifications into one extensible framework.</p>
+</div>
+<div class="paragraph">
+<p>This multi-layered approach accomplishes the original design specification goals of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Functional equivalence: all COM OPC Classic specifications are mapped to UA</p>
+</li>
+<li>
+<p>Platform independence: from an embedded micro-controller to cloud-based infrastructure</p>
+</li>
+<li>
+<p>Secure: encryption, authentication, and auditing</p>
+</li>
+<li>
+<p>Extensible: ability to add new features without affecting existing applications</p>
+</li>
+<li>
+<p>Comprehensive information modeling: for defining complex information</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+</table>
+</div>
+</div>
+</div>
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
+            <div class="row justify-content-md-center" style="font-size: 13px">
+                <div class="col col-6 text-center">
+                                    Copyright &#169;      2017&#x2013;2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+All rights reserved.<br/>
+                    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../js/jquery.slim.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+</body>
+</html>
