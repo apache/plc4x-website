@@ -341,11 +341,12 @@ Once we have decided that PLC4Py is in a position to release we will publish to 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>from plc4py.PlcDriverManager import PlcDriverManager
+<pre>import asyncio
+from plc4py.PlcDriverManager import PlcDriverManager
 
-connection_string = "modbus://192.168.1.174:502";
-
+connection_string = "modbus://192.168.1.174:502"
 driver_manager = PlcDriverManager()
+
 async def communicate_with_plc():
     async with driver_manager.connection(connection_string) as connection:
         with connection.read_request_builder() as builder:
@@ -354,7 +355,9 @@ async def communicate_with_plc():
 
     future = connection.execute(request)
     await future
-    response = future.result()</pre>
+    response = future.result()
+
+asyncio.run(communicate_with_plc())</pre>
 </div>
 </div>
 <div class="paragraph">
