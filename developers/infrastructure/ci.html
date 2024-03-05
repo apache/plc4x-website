@@ -66,13 +66,7 @@
                                                                     
                                             
                                                                     
-                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
-                    <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                                                            <li class="nav-item">
-                            <a href="../../developers/infrastructure/issues.html" class="nav-link">Bug & Issue Tracker</a>
-                            </li>
-                                
+                                            
                                                                     
                                             
                                                                     
@@ -92,7 +86,10 @@
                                                                     
                                                                 
                                                                     
-                                                                <li class="nav-item">
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
                             <a href="../../developers/index.html" class="nav-link">Section Home</a>
                             </li>
                                 
@@ -183,9 +180,6 @@
                                             <li class="nav-item">
                             <a href="../../developers/infrastructure/website.html" class="nav-link">Website</a>
                             </li>
-                                            <li class="nav-item">
-                            <a href="../../developers/infrastructure/vpn.html" class="nav-link">IoT VPN</a>
-                            </li>
                             </ul>
             </li>
                                 
@@ -244,21 +238,26 @@
 <h2 id="continuous_integration">Continuous Integration</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We are currently using Apache&#8217;s <code>Jenkins</code> as single CI system.</p>
+<p>We are currently using the following CI systems.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>Apache&#8217;s Jenkins at: <a href="https://ci-builds.apache.org/job/PLC4X/" class="bare">https://ci-builds.apache.org/job/PLC4X/</a></p>
 </li>
+<li>
+<p>GitHub Actions at: <a href="https://github.com/apache/plc4x/actions" class="bare">https://github.com/apache/plc4x/actions</a></p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>However we might add Travis for automatically building and testing Pull-Requests in the near future.</p>
+<p>The build on Jenkins is generally responsible for building and testing the state of the project on the <code>development</code> branch.
+It is currently the only service that is able to build and deploy the <code>SNAPSHOT</code> artifacts and is also responsible for building and updating our website.</p>
 </div>
 <div class="paragraph">
-<p>Hereby Apache Jenkins' clearly is responsible for running the full testsuite with all integration-tests.
-Also only jobs on Apache Jenkins are allowed to publish SNAPSHOT versions of the Maven artifacts to <code>Apaches Nexus</code> at: <a href="https://repository.apache.org" class="bare">https://repository.apache.org</a>.</p>
+<p>GitHub Actions on the other side responsible for doing the main part of the testing.
+It not only builds and runs the tests on a matrix of operating systems as well as with a number of java versions.
+It also is configured to run the tests on pull-requests.</p>
 </div>
 <div class="sect2">
 <h3 id="structure_of_the_jenkins_pipeline_build">Structure of the Jenkins Pipeline build</h3>
@@ -266,40 +265,11 @@ Also only jobs on Apache Jenkins are allowed to publish SNAPSHOT versions of the
 <p>We are using the Jenkins <code>multi-branch pipeline plugin</code> to automatically setup build for branches based upon the build definition in the <code>Jenkinsfile</code> in the root of the project.</p>
 </div>
 <div class="paragraph">
-<p>In general it builds the <code>develop</code> branch and all branches starting with the prefix <code>feature/</code>.
-However when building the <code>develop</code> branch some additional steps are performed.</p>
+<p>In general, it builds the <code>develop</code> branch and all branches starting with the prefix <code>feature/</code>.
+However, when building the <code>develop</code> branch some additional steps are performed.</p>
 </div>
 <div class="paragraph">
 <p>When building <code>develop</code> the build not only builds the project itself and runs all tests, it also runs the <code>sonarcloud</code> analysis, deploys the artifacts built to the <code>Apache Nexus</code> as well as generates and deploys the website.</p>
-</div>
-<div class="paragraph">
-<p>The general structure of the build is as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Failed to generate image: blockdiag3 failed: ERROR: got unexpected token: 19,82-19,83: Op '-&gt;'
-
-{
-  Start [shape = beginpoint];
-  Initialization [label = "Initialization"];
-  Cleanup [label = "Cleanup"];
-  Checkout [color = "#068D9D", textcolor="#FFFFFF"];
-  Build [label = "Build"];
-  BuildDevelop [label = "Build develop"];
-  CodeQuality [label = "Code Quality"];
-  Deploy [label = "Deploy"];
-  BuildSite [label = "Build Site"];
-  StageSite [label = "Stage site"];
-  DeploySite [label = "Deploy site"];
-  Finish [shape = endpoint];
-
-  Start -&gt; Initialization -&gt; Cleanup -&gt; Checkout;
-  Checkout -&gt; Build [label = "feature branch"];
-  Build -&gt; Finish;
-  Checkout -&gt; BuildDevelop [label = "develop"];
-  BuildDevelop -&gt; CodeQuality -&gt; Deploy -&gt; BuildSite -&gt; StageSite -&gt; DeploySite; -&gt; Finish;
-}</pre>
-</div>
 </div>
 </div>
 </div>

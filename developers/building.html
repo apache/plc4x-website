@@ -66,13 +66,7 @@
                                                                     
                                             
                                                                     
-                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
-                    <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                                                            <li class="nav-item">
-                            <a href="../developers/infrastructure/issues.html" class="nav-link">Bug & Issue Tracker</a>
-                            </li>
-                                
+                                            
                                                                     
                                             
                                                                     
@@ -92,7 +86,10 @@
                                                                     
                                                                 
                                                                     
-                                                                <li class="nav-item">
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
                             <a href="../developers/index.html" class="nav-link">Section Home</a>
                             </li>
                                 
@@ -182,9 +179,6 @@
                             </li>
                                             <li class="nav-item">
                             <a href="../developers/infrastructure/website.html" class="nav-link">Website</a>
-                            </li>
-                                            <li class="nav-item">
-                            <a href="../developers/infrastructure/vpn.html" class="nav-link">IoT VPN</a>
                             </li>
                             </ul>
             </li>
@@ -297,16 +291,14 @@ So simply adding the additional <code>w</code> to each of the Maven commands, th
 But there is a lot of good documentation out there.</p>
 </div>
 <div class="paragraph">
-<p>Justin McLean and Christofer Dutz even recorded a not quite 2 hour Maven training Video some time ago for another Apache project.</p>
+<p>Justin McLean and Christofer Dutz even recorded a not quite 2-hour Maven training Video some time ago for another Apache project.</p>
 </div>
 <div class="paragraph">
 <p>It should handle all the details needed to get a general understanding of Maven and how it works.</p>
 </div>
-<div class="videoblock">
+<div class="paragraph">
 <div class="title">Recording of a Maven Training for Apache Flex from 2016</div>
-<div class="content">
-<iframe width="640" height="420" src="https://player.vimeo.com/video/167857327" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-</div>
+<p><a href="https://vimeo.com/167857327" class="bare">https://vimeo.com/167857327</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -358,36 +350,7 @@ As these profiles typically require some preparation and setup on your developme
 </table>
 </div>
 <div class="paragraph">
-<p>Beyond that there is an additional profile <code>with-proxies</code> which will enable additional modules in each of the activated languages.
-This <code>proxies</code> module, uses <code>Apache Thrift</code> to generate modules for forwarding requests to an <code>interop server</code> which runs somewhere else or on the same machine.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-Currently when enabling the <code>with-python</code> module, you are required to also enable the <code>with-proxies</code> profile too as this is currently required there but will probably change in the near future.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>There are 3 more profiles that allow you to activate additional modules or functionality:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>with-docker</code> : Some modules also provide the means to build <code>Docker</code> images. By enabling this profile these images are automatically built too</p>
-</li>
-<li>
-<p><code>with-boost</code> : Builds a <code>C</code>/<code>C` Library used by both the `Apache Thrift` build as well as the `C</code> drivers. Unfortunately this is an extremely intense build so we have setup the PLC4X build to only require this profile to be activated once. If the resulting artifacts are installed in your <code>Maven-Local-Repo</code>, these will be re-used.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The minimum Apache PLC4X build will build only the <code>Java</code> modules without any experimental modules:</p>
+<p>The minimum Apache PLC4X build will build only basic code-generation modules without support for any language:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -395,11 +358,19 @@ Currently when enabling the <code>with-python</code> module, you are required to
 </div>
 </div>
 <div class="paragraph">
+<p>So if for example you want to build only the Java related modules, the following command will do that:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn -P with-java install</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>If you want to skip the running of tests (even if this is not encouraged) you can skip them all together.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn install -DskipTests</pre>
+<pre>mvn -P with-java -DskipTests install</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -495,21 +466,11 @@ All Properties are expanded to the value Maven uses.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="development_profile"><code>development</code> profile</h4>
+<h4 id="enable_all_checks_profile"><code>enable-all-checks</code> profile</h4>
 <div class="paragraph">
-<p>This profile enables some extra strict enforcer rules. It is encouraged to activate this profile during development.</p>
-</div>
-<div class="paragraph">
-<p>In the <code>CI Build</code> this profile is enabled.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="skip_prerequisite_check_profile"><code>skip-prerequisite-check</code> profile</h4>
-<div class="paragraph">
-<p>Some times, actually only on the build-server we have encountered random failures of the <code>prerequisite check</code> build step.</p>
-</div>
-<div class="paragraph">
-<p>In order to still be able to build in this case, activating this profile simply disables these checks.</p>
+<p>Some tests of the PLC4X project do require quite a bit of time to run.
+Therefore we decided to disable these for a normal build on developer machines.
+If you want to run them locally and not rely on them being run on the CI servers, enable the <code>enable-all-checks</code> profile.</p>
 </div>
 </div>
 </div>
@@ -529,9 +490,9 @@ All Properties are expanded to the value Maven uses.</p>
 }
 
 dependencies {
-    implementation group: 'org.apache.plc4x', name: 'plc4j-api', version: '0.8.0-SNAPSHOT'
-    implementation group: 'org.apache.plc4x', name: 'plc4j-driver-s7', version: '0.8.0-SNAPSHOT'
-    implementation group: 'org.apache.plc4x', name: 'plc4j-connection-pool', version: '0.8.0-SNAPSHOT'
+    implementation group: 'org.apache.plc4x', name: 'plc4j-api', version: '0.12.0'
+    implementation group: 'org.apache.plc4x', name: 'plc4j-driver-s7', version: '0.12.0'
+    implementation group: 'org.apache.plc4x', name: 'plc4j-connection-pool', version: '0.12.0'
 }</code></pre>
 </div>
 </div>
