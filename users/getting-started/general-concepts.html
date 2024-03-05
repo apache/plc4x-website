@@ -426,13 +426,13 @@ This allows them to not only be used in what we call <code>passive-mode drivers<
 <p>For example with a <code>TCP</code> and <code>UDP</code> transport, this will be the <code>IP address</code> or <code>hostname</code> optionally followed by the <code>Port</code>.</p>
 </div>
 <div class="paragraph">
-<p>For a <code>Serial</code> transport this will be the <code>name of the serial interface</code>. <code>Raw Sockets</code> will require the <code>device name</code> or a `MAC address`and so on.</p>
+<p>For a <code>Serial</code> transport this will be the <code>name of the serial interface</code>. <code>Raw Sockets</code> will require the <code>device name</code> or a <code>MAC address</code> and so on.</p>
 </div>
 <div class="paragraph">
 <p>For a full description of all transports and their options, please consult the <code>Transport Documentation</code> <a href="../transports/index.html">here</a>.</p>
 </div>
 <div class="paragraph">
-<p>The last segment - <code>options</code> - can be used to fine tune some protocol or transport options to non-default values. For details on these options, please have a look at the <code>Protocol Documentation</code> <a href="../protocols/index.html">here</a> and the <code>Transport Documentation</code> <a href="../transports/index.html">here</a>.</p>
+<p>The last segment - <code>options</code> - can be used to fine tune some protocol or transport options to non-default values. Usually these vary quite a bit from protocol to protocol. For details on these options, please have a look at the <code>Protocol Documentation</code> <a href="../protocols/index.html">here</a>. Even if most transports also have common options, their defaults vary quite a bit, depending on the protocol being used. So, instead of having a look at the general <code>Transport Documentation</code> <a href="../transports/index.html">here</a>, wach protocol documentation also contains a list of all supported transports as well as the transport configuration options and their defaults.</p>
 </div>
 <div class="paragraph">
 <p>The general structure of this part is always the same:</p>
@@ -443,7 +443,7 @@ This allows them to not only be used in what we call <code>passive-mode drivers<
 </div>
 </div>
 <div class="paragraph">
-<p>So in general the options are stared with a <code>?</code> and then followed by <code>name-value</code> pairs, which are separated by ampersand characters <code>&amp;</code>.</p>
+<p>So the options start with a <code>?</code> and are then followed by <code>name-value</code> pairs, which are separated by ampersand characters <code>&amp;</code>.</p>
 </div>
 <div class="paragraph">
 <p>A driver for a given protocol however usually has a <code>default transport</code>, so sometimes it is possible to omit the transport code. Also do most drivers define default values for the various configuration options, so in general you should only require to use configuration options, if you are using non-default settings.</p>
@@ -457,7 +457,7 @@ This allows them to not only be used in what we call <code>passive-mode drivers<
 </div>
 </div>
 <div class="paragraph">
-<p>For more information on the default settings for a given protocol or transport, please check the corresponding documentation.</p>
+<p>For more information on the default settings for a given protocol or transport, please check the corresponding drivers documentation.</p>
 </div>
 </div>
 </div>

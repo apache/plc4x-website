@@ -333,7 +333,7 @@ The driver can be found in the Maven module</p>
 <div class="content">
 <pre>    &lt;dependency&gt;
       &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
-      &lt;artifactId&gt;plc4j-transport-test&lt;/artifactId&gt;
+      &lt;artifactId&gt;plc4j-driver-mock&lt;/artifactId&gt;
       &lt;version&gt;0.12.0&lt;/version&gt;
       &lt;scope&gt;test&lt;/scope&gt;
    &lt;/dependency&gt;</pre>
@@ -343,7 +343,7 @@ The driver can be found in the Maven module</p>
 <p>The connection string Syntax for the mock driver is <code>mock:{name-of-the-connection}</code>. So you can use multiple Mock Devices at the same time.</p>
 </div>
 <div class="paragraph">
-<p>The Mock Driver does nothing else than forwarding all Requests to a <em>Virtual Device</em> which we can provide to control all responses and also Monitor them, e.g. for unit tests.
+<p>The Mock Driver does nothing else than forwarding all Requests to a `Virtual Device which we can provide to control all responses and also Monitor them, e.g. for unit tests.
 The Interface for the Mock Device is</p>
 </div>
 <div class="listingblock">
@@ -375,8 +375,7 @@ This can be done with the Mock Driver in the following way.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code>PlcDriverManager driverManager = new PlcDriverManager();
-PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("mock:my-mock-connection");</code></pre>
+<pre class="prettyprint highlight"><code>PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -426,8 +425,7 @@ Like in the following Example</p>
 <div class="content">
 <pre class="prettyprint highlight"><code>MockDevice mockDevice = Mockito.mock(MockDevice.class);
 
-PlcDriverManager driverManager = new PlcDriverManager();
-PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("mock:my-mock-connection");
+PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");
 connection.setDevice(mockDevice);
 
 // Populate the Mock to avoid a NPE
@@ -448,15 +446,14 @@ verify(mockDevice).read(eq("MyAdress"));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>But as the <em>MockDriver</em> uses a static Mock Connection registry the following Code works also</p>
+<p>But as the <code>MockDriver</code> uses a static Mock Connection registry the following Code works also</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code>MockDevice mockDevice = Mockito.mock(MockDevice.class);
 
 // Setup
-PlcDriverManager driverManager = new PlcDriverManager();
-PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("mock:my-mock-connection");
+PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");
 connection.setDevice(mockDevice);
 // Populate the Mock to avoid a NPE
 when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new PlcString("hello")));
@@ -465,7 +462,7 @@ when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new Pl
 // or at least mock:my-mock-connection as connection string
 // Here: send a request to the field "MyAdress"
 // and we build up a new Connection
-try (PlcConnection conn = driverManager.getConnection("mock:my-mock-connection")) {
+try (PlcConnection conn = PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection")) {
     conn
         .readRequestBuilder
         .addItem("station", "MyAdress")
@@ -490,7 +487,7 @@ verify(mockDevice).read(eq("MyAdress"));</code></pre>
 <p>The above examples show that the <code>MockDriver</code> driver can not only be used to play around with the API but is also a powerful tool to
 do unit testing of Code which uses the PLC4X API.
 All that needs to be done is to either pass an instance of the Mocked Connection or just use the same Connection string (e.g. from a test configuration) that was used to Prepare a Mock Device.
-Some Examples of futher (more Complex) use cases can be found in the PLC4X Codebases, e.g. in the following classes</p>
+Some Examples of further (more Complex) use cases can be found in the PLC4X Codebases, e.g. in the following classes</p>
 </div>
 <div class="ulist">
 <ul>
