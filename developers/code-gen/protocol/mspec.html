@@ -241,7 +241,8 @@
 <p>The <code>MSpec</code> format (Message Specification) was a result of a brainstorming session after evaluating a lot of other options.</p>
 </div>
 <div class="paragraph">
-<p>We simply sat down and started to write some imaginary format (<code>imaginary</code> was even the initial Name we used) and created parses for this afterwards and fine-tuned spec and parsers as part of the process of implementing first protocols and language templates.</p>
+<p>We simply sat down and started to write some imaginary format (imaginary was even the initial Name we used Machine-Readable SPEC = <code>mspec</code>).
+After we had an initial format that seemed to do the trick, we then stated creating parses for this and started iteratively fine-tuning both spec and parsers as part of the process of implementing new protocols and language templates.</p>
 </div>
 <div class="paragraph">
 <p>It&#8217;s a text-based format.</p>
@@ -250,26 +251,26 @@
 <p>At the root level of these specs are a set of <code>type</code>, <code>discriminatedType</code>, <code>dataIo</code> and <code>enum</code> blocks.</p>
 </div>
 <div class="paragraph">
-<p><code>type</code> elements are objects who&#8217;s content is independent of the input.</p>
+<p><code>type</code> elements are objects who`s content and structure is independent of the input.</p>
 </div>
 <div class="paragraph">
-<p>An example would be the <code>TPKTPacket</code> of the S7 format:</p>
+<p>An example would be the <code>TPKTPacket</code> of the <code>S7</code> format:</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>[type TPKTPacket
-    [const    uint 8     protocolId 0x03]
-    [reserved uint 8     '0x00']
-    [implicit uint 16    len        'payload.lengthInBytes + 4']
-    [field    COTPPacket 'payload']
+    [const    uint 8                 protocolId 0x03]
+    [reserved uint 8                 '0x00']
+    [implicit uint 16                len       'payload.lengthInBytes + 4']
+    [simple   COTPPacket('len - 4') payload]
 ]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A <code>discriminatedType</code> type, in contrast, is an object who&#8217;s content and structure is influenced by the input.</p>
+<p>A <code>discriminatedType</code> type, in contrast, is an object who`s content and structure is influenced by the input.</p>
 </div>
 <div class="paragraph">
-<p>Every discriminated type can contain an arbitrary number of <code>discriminator</code> fields and exactly one <code>typeSwitch</code> element.</p>
+<p>Every discriminated type can contain an arbitrary number of normal fields but must contain exactly one <code>typeSwitch</code> element.</p>
 </div>
 <div class="paragraph">
 <p>For example part of the spec for the S7 format looks like this:</p>
@@ -281,42 +282,47 @@
     [discriminator uint 8  messageType]
     [reserved      uint 16 '0x0000']
     [simple        uint 16 tpduReference]
-    [implicit      uint 16 parameterLength 'parameter.lengthInBytes']
-    [implicit      uint 16 payloadLength   'payload.lengthInBytes']
-    [typeSwitch 'messageType'
+    [implicit      uint 16 parameterLength 'parameter != null ? parameter.lengthInBytes : 0']
+    [implicit      uint 16 payloadLength   'payload != null ? payload.lengthInBytes : 0']
+    [typeSwitch messageType
         ['0x01' S7MessageRequest
         ]
-        ['0x03' S7MessageResponse
+        ['0x02' S7MessageResponse
             [simple uint 8 errorClass]
-            [simple uint 8 errorCode ]
+            [simple uint 8 errorCode]
+        ]
+        ['0x03' S7MessageResponseData
+            [simple uint 8 errorClass]
+            [simple uint 8 errorCode]
         ]
         ['0x07' S7MessageUserData
         ]
     ]
-    [simple S7Parameter('messageType')            parameter]
-    [simple S7Payload('messageType', 'parameter') payload  ]
+    [optional S7Parameter ('messageType')              parameter 'parameterLength &gt; 0']
+    [optional S7Payload   ('messageType', 'parameter') payload   'payloadLength &gt; 0'  ]
 ]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A types start is declared by an opening square bracket <code>[</code> and ended with a closing one <code>]</code>.</p>
+<p>A type`s start is declared by an opening square bracket <code>[</code> followed by the <code>type</code> or <code>discriminatedType</code> keyword, which is directly followed by a name.
+A Type definition is ended with a closing square bracket <code>]</code>.</p>
 </div>
 <div class="paragraph">
-<p>Also, to both provide a name as first argument.</p>
+<p>Every type definition contains a list of so-called fields.</p>
 </div>
 <div class="paragraph">
-<p>Every type definition contains a list of fields that can have different types.</p>
-</div>
-<div class="paragraph">
-<p>The list of available types are:</p>
+<p>The list of available field types are:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>abstract: used in the parent type declaration do declare a field that has to be defined with the identical type in all sub-types (reserved for <code>discriminatedType</code>).</p>
+<p>abstract: used in the parent type declaration do declare a field that has to be defined with the identical type in all subtypes (reserved for <code>discriminatedType</code>).</p>
 </li>
 <li>
 <p>array: array of simple or complex typed objects.</p>
+</li>
+<li>
+<p>assert: generally similar to <code>constant</code> fields, however do they throw <code>AssertionExceptions</code> instead of hard <code>ParseExceptions</code>. They are used in combination with optional fields.</p>
 </li>
 <li>
 <p>checksum: used for calculating and verifying checksum values.</p>
@@ -334,9 +340,6 @@
 <p>implicit: a field required for parsing, but is usually defined though other data, so it&#8217;s not stored in the object, but calculated on serialization.</p>
 </li>
 <li>
-<p>assert: generally similar to <code>constant</code> fields, however do they throw <code>AssertionExceptions</code> instead of hard <code>ParseExceptions</code>. They are used in combination with optional fields.</p>
-</li>
-<li>
 <p>manualArray: like an array field, however the logic for serializing, parsing, number of elements and size have to be provided manually.</p>
 </li>
 <li>
@@ -349,16 +352,22 @@
 <p>padding: field used to add padding data to make datastructures aligned.</p>
 </li>
 <li>
+<p>peek: field that tries to parse a given structure without actually consuming the bytes.</p>
+</li>
+<li>
 <p>reserved: expects a given value, but only warns if condition is not meet.</p>
 </li>
 <li>
 <p>simple: simple or complex typed object.</p>
 </li>
 <li>
-<p>typeSwitch: not a real field, but indicates the existence of sub-types, which are declared inline (reserved for <code>discriminatedType</code>).</p>
+<p>typeSwitch: not a real field, but indicates the existence of subtypes, which are declared inline (reserved for <code>discriminatedType</code>).</p>
 </li>
 <li>
 <p>unknown: field used to declare parts of a message that still has to be defined. Generally used when reverse-engineering a protocol. Messages with <code>unknown</code> fields can only be parsed and not serialized.</p>
+</li>
+<li>
+<p>validation: this field is not actually a real field, it&#8217;s more a condition that is checked during parsing and if the check fails, it throws a validation exception, wich is handled by</p>
 </li>
 <li>
 <p>virtual: generates a field in the message, that is generally only used for simplification. It&#8217;s not used for parsing or serializing.</p>
@@ -406,10 +415,10 @@
 <p><strong>byte</strong>: Special value fixed to 8 bit, which defaults to either signed or unsigned depending on the programming language (Java it defaults to signed integer values and in C and Go it defaults to unsigned integers).</p>
 </li>
 <li>
-<p><strong>uint</strong>: The input is treated as unsigned integer value.</p>
+<p><strong>int</strong>: The input is treated as signed integer value.</p>
 </li>
 <li>
-<p><strong>int</strong>: The input is treated as signed integer value.</p>
+<p><strong>uint</strong>: The input is treated as unsigned integer value.</p>
 </li>
 <li>
 <p><strong>float</strong>: The input is treated as floating point number.</p>
@@ -420,11 +429,17 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>All above types take a <code>size</code> value which provides how many <code>bits</code> should be read.
-All except the <code>bit</code> type, which is fixed to one single bit.</p>
+<p>Then for <code>dataIo</code> types we have some additional types:
+- <strong>time</strong>: The input is treated as a time representation
+- <strong>date</strong>: The input is treated as a date representation
+- <strong>dateTime</strong>: The input is treated as a date with time</p>
 </div>
 <div class="paragraph">
-<p>So reading an unsigned byte would be: <code>uint 8</code>.</p>
+<p>All except the <code>bit</code> and <code>byte</code> types take a <code>size</code> value which provides how many <code>bits</code> should be read.
+For the <code>bit</code> field, this obviously defaults to 1 and for the <code>byte</code> the bits default to 8.</p>
+</div>
+<div class="paragraph">
+<p>So reading an unsigned 8-bit integer would be: <code>uint 8</code>.</p>
 </div>
 <div class="paragraph">
 <p>There is currently one special type, reserved for string values, whose length is determined by an expression instead of a fixed number of bits. It is considered a variable length string:</p>
@@ -440,7 +455,7 @@ All except the <code>bit</code> type, which is fixed to one single bit.</p>
 <div class="sect2">
 <h3 id="complex_types">Complex Types</h3>
 <div class="paragraph">
-<p>In contrast to simple types, complex type reference other complex types (Root elements of the spec document).</p>
+<p>In contrast to simple types, complex types reference other complex types (Root elements of the spec document).</p>
 </div>
 <div class="paragraph">
 <p>How the parser should interpret them is defined in the referenced types definition.</p>
@@ -459,12 +474,17 @@ It generates an field which is not a single-value element but an array or list o
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[array {simple-type} {size} '{name}' {'count', 'length', 'terminated'} '{expression}']</pre>
+<pre>[array {bit|byte}           {name} {count|length|terminated} '{expression}']</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[array {complex-type} '{name}' {'count', 'length', 'terminated'} '{expression}']</pre>
+<pre>[array {simple-type} {size} {name} {count|length|terminated} '{expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[array {complex-type}       {name} {count|length|terminated} '{expression}']</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -477,13 +497,49 @@ Possible values are:
 </div>
 </div>
 <div class="sect3">
+<h4 id="assert_field">assert Field</h4>
+<div class="paragraph">
+<p>An assert field is pretty much identical to a <code>const</code> field.
+The main difference however it how the case is handled, if the parsed value does not match the expected value.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[assert         {bit|byte}            {name}          '{assert-value}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[assert         {simple-type} {size}  {name}          '{assert-value}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>While a <code>const</code> field would abort parsing in total with an error, an <code>assert</code> field with abort parsing, but the error will only bubble up in the stack till the first <code>optional</code> field is found.</p>
+</div>
+<div class="paragraph">
+<p>In this case the parser will be rewound to the position before starting to parse the <code>optional</code> field and continue parsing with the next field, skipping the <code>optional</code> field.</p>
+</div>
+<div class="paragraph">
+<p>If there is no upstream <code>optional</code> field, then parsing of the message terminates with an error.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- validation field: Similar to an <code>assert</code> field, however no parsing is done, and instead simply a condition is checked.
+- optional field: <code>optional</code> fields are aware of the types of parser errors produced by <code>assert</code> and <code>validation</code> fields</p>
+</div>
+</div>
+<div class="sect3">
 <h4 id="checksum_field">checksum Field</h4>
 <div class="paragraph">
 <p>A checksum field can only operate on simple types.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[checksum {simple-type} {size} '{name}' '{checksum-expression}']</pre>
+<pre>[checksum {bit|byte}           {name} '{checksum-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[checksum {simple-type} {size} {name} '{checksum-expression}']</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -511,11 +567,16 @@ If they don&#8217;t match an exception is thrown.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[const {simple-type} {size} '{name}' {reference}]</pre>
+<pre>[const {bit|byte}           {name} {reference}]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[const {simple-type} {size} {name} {reference}]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When parsing it makes the parser throw an Exception if the parsed value does not match.</p>
+<p>When parsing it makes the parser throws an Exception if the parsed value does not match the expected one.</p>
 </div>
 <div class="paragraph">
 <p>When serializing is simply outputs the expected constant.</p>
@@ -535,8 +596,12 @@ If they don&#8217;t match an exception is thrown.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[discriminator {simple-type} {size} '{name}']</pre>
+<pre>[discriminator {simple-type} {size} {name}]</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>They are used, in cases where the value of a field determines the concrete type of a discriminated type.
+In this case we don&#8217;t have to waste memory on storing the discriminator value and this can be statically assigned to the type.</p>
 </div>
 <div class="paragraph">
 <p>When parsing a discriminator fields result just in being a locally available variable.</p>
@@ -557,7 +622,12 @@ If they don&#8217;t match an exception is thrown.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[implicit {simple-type} {size} '{name}' '{serialization-expression}']</pre>
+<pre>[implicit {bit|byte}           {name} '{serialization-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[implicit {simple-type} {size} {name} '{serialization-expression}']</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -577,12 +647,17 @@ If they don&#8217;t match an exception is thrown.</p>
 <h4 id="manualarray_field">manualArray Field</h4>
 <div class="literalblock">
 <div class="content">
-<pre>[manualArray {simple-type} {size} '{name}' {'count', 'length', 'terminated'} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+<pre>[manualArray {bit|byte}           {name} {count|length|terminated} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[manualArray {complex-type} '{name}' {'count', 'length', 'terminated'} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+<pre>[manualArray {simple-type} {size} {name} {count|length|terminated} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[manualArray {complex-type}       {name} {count|length|terminated} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
 </div>
 </div>
 </div>
@@ -590,12 +665,17 @@ If they don&#8217;t match an exception is thrown.</p>
 <h4 id="manual_field">manual Field</h4>
 <div class="literalblock">
 <div class="content">
-<pre>[manual {simple-type} {size} '{name}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+<pre>[manual {bit|byte}           {name} '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[manual {complex-type} '{name}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+<pre>[manual {simple-type} {size} {name} '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[manual {complex-type}       {name} '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
 </div>
 </div>
 </div>
@@ -606,23 +686,34 @@ If they don&#8217;t match an exception is thrown.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[optional {simple-type} {size} '{name}' '{optional-expression}']</pre>
+<pre>[optional {bit|byte}           {name} ('{optional-expression}')?]</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[optional {complex-type} '{name}' '{optional-expression}']</pre>
+<pre>[optional {simple-type} {size} {name} ('{optional-expression}')?]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[optional {complex-type}       {name} ('{optional-expression}')?]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When parsing the <code>optional-expression</code> is evaluated. If this results in`false` nothing is output, if it evaluates to <code>true</code> it is serialized as a <code>simple</code> field.</p>
+<p>The <code>optional-expression</code> attribute is optional. If it is provided the <code>optional-expression</code> is evaluated.
+If this results in`false` nothing is parsed, if it evaluates to <code>true</code> it is parsed.</p>
+</div>
+<div class="paragraph">
+<p>In any case, if when parsing the content of an <code>optional</code> field a <code>assert</code> or <code>validation</code> field fails, the parser is rewound to the position before starting to parse the <code>optional</code> field, the optional field is then skipped and the parser continues with the next field.</p>
 </div>
 <div class="paragraph">
 <p>When serializing, if the field is <code>null</code> nothing is output, if it is not <code>null</code> it is serialized normally.</p>
 </div>
 <div class="paragraph">
 <p>See also:
-- simple field: In general <code>optional</code> fields are identical to <code>simple</code> fields except the ability to be <code>null</code> or be skipped.</p>
+- simple field: In general <code>optional</code> fields are identical to <code>simple</code> fields except the ability to be <code>null</code> or be skipped.
+- <code>assert</code>: Assert fields are similar to <code>const</code> fields, but can abort parsing of an <code>optional</code> filed.
+- <code>validation</code>: If a validation field in any of the subtypes fails, this aborts parsing of the <code>optional</code> field.</p>
 </div>
 </div>
 <div class="sect3">
@@ -634,15 +725,26 @@ Padding is added only when result of expression is bigger than zero.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[padding {simple-type} {size} '{pading-value}' '{padding-expression}']</pre>
+<pre>[padding {bit|byte}            {name} '{pading-value}' '{times-padding}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[padding {simple-type} {size}  {name} '{pading-value}' '{times-padding}']</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When parsing a <code>padding</code> field is just consumed without being made available as property or local variable if the <code>padding-expression</code> evaluates to value greater than zero.
-If it doesn&#8217;t, it is just skipped.</p>
+<p>When parsing a <code>padding</code> field is being parsed, the <code>times-padding</code> expressions determines how often the <code>padding-value</code> should be read. So it doesn&#8217;t really check if the read values match the <code>padding-value</code>, it just ensures the same amount of bits are being read. The read values are simply discarded.</p>
+</div>
+<div class="paragraph">
+<p>When serializing, the <code>times-padding</code> defines how often the <code>padding-value</code> should be written.</p>
 </div>
 <div class="paragraph">
 <p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+<div class="sect4">
+<h5 id="peek_field">peek Field</h5>
+
 </div>
 </div>
 <div class="sect3">
@@ -651,19 +753,26 @@ If it doesn&#8217;t, it is just skipped.</p>
 <p>Reserved fields are very similar to <code>const</code> fields, however they don&#8217;t throw exceptions, but instead log messages if the values don&#8217;t match.</p>
 </div>
 <div class="paragraph">
-<p>The reason for this is that in general reserved fields have the given value until they start to be used.</p>
+<p>The reason for this is that in general reserved fields have the given value until they start being used.</p>
 </div>
 <div class="paragraph">
 <p>If the field starts to be used this shouldn&#8217;t break existing applications, but it should raise a flag as it might make sense to update the drivers.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[reserved {simple-type} {size} '{name}' '{reference}']</pre>
+<pre>[reserved {bit|byte}           {name} '{reference}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[reserved {simple-type} {size} {name} '{reference}']</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When parsing the values is parsed and the result is compared to the reference value.
-If the values don&#8217;t match, a log message is sent.</p>
+<p>When parsing the values a <code>reserved</code> field is parsed and the result is compared to the reference value and then discarded.</p>
+</div>
+<div class="paragraph">
+<p>If the values don&#8217;t match, a log message is written.</p>
 </div>
 <div class="paragraph">
 <p>This field doesn&#8217;t keep any data in memory.</p>
@@ -676,44 +785,31 @@ If the values don&#8217;t match, a log message is sent.</p>
 <div class="sect3">
 <h4 id="simple_field">simple Field</h4>
 <div class="paragraph">
-<p>Simple fields are the most common types of fields.
-A <code>simple</code> field directly mapped to a normally typed field.</p>
+<p>Simple fields are the most common types of fields.</p>
+</div>
+<div class="paragraph">
+<p>A <code>simple</code> field directly mapped to a normally typed field of a message type.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[simple {simple-type} {size} '{name}']</pre>
+<pre>[simple {bit|byte}           {name}]</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[simple {complex-type} '{name}']</pre>
+<pre>[simple {simple-type} {size} {name}]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[simple {complex-type}       {name}]</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>When parsing, the given type is parsed (can&#8217;t be <code>null</code>) and saved in the corresponding model instance&#8217;s property field.</p>
 </div>
 <div class="paragraph">
-<p>When serializing it is serialized normally.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="virtual_field">virtual Field</h4>
-<div class="paragraph">
-<p>Virtual fields have no impact on the input or output.
-They simply result in creating artificial get-methods in the generated model classes.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>[virtual {simple-type} {size} '{name}' '{value-expression}']</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>[virtual {complex-type} '{name}' '{value-expression}']</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Instead of being bound to a property, the return value of a <code>virtual</code> property is created by evaluating the <code>value-expression</code>.</p>
+<p>When serializing it is serialized normally using either a simple type serializer or by delegating serialization to a complex type.</p>
 </div>
 </div>
 <div class="sect3">
@@ -726,14 +822,14 @@ They simply result in creating artificial get-methods in the generated model cla
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>[typeSwitch '{arument-1}', '{arument-2}', ...
-    ['{argument-1-value-1}' {subtype-1-name}
+<pre>[typeSwitch {field-or-attribute-1}(,{field-or-attribute-2}, ...)
+    ['{field-1-value-1}' {subtype-1-name}
         ... Fields ...
     ]
-    ['{vargument-1-value-2}', '{argument-2-value-1}' {subtype-2-name}
+    ['{field-1-value-2}', '{field-2-value-1}' {subtype-2-name}
         ... Fields ...
     ]
-    ['{vargument-1-value-3}', '{argument-2-value-2}' {subtype-2-name} [uint 8 'existing-attribute-1', uint 16 'existing-attribute-2']
+    ['{field-1-value-3}', '{field-2-value-2}' {subtype-2-name} [uint 8 'existing-attribute-1', uint 16 'existing-attribute-2']
         ... Fields ...
     ]</pre>
 </div>
@@ -743,7 +839,7 @@ They simply result in creating artificial get-methods in the generated model cla
 Only the last option can stay empty, which results in a default type.</p>
 </div>
 <div class="paragraph">
-<p>Each sub-type declares a comma-separated list of concrete values.</p>
+<p>Each subtype declares a comma-separated list of concrete values.</p>
 </div>
 <div class="paragraph">
 <p>It must contain at most as many elements as arguments are declared for the type switch.</p>
@@ -758,10 +854,10 @@ Only the last option can stay empty, which results in a default type.</p>
 <p>If no type is found, an exception is thrown.</p>
 </div>
 <div class="paragraph">
-<p>Inside each sub-type can declare fields using a subset of the types (<code>discriminator</code> and <code>typeSwitch</code> can&#8217;t be used here)</p>
+<p>Inside each subtype can declare fields using a subset of the types (<code>discriminator</code> and <code>typeSwitch</code> can&#8217;t be used here)</p>
 </div>
 <div class="paragraph">
-<p>The third case in above code-snippet also passes a named attribute to the sub-type.
+<p>The third case in above code-snippet also passes a named attribute to the subtype.
 The name must be identical to any argument or named field parsed before the switchType.
 These arguments are then available for expressions or passing on in the subtypes.</p>
 </div>
@@ -769,11 +865,59 @@ These arguments are then available for expressions or passing on in the subtypes
 <p>See also:
 - <code>discriminatedType</code></p>
 </div>
+<div class="sect4">
+<h5 id="unknown_field">unknown Field</h5>
+<div class="paragraph">
+<p>This type of field is mainly used when working on reverse-engineering a new protocol.
+It allows parsing any type of information, storing and using it and serializing it back.</p>
+</div>
+<div class="paragraph">
+<p>In general, it&#8217;s something similar to a <code>simple</code> field, just explicitly states, that we don&#8217;t yet quite know how to handle the content.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="validation_field">validation Field</h5>
+<div class="paragraph">
+<p>As mentioned before, a <code>validation</code> field is not really a field, it&#8217;s a check that is added to the type parser.</p>
+</div>
+<div class="paragraph">
+<p>If the expression provided in the <code>validation</code> field fails, the parser aborts parsing and goes up the stack, till it finds the first <code>optional</code> field.
+If it finds one, it rewinds the parser to the position just before starting to parse the <code>optional</code> field, then skips the <code>optional</code> fields and continues with the next field.</p>
+</div>
+<div class="paragraph">
+<p>If there is no <code>optional</code> field up the stack, then parsing fails.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="virtual_field">virtual Field</h4>
+<div class="paragraph">
+<p>Virtual fields have no impact on the input or output.
+They simply result in creating artificial get-methods in the generated model classes.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[virtual {bit|byte}           {name} '{value-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[virtual {simple-type} {size} {name} '{value-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[virtual {complex-type}       {name} '{value-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead of being bound to a property, the return value of a <code>virtual</code> property is created by evaluating the <code>value-expression</code>.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="parameters">Parameters</h4>
 <div class="paragraph">
-<p>Some times it is necessary to pass along additional parameters.</p>
+<p>Sometimes it is necessary to pass along additional parameters.</p>
 </div>
 <div class="paragraph">
 <p>If a complex type requires parameters, these are declared in the header of that type.</p>
@@ -800,7 +944,7 @@ These arguments are then available for expressions or passing on in the subtypes
 </div>
 </div>
 <div class="paragraph">
-<p>Therefore wherever a complex type is referenced an additional list of parameters can be passed to the next type.</p>
+<p>Therefore, wherever a complex type is referenced an additional list of parameters can be passed to the next type.</p>
 </div>
 <div class="paragraph">
 <p>Here comes an example of this in above snippet:</p>
@@ -808,6 +952,49 @@ These arguments are then available for expressions or passing on in the subtypes
 <div class="literalblock">
 <div class="content">
 <pre>[field S7Payload   'payload'   ['messageType', 'parameter']]</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="serializer_and_parser_arguments">Serializer and Parser-Arguments</h4>
+<div class="paragraph">
+<p>Arguments influence the way the parser or serializer operates.</p>
+</div>
+<div class="paragraph">
+<p>Wherever an parser-argument is used, this should also be valid in all subtypes the parser processes.</p>
+</div>
+<div class="sect4">
+<h5 id="byteorder">byteOrder</h5>
+<div class="paragraph">
+<p>A <code>byteOrder</code> argument can set or change the byte-order used by the parser.</p>
+</div>
+<div class="paragraph">
+<p>We currently support two variants:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BIG_ENDIAN</p>
+</li>
+<li>
+<p>LITTLE_ENDIAN</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="encoding">encoding</h5>
+<div class="paragraph">
+<p>Each simple type has a default encoding, which is ok for a very high percentage of cases.</p>
+</div>
+<div class="paragraph">
+<p>Unsigned integers for example use 2s-complement notation, floating point values are encoded in IEEE 754 single- or double precision encoding. Strings are encoded as UTF-8 per default.</p>
+</div>
+<div class="paragraph">
+<p>However, in some cases an alternate encoding needs to be used. Especially when dealing with Strings, different encodings, such as ASCII, UTF-16 and many more, can be used. But also for numeric values, different encodings might be used. For example does KNX use a 16bit floating point encoding, which is not standard or in S7 drivers a special encoding was used to encode numeric values so they represent the number in hex format.</p>
+</div>
+<div class="paragraph">
+<p>An <code>encoding</code> attribute can be used to select a non-default encoding.</p>
 </div>
 </div>
 </div>

@@ -271,22 +271,22 @@
 <p><code>Protocol Base</code> and <code>Language Base</code> hereby just provide the interfaces that reference these types and provide the API for the <code>plc4x-maven-plugin</code> to use.</p>
 </div>
 <div class="paragraph">
-<p>These modules are also maintained in a repository which is separate from the rest of the PLC4X code.</p>
+<p>These modules are also maintained in a <a href="https://github.com/apache/plc4x-build-tools/tree/develop/code-generation">repository</a> which is separate from the rest of the PLC4X code.</p>
 </div>
 <div class="paragraph">
-<p>This is due to some restrictions in the Maven build system. If you are interested in understanding the reasons - please read the chapter on <code>Problems with Maven</code> near the end of this page.</p>
+<p>This is generally only due to some restrictions in the Maven build system. If you are interested in understanding the reasons - please read the chapter on <code>Problems with Maven</code> near the end of this page.</p>
 </div>
 <div class="paragraph">
-<p>Concrete protocol spec parsers and templates that actually generate code are implemented in derived modules.</p>
+<p>Concrete <a href="https://github.com/apache/plc4x/tree/develop/code-generation/protocol-base-mspec">protocol spec parsers</a>, <a href="https://github.com/apache/plc4x/tree/develop/code-generation/language-base-freemarker">code generators</a> as well as <a href="https://github.com/apache/plc4x/tree/develop/code-generation/language-java">templates</a> that actually generate code are implemented in derived modules all located under the <a href="https://github.com/apache/plc4x/tree/develop/code-generation">code-generation</a> part of the main project repository.</p>
 </div>
 <div class="paragraph">
-<p>We didn&#8217;t want to tie ourselves to only one way to specify protocols and to generate code. Generally multiple types of formats for specifying drivers are thinkable and the same way multiple ways of generating code are possible. Currently however we only have one parser: <code>MSpec</code> and one generator: <code>Freemarker</code>.</p>
+<p>We didn&#8217;t want to tie ourselves to only one way to specify protocols and to generate code. Generally multiple types of formats for specifying drivers are thinkable and the same way, multiple ways of generating code are possible. Currently, however we only have one parser: <code>MSpec</code> and one generator: <code>Freemarker</code>.</p>
 </div>
 <div class="paragraph">
 <p>These add more layers to the hierarchy.</p>
 </div>
 <div class="paragraph">
-<p>So for example in case of generating a Siemens S7 Driver for Java this would look like this:</p>
+<p>So for example in case of generating a <code>Siemens S7</code> Driver for <code>Java</code> this would look like this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -308,19 +308,23 @@
 <p>For the formats of specifying a protocol we have tried out numerous tools and frameworks, however the results were never quite satisfying.</p>
 </div>
 <div class="paragraph">
-<p>Usually using them required a large amount of workarounds, which made the solution quite complicated.</p>
+<p>Usually using them required a large amount of workarounds, which made the solution quite complicated.
+This is mainly the result, that tools like Thrift, Avro, GRPc, &#8230;&#8203; all are made for transferring an object structure from A to B. They lay focus on keeping the structure of the object in takt and not offer ways to control the format for transferring them.</p>
 </div>
 <div class="paragraph">
-<p>In the end only DFDL and the corresponding Apache project <a href="https://daffodil.apache.org">Apache Daffodil</a> seemed to provide what we were looking for.</p>
+<p>Existing industry standards, such as <code>ASN.1</code> unfortunately mostly relied on large portions of text to describe part of the parsing or serializing logic, which made it pretty much useless for a fully automated code genration.</p>
+</div>
+<div class="paragraph">
+<p>In the end only <code>DFDL</code> and the corresponding Apache project <a href="https://daffodil.apache.org">Apache Daffodil</a> seemed to provide what we were looking for.</p>
 </div>
 <div class="paragraph">
 <p>With this we were able to provide first driver versions fully specified in XML.</p>
 </div>
 <div class="paragraph">
-<p>The downside was, that the PLC4X community regarded this XML format as pretty complicated and when implementing an experimental code generator we quickly noticed that generating a nice object model would not be possible, due to the lack ability to model the inheritance of types in DFDL.</p>
+<p>The downside was, that the PLC4X community regarded this XML format as pretty complicated and when implementing an experimental code generator we quickly noticed that generating a nice object model would not be possible, due to the lack of an ability to model inheritance of types into a DFDL schema.</p>
 </div>
 <div class="paragraph">
-<p>In the end we came up with our own solution which we called <code>MSpec</code> and is described in the <a href="protocol/mspec.html">MSpec Format description</a>.</p>
+<p>In the end we came up with our own format which we called <code>MSpec</code> and is described in the <a href="protocol/mspec.html">MSpec Format description</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -332,17 +336,26 @@
 <p>In general all you need to specify, is the <code>protocolName</code> and the <code>languageName</code>.</p>
 </div>
 <div class="paragraph">
-<p>An additional option <code>outputFlavor</code> allows generating multiple versions of a driver for a given language. This can come in handy if we want to be able to generate <code>read-only</code> or <code>passive mode</code> driver variants.</p>
+<p>An additional option <code>outputFlavor</code> allows generating multiple versions of a driver for a given language.
+This can come in handy if we want to be able to generate <code>read-only</code> or <code>passive mode</code> driver variants.</p>
+</div>
+<div class="paragraph">
+<p>In order to be able to refactor and improve protocol specifications without having to update all drivers for a given protocol, we recently added a <code>protocolVersion</code> attribute, that allows us to provide and use multiple versions of one protocol.
+So in case of us updating the fictional <code>wombat-protocol</code>, we could add a <code>version 2</code> <code>mspec</code> for that, then use the version 2 in the java-driver and continue to use version 1 in all other languages.
+Once all drivers are updated we could eliminate the version again.</p>
 </div>
 <div class="paragraph">
 <p>Last, not least, we have a pretty generic <code>options</code> config option, which is a Map type.</p>
 </div>
 <div class="paragraph">
-<p>With options is it possible to pass generic options to the code-generation. So if a driver or language requires further customization, these options can be used.</p>
+<p>With options is it possible to pass generic options to the code-generation.
+So if a driver or language requires further customization, these options can be used.
+For a list of all supported options for a given language template, please refer to the corresponding language page.</p>
 </div>
 <div class="paragraph">
 <p>Currently, the <code>Java</code> module makes use of such an option for specifying the Java <code>package</code> the generated code uses.
-If no <code>package</code> option is provided, the default package <code>org.apache.plc4x.{language-name}.{protocol-name}.{output-flavor}</code> is used, but especially when generating custom drivers, which are not part of the Apache PLC4X project, different package names are better suited. So in these cases, the user can simply override the default package name.</p>
+If no <code>package</code> option is provided, the default package <code>org.apache.plc4x.{language-name}.{protocol-name}.{output-flavor}</code> is used, but especially when generating custom drivers, which are not part of the Apache PLC4X project, different package names are better suited.
+So in these cases, the user can simply override the default package name.</p>
 </div>
 <div class="paragraph">
 <p>There is also an additional parameter: <code>outputDir</code>, which defaults to <code>${project.build.directory}/generated-sources/plc4x/</code> and usually shouldn&#8217;t require being changed in case of a <code>Java</code> project, but usually requires tweaking when generating code for other languages.</p>
@@ -379,7 +392,7 @@ If no <code>package</code> option is provided, the default package <code>org.apa
   &lt;parent&gt;
     &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
     &lt;artifactId&gt;plc4x-code-generation&lt;/artifactId&gt;
-    &lt;version&gt;0.6.0-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;0.12.0&lt;/version&gt;
   &lt;/parent&gt;
 
   &lt;artifactId&gt;test-java-s7-driver&lt;/artifactId&gt;
@@ -411,13 +424,13 @@ If no <code>package</code> option is provided, the default package <code>org.apa
     &lt;dependency&gt;
       &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
       &lt;artifactId&gt;plc4x-code-generation-driver-base-java&lt;/artifactId&gt;
-      &lt;version&gt;0.6.0-SNAPSHOT&lt;/version&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
     &lt;/dependency&gt;
 
     &lt;dependency&gt;
       &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
       &lt;artifactId&gt;plc4x-code-generation-language-java&lt;/artifactId&gt;
-      &lt;version&gt;0.6.0-SNAPSHOT&lt;/version&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
       &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
       &lt;scope&gt;provided&lt;/scope&gt;
     &lt;/dependency&gt;
@@ -425,7 +438,7 @@ If no <code>package</code> option is provided, the default package <code>org.apa
     &lt;dependency&gt;
       &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
       &lt;artifactId&gt;plc4x-code-generation-protocol-s7&lt;/artifactId&gt;
-      &lt;version&gt;0.6.0-SNAPSHOT&lt;/version&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
       &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
       &lt;scope&gt;provided&lt;/scope&gt;
     &lt;/dependency&gt;
@@ -442,11 +455,11 @@ If no <code>package</code> option is provided, the default package <code>org.apa
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;plc4x-code-generation-driver-base-java&lt;/artifactId&gt;
-  &lt;version&gt;0.6.0-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;</pre>
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-driver-base-java&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+    &lt;/dependency&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -457,13 +470,13 @@ If no <code>package</code> option is provided, the default package <code>org.apa
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;plc4x-code-generation-language-java&lt;/artifactId&gt;
-  &lt;version&gt;0.6.0-SNAPSHOT&lt;/version&gt;
-  &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
-  &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-language-java&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+      &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -471,13 +484,13 @@ If no <code>package</code> option is provided, the default package <code>org.apa
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;plc4x-code-generation-protocol-s7&lt;/artifactId&gt;
-  &lt;version&gt;0.6.0-SNAPSHOT&lt;/version&gt;
-  &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
-  &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;</pre>
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-protocol-s7&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+      &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -495,16 +508,15 @@ If no <code>package</code> option is provided, the default package <code>org.apa
 <p>In order to provide a new protocol module, all that is required, it so create a module containing a <code>META-INF/services/org.apache.plc4x.plugins.codegenerator.protocol.Protocol</code> file referencing an implementation of the <code>org.apache.plc4x.plugins.codegenerator.protocol.Protocol</code> interface.</p>
 </div>
 <div class="paragraph">
-<p>This interface is located in the <code>org.apache.plc4x.plugins:plc4x-code-generation-protocol-base</code> module and generally only defines two methods:</p>
+<p>This interface is located in the <code>org.apache.plc4x.plugins:plc4x-code-generation-protocol-base</code> module and generally only defines three methods:</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>package org.apache.plc4x.plugins.codegenerator.protocol;
 
-import org.apache.plc4x.plugins.codegenerator.types.definitions.ComplexTypeDefinition;
 import org.apache.plc4x.plugins.codegenerator.types.exceptions.GenerationException;
 
-import java.util.Map;
+import java.util.Optional;
 
 public interface Protocol {
 
@@ -516,38 +528,41 @@ public interface Protocol {
     String getName();
 
     /**
-     * Returns a map of complex type definitions for which code has to be generated.
+     * Returns a map of type definitions for which code has to be generated.
      *
      * @return the Map of types that need to be generated.
      * @throws GenerationException if anything goes wrong parsing.
      */
-    Map&lt;String, TypeDefinition&gt; getTypeDefinitions() throws GenerationException;
+    TypeContext getTypeContext() throws GenerationException;
+
+
+    /**
+     * @return the protocolVersion is applicable
+     */
+    default Optional&lt;String&gt; getVersion() {
+        return Optional.empty();
+    }
 
 }</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>These implementations could use any form of way to generate the Map of `ComplexTypeDefinition&#8217;s.
-They could even be hard coded.</p>
+<p>The <code>name</code> is being used for the module to find the right language module, so the result of <code>getName()</code> needs to match the value provided in the maven config-option <code>protocolName</code>.</p>
 </div>
 <div class="paragraph">
-<p>However, we have currently implemented utilities for universally providing input:</p>
+<p>As mentioned before, we support multiple versions of a protocol, so if <code>getVersions()</code> returns a non-empty version, this is used to select the version.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="protocol/mspec.html">MSpec Format</a> PLC4X proprietary format.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>The most important method for the actual code-generation however is the <code>getTypeContext()</code> method, which returns a <code>TypeContext</code> type which generally contains a list of all parsed types for this given protocol.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="language_modules">Language Modules</h4>
 <div class="paragraph">
-<p>Analog to the <a href="#protocol_modules">Protocol Modules</a> the Language modules are constructed equally.</p>
+<p>Analog to the <a href="#protocol_modules">Protocol Modules</a> the Language modules are constructed very similar.</p>
 </div>
 <div class="paragraph">
-<p>The <code>Language</code> interface is very simplistic too and is located in the <code>org.apache.plc4x.plugins:plc4x-code-generation-language-base</code> module and generally only defines two methods:</p>
+<p>The <code>LanguageOutput</code> interface is very simplistic too and is located in the <code>org.apache.plc4x.plugins:plc4x-code-generation-language-base</code> module and generally only defines four methods:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -578,7 +593,7 @@ public interface LanguageOutput {
      */
     Set&lt;String&gt; supportedOptions();
 
-    void generate(File outputDir, String languageName, String protocolName, String outputFlavor,
+    void generate(File outputDir, String version, String languageName, String protocolName, String outputFlavor,
         Map&lt;String, TypeDefinition&gt; types, Map&lt;String, String&gt; options) throws GenerationException;
 
 }</pre>
@@ -588,14 +603,13 @@ public interface LanguageOutput {
 <p>The file for registering Language modules is located at: <code>META-INF/services/org.apache.plc4x.plugins.codegenerator.language.LanguageOutput</code></p>
 </div>
 <div class="paragraph">
-<p>Same as with the protocol modules, the language modules could also be implemented in any thinkable way, however we have already implemented some helpers for using:</p>
+<p>The <code>name</code> being used by the plugin to find the language output module defined by the maven config option <code>languageName</code>.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="language/freemarker.html">Apache Freemarker Format</a> Generate output using <a href="https://freemarker.apache.org">Apache Freemarker</a> Project.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><code>supportedOutputFlavors</code> provides a possible list of flavors, that can be referred to by the maven config option <code>outputFlavor</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>supportedOptions</code> provides a list of <code>options</code> that the current language module is able to use and which can be passed in to the maven configuration using the <code>options</code> settings.</p>
 </div>
 </div>
 </div>
@@ -614,17 +628,17 @@ public interface LanguageOutput {
 This means that Maven also tries to download the dependencies of the plugins too.</p>
 </div>
 <div class="paragraph">
-<p>In case of using a Maven plugin in a project which also produces the maven plugin, this is guaranteed to fail - Especially during releases.
-While during normal development, Maven will probably just download the latest <code>SNAPSHOT</code> from our Maven repository and be happy with this and not complain that this version will be overwritten later on in the build.
+<p>In case of using a Maven plugin in a project which also builds the maven plugin itself, this is guaranteed to fail - Especially during releases.
+While during normal development, Maven will probably just download the latest <code>SNAPSHOT</code> from our Maven repository and will be happy with this and not complain even if this version will be overwritten later on in the build.
 It will just use the new version as soon as it has to.</p>
 </div>
 <div class="paragraph">
 <p>During releases however the release plugin changes the version to a release version and then spawns a build.
-In this case the build will fail because there is no Plugin with that version to download.
-In this case the only option would be to manually build and install the plugin in the release version and to re-start the release (Which is not a nice thing for the release manager).</p>
+In this case the build will fail because there is no Plugin with that version to download from anywhere.
+In this case the only option would be to manually build and deploy the plugin in the release version and to re-start the release (Which is not a nice thing for the release manager).</p>
 </div>
 <div class="paragraph">
-<p>For this reason we have stripped down the plugin and its dependencies to an absolute minimum and have released (or will release) that separately from the rest, hoping due to the minimality of the dependencies that we will not have to do it very often.</p>
+<p>For this reason we have stripped down the plugin and its dependencies to an absolute minimum and have released that separately from the rest, hoping due to the minimality of the dependencies that we will not have to do it very often.</p>
 </div>
 <div class="paragraph">
 <p>As soon as the tooling is released, the version is updated in the PLC4X build and the release version is used without any complications.</p>
@@ -633,17 +647,17 @@ In this case the only option would be to manually build and install the plugin i
 <div class="sect3">
 <h4 id="why_are_the_protocol_and_language_dependencies_done_so_strangely">Why are the protocol and language dependencies done so strangely?</h4>
 <div class="paragraph">
-<p>It would certainly be a lot cleaner, if we provided the modules as plugin dependencies.</p>
+<p>It would certainly be a lot cleaner, if we provided the dependencies to protocol and language modules as plugin dependencies.</p>
 </div>
 <div class="paragraph">
-<p>However, as we mentioned in the previous sub-chapter, Maven tries to download and configure the plugins prior to running the build.
+<p>However, as we mentioned in the previous subchapter, Maven tries to download and configure the plugins prior to running the build.
 So during a release the new versions of the modules wouldn&#8217;t exist, this would cause the build to fail.</p>
 </div>
 <div class="paragraph">
 <p>We could release the protocol- and the language modules separately too, but we want the language and protocol modules to be part of the project, to not over-complicate things - especially during a release.</p>
 </div>
 <div class="paragraph">
-<p>So the Maven plugin is built in a way, that it uses the modules dependencies and creates its own Classloader to contain all of these modules at runtime.</p>
+<p>In order to keep the build and the release as simple as possible, we built the Maven plugin in a way, that it uses the modules dependencies and creates its own Classloader to contain all of these modules at runtime.</p>
 </div>
 <div class="paragraph">
 <p>This brings the benefit of being able to utilize Maven&#8217;s capability of determining the build order and dynamically creating the modules build classpath.</p>
@@ -652,7 +666,7 @@ So during a release the new versions of the modules wouldn&#8217;t exist, this w
 <p>Adding a normal dependency however would make Maven deploy the artifacts with the rest of the modules.</p>
 </div>
 <div class="paragraph">
-<p>We don&#8217;t want that as the modules are useless as soon as they have been used to generate the code.</p>
+<p>We don&#8217;t want that as both the protocol as well as the language-modules are useless as soon as they have been used to generate the code.</p>
 </div>
 <div class="paragraph">
 <p>So we use a trick that is usually used in Web applications, for example:
