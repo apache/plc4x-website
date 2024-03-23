@@ -266,7 +266,7 @@ Please be sure to execute the release with a Java version 11 or the Karaf featur
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox,enable-all-checks -DbranchName=rel/{current-short-version}</pre>
+<pre>   mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks -DbranchName=rel/{current-short-version}</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -281,7 +281,7 @@ Please be sure to execute the release with a Java version 11 or the Karaf featur
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:prepare -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox,enable-all-checks</pre>
+<pre>   mvn release:prepare -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</pre>
 </div>
 </div>
 <div class="ulist checklist">
@@ -497,7 +497,7 @@ Otherwise, the non-default modules on develop will reference the old version whi
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox,enable-all-checks -DbranchName=rel/{minor-version}</pre>
+<pre>mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks -DbranchName=rel/{minor-version}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -506,7 +506,7 @@ So in case of preparing the release branch for <code>0.13.0-SNAPSHOT</code> the 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox,enable-all-checks -DbranchName=rel/0.13</pre>
+<pre>   mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks -DbranchName=rel/0.13</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -598,11 +598,11 @@ In order to prepare a release-candidate, the first step is switching to the corr
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:prepare -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox,enable-all-checks</pre>
+<pre>mvn release:prepare -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(The <code>-P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox,enable-all-checks</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release)
+<p>(The <code>-P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release)
 In general the plugin will now ask you 3 questions:</p>
 </div>
 <div class="olist arabic">
@@ -715,7 +715,7 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn release:rollback -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox,enable-all-checks</pre>
+<pre>mvn release:rollback -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -765,7 +765,7 @@ Here it automatically executes a maven build (You don&#8217;t have to do this, i
 <p>As the <code>apache-release</code> profile is also activated, this builds and tests the project as well as creates the JavaDocs, Source packages and signs each of these with your PGP key.</p>
 </div>
 <div class="paragraph">
-<p>We are intentionally not adding the other profiles, as these either produce binary artifacts that usually only work on the system they were compiled on (C++, .Net) or we haven&#8217;t found a good way to distribute them via Maven yet (Python) or deployment is disabled anyway (sandbox).</p>
+<p>We are intentionally not adding the other profiles, as these either produce binary artifacts that usually only work on the system they were compiled on (C++, .Net) or we haven&#8217;t found a good way to distribute them via Maven yet (Python).</p>
 </div>
 <div class="paragraph">
 <p>As this time the build is building with release versions, Maven will automatically choose the release url for deploying artifacts.</p>
@@ -964,7 +964,7 @@ This is done by moving them inside the Apache SVN.</p>
 <p>Set the versions of the release branch to the previous version by using the <code>versions:set</code> plugin:</p>
 <div class="literalblock">
 <div class="content">
-<pre>mvn versions:set -DprocessAllModules=true -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox,enable-all-checks</pre>
+<pre>mvn versions:set -DprocessAllModules=true -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</pre>
 </div>
 </div>
 </li>
