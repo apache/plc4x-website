@@ -410,7 +410,7 @@
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>unit-identifier</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>default-unit-identifier</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -571,7 +571,7 @@
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>unit-identifier</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>default-unit-identifier</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -800,9 +800,9 @@ Allowed values are:
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>unit-identifier</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>default-unit-identifier</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>INT</p>
+<p>STRUCT</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>1</p>
@@ -1015,6 +1015,17 @@ Allowed values are:
 <div class="paragraph">
 <p>If the array-size part is omitted, the size-default of <code>1</code> is assumed.
 If the data-type part is omitted, it defaults to BOOL for Coils and Discrete Inputs and INT for input, holding and extended registers.</p>
+</div>
+<div class="paragraph">
+<p>Additionally address can contain tag configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{unit-id: 123}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Specifying this value overrides value of <code>default-unit-id</code> parameter specified at the connection string.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1278,6 +1289,28 @@ This memory area starts at address 0.</p>
 </li>
 <li>
 <p>4x5678</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To read 1 holding register of unit 10 at address 5678 the following examples are valid.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>holding-register:5678{unit-id: 10}</p>
+</li>
+<li>
+<p>405678{unit-id: 10}</p>
+</li>
+<li>
+<p>4x05678{unit-id: 10}</p>
+</li>
+<li>
+<p>45678{unit-id: 10}</p>
+</li>
+<li>
+<p>4x5678{unit-id: 10}</p>
 </li>
 </ul>
 </div>
