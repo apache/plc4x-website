@@ -356,9 +356,7 @@ async def communicate_with_plc():
             builder.add_item("Random Tag", "4x00001[10]")
             request = builder.build()
 
-        future = connection.execute(request)
-        await future
-        response = future.result()
+        response = await connection.execute(request)
 
 asyncio.run(communicate_with_plc())</pre>
 </div>
@@ -440,9 +438,7 @@ with connection.read_request_builder() as builder:
 <div class="listingblock">
 <div class="content">
 <pre>try:
-    future = connection.execute(request)
-    await future
-    response = future.result()
+    response = await connection.execute(request)
 except TimeOutException:
     # Handle timeout error
 except ...
@@ -551,9 +547,7 @@ with connection.write_request_builder() as builder:
 <div class="listingblock">
 <div class="content">
 <pre>try:
-    future = connection.execute(request)
-    await future
-    response = future.result()
+    response = await connection.execute(request)
 except TimeOutException:
     # Handle timeout error
 except ...
