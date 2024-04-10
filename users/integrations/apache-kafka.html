@@ -335,7 +335,7 @@ mission-critical applications.</p>
 <h1 id="plc4x_kafka_connectors" class="sect0">PLC4X Kafka Connectors</h1>
 <div class="paragraph">
 <p>The PLC4X connectors have the ability to pass data between Kafka and devices using industrial protocols.
-They can be built from source from the latest <a href="https://plc4x.apache.org/users/download.html">release</a> of
+They can be built from source from the latest <a href="https://github.com/apache/plc4x-extras/tree/main/plc4j/integrations/apache-kafka">plc4x extras - kafka integration</a> and plc4x <a href="https://plc4x.apache.org/users/download.html">release</a> of
 PLC4X or from the latest snapshot from <a href="https://github.com/apache/plc4x">github</a>.</p>
 </div>
 <div class="sect1">
@@ -439,7 +439,7 @@ This includes comments as well as meaningful properties that can be used with th
 </div>
 <div class="paragraph">
 <p>The configuration of the connectors via the REST interface expects the same properties as are specified within the
-example <a href="https://github.com/apache/plc4x/tree/develop/plc4j/integrations/apache-kafka/config">config/plc4x-source.properties</a> file. These will need to be in JSON format and included with a couple of headers.
+example <a href="https://github.com/apache/plc4x-extras/blob/main/plc4j/integrations/apache-kafka/config/plc4x-source.properties">config/plc4x-source.properties</a> file. These will need to be in JSON format and included with a couple of headers.
 An example below shows the format it expects:-</p>
 </div>
 <div class="literalblock">
@@ -517,7 +517,7 @@ bin/kafka-topics --create --zookeeper localhost:2181 --topic connect-status --re
 <h2 id="sink_connector">Sink Connector</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>See <a href="https://github.com/apache/plc4x/tree/develop/plc4j/integrations/apache-kafka/config">config/sink.properties</a> for an example configuration.</p>
+<p>See <a href="https://github.com/apache/plc4x-extras/blob/main/plc4j/integrations/apache-kafka/config/plc4x-sink.properties">config/sink.properties</a> for an example configuration.</p>
 </div>
 <div class="sect2">
 <h3 id="start_a_kafka_connect_sink_worker_standalone">Start a Kafka Connect Sink Worker (Standalone)</h3>
