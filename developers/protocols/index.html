@@ -101,7 +101,7 @@
                             <a href="../../developers/preparing/linux.html" class="nav-link">Linux</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">Mac OS</strong>
+                            <a href="../../developers/preparing/macos.html" class="nav-link">Mac OS</a>
                             </li>
                                             <li class="nav-item">
                             <a href="../../developers/preparing/windows.html" class="nav-link">Windows</a>
@@ -150,7 +150,7 @@
                                 
                                                                     
                                                                 <li class="nav-item">
-                            <a href="../../developers/protocols/index.html" class="nav-link">Protocols</a>
+                            <strong class="nav-link">Protocols</strong>
                                     <ul class="flex-column pl-4 nav">
                                             <li class="nav-item">
                             <a href="../../developers/protocols/ads/protocol.html" class="nav-link">ADS/AMS</a>
@@ -238,150 +238,12 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="mac_os">Mac OS</h2>
+<h2 id="usage_of_protocols">Usage of protocols</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Most libraries on Mac are installed using <code>Homebrew</code>.</p>
-</div>
-<div class="paragraph">
-<p>Make sure <code>Homebrew</code> ist installed in order to install most of these.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="git">Git</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>git --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>In order to install it, please execute the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>brew install git</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="libpcap">LibPCAP</h3>
-<div class="paragraph">
-<p>The libpcap version bundled with Mac OS is currently 1.9.1.
-This version causes exceptions.
-So it&#8217;s best to update to a newer version using brew:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>brew install libpcap</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="gcc">gcc</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>gcc --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>It seems macOS comes with a version of gcc which is good enough for our usecases.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="dotnet">dotnet</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>dotnet --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>Microsoft is offering an installer for MacOS which is available from <a href="https://dotnet.microsoft.com/download/dotnet-core/2.2">here</a>.</p>
-</div>
-<div class="paragraph">
-<p>Alternatively you can also install it via homebrew:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>brew install --cask dotnet-sdk</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="python">python</h3>
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>python --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get a version of 3.0.0 or higher reported, you probably don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>In order to install it, please execute the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>brew install pyenv</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then use pyenv to install python:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>pyenv install 3.9.13</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then set this as the global python version:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>pyenv global 3.9.13</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And add pyenv to the PATH:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.zshrc
-$ echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.bash_profile</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>After opening a new terminal, <code>python</code> should be configured</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>python --version</pre>
-</div>
-</div>
+<p>Currently documented are:
+* <a href="ads/index.html">Beckhoff/ ADS</a>
+* <a href="eip/index.html">EIP</a></p>
 </div>
 </div>
 </div>
