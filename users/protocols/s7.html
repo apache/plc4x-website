@@ -552,7 +552,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Rack value for the client (PLC4X device).</p>
+<p>Rack value for the client (PLC4X device).)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -565,7 +565,24 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Slot value for the client (PLC4X device).</p>
+<p>Slot value for the client (PLC4X device).)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-device-group</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OTHERS</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local Device Group. (Defaults to 'OTHERS').<br/>
+Allowed values:<br/>
+ - PG_OR_PC<br/>
+ - OS<br/>
+ - OTHERS)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -578,7 +595,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Local Transport Service Access Point.</p>
+<p>Local Transport Service Access Point. (Overrides settings made in local-rack, local-slot and local-device-group. Be sure to convert into integer representation))</p>
 </div></div></td>
 </tr>
 <tr>
@@ -591,7 +608,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Rack value for the remote main CPU (PLC).</p>
+<p>Rack value for the remote main CPU (PLC).)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -604,33 +621,24 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Slot value for the remote main CPU (PLC).</p>
+<p>Slot value for the remote main CPU (PLC).)</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-rack2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-device-group</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>INT</p>
+<p>STRING</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>0</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Rack value for the remote secondary CPU (PLC).</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-slot2</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>INT</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>0</p>
+<p>PG_OR_PC</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Slot value for the remote secondary CPU (PLC).</p>
+<p>Remote Device Group (Defaults to 'PG_OR_PC').<br/>
+Allowed values:<br/>
+ - PG_OR_PC<br/>
+ - OS<br/>
+ - OTHERS)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -643,7 +651,50 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Remote Transport Service Access Point.</p>
+<p>Remote Transport Service Access Point. (Overrides settings made in remote-rack, remote-slot and remote-device-group. Be sure to convert into integer representation))</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-rack2</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Rack value for the remote secondary CPU (PLC).)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-slot2</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Slot value for the remote secondary CPU (PLC).)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-device-group2</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PG_OR_PC</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Remote Device Group. (Defaults to 'PG_OR_PC').<br/>
+Allowed values:<br/>
+ - PG_OR_PC<br/>
+ - OS<br/>
+ - OTHERS)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -656,7 +707,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Maximum size of a data-packet sent to and received from the remote PLC. During the connection process both parties will negotiate a maximum size both parties can work with and is equal or smaller than the given value is used. The driver will automatically split up large requests to not exceed this value in a request or expected response.</p>
+<p>Maximum size of a data-packet sent to and received from the remote PLC. During the connection process both parties will negotiate a maximum size both parties can work with and is equal or smaller than the given value is used. The driver will automatically split up large requests to not exceed this value in a request or expected response.)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -669,7 +720,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Maximum number of unconfirmed requests the PLC will accept in parallel before discarding with errors. This parameter also will be negotiated during the connection process and the maximum both parties can work with and is equal or smaller than the given value is used. The driver will automatically take care not exceeding this value while processing requests. Too many requests can cause a growing queue.</p>
+<p>Maximum number of unconfirmed requests the PLC will accept in parallel before discarding with errors. This parameter also will be negotiated during the connection process and the maximum both parties can work with and is equal or smaller than the given value is used. The driver will automatically take care not exceeding this value while processing requests. Too many requests can cause a growing queue.)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -682,7 +733,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Maximum number of unconfirmed responses or requests PLC4X will accept in parallel before discarding with errors. This option is available for completeness and is correctly handled out during the connection process, however it is currently not enforced on PLC4X’s side. So if a PLC would send more messages than agreed upon, these would still be processed.</p>
+<p>Maximum number of unconfirmed responses or requests PLC4X will accept in parallel before discarding with errors. This option is available for completeness and is correctly handled out during the connection process, however it is currently not enforced on PLC4X’s side. So if a PLC would send more messages than agreed upon, these would still be processed.)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -693,11 +744,11 @@ In the following, reference will be made to the Java-based driver, which impleme
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>As part of the connection process, usually the PLC4X S7 driver would try to identify the remote device. However some devices seem to have problems with this and hang up or cause other problems. In such a case, providing the controller-type will skip the identification process and hereby avoid this type of problem. Possible values are:/n- S7_300
-- S7_400
-- S7_1200
-- S7-1500
-- LOGO</p>
+<p>As part of the connection process, usually the PLC4X S7 driver would try to identify the remote device. However some devices seem to have problems with this and hang up or cause other problems. In such a case, providing the controller-type will skip the identification process and hereby avoid this type of problem. Possible values are:/n- S7_300<br/>
+- S7_400<br/>
+- S7_1200<br/>
+- S7-1500<br/>
+- LOGO)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -710,7 +761,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>This is the maximum waiting time for reading on the TCP channel. As there is no traffic, it must be assumed that the connection with the interlocutor was lost and it must be restarted. When the channel is closed, the "fail over" is carried out in case of having the secondary channel, or it is expected that it will be restored automatically, which is done every 4 seconds.</p>
+<p>This is the maximum waiting time for reading on the TCP channel. As there is no traffic, it must be assumed that the connection with the interlocutor was lost and it must be restarted. When the channel is closed, the "fail over" is carried out in case of having the secondary channel, or it is expected that it will be restored automatically, which is done every 4 seconds.)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -723,7 +774,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time for supervision of TCP channels. If the channel is not active, a safe stop of the EventLoop must be performed, to ensure that no additional tasks are created.</p>
+<p>Time for supervision of TCP channels. If the channel is not active, a safe stop of the EventLoop must be performed, to ensure that no additional tasks are created.)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -736,7 +787,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>If your application requires sampling times greater than the set "read-timeout" time, it is important that the PING option is activated, this will prevent the TCP channel from being closed unnecessarily.</p>
+<p>If your application requires sampling times greater than the set "read-timeout" time, it is important that the PING option is activated, this will prevent the TCP channel from being closed unnecessarily.)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -749,7 +800,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time value in seconds at which the execution of the PING will be scheduled. Generally set by developer experience, but generally should be the same as (read-timeout / 2).</p>
+<p>Time value in seconds at which the execution of the PING will be scheduled. Generally set by developer experience, but generally should be the same as (read-timeout / 2).)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -770,7 +821,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Should keep-alive packets be sent?</p>
+<p>Should keep-alive packets be sent?)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -783,7 +834,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Should packets be sent instantly or should we give the OS some time to aggregate data.</p>
+<p>Should packets be sent instantly or should we give the OS some time to aggregate data.)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -796,7 +847,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Timeout after which a connection will be treated as disconnected.</p>
+<p>Timeout after which a connection will be treated as disconnected.)</p>
 </div></div></td>
 </tr>
 </tbody>
