@@ -244,13 +244,65 @@
 <p>Building a project like Apache PLC4X on multiple target operating-systems is quite a challenge, but I think we managed to make it as simple as possible.</p>
 </div>
 <div class="paragraph">
-<p>However, when building PLC4X there are some requirements the build is expecting you to have provided.
-However, this greatly depends on which parts you want to build.
-The <code>Java</code> modules hereby probably have the least demanding requirements.</p>
+<p>We usually test the PLC4X build on the following systems:</p>
 </div>
 <div class="paragraph">
-<p>In order to build most Java parts of <code>PLC4X</code> you are required to have at least <code>Java 9</code> installed on your machine.
-Some integration modules and some other languages however may add some additional constraints to this.</p>
+<p>width=100%]</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operating System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CPU Architecture</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linux</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x86_64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Most computers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linux</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aarch64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linux running on Macs with M processors (Paralells)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Windows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x86_64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Most computers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Windows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aarch64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Windows running on Macs with M processors (Paralells)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mac</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x86_64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Older Macs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mac</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aarch64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Newer Macs with M processors (Paralells)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>However, when building PLC4X there are some requirements the build is expecting you to have provided.
+These greatly depend on which parts you want to build.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re just building the <code>Java</code> modules, these probably have the least demanding requirements.
+Also, should the <code>Go</code> parts generally work without any additional installations as the maven build should automatically pull the required packages.</p>
+</div>
+<div class="paragraph">
+<p>In order to build all Java parts of <code>PLC4X</code> you are required to have at least <code>Java 11</code> installed on your machine.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -259,7 +311,7 @@ Some integration modules and some other languages however may add some additiona
 <div class="title">Tip</div>
 </td>
 <td class="content">
-We have tested the build with Java 11 up to Java 18 (Latest version at the time of writing this document).
+We have tested the build with Java 11 up to Java 21 (Latest version at the time of writing this document).
 </td>
 </tr>
 </table>
@@ -270,19 +322,7 @@ We&#8217;ll probably fix them as soon as possible.
 However, in the past with Oracle&#8217;s new release strategy, there have been a few bumps on the road.</p>
 </div>
 <div class="paragraph">
-<p>Also will PLC4X build with any Maven version starting with <code>Maven 3.3.0</code> however the <code>with-c</code> profile requires at least <code>Maven 3.6</code> as the <code>cmake-maven-plugin</code> requires this.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Tip</div>
-</td>
-<td class="content">
-Currently, Maven 3.6 and above is required for being able to build all parts of PLC4X.
-</td>
-</tr>
-</table>
+<p>Also will PLC4X build with any Maven version starting with <code>Maven 3.6.0</code>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>

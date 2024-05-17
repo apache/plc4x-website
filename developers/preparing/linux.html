@@ -240,6 +240,19 @@
             <div class="sect1">
 <h2 id="linux">Linux</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>As tracking down issues which result from missing or outdated third party tools such as compilers are always hard do diagnose, we have extended the build of PLC4X with a <code>prerequisiteCheck</code> that automatically checks if required tools are installed and if a required minimum version is available.</p>
+</div>
+<div class="paragraph">
+<p>If any of the prerequisites are not met, the build fails with an error message that will help finding out what&#8217;s wrong.</p>
+</div>
+<div class="paragraph">
+<p>The number of checks is highly dependent on which profiles are enabled.
+So for example the availability and version of the C compiler is only checked if the <code>with-c</code> profile is enabled.</p>
+</div>
+<div class="paragraph">
+<p>If the check is reporting any issues, please feel free to follow the corresponding steps in this guide to install the tools.</p>
+</div>
 <div class="sect2">
 <h3 id="git">Git</h3>
 <div class="paragraph">
@@ -258,7 +271,7 @@
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo apt-get install git</pre>
+<pre>sudo apt install git</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -271,13 +284,40 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="libpcap">LibPCAP</h3>
+<h3 id="java">Java</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>java --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get successful output indicating at least Java 11, you don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Apt based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt install openjdk-21-jdk</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="optional_and_other_language_support">Optional and other language support</h3>
+<div class="paragraph">
+<p>Git an Java should be all you need for building the Java part of PLC4X.</p>
+</div>
+<div class="sect3">
+<h4 id="libpcap_for_raw_ethernet_support">LibPCAP (For raw-ethernet support)</h4>
 <div class="paragraph">
 <p>Apt-based systems:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo apt-get install libpcap-dev</pre>
+<pre>sudo apt install libpcap-dev</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -293,20 +333,41 @@
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>setcap cap_net_raw,cap_net_admin=eip /path/to/java</pre>
+<pre>sudo setcap cap_net_raw,cap_net_admin=eip /path/to/java</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Sometimes I had to set the uid to execute the java executable with the permissions of the owner (root) &#8230;&#8203; however this is quite sub-optimal solution.</p>
+<p><code>/path/to/java</code> however needs to be a real file and not a symlink.
+So on my Ubuntu 22.04 system, where I installed java as described above the command is as follows:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>chmod 4755 /path/to/java</pre>
+<pre>sudo setcap cap_net_raw,cap_net_admin=eip /usr/lib/jvm/java-21-openjdk-arm64/bin/java</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sometimes I had to set the uid to execute the java executable with the permissions of the owner (root) &#8230;&#8203; however this is quite suboptimal solution.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo chmod 4755 /path/to/java</pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="gcc">gcc</h3>
+<div class="sect3">
+<h4 id="gcc_for_plc4c">gcc (For PLC4C)</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+It seems that when running Linux on <code>aarch64</code> (Apple&#8217;s Silicon Chips), that there are issues &#8230;&#8203; we&#8217;re working on that. Feel free to watch <a href="https://github.com/apache/plc4x/issues/1582" class="bare">https://github.com/apache/plc4x/issues/1582</a> on updates to this.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -323,7 +384,7 @@
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo apt-get install gcc</pre>
+<pre>sudo apt install gcc</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -335,8 +396,8 @@
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="dotnet">dotnet</h3>
+<div class="sect3">
+<h4 id="dotnet_for_plc4net">dotnet (For PLC4Net)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -358,17 +419,28 @@
 <div class="content">
 <pre>wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
-sudo apt-get install apt-transport-https
-sudo apt-get update
-sudo apt-get install dotnet-sdk-6.0</pre>
+sudo apt install apt-transport-https
+sudo apt update
+sudo apt install dotnet-sdk-6.0</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>For other distributions, please select the distribution in the drop-down menu and follow the instructions there.</p>
 </div>
+<div class="paragraph">
+<p>If, when checking the version again after installing, you are getting an error:</p>
 </div>
-<div class="sect2">
-<h3 id="python">python</h3>
+<div class="literalblock">
+<div class="content">
+<pre>A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then please have a look at this Stackoverflow post (the accepted solution) <a href="https://stackoverflow.com/questions/73753672/a-fatal-error-occurred-the-folder-usr-share-dotnet-host-fxr-does-not-exist" class="bare">https://stackoverflow.com/questions/73753672/a-fatal-error-occurred-the-folder-usr-share-dotnet-host-fxr-does-not-exist</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="python_for_plc4py">python (For PLC4Py)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -385,7 +457,7 @@ sudo apt-get install dotnet-sdk-6.0</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo apt-get install python3</pre>
+<pre>sudo apt install python3</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -397,8 +469,8 @@ sudo apt-get install dotnet-sdk-6.0</pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="python_venv">Python venv</h3>
+<div class="sect3">
+<h4 id="python_venv_for_plc4py">Python venv (For PLC4Py)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -416,7 +488,8 @@ It seems that this manually needs to be installed on some systems.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>sudo apt-get install python3-venv</pre>
+<pre>sudo apt install python3-venv</pre>
+</div>
 </div>
 </div>
 </div>

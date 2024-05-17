@@ -240,6 +240,22 @@
             <div class="sect1">
 <h2 id="windows">Windows</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>As tracking down issues which result from missing or outdated third party tools such as compilers are always hard do diagnose, we have extended the build of PLC4X with a <code>prerequisiteCheck</code> that automatically checks if required tools are installed and if a required minimum version is available.</p>
+</div>
+<div class="paragraph">
+<p>If any of the prerequisites are not met, the build fails with an error message that will help finding out what&#8217;s wrong.</p>
+</div>
+<div class="paragraph">
+<p>The number of checks is highly dependent on which profiles are enabled.
+So for example the availability and version of the C compiler is only checked if the <code>with-c</code> profile is enabled.</p>
+</div>
+<div class="paragraph">
+<p>As in the past keeping the documentation up to date has been quite challenging, as the projects providing and packaging some of the needed tools have been born and dying like weed, we&#8217;ll start using Chocolatey as something similar to Homebrew on Mac or Apt on Linux.</p>
+</div>
+<div class="paragraph">
+<p>So first be sure to install Chocolatey from here: <a href="https://community.chocolatey.org/" class="bare">https://community.chocolatey.org/</a> and follow the most recent instructions on that page in order to install it.</p>
+</div>
 <div class="sect2">
 <h3 id="git">Git</h3>
 <div class="paragraph">
@@ -254,60 +270,78 @@
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>In order to install it, please download end execute the installer from <a href="https://git-scm.com/download/win">here</a> and make sure to have it add the git executable to your systems <code>PATH</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="libpcap">LibPCAP</h3>
-<div class="paragraph">
-<p>A special version of LibPCAP is available for Windows, which is called Npcap.
-It is available from <a href="https://npcap.com/">here</a>.</p>
-</div>
-<div class="paragraph">
-<p>So in order to install things correctly:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>install the version Npcap from above location.</p>
-</li>
-<li>
-<p>Add <code>%SystemRoot%\System32\Npcap\</code> to your System&#8217;s <code>PATH</code></p>
-</li>
-<li>
-<p>Possibly reboot</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>After this all should be working.</p>
-</div>
-<div class="paragraph">
-<p>If not, have a look here for possible help: <a href="https://github.com/kaitoy/pcap4j#about-native-library-loading">here</a></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-If you had WinPcap installed, you need to uninstall this and make sure the files <code>Packet.dll</code> and <code>wpcap.dll</code> are deleted in the <code>%SystemRoot%\System32\</code> directory. Otherwise <code>pcap4j</code> will incorrectly detect a wrong version.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>An alternative is to use the version that comes with nmap</p>
+<p>If above command is not successful, simply install it via Chocolatey:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>choco install -y nmap</pre>
+<pre>choco install git</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="gcc">gcc</h3>
+<h3 id="java">Java</h3>
+<div class="paragraph">
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>java --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get successful output, check that the version reported is at least Java 11.
+If you need to install or update Java, unfortunately this doesn&#8217;t seem to be available via Chocolatey, but needs to be installed directly from a distribution.</p>
+</div>
+<div class="paragraph">
+<p>For Oracles OpenJDK 21 this would be from here: <a href="https://learn.microsoft.com/de-de/java/openjdk/download" class="bare">https://learn.microsoft.com/de-de/java/openjdk/download</a>
+If you are using a Windows VM on <code>aarch64</code> (Apple M1 or M2 virtual machine), the download available from Microsoft build seem to be one of the few options you have. When installing make sure to select the option to configure the "JAVA_HOME" environment variable (deactivated per default).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="optional_and_other_language_support">Optional and other language support</h3>
+<div class="paragraph">
+<p>Git an Java should be all you need for building the Java part of PLC4X.</p>
+</div>
+<div class="sect3">
+<h4 id="libpcap_for_raw_ethernet_support">LibPCAP (For raw-ethernet support)</h4>
+<div class="paragraph">
+<p>In order to use the raw ethernet transport capabilities of PLC4X, we need to ensure the NPcap library is installed.</p>
+</div>
+<div class="paragraph">
+<p>In order to check if NPcap is installed, check the following directories:</p>
+</div>
+<div class="paragraph">
+<p>64-bit versions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>C:\Windows\System32\packet.dll</p>
+</li>
+<li>
+<p>C:\Windows\System32\wpcap.dll</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>32-bit versions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>C:\Windows\SysWOW64\packet.dll</p>
+</li>
+<li>
+<p>C:\Windows\SysWOW64\wpcap.dll</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If none of these can be found, install it by downloading the installer from <a href="https://npcap.com/#download" class="bare">https://npcap.com/#download</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="gcc_for_plc4c">gcc (For PLC4C)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -320,11 +354,23 @@ If you had WinPcap installed, you need to uninstall this and make sure the files
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>On windows we will be using something called WinBuilds, which is sort of a package consisting of a typical build environment consisting of multiple build tools. So please look at the WinBuilds chapter at the end of the Windows section.</p>
+<p>If above command fails, please install MinGW from an Administrative console with the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>choco install mingw</pre>
 </div>
 </div>
-<div class="sect2">
-<h3 id="dotnet">dotnet</h3>
+<div class="paragraph">
+<p><a href="https://repo.maven.apache.org/maven2/com/googlecode/cmake-maven-project/cmake-binaries/3.27.7-b1/" class="bare">https://repo.maven.apache.org/maven2/com/googlecode/cmake-maven-project/cmake-binaries/3.27.7-b1/</a>
+Download:
+<a href="https://repo.maven.apache.org/maven2/com/googlecode/cmake-maven-project/cmake-binaries/3.27.7-b1/cmake-binaries-3.27.7-b1-windows-arm_64.jar" class="bare">https://repo.maven.apache.org/maven2/com/googlecode/cmake-maven-project/cmake-binaries/3.27.7-b1/cmake-binaries-3.27.7-b1-windows-arm_64.jar</a>
+Deploy as:
+<a href="https://repo.maven.apache.org/maven2/com/googlecode/cmake-maven-project/cmake-binaries/3.27.7-b1/cmake-binaries-3.27.7-b1-windows-arm64.jar" class="bare">https://repo.maven.apache.org/maven2/com/googlecode/cmake-maven-project/cmake-binaries/3.27.7-b1/cmake-binaries-3.27.7-b1-windows-arm64.jar</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="dotnet_for_plc4net">dotnet (For PLC4Net)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -340,12 +386,11 @@ If you had WinPcap installed, you need to uninstall this and make sure the files
 <p>Usually this is already installed on Windows machines.</p>
 </div>
 <div class="paragraph">
-<p>Download the installer from <a href="https://dotnet.microsoft.com/download/dotnet-core/3.1">here</a>
-(Be sure to download an installer from the second column labeled <code>Build apps - SDK</code>)</p>
+<p>Download the installer from <a href="https://dotnet.microsoft.com/en-us/download">here</a></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="python">python</h3>
+<div class="sect3">
+<h4 id="python_for_plc4py">python (For PLC4Py)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -358,95 +403,18 @@ If you had WinPcap installed, you need to uninstall this and make sure the files
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>You can get Python from <a href="https://www.python.org/downloads/release/python-2716/">here</a>.</p>
+<p>You can get Python from <a href="https://www.python.org/downloads/windows/">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>Make sure directory containing <code>python.exe</code> is added to your systems <code>PATH</code>.
 Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="winbuilds">WinBuilds</h3>
 <div class="paragraph">
-<p>We have tested WinBuilds with the bundle found <a href="http://win-builds.org/doku.php/download_and_installation_from_windows">here</a>.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-Please use the installer. When using the zip distribution and manually adding that to the <code>PATH</code> the build will fail without a log output as some binaries can&#8217;t find some of the DLL files.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-When installing in virtual machines. Make sure to run the installer from a path referring to a local hard-disk <code>C:</code>, <code>D:</code> &#8230;&#8203; when using Paralells the location of the <code>Downloads</code> or <code>Desktop</code> is a shared directory on your Mac.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-When installing in virtual machines. Please <strong>don&#8217;t</strong> install to any of Windows' <code>Program Files</code> directories. Strange things will happen.
-</td>
-</tr>
-</table>
+<p><a href="https://visualstudio.microsoft.com/de/visual-cpp-build-tools/" class="bare">https://visualstudio.microsoft.com/de/visual-cpp-build-tools/</a></p>
 </div>
 <div class="paragraph">
-<p>When running the installer, make sure to select the options:
-- Native Windows
-- x86_64
-Not quite sure which elements are really needed, better just install all of them.</p>
+<p>PLC4PY Build doesn&#8217;t work on Aarch64 on Windows</p>
 </div>
-<div class="paragraph">
-<p>When running the setup, be sure to leave the setting on the <code>line ending conversions</code> on <code>Checkout Windows-style, commit Unix-style line endings</code>, this will cause specially in the generated code, a lot of false-dirty files, however when selecting other options that check out the code with Unix line endings (the repo is in this state) the build will fail.</p>
-</div>
-<div class="paragraph">
-<p>Make sure it&#8217;s <code>bin</code> directory is added to your systems <code>PATH</code>, however the installer should have taken care of this.
-Also make sure you restarted your IDE and or console window after changing the <code>PATH</code> settings for the changes to take effect.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="openssl">OpenSSL</h3>
-<div class="paragraph">
-<p>It is encouraged to build them yourself, but binaries can be downloaded from sites like:
-<a href="https://slproweb.com/products/Win32OpenSSL.html">this</a></p>
-</div>
-<div class="paragraph">
-<p>Usually I download the 64Bit installer.</p>
-</div>
-<div class="paragraph">
-<p>Be sure to add the <code>bin</code> directory to the systems Path.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="clang">Clang</h3>
-<div class="paragraph">
-<p>Pre-Compiled Clang executables seem to be shipped with <code>Visual Studio Community</code> edition. So if you have this installed, just make sure the executables are available on the path.</p>
-</div>
-<div class="paragraph">
-<p>If not, it&#8217;s a little tricky to find pre-compiled binaries for windows.</p>
-</div>
-<div class="paragraph">
-<p>Seem the versions available <a href="https://releases.llvm.org/download.html">here</a> to the trick.
-Download and install the <code>LLVM</code> package.</p>
-</div>
-<div class="paragraph">
-<p>Select to add the LLVM to the path (doesn&#8217;t matter if just for the current user or for all)</p>
 </div>
 </div>
 </div>

@@ -241,6 +241,16 @@
 <h2 id="mac_os">Mac OS</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p>As tracking down issues which result from missing or outdated third party tools such as compilers are always hard do diagnose, we have extended the build of PLC4X with a <code>prerequisiteCheck</code> that automatically checks if required tools are installed and if a required minimum version is available.</p>
+</div>
+<div class="paragraph">
+<p>If any of the prerequisites are not met, the build fails with an error message that will help finding out what&#8217;s wrong.</p>
+</div>
+<div class="paragraph">
+<p>The number of checks is highly dependent on which profiles are enabled.
+So for example the availability and version of the C compiler is only checked if the <code>with-c</code> profile is enabled.</p>
+</div>
+<div class="paragraph">
 <p>Most libraries on Mac are installed using <code>Homebrew</code>.</p>
 </div>
 <div class="paragraph">
@@ -248,7 +258,7 @@
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</pre>
+<pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
 </div>
 </div>
 <div class="sect2">
@@ -265,7 +275,11 @@
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>In order to install it, please execute the following command:</p>
+<p>If you are running this command on a really fresh and clean system, it might be that you are asked to finish installing the XCode commandline tools.
+If this happens, just follow the process and re-try after it has finished.</p>
+</div>
+<div class="paragraph">
+<p>If you get a response that indicates that git needs to be installed, please execute the following command:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -274,9 +288,36 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="libpcap">LibPCAP</h3>
+<h3 id="java">Java</h3>
 <div class="paragraph">
-<p>The libpcap version bundled with Mac OS is currently 1.9.1.
+<p>Checking:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>java --version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get successful output indicating at least Java 11, you don&#8217;t need to do anything.</p>
+</div>
+<div class="paragraph">
+<p>Apt based systems:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>brew install openjdk</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="optional_and_other_language_support">Optional and other language support</h3>
+<div class="paragraph">
+<p>Git an Java should be all you need for building the Java part of PLC4X.</p>
+</div>
+<div class="sect3">
+<h4 id="libpcap_for_raw_ethernet_support">LibPCAP (For raw-ethernet support)</h4>
+<div class="paragraph">
+<p>The libpcap version bundled with macOS is currently 1.9.1.
 This version causes exceptions.
 So it&#8217;s best to update to a newer version using brew:</p>
 </div>
@@ -286,8 +327,8 @@ So it&#8217;s best to update to a newer version using brew:</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="gcc">gcc</h3>
+<div class="sect3">
+<h4 id="gcc_for_plc4c">gcc (For PLC4C)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -300,11 +341,11 @@ So it&#8217;s best to update to a newer version using brew:</p>
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>It seems macOS comes with a version of gcc which is good enough for our usecases.</p>
+<p>It seems macOS comes with a version of gcc which is good enough for our use cases.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="dotnet">dotnet</h3>
+<div class="sect3">
+<h4 id="dotnet_for_plc4net">dotnet (For PLC4Net)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -317,7 +358,7 @@ So it&#8217;s best to update to a newer version using brew:</p>
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>Microsoft is offering an installer for MacOS which is available from <a href="https://dotnet.microsoft.com/download/dotnet-core/2.2">here</a>.</p>
+<p>Microsoft is offering an installer for macOS which is available from <a href="https://dotnet.microsoft.com/download/dotnet-core/2.2">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>Alternatively you can also install it via homebrew:</p>
@@ -328,8 +369,8 @@ So it&#8217;s best to update to a newer version using brew:</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="python">python</h3>
+<div class="sect3">
+<h4 id="python_for_plc4py">python (For PLC4Py)</h4>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -371,7 +412,7 @@ So it&#8217;s best to update to a newer version using brew:</p>
 <div class="literalblock">
 <div class="content">
 <pre>echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.zshrc
-$ echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.bash_profile</pre>
+echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.bash_profile</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -380,6 +421,7 @@ $ echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv
 <div class="literalblock">
 <div class="content">
 <pre>python --version</pre>
+</div>
 </div>
 </div>
 </div>
