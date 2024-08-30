@@ -337,7 +337,15 @@ Password:</pre>
 <p>If you now enter your normal password, you&#8217;ll simply get <code>permission denied</code> errors.</p>
 </div>
 <div class="paragraph">
-<p>In order to execute operations as root on the machine, you need to use an opie client.</p>
+<p>In order to execute operations as root on the machine, you firstly need to run ortpasswd to generate a new seed.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>ortpasswd</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then use an opie client on your local machine or online at <a href="https://selfserve.apache.org/otp-calculator.html" class="bare">https://selfserve.apache.org/otp-calculator.html</a></p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -365,6 +373,18 @@ Password:</pre>
 <td class="content">
 As with the latest version of Mac Catalina the existing clients no longer work and using a public web service is a bad idea, Apache has its own service to calculate it:
 <a href="https://selfserve.apache.org/otp-calculator.html" class="bare">https://selfserve.apache.org/otp-calculator.html</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+More help can be found for Apache committers at <a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=122916896" class="bare">https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=122916896</a>
 </td>
 </tr>
 </table>
