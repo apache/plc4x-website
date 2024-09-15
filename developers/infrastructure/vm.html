@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>PLC4X &#x2013; [Untitled]</title>
+    <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
+    <!--script src="../../js/popper.min.js" type="javascript"></script-->
+    <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- The tooling for adding images and links to Apache events -->
+    <script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../../css/all.min.css" type="text/css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css"/>
+    <!-- Some Maven Site defaults -->
+    <link rel="stylesheet" href="../../css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/maven-theme.css" type="text/css"/>
+    <!-- The PLC4X version of a bootstrap theme -->
+    <link rel="stylesheet" href="../../css/themes/plc4x.css" type="text/css" id="pagestyle"/>
+    <!-- A custom style for printing content -->
+    <link rel="stylesheet" href="../../css/print.css" type="text/css" media="print"/>
+
+            <meta http-equiv="Content-Language" content="en"/>
+            
+</head>
+<body class="composite">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center border-bottom">
+    <!--a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a-->
+    <a href="https://plc4x.apache.org/" id="bannerLeft"><img src="../../images/apache_plc4x_logo_small.png"  alt="Apache PLC4X"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+                                                                                <li class="nav-item">
+                                    <a class="nav-link" href="../../users/index.html">Users</a>
+                </li>
+                                            <li class="nav-item active">
+                                    <a class="nav-link" href="../../developers/index.html">Developers</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../apache/index.html">Apache</a>
+                </li>
+                    </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item row valign-middle">
+                <a class="acevent" data-format="wide" data-mode="light" data-event="random" style="width:240px;height:60px;"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row h-100">
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                                                    
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
+                            <a href="../../developers/index.html" class="nav-link">Section Home</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/preparing/index.html" class="nav-link">Preparing your Computer</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/preparing/linux.html" class="nav-link">Linux</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/preparing/macos.html" class="nav-link">Mac OS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/preparing/windows.html" class="nav-link">Windows</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/building.html" class="nav-link">Building</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/contributing.html" class="nav-link">Contributing</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/tutorials/index.html" class="nav-link">Tutorials</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/tutorials/writing-driver.html" class="nav-link">Writing Drivers</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/tutorials/testing-serializers-and-parsers.html" class="nav-link">Testing Drivers</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/code-gen/index.html" class="nav-link">Code Generation</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/code-gen/protocol/mspec.html" class="nav-link">Protocol: MSpec Format</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/code-gen/language/freemarker.html" class="nav-link">Language: Apache Freemarker</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/code-gen/protocol/df1.html" class="nav-link">Example: DF1 MSpec</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/protocols/index.html" class="nav-link">Protocols</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/protocols/ads/protocol.html" class="nav-link">ADS/AMS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/protocols/eip/protocol.html" class="nav-link">EIP</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/infrastructure/index.html" class="nav-link">Infrastructure</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/ci.html" class="nav-link">Continuous Integration</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/issues.html" class="nav-link">Bug & Issue Tracker</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/sonar.html" class="nav-link">Code Analysis</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/wiki.html" class="nav-link">Wiki</a>
+                            </li>
+                                            <li class="nav-item">
+                            <strong class="nav-link">Build VM</strong>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/website.html" class="nav-link">Website</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/release/index.html" class="nav-link">Releasing</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/release/release.html" class="nav-link">Releasing</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/release/validation.html" class="nav-link">Validating</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/release/build-tools.html" class="nav-link">Releasing Build-Tools</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/tools.html" class="nav-link">Tools</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/team.html" class="nav-link">Team</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/decisions.html" class="nav-link">Decision Making</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/maturity.html" class="nav-link">Maturity</a>
+                            </li>
+                                                    
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                                    </ul>
+        </div>
+        </nav>
+                                            <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
+            <div class="sect1">
+<h2 id="the_plc4x_project_vm">The PLC4X Project VM</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As, especially for the raw socket functionality of PLC4X, our project had higher demands on the infrastructure as other projects.
+Apache Infra kindly provided us with a dedicated VM.</p>
+</div>
+<div class="paragraph">
+<p>This is included as build agent into Apache&#8217;s Jenkins with the label <code>plc4x2</code> and is marked for exclusive usage by our project.</p>
+</div>
+<div class="paragraph">
+<p>The host name of this machine is: <code>plc4x-vm2.apache.org</code></p>
+</div>
+<div class="paragraph">
+<p>On this machine we can even <code>sudo</code> to perform operations only available to <code>root</code>.</p>
+</div>
+<div class="paragraph">
+<p>Project members can request access to the machine.</p>
+</div>
+<div class="sect2">
+<h3 id="requesting_access">Requesting access</h3>
+<div class="paragraph">
+<p>In order to be able to log in, users need to add their SSH public key to their Apache ID first.</p>
+</div>
+<div class="paragraph">
+<p>This is done under the following url: <a href="https://id.apache.org/" class="bare">https://id.apache.org/</a></p>
+</div>
+<div class="paragraph">
+<p>Here just add the content in the following format to one of the <code>SSH Key (authorized_keys line)</code> fields:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDd10ykYAZLxHJVTER71IrrVVpyR8OBdlJd1aVwb67Ts+ueJjzo8ofQKLASaQw9EQOSfprGZW0sfzhepeJvbX0n1IfsRexoyIGlD8WzyX/UoLiRLPHFv+eSGJVlN90x/l+zps+yo3lq6qfuIqkXQQvB4aJBYsYC/jifpMLvx06zaUBPfdWIaGiBgaWbX/59Q0QsSpX5r8tgdA+XLw/8Zg5AbKazuS2Cm/soJCfQQ7km4bd/WtF5R5xvakVbyILMT8Dk9Hs9OfVL/RFGLYqX4bjy5uCTwPBrwlWqFyq1u7JR39i870XNgn+bIeChaZU098BGyBH/cWMGt7bTJQSKxksF2SZAHjt8Ga2Pl+J6MTW6/EPzIYENgvfOBVSlVaz9SlM26nel1+SHDND9dK/4gRNbujbmzHZLfTjMk7oc4R+WPCBIw99CFeShTKHSxhJKz/3KmcmuEHhNRBdMy+xHecr/r/Pax58a9VHXQqHbwES6tvC1gvM2uFSMKoaKtNkME4V7bPLbQcEF8tKz7/gKp6vp1IL0BdDMwZPodFPmbiJzqjvC38A++B5k0GAgWKYPVsenamZviFhRNGjjum/qxBnAF1FjpIocsEA0zQBYvvOPDpKl9KPRZ32ALHztnRfCEwltgnM1Sjinn4zQjxQs5mJBz2rjMGlkSzVjLoSo7khiBQ== my@email-address.com</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(I just had to copy this line from my <code>~/.ssh/id_rsa.pub</code> file)</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Note, the Email Address in the end doesn&#8217;t seem to matter, I simply added it for the sake of completeness. So if this doesn&#8217;t match your Apache email, this is not a problem.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As soon as that&#8217;s done, access needs to be requested from Apache Infra.</p>
+</div>
+<div class="paragraph">
+<p>This is done using the Infra Jira at: <a href="https://issues.apache.org/jira" class="bare">https://issues.apache.org/jira</a></p>
+</div>
+<div class="paragraph">
+<p>Here make sure to select the Project <code>Infrastructure (INFRA)</code>.</p>
+</div>
+<div class="paragraph">
+<p>As soon as that&#8217;s handled by the Infra team, you should be ready to log-in on the machine.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="login_to_the_machine">Login to the machine</h3>
+<div class="paragraph">
+<p>Using SSH we should now be able to log in to the VM.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>ssh apacheId@plc4x-vm2.apache.org</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Be sure to use the username matching your Apache ID or the login will fail.</p>
+</div>
+<div class="paragraph">
+<p>If all went well you should now be able to log in to the machine using your apache user.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="doing_things_as_root">Doing things as <code>root</code></h3>
+<div class="paragraph">
+<p>Apache Infra is great at keeping things safe.
+Providing a sudo password directly would increase the danger of having this intercepted, therefore they are using a tool called <code>opiepasswd</code>.</p>
+</div>
+<div class="paragraph">
+<p>Instead of now entering a password, a challenge is displayed:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>myid@plc4x-vm2:~$ sudo apt-get update
+otp-md5 496 pl8230
+Password:</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you now enter your normal password, you&#8217;ll simply get <code>permission denied</code> errors.</p>
+</div>
+<div class="paragraph">
+<p>In order to execute operations as root on the machine, you firstly need to run ortpasswd to generate a new seed.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>ortpasswd</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then use an opie client on your local machine or online at <a href="https://selfserve.apache.org/otp-calculator.html" class="bare">https://selfserve.apache.org/otp-calculator.html</a></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>otp-md5 496 pl8230</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>into OPIE client&#8217;s <code>challenge</code> field.</p>
+</div>
+<div class="paragraph">
+<p>In the <code>password</code> field you provide your Apache LDAP password.</p>
+</div>
+<div class="paragraph">
+<p>When hitting enter or clicking on <code>Compute</code> the tool should automatically generate a response.</p>
+</div>
+<div class="paragraph">
+<p>Now all you need to do is copy &amp; paste that as password into your SSH client session.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+As with the latest version of Mac Catalina the existing clients no longer work and using a public web service is a bad idea, Apache has its own service to calculate it:
+<a href="https://selfserve.apache.org/otp-calculator.html" class="bare">https://selfserve.apache.org/otp-calculator.html</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+More help can be found for Apache committers at <a href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=122916896" class="bare">https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=122916896</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="required_software">Required software</h3>
+<div class="paragraph">
+<p>For being able to build the charts and graphics as part of the site generation, we need to add some additional packages:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo apt-get install python-seqdiag
+sudo apt-get install python-nwdiag</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
+            <div class="row justify-content-md-center" style="font-size: 13px">
+                <div class="col col-6 text-center">
+                                    Copyright &#169;      2017&#x2013;2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+All rights reserved.<br/>
+                    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../js/jquery.slim.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+</body>
+</html>

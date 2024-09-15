@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>PLC4X &#x2013; [Untitled]</title>
+    <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
+    <!--script src="../../js/popper.min.js" type="javascript"></script-->
+    <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- The tooling for adding images and links to Apache events -->
+    <script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../../css/all.min.css" type="text/css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css"/>
+    <!-- Some Maven Site defaults -->
+    <link rel="stylesheet" href="../../css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/maven-theme.css" type="text/css"/>
+    <!-- The PLC4X version of a bootstrap theme -->
+    <link rel="stylesheet" href="../../css/themes/plc4x.css" type="text/css" id="pagestyle"/>
+    <!-- A custom style for printing content -->
+    <link rel="stylesheet" href="../../css/print.css" type="text/css" media="print"/>
+
+            <meta http-equiv="Content-Language" content="en"/>
+            
+</head>
+<body class="composite">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center border-bottom">
+    <!--a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a-->
+    <a href="https://plc4x.apache.org/" id="bannerLeft"><img src="../../images/apache_plc4x_logo_small.png"  alt="Apache PLC4X"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+                                                                                <li class="nav-item">
+                                    <a class="nav-link" href="../../users/index.html">Users</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../developers/index.html">Developers</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../apache/index.html">Apache</a>
+                </li>
+                    </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item row valign-middle">
+                <a class="acevent" data-format="wide" data-mode="light" data-event="random" style="width:240px;height:60px;"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row h-100">
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                                                                    <main role="main" class="ml-sm-auto px-4 w-100 h-100">
+            <div class="sect1">
+<h2 id="s7_comm_0x32">S7 Comm (0x32)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="general">General</h3>
+<div class="paragraph">
+<p>While a lot of information was available on the general structure of S7 communication, only little information was available on the constant values this protocol uses.
+If information was available, this was mostly provided with a GPL license and therefore was disqualified for being used in this project.
+The information on the S7 constants in this project were therefore generated by a little tool that generates "pcap" files <code>WireShark</code> can process.
+The tool then generated 256 versions of a given template with the only difference being the one byte having all possible values.
+Using the <code>tshark</code> commandline tool, the generated packets were decoded to an XML format.
+For each examined byte an XPath expression was created to detect valid values.
+As soon as a valid value was found the tool then output the detected constant value to the console.</p>
+</div>
+<div class="paragraph">
+<p>The tool for generating this is located in the <code>plc4j/protocols/s7-utils</code> project.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="structure_of_a_setup_communication_request">Structure of a Setup Communication Request</h3>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/s7-setup-communication-request.svg" alt="s7 setup communication request" width="896" height="440"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Legend:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="protocolIsoOnTcp">ISO on TCP Packet Header</span></p>
+</li>
+<li>
+<p><span class="protocolIsoTP">ISO Transport Protocol Packet Header</span></p>
+</li>
+<li>
+<p><span class="protocolS7">S7 Protocol</span></p>
+</li>
+<li>
+<p><span class="protocolId">Part of the packet that identifies the type of request</span></p>
+</li>
+<li>
+<p><span class="protocolParameter">Variable Parts of the ISO Transport Protocol Packet Header</span></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="structure_of_a_setup_communication_response">Structure of a Setup Communication Response</h3>
+<div class="paragraph">
+<p>The <code>Setup Communication Response</code> is identical to the <code>Setup Communication Request</code> with the only difference that the <code>Message Type</code> has an ACK_DATA code of <code>0x03</code>.</p>
+</div>
+<div class="paragraph">
+<p>Also does the response eventually provide different values for <code>Max AMQ Caller</code>, <code>Max AMQ Callee</code> and <code>PDU Size</code>.</p>
+</div>
+<div class="paragraph">
+<p>The values might be lower than in the request, but never higher.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+One thing about <code>Setup Communication Responses</code> which is kind of strange, is that usually S7 response messages have additional <code>error class</code> and <code>error code</code> fields, which this type of response doesn&#8217;t seem to have.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sizes_of_requests">Sizes of requests</h3>
+<div class="paragraph">
+<p>During the connection to a S7 PLC the client and PLC agree on 3 important parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>PDU Size</p>
+</li>
+<li>
+<p>Max AMQ Caller</p>
+</li>
+<li>
+<p>Max AMQ Callee</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The PDU Size is the size of a data packet the PLC is willing to accept.
+Here note, that in reality there are two PDU sizes involved: On <code>ISO TP/COTP</code> protocol level (TPDU Size) and a second time on the <code>S7</code> protocol level (PDU Size).
+Most implementations treat them as somewhat equal, but this doesn&#8217;t have to be the case.
+A PLC could accept a higher PDU size on <code>ISO TP</code> level than on <code>S7</code> level.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Max AMQ</code> parameters define how many unacknowledged requests a PLC (Callee) is able to accept from a client (Caller).</p>
+</div>
+<div class="paragraph">
+<p>If the <code>ISO TP</code> TPDU size is bigger than the <code>S7</code> PDU size, then theoretically multiple <code>S7</code> PDUs can be contained in one <code>ISO TP</code> packet.
+But at max <code>Max AMQ</code> packets.
+Most drivers don&#8217;t utilize this option however (We won&#8217;t either).</p>
+</div>
+<div class="paragraph">
+<p>When issuing a read request there are other things that have to be taken into account:</p>
+</div>
+<div class="paragraph">
+<p>If on <code>ISO TP</code> level a max PDU size has been agreed on, the max PDU Size of the <code>S7</code> packet will be smaller.
+So if a TPDU size of 256 bytes has been agreed upon, then the ISO TP header takes 3 bytes and the header of the S7 packet takes 10 bytes.
+The header of a <code>Read Var</code> parameter takes 2 bytes.
+So if the TPDU size is 256 bytes, this leaves 256 - (3 + 10 + 2) bytes = 241 bytes</p>
+</div>
+<div class="paragraph">
+<p>An <code>S7ANY</code> type variable specification takes 12 bytes, so the maximum number of memory areas that can be accessed in one S7 request packet is: 241 / 12 = 20
+That&#8217;s also the reason why most available drivers limit the number of addresses to 20 (Some go down to 18 because some devices seem to calculate the boundaries differently).</p>
+</div>
+<div class="paragraph">
+<p>To make things even more complicated, we have to ensure the data retrieved by a read request fits into a PDU.
+So if a block of data requested in a read request would would exceed the agreed upon PDU size, the PLC will respond with an <code>Access Violation</code> and not return any data.
+So the size limit for reading data with a 256 byte PDU size would be 241 - 12 = 229 bytes.</p>
+</div>
+<div class="paragraph">
+<p>Another example would be if you read different memory blocks, each smaller than the max PDU size, the read PDU could be quite small, but if these blocks are quite large, the read response could exceed the max PDU size.
+In this case the item responses that exceed the size will simply be responded with an <code>Access violation</code> by the PLC.</p>
+</div>
+<div class="paragraph">
+<p>The typical <code>Max AMQ</code> of <code>8</code> further complicates things as we can&#8217;t simply split up the one message into multiple ones and blindly fire them at the PLC.
+If the number of messages exceeds this number, we have to queue the excess PDUs and wait till the PLC confirmed some and can then continue sending further fragments.</p>
+</div>
+<div class="paragraph">
+<p>Most commercial drivers reduce the stress by rearranging and changing the requests.
+If for example a request would read 8 consecutive bits, it would automatically change the 8 items into reading one byte.
+Also if the gap between addresses is smaller than the overhead for a new definition, it would extend the first to include the second memory area.
+Same should sometimes be possible in the other direction.
+So if we wanted to read 300 bytes with a 256 byte TPDU size, the driver would split this up into two smaller byte arrays and internally merge them. However when reading Real (Number) values there could be issues with this.
+However in this case the driver has to completely take care of this optimization.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="links">Links</h3>
+<div class="paragraph">
+<p>Providing some additional information without directly being used:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>High Level description: <a href="http://snap7.sourceforge.net/siemens_comm.html" class="bare">http://snap7.sourceforge.net/siemens_comm.html</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/26483647/welche-eigenschaften-vorteile-und-besonderheiten-bietet-das-s7-protokoll-?dti=0&amp;lc=de-WW" class="bare">https://support.industry.siemens.com/cs/document/26483647/welche-eigenschaften-vorteile-und-besonderheiten-bietet-das-s7-protokoll-?dti=0&amp;lc=de-WW</a></p>
+</li>
+<li>
+<p>Interesting presentation mentioning a new protocol flavor 0x72 instead of the old 0x32: <a href="https://www.research.ibm.com/haifa/Workshops/security2014/present/Avishai_Wool_AccurateModelingoftheSiemensS7SCADAProtocol-v5.pdf" class="bare">https://www.research.ibm.com/haifa/Workshops/security2014/present/Avishai_Wool_AccurateModelingoftheSiemensS7SCADAProtocol-v5.pdf</a></p>
+</li>
+<li>
+<p>Open Source SCADA System: <a href="https://www.eclipse.org/eclipsescada/" class="bare">https://www.eclipse.org/eclipsescada/</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
+            <div class="row justify-content-md-center" style="font-size: 13px">
+                <div class="col col-6 text-center">
+                                    Copyright &#169;      2017&#x2013;2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+All rights reserved.<br/>
+                    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../js/jquery.slim.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+</body>
+</html>

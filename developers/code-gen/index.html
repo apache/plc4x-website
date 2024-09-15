@@ -1,0 +1,730 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>PLC4X &#x2013; [Untitled]</title>
+    <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
+    <!--script src="../../js/popper.min.js" type="javascript"></script-->
+    <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- The tooling for adding images and links to Apache events -->
+    <script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../../css/all.min.css" type="text/css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css"/>
+    <!-- Some Maven Site defaults -->
+    <link rel="stylesheet" href="../../css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/maven-theme.css" type="text/css"/>
+    <!-- The PLC4X version of a bootstrap theme -->
+    <link rel="stylesheet" href="../../css/themes/plc4x.css" type="text/css" id="pagestyle"/>
+    <!-- A custom style for printing content -->
+    <link rel="stylesheet" href="../../css/print.css" type="text/css" media="print"/>
+
+            <meta http-equiv="Content-Language" content="en"/>
+            
+</head>
+<body class="composite">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center border-bottom">
+    <!--a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a-->
+    <a href="https://plc4x.apache.org/" id="bannerLeft"><img src="../../images/apache_plc4x_logo_small.png"  alt="Apache PLC4X"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+                                                                                <li class="nav-item">
+                                    <a class="nav-link" href="../../users/index.html">Users</a>
+                </li>
+                                            <li class="nav-item active">
+                                    <a class="nav-link" href="../../developers/index.html">Developers</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../apache/index.html">Apache</a>
+                </li>
+                    </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item row valign-middle">
+                <a class="acevent" data-format="wide" data-mode="light" data-event="random" style="width:240px;height:60px;"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row h-100">
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                                                    
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
+                            <a href="../../developers/index.html" class="nav-link">Section Home</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/preparing/index.html" class="nav-link">Preparing your Computer</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/preparing/linux.html" class="nav-link">Linux</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/preparing/macos.html" class="nav-link">Mac OS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/preparing/windows.html" class="nav-link">Windows</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/building.html" class="nav-link">Building</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/contributing.html" class="nav-link">Contributing</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/tutorials/index.html" class="nav-link">Tutorials</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/tutorials/writing-driver.html" class="nav-link">Writing Drivers</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/tutorials/testing-serializers-and-parsers.html" class="nav-link">Testing Drivers</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <strong class="nav-link">Code Generation</strong>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/code-gen/protocol/mspec.html" class="nav-link">Protocol: MSpec Format</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/code-gen/language/freemarker.html" class="nav-link">Language: Apache Freemarker</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/code-gen/protocol/df1.html" class="nav-link">Example: DF1 MSpec</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/protocols/index.html" class="nav-link">Protocols</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/protocols/ads/protocol.html" class="nav-link">ADS/AMS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/protocols/eip/protocol.html" class="nav-link">EIP</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/infrastructure/index.html" class="nav-link">Infrastructure</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/ci.html" class="nav-link">Continuous Integration</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/issues.html" class="nav-link">Bug & Issue Tracker</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/sonar.html" class="nav-link">Code Analysis</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/wiki.html" class="nav-link">Wiki</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/vm.html" class="nav-link">Build VM</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/infrastructure/website.html" class="nav-link">Website</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/release/index.html" class="nav-link">Releasing</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../developers/release/release.html" class="nav-link">Releasing</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/release/validation.html" class="nav-link">Validating</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../developers/release/build-tools.html" class="nav-link">Releasing Build-Tools</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/tools.html" class="nav-link">Tools</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/team.html" class="nav-link">Team</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/decisions.html" class="nav-link">Decision Making</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../developers/maturity.html" class="nav-link">Maturity</a>
+                            </li>
+                                                    
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                                    </ul>
+        </div>
+        </nav>
+                                            <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
+            <div class="sect1">
+<h2 id="code_generation">Code Generation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As hand-writing code for a lot of drivers in multiple languages would be quite a nightmare, we have invested a very large amount of time into finding a way to automate this.</p>
+</div>
+<div class="paragraph">
+<p>So in the end we need 3 parts:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Protocol definition</p>
+</li>
+<li>
+<p>Language template</p>
+</li>
+<li>
+<p>A maven plugin which generates the code</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This maven plugin uses a given protocol definition as well as a language template and generates code for reading/writing data in that protocol with the given language.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/code-generation-intro.png" alt="code generation intro" width="750" height="308"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Types Base</code> module provides all the structures the <code>Protocol</code> modules output which are then used in the <code>Language</code> templates to generate code.</p>
+</div>
+<div class="paragraph">
+<p><code>Protocol Base</code> and <code>Language Base</code> hereby just provide the interfaces that reference these types and provide the API for the <code>plc4x-maven-plugin</code> to use.</p>
+</div>
+<div class="paragraph">
+<p>These modules are also maintained in a <a href="https://github.com/apache/plc4x-build-tools/tree/develop/code-generation">repository</a> which is separate from the rest of the PLC4X code.</p>
+</div>
+<div class="paragraph">
+<p>This is generally only due to some restrictions in the Maven build system. If you are interested in understanding the reasons - please read the chapter on <code>Problems with Maven</code> near the end of this page.</p>
+</div>
+<div class="paragraph">
+<p>Concrete <a href="https://github.com/apache/plc4x/tree/develop/code-generation/protocol-base-mspec">protocol spec parsers</a>, <a href="https://github.com/apache/plc4x/tree/develop/code-generation/language-base-freemarker">code generators</a> as well as <a href="https://github.com/apache/plc4x/tree/develop/code-generation/language-java">templates</a> that actually generate code are implemented in derived modules all located under the <a href="https://github.com/apache/plc4x/tree/develop/code-generation">code-generation</a> part of the main project repository.</p>
+</div>
+<div class="paragraph">
+<p>We didn&#8217;t want to tie ourselves to only one way to specify protocols and to generate code. Generally multiple types of formats for specifying drivers are thinkable and the same way, multiple ways of generating code are possible. Currently, however we only have one parser: <code>MSpec</code> and one generator: <code>Freemarker</code>.</p>
+</div>
+<div class="paragraph">
+<p>These add more layers to the hierarchy.</p>
+</div>
+<div class="paragraph">
+<p>So for example in case of generating a <code>Siemens S7</code> Driver for <code>Java</code> this would look like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/code-generation-intro-s7-java.png" alt="code generation intro s7 java" width="480" height="728"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The dark blue parts are the ones released externally, the turquoise ones are part of the main PLC4X repo.</p>
+</div>
+<div class="sect2">
+<h3 id="introduction">Introduction</h3>
+<div class="paragraph">
+<p>The maven plugin is built up very modular.</p>
+</div>
+<div class="paragraph">
+<p>So in general it is possible to add new forms of providing protocol definitions as well as language templates.</p>
+</div>
+<div class="paragraph">
+<p>For the formats of specifying a protocol we have tried out numerous tools and frameworks, however the results were never quite satisfying.</p>
+</div>
+<div class="paragraph">
+<p>Usually using them required a large amount of workarounds, which made the solution quite complicated.
+This is mainly the result, that tools like Thrift, Avro, GRPc, &#8230;&#8203; all are made for transferring an object structure from A to B. They lay focus on keeping the structure of the object in takt and not offer ways to control the format for transferring them.</p>
+</div>
+<div class="paragraph">
+<p>Existing industry standards, such as <code>ASN.1</code> unfortunately mostly relied on large portions of text to describe part of the parsing or serializing logic, which made it pretty much useless for a fully automated code genration.</p>
+</div>
+<div class="paragraph">
+<p>In the end only <code>DFDL</code> and the corresponding Apache project <a href="https://daffodil.apache.org">Apache Daffodil</a> seemed to provide what we were looking for.</p>
+</div>
+<div class="paragraph">
+<p>With this we were able to provide first driver versions fully specified in XML.</p>
+</div>
+<div class="paragraph">
+<p>The downside was, that the PLC4X community regarded this XML format as pretty complicated and when implementing an experimental code generator we quickly noticed that generating a nice object model would not be possible, due to the lack of an ability to model inheritance of types into a DFDL schema.</p>
+</div>
+<div class="paragraph">
+<p>In the end we came up with our own format which we called <code>MSpec</code> and is described in the <a href="protocol/mspec.html">MSpec Format description</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration">Configuration</h3>
+<div class="paragraph">
+<p>The <code>plc4x-maven-plugin</code> has a very limited set of configuration options.</p>
+</div>
+<div class="paragraph">
+<p>In general all you need to specify, is the <code>protocolName</code> and the <code>languageName</code>.</p>
+</div>
+<div class="paragraph">
+<p>An additional option <code>outputFlavor</code> allows generating multiple versions of a driver for a given language.
+This can come in handy if we want to be able to generate <code>read-only</code> or <code>passive mode</code> driver variants.</p>
+</div>
+<div class="paragraph">
+<p>In order to be able to refactor and improve protocol specifications without having to update all drivers for a given protocol, we recently added a <code>protocolVersion</code> attribute, that allows us to provide and use multiple versions of one protocol.
+So in case of us updating the fictional <code>wombat-protocol</code>, we could add a <code>version 2</code> <code>mspec</code> for that, then use the version 2 in the java-driver and continue to use version 1 in all other languages.
+Once all drivers are updated we could eliminate the version again.</p>
+</div>
+<div class="paragraph">
+<p>Last, not least, we have a pretty generic <code>options</code> config option, which is a Map type.</p>
+</div>
+<div class="paragraph">
+<p>With options is it possible to pass generic options to the code-generation.
+So if a driver or language requires further customization, these options can be used.
+For a list of all supported options for a given language template, please refer to the corresponding language page.</p>
+</div>
+<div class="paragraph">
+<p>Currently, the <code>Java</code> module makes use of such an option for specifying the Java <code>package</code> the generated code uses.
+If no <code>package</code> option is provided, the default package <code>org.apache.plc4x.{language-name}.{protocol-name}.{output-flavor}</code> is used, but especially when generating custom drivers, which are not part of the Apache PLC4X project, different package names are better suited.
+So in these cases, the user can simply override the default package name.</p>
+</div>
+<div class="paragraph">
+<p>There is also an additional parameter: <code>outputDir</code>, which defaults to <code>${project.build.directory}/generated-sources/plc4x/</code> and usually shouldn&#8217;t require being changed in case of a <code>Java</code> project, but usually requires tweaking when generating code for other languages.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of a driver pom for building a <code>S7</code> driver for <code>java</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  --&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+  &lt;parent&gt;
+    &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;plc4x-code-generation&lt;/artifactId&gt;
+    &lt;version&gt;0.12.0&lt;/version&gt;
+  &lt;/parent&gt;
+
+  &lt;artifactId&gt;test-java-s7-driver&lt;/artifactId&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+        &lt;artifactId&gt;plc4x-maven-plugin&lt;/artifactId&gt;
+        &lt;executions&gt;
+          &lt;execution&gt;
+            &lt;id&gt;test&lt;/id&gt;
+            &lt;phase&gt;generate-sources&lt;/phase&gt;
+            &lt;goals&gt;
+              &lt;goal&gt;generate-driver&lt;/goal&gt;
+            &lt;/goals&gt;
+            &lt;configuration&gt;
+              &lt;protocolName&gt;s7&lt;/protocolName&gt;
+              &lt;languageName&gt;java&lt;/languageName&gt;
+              &lt;outputFlavor&gt;read-write&lt;/outputFlavor&gt;
+            &lt;/configuration&gt;
+          &lt;/execution&gt;
+        &lt;/executions&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-driver-base-java&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-language-java&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+      &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-protocol-s7&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+      &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+&lt;/project&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So the plugin configuration is pretty straight forward, all that is specified, is the <code>protocolName</code>, <code>languageName</code> and the <code>output-flavor</code>.</p>
+</div>
+<div class="paragraph">
+<p>The dependency:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-driver-base-java&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+    &lt;/dependency&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example contains all classes the generated code relies on.</p>
+</div>
+<div class="paragraph">
+<p>The definitions of both the <code>s7</code> protocol and <code>java</code> language are provided by the two dependencies:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-language-java&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+      &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4x-code-generation-protocol-s7&lt;/artifactId&gt;
+      &lt;version&gt;0.12.0&lt;/version&gt;
+      &lt;!-- Scope is 'provided' as this way it's not shipped with the driver --&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The reason for why the dependencies are added as code-dependencies and why the scope is set the way it is, is described in the <a href="#why_are_the_protocol_and_language_dependencies_done_so_strangely">Why are the protocol and language dependencies done so strangely?</a> section.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="custom_modules">Custom Modules</h3>
+<div class="paragraph">
+<p>The plugin uses the <a href="https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html">Java Serviceloader</a> mechanism to find modules.</p>
+</div>
+<div class="sect3">
+<h4 id="protocol_modules">Protocol Modules</h4>
+<div class="paragraph">
+<p>In order to provide a new protocol module, all that is required, it so create a module containing a <code>META-INF/services/org.apache.plc4x.plugins.codegenerator.protocol.Protocol</code> file referencing an implementation of the <code>org.apache.plc4x.plugins.codegenerator.protocol.Protocol</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>This interface is located in the <code>org.apache.plc4x.plugins:plc4x-code-generation-protocol-base</code> module and generally only defines three methods:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>package org.apache.plc4x.plugins.codegenerator.protocol;
+
+import org.apache.plc4x.plugins.codegenerator.types.exceptions.GenerationException;
+
+import java.util.Optional;
+
+public interface Protocol {
+
+    /**
+     * The name of the protocol what the plugin will use to select the correct protocol module.
+     *
+     * @return the name of the protocol.
+     */
+    String getName();
+
+    /**
+     * Returns a map of type definitions for which code has to be generated.
+     *
+     * @return the Map of types that need to be generated.
+     * @throws GenerationException if anything goes wrong parsing.
+     */
+    TypeContext getTypeContext() throws GenerationException;
+
+
+    /**
+     * @return the protocolVersion is applicable
+     */
+    default Optional&lt;String&gt; getVersion() {
+        return Optional.empty();
+    }
+
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>name</code> is being used for the module to find the right language module, so the result of <code>getName()</code> needs to match the value provided in the maven config-option <code>protocolName</code>.</p>
+</div>
+<div class="paragraph">
+<p>As mentioned before, we support multiple versions of a protocol, so if <code>getVersions()</code> returns a non-empty version, this is used to select the version.</p>
+</div>
+<div class="paragraph">
+<p>The most important method for the actual code-generation however is the <code>getTypeContext()</code> method, which returns a <code>TypeContext</code> type which generally contains a list of all parsed types for this given protocol.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="language_modules">Language Modules</h4>
+<div class="paragraph">
+<p>Analog to the <a href="#protocol_modules">Protocol Modules</a> the Language modules are constructed very similar.</p>
+</div>
+<div class="paragraph">
+<p>The <code>LanguageOutput</code> interface is very simplistic too and is located in the <code>org.apache.plc4x.plugins:plc4x-code-generation-language-base</code> module and generally only defines four methods:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>package org.apache.plc4x.plugins.codegenerator.language;
+
+import org.apache.plc4x.plugins.codegenerator.types.definitions.ComplexTypeDefinition;
+import org.apache.plc4x.plugins.codegenerator.types.exceptions.GenerationException;
+
+import java.io.File;
+import java.util.Map;
+
+public interface LanguageOutput {
+
+    /**
+     * The name of the template is what the plugin will use to select the correct language module.
+     *
+     * @return the name of the template.
+     */
+    String getName();
+
+    List&lt;String&gt; supportedOutputFlavors();
+
+    /**
+     * An additional method which allows generator to have a hint which options are supported by it.
+     * This method might be used to improve user experience and warn, if set options are ones generator does not support.
+     *
+     * @return Set containing names of options this language output can accept.
+     */
+    Set&lt;String&gt; supportedOptions();
+
+    void generate(File outputDir, String version, String languageName, String protocolName, String outputFlavor,
+        Map&lt;String, TypeDefinition&gt; types, Map&lt;String, String&gt; options) throws GenerationException;
+
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The file for registering Language modules is located at: <code>META-INF/services/org.apache.plc4x.plugins.codegenerator.language.LanguageOutput</code></p>
+</div>
+<div class="paragraph">
+<p>The <code>name</code> being used by the plugin to find the language output module defined by the maven config option <code>languageName</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>supportedOutputFlavors</code> provides a possible list of flavors, that can be referred to by the maven config option <code>outputFlavor</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>supportedOptions</code> provides a list of <code>options</code> that the current language module is able to use and which can be passed in to the maven configuration using the <code>options</code> settings.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="problems_with_maven">Problems with Maven</h3>
+<div class="sect3">
+<h4 id="why_are_the_4_modules_released_separately">Why are the 4 modules released separately?</h4>
+<div class="paragraph">
+<p>We mentioned in the introduction, that the first 4 modules are maintained and released from outside the main PLC4X repository.</p>
+</div>
+<div class="paragraph">
+<p>This is due to some restrictions in Maven, which result from the way Maven generally works.</p>
+</div>
+<div class="paragraph">
+<p>The main problem is that when starting a build, in the <code>validate</code>-phase, Maven goes through the configuration, downloads the plugins and configures these.
+This means that Maven also tries to download the dependencies of the plugins too.</p>
+</div>
+<div class="paragraph">
+<p>In case of using a Maven plugin in a project which also builds the maven plugin itself, this is guaranteed to fail - Especially during releases.
+While during normal development, Maven will probably just download the latest <code>SNAPSHOT</code> from our Maven repository and will be happy with this and not complain even if this version will be overwritten later on in the build.
+It will just use the new version as soon as it has to.</p>
+</div>
+<div class="paragraph">
+<p>During releases however the release plugin changes the version to a release version and then spawns a build.
+In this case the build will fail because there is no Plugin with that version to download from anywhere.
+In this case the only option would be to manually build and deploy the plugin in the release version and to re-start the release (Which is not a nice thing for the release manager).</p>
+</div>
+<div class="paragraph">
+<p>For this reason we have stripped down the plugin and its dependencies to an absolute minimum and have released that separately from the rest, hoping due to the minimality of the dependencies that we will not have to do it very often.</p>
+</div>
+<div class="paragraph">
+<p>As soon as the tooling is released, the version is updated in the PLC4X build and the release version is used without any complications.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="why_are_the_protocol_and_language_dependencies_done_so_strangely">Why are the protocol and language dependencies done so strangely?</h4>
+<div class="paragraph">
+<p>It would certainly be a lot cleaner, if we provided the dependencies to protocol and language modules as plugin dependencies.</p>
+</div>
+<div class="paragraph">
+<p>However, as we mentioned in the previous subchapter, Maven tries to download and configure the plugins prior to running the build.
+So during a release the new versions of the modules wouldn&#8217;t exist, this would cause the build to fail.</p>
+</div>
+<div class="paragraph">
+<p>We could release the protocol- and the language modules separately too, but we want the language and protocol modules to be part of the project, to not over-complicate things - especially during a release.</p>
+</div>
+<div class="paragraph">
+<p>In order to keep the build and the release as simple as possible, we built the Maven plugin in a way, that it uses the modules dependencies and creates its own Classloader to contain all of these modules at runtime.</p>
+</div>
+<div class="paragraph">
+<p>This brings the benefit of being able to utilize Maven&#8217;s capability of determining the build order and dynamically creating the modules build classpath.</p>
+</div>
+<div class="paragraph">
+<p>Adding a normal dependency however would make Maven deploy the artifacts with the rest of the modules.</p>
+</div>
+<div class="paragraph">
+<p>We don&#8217;t want that as both the protocol as well as the language-modules are useless as soon as they have been used to generate the code.</p>
+</div>
+<div class="paragraph">
+<p>So we use a trick that is usually used in Web applications, for example:
+Here the vendor of a Servlet engine is expected to provide an implementation of the <code>Servlet API</code>.
+It is forbidden for an application to bring this along, but it is required to build the application.</p>
+</div>
+<div class="paragraph">
+<p>For this the Maven scope <code>provided</code>, which tells Maven to provide it during the build, but to exclude it from any applications it builds, because it will be provided by the system running the application.</p>
+</div>
+<div class="paragraph">
+<p>This is not quite true, but it does the trick.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
+            <div class="row justify-content-md-center" style="font-size: 13px">
+                <div class="col col-6 text-center">
+                                    Copyright &#169;      2017&#x2013;2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+All rights reserved.<br/>
+                    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../js/jquery.slim.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+</body>
+</html>

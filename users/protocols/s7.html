@@ -1,0 +1,2546 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>PLC4X &#x2013; [Untitled]</title>
+    <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
+    <!--script src="../../js/popper.min.js" type="javascript"></script-->
+    <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <!-- The tooling for adding images and links to Apache events -->
+    <script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="../../css/all.min.css" type="text/css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css"/>
+    <!-- Some Maven Site defaults -->
+    <link rel="stylesheet" href="../../css/maven-base.css" type="text/css"/>
+    <link rel="stylesheet" href="../../css/maven-theme.css" type="text/css"/>
+    <!-- The PLC4X version of a bootstrap theme -->
+    <link rel="stylesheet" href="../../css/themes/plc4x.css" type="text/css" id="pagestyle"/>
+    <!-- A custom style for printing content -->
+    <link rel="stylesheet" href="../../css/print.css" type="text/css" media="print"/>
+
+            <meta http-equiv="Content-Language" content="en"/>
+            
+</head>
+<body class="composite">
+<nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center border-bottom">
+    <!--a href="/" class="navbar-brand d-flex w-50 mr-auto">Navbar 3</a-->
+    <a href="https://plc4x.apache.org/" id="bannerLeft"><img src="../../images/apache_plc4x_logo_small.png"  alt="Apache PLC4X"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+                                                                                <li class="nav-item active">
+                                    <a class="nav-link" href="../../users/index.html">Users</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../developers/index.html">Developers</a>
+                </li>
+                                            <li class="nav-item">
+                                    <a class="nav-link" href="../../apache/index.html">Apache</a>
+                </li>
+                    </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item row valign-middle">
+                <a class="acevent" data-format="wide" data-mode="light" data-event="random" style="width:240px;height:60px;"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row h-100">
+                                            
+                                                                    
+                                                                                                    <nav class="col-sm-push col-md-2 pt-3 sidebar">
+                    <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                                                            <li class="nav-item">
+                            <a href="../../users/index.html" class="nav-link">Section Home</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/download.html" class="nav-link">Download</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/adopters.html" class="nav-link">Adopters</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/issues.html" class="nav-link">Bug & Issue Tracker</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/commercial-support.html" class="nav-link">Commercial support</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/getting-started/index.html" class="nav-link">Getting Started</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4c.html" class="nav-link">C</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4cs.html" class="nav-link">C#</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4go.html" class="nav-link">Go</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4j.html" class="nav-link">Java</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/plc4py.html" class="nav-link">Python</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/using-snapshots.html" class="nav-link">Using SNAPSHOTS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/general-concepts.html" class="nav-link">General Concepts</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/getting-started/virtual-modbus.html" class="nav-link">Virtual Modbus</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/blogs-videos-and-slides.html" class="nav-link">Blogs, Videos and Slides</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/protocols/index.html" class="nav-link">Protocols</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ab-eth.html" class="nav-link">AB-ETH</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ads.html" class="nav-link">ADS/AMS</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/bacnet.html" class="nav-link">BACnet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/c-bus.html" class="nav-link">C-Bus</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/canopen.html" class="nav-link">CANopen</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/ctrlx.html" class="nav-link">CtrlX</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/deltav.html" class="nav-link">DeltaV</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/df1.html" class="nav-link">DF1</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/eip.html" class="nav-link">EtherNet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/firmata.html" class="nav-link">Firmata</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/genericcan.html" class="nav-link">Generic CAN</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/iec-60870.html" class="nav-link">IEC-60870</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/knxnetip.html" class="nav-link">KNXnet/IP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/logix.html" class="nav-link">Logix</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/modbus.html" class="nav-link">Modbus (TCP/RTU/ASCII)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/opcua.html" class="nav-link">OPC UA</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/open-protocol.html" class="nav-link">Open-Protocol (Torque-Tools)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/plc4x.html" class="nav-link">PLC4X (Proxy)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/profinet.html" class="nav-link">PROFINET</a>
+                            </li>
+                                            <li class="nav-item">
+                            <strong class="nav-link">S7 (Step7)</strong>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/protocols/simulated.html" class="nav-link">Simulated</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/transports/index.html" class="nav-link">Transports</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/transports/tcp.html" class="nav-link">TCP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/udp.html" class="nav-link">UDP</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/serial.html" class="nav-link">Serial</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/socketcan.html" class="nav-link">SocketCAN</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/raw-socket.html" class="nav-link">Raw Socket</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/transports/pcap-replay.html" class="nav-link">PCAP Replay</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/integrations/index.html" class="nav-link">Integrations</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-calcite.html" class="nav-link">Apache Calcite</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-camel.html" class="nav-link">Apache Camel</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-iotdb.html" class="nav-link">Apache IoTDB</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-kafka.html" class="nav-link">Apache Kafka</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-nifi.html" class="nav-link">Apache NiFi</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/apache-streampipes.html" class="nav-link">Apache StreamPipes</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/eclipse-ditto.html" class="nav-link">Eclipse Ditto</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/integrations/eclipse-milo.html" class="nav-link">Eclipse Milo OPC UA Server</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/tools/index.html" class="nav-link">Tools</a>
+                                    <ul class="flex-column pl-4 nav">
+                                            <li class="nav-item">
+                            <a href="../../users/tools/capture-replay.html" class="nav-link">Capture Replay</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/connection-cache.html" class="nav-link">Connection Cache</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/opm.html" class="nav-link">Object PLC Mapping (OPM)</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/scraper.html" class="nav-link">Scraper</a>
+                            </li>
+                                            <li class="nav-item">
+                            <a href="../../users/tools/testing.html" class="nav-link">PLC4X without a PLC and Unit Testing</a>
+                            </li>
+                            </ul>
+            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/industry40.html" class="nav-link">Industry 4.0 with Apache</a>
+                            </li>
+                                
+                                                                    
+                                                                <li class="nav-item">
+                            <a href="../../users/security.html" class="nav-link">Security</a>
+                            </li>
+                                                    
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                            
+                                                                    
+                                                                
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                            
+                                    
+                                                    </ul>
+        </div>
+        </nav>
+                                            <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
+            <div class="sect1">
+<h2 id="s7_step7">S7 (Step7)</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../../images/s7_banner.png" alt="banner" width="512" height="167"/>
+</div>
+</div>
+<div class="sect2">
+<h3 id="executive_summary">Executive Summary</h3>
+<div class="paragraph">
+<p>This version of the S7 driver is aimed at exploiting the advanced features of the S7-300 and S7-400 controllers, as well as basic reading and writing functions for the S7-1200 and S7-1500 devices (PUT/GET functions). We hope in a short period of time to have the S7-Plus version, which should exploit the asynchronous functions of the S7-1500.</p>
+</div>
+<div class="paragraph">
+<p>Most of the closed source solutions are based on request/response patterns, generally with a high level of optimization. Even the best open source implementations, such as “Snap7” [1], base their usage on this same pattern. Is there another way to do things?, yes!, but this should be enough for 95% of automation applications, if your system works and you are happy with it, apply the maxim of automation, “Is it working?, no touch it, production first!”</p>
+</div>
+<div class="paragraph">
+<p>If the solution you need to develop must strictly revolve around the Siemens platform, you will probably opt for a solution based on SOFTNET OPC-DA or OPC-UA which is the recommendation given by Siemens, if you want to go to a lower level, you should use the libraries SAPI-S7 [2] (generally supplied with SOFTNET), which is the lowest access layer to access the internal Siemens communications architecture, which gives access to any CP and/or any protocol (S7-TCP, MPI, DP, etc.) that is being used. The configuration of the communication links is carried out from the STEP7 environment (TIA or Simatic Manager) in a static way, so creating communication links falls within a development cycle configure/compile/transfer to each of the interlocutors.</p>
+</div>
+<div class="paragraph">
+<p>Now, what options are there for those applications that want to make use of the asynchronous nature of S7 PLCs, including alarms, events, or time-stamped data? Outside of the Siemens ecosystem, very few. In general they are tied to a specific platform, for example PCS7 (Siemens DCS), Braumat (Platform for brewing processes) or WinCC (SCADA system).</p>
+</div>
+<div class="paragraph">
+<p>This is where the open source nature of the S7 driver developed by the PLC4X team becomes a differentiating factor. The driver data structures are clearly defined in "mspec", the cornerstone for the development of our drivers in different languages and platforms, as well as a well-defined API, allow a lingua franca for managing the driver development cycle.</p>
+</div>
+<div class="paragraph">
+<p>Our added value is having the advanced functionalities of the Simatic S7-300/S7-400 such as:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Device status management (RUN/STOP).</p>
+</li>
+<li>
+<p>System events (Alarms/User messages).</p>
+</li>
+<li>
+<p>Cyclic Subscription (CYC).</p>
+</li>
+<li>
+<p>SZL(SSL) diagnostics.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>These functionalities normally available on the Siemens platform (STEP7/TIA/WinCC) are now available for use in open IoT-type applications, which guarantees the correct handling of the "quality" of the data, as well as its time stamp.</p>
+</div>
+<div class="paragraph">
+<p>Although this driver is developed using Siemens Hardware, it should be functional with VIPA brand equipment, which is a version (clone) of the S7-300, with more memory and functionalities. If you have one of these devices and you are in your best disposition to carry out communication tests, we would be very grateful if you collaborate with the results in the development list and placing the model and firmware version that you have used.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/note.png" alt="Note"/>
+</td>
+<td class="content">
+When trying to connect to a Siemens <code>LOGO</code> device, it is important to add one connection option, as Siemens seems to have only partially implemented the protocol, the device simply terminates the connection as soon as our driver tried to read the SZL table in order to find out which type of S7 device it is talking to. This can be disabled by passing in the type of PLC. For a Siemens LOGO device therefore please add <code>?controller-type=LOGO</code> to the connection string.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="regarding_the_support">Regarding the Support</h3>
+<div class="paragraph">
+<p>It is typical within the decision-making cycle in an automation project to know who and how much the support of the tools that will be used in the control architecture will cost.</p>
+</div>
+<div class="paragraph">
+<p>PLC4X support is on our development list (<a href="mailto:dev@plc4x.apache.org">dev@plc4x.apache.org</a>) where we will gladly answer your questions about the S7 driver.</p>
+</div>
+<div class="paragraph">
+<p>If your company requires commercial support, companies that directly or indirectly support the drivers and tools developed in PLC4X are published on our page.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="record_of_revisions_made_to_the_driver">Record of revisions made to the driver</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;"/>
+<col style="width: 20%;"/>
+<col style="width: 20%;"/>
+<col style="width: 50%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Rev</th>
+<th class="tableblock halign-left valign-top">Release</th>
+<th class="tableblock halign-left valign-top">Date</th>
+<th class="tableblock halign-left valign-top">Description of the change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.10.0</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>2022/10/04</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Stable release.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="connecting_as_easy_as_1_2_3">Connecting as easy as 1-2-3.</h3>
+<div class="sect3">
+<h4 id="one">ONE</h4>
+<div class="paragraph">
+<p>In PLC4X the URL philosophy is used as the data source for the connection for the specification of the driver and its connection parameters, this is almost a standard in network applications (pointing to the best practices). It is also possible to create an instance of the driver directly and assign its parameters with the typical "set" methods.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_note.png" alt="Note"/>
+</td>
+<td class="content">
+In the following, reference will be made to the Java-based driver, which implements all the functionalities indicated in this manual.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The specified URL has the structure</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7_url.png" alt="s7_url"/>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SCHEMA: Defines the protocol to be used, in our particular case S7</p>
+</li>
+<li>
+<p>DOMAINE NAME: Physical address of the PLC or CP&#8217;s.</p>
+</li>
+<li>
+<p>PARAMETERS: List of key/value values separated by ampersand "&amp;". They define the behavior of the driver.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The SCHEMA and DOMAINE NAME are almost standard for any URL and do not require further explanation. The PARAMETERS that define the behavior of the driver are defined in the following table.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="connection_string_options">Connection String Options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 33.3336%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Default Value</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Required</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p>Siemens S7 (Basic)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>s7</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="listingblock">
+<div class="content">
+<pre>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-s7&lt;/artifactId&gt;
+  &lt;version&gt;0.12.0&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>tcp</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supported Transports</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>tcp</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-rack</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Rack value for the client (PLC4X device).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-slot</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Slot value for the client (PLC4X device).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-device-group</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OTHERS</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local Device Group. (Defaults to 'OTHERS').<br/>
+Allowed values:<br/>
+ - PG_OR_PC<br/>
+ - OS<br/>
+ - OTHERS<br/>
+<strong>Since: 0.13.0</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-tsap</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local Transport Service Access Point. (Overrides settings made in local-rack, local-slot and local-device-group. Be sure to convert into integer representation)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-rack</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Rack value for the remote main CPU (PLC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-slot</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Slot value for the remote main CPU (PLC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-device-group</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PG_OR_PC</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Remote Device Group (Defaults to 'PG_OR_PC').<br/>
+Allowed values:<br/>
+ - PG_OR_PC<br/>
+ - OS<br/>
+ - OTHERS<br/>
+<strong>Since: 0.13.0</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-tsap</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Remote Transport Service Access Point. (Overrides settings made in remote-rack, remote-slot and remote-device-group. Be sure to convert into integer representation)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-rack2</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Rack value for the remote secondary CPU (PLC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-slot2</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Slot value for the remote secondary CPU (PLC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-device-group2</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PG_OR_PC</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Remote Device Group. (Defaults to 'PG_OR_PC').<br/>
+Allowed values:<br/>
+ - PG_OR_PC<br/>
+ - OS<br/>
+ - OTHERS<br/>
+<strong>Since: 0.13.0</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pdu-size</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1024</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum size of a data-packet sent to and received from the remote PLC. During the connection process both parties will negotiate a maximum size both parties can work with and is equal or smaller than the given value is used. The driver will automatically split up large requests to not exceed this value in a request or expected response.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>max-amq-caller</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>8</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum number of unconfirmed requests the PLC will accept in parallel before discarding with errors. This parameter also will be negotiated during the connection process and the maximum both parties can work with and is equal or smaller than the given value is used. The driver will automatically take care not exceeding this value while processing requests. Too many requests can cause a growing queue.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>max-amq-callee</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>8</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum number of unconfirmed responses or requests PLC4X will accept in parallel before discarding with errors. This option is available for completeness and is correctly handled out during the connection process, however it is currently not enforced on PLC4X’s side. So if a PLC would send more messages than agreed upon, these would still be processed.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>controller-type</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>As part of the connection process, usually the PLC4X S7 driver would try to identify the remote device. However some devices seem to have problems with this and hang up or cause other problems. In such a case, providing the controller-type will skip the identification process and hereby avoid this type of problem. Possible values are:/n- S7_300<br/>
+- S7_400<br/>
+- S7_1200<br/>
+- S7-1500<br/>
+- LOGO</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>This is the maximum waiting time for reading on the TCP channel. As there is no traffic, it must be assumed that the connection with the interlocutor was lost and it must be restarted. When the channel is closed, the "fail over" is carried out in case of having the secondary channel, or it is expected that it will be restored automatically, which is done every 4 seconds.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ping</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Time for supervision of TCP channels. If the channel is not active, a safe stop of the EventLoop must be performed, to ensure that no additional tasks are created.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ping-time</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>If your application requires sampling times greater than the set "read-timeout" time, it is important that the PING option is activated, this will prevent the TCP channel from being closed unnecessarily.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>retry-time</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Time value in seconds at which the execution of the PING will be scheduled. Generally set by developer experience, but generally should be the same as (read-timeout / 2).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Transport config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
+<h4>tcp</h4>
+</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.keep-alive</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should keep-alive packets be sent?</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Should packets be sent instantly or should we give the OS some time to aggregate data.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.default-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Timeout after which a connection will be treated as disconnected.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 55.5556%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Only supported with <code>tcp</code> transport.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Only supported with <code>tcp</code> transport.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="two">TWO</h4>
+<div class="paragraph">
+<p>After defining the URL, the connection is made. Driver selection from the URL is done via PLC4X&#8217;s SPI support, so driver instantiation and mapping originating from the URL is done transparently by the Java SPI services.</p>
+</div>
+<div class="paragraph">
+<p>Any inconsistency in the URL definition will generate an exception that must be handled by the user program.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">     .
+     .
+     .
+try {
+    PlcConnection connection = new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400"); //(2.1)
+    final PlcReadRequest.Builder subscription = connection.readRequestBuilder(); //(2.2)
+     .
+     .
+     .
+     }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In (2.1) the driver instance is created, you only have to ensure that the required driver is in the CLASSPATH of your Java environment. Already in (2.2) it defines the type of service required (read/write or a subscription), here a read request is indicated.</p>
+</div>
+<div class="paragraph">
+<p>No problems? Then we are ready to configure and request the data that we require from the PLC. Let&#8217;s go to step "three".</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="three">THREE</h4>
+<div class="paragraph">
+<p>By having the connection we can start building and executing our requests.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">.
+.
+.
+ readrequest.addTagAddress("MySZL", "SZL_ID=16#0091;INDEX=16#0000"); //(3.1)
+
+            final PlcReadRequest rr = readrequest.build(); //(3.2)
+            final PlcReadResponse szlresponse = rr.execute().get(); //(3.3)
+  if (szlresponse.getResponseCode("MySZL") == PlcResponseCode.OK) {//(3.4)
+  }
+.
+.
+.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In (3.1) the request for a PLCTag is constructed, in this particular case a list of controller system status. In step (3.2) we build the request and in (3.3) we execute the request using the futures pattern in Java. We verify in (3.4) that everything is fine and that our data was acquired.</p>
+</div>
+<div class="paragraph">
+<p>These steps are shown separately for ease of analysis, but can be simplified into one statement to avoid excessive code.</p>
+</div>
+<div class="paragraph">
+<p>A detailed explanation of the format for addressing PLCTags in the S7 driver will be given in the following sections.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+<div class="paragraph">
+<p>When programming Siemens PLCs, usually the tool used to do that is called TIA Portal.</p>
+</div>
+<div class="paragraph">
+<p>The PLC4X S7 Driver is therefore sticking to the address format defined by this tool as it simplifies exchanging address information.</p>
+</div>
+<div class="sect3">
+<h4 id="general_format">General Format</h4>
+<div class="paragraph">
+<p>In general all S7 addresses have this format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>. %{Memory-Area}{start-address}:{Data-Type}[{array-size}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the array-part is omitted, the size-default of <code>1</code> is assumed.</p>
+</div>
+<div class="paragraph">
+<p>Generally there are two types of addresses:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>. Bit-Addresses {Memory-Area-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
+. Byte-Addresses {Memory-Area-Code}{Start-Byte-Address}:{Data-Type-Code}[{count}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Bit addresses are only used if the datatype: <code>BOOL</code> is used.</p>
+</div>
+<div class="paragraph">
+<p>The array notation of these can be omitted. In this case a <code>Count</code> of 1 is used per default.</p>
+</div>
+<div class="paragraph">
+<p><code>Start-Byte-Address</code> and <code>Bit-Offset</code> in above list both represent unsigned integer values.</p>
+</div>
+<div class="paragraph">
+<p>In case of accessing data in the <code>data block</code> memory area, the syntax is quite a bit more complex:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>. DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
+. DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:{Data-Type-Code}[{Count}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When reading a <code>STRING</code> datatype, currently 254 characters would automatically be fetched from the PLC.</p>
+</div>
+<div class="paragraph">
+<p>In order to limit the amount of data, we extended the <code>STRING</code> type declaration syntax to allow limiting this.</p>
+</div>
+<div class="paragraph">
+<p>With the following format less than 254 characters can be read:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>. DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:STRING({string-length})[{Count}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These addresses can usually be copied directly out of TIA portal.
+However we also implemented a shorter version, as above version does have some unnecesary boilerplate parts (The <code>.DB</code> in the middle as well as the <code>Short-Data-Type-Code</code>)</p>
+</div>
+<div class="paragraph">
+<p>The shorter syntax looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>. DB{Data-Block-Number}:{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
+. DB{Data-Block-Number}:{Start-Byte-Address}:{Data-Type-Code}[{Count}]
+. DB{Data-Block-Number}:{Start-Byte-Address}:STRING({string-length})[{Count}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The S7 driver will handle both types of notation equally.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="memory_areas">Memory Areas</h4>
+<div class="paragraph">
+<p>The S7 driver currently allows access to the following memory areas.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Code</code> column represents the code that is used in above general address syntax:</p>
+</div>
+<div class="paragraph">
+<p>Not all S7 device types support the same full set of memory areas, so the last column gives more information on which types a given memory area is supported on.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 18.1818%;"/>
+<col style="width: 18.1818%;"/>
+<col style="width: 45.4545%;"/>
+<col style="width: 18.1819%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Supported PLC Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COUNTERS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">T</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMERS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIRECT_PERIPHERAL_ACCESS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INPUTS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Inputs (Digital and Analog &#8230;&#8203; usually Analog Inputs just have a start-address offset to separate them from the digital ones)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Q</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OUTPUTS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Outputs (Digital and Analog &#8230;&#8203; usually Analog Outputs just have a start-address offset to separate them from the digital ones)</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLAGS_MARKERS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATA_BLOCKS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Memory areas containing user-defined data structures usually accessed by the integer data block number. antease note that data block addresses have a little more complex address format.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DBI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INSTANCE_DATA_BLOCKS</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCAL_DATA</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>TODO: Document this</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO: Document this</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="data_types">Data Types</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;"/>
+<col style="width: 10%;"/>
+<col style="width: 20%;"/>
+<col style="width: 40%;"/>
+<col style="width: 10%;"/>
+<col style="width: 10%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Short-Code</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Size in bits</th>
+<th class="tableblock halign-left valign-top"> Supported PLC Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Bit-Strings (Will all interpreted as sequence of boolean values in PLC4X)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Single boolean value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BYTE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Byte </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of 8 boolean values </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">W </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Word </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of 16 boolean values </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double-Word </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of 32 boolean values </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long-Word </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array of 64 boolean values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Integer values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Small int </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bit integer (signed) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Small unsigned int </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bit integer (unsigned)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">W </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bit integer (signed)  </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">W </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unsigned integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bit integer (unsigned)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double integer </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bit integer (signed) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UDINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unsigned Double Integer </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bit integer (unsigned) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long integer </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bit integer (signed)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ULINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unsigned long integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bit integer (unsigned) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Floating point values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">D </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Real </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bit IEEE 754 full precision floating point value (signed) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LREAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long Real </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bit IEEE 754 double precision floating point value (signed) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Character values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">B </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Character </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 bit character </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WCHAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double byte character </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 bit character value </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String 2 + n bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WSTRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double byte String      </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String of 16 bit characters 2 + n bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="6"><p class="tableblock">Temporal values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S5TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S5 Time </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S5 Time (like in duration)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_300, S7_400, S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time (like in duration) (Minutes, Seconds, Milliseconds) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LTIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long Time </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long Time (like in duration) (Minutes, Seconds, Milliseconds, Microseconds, Nanoseconds)  </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME_OF_DAY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time of day </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time (like in 4:40PM) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE_AND_TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date and Time </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date and time (like in 03.05.2020 4:40 PM) </p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S7_300, S7_400, S7_1500</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="actors_participating_in_the_communication_process">Actors participating in the communication process</h3>
+<div class="paragraph">
+<p>PLC programming in general is a Pandora&#8217;s box!</p>
+</div>
+<div class="paragraph">
+<p>Here we will assume that you use standard technological functions/libraries within your development cycle, therefore, at this point it is important to point out the actors that participate in this dialogue between the driver and the PLC and how they affect the communication cycle.</p>
+</div>
+<div class="paragraph">
+<p>The different actors involved in communication are shown in image 1.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7h_image01.png" alt="s7h image01" width="481" height="237"/>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>PLC (AS)</code>, the controller. <code>AS</code> is the reference used in PCS7.</p>
+</li>
+<li>
+<p><code>App</code>,  your application.</p>
+</li>
+<li>
+<p><code>PLC4X</code>, implementation of the S7 driver.</p>
+</li>
+<li>
+<p><code>OS</code>, PLC operating system.</p>
+</li>
+<li>
+<p><code>PCS7</code>, represents the technological functions used in the PLC. PCS7 are Siemens DCS libraries.</p>
+</li>
+<li>
+<p><code>S7App</code>, your application that runs on the PLC.</p>
+</li>
+<li>
+<p><code>CP</code>, the communications CP will depend on your architecture and requirements, for an S7-300 it will be a CP 343-1 or a CP 443-1 for an S7-400.</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="s7_readwrite">S7 Read/Write</h4>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7h_image02.png" alt="s7h image02" width="583" height="725"/>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="s7_event_subscription">S7 Event Subscription</h4>
+<div class="paragraph">
+<p>The S7 driver allows the subscription to asynchronous events generated in the PLC.</p>
+</div>
+<div class="paragraph">
+<p>This type of event is generated by S7-300, S7-400, G120C-PN, S120-PN controllers and VIPA devices. Unfortunately for the S7-1200 and S7-1500 series this functionality has been superseded.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_note.png" alt="Note"/>
+</td>
+<td class="content">
+For a complete list of compatibility between the S7-300,400 and S7-1200 &amp; S7-1500, you can see the document in [1] provided by Siemens.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>These services have the following advantages:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Report the status of the CPUs and other components within the control architecture that support it (CP, IM, DI, etc).</p>
+</li>
+<li>
+<p>Transfer of values when a change occurs.</p>
+</li>
+<li>
+<p>Associate values to the events sent.</p>
+</li>
+<li>
+<p>A better handling of the TimeStamp of the associated values.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The messages are classified into two groups depending on how they are generated:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SCAN: All those events generated by the system or preset in Step7 (TIA Portal). The change of state of the configured signals is carried out by the operating system at specific intervals (500 ms, 100ms or 16 ms).</p>
+</li>
+<li>
+<p>ALARM: These are events generated by the user application using the alarm blocks (ALARM_S, ALARM_SQ, NOTIFY, ALARM, ALARM_8). In addition to user applications, these events can be generated from technological functions such as PCS7 or Braumat.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The data associated with the events is represented in a HashMap in order to facilitate its transfer to other applications based on a standard such as JMS, MQTT or other messaging technology.</p>
+</div>
+<div class="paragraph">
+<p>The handling of the TimeStamp of the SCAN type events is generated in the computer. In ALARM type messages the TimeStamps are generated in the PLC. It is extremely important that the date and time synchronization is done between both computers and PLC.</p>
+</div>
+<div class="paragraph">
+<p>The values associated with the events can have different types of representation, so their interpretation must be agreed upon during the programming of the application in the PLC and your application.</p>
+</div>
+<div class="paragraph">
+<p>For each type of event, the particular fields of type &lt;String, T&gt; will be arranged within the Map. These will be documented for each type of event.</p>
+</div>
+<div class="paragraph">
+<p>To maximize the use of the data fields associated with the events, the use of the intra-area pointer system and the ANY type pointer is recommended in the PLC, As well as the recommendations for the management of the time stamp [2].</p>
+</div>
+<div class="paragraph">
+<p>At the user application level <code>App</code>, you can use the PLC4X API to subscribe SCAN or ALARM type events by selecting any of the following fields according to the requirement:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>MODE</code>: Change of operating state in the controller, change from STOP to RUN and vice versa.</p>
+</li>
+<li>
+<p><code>SYS</code>: System events, associated with internal events of the controller or events previously parameterized for their indication.</p>
+</li>
+<li>
+<p><code>USR</code>: Events programmed by the user and that are registered in the internal diagnostic buffer.</p>
+</li>
+<li>
+<p><code>ALM</code>: Alarm events generated by the user program, ALARM_S, ALARM_8, NOTIFY.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In the following sections we will describe in more detail the functionalities of each field.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="scan_events">SCAN Events</h4>
+
+</div>
+<div class="sect3">
+<h4 id="subscription_to_mode_events_s7modeevent">Subscription to MODE events (S7ModeEvent).</h4>
+<div class="paragraph">
+<p>By subscribing to controller status changes or <code>MODE</code> events, the PLC status changes can be tracked.</p>
+</div>
+<div class="paragraph">
+<p>Depending on the CPU model, these state changes are followed in the user application (PLC program), OB100 and OB101, allowing these applications to be brought to a safe state.</p>
+</div>
+<div class="paragraph">
+<p>Now, how do these state changes affect external applications, for example HMI or custom user applications?</p>
+</div>
+<div class="paragraph">
+<p>In the use of a unified Siemens architecture, the operator panels (HMI) and WinCC (Scada) detect the status of the CPU and pass the quality of the points in the database in real time to poor quality.</p>
+</div>
+<div class="paragraph">
+<p>In the case of an application developed with PLC4X, the use of MODE events will allow your application to indicate to users the quality of the points used, and that by design the quality is not updated in the controller.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7h_image03.png" alt="s7h image03" width="583" height="725"/>
+</div>
+</div>
+<div class="paragraph">
+<p>From image 2, we can describe the sequence of actions that can be followed for subscription. In the first place, the subscription process occurs from the <strong>App</strong> of the user (1)(2)(3)(4), having a positive response the application is ready to receive the events asynchronously from the <strong>PLC (AS)</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Suppose that the manager for a reason passes the controller to <strong>STOP</strong> (06) through the front switch or from the engineering station, then <strong>OS</strong> proceeds to send a notification (07)(08) to all consoles that are registered to receive this event.</p>
+</div>
+<div class="paragraph">
+<p>Subsequently, the manager decides to switch the controller to execution mode, through the front switch or the engineering console, at this time the <strong>OS</strong> is in charge of generating the startup events, initially it indicates the hot start <strong>WARN_RESTART</strong> (09)(10)(11) and if the startup is successful, indicate that the controller is in execution mode or <strong>RUN</strong> (12)(13)(14).</p>
+</div>
+<div class="paragraph">
+<p>The information received in (08)(11)(14) is included in the attached table.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TYPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fixed value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instant</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instant.now () value assigned when receiving the event from the PLC.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HashMap</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The HashMap with all fields.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">METHOD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value of "method" as defined in S7Parameter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FUNCTION</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value of "function" as defined in S7Parameter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CURRENT_MODE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status value reported in the event. Check the ModeTransitionType enum.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>With the sequence diagram and the data structures that will be received by the application, we can analyze the Java code for this specific function. We think this should serve as a pseudocode for the other languages.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">public class PLCEventModeSubscription {
+
+   public static void main(String[] args) throws Exception {
+    try (PlcConnection connection = new PlcDriverManager()
+			.getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
+
+      final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder(); <img src="../../images/users/protocols/callouts/01.png" alt="01"/>
+
+      subscription.addEventField("myMODE", "MODE");
+      final PlcSubscriptionRequest sub = subscription.build();
+
+      System.out.println("Query: " + sub.toString());
+
+      final PlcSubscriptionResponse subresponse = sub.execute().get();
+
+      if (subresponse.getResponseCode("myMODE") == PlcResponseCode.OK) { <img src="../../images/users/protocols/callouts/04.png" alt="04"/>
+				PlcConsumerRegistration registerMode =
+        	subresponse
+          	.getSubscriptionHandle("myMODE") <img src="../../images/users/protocols/callouts/05.png" alt="05"/>
+          	.register(msg -&gt; { <img src="../../images/users/protocols/callouts/08.png" alt="08"/><img src="../../images/users/protocols/callouts/11.png" alt="11"/><img src="../../images/users/protocols/callouts/14.png" alt="14"/>
+           		System.out.println("******** S7ModeEvent ********");
+            	Map&lt;String, Object&gt; map = ((S7ModeEvent) msg).getMap();
+            	map.forEach((x, y) -&gt; {
+              	System.out.println(x + " : " + y);
+            	});
+            	short currentmode = (short)
+              map.get(S7ModeEvent.Fields.CURRENT_MODE.name());
+            	System.out.println("CURRENT_MODE MSG: " + ModeTransitionType.enumForValue(currentmode).name());
+            	System.out.println("****************************");
+          	});
+			}
+          System.out.println("Waiting for the messages.");
+          Thread.sleep(120000);
+          connection.close();
+          System.out.println("Ending the connection.");
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="subscription_to_sys_events_s7sysevent_and_user_events_s7userevent">Subscription to SYS events (S7SysEvent) and USER events (S7UserEvent).</h4>
+<div class="paragraph">
+<p>System events allow to receive asynchronously any event that affects the operation of the controller, or any of its peripheral equipment that is capable of sending events through a PROFIBUS or Profinet fieldbus.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7h_image04.png" alt="s7h image04" width="608" height="512"/>
+</div>
+</div>
+<div class="paragraph">
+<p>A first example of its use is the change of state of a CP, IM or FM within the architecture of the controller. This will allow the application to indicate that there is an effect on the system that may affect the quality of the signals used, allowing preventive or corrective actions to be taken as required.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7h_image05.png" alt="s7h image05" width="563" height="499"/>
+</div>
+</div>
+<div class="paragraph">
+<p>In general, system and user events are part of the same group of events, but they are differentiated to facilitate their processing.</p>
+</div>
+<div class="paragraph">
+<p>From the sequence diagrams after subscribing to the required event type (01)(02)(03)(04), the consumer (05) is registered to start receiving the events either from the <strong>SYS</strong> system or from the user <strong>USR</strong>.</p>
+</div>
+<div class="paragraph">
+<p>When the event is generated, it is sent to the diagnostic buffer (06) and an image of it is sent to all consoles registered to receive this type of event (07) distributed by the OS (08).</p>
+</div>
+<div class="paragraph">
+<p>Since at the protocol level the events are not differentiated, the PLC4X driver (08) is in charge of classifying the events in <strong>SYS</strong> or <strong>USR</strong> and transferring them to the registered consumer (09).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_tip.png" alt="Tip"/>
+</td>
+<td class="content">
+For didactic purposes, a step-by-step explanation has been carried out, but in general the <strong>App</strong> application can be subscribed to the four types of events simultaneously.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following table shows the fields available for each message.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TYPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fixed value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instant</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Instant.now () value assigned when receiving the event from the PLC.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EVENT_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OS generated event ID.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PRIORITY_CLASS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value of "method" as defined in S7Parameter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OB_NUMBER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value of "function" as defined in S7Parameter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DAT_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">short</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status value reported in the event. Check the ModeTransitionType enum.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INFO1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">System information 1 word long.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INFO2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">System information 2 words l ng.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For SYS events, the EVENT_ID is generated automatically by the <strong>OS</strong>, and basically they are constant in the different families of controllers.</p>
+</div>
+<div class="paragraph">
+<p>For the USER or User-defined events follow the same pattern as system events. They have the particularity that the value of EVENT_ID must be between the values 0xAXXX and 0xBYYY.</p>
+</div>
+<div class="paragraph">
+<p>This programming of the user-defined events is carried out at the level of the <strong>PLC(AS)</strong> controller, so we recommend the technical note [3] of the Siemens portal.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_tip.png" alt="Tip"/>
+</td>
+<td class="content">
+In the case of user-defined messages, it is important to take into account that these are reported to the diagnostic buffer, which has a limited capacity depending on the CPU model used. Also take into account that the diagnostic buffer works like a circular buffer, so the oldest messages will be lost.
+</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>   +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+   |15|14|13|12|11|10| 9| 8| 7| 6| 5| 4| 3| 2| 1|
+   +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+   \__________/\__________/\____________________/
+    Event class     IDs         Event number
+
+    Event Class:
+       1   Standard OB Events
+       2   Synchronous errors
+       3   Asynchronous errors
+       4   Mode transition
+       5   Run-time events
+       6   Communications events
+       7   Events for fail-safe and fault tolerant systems
+       8   Standardized diagnostic data on modules
+       9   Predefined user events
+     A,B   Freely definable events
+   C,D,E   Reserved
+       F   Events for modules other than CPUs (for example, CPs, FMs)
+
+   IDs (Bit)
+       8   0:Event leaving state, 1:Event entering state
+       9   1:Entry in diagnostic buffer
+      10   1:Internal error
+      11   1:External error</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the previous table we can see how the event classes are coded, and how they are classified. If you require detailed information on each event, the user&#8217;s <strong>App</strong> must interpret the indicated bits.</p>
+</div>
+<div class="paragraph">
+<p>In the INFO1 and INFO2 fields, specific diagnostic information associated with the event is generally attached, or some information that needs to be recorded in the case of user events.</p>
+</div>
+<div class="paragraph">
+<p>The INFO1 field contains information that can be stored in a word, namely, WORD, INT of ARRAY [0..1] OF CHAR.</p>
+</div>
+<div class="paragraph">
+<p>The INFO2 field contains information that can be stored in a double word, namely, DWORD, DINT, REAL, TIME, ARRAY [0..3] OF CHAR.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example code for the subscription of events type <strong>SYS</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">public static void main(String[] args) throws Exception {
+ try (PlcConnection connection = new PlcDriverManager().
+  getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
+
+   final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder(); <img src="../../images/users/protocols/callouts/01.png" alt="01"/>
+
+   subscription.addEventField("mySYS", "SYS");
+   final PlcSubscriptionRequest sub = subscription.build();
+
+   System.out.println("Query: " + sub.toString());
+
+   final PlcSubscriptionResponse subresponse = sub.execute().get();
+
+   PlcConsumerRegistration registerSys =
+    subresponse
+     .getSubscriptionHandle("mySYS") <img src="../../images/users/protocols/callouts/05.png" alt="05"/>
+     .register(msg -&gt; { <img src="../../images/users/protocols/callouts/09.png" alt="09"/>
+      System.out.println("******** S7SysEvent ********");
+      Map&lt;String, Object&gt; map = ((S7SysEvent) msg).getMap();
+      map.forEach((x, y) -&gt; {
+       System.out.println(x + " : " + y);
+      });
+      Integer eventid = (Integer) map.get(S7SysEvent.Fields.EVENT_ID.name());
+      System.out.println("DIAGNOSTIC: " + S7DiagnosticEventId.
+      valueOf(eventid.shortValue()).getDescription()); <img src="../../images/users/protocols/callouts/10.png" alt="10"/>
+      System.out.println("****************************");
+     });
+
+   System.out.println("Waiting for the messages.");
+   Thread.sleep(120000);
+   connection.close();
+   System.out.println("Ending the connection.");
+  }
+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And below is an example code for the subscription of events type <strong>USR</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">public static void main(String[] args) throws Exception {
+ try (PlcConnection connection = new PlcDriverManager().
+  getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
+
+   final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder();
+
+   subscription.addEventField("myUSR", "USR");
+   final PlcSubscriptionRequest sub = subscription.build();
+
+   System.out.println("Query: " + sub.toString());
+
+   final PlcSubscriptionResponse subresponse = sub.execute().get();
+
+   PlcConsumerRegistration registerUsr =
+    subresponse
+    .getSubscriptionHandle("myUSR") <img src="../../images/users/protocols/callouts/05.png" alt="05"/>
+    .register(msg -&gt; {
+     System.out.println("******** S7UserEvent *******");
+     Map&lt;String, Object&gt; map = ((S7UserEvent) msg).getMap();
+     map.forEach((x, y) -&gt; { <img src="../../images/users/protocols/callouts/09.png" alt="09"/>
+      System.out.println(x + " : " + y);
+     });
+     System.out.println("****************************");
+    });
+
+   System.out.println("Waiting for the messages.");
+   Thread.sleep(120000);
+   connection.close();
+   System.out.println("Ending the connection.");
+  }
+ }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Java code shows how to detect the type of event in an event type <strong>SYS</strong>. In the S7 driver, there is an enum object <em>S7DiagnosticEventId</em>(10) that allows us to identify which internal event of the <strong>PLC(AS)</strong> generated it and thus, through the interpretation of the INFO1 and INFO2 fields, determine the root cause of the event.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_note.png" alt="Note"/>
+</td>
+<td class="content">
+To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable amount of diagnostic values, it must be updated according to the new CPUs or firmware versions available.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Unlike <strong>SYS</strong> events, <strong>USR</strong> events must be interpreted directly by the <strong>App</strong> application, so they are generally scheduled during the development phase of the <strong>S7App</strong> application.</p>
+</div>
+<div class="paragraph">
+<p>By having INFO1 and INFO2 in the <strong>S7App</strong> program, the user can transfer data associated with events, such as transitions between phases, events of diagnostic routines such as firts-out or the start or end of a batch process, all asynchronously.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="subscription_to_alm_type_events_s7alarmevent">Subscription to ALM type events (S7AlarmEvent).</h4>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7h_image06.png" alt="s7h image06" width="1393" height="1153"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The registration sequence for subscription is the typical one carried out so far (01)(02)(03)(04)(05). From that moment on, you can start receiving alarm events asynchronously.</p>
+</div>
+<div class="paragraph">
+<p>Depending on your application, you can make a request for the currently active alarms in the alarm buffer of the <strong>PLC(AS)</strong>, in this way you can prepare a reception buffer or establish the correct state of a state machine that depends on the Active events in the controller.</p>
+</div>
+<div class="paragraph">
+<p>You must take into account that when making the request (06), from a few to hundreds of alarms can be stored depending on the complexity of your application and the capacity of the <strong>PLC (AS)</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In this scenario, the <strong>PLC4X</strong> driver maintains the dialogue with the <strong>OS</strong> to receive sequentially (07)(08)(09)(10)(11)(12)(13)(14) the alarms stored on the controller, to later transfer them to the user application <strong>App</strong> (15).</p>
+</div>
+<div class="paragraph">
+<p>At the end of the subscription process, it will begin to receive the events generated by the system, such as high precision time signals (16)(17)(18)(19) or events generated by the user application (20)(21)(22).</p>
+</div>
+<div class="paragraph">
+<p>This simple sequence of events is used by process applications based on PCS7, for the handling of alarms, events and logging of practically all the events of the distributed control system (DCS).</p>
+</div>
+<div class="paragraph">
+<p>Another important feature of the driver is the ability to recognize the alarms generated from the <strong>PLC(AS)</strong>. In (23)(24)(25) the <strong>S7App</strong> application generates an alarm/event that is required to be acknowledged by the user to continue with the execution of a specific routine. The user applications <strong>App</strong> generates the acknowledgment (27)(28) using the corresponding alarm identifier, the <strong>OS</strong> is responsible for making the confirmation (29)(30) and asynchronously generating an event for the update of the state machine in the <strong>App</strong>(31)(32).</p>
+</div>
+<div class="paragraph">
+<p>Within the cyclical execution of the application <strong>S7App</strong> waits for the confirmation of the alarm (26) to continue with some specific routine.</p>
+</div>
+<div class="paragraph">
+<p>TODO: Field description</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TYPE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP_GOING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP_COMING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ASSOCIATED_VALUES</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MAP</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EVENT_ID</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EVENT_STATE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STATE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ACKSTATE_GOING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ACKSTATE_COMING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EVENT_GOING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EVENT_COMING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EVENT_LAST_CHANGE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_[1&#8230;&#8203;8]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_STATE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_[1&#8230;&#8203;8]_STATE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_DATA</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_[1&#8230;&#8203;8]_DATA</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_[1&#8230;&#8203;8]_DATA_GOING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_[1&#8230;&#8203;8]_DATA_CO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_[1..8]_DATA_STATUS</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_[1&#8230;&#8203;8]_DATA_SIZE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SIG_[1&#8230;&#8203;8]_DATA_LENGTH</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>TODO: Example code</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="todo_cyclic_subscription_cyc">TODO: Cyclic subscription (CYC).</h4>
+<div class="paragraph">
+<p>The cyclical subscription allows the acquisition of data in passive mode, that is, the data is sent from the PLC in a cyclical and synchronous way.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7h_image07.png" alt="s7h image07" width="481" height="237"/>
+</div>
+</div>
+<div class="paragraph">
+<p>The data transfer has three time bases:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>B01SEC</strong>: Time base 0.1 Sec. (100 mSec.).</p>
+</li>
+<li>
+<p><strong>B0SEC</strong>: Time base 1.0 Sec.</p>
+</li>
+<li>
+<p><strong>B10SEC</strong>: Time base 10 Sec.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="szl_system_status_list">SZL System Status List</h4>
+<div class="paragraph">
+<p>The system status list gives access to the operating data of the PLC, such as memory space, operating status, status of the control switches, as well as diagnostic data of expansion cards or decentralized peripherals, PROFIBUS or PROFINET .</p>
+</div>
+<div class="paragraph">
+<p>This is fundamental data to determine the quality of the data supplied by the PLC.</p>
+</div>
+<div class="paragraph">
+<p>By initiating the connection with the PLC you can determine its operating status, which will allow you to define the quality of the data taken and what the implemented application can do or not, eventually this is the procedure carried out by the Siemens CPs.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_note.png" alt="Note"/>
+</td>
+<td class="content">
+Why SZL and not SSL? Well, creative freedom. The translation of the manuals from German to Spanish use SZL and German to English use SSL. Both the source code and the documentation use this reduction to keep the text uniform.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Due to the fact that the data structures are so varied, basically one per type of diagnosis, the decision was made to return these as an array of bytes, leaving the developer to implement the parser according to their requirements.</p>
+</div>
+<div class="paragraph">
+<p>For a first approach to using system state lists a byte array to JSON notation parser is available at "org.apache.plc4x.java.s7.readwrite.utils.StaticHelper.SZL" .</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_tip.png" alt="Note"/>
+</td>
+<td class="content">
+Make use of the XXX document for a detailed explanation of each SZL, since as indicated, everything will depend on the hardware you have installed.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="notation_for_szl_request">Notation for SZL request</h4>
+<div class="paragraph">
+<p>The access to the SZL of the PLC is done as a read request, where the PLCTag is formed by two fields "SZL_ID" and "INDEX".</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SZL_ID: Number assigned to the SZL list. There are variants of the SZL_ID depending on whether the request is total, partial or just the header. To facilitate its use, the representation will always be in hexadecimal with the format 0xxyID.</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |15|14|13|12|11|10| 9| 8| 7| 6| 5| 4| 3| 2| 1|
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  \__________/\__________/\____________________/
+   Module      Number of   Number of the partial
+   class       the partial list
+               list
+               extract</pre>
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Number of the partial list : The number of the partial SZL list you want to read.</p>
+</li>
+<li>
+<p>Number of the partial list extract: Defines which part of the partial list you want to extract. It varies from list to list.</p>
+</li>
+<li>
+<p>Module Class: The requests for the partial list depend on the hardware that is being used, generally the IM (communication cards), FM (special functions) and CP (periphery controller) have their own diagnostic system, which can be consulted through of the SZL_ID/INDEX PlcTag.</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  Module Class:
+  +--------------+-----------------+
+  | Module class | Coding (Binary) |
+  +--------------|-----------------+
+  |     CPU      |      0000       |
+  +--------------|-----------------+
+  |     IM       |      0100       |
+  +--------------|-----------------+
+  |     FM       |      1000       |
+  +--------------|-----------------+
+  |     CP       |      1100       |
+  +--------------|-----------------+</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>INDEX: Number of the required sublist. To facilitate its use, the representation will always be in hexadecimal with the format 0xhhhh.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../images/mi_001.png" alt="mi_001"/>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">public static void main(String[] args) throws Exception {
+    System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "trace");
+
+    System.out.println("******************************************************************************************");
+    System.out.println("Before using, take a look at:");
+    System.out.println("System Software for S7-300/400.\r\nSystem and Standard Functions - Volume 1/2");
+    System.out.println("Document: A5E02789976-01");
+    System.out.println("Chapter 34 System Status Lists (SSL).");
+    System.out.println("URL: https://cache.industry.siemens.com/dl/files/604/44240604/att_67003/v1/s7sfc_en-EN.pdf");
+    System.out.println("******************************************************************************************");
+
+    try (PlcConnection connection = new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) { //(01)
+
+        final PlcReadRequest.Builder readrequest = connection.readRequestBuilder(); //(02)
+
+        readrequest.addTagAddress("MySZL", "SZL_ID=16#0012;INDEX=16#0000"); //(03)
+
+        final PlcReadRequest rr = readrequest.build(); //(04)
+        final PlcReadResponse szlresponse = rr.execute().get(); //(05)
+
+        if (szlresponse.getResponseCode("MySZL") == PlcResponseCode.OK){ //(06)
+
+            Collection&lt;Byte&gt;  data = szlresponse.getAllBytes("MySZL"); //(07)
+            byte[] dbytes = ArrayUtils.toPrimitive(data.toArray(new Byte[data.size()])); //(08)
+
+            SZL szl = SZL.valueOf(0x0012); //(09)
+            ByteBuf wb = wrappedBuffer(dbytes); //(10)
+            StringBuilder sb =  szl.execute(wb); //(11)
+            System.out.println(sb.toString());  //(12)
+
+        } else if (szlresponse.getResponseCode("MySZL") == PlcResponseCode.NOT_FOUND){ //(13)
+                System.out.println("SZL is not supported.");
+        }
+
+            Thread.sleep(2000);
+            System.out.println("Bye...");
+
+      }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The request for the SZL lists follows the same pattern of variable readings, for each request a response, unlike the request for process variables where several can be grouped in a single request, the SZL request must correspond to one request to one petition.</p>
+</div>
+<div class="paragraph">
+<p>Like other requests, the connection URL (01) is established and the request constructor instance (02) is created. The associated PLCTag is added to the diagnostic list (one per request), in this case the SZL_ID=0x0012 and INDEX=0x0000 (03) which allows obtaining the identification and firmware of the PLC.</p>
+</div>
+<div class="paragraph">
+<p>In (04) and (05), we prepare and execute the request to the PLC. If we have a valid response (06) we can perform the processing of the data stream obtained, which as indicated is an array of bytes which is obtained in (07) and (08).</p>
+</div>
+<div class="paragraph">
+<p>As we pointed out in the support libraries, we have an "SZL" object (an enum), which allows us to select the appropriate parser based on the numerical index SLZ_ID (09). In (10) we make a wrapper in a ByteBuf type (from the Netty library) in order to pass it to the "szl" instance through the "execute" method (11).</p>
+</div>
+<div class="paragraph">
+<p>When processing the data buffer we must obtain in (12) a StringBuilder with the JSON representation.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{"RECORDS":[{"AUSBG2":0,"AUSBG1":61,"BGTYP":130,"INDEX":1,"MIFB":"6ES7 417-4XT05-0AB0 "},{"AUSBG2":0,"AUSBG1":2,"BGTYP":130,"INDEX":6,"MIFB":"6ES7 417-4XT05-0AB0 "},{"AUSBG2":768,"AUSBG1":22021,"BGTYP":0,"INDEX":7,"MIFB":"                    "},{"AUSBG2":3,"AUSBG1":22021,"BGTYP":0,"INDEX":129,"MIFB":"Boot Loader         "}],"LENGTHDR":28,"SZL-ID":17,"INDEX":0,"N_DR":4}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As noted above, the parser performed on the SZL enum is not complete, so the missing information must be obtained from the returned fields. For further details you should consult [].</p>
+</div>
+<div class="paragraph">
+<p>In case of not being able to process the request, it is detected in (13) to take the necessary measures.</p>
+</div>
+<div class="paragraph">
+<p>The following diagram represents the information in JSON format.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7h_szlxy11demo.png" alt="s7h szlxy11demo" width="485" height="479"/>
+</div>
+</div>
+<div class="paragraph">
+<p>From the obtained StringBuilder, you can use the JSON processor of your choice to access the different fields.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3333%;"/>
+<col style="width: 33.3334%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Module class</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>SZL-ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Implemented</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SZL List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy00</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Module identification</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CPU characteristics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User memory areas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">System areas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy14</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Block types</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrupt status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assignment between process image partitions and OBs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Communication status data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">H CPU group information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy71</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status of the module LEDs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy74</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Switched DP slaves in the H-system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy75</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Module status information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy91</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rack / station status information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy92</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rack / station status information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy94</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extended DP master system / PROFINET IO system information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy95</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Module status information, PROFINET IO and PROFIBUS DP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy96</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tool changer information (PROFINET IO)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xy9C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Diagnostic buffer of the CPU</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xyA0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Module diagnostic information (data record 0)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xyB1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Module diagnostic information (data record 1), geographical address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xyB2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Module diagnostic information (data record 1), local address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xyB3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Diagnostic data of a DP slave</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16#xyB4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tested with S7-400, JSON</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="some_useful_tips">Some useful tips</h4>
+<div class="paragraph">
+<p>Especially when it comes to the input- and output addresses for analog channels, the start addresses are configurable and hereby don&#8217;t always start at the same address.
+In order to find out what addresses these ports have, please go to the <code>device setting</code> of your PLC in <code>TIA Portal</code></p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7-tia-device-settings.png" alt="devsettings" width="640" height="480"/>
+</div>
+</div>
+<div class="paragraph">
+<p>Especially pay attention to this part:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../../images/s7-tia-io-settings.png" alt="iosettings" width="600" height="144"/>
+</div>
+</div>
+<div class="paragraph">
+<p>In above image you can see that this device has 8 digital inputs (<code>DI 8</code>) and 2 analog inputs (<code>AI 2_1</code>) as well as 6 digital outputs (<code>DQ 6</code>).</p>
+</div>
+<div class="paragraph">
+<p>The start addresses of the digital inputs and outputs start directly at <code>0</code>.</p>
+</div>
+<div class="paragraph">
+<p>The analog inputs however start at address <code>64</code>.</p>
+</div>
+<div class="paragraph">
+<p>Each digital input and output can be addresses by a single bit-address (start-address and offset) or can be read in a block by reading a full byte starting at the given start address without providing a bit offset.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="resources">Resources</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://snap7.sourceforge.net/" class="bare">https://snap7.sourceforge.net/</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/13649203/simatic-net-pc-software-s7-programming-interface?dti=0&amp;dl=en&amp;lc=es-ES" class="bare">https://support.industry.siemens.com/cs/document/13649203/simatic-net-pc-software-s7-programming-interface?dti=0&amp;dl=en&amp;lc=es-ES</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/109797648/simatic-comparison-list-for-s7-300-s7-400-s7-1200-s7-1500?dti=0&amp;lc=en-WW" class="bare">https://support.industry.siemens.com/cs/document/109797648/simatic-comparison-list-for-s7-300-s7-400-s7-1200-s7-1500?dti=0&amp;lc=en-WW</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/mdm/109746537?c=98956468747&amp;lc=es-DO" class="bare">https://support.industry.siemens.com/cs/mdm/109746537?c=98956468747&amp;lc=es-DO</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/15166942/writing-user-specific-information-to-the-diagnostic-buffer-of-a-cpu-(sfc-52)?dti=0&amp;lc=en-ES" class="bare">https://support.industry.siemens.com/cs/document/15166942/writing-user-specific-information-to-the-diagnostic-buffer-of-a-cpu-(sfc-52)?dti=0&amp;lc=en-ES</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/24013249/how-do-you-display-alarm_s-or-alarm_d-messages-with-process-values-(so-called-associated-values)-on-a-wincc-flexible-operator-panel-?dti=0&amp;lc=en-WW" class="bare">https://support.industry.siemens.com/cs/document/24013249/how-do-you-display-alarm_s-or-alarm_d-messages-with-process-values-(so-called-associated-values)-on-a-wincc-flexible-operator-panel-?dti=0&amp;lc=en-WW</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/109481157/comunicaci%C3%B3n-entre-paneles-de-operador-simatic-hmi-y-convertidores-de-frecuencia-sinamics-g120-para-el-manejo-y-la-visualizaci%C3%B3n-de-avisos-de-fallo-y-de-advertencia-(enlace-directo-sin-controlador)?dti=0&amp;lc=es-WW" class="bare">https://support.industry.siemens.com/cs/document/109481157/comunicaci%C3%B3n-entre-paneles-de-operador-simatic-hmi-y-convertidores-de-frecuencia-sinamics-g120-para-el-manejo-y-la-visualizaci%C3%B3n-de-avisos-de-fallo-y-de-advertencia-(enlace-directo-sin-controlador)?dti=0&amp;lc=es-WW</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/97550333/sinamics-g-s-hmi-direct-access?dti=0&amp;lc=en-WW" class="bare">https://support.industry.siemens.com/cs/document/97550333/sinamics-g-s-hmi-direct-access?dti=0&amp;lc=en-WW</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/21402122/technology-cpus-technology-template-error-messages-?dti=0&amp;lc=en-WW" class="bare">https://support.industry.siemens.com/cs/document/21402122/technology-cpus-technology-template-error-messages-?dti=0&amp;lc=en-WW</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/77467239/transforming-warning-and-error-messages-of-a-sinamics-drive-with-the-aid-of-the-xml-parser-and-integrating-them-into-a-step-7-hmi-project?dti=0&amp;lc=en-WW" class="bare">https://support.industry.siemens.com/cs/document/77467239/transforming-warning-and-error-messages-of-a-sinamics-drive-with-the-aid-of-the-xml-parser-and-integrating-them-into-a-step-7-hmi-project?dti=0&amp;lc=en-WW</a></p>
+</li>
+<li>
+<p><a href="https://support.industry.siemens.com/cs/document/24037531/%C2%BFqu%C3%A9-pasos-de-configuraci%C3%B3n-hay-que-realizar-en-el-simotion-scout-y-el-wincc-flexible-para-que-se-muestren-los-avisos-alarm_s-y-las-alarmas-tecnol%C3%B3gicas-dentro-del-wincc-flexible-runtime-?dti=0&amp;lc=es-ES" class="bare">https://support.industry.siemens.com/cs/document/24037531/%C2%BFqu%C3%A9-pasos-de-configuraci%C3%B3n-hay-que-realizar-en-el-simotion-scout-y-el-wincc-flexible-para-que-se-muestren-los-avisos-alarm_s-y-las-alarmas-tecnol%C3%B3gicas-dentro-del-wincc-flexible-runtime-?dti=0&amp;lc=es-ES</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+        </main>
+        <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">
+            <div class="row justify-content-md-center" style="font-size: 13px">
+                <div class="col col-6 text-center">
+                                    Copyright &#169;      2017&#x2013;2024 <a href="https://www.apache.org/">The Apache Software Foundation</a>.
+All rights reserved.<br/>
+                    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks mentioned may be trademarks or registered trademarks of their respective owners.
+                                        <br/><div style="text-align:center;">Home screen image taken from <a
+                        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+                    under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+                    and blur effect added.</div>
+                                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../js/jquery.slim.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('.carousel .carousel-item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (let i = 0; i < 3; i++) {
+            next=next.next();
+            if (!next.length) {
+                next = $(this).siblings(':first');
+            }
+            next.children(':first-child').clone().appendTo($(this));
+        }
+    });
+</script>
+</body>
+</html>
