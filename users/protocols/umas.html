@@ -191,7 +191,7 @@
                             <a href="../../users/protocols/simulated.html" class="nav-link">Simulated</a>
                             </li>
                                             <li class="nav-item">
-                            <a href="../../users/protocols/umas.html" class="nav-link">UMAS</a>
+                            <strong class="nav-link">UMAS</strong>
                             </li>
                             </ul>
             </li>
@@ -269,7 +269,7 @@
                             <a href="../../users/tools/scraper.html" class="nav-link">Scraper</a>
                             </li>
                                             <li class="nav-item">
-                            <strong class="nav-link">PLC4X without a PLC and Unit Testing</strong>
+                            <a href="../../users/tools/testing.html" class="nav-link">PLC4X without a PLC and Unit Testing</a>
                             </li>
                             </ul>
             </li>
@@ -326,190 +326,255 @@
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
             <div class="sect1">
-<h2 id="testing_or_using_plc4x_without_a_plc">Testing (or using PLC4X without a PLC)</h2>
+<h2 id="umas_schneider_electric_plcs">UMAS (Schneider Electric PLCs)</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="the_mock_driver">The Mock Driver</h3>
 <div class="paragraph">
-<p>PLC4X has a <em>Mock Driver</em> which was initially implemented to be used for Unit Tests and this still is its main purpose.
-But this driver is also very suitable to play around a bit with the PLC4X API if no <em>Hardware</em> PLC is available.
-The driver can be found in the Maven module</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
-      &lt;artifactId&gt;plc4j-driver-mock&lt;/artifactId&gt;
-      &lt;version&gt;0.12.0&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-   &lt;/dependency&gt;</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The connection string Syntax for the mock driver is <code>mock:{name-of-the-connection}</code>. So you can use multiple Mock Devices at the same time.</p>
-</div>
-<div class="paragraph">
-<p>The Mock Driver does nothing else than forwarding all Requests to a `Virtual Device which we can provide to control all responses and also Monitor them, e.g. for unit tests.
-The Interface for the Mock Device is</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code>public interface MockDevice {
-
-    Pair&lt;PlcResponseCode, PlcValue&gt; read(String fieldQuery);
-
-    PlcResponseCode write(String fieldQuery, Object value);
-
-    Pair&lt;PlcResponseCode, PlcSubscriptionHandle&gt; subscribe(String fieldQuery);
-
-    void unsubscribe();
-
-    // ...
-
-}</code></pre>
-</div>
-</div>
+<p>(Supported by Plc4Py Only)</p>
 </div>
 <div class="sect2">
-<h3 id="simple_example">Simple Example</h3>
-<div class="paragraph">
-<p>Imagine we have some Code which we cannot control or whose functionality we want to test.
-This can be done with the Mock Driver in the following way.</p>
-</div>
-<div class="paragraph">
-<p>First, a new Mock Connection is established (like any other connection also would be):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code>PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You see, that we directly cast the Connection to a <code>PlcMockConnection</code>. This is done, because we need to <em>connect</em> a Device to this Mock Connection.</p>
-</div>
-<div class="paragraph">
-<p>This is done in the following Snippet</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code>connection.setDevice(mockDevice);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here, we pass it an instance of <code>MockDevice</code> which could be a simple Implementation of the interface like</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code>MockDevice mockDevice = new MockDevice() {
-
-    Pair&lt;PlcResponseCode, PlcValue&gt; read(String fieldQuery) {
-        System.out.println("I got a read to " + fieldQuery);
-        return Pair.of(PlcResponseCode.OK, new PlcString("hello"));
-    }
-
-    PlcResponseCode write(String fieldQuery, Object value) {
-        System.out.println("I got a write to " + fieldQuery + " with the value " + value);
-        return PlcResponseCode.OK;
-    }
-
-    // ...
-
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This would just return a String Value <code>hello</code> for every request and print all read and write requests to the Console.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="unit_testing_with_the_mock_driver">Unit Testing with the Mock Driver</h3>
-<div class="paragraph">
-<p>To use the Mock driver in Unit Tests the easiest way is to generate the <code>MockDriver</code> instance as Mockito (or any other Framework) Mock.
-Like in the following Example</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code>MockDevice mockDevice = Mockito.mock(MockDevice.class);
-
-PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");
-connection.setDevice(mockDevice);
-
-// Populate the Mock to avoid a NPE
-when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new PlcString("hello")));
-
-// Some Demo code that uses the same Driver Manager and either the connection from above
-// or at least mock:my-mock-connection as connection string
-// Here: send a request to the field "MyAdress"
-connection
-    .readRequestBuilder
-    .addItem("station", "MyAdress")
-    .build()
-    .execute()
-    .get();
-
-// Check that the we really issued a Read request to the Field "MyAdress"
-verify(mockDevice).read(eq("MyAdress"));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>But as the <code>MockDriver</code> uses a static Mock Connection registry the following Code works also</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code>MockDevice mockDevice = Mockito.mock(MockDevice.class);
-
-// Setup
-PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");
-connection.setDevice(mockDevice);
-// Populate the Mock to avoid a NPE
-when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new PlcString("hello")));
-
-// Some Demo code that uses the same Driver Manager and either the connection from above
-// or at least mock:my-mock-connection as connection string
-// Here: send a request to the field "MyAdress"
-// and we build up a new Connection
-try (PlcConnection conn = PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection")) {
-    conn
-        .readRequestBuilder
-        .addItem("station", "MyAdress")
-        .build()
-        .execute()
-        .get();
-} catch (Exception e) {
-    // do nothing
-}
-
-// Check that the we really issued a Read request to the Field "MyAdress"
-verify(mockDevice).read(eq("MyAdress"));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The Snippet above shows that the part under test really has to share nothing with the test code except for the connection string.</p>
-</div>
+<h3 id="connection_string_options">Connection String Options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 16.6666%;"/>
+<col style="width: 33.3336%;"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Default Value</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Required</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p>UMAS</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>umas</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>tcp</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Supported Transports</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>tcp</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>5000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Default timeout for all types of requests.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>unit-identifier</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Unit-identifier or slave-id that identifies the target PLC. Defaults to 1.
++</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
-<h3 id="conclusion">Conclusion</h3>
+<h3 id="supported_operations">Supported Operations</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;"/>
+<col style="width: 22.2222%;"/>
+<col style="width: 55.5556%;"/>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>browse</code></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+<div class="sect3">
+<h4 id="connection_string">Connection String</h4>
 <div class="paragraph">
-<p>The above examples show that the <code>MockDriver</code> driver can not only be used to play around with the API but is also a powerful tool to
-do unit testing of Code which uses the PLC4X API.
-All that needs to be done is to either pass an instance of the Mocked Connection or just use the same Connection string (e.g. from a test configuration) that was used to Prepare a Mock Device.
-Some Examples of further (more Complex) use cases can be found in the PLC4X Codebases, e.g. in the following classes</p>
+<p>UMAS has the following connection string format:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>umas:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example connection string would look like:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>umas:tcp://127.0.0.1:502</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the transport, port and option fields are optional.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="general_format">General Format</h4>
+<div class="paragraph">
+<p>In general all UMAS addresses have this format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{tag-name}.{child-name}.{child-name}:{data-type}[{array-size}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on the type of tag the child-name parameters are optional.
+e.g. A tag with a BOOL data type could be 'TESTING_BOOL_1' whereas
+if it is a UDT the tag name is followed by the child 'TESTING_UDT_1.START' which in itself could be a BOOL.</p>
+</div>
+<div class="paragraph">
+<p>If the array-size part is omitted, the size-default of <code>1</code> is assumed.</p>
+</div>
+<div class="paragraph">
+<p>If the data-type part is omitted, it defaults to the data type of the tag read from the PLC.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="memory_areas">Memory Areas</h4>
+<div class="paragraph">
+<p>Apart from tags defined in the PLC the driver is also able to access the %S and %SW
+system memory areas.</p>
+</div>
+<div class="paragraph">
+<p>The specific address details of the data in these areas are outlined in the devices
+manual.</p>
+</div>
+<div class="paragraph">
+<p>An example of the address format of these areas is %SW1 or %S20.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="data_types">Data Types</h4>
+<div class="paragraph">
+<p>The following data types are supported</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>org.apache.plc4x.java.opm.PlcEntityManagerTest</code></p>
+<p>BOOL (boolean)</p>
 </li>
 <li>
-<p><code>org.apache.plc4x.java.opm.PlcEntityManagerComplexTest</code></p>
+<p>SINT (int 8)</p>
 </li>
 <li>
-<p><code>org.apache.plc4x.java.scraper.ScraperTest</code></p>
+<p>USINT (uint 8)</p>
+</li>
+<li>
+<p>BYTE (uint 8)</p>
+</li>
+<li>
+<p>INT (int 16)</p>
+</li>
+<li>
+<p>UINT (uint 16)</p>
+</li>
+<li>
+<p>WORD (uint 16)</p>
+</li>
+<li>
+<p>DINT (int 32)</p>
+</li>
+<li>
+<p>UDINT (uint 32)</p>
+</li>
+<li>
+<p>DWORD (uint 32)</p>
+</li>
+<li>
+<p>REAL (float)</p>
+</li>
+<li>
+<p>STRING (char)</p>
+</li>
+<li>
+<p>TIME</p>
+</li>
+<li>
+<p>DATE</p>
+</li>
+<li>
+<p>TOD (Time of Day)</p>
+</li>
+<li>
+<p>DATE_AND_TIME</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>and many more Test classes, especially in the OPM and the Scraper Module.</p>
 </div>
 </div>
 </div>
