@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Firmata</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,8 +328,8 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="firmata">Firmata</h2>
+            <h1>Firmata</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Firmata protocol is based on the MIDI protocol used for communicating with musical equipment.</p>
@@ -340,8 +340,11 @@
 <div class="paragraph">
 <p>This driver is built to be compatible with the <code>StandardFirmata Arduino Sketch</code> which can be found <a href="https://github.com/firmata/arduino/blob/master/examples/StandardFirmata/StandardFirmata.ino">here</a> (Version last changed on August 17th, 2017)</p>
 </div>
-<div class="sect2">
-<h3 id="connection_string_options">Connection String Options</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="connection_string_options">Connection String Options</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;"/>
@@ -547,16 +550,18 @@ When subscribing to pins, these are configured to become read pins. When writing
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
+</div>
+<div class="sect1">
+<h2 id="individual_resource_address_format">Individual Resource Address Format</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Similar to the Modbus protocol, the Firmata protocol support Boolean and Short values.</p>
 </div>
 <div class="paragraph">
 <p>Booleans are used for the digital IO pins and short values for the analog inputs.</p>
 </div>
-<div class="sect3">
-<h4 id="binary_addresses">Binary Addresses</h4>
+<div class="sect2">
+<h3 id="binary_addresses">Binary Addresses</h3>
 <div class="paragraph">
 <p>The full format for a digital address has the following format:</p>
 </div>
@@ -598,8 +603,8 @@ However in case of using the serial port (which will always be the case when usi
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="analog_addresses">Analog Addresses</h4>
+<div class="sect2">
+<h3 id="analog_addresses">Analog Addresses</h3>
 <div class="paragraph">
 <p>The full format for an analog address is as follows:</p>
 </div>
@@ -622,7 +627,6 @@ analog:2[3]</pre>
 </div>
 <div class="paragraph">
 <p>A normal <code>Arduino Uno</code> is equipped with 6 analog inputs: 0-5</p>
-</div>
 </div>
 </div>
 </div>

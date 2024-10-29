@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Reverse Engineering the DeltaV protocol</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -123,8 +123,8 @@
                                             
                                     
                                                                                     <main role="main" class="ml-sm-auto px-4 w-100 h-100">
-            <div class="sect1">
-<h2 id="reverse_engineering_the_deltav_protocol">Reverse Engineering the DeltaV protocol</h2>
+            <h1>Reverse Engineering the DeltaV protocol</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>This document should describe what we did in order to reverse-engineer the DeltaV protocol.</p>
@@ -132,8 +132,11 @@
 <div class="paragraph">
 <p>The sole purpose of this document, is to write document our path in order to eventually protect ourselves against accusation of using illegal measures in gaining the information we got.</p>
 </div>
-<div class="sect2">
-<h3 id="starting_point">Starting point</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="starting_point">Starting point</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We kindly were provided with access to a DeltaV system used for training.</p>
 </div>
@@ -168,8 +171,10 @@ So in general there were three types of systems involved:</p>
 <p>This 29MB WireShark capture was what we started working with.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="identifying_the_protocol">Identifying the protocol</h3>
+</div>
+<div class="sect1">
+<h2 id="identifying_the_protocol">Identifying the protocol</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>As WireShark didn&#8217;t have a DeltaV disector, we had to trace it down ourselves.</p>
 </div>
@@ -180,8 +185,10 @@ So in general there were three types of systems involved:</p>
 <p>Special with all of these was that they all started with a payload of <code>0xFACE</code>.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="first_steps_in_understanding_the_protocol">First steps in understanding the protocol</h3>
+</div>
+<div class="sect1">
+<h2 id="first_steps_in_understanding_the_protocol">First steps in understanding the protocol</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Here it appeared that <code>UDP</code> packets are sent with some sort of payload, which are obviously responded to by packets with a fixed and very small size (64 bytes).</p>
 </div>
@@ -217,8 +224,10 @@ So in general there were three types of systems involved:</p>
 <p>In order to prove any assumption we made, we used little programs that used Pcap4J to programmatically check assumptions.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="decoding_the_wrapper_packet_header">Decoding the wrapper packet header</h3>
+</div>
+<div class="sect1">
+<h2 id="decoding_the_wrapper_packet_header">Decoding the wrapper packet header</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>As mentioned before, it appeared obvious that for almost identical packets the first two short values were very similar too, which led us to the assumption that these are <code>type</code> and `sub-type'.
 So we wrote a little program, that scanned all the packets and counted how many types we had.
@@ -302,8 +311,10 @@ The last two bytes of the wrapper packet header are simply constantly <code>0x80
 Here too, we&#8217;ll just live with knowing that and not wondering what it could mean.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="decoding_the_internal_packet">Decoding the internal packet</h3>
+</div>
+<div class="sect1">
+<h2 id="decoding_the_internal_packet">Decoding the internal packet</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>After having decoded what we think is the wrapper-protocol packet structure, we knew decoding the internal protocol would be a bigger challenge.</p>
 </div>
@@ -326,8 +337,8 @@ This simulator allowed us to provide values to the controller via the backend Pr
 <p>Especially we did a lot of separate captures for all sorts of different operations.
 During this we managed to reverse engineer the connection on the wrapper-protocol layer as well how the communication looks inside the internal protocol.</p>
 </div>
-<div class="sect3">
-<h4 id="connecting">Connecting</h4>
+<div class="sect2">
+<h3 id="connecting">Connecting</h3>
 <div class="paragraph">
 <p>When an OS is booted, the following communication could be observed:</p>
 </div>
@@ -364,8 +375,8 @@ So it seems that In these packets each participant compares it&#8217;s software 
 When connecting to a remote system, checking the version compatibility is surely an important thing to do.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="normal_operation">Normal operation</h4>
+<div class="sect2">
+<h3 id="normal_operation">Normal operation</h3>
 <div class="paragraph">
 <p>When just starting the system and not changing anything, we did notice those previously mentioned <code>0x0006</code> type messages we think are responsible for keeping the connections in sync.</p>
 </div>
@@ -379,8 +390,8 @@ As when seeing a lot of alarms being sent in 0x0304 messages, sometimes these ar
 The last of these usually being smaller than the rest.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="changing_values">Changing values</h4>
+<div class="sect2">
+<h3 id="changing_values">Changing values</h3>
 <div class="paragraph">
 <p>So now we started changing values.
 First we started changing valid values into other valid values.</p>
@@ -399,8 +410,8 @@ Also did we notice the <code>0x0403</code> packets seem to contain String consta
 <p>We assume payload-types starting with <code>0x04</code> relate to normal data exchange and ones with <code>0x03</code> relating to events and alarms.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="decoding_value_changes">Decoding value changes</h4>
+<div class="sect2">
+<h3 id="decoding_value_changes">Decoding value changes</h3>
 <div class="paragraph">
 <p>After coming to the conclusion that wrapper-type <code>0x0002</code> messages with a payload-type <code>0x0403</code> seem to relate to value changes, we started filtering for exactly these packages.</p>
 </div>
@@ -457,8 +468,8 @@ Perhaps the <code>0x0b</code> part referred to some sort subscription-id.</p>
 <p>We will hopefully be able to decode this addressing problem in one of our next reverse-engineering sessions.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="decoding_strings">Decoding Strings</h4>
+<div class="sect2">
+<h3 id="decoding_strings">Decoding Strings</h3>
 <div class="paragraph">
 <p>As we mentioned before, that we could see content in the packages that were sometimes readable from just looking at the payload, we decided to have another look at these.</p>
 </div>
@@ -467,7 +478,6 @@ Perhaps the <code>0x0b</code> part referred to some sort subscription-id.</p>
 This is then followed by each character being output using two bytes.
 We assume this is in order to allow transferring <code>UTF-16</code> (two byte) big characters, but never found any.
 Right now the first byte of every block is simply <code>0x00</code> followed by the <code>UTF-8</code> character value.</p>
-</div>
 </div>
 </div>
 </div>

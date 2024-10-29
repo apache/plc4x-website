@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Example: DF1 MSpec</title>
     <script src="../../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../../js/popper.min.js" type="javascript"></script-->
     <script src="../../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -237,9 +237,7 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="example_df1_mspec">Example: DF1 MSpec</h2>
-<div class="sectionbody">
+            <h1>Example: DF1 MSpec</h1>
 <div class="paragraph">
 <p>The DF1 protocol has three basic messages: a command message, acknowledge and not acknowledge.
 A <code>0x10</code> is used as delimiter to differentiate between the messages and parts of the command message.</p>
@@ -422,8 +420,6 @@ DLE + ETX mark the end of the message, the last two bytes are the CRC that is ca
 <p>The basic object is the DF1Symbol, where the second byte is used to distinguish between the different message types using a typeSwitch.
 In the case of a command message, the message frame contains the DF1Command to further differentiate between the command types.
 Currently only the unprotected read and its response are implemented.</p>
-</div>
-</div>
 </div>
         </main>
         <footer class="pt-4 my-md-5 pt-md-5 w-100 border-top">

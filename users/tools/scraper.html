@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Scraper</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,8 +328,8 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="scraper">Scraper</h2>
+            <h1>Scraper</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>While the Apache PLC4X API allows simple access to PLC resources, if you want to continuously monitor some values and have them retrieved in a pre-defined interval, the core PLC4X API method is a little bit uncomfortable.</p>
@@ -346,8 +346,11 @@
 <div class="paragraph">
 <p>This tool automatically handles all of the tasks mentioned above.</p>
 </div>
-<div class="sect2">
-<h3 id="getting_started_with_the_scraper">Getting started with the <code>Scraper</code></h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="getting_started_with_the_scraper">Getting started with the <code>Scraper</code></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The Scraper can be found in the Maven module:</p>
 </div>
@@ -371,8 +374,8 @@
 <div class="paragraph">
 <p>In the <code>Scraper</code> Configuration you define the so-called <code>jobs</code>.</p>
 </div>
-<div class="sect3">
-<h4 id="sources">Sources</h4>
+<div class="sect2">
+<h3 id="sources">Sources</h3>
 <div class="paragraph">
 <p>Sources define connections to PLCs using PLC4X drivers.</p>
 </div>
@@ -380,8 +383,8 @@
 <p>Generally you can think of a <code>Source</code> as a PLC4X connection string, given an alias name.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="jobs">Jobs</h4>
+<div class="sect2">
+<h3 id="jobs">Jobs</h3>
 <div class="paragraph">
 <p>A <code>Job</code> defines which resources (PLC Addresses) should be collected from which <code>Sources</code> with a given <code>Trigger</code>.</p>
 </div>
@@ -401,8 +404,10 @@
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="configuration_using_the_java_api">Configuration using the Java API</h3>
+</div>
+<div class="sect1">
+<h2 id="configuration_using_the_java_api">Configuration using the Java API</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The core of the Scraper configuration is the <code>ScraperConfigurationTriggeredImplBuilder</code> class.
 Use this to build the configuration objects used to bootstrap the Scraper.</p>
@@ -495,8 +500,10 @@ It gives a PLC4X address string an easy to understand string name, just like whe
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="running_the_scraper">Running the <code>Scraper</code></h3>
+</div>
+<div class="sect1">
+<h2 id="running_the_scraper">Running the <code>Scraper</code></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>In order to run the <code>Scraper</code>, the following boilerplate code is needed.</p>
 </div>
@@ -549,8 +556,10 @@ public interface ResultHandler {
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="configuration_using_a_json_or_yaml_file">Configuration using a <code>JSON</code> or <code>YAML</code> file</h3>
+</div>
+<div class="sect1">
+<h2 id="configuration_using_a_json_or_yaml_file">Configuration using a <code>JSON</code> or <code>YAML</code> file</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>As an alternative to using the Java API, the Scraper Configuration can also be read from a <code>JSON</code> or <code>YAML</code> document.</p>
 </div>
@@ -606,7 +615,6 @@ jobs:
 <div class="listingblock">
 <div class="content">
 <pre>ScraperConfiguration conf = ScraperConfiguration.fromFile("{path to the JSON or YAML file}", ScraperConfigurationTriggeredImpl.class);</pre>
-</div>
 </div>
 </div>
 </div>

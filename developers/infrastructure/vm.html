@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; The PLC4X Project VM</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -237,8 +237,8 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="the_plc4x_project_vm">The PLC4X Project VM</h2>
+            <h1>The PLC4X Project VM</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>As, especially for the raw socket functionality of PLC4X, our project had higher demands on the infrastructure as other projects.
@@ -256,8 +256,11 @@ Apache Infra kindly provided us with a dedicated VM.</p>
 <div class="paragraph">
 <p>Project members can request access to the machine.</p>
 </div>
-<div class="sect2">
-<h3 id="requesting_access">Requesting access</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="requesting_access">Requesting access</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>In order to be able to log in, users need to add their SSH public key to their Apache ID first.</p>
 </div>
@@ -300,8 +303,10 @@ Note, the Email Address in the end doesn&#8217;t seem to matter, I simply added 
 <p>As soon as that&#8217;s handled by the Infra team, you should be ready to log-in on the machine.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="login_to_the_machine">Login to the machine</h3>
+</div>
+<div class="sect1">
+<h2 id="login_to_the_machine">Login to the machine</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Using SSH we should now be able to log in to the VM.</p>
 </div>
@@ -317,8 +322,10 @@ Note, the Email Address in the end doesn&#8217;t seem to matter, I simply added 
 <p>If all went well you should now be able to log in to the machine using your apache user.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="doing_things_as_root">Doing things as <code>root</code></h3>
+</div>
+<div class="sect1">
+<h2 id="doing_things_as_root">Doing things as <code>root</code></h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Apache Infra is great at keeping things safe.
 Providing a sudo password directly would increase the danger of having this intercepted, therefore they are using a tool called <code>opiepasswd</code>.</p>
@@ -390,8 +397,10 @@ More help can be found for Apache committers at <a href="https://cwiki.apache.or
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="required_software">Required software</h3>
+</div>
+<div class="sect1">
+<h2 id="required_software">Required software</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>For being able to build the charts and graphics as part of the site generation, we need to add some additional packages:</p>
 </div>
@@ -399,7 +408,6 @@ More help can be found for Apache committers at <a href="https://cwiki.apache.or
 <div class="content">
 <pre>sudo apt-get install python-seqdiag
 sudo apt-get install python-nwdiag</pre>
-</div>
 </div>
 </div>
 </div>

@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; CANopen</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,22 +328,18 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="canopen">CANopen</h2>
+            <h1>CANopen</h1>
+<div class="sect1">
+<h2 id="can_in_automation">CAN in Automation</h2>
 <div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="../../images/users/protocols/can_banner.png" alt="banner" width="512" height="167"/>
-</div>
-</div>
-<div class="sect2">
-<h3 id="can_in_automation">CAN in Automation</h3>
 <div class="paragraph">
 <p>CANopen is a specific protocol built on top of CAN bus.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="connection_string_options">Connection String Options</h3>
+</div>
+<div class="sect1">
+<h2 id="connection_string_options">Connection String Options</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;"/>
@@ -512,8 +508,10 @@
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="more_details_on_the_driver">More details on the driver</h3>
+</div>
+<div class="sect1">
+<h2 id="more_details_on_the_driver">More details on the driver</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>CAN, despite (or due) to its popularity has ambiguous meaning.
 There are multiple articles and sources which attempts to give introduction, yet very few of them is consistent between each other.</p>
@@ -557,8 +555,10 @@ This driver does honor OD structure through usage of index and sub index for add
 It does not ship Electronic Data Sheet (EDS) parser leaving it for applications who wish to utilize it.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="address_format">Address Format</h3>
+</div>
+<div class="sect1">
+<h2 id="address_format">Address Format</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>CANopen specification defines several groups of addresses dedicated to certain kind of operations.
 Critical services and message exchanges related with them have lower identifiers making them wining eventual bus access.</p>
@@ -864,7 +864,6 @@ In case if device returns text using different encoding it is recommended to use
 In case of writing length of field can be ommited.
 For example request <code>write(SDO:1:2/3:RECORD, payload)</code> will try to write whole payload to specified address.
 Same applies to responses sent by devies as requester often might not know full length of reply payload.</p>
-</div>
 </div>
 </div>
 </div>

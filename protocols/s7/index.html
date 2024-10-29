@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; S7 Communication</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -123,8 +123,8 @@
                                             
                                     
                                                                                     <main role="main" class="ml-sm-auto px-4 w-100 h-100">
-            <div class="sect1">
-<h2 id="s7_communication">S7 Communication</h2>
+            <h1>S7 Communication</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>When communicating with S7 Devices there is a whole family of protocols, that can be used.
@@ -132,16 +132,21 @@ In general you can divide them into <code>Profinet</code> protocols and <code>S7
 The later are far simpler in structure, but also far less documented.
 The <code>S7 Comm</code> protocols are generally split up into two flavours: The classic <code>S7 Comm</code> and a newer version unofficially called <code>S7 Comm Plus</code>.</p>
 </div>
-<div class="sect2">
-<h3 id="overview_of_the_protocols">Overview of the Protocols</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview_of_the_protocols">Overview of the Protocols</h2>
+<div class="sectionbody">
 <div class="imageblock">
 <div class="content">
 <img src="../../images/protocols-s7-osi.png" alt="protocols s7 osi" width="1270" height="812"/>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="protocol_descriptions">Protocol Descriptions</h3>
+</div>
+<div class="sect1">
+<h2 id="protocol_descriptions">Protocol Descriptions</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;"/>
@@ -201,8 +206,10 @@ The <code>S7 Comm</code> protocols are generally split up into two flavours: The
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="interaction_with_an_s7_plc">Interaction with an S7 PLC</h3>
+</div>
+<div class="sect1">
+<h2 id="interaction_with_an_s7_plc">Interaction with an S7 PLC</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Currently we are concentrating on implementing the TCP-based variants of the <code>S7 Comm</code> and <code>S7 Comm Plus</code> protocols.
 Both are transferred using <code>ISO TP</code> which is wrapped by <code>ISO on TCP</code>.
@@ -243,7 +250,6 @@ These are then handled by the individual protocol sub-pages:</p>
 }</pre>
 </div>
 </div>
-</div>
 <div class="sect2">
 <h3 id="iso_tp_message_types">ISO TP Message Types</h3>
 <div class="paragraph">
@@ -269,8 +275,9 @@ Each message is called a <code>TPDU</code> (Transport Protocol Data Unit):</p>
 <div class="paragraph">
 <p>Notice: There is no <code>Disconnect Response</code> in <code>ISO TP: Class 0</code>.</p>
 </div>
-<div class="sect3">
-<h4 id="connection_request_tpdu">Connection Request TPDU</h4>
+</div>
+<div class="sect2">
+<h3 id="connection_request_tpdu">Connection Request TPDU</h3>
 <div class="imageblock">
 <div class="content">
 <img src="../../images/s7-connect-request.svg" alt="s7 connect request" width="896" height="360"/>
@@ -296,14 +303,14 @@ Each message is called a <code>TPDU</code> (Transport Protocol Data Unit):</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="connection_response_tpdu">Connection Response TPDU</h4>
+<div class="sect2">
+<h3 id="connection_response_tpdu">Connection Response TPDU</h3>
 <div class="paragraph">
 <p>The <code>Connection Response</code> is identical to the <code>Connection Request</code> with the only difference that the <code>TPDU-Code</code> has a code of <code>0xD0</code>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="data_tpdu">Data TPDU</h4>
+<div class="sect2">
+<h3 id="data_tpdu">Data TPDU</h3>
 <div class="imageblock">
 <div class="content">
 <img src="../../images/s7-data.svg" alt="s7 data" width="896" height="200"/>
@@ -324,7 +331,6 @@ Each message is called a <code>TPDU</code> (Transport Protocol Data Unit):</p>
 <p><span class="protocolId">Part of the packet that identifies the type of request</span></p>
 </li>
 </ul>
-</div>
 </div>
 <div class="sect3">
 <h4 id="disconnect_request_tpdu">Disconnect Request TPDU</h4>

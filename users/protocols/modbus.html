@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Modbus (TCP/UDP/Serial)</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,13 +328,12 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="modbus_tcpudpserial">Modbus (TCP/UDP/Serial)</h2>
+            <h1>Modbus (TCP/UDP/Serial)</h1>
+<div class="sect1">
+<h2 id="connection_string_options">Connection String Options</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="connection_string_options">Connection String Options</h3>
-<div class="sect3">
-<h4 id="modbus_tcp">Modbus TCP</h4>
+<h3 id="modbus_tcp">Modbus TCP</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;"/>
@@ -539,8 +538,8 @@ Allowed values are: <br/>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="modbus_rtu">Modbus RTU</h4>
+<div class="sect2">
+<h3 id="modbus_rtu">Modbus RTU</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;"/>
@@ -817,8 +816,8 @@ Allowed values are:<br/>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="modbus_ascii">Modbus ASCII</h4>
+<div class="sect2">
+<h3 id="modbus_ascii">Modbus ASCII</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;"/>
@@ -1095,8 +1094,10 @@ Allowed values are:<br/>
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="supported_operations">Supported Operations</h3>
+</div>
+<div class="sect1">
+<h2 id="supported_operations">Supported Operations</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 22.2222%;"/>
@@ -1129,10 +1130,12 @@ Allowed values are:<br/>
 </tbody>
 </table>
 </div>
+</div>
+<div class="sect1">
+<h2 id="individual_resource_address_format">Individual Resource Address Format</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
-<div class="sect3">
-<h4 id="connection_string">Connection String</h4>
+<h3 id="connection_string">Connection String</h3>
 <div class="paragraph">
 <p>Modbus has the following connection string format:-</p>
 </div>
@@ -1153,8 +1156,8 @@ Allowed values are:<br/>
 <p>Note the transport, port and option fields are optional.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="general_format">General Format</h4>
+<div class="sect2">
+<h3 id="general_format">General Format</h3>
 <div class="paragraph">
 <p>In general all Modbus addresses have this format:</p>
 </div>
@@ -1188,8 +1191,8 @@ If the name-value-tag-options part is omitted, simply no configuration fine-tuni
 <p>With this, can the default byte-order be overridden on a per-tag basis. If not provided the default-byte-order from the connection string is used, or BIG_ENDIAN, if this is also not provided.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="memory_areas">Memory Areas</h4>
+<div class="sect2">
+<h3 id="memory_areas">Memory Areas</h3>
 <div class="paragraph">
 <p>There are a number of memory areas defined in the Modbus specification.</p>
 </div>
@@ -1299,8 +1302,8 @@ Using the extended-register: format you are able to reference all of these, if t
 This memory area starts at address 0.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="data_types">Data Types</h4>
+<div class="sect2">
+<h3 id="data_types">Data Types</h3>
 <div class="paragraph">
 <p>The following data types are supported</p>
 </div>
@@ -1360,8 +1363,8 @@ This memory area starts at address 0.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="some_useful_tips">Some useful tips</h4>
+<div class="sect2">
+<h3 id="some_useful_tips">Some useful tips</h3>
 <div class="paragraph">
 <p>Most memory areas start at address 1, except for the extended register area which starts at 0. These are both mapped to 0x0000 when it is sent in the Modbus protocol.</p>
 </div>
@@ -1406,8 +1409,8 @@ This memory area starts at address 0.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="examples">Examples</h4>
+<div class="sect2">
+<h3 id="examples">Examples</h3>
 <div class="paragraph">
 <p>To read 10 holding registers starting at address 20 and parse as Unsigned Integers the following examples are all valid.</p>
 </div>
@@ -1524,7 +1527,6 @@ This memory area starts at address 0.</p>
 <div class="paragraph">
 <p>This corresponds to addresses 9995-9999 in file record 1 and addresses 0-5 in file record 2.
 Note that this request is split into 2 sub requests in the Modbus protocol.</p>
-</div>
 </div>
 </div>
 </div>

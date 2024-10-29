@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Architecture of PLC4X Connections</title>
     <script src="../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../js/popper.min.js" type="javascript"></script-->
     <script src="../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -237,11 +237,10 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="architecture_of_plc4x_connections">Architecture of PLC4X Connections</h2>
+            <h1>Architecture of PLC4X Connections</h1>
+<div class="sect1">
+<h2 id="simple_case">Simple case</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="simple_case">Simple case</h3>
 <div class="paragraph">
 <p>In this simple case, an application asks the DriverManager to forward a connection creation to the corresponding Driver implementation, which then creates both a Connection and a MessageCodec instance. The Connection is the logical link between the connection state and the MessageCodec.
 A MessageCodec uses a TransportInstance to communicate with the target device.</p>
@@ -257,8 +256,10 @@ A MessageCodec uses a TransportInstance to communicate with the target device.</
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="problems">Problems</h3>
+</div>
+<div class="sect1">
+<h2 id="problems">Problems</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Serial transports based on RS475 and UDP Transports currently don&#8217;t allow sharing. That means only one connection instance can have access to one RS485 or one shared local UDP Port (Multiple UDP transport instances with different local ports however are possible). As soon as one connection is established and a second connection would try to access this, this would result in errors.</p>
 </div>
@@ -266,8 +267,10 @@ A MessageCodec uses a TransportInstance to communicate with the target device.</
 <p>However, multiple devices could be attached to the same RS458 port (Modbus RTU and Modbus ASCII explicitly supports this, however using different devices using different protocols over the same port is not possible) and in BACnet connecting to multiple remote BACnet devices would require one local UDP port to be used by multiple connections.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="protocols_requiring_us_to_use_a_fixed_port_on_a_non_broadcast_address">Protocols requiring us to use a fixed port on a non-broadcast address</h3>
+</div>
+<div class="sect1">
+<h2 id="protocols_requiring_us_to_use_a_fixed_port_on_a_non_broadcast_address">Protocols requiring us to use a fixed port on a non-broadcast address</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Some protocols, such as BACnet require remotes to send data to a fixed udp port on a non-broadcast address. This causes problems as soon as we want to connect to multiple BACnet devices from the same host as only one instance can get access to that port.</p>
 </div>
@@ -282,10 +285,11 @@ A MessageCodec uses a TransportInstance to communicate with the target device.</
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="protocols_only_allowing_one_connection_at_a_time">Protocols only allowing one connection at a time</h3>
-
 </div>
+<div class="sect1">
+<h2 id="protocols_only_allowing_one_connection_at_a_time">Protocols only allowing one connection at a time</h2>
+<div class="sectionbody">
+
 </div>
 </div>
         </main>

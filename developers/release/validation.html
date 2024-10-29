@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Validating a staged release</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -237,8 +237,8 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="validating_a_staged_release">Validating a staged release</h2>
+            <h1>Validating a staged release</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock tip">
 <table>
@@ -362,8 +362,11 @@ Windows (PowerShell): Get-FileHash -Algorithm SHA512 .\apache-plc4x-code-generat
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="using_rat">Using RAT</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using_rat">Using RAT</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Even if we are using RAT to ensure sources have headers in place, still the project can contain exclusions that hide things from the check.</p>
 </div>
@@ -385,8 +388,10 @@ Windows (PowerShell): Get-FileHash -Algorithm SHA512 .\apache-plc4x-code-generat
 <p>By piping the result into a text file gives you the chance to investigate the content more easily.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="release_tooling">Release Tooling</h3>
+</div>
+<div class="sect1">
+<h2 id="release_tooling">Release Tooling</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>In the <code>tools</code> directory we have a little script that can help with downloading and checking the hashes and signatures automatically.</p>
 </div>
@@ -408,8 +413,10 @@ Windows (PowerShell): Get-FileHash -Algorithm SHA512 .\apache-plc4x-code-generat
 <p>Last not least it will validate the PGP key and print out some information on it.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="template_for_the_email_for_voting">Template for the email for voting</h3>
+</div>
+<div class="sect1">
+<h2 id="template_for_the_email_for_voting">Template for the email for voting</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre>+1/-1 (binding)
@@ -435,7 +442,6 @@ Name
 <p>If everything is ok, I put "OK" int the square brackets.
 If there are minor issues, I put "MINOR" in there and, if it&#8217;s a short reason, I put an explanation at the end of the line. If it&#8217;s longer I put a longer section after the checklist.
 If there are major issues, I put "FAIL" in there and comment the same way as with minor issues.</p>
-</div>
 </div>
 </div>
 </div>

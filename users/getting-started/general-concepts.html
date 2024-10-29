@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; General Concepts</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,8 +328,8 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="general_concepts">General Concepts</h2>
+            <h1>General Concepts</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>On this page we&#8217;ll give a short introduction to the most important concepts that will help you understand Apache PLC4X better.</p>
@@ -356,8 +356,11 @@
 <div class="paragraph">
 <p>If you are familiar with <code>JDBC</code> or <code>ODBC</code>, you will easily understand the concepts in PLC4X, as these were a great inspiration for the creation of Apache PLC4X.</p>
 </div>
-<div class="sect2">
-<h3 id="connections">Connections</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="connections">Connections</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>In general a connection is a physical or logical connection between two endpoints.</p>
 </div>
@@ -415,8 +418,8 @@ This allows them to not only be used in what we call <code>passive-mode drivers<
 <div class="paragraph">
 <p>The <code>Test</code> transport is generally built for being used inside the PLC4X test framework as it allows fine-grained access to the input and output of the drivers. With the test transport we can explicitly control which data is passed into and retrieved from drivers and to validate this in unit- and integration-tests.</p>
 </div>
-<div class="sect3">
-<h4 id="connection_strings">Connection Strings</h4>
+<div class="sect2">
+<h3 id="connection_strings">Connection Strings</h3>
 <div class="paragraph">
 <p>A fully qualified PLC4X connection string would look like this:</p>
 </div>
@@ -470,12 +473,45 @@ This allows them to not only be used in what we call <code>passive-mode drivers<
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="individual_resource_addresses_tags">Individual Resource Addresses (Tags)</h3>
+</div>
+<div class="sect1">
+<h2 id="individual_resource_addresses_tags">Individual Resource Addresses (Tags)</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Addresses for individual tags on a PLC are extremely dependent on the used protocol.
 As we usually decided to stick to the address formats that are used in those particular environments, please check the <code>Protocol Documentation</code> on details about these address formats <a href="../protocols/index.html">here</a>.</p>
 </div>
+<div class="paragraph">
+<p>The tag syntax is fairly generic and can be summarized as <code>type:address</code>.
+Some protocols might support tag attributes which are specified as key-value pairs after primary tag address.
+For example <code>coil:1{unit-id: 10}</code>.
+Tag attributes are additional elements which depend on actual protocol.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tag_metadata">Tag metadata</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Starting from Apache PLC4X release 0.13 an experimental support for result set metadata is provided in plc4j.
+This metadata is dedicated to provide additional information which might be available at protocol (sample timestamp) or driver level (i.e. packet receive time).
+Consult again protocol documentation on specifics of this feature.</p>
+</div>
+<div class="paragraph">
+<p>The common metadata keys currently defined are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>timestamp - timestamp for tag value provided by other communication party.</p>
+</li>
+<li>
+<p>timestamp_source - source of timestamp or receive_timestamp field, if any of these is provided.</p>
+</li>
+<li>
+<p>receive_timestamp - timestamp assumed upon receiving of packet with data.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

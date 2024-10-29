@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; CAN Bus Driver Adapter</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,8 +328,8 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="can_bus_driver_adapter">CAN Bus Driver Adapter</h2>
+            <h1>CAN Bus Driver Adapter</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
@@ -341,8 +341,11 @@
 Its responsibility is to combine <a href="../transports/can.html">CAN transport facade</a> and custom application layer protocols.
 In this way, the protocol can use its own "root frame" type which is not delivered from CAN bus frame.</p>
 </div>
-<div class="sect2">
-<h3 id="more_details_on_the_driver">More details on the driver</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="more_details_on_the_driver">More details on the driver</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The <code>CANDriverAdapter</code> is a full implementation of Apache PLC4X API.
 Under the hood adapter will forward all operations to delegate driver.
@@ -380,7 +383,6 @@ This adapter can then create a <code>CANopenFrame</code> which is processed by d
 Because <code>FrameData</code> does not be a real type (it is an interface) we can skip it.
 With a help of a <code>CANFrameBuilder</code> provided by CAN transport driver can easily construct a structure which is supported by it.
 While this makes an API asymmetric it also makes it possible to use any third party transport with <code>CANopenDriver</code>.</p>
-</div>
 </div>
 </div>
 </div>

@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Releasing PLC4X</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -237,11 +237,10 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="releasing_plc4x">Releasing PLC4X</h2>
+            <h1>Releasing PLC4X</h1>
+<div class="sect1">
+<h2 id="tldr">TL/DR</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="tldr">TL/DR</h3>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -337,8 +336,10 @@ Please be sure to execute the release with a Java version 11 or the Karaf featur
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="preparing_your_system_for_being_able_to_release">Preparing your system for being able to release</h3>
+</div>
+<div class="sect1">
+<h2 id="preparing_your_system_for_being_able_to_release">Preparing your system for being able to release</h2>
+<div class="sectionbody">
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -461,8 +462,10 @@ On some systems (mainly Mac) gpg signing can result in errors like:
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="preparing_the_codebase_for_a_release">Preparing the codebase for a release</h3>
+</div>
+<div class="sect1">
+<h2 id="preparing_the_codebase_for_a_release">Preparing the codebase for a release</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Usually you will have to update the RELEASE_NOTES document to the new version.
 I would suggest doing this prior to the branch as otherwise you will definitely have to port it back to <code>develop</code>.
@@ -473,8 +476,10 @@ So remove the <code>SNAPSHOT</code> and <code>(Unreleased)</code> markers from t
 Usually the <code>NOTICE</code> file has to be adjusted.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="creating_a_release_branch">Creating a release branch</h3>
+</div>
+<div class="sect1">
+<h2 id="creating_a_release_branch">Creating a release branch</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>According to SemVer, we have: Major, Minor and Bugfix releases.</p>
 </div>
@@ -530,8 +535,10 @@ So in case of preparing the release branch for <code>0.13.0-SNAPSHOT</code> the 
 <p>However, in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/0.13</code> branch is created.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="preparing_develop_for_the_next_iteration">Preparing <code>develop</code> for the next iteration</h3>
+</div>
+<div class="sect1">
+<h2 id="preparing_develop_for_the_next_iteration">Preparing <code>develop</code> for the next iteration</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Now is a good time to add a new section to the <code>RELEASE_NOTES</code> document for the new <code>SNAPSHOT</code> version.</p>
 </div>
@@ -572,8 +579,10 @@ If you find anything here, you will need to pay attention during the release.
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="release_stabilization_phase">Release stabilization phase</h3>
+</div>
+<div class="sect1">
+<h2 id="release_stabilization_phase">Release stabilization phase</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Now usually comes a phase in which last tests and checks should be performed.</p>
 </div>
@@ -584,8 +593,10 @@ If you find anything here, you will need to pay attention during the release.
 <p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems, and we no longer have the same versions.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="preparing_a_release">Preparing a release</h3>
+</div>
+<div class="sect1">
+<h2 id="preparing_a_release">Preparing a release</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Same as with creating the branch it is important to enable all profiles when creating the branch as only this way will all modules versions be updated.
 Otherwise, the non-default modules on develop will reference the old version which will cause problems when building.
@@ -709,7 +720,6 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
 <h2 id="what_if_something_goes_wrong">What if something goes wrong?</h2>
 <div class="sectionbody">
@@ -730,8 +740,11 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 <div class="paragraph">
 <p>However, it will not delete the tag in GIT (locally and remotely). So you have to do that manually or use a different tag next time.</p>
 </div>
-<div class="sect2">
-<h3 id="performing_a_release">Performing a release</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="performing_a_release">Performing a release</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>This is done by executing another goal of the <code>maven-release-plugin</code>:</p>
 </div>
@@ -804,8 +817,10 @@ Here it automatically executes a maven build (You don&#8217;t have to do this, i
 <p>This file will also be signed and <code>SHA512</code> hashes will be created.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="staging_a_release">Staging a release</h3>
+</div>
+<div class="sect1">
+<h2 id="staging_a_release">Staging a release</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Each new release and release-candidate has to be staged in the Apache SVN under:</p>
 </div>
@@ -855,8 +870,10 @@ Ideally you just copy them there from there.</p>
 <p>After committing these files to SVN you are ready to start the vote.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="starting_a_vote_on_the_mailing_list">Starting a vote on the mailing list</h3>
+</div>
+<div class="sect1">
+<h2 id="starting_a_vote_on_the_mailing_list">Starting a vote on the mailing list</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>After staging the release candidate in the Apache SVN, it is time to actually call out the vote.</p>
 </div>
@@ -936,8 +953,10 @@ So, the vote passes with {number of +1 votes} +1 votes by PMC members {number of
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="releasing_after_a_successful_vote">Releasing after a successful vote</h3>
+</div>
+<div class="sect1">
+<h2 id="releasing_after_a_successful_vote">Releasing after a successful vote</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>As soon as the votes are finished, and the results were in favor of a release, the staged artifacts can be released.
 This is done by moving them inside the Apache SVN.</p>
@@ -956,8 +975,10 @@ This is done by moving them inside the Apache SVN.</p>
 <p>This is also the reason why you should wait at least 24 hours before sending out the release notification emails.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="going_back_for_a_new_release_candidate">Going back for a new release candidate</h3>
+</div>
+<div class="sect1">
+<h2 id="going_back_for_a_new_release_candidate">Going back for a new release candidate</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>If however for some reason it is needed to prepare a new RC for the release. Please follow these steps:</p>
 </div>
@@ -1010,8 +1031,10 @@ This is done by moving them inside the Apache SVN.</p>
 <p>After this you should be ready to start a new RC.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="cleaning_up_older_release_versions">Cleaning up older release versions</h3>
+</div>
+<div class="sect1">
+<h2 id="cleaning_up_older_release_versions">Cleaning up older release versions</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>As a lot of mirrors are serving our releases, it is the Apache policy to clean old releases from the repo if newer versions are released.</p>
 </div>
@@ -1027,8 +1050,10 @@ This is done by moving them inside the Apache SVN.</p>
 <p>After this <a href="https://dist.apache.org/repos/dist/release/plc4x" class="bare">https://dist.apache.org/repos/dist/release/plc4x</a> should only contain the latest release directory.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="releasing_the_maven_artifacts">Releasing the Maven artifacts</h3>
+</div>
+<div class="sect1">
+<h2 id="releasing_the_maven_artifacts">Releasing the Maven artifacts</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Probably the simplest part is releasing the Maven artifacts.</p>
 </div>
@@ -1042,8 +1067,10 @@ This is done by moving them inside the Apache SVN.</p>
 <p>All release artifacts released to the Apache release repo, will automatically be synced to Maven central.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="add_the_version_to_the_doap_file">Add the version to the DOAP file</h3>
+</div>
+<div class="sect1">
+<h2 id="add_the_version_to_the_doap_file">Add the version to the DOAP file</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Now that the release is out, in the <code>develop</code> branch, update the <code>DOAP</code> file for plc4x.</p>
 </div>
@@ -1062,8 +1089,10 @@ This is done by moving them inside the Apache SVN.</p>
 <p>This file is needed for Apache&#8217;s tooling to automatically keep track of project release activity, and we use this internally too to automatically update the documentation to always reference the latest released version automatically.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="merge_back_release_version_to_release_branch">Merge back release version to <code>release</code> branch</h3>
+</div>
+<div class="sect1">
+<h2 id="merge_back_release_version_to_release_branch">Merge back release version to <code>release</code> branch</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The <code>release</code> branch should always point to the last released version.
 This has to be done with git</p>
@@ -1087,8 +1116,10 @@ git merge v0.13.0</pre>
 be pushed.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="updating_jira">Updating Jira</h3>
+</div>
+<div class="sect1">
+<h2 id="updating_jira">Updating Jira</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1100,8 +1131,10 @@ be pushed.</p>
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="update_the_download_site">Update the download site</h3>
+</div>
+<div class="sect1">
+<h2 id="update_the_download_site">Update the download site</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The URL <a href="http://plc4x.apache.org/users/download.html" class="bare">http://plc4x.apache.org/users/download.html</a> has to be changed, and the current release has to be listed there.
 This is done by changing the <code>download.adoc</code> under <code>src/site/users/</code> (<strong>in the develop branch, as this is where the site is generated from!</strong>)</p>
@@ -1126,8 +1159,10 @@ This is done by changing the <code>download.adoc</code> under <code>src/site/use
 </ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="notifying_the_world">Notifying the world</h3>
+</div>
+<div class="sect1">
+<h2 id="notifying_the_world">Notifying the world</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Make sure you have given the Apache mirrors time to fetch the release files by waiting at least 24 hours after moving the release candidate to the release part of the SVN.</p>
 </div>
@@ -1197,7 +1232,6 @@ Note &#8230;&#8203; you will be able to select the alternate sending address if 
 </div>
 <div class="paragraph">
 <p>After that email is out the door, you&#8217;re done. Congrats!</p>
-</div>
 </div>
 </div>
 </div>

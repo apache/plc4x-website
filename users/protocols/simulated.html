@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Simulated</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,11 +328,10 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="simulated">Simulated</h2>
+            <h1>Simulated</h1>
+<div class="sect1">
+<h2 id="connection_string_options">Connection String Options</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="connection_string_options">Connection String Options</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;"/>
@@ -428,10 +427,12 @@
 </tbody>
 </table>
 </div>
+</div>
+<div class="sect1">
+<h2 id="individual_resource_address_format">Individual Resource Address Format</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
-<div class="sect3">
-<h4 id="connection_string">Connection String</h4>
+<h3 id="connection_string">Connection String</h3>
 <div class="paragraph">
 <p>The simulated driver has the following connection string format:-</p>
 </div>
@@ -452,8 +453,8 @@
 <p>Note the transport and port fields are optional.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="general_format">General Format</h4>
+<div class="sect2">
+<h3 id="general_format">General Format</h3>
 <div class="paragraph">
 <p>The simulated addresses have this format:</p>
 </div>
@@ -467,8 +468,8 @@
 If the data-type part is omitted, it defaults to STRING.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="simulation_types">Simulation Types</h4>
+<div class="sect2">
+<h3 id="simulation_types">Simulation Types</h3>
 <div class="paragraph">
 <p>The simulation device supports 3 different simulation types</p>
 </div>
@@ -487,16 +488,16 @@ should only be used in conjunction with a persistent connection. Once the connec
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="alias">Alias</h4>
+<div class="sect2">
+<h3 id="alias">Alias</h3>
 <div class="paragraph">
 <p>Aliases are used to identify the different field addresses.
 They should only contain alpha-numeric and the full stop (.) character.
 For readability and language specific technical purposes they should be less than 256 characters.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="data_types">Data Types</h4>
+<div class="sect2">
+<h3 id="data_types">Data Types</h3>
 <div class="paragraph">
 <p>The following data types are supported:-</p>
 </div>
@@ -559,15 +560,15 @@ For readability and language specific technical purposes they should be less tha
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="some_useful_tips">Some useful tips</h4>
+<div class="sect2">
+<h3 id="some_useful_tips">Some useful tips</h3>
 <div class="paragraph">
 <p>The simulation driver uses a lot of the same logic templates that is used for the other drivers. It is a good way to test PLC4X
 functionality without having a device to connect to.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="examples">Examples</h4>
+<div class="sect2">
+<h3 id="examples">Examples</h3>
 <div class="paragraph">
 <p>All of these address formats are valid:-</p>
 </div>
@@ -592,7 +593,6 @@ functionality without having a device to connect to.</p>
 <p>STDOUT/device1.machineA.sensor1:INT</p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>

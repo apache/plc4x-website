@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; UMAS (Schneider Electric PLCs)</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,14 +328,17 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="umas_schneider_electric_plcs">UMAS (Schneider Electric PLCs)</h2>
+            <h1>UMAS (Schneider Electric PLCs)</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>(Supported by Plc4Py Only)</p>
 </div>
-<div class="sect2">
-<h3 id="connection_string_options">Connection String Options</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="connection_string_options">Connection String Options</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;"/>
@@ -421,8 +424,10 @@
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="supported_operations">Supported Operations</h3>
+</div>
+<div class="sect1">
+<h2 id="supported_operations">Supported Operations</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 22.2222%;"/>
@@ -461,10 +466,12 @@
 </tbody>
 </table>
 </div>
+</div>
+<div class="sect1">
+<h2 id="individual_resource_address_format">Individual Resource Address Format</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="individual_resource_address_format">Individual Resource Address Format</h3>
-<div class="sect3">
-<h4 id="connection_string">Connection String</h4>
+<h3 id="connection_string">Connection String</h3>
 <div class="paragraph">
 <p>UMAS has the following connection string format:-</p>
 </div>
@@ -485,8 +492,8 @@
 <p>Note the transport, port and option fields are optional.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="general_format">General Format</h4>
+<div class="sect2">
+<h3 id="general_format">General Format</h3>
 <div class="paragraph">
 <p>In general all UMAS addresses have this format:</p>
 </div>
@@ -507,8 +514,8 @@ if it is a UDT the tag name is followed by the child 'TESTING_UDT_1.START' which
 <p>If the data-type part is omitted, it defaults to the data type of the tag read from the PLC.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="memory_areas">Memory Areas</h4>
+<div class="sect2">
+<h3 id="memory_areas">Memory Areas</h3>
 <div class="paragraph">
 <p>Apart from tags defined in the PLC the driver is also able to access the %S and %SW
 system memory areas.</p>
@@ -521,8 +528,8 @@ manual.</p>
 <p>An example of the address format of these areas is %SW1 or %S20.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="data_types">Data Types</h4>
+<div class="sect2">
+<h3 id="data_types">Data Types</h3>
 <div class="paragraph">
 <p>The following data types are supported</p>
 </div>
@@ -577,7 +584,6 @@ manual.</p>
 <p>DATE_AND_TIME</p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>

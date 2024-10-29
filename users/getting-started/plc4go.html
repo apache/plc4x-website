@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
                             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PLC4X &#x2013; [Untitled]</title>
+    <title>PLC4X &#x2013; Getting Started with Go</title>
     <script src="../../js/jquery.slim.min.js" type="text/javascript"></script>
     <!--script src="../../js/popper.min.js" type="javascript"></script-->
     <script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -328,11 +328,10 @@
         </div>
         </nav>
                                             <main role="main" class="ml-sm-auto px-4 col-sm-pull col-md-9 col-lg-10 h-100">
-            <div class="sect1">
-<h2 id="getting_started_with_go">Getting Started with Go</h2>
+            <h1>Getting Started with Go</h1>
+<div class="sect1">
+<h2 id="initializing_a_dummy_project">Initializing a dummy project</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="initializing_a_dummy_project">Initializing a dummy project</h3>
 <div class="paragraph">
 <p>Just in case you want to get started with <code>Go</code>. In this part we&#8217;ll setup a new <code>Go</code> project.
 If you are familiar with this, you can go to the next chapter.</p>
@@ -391,8 +390,10 @@ func main() {
 <p>You&#8217;re now ready to continue.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="using_the_plc4go_api_directly">Using the PLC4Go API directly</h3>
+</div>
+<div class="sect1">
+<h2 id="using_the_plc4go_api_directly">Using the PLC4Go API directly</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>In order to write a valid PLC4X Go application, all you need, is to add a dependency to the <code>plc4go module</code>.
 Now all you need to do, is execute the following command:</p>
@@ -421,8 +422,8 @@ Perhaps we&#8217;ll change this in the future, but for now all comes in one bund
 <div class="paragraph">
 <p>Now you&#8217;re generally set to start writing your first <code>PLC4Go</code> program.</p>
 </div>
-<div class="sect3">
-<h4 id="connecting_to_a_plc">Connecting to a PLC</h4>
+<div class="sect2">
+<h3 id="connecting_to_a_plc">Connecting to a PLC</h3>
 <div class="paragraph">
 <p>In contrast to PLC4J, which uses the service lookup to find the <code>transports</code> and the <code>drivers</code> automatically, in <code>PLC4Go</code> they need to be manually registered at the driver manager.</p>
 </div>
@@ -497,7 +498,6 @@ Depending on the protocol used, it will exeute a command which only will complet
 	    fmt.Printf("Couldn't ping device: %s", pingResult.Err.Error())
 		return
 	}</pre>
-</div>
 </div>
 </div>
 <div class="sect3">
