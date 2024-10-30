@@ -371,10 +371,10 @@ async def communicate_with_plc():
             builder.add_item("Random Tag", "4x00001[10]")
             request = builder.build()
             print(f"Request built")
-            print(f"Executing request")
-            response = await connection.execute(request)
-            print(f"Request executed")
-            print(f"Response code: {response.response_code}")
+        print(f"Executing request")
+        response = await connection.execute(request)
+        print(f"Request executed")
+        print(f"Response code: {response.response_code}")
 
 asyncio.run(communicate_with_plc())</pre>
 </div>
@@ -397,7 +397,7 @@ asyncio.run(communicate_with_plc())</pre>
 <p>Read data</p>
 </li>
 <li>
-<p>Write data (Not yet available for PLC4Py)</p>
+<p>Write data</p>
 </li>
 <li>
 <p>Subscribe for data (Not yet available for PLC4Py)</p>
@@ -406,7 +406,8 @@ asyncio.run(communicate_with_plc())</pre>
 </div>
 <div class="paragraph">
 <p>In general, we will try to offer as many features as possible.
-So if a protocol doesn&#8217;t support subscription based communication it is our goal to simulate this by polling in the background, so it is transparent for the users (This simulation feature hasn&#8217;t been implemented yet though, but it&#8217;s on our roadmap).</p>
+So if a protocol doesn&#8217;t support subscription based communication it is our goal to simulate this by polling in the background,
+so it is transparent for the users (This simulation feature hasn&#8217;t been implemented yet though, but it&#8217;s on our roadmap).</p>
 </div>
 <div class="paragraph">
 <p>But there are some cases in which we can&#8217;t simulate or features are simply disabled intentionally:</p>
@@ -426,7 +427,7 @@ So if a protocol doesn&#8217;t support subscription based communication it is ou
 <div class="listingblock">
 <div class="content">
 <pre># Check if this connection support reading of data.
-if connection.is_read_supported():
+if not connection.is_read_supported():
     logger.error("This connection doesn't support reading.")</pre>
 </div>
 </div>
@@ -448,7 +449,8 @@ with connection.read_request_builder() as builder:
 <p>So, as you can see, you prepare a request, by adding tag addresses to the request and in the end by calling the <code>build</code> method.</p>
 </div>
 <div class="paragraph">
-<p>If you are using the <code>BrowseApi</code> you might also have been provided with <code>Tag</code> objects. In that case simply use <code>addTag</code> and pass in the <code>Tag</code> object instead of the address string.</p>
+<p>If you are using the <code>BrowseApi</code> you might also have been provided with <code>Tag</code> objects. In that case simply use <code>add_tag</code> and
+pass in the <code>PlcTag</code> object instead of the address string.</p>
 </div>
 <div class="paragraph">
 <p>The request is sent to the PLC by issuing the <code>execute</code> method on the request object:</p>
@@ -465,7 +467,8 @@ except ...
 </div>
 <div class="paragraph">
 <p>In general, all requests are executed asynchronously.
-As soon as the request is fully processed, the callback gets called and will contain a <code>ReadResponse</code>, if everything went right or an excception  if there were problems.</p>
+As soon as the request is fully processed, the callback gets called and will contain a <code>ReadResponse</code>, if everything went right or
+an excception if there were problems.</p>
 </div>
 <div class="paragraph">
 <p>The following example will demonstrate some of the options you have:</p>
@@ -490,7 +493,8 @@ As soon as the request is fully processed, the callback gets called and will con
 </div>
 <div class="paragraph">
 <p>In the for-loop, we are demonstrating how the user can iterate over the tag aliases in the response.
-In case of an ordinary read request, this will be predefined by the items in the request, however in case of a subscription response, the response might only contain some of the items that were subscribed.</p>
+In case of an ordinary read request, this will be predefined by the items in the request, however in case of a subscription
+response, the response might only contain some of the items that were subscribed.</p>
 </div>
 <div class="paragraph">
 <p>Before accessing the data, it is advisable to check if an item was correctly returned.
@@ -523,7 +527,8 @@ If this is <code>PlcResponseCode.OK</code>, everything is ok, however it could b
 <p>Assuming the return code was <code>OK</code>, we can continue accessing the data.</p>
 </div>
 <div class="paragraph">
-<p>As all PlcValue items support the len property, the user can check how many items of a given type are returned by calling len(response.tags[tag_name].value)</p>
+<p>As all PlcValue items support the len property, the user can check how many items of a given type are returned
+by calling len(response.tags[tag_name].value)</p>
 </div>
 <div class="paragraph">
 <p>You can then treat the values in the PlcList as a list using response.tags[tag_name].value.get_list()</p>
@@ -541,8 +546,7 @@ If this is <code>PlcResponseCode.OK</code>, everything is ok, however it could b
 <div class="content">
 <pre>// Check if this connection support writing of data.
 if not plc_connection.is_write_supported():
-  logger.error("This connection doesn't support writing.")
-  return</pre>
+  logger.error("This connection doesn't support writing.")</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -554,8 +558,8 @@ if not plc_connection.is_write_supported():
 // - Give the single item requested an alias name
 // - Pass in the data you want to write (for arrays, pass in a list of values)
 with connection.write_request_builder() as builder:
-    builder.add_item("Random Tag 1", "4x00001[2]", [1, 2])
-    builder.add_item("Random Tag 2", "4x00011", 1)
+    builder.add_item("Random Tag 1", "4x00001[2]", PlcList([PlcINT(1), PlcINT(2)]))
+    builder.add_item("Random Tag 2", "4x00011", PlcINT(1))
     request = builder.build()</pre>
 </div>
 </div>
