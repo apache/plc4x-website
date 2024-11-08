@@ -837,12 +837,16 @@ Manual tests proven that driver is able to communicate with OPC UA server launch
 </div>
 <div class="paragraph">
 <p>Depending on actual configuration of remote end there might be necessity to prepare client certificate.
-Preparation of certificate is beyond driver, however in case when no client certificate is provided, it will be auto-generated to establish a session.</p>
+Preparation of certificate is beyond driver, however in case when no client certificate is provided, it will be auto-generated to establish a session.
+Please follow our tutorial <a href="../getting-started/opcua-client-certificate.html">on provisioning of client private key and certificate</a>.
+By following it you will be able to create self-signed certificate for use with both hardware and software based OPC-UA servers.
+Please note that there are multiple appearances of certificates within specification.
+There is transport level certificate which can be provided though keystore options, but there is also a X509 Certificate which can be used for authentication (currently unsupported by PLC4X).</p>
 </div>
 <div class="paragraph">
 <p>The security modes differ between themselves by strength of applied signature and encryption algorithms.
 Driver is able to communicate with single security mode at the time.
-Additionally, to security policy it is possible to specify <code>messageSecurity</code> option which indicates expected security settings after initial handshake.
+Additionally, to security policy it is possible to specify <code>message-security</code> option which indicates expected security settings after initial handshake.
 By default, this option is set to <code>SIGN_ENCRYPT</code> which imposes high security settings and full encryption of exchanged message payloads.
 In case when additional diagnostics is needed payloads has to be traced through TRACE level log entries.
 The <code>SIGN</code> mode gives possibility o browse packets in tools such wireshark.</p>
@@ -852,10 +856,10 @@ The <code>SIGN</code> mode gives possibility o browse packets in tools such wire
 <div class="paragraph">
 <p>The OPC UA specification defines its own procedures for certificate validation.
 In order to simplify implementation by default server certificate validation is relaxed.
-Unless explicitly disabled through configuration of <code>trustStoreFile</code> all server certificates will be accepted without validation.</p>
+Unless explicitly disabled through configuration of <code>trust-store-file</code> all server certificates will be accepted without validation.</p>
 </div>
 <div class="paragraph">
-<p>In case when secure communication is enabled the <code>trustStoreFile</code> option might be used to point certificates which client should accept.
+<p>In case when secure communication is enabled the <code>trust-store-file</code> option might be used to point certificates which client should accept.
 The acceptance rely on regular TLS checks (expiry date, certificate path etc.), does not validate OPC UA specific parts such as application URI.</p>
 </div>
 </div>
@@ -877,7 +881,7 @@ The only one note is that driver takes minimum of local receive and remote send 
 It does same with local send and remote receive buffer.</p>
 </div>
 <div class="paragraph">
-<p>Usual values of <code>sendBufferSize</code> and <code>receiveBufferSize</code> PLC devices remain at 8196 bytes.</p>
+<p>Usual values of <code>encoding.send-buffer-size</code> and <code>encoding.receive-buffer-size</code> PLC devices remain at 8196 bytes.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -906,8 +910,12 @@ is selected based on the datatype of the returned value. For Unsigned data types
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>ns={namespace-index};[s|i|g|b]={Identifier};{Data Type}</pre>
+<pre>ns={namespace-index};[s|i|g|b]={Identifier};a=attributeId;{Data Type}</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The <code>a</code> parameter which stands for <code>attributeId</code> of an object is optional, and by default it is assumed to be Value 13 (<code>0x0d</code>).
+Value of this parameter can be specified using numeric value or OPC-UA attribute name (case-sensitive).</p>
 </div>
 <div class="sect2">
 <h3 id="data_types">Data Types</h3>
@@ -987,7 +995,8 @@ is selected based on the datatype of the returned value. For Unsigned data types
 <div class="listingblock">
 <div class="content">
 <pre>ns=2;s=HelloWorld/ScalarTypes/Boolean
-ns=2;s=HelloWorld/ScalarTypes/Boolean;BOOL</pre>
+ns=2;s=HelloWorld/ScalarTypes/Boolean;BOOL
+ns=2;s=HelloWorld/ScalarTypes/Boolean;a=Value;BOOL</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -996,7 +1005,8 @@ ns=2;s=HelloWorld/ScalarTypes/Boolean;BOOL</pre>
 <div class="listingblock">
 <div class="content">
 <pre>ns=1;i=1337
-ns=1;i=1337;DINT</pre>
+ns=1;i=1337;DINT
+ns=1;i=1337;a=Value;DINT</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1005,11 +1015,22 @@ ns=1;i=1337;DINT</pre>
 <div class="listingblock">
 <div class="content">
 <pre>ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a
-ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;REAL</pre>
+ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;REAL
+ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;a=Value;REAL</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Note the Identifiers <code>s</code>,<code>i</code>,<code>b</code> and <code>g</code> specify the format of the address not the data type of the returned value.</p>
+<p>Event Subscription:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ns=0;i=2253;a=EventNotifier;BOOL{EventId: '', EventType: '', Severity: '', Time: '', Message: ''}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the Identifiers <code>s</code>,<code>i</code>,<code>b</code> and <code>g</code> specify the format of the address not the data type of the returned value.
+The <code>a</code> attribute is required only for event subscriptions which additionally makes use of tag config.
+Tag config is a list of key-value pairs which rely on simplified JSON syntax.</p>
 </div>
 </div>
 </div>
@@ -1018,7 +1039,174 @@ ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;REAL</pre>
 <h2 id="some_useful_tips">Some useful tips</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The namespace (e.g. <code>ns=2</code>) within the address is specific to the server you are connecting to.</p>
+<p>The namespace (e.g. <code>ns=2</code>) within the address is specific to the server you are connecting to.
+Objects appearing in namespaces can, and will vary, as namespaces are used to separate scope of objects.</p>
+</div>
+<div class="paragraph">
+<p>OPC-UA servers support subscriptions which allow to reduce amount of data exchanged between client and server.
+There are three primary subscription modes: Data Change Notification, Status Change Notification and Event Notification.
+Currently, Apache PLC4X client supports Data Change Notification and Event Notification.</p>
+</div>
+<div class="paragraph">
+<p>Under the hood subscriptions still require client to request data though PublishRequest.</p>
+</div>
+<div class="sect2">
+<h3 id="opc_ua_data_change_notification">OPC UA Data Change Notification</h3>
+<div class="paragraph">
+<p>Data change notifications are created with list of tags, after which client need to send publish requests.
+Upon each publish request server will send response which will include values of all tag for which subscription was created.
+While OPC-UA specification permits mutation of subscription contents, PLC4X API does not allow that.</p>
+</div>
+<div class="paragraph">
+<p>By default, <code>Cyclic</code> and <code>Change of State</code> subscriptions operations defined in PLC4X client API result in data change notifications.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="opc_ua_event_notification">OPC UA Event Notification</h3>
+<div class="paragraph">
+<p>Third mode of subscription defined by PLC4X API is <code>Event Subscription</code>.
+This kind of subscription is available since PLC4X 0.13 and have slightly different syntax, which brings more complex data.
+OPC-UA events can be used to receive notifications of various kinds which appear when specific situation happens.
+In other protocols this kind of behavior can function as alarms or alerts.</p>
+</div>
+<div class="paragraph">
+<p>In order to create OPC-UA event subscription you need to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>define <code>a=EventNotifier</code> or <code>a=12</code></p>
+</li>
+<li>
+<p>specify event fields to retrieve through a tag config</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The tag config key must match OPC-UA event field.
+The tag config value is not used, thus it can not be used to specify filter criteria for field value.
+Fields which are supported are defined in OPC UA <code>BaseEventType</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>EventId</code></p>
+</li>
+<li>
+<p><code>EventType</code></p>
+</li>
+<li>
+<p><code>SourceNode</code></p>
+</li>
+<li>
+<p><code>SourceName</code></p>
+</li>
+<li>
+<p><code>Time</code></p>
+</li>
+<li>
+<p><code>ReceiveTime</code></p>
+</li>
+<li>
+<p><code>LocalTime</code></p>
+</li>
+<li>
+<p><code>Message</code></p>
+</li>
+<li>
+<p><code>Severity</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example syntax: <code>ns=0;i=2253;a=EventNotifier;BOOL{EventId: '', EventType: '', Severity: '', Time: '', Message: ''}</code>.</p>
+</div>
+<div class="paragraph">
+<p>Subscription event generated by client upon receiving notification will contain an object (<code>PlcSTRUCT</code>/<code>Map</code>) which will contain all requested fields.
+Please note that Apache PLC4X does only basic normalization of data, thus your application need to take care of actual processing of event data.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tag_metadata">Tag metadata</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This driver supports tag metadata.
+Beyond standard metadata fields such <code>timestamp</code> and <code>timestamp_source</code> it can provide following keys:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>opcua_quality</code></p>
+</li>
+<li>
+<p><code>opcua_server_timestamp</code></p>
+</li>
+<li>
+<p><code>opcua_source_timestamp</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Appearance of these fields is conditional, they are provided only when it can be sourced from packets exchanged between client and server.
+This means that depending on operation conducted by client (read/write/subscribe) metadata will vary.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="compatibility_with_opc_ua_servers">Compatibility with OPC-UA Servers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are multiple OPC-UA server implementations.
+Each of it have its own specifics, sometimes showing up more detailed security handling or further edge case buried in specification.
+So far Apache PLC4X OPC-UA client have been confirmed to be working with below servers (order in chronology of passed tests/confirmed compatibility):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>version 0.13</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/node-opcua/node-opcua">node-opcua</a></p>
+</li>
+<li>
+<p>Mitsubishi Electric MX OPC Server UA</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>version 0.12</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://prosysopc.com/products/opc-ua-simulation-server/">Prosys OPC-UA Simulation Server</a></p>
+</li>
+<li>
+<p>Simatic OPC UA S7-1200 Basic</p>
+</li>
+<li>
+<p><a href="https://github.com/OPCFoundation/UA-.NETStandard">OPC Foundation UA-.NET Standard</a></p>
+</li>
+<li>
+<p>Simocode OPC UA server</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>versions prior 0.12</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://eclipse.org/milo">Eclipse Milo</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1051,8 +1239,6 @@ The OPC Unified Architecture (UA), released in 2008, is a platform independent s
 </li>
 </ul>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-</table>
 </div>
 </div>
         </main>
