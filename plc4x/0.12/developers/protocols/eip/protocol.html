@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>EIP Protocol :: PLC4X</title>
+    <meta name="generator" content="Antora 3.1.9">
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<link rel="stylesheet" href="/_/css/site.css">
+<link rel="stylesheet" href="/_/css/header.css">
+<link rel="stylesheet" href="/_/css/vars.css">
+<link rel="stylesheet" href="/_/css/all.min.css" type="text/css"/>
+<script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../../../..">
+          <img src="../../../../../plc4x/0.12/_images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+      </a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end justify-content-center">
+        <a class="navbar-item" href="../../../../../">Home</a>
+        <a class="navbar-item" href="../../../../../plc4x/0.12/users">Users</a>
+        <a class="navbar-item" href="../../../../../plc4x/0.12/developers">Developers</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://www.apache.org">Apache</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="navbar-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="navbar-item" href="https://www.apache.org/security/">Security</a>
+            <a class="navbar-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/policies/conduct">Code of Conduct</a>
+            <a class="navbar-item" href="https://events.apache.org/">Upcoming Events</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="../../../../../plc4x/0.12/users/download">Download</a>
+          </span>
+        </div>
+        <a class="acevent" data-format="wide"></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="plc4x" data-version="0.12">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../../users/index.html">plc4x</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/index.html">Users</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/adopters.html">Adopters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/commercial-support.html">Commercial Support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/getting-started/index.html">Getting Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4c.html">Getting Started with C</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4cs.html">Getting Started with C#</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4go.html">Getting Started with Go</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4j.html">Getting Started with Java</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4py.html">Getting Started with Python</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/using-snapshots.html">Using SNAPSHOT versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/general-concepts.html">General Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/protocols/index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/ab-eth.html">AB-ETH</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/ads.html">ADS (Automation Device Specification)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/bacnet.html">BACnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/c-bus.html">C-Bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/canopen.html">CANopen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/ctrlx.html">CtlrX</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/deltav.html">DeltaV</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/df1.html">DF1</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/eip.html">EtherNet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/firmata.html">Firmata</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/genericcan.html">Generic CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/iec-60870.html">IEC-60870</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/knxnetip.html">KNXnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/logix.html">Logix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/modbus.html">Modbus (TCP/UDP/Serial)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/opcua.html">OPC UA</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/plc4x.html">PLC4X (Proxy) (TCP)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/profinet.html">Profinet (In Development)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/s7.html">S7 (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/simulated.html">Simulated</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/transports/index.html">Transports</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/tcp.html">TCP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/udp.html">UDP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/socketcan.html">SocketCAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/pcap-replay.html">PCAP Replay</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/integrations/index.html">Integrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-calcite.html">Apache Calcite</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-camel.html">Apache Camel</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-iotdb.html">Apache IotDB</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-streampipes.html">Apache StreamPipes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/eclipse-milo.html">Introduction</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/tools/index.html">Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/capture-replay.html">Capture Replay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/connection-cache.html">The Connection Cache concept</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/scraper.html">Scraper</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/testing.html">Testing (or using PLC4X without a PLC)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/industry40.html">Industry 4.0 with Apache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/security.html">Security Vulnerabilities</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../index.html">Developers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../preparing/index.html">Preparing your Computer</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../preparing/linux.html">Linux</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../preparing/macos.html">Mac OS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../preparing/windows.html">Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../building.html">Building PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../contributing.html">Contributing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../tutorials/index.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tutorials/writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../code-gen/index.html">Code Generation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../code-gen/protocol/mspec.html">The MSpec format</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../code-gen/language/freemarker.html">Apache Freemarker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../code-gen/protocol/df1.html">Example: DF1 MSpec</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Usage of protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ads/protocol.html">Beckhoff ADS Protocol</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="protocol.html">EIP Protocol</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../infrastructure/index.html">Infrastructure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/ci.html">Continuous Integration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/sonar.html">Code Analysis</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/wiki.html">WIKI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/vm.html">infrastructure/vm.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/website.html">Generating the Website</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../release/index.html">Releasing and Validating Releases</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../release/release.html">Releasing PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../release/validation.html">Validating a staged release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../release/build-tools.html">Releasing PLC4X Build-Tools</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tools.html">Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../team.html">Team</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../decisions.html">Decision Making</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../maturity.html">Apache Maturity Model Assessment for PLC4X</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">plc4x</span>
+    <span class="version">0.12</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../../users/index.html">plc4x</a></div>
+      <ul class="versions">
+        <li class="version">
+          <a href="../../../../latest/users/index.html">latest</a>
+        </li>
+        <li class="version is-current is-latest">
+          <a href="../../../users/index.html">0.12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../../users/index.html">plc4x</a></li>
+    <li><a href="../../index.html">Developers</a></li>
+    <li><a href="../index.html">Usage of protocols</a></li>
+    <li><a href="protocol.html">EIP Protocol</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">0.12</button>
+  <div class="version-menu">
+    <a class="version" href="../../../../latest/developers/protocols/eip/protocol.html">latest</a>
+    <a class="version is-current" href="protocol.html">0.12</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/protocols/eip/protocol.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">EIP Protocol</h1>
+<div class="imageblock kroki">
+<div class="content">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1597px" preserveAspectRatio="none" style="width:4546px;height:1597px;background:#FFFFFF;" version="1.1" viewBox="0 0 4546 1597" width="4546px" zoomAndPan="magnify"><defs/><g><!--cluster Connect--><g id="cluster_Connect"><polygon fill="#EEEECC" points="304.8648,71,376.8648,71,383.8648,93.2969,706.8648,93.2969,706.8648,1027.1,304.8648,1027.1,304.8648,71" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="304.8648" x2="383.8648" y1="93.2969" y2="93.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="66" x="308.8648" y="85.9951">Connect</text></g><!--cluster Connected--><g id="cluster_Connected"><polygon fill="#EEEEEE" points="746.8648,811.78,838.8648,811.78,845.8648,834.0769,4529.8648,834.0769,4529.8648,1590.97,746.8648,1590.97,746.8648,811.78" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="746.8648" x2="845.8648" y1="834.0769" y2="834.0769"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="86" x="750.8648" y="826.7751">Connected</text></g><!--cluster Browse--><g id="cluster_Browse"><polygon fill="#CCCCEE" points="3394.8648,870.78,3460.8648,870.78,3467.8648,893.0769,3522.8648,893.0769,3522.8648,1014.11,3394.8648,1014.11,3394.8648,870.78" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="3394.8648" x2="3467.8648" y1="893.0769" y2="893.0769"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="60" x="3398.8648" y="885.7751">Browse</text></g><!--cluster Read--><g id="cluster_Read"><polygon fill="#CCEECC" points="2460.8648,870.78,2505.8648,870.78,2512.8648,893.0769,3354.8648,893.0769,3354.8648,1473.97,2460.8648,1473.97,2460.8648,870.78" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="2460.8648" x2="2512.8648" y1="893.0769" y2="893.0769"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="39" x="2464.8648" y="885.7751">Read</text></g><!--cluster Write--><g id="cluster_Write"><polygon fill="#EECCCC" points="1526.8648,870.78,1574.8648,870.78,1581.8648,893.0769,2420.8648,893.0769,2420.8648,1371,1526.8648,1371,1526.8648,870.78" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1526.8648" x2="1581.8648" y1="893.0769" y2="893.0769"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="42" x="1530.8648" y="885.7751">Write</text></g><!--cluster Subscribe--><g id="cluster_Subscribe"><polygon fill="#EECCEE" points="1358.8648,870.78,1443.8648,870.78,1450.8648,893.0769,1486.8648,893.0769,1486.8648,1014.11,1358.8648,1014.11,1358.8648,870.78" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1358.8648" x2="1450.8648" y1="893.0769" y2="893.0769"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="79" x="1362.8648" y="885.7751">Subscribe</text></g><!--cluster Unsubscribe--><g id="cluster_Unsubscribe"><polygon fill="#87CEFA" points="1190.8648,870.78,1295.8648,870.78,1302.8648,893.0769,1318.8648,893.0769,1318.8648,1014.11,1190.8648,1014.11,1190.8648,870.78" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1190.8648" x2="1302.8648" y1="893.0769" y2="893.0769"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="99" x="1194.8648" y="885.7751">Unsubscribe</text></g><!--cluster Disconnect--><g id="cluster_Disconnect"><polygon fill="#EECCCC" points="786.8648,870.78,880.8648,870.78,887.8648,893.0769,1150.8648,893.0769,1150.8648,1550.97,786.8648,1550.97,786.8648,870.78" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="786.8648" x2="887.8648" y1="893.0769" y2="893.0769"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="88" x="790.8648" y="885.7751">Disconnect</text></g><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="80" x="361.8648" y="114"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="371.8648" y="135.1387">initializing</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="182" x="342.8648" y="188.97"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="162" x="352.8648" y="210.1087">Send ListServices request</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="208" x="336.8648" y="263.94"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="188" x="346.8648" y="285.0787">Receive ListServices response</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="251" x="342.3648" y="351.91"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="231" x="352.3648" y="373.0487">Send EipConnectionRequest request</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="277" x="336.3648" y="426.88"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="257" x="346.3648" y="448.0187">Receive EipConnectionRequest response</text><g id="elem_#28"><polygon fill="#F1F1F1" points="474.8648,501.84,486.8648,513.84,474.8648,525.84,462.8648,513.84,474.8648,501.84" style="stroke:#181818;stroke-width:0.5;"/></g><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="207" x="442.3648" y="579.84"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="187" x="452.3648" y="600.9787">Send GetAllAttributes request</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="268" x="401.8648" y="881.16"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="248" x="411.8648" y="902.2987">Send OpenConnectionManager request</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="233" x="450.3648" y="654.81"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="213" x="460.3648" y="675.9487">Receive GetAllAttributes response</text><g id="elem_#37"><polygon fill="#F1F1F1" points="566.8648,729.78,578.8648,741.78,566.8648,753.78,554.8648,741.78,566.8648,729.78" style="stroke:#181818;stroke-width:0.5;"/></g><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="294" x="388.8648" y="969.13"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="274" x="398.8648" y="990.2687">Receive OpenConnectionManager response</text><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="3418.8648" y="982.11"/><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="3212.8648" y="982.11"/><g id="elem_#66"><polygon fill="#F1F1F1" points="3140.8648,1072.1,3152.8648,1084.1,3140.8648,1096.1,3128.8648,1084.1,3140.8648,1072.1" style="stroke:#181818;stroke-width:0.5;"/></g><g id="elem_#69"><polygon fill="#F1F1F1" points="2818.8648,1155.08,2830.8648,1167.08,2818.8648,1179.08,2806.8648,1167.08,2818.8648,1155.08" style="stroke:#181818;stroke-width:0.5;"/></g><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="202" x="2484.8648" y="1238.06"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="182" x="2494.8648" y="1259.1987">readWithConnectionManager</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="223" x="2707.3648" y="1238.06"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="203" x="2717.3648" y="1259.1987">readWithoutConnectionManager</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="195" x="3043.3648" y="1150.1"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="175" x="3053.3648" y="1171.2387">readWithoutMessageRouter</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="196" x="2508.8648" y="1313.03"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="176" x="2518.8648" y="1334.1687">Send SendUnitData request</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="222" x="2615.8648" y="1416"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="202" x="2625.8648" y="1437.1387">Receive SendUnitData response</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="174" x="2758.8648" y="1313.03"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="154" x="2768.8648" y="1334.1687">Send CipRRData request</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="200" x="2977.8648" y="1416"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="180" x="2987.8648" y="1437.1387">Receive CipRRData response</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="380" x="2950.8648" y="1238.06"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="360" x="2960.8648" y="1259.1987">Send unconnected CipReadRequest request for each tag</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="325" x="2992.3648" y="1313.03"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="305" x="3002.3648" y="1334.1687">Receive unconnected CipReadRequest response</text><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="2271.8648" y="982.11"/><g id="elem_#95"><polygon fill="#F1F1F1" points="2140.8648,1072.1,2152.8648,1084.1,2140.8648,1096.1,2128.8648,1084.1,2140.8648,1072.1" style="stroke:#181818;stroke-width:0.5;"/></g><g id="elem_#98"><polygon fill="#F1F1F1" points="2140.8648,1155.08,2152.8648,1167.08,2140.8648,1179.08,2128.8648,1167.08,2140.8648,1155.08" style="stroke:#181818;stroke-width:0.5;"/></g><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="203" x="1950.3648" y="1238.06"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="183" x="1960.3648" y="1259.1987">writeWithConnectionManager</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="224" x="2172.8648" y="1238.06"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="204" x="2182.8648" y="1259.1987">writeWithoutConnectionManager</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="196" x="1797.8648" y="1150.1"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="176" x="1807.8648" y="1171.2387">writeWithoutMessageRouter</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="380" x="1550.8648" y="1238.06"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="360" x="1560.8648" y="1259.1987">Send unconnected CipWriteRequest request for each tag</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="325" x="1947.3648" y="1313.03"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="305" x="1957.3648" y="1334.1687">Receive unconnected CipWriteRequest response</text><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="1382.8648" y="982.11"/><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="1214.8648" y="982.11"/><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="1046.8648" y="982.11"/><g id="elem_#47"><polygon fill="#F1F1F1" points="1086.8648,1072.1,1098.8648,1084.1,1086.8648,1096.1,1074.8648,1084.1,1086.8648,1072.1" style="stroke:#181818;stroke-width:0.5;"/></g><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="269" x="810.3648" y="1150.1"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="249" x="820.3648" y="1171.2387">Send ConnectionManagerClose request</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="179" x="918.3648" y="1313.03"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="159" x="928.3648" y="1334.1687">Send Disconnect request</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="295" x="810.3648" y="1238.06"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="275" x="820.3648" y="1259.1987">Receive ConnectionManagerClose response</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="205" x="905.3648" y="1416"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="185" x="915.3648" y="1437.1387">Receive Disconnect response</text><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="967.8648" y="1518.97"/><ellipse cx="356.8648" cy="16" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1.0;"/><!--link start to Connect--><g id="link_start_Connect"><path d="M349.4548,23.15 C341.7048,30.05 329.8448,41.98 323.8648,55 C322.1636,58.7075 320.7131,62.6167 319.4776,66.6244 C319.1688,67.6264 318.8733,68.6344 318.5908,69.6471 C318.5201,69.9002 318.4503,70.1537 318.3813,70.4074 C318.3467,70.5342 319.8696,64.8667 319.8354,64.9937 " fill="none" id="start-to-Connect" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="318.2783,70.7881,324.477,63.1346,319.5759,65.9594,316.7511,61.0584,318.2783,70.7881" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Connected to Browse--><g id="link_Connected_Browse"><path d="M3563.0048,1083.09 C3574.9748,1082.99 4340.7748,1076.01 4370.8648,1043.1 C4393.9448,1017.84 4391.1648,993.65 4370.8648,966.11 C4342.2948,927.35 4127.7098,910.565 3918.7036,903.4913 C3814.2005,899.9544 3711.092,898.8453 3633.3275,898.6311 C3594.4452,898.524 3561.8989,898.6406 3538.6823,898.7893 C3532.8781,898.8265 3533.6568,898.8157 3529.0657,898.8539 " fill="none" id="Connected-to-Browse" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3523.0659,898.9038,3532.0988,902.8288,3528.0657,898.8622,3532.0323,894.8291,3523.0659,898.9038" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="114" x="4387.8648" y="990.3204">API Browse Request</text></g><!--link Connected to Read--><g id="link_Connected_Read"><path d="M3562.9848,1083.09 C3572.8548,1082.9 4205.0148,1070.28 4229.8648,1043.1 C4252.9448,1017.84 4250.1648,993.65 4229.8648,966.11 C4174.3848,890.84 3482.5748,927.3 3389.8648,915.13 C3382.5148,914.1625 3374.7948,912.7256 3367.3153,911.1036 C3363.5755,910.2926 3359.8959,909.4353 3356.3527,908.5672 C3355.9098,908.4587 3361.2925,909.7946 3360.854,909.6859 " fill="none" id="Connected-to-Read" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3355.0305,908.2412,3362.8027,914.2905,3359.8834,909.4451,3364.7288,906.5258,3355.0305,908.2412" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="4246.8648" y="990.3204">API Read Request</text></g><!--link Connected to Write--><g id="link_Connected_Write"><path d="M3562.9548,1083.1 C3570.4348,1083.14 4049.3348,1085.75 4088.8648,1043.1 C4112.1248,1018 4110.3448,992.74 4088.8648,966.11 C4048.0348,915.49 4010.4748,942.48 3945.8648,935.13 C3616.8548,897.66 2784.6048,954.94 2455.8648,915.13 C2448.2973,914.2125 2440.348,912.8019 2432.6456,911.1908 C2428.7945,910.3852 2425.005,909.5296 2421.356,908.6604 C2421.242,908.6332 2426.9637,910.0008 2426.85,909.9736 " fill="none" id="Connected-to-Write" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2421.0143,908.5788,2428.838,914.5614,2425.8773,909.7411,2430.6976,906.7805,2421.0143,908.5788" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="4105.8648" y="990.3204">API Write Request</text></g><!--link Connected to Subscribe--><g id="link_Connected_Subscribe"><path d="M3562.9248,1083.09 C3567.7948,1082.92 3879.6348,1071.45 3904.8648,1043.1 C3927.6148,1017.53 3926.5948,992.54 3904.8648,966.11 C3859.7048,911.17 3818.6148,942.36 3747.8648,935.13 C3501.8048,909.96 1766.8248,949.38 1521.8648,915.13 C1515.4523,914.2325 1508.7442,912.8319 1502.2597,911.2245 C1499.0174,910.4209 1495.8311,909.5655 1492.7655,908.6955 C1491.2327,908.2605 1489.7301,907.8219 1488.2659,907.3842 C1487.8998,907.2748 1487.5361,907.1654 1487.175,907.0562 C1487.0847,907.0289 1492.7363,908.7431 1492.6463,908.7158 " fill="none" id="Connected-to-Subscribe" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1486.9046,906.9743,1494.3562,913.4143,1491.6893,908.4255,1496.6781,905.7587,1486.9046,906.9743" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="142" x="3921.8648" y="990.3204">API Subscription Request</text></g><!--link Connected to Unsubscribe--><g id="link_Connected_Unsubscribe"><path d="M3562.9548,1083.09 C3566.7148,1082.67 3687.0848,1069.12 3706.8648,1043.1 C3727.5648,1015.86 3728.1548,992.89 3706.8648,966.11 C3668.8248,918.27 3633.5648,942.33 3572.8648,935.13 C3328.0148,906.07 1598.0548,949.28 1353.8648,915.13 C1347.4523,914.2325 1340.7442,912.8319 1334.2597,911.2245 C1331.0174,910.4209 1327.8311,909.5655 1324.7655,908.6955 C1323.2327,908.2605 1321.7301,907.8219 1320.2659,907.3842 C1319.8998,907.2748 1319.5361,907.1654 1319.175,907.0562 C1319.0847,907.0289 1324.7363,908.7431 1324.6463,908.7158 " fill="none" id="Connected-to-Unsubscribe" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1318.9046,906.9743,1326.3562,913.4143,1323.6893,908.4255,1328.6781,905.7587,1318.9046,906.9743" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="156" x="3722.8648" y="990.3204">API Unsubscription Request</text></g><!--link Connected to Disconnect--><g id="link_Connected_Disconnect"><path d="M3562.8648,1083.03 C3562.7348,1080.44 3558.2348,997.21 3511.8648,966.11 C3404.5248,894.11 1313.7548,933.86 1185.8648,915.13 C1179.4573,914.19 1172.7517,912.7675 1166.2681,911.1514 C1163.0263,910.3434 1159.84,909.4869 1156.7743,908.6182 C1155.2414,908.1838 1153.7386,907.7464 1152.2742,907.3104 C1151.908,907.2014 1151.5443,907.0925 1151.1831,906.9837 C1151.0928,906.9565 1156.7466,908.6634 1156.6566,908.6362 " fill="none" id="Connected-to-Disconnect" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1150.9127,906.9022,1158.3726,913.3326,1155.6993,908.3472,1160.6846,905.6739,1150.9127,906.9022" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="133" x="3556.8648" y="990.3204">API Disconnect Request</text></g><!--link start to initializing--><g id="link_start_initializing"><path d="M360.3948,25.87 C367.9348,44.8 383.494,83.8661 393.144,108.0861 " fill="none" id="start-to-initializing" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="395.3648,113.66,395.7496,103.8187,393.5142,109.0151,388.3177,106.7797,395.3648,113.66" style="stroke:#181818;stroke-width:1.0;"/></g><!--link initializing to Send ListServices request--><g id="link_initializing_Send ListServices request"><path d="M408.9648,148.18 C414.2348,160.19 418.973,171.0061 424.263,183.0561 " fill="none" id="initializing-to-Send ListServices request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="426.6748,188.55,426.7197,178.7012,424.665,183.9717,419.3945,181.917,426.6748,188.55" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Send ListServices request to Receive ListServices response--><g id="link_Send ListServices request_Receive ListServices response"><path d="M435.4148,223.15 C436.5748,235.16 437.5604,245.4876 438.7204,257.5476 " fill="none" id="Send ListServices request-to-Receive ListServices response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="439.2948,263.52,442.4148,254.1784,438.8161,258.543,434.4515,254.9443,439.2948,263.52" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive ListServices response to Send EipConnectionRequest request--><g id="link_Receive ListServices response_Send EipConnectionRequest request"><path d="M445.9448,298.09 C450.7448,313.37 456.0963,330.4359 460.9163,345.7759 " fill="none" id="Receive ListServices response-to-Send EipConnectionRequest request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="462.7148,351.5,463.833,341.7148,461.216,346.7299,456.2009,344.1129,462.7148,351.5" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="324" x="456.8648" y="329.1204">If successfull, extract 'CIP encapsulation support' setting</text></g><!--link Send EipConnectionRequest request to Receive EipConnectionRequest response--><g id="link_Send EipConnectionRequest request_Receive EipConnectionRequest response"><path d="M469.4148,386.09 C470.5748,398.09 471.5604,408.4276 472.7204,420.4876 " fill="none" id="Send EipConnectionRequest request-to-Receive EipConnectionRequest response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="473.2948,426.46,476.4148,417.1184,472.8161,421.483,468.4515,417.8843,473.2948,426.46" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive EipConnectionRequest response to #28--><g id="link_Receive EipConnectionRequest response_#28"><path d="M474.8648,461.32 C474.8648,473.74 474.8648,484.45 474.8648,495.43 " fill="none" id="Receive EipConnectionRequest response-to-#28" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="474.8648,501.43,478.8648,492.43,474.8648,496.43,470.8648,492.43,474.8648,501.43" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="244" x="210.6586" y="496.6579">"Response is an EipConnectionResponse"?</text></g><!--link #28 to Send GetAllAttributes request--><g id="link_#28_Send GetAllAttributes request"><path d="M480.2048,520.93 C490.9748,533.22 511.6798,556.8381 527.5198,574.9081 " fill="none" id="#28-to-Send GetAllAttributes request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="531.4748,579.42,528.5501,570.0154,528.1789,575.6601,522.5343,575.2889,531.4748,579.42" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="23" x="512.8648" y="557.0504">true</text></g><!--link #28 to Send OpenConnectionManager request--><g id="link_#28_Send OpenConnectionManager request"><path d="M467.2248,518.56 C448.3148,528.34 400.8648,556.79 400.8648,595.83 C400.8648,595.83 400.8648,595.83 400.8648,742.78 C400.8648,806.33 461.3834,853.1678 501.1234,877.5978 " fill="none" id="#28-to-Send OpenConnectionManager request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="506.2348,880.74,500.6625,872.6191,501.9753,878.1215,496.4729,879.4343,506.2348,880.74" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="401.8648" y="676.0104">false</text></g><!--link Send GetAllAttributes request to Receive GetAllAttributes response--><g id="link_Send GetAllAttributes request_Receive GetAllAttributes response"><path d="M550.5248,614.02 C553.9848,626.03 557.0158,636.5739 560.4858,648.6339 " fill="none" id="Send GetAllAttributes request-to-Receive GetAllAttributes response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="562.1448,654.4,563.5003,644.6449,560.7623,649.5949,555.8122,646.8569,562.1448,654.4" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive GetAllAttributes response to #37--><g id="link_Receive GetAllAttributes response_#37"><path d="M566.8648,689.25 C566.8648,701.67 566.8648,712.39 566.8648,723.37 " fill="none" id="Receive GetAllAttributes response-to-#37" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="566.8648,729.37,570.8648,720.37,566.8648,724.37,562.8648,720.37,566.8648,729.37" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="541" x="6" y="726.258">Extract setting for 'useMessageRouter' and 'useConnectionManager'. If useConnectionManager</text></g><!--link #37 to Send OpenConnectionManager request--><g id="link_#37_Send OpenConnectionManager request"><path d="M564.9248,752.44 C559.7548,778.18 546.7875,842.7777 540.3275,874.9077 " fill="none" id="#37-to-Send OpenConnectionManager request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="539.1448,880.79,544.8404,872.755,540.1304,875.8881,536.9973,871.1781,539.1448,880.79" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="23" x="560.8648" y="784.9904">true</text></g><!--link #37 to Connected--><g id="link_#37_Connected"><path d="M578.4948,742.74 C755.4248,742.12 2899.9148,735.95 3527.8648,795.78 C3747.9098,816.745 3921.7648,774.75 4076.1811,769.8025 C4153.3892,767.3288 4225.7377,774.1169 4296.5703,802.6678 C4300.9974,804.4522 4305.4185,806.3217 4309.8345,808.2792 C4312.0425,809.258 4308.8064,807.7338 4311.0119,808.7569 " fill="none" id="#37-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="4316.4548,811.2819,4309.9738,803.8659,4311.9191,809.1778,4306.6072,811.123,4316.4548,811.2819" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="4488.8648" y="946.3404">false</text></g><!--link Send OpenConnectionManager request to Receive OpenConnectionManager response--><g id="link_Send OpenConnectionManager request_Receive OpenConnectionManager response"><path d="M535.8648,915.31 C535.8648,930.58 535.8648,947.38 535.8648,962.72 " fill="none" id="Send OpenConnectionManager request-to-Receive OpenConnectionManager response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="535.8648,968.72,539.8648,959.72,535.8648,963.72,531.8648,959.72,535.8648,968.72" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive OpenConnectionManager response to Connected--><g id="link_Receive OpenConnectionManager response_Connected"><path d="M596.1848,1003.54 C622.5598,1010.3 655.4723,1018.22 690.5448,1025.435 C708.0811,1029.0425 726.1573,1032.4738 744.2264,1035.4956 C744.7911,1035.5901 745.3557,1035.6841 745.9203,1035.7777 C746.2027,1035.8245 740.5651,1034.8938 740.8474,1034.9405 " fill="none" id="Receive OpenConnectionManager response-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="746.7673,1035.9179,738.5391,1030.5052,741.8341,1035.1034,737.2359,1038.3983,746.7673,1035.9179" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Disconnect to DisconnectStart--><g id="link_Disconnect_DisconnectStart"><path d="M1127.8348,899.2 C1126.7348,901.5 1098.2268,961.274 1090.9568,976.524 " fill="none" id="Disconnect-to-DisconnectStart" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1088.3748,981.94,1095.8585,975.5372,1090.5265,977.4266,1088.6371,972.0946,1088.3748,981.94" style="stroke:#181818;stroke-width:1.0;"/></g><!--link DisconnectStart to #47--><g id="link_DisconnectStart_#47"><path d="M1086.8648,990.3 C1086.8648,1002.93 1086.8648,1043.71 1086.8648,1065.62 " fill="none" id="DisconnectStart-to-#47" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1086.8648,1071.62,1090.8648,1062.62,1086.8648,1066.62,1082.8648,1062.62,1086.8648,1071.62" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="98" x="968.6523" y="1062.3734">connectionId != 0</text></g><!--link #47 to Send ConnectionManagerClose request--><g id="link_#47_Send ConnectionManagerClose request"><path d="M1079.6248,1089.22 C1060.4148,1100.18 1012.4966,1127.5072 978.9766,1146.6272 " fill="none" id="#47-to-Send ConnectionManagerClose request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="973.7648,1149.6,983.5644,1148.6153,978.108,1147.1227,979.6006,1141.6663,973.7648,1149.6" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="23" x="1028.8648" y="1127.3104">true</text></g><!--link #47 to Send Disconnect request--><g id="link_#47_Send Disconnect request"><path d="M1090.9648,1092.17 C1105.4948,1118.26 1151.6948,1210.7 1114.8648,1272.03 C1103.5448,1290.89 1089.1158,1301.4088 1069.5158,1310.1388 " fill="none" id="#47-to-Send Disconnect request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1064.0348,1312.58,1073.8837,1312.5721,1068.6023,1310.5456,1070.6287,1305.2642,1064.0348,1312.58" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="1128.8648" y="1215.2704">false</text></g><!--link Send ConnectionManagerClose request to Receive ConnectionManagerClose response--><g id="link_Send ConnectionManagerClose request_Receive ConnectionManagerClose response"><path d="M947.3148,1184.25 C949.6148,1199.52 952.1682,1216.3774 954.4882,1231.7274 " fill="none" id="Send ConnectionManagerClose request-to-Receive ConnectionManagerClose response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="955.3848,1237.66,957.9949,1228.1633,954.6376,1232.7161,950.0848,1229.3588,955.3848,1237.66" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive ConnectionManagerClose response to Send Disconnect request--><g id="link_Receive ConnectionManagerClose response_Send Disconnect request"><path d="M968.9648,1272.24 C977.1848,1284.25 984.9744,1295.6098 993.2344,1307.6698 " fill="none" id="Receive ConnectionManagerClose response-to-Send Disconnect request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="996.6248,1312.62,994.8393,1302.9343,993.7995,1308.4948,988.239,1307.455,996.6248,1312.62" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Send Disconnect request to Receive Disconnect response--><g id="link_Send Disconnect request_Receive Disconnect response"><path d="M1007.8648,1347.24 C1007.8648,1366.08 1007.8648,1390.98 1007.8648,1409.8 " fill="none" id="Send Disconnect request-to-Receive Disconnect response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="1007.8648,1415.8,1011.8648,1406.8,1007.8648,1410.8,1003.8648,1406.8,1007.8648,1415.8" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive Disconnect response to Disconnected--><g id="link_Receive Disconnect response_Disconnected"><path d="M1007.8648,1450.12 C1007.8648,1471.36 1007.8648,1501.3 1007.8648,1512.52 " fill="none" id="Receive Disconnect response-to-Disconnected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1007.8648,1518.52,1011.8648,1509.52,1007.8648,1513.52,1003.8648,1509.52,1007.8648,1518.52" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Browse to BrowseStart--><g id="link_Browse_BrowseStart"><path d="M3499.8348,899.2 C3498.7348,901.5 3470.2268,961.274 3462.9568,976.524 " fill="none" id="Browse-to-BrowseStart" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3460.3748,981.94,3467.8585,975.5372,3462.5265,977.4266,3460.6371,972.0946,3460.3748,981.94" style="stroke:#181818;stroke-width:1.0;"/></g><!--link BrowseStart to Connected--><g id="link_BrowseStart_Connected"><path d="M3460.9348,990.44 C3466.7348,999.59 3483.9848,1025.64 3502.8648,1043.1 C3525.6548,1064.18 3555.2382,1079.2469 3557.3982,1080.3369 " fill="none" id="BrowseStart-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3562.7548,1083.04,3556.522,1075.4143,3558.291,1080.7874,3552.9179,1082.5564,3562.7548,1083.04" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Read to ReadStart--><g id="link_Read_ReadStart"><path d="M3322.8148,899.2 C3320.9448,901.5 3271.6538,962.0377 3259.2338,977.2877 " fill="none" id="Read-to-ReadStart" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3255.4448,981.94,3264.2298,977.4875,3258.6023,978.0631,3258.0267,972.4356,3255.4448,981.94" style="stroke:#181818;stroke-width:1.0;"/></g><!--link ReadStart to #66--><g id="link_ReadStart_#66"><path d="M3248.8748,990.53 C3232.1248,1004.89 3171.881,1056.516 3151.551,1073.936 " fill="none" id="ReadStart-to-#66" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3146.9948,1077.84,3156.4318,1075.0214,3150.7917,1074.5867,3151.2264,1068.9465,3146.9948,1077.84" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="109" x="3161.0155" y="1073.3084">useMessageRouter</text></g><!--link #66 to #69--><g id="link_#66_#69"><path d="M3131.5748,1087.43 C3084.7648,1099.21 2880.9138,1150.4772 2834.0138,1162.2672 " fill="none" id="#66-to-#69" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2828.1948,1163.73,2837.8985,1165.4151,2833.044,1162.511,2835.9481,1157.6565,2828.1948,1163.73" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="133" x="2838.8584" y="1160.6822">useConnectionManager</text></g><!--link #69 to readWithConnectionManager--><g id="link_#69_readWithConnectionManager"><path d="M2810.5748,1171.14 C2782.1148,1181.64 2692.7042,1214.6339 2635.7342,1235.6439 " fill="none" id="#69-to-readWithConnectionManager" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2630.1048,1237.72,2639.933,1238.3588,2634.796,1235.9899,2637.1649,1230.853,2630.1048,1237.72" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="23" x="2716.8648" y="1215.2704">true</text></g><!--link #69 to readWithoutConnectionManager--><g id="link_#69_readWithoutConnectionManager"><path d="M2818.8648,1179.67 C2818.8648,1194.61 2818.8648,1214.68 2818.8648,1231.65 " fill="none" id="#69-to-readWithoutConnectionManager" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2818.8648,1237.65,2822.8648,1228.65,2818.8648,1232.65,2814.8648,1228.65,2818.8648,1237.65" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="2819.8648" y="1215.2704">false</text></g><!--link #66 to readWithoutMessageRouter--><g id="link_#66_readWithoutMessageRouter"><path d="M3135.3848,1091.2 C3130.4948,1097.1 3123.6848,1106.51 3120.8648,1116.1 C3117.4848,1127.57 3119.3713,1134.9411 3125.2113,1144.5611 " fill="none" id="#66-to-readWithoutMessageRouter" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3128.3248,1149.69,3127.0737,1139.9209,3125.7302,1145.4159,3120.2352,1144.0724,3128.3248,1149.69" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="3121.8648" y="1127.3104">false</text></g><!--link readWithConnectionManager to Send SendUnitData request--><g id="link_readWithConnectionManager_Send SendUnitData request"><path d="M2590.5248,1272.24 C2593.9848,1284.25 2597.0158,1294.7939 2600.4858,1306.8539 " fill="none" id="readWithConnectionManager-to-Send SendUnitData request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2602.1448,1312.62,2603.5003,1302.8649,2600.7623,1307.8149,2595.8122,1305.0769,2602.1448,1312.62" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Send SendUnitData request to Receive SendUnitData response--><g id="link_Send SendUnitData request_Receive SendUnitData response"><path d="M2620.4648,1347.24 C2640.4348,1366.08 2672.3753,1393.3529 2697.1753,1412.1729 " fill="none" id="Send SendUnitData request-to-Receive SendUnitData response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="2701.9548,1415.8,2697.2035,1407.173,2697.9719,1412.7774,2692.3674,1413.5458,2701.9548,1415.8" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Send SendUnitData request to Receive SendUnitData response--><g id="link_Send SendUnitData request_Receive SendUnitData response"><path d="M2632.1248,1347.46 C2656.8248,1366.24 2688.7491,1392.6541 2708.6691,1411.4341 " fill="none" id="Send SendUnitData request-to-Receive SendUnitData response-1" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="2713.0348,1415.55,2709.2302,1406.4657,2709.3967,1412.1201,2703.7423,1412.2867,2713.0348,1415.55" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive SendUnitData response to Connected--><g id="link_Receive SendUnitData response_Connected"><path d="M2838.2348,1423.72 C3002.9448,1411.84 3294.4848,1390.92 3317.8648,1387 C3414.4048,1370.84 3530.8648,1428.9 3530.8648,1331.02 C3530.8648,1166.08 3530.8648,1166.08 3530.8648,1166.08 C3530.8648,1129.36 3546.2352,1087.2358 3556.4352,1085.9058 " fill="none" id="Receive SendUnitData response-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3562.3848,1085.13,3552.9432,1082.3273,3557.4268,1085.7765,3553.9776,1090.2601,3562.3848,1085.13" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive SendUnitData response to Connected--><g id="link_Receive SendUnitData response_Connected"><path d="M2838.2248,1424.61 C3007.8948,1412.92 3313.8848,1391.02 3337.8648,1387 C3434.4048,1370.84 3550.8648,1428.9 3550.8648,1331.02 C3550.8648,1166.08 3550.8648,1166.08 3550.8648,1166.08 C3550.8648,1129.36 3578.1185,1087.3497 3569.2485,1086.0197 " fill="none" id="Receive SendUnitData response-to-Connected-1" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3563.3148,1085.13,3571.6222,1090.4204,3568.2596,1085.8714,3572.8085,1082.5088,3563.3148,1085.13" style="stroke:#181818;stroke-width:1.0;"/></g><!--link readWithoutConnectionManager to Send CipRRData request--><g id="link_readWithoutConnectionManager_Send CipRRData request"><path d="M2824.8548,1272.24 C2829.3048,1284.25 2833.2537,1294.9325 2837.7137,1306.9925 " fill="none" id="readWithoutConnectionManager-to-Send CipRRData request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2839.7948,1312.62,2840.4248,1302.7913,2838.0606,1307.9304,2832.9214,1305.5662,2839.7948,1312.62" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Send CipRRData request to Receive CipRRData response--><g id="link_Send CipRRData request_Receive CipRRData response"><path d="M2865.1348,1347.44 C2887.1248,1361.54 2923.5248,1381.78 2956.8648,1396 C2973.9148,1403.27 2987.2261,1408.1564 3005.1161,1413.7264 " fill="none" id="Send CipRRData request-to-Receive CipRRData response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="3010.8448,1415.51,3003.4408,1409.0154,3006.0709,1414.0236,3001.0626,1416.6537,3010.8448,1415.51" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Send CipRRData request to Receive CipRRData response--><g id="link_Send CipRRData request_Receive CipRRData response"><path d="M2880.9448,1347.44 C2907.1248,1361.54 2943.5248,1381.78 2976.8648,1396 C2993.9148,1403.27 3007.2537,1408.0699 3024.2337,1413.6399 " fill="none" id="Send CipRRData request-to-Receive CipRRData response-1" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="3029.9348,1415.51,3022.63,1408.904,3025.1839,1413.9515,3020.1364,1416.5055,3029.9348,1415.51" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive CipRRData response to Connected--><g id="link_Receive CipRRData response_Connected"><path d="M3178.1148,1430.3 C3304.9148,1427.25 3509.8948,1418.85 3536.8648,1396 C3559.5548,1376.77 3552.8648,1360.76 3552.8648,1331.02 C3552.8648,1166.08 3552.8648,1166.08 3552.8648,1166.08 C3552.8648,1130.65 3546.9258,1087.3529 3556.4658,1085.9829 " fill="none" id="Receive CipRRData response-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3562.4048,1085.13,3552.9276,1082.4499,3557.4556,1085.8407,3554.0648,1090.3687,3562.4048,1085.13" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive CipRRData response to Connected--><g id="link_Receive CipRRData response_Connected"><path d="M3178.0948,1430.6 C3310.1848,1427.83 3528.9448,1419.66 3556.8648,1396 C3579.5548,1376.77 3572.8648,1360.76 3572.8648,1331.02 C3572.8648,1166.08 3572.8648,1166.08 3572.8648,1166.08 C3572.8648,1130.65 3578.8039,1087.3529 3569.2639,1085.9829 " fill="none" id="Receive CipRRData response-to-Connected-1" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3563.3248,1085.13,3571.6649,1090.3687,3568.2741,1085.8407,3572.802,1082.4499,3563.3248,1085.13" style="stroke:#181818;stroke-width:1.0;"/></g><!--link readWithoutMessageRouter to Send unconnected CipReadRequest request for each tag--><g id="link_readWithoutMessageRouter_Send unconnected CipReadRequest request for each tag"><path d="M3140.8648,1184.25 C3140.8648,1199.52 3140.8648,1216.31 3140.8648,1231.66 " fill="none" id="readWithoutMessageRouter-to-Send unconnected CipReadRequest request for each tag" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3140.8648,1237.66,3144.8648,1228.66,3140.8648,1232.66,3136.8648,1228.66,3140.8648,1237.66" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Send unconnected CipReadRequest request for each tag to Receive unconnected CipReadRequest response--><g id="link_Send unconnected CipReadRequest request for each tag_Receive unconnected CipReadRequest response"><path d="M3143.9748,1272.24 C3146.2748,1284.25 3148.2761,1294.6671 3150.5861,1306.7271 " fill="none" id="Send unconnected CipReadRequest request for each tag-to-Receive unconnected CipReadRequest response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="3151.7148,1312.62,3153.9503,1303.0282,3150.7742,1307.7093,3146.0932,1304.5332,3151.7148,1312.62" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive unconnected CipReadRequest response to Connected--><g id="link_Receive unconnected CipReadRequest response_Connected"><path d="M3311.0748,1312.55 C3360.4348,1306.33 3404.8548,1299.26 3414.8648,1293.03 C3495.5648,1242.87 3476.2148,1190.85 3534.8648,1116.1 C3545.9648,1101.94 3557.5922,1090.3626 3558.5722,1089.3826 " fill="none" id="Receive unconnected CipReadRequest response-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3562.8148,1085.14,3553.6225,1088.6755,3559.2793,1088.6755,3559.2793,1094.3324,3562.8148,1085.14" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Write to WriteStart--><g id="link_Write_WriteStart"><path d="M2386.8148,899.2 C2384.8048,901.5 2331.8802,962.1696 2318.5702,977.4196 " fill="none" id="Write-to-WriteStart" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2314.6248,981.94,2323.5565,977.7896,2317.9126,978.173,2317.5293,972.5291,2314.6248,981.94" style="stroke:#181818;stroke-width:1.0;"/></g><!--link WriteStart to #95--><g id="link_WriteStart_#95"><path d="M2305.7748,990.53 C2279.6048,1005.22 2181.8569,1060.0831 2153.4069,1076.0531 " fill="none" id="WriteStart-to-#95" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2148.1748,1078.99,2157.9809,1078.0726,2152.5349,1076.5426,2154.065,1071.0966,2148.1748,1078.99" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="109" x="2160.9232" y="1074.992">useMessageRouter</text></g><!--link #95 to #98--><g id="link_#95_#98"><path d="M2140.8648,1096.7 C2140.8648,1112.09 2140.8648,1133.11 2140.8648,1148.5 " fill="none" id="#95-to-#98" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2140.8648,1154.5,2144.8648,1145.5,2140.8648,1149.5,2136.8648,1145.5,2140.8648,1154.5" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="133" x="2002.0772" y="1144.9542">useConnectionManager</text></g><!--link #98 to writeWithConnectionManager--><g id="link_#98_writeWithConnectionManager"><path d="M2135.0248,1173.72 C2121.7948,1186.5 2093.4494,1213.8705 2073.2194,1233.4205 " fill="none" id="#98-to-writeWithConnectionManager" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2068.9048,1237.59,2078.1563,1234.2121,2072.5003,1234.1154,2072.597,1228.4594,2068.9048,1237.59" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="23" x="2101.8648" y="1215.2704">true</text></g><!--link #98 to writeWithoutConnectionManager--><g id="link_#98_writeWithoutConnectionManager"><path d="M2147.8148,1172.23 C2167.3048,1183.86 2218.173,1214.2346 2252.263,1234.5846 " fill="none" id="#98-to-writeWithoutConnectionManager" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2257.4148,1237.66,2251.7373,1229.6123,2253.1216,1235.0972,2247.6368,1236.4815,2257.4148,1237.66" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="2221.8648" y="1215.2704">false</text></g><!--link #95 to writeWithoutMessageRouter--><g id="link_#95_writeWithoutMessageRouter"><path d="M2132.1448,1087.98 C2102.7348,1097.7 2011.3715,1127.8963 1951.1915,1147.7963 " fill="none" id="#95-to-writeWithoutMessageRouter" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1945.4948,1149.68,1955.2956,1150.6522,1950.242,1148.1102,1952.784,1143.0567,1945.4948,1149.68" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="2040.8648" y="1127.3104">false</text></g><!--link writeWithConnectionManager to Send SendUnitData request--><g id="link_writeWithConnectionManager_Send SendUnitData request"><path d="M2153.7748,1270.79 C2156.8348,1271.21 2159.8748,1271.63 2162.8648,1272.03 C2281.6448,1288.21 2412.5312,1304.8359 2502.5412,1316.0859 " fill="none" id="writeWithConnectionManager-to-Send SendUnitData request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2508.4948,1316.83,2500.0604,1311.7447,2503.5334,1316.2099,2499.0682,1319.6829,2508.4948,1316.83" style="stroke:#181818;stroke-width:1.0;"/></g><!--link writeWithoutConnectionManager to Send CipRRData request--><g id="link_writeWithoutConnectionManager_Send CipRRData request"><path d="M2397.0448,1270.64 C2503.5248,1284.49 2655.3949,1304.2462 2752.7449,1316.9062 " fill="none" id="writeWithoutConnectionManager-to-Send CipRRData request" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="2758.6948,1317.68,2750.2858,1312.5528,2753.7366,1317.0352,2749.2542,1320.486,2758.6948,1317.68" style="stroke:#181818;stroke-width:1.0;"/></g><!--link writeWithoutMessageRouter to Send unconnected CipWriteRequest request for each tag--><g id="link_writeWithoutMessageRouter_Send unconnected CipWriteRequest request for each tag"><path d="M1866.3448,1184.45 C1838.8548,1199.7 1803.3214,1219.3991 1775.7814,1234.6791 " fill="none" id="writeWithoutMessageRouter-to-Send unconnected CipWriteRequest request for each tag" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1770.5348,1237.59,1780.3453,1236.7213,1774.907,1235.1642,1776.4641,1229.7259,1770.5348,1237.59" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Send unconnected CipWriteRequest request for each tag to Receive unconnected CipWriteRequest response--><g id="link_Send unconnected CipWriteRequest request for each tag_Receive unconnected CipWriteRequest response"><path d="M1824.1348,1272.51 C1884.6148,1284.47 1960.2189,1299.4258 2020.6889,1311.3858 " fill="none" id="Send unconnected CipWriteRequest request for each tag-to-Receive unconnected CipWriteRequest response" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,3.0;"/><polygon fill="#181818" points="2026.5748,1312.55,2018.522,1306.8798,2021.6699,1311.5799,2016.9698,1314.7278,2026.5748,1312.55" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Receive unconnected CipWriteRequest response to Connected--><g id="link_Receive unconnected CipWriteRequest response_Connected"><path d="M2272.7648,1321.84 C2606.6048,1307.09 3337.7348,1274.52 3343.8648,1272.03 C3440.6948,1232.73 3438.2648,1181.39 3519.8648,1116.1 C3537.6848,1101.84 3556.3373,1089.4303 3557.7973,1088.4603 " fill="none" id="Receive unconnected CipWriteRequest response-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3562.7948,1085.14,3553.085,1086.7887,3558.6302,1087.9069,3557.512,1093.4522,3562.7948,1085.14" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Subscribe to SubscribeStart--><g id="link_Subscribe_SubscribeStart"><path d="M1463.8348,899.2 C1462.7348,901.5 1434.2268,961.274 1426.9568,976.524 " fill="none" id="Subscribe-to-SubscribeStart" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1424.3748,981.94,1431.8585,975.5372,1426.5265,977.4266,1424.6371,972.0946,1424.3748,981.94" style="stroke:#181818;stroke-width:1.0;"/></g><!--link SubscribeStart to Connected--><g id="link_SubscribeStart_Connected"><path d="M1427.8248,990.56 C1443.2348,1001.03 1492.0148,1032.43 1537.8648,1043.1 C1589.6748,1055.15 3400.2148,1043.48 3452.8648,1051.1 C3502.4648,1058.27 3555.4574,1080.044 3557.2774,1080.794 " fill="none" id="SubscribeStart-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3562.8248,1083.08,3556.0277,1075.9527,3558.202,1081.175,3552.9797,1083.3492,3562.8248,1083.08" style="stroke:#181818;stroke-width:1.0;"/></g><!--link Unsubscribe to UnsubscribeStart--><g id="link_Unsubscribe_UnsubscribeStart"><path d="M1295.8348,899.2 C1294.7348,901.5 1266.2268,961.274 1258.9568,976.524 " fill="none" id="Unsubscribe-to-UnsubscribeStart" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1256.3748,981.94,1263.8585,975.5372,1258.5265,977.4266,1256.6371,972.0946,1256.3748,981.94" style="stroke:#181818;stroke-width:1.0;"/></g><!--link UnsubscribeStart to Connected--><g id="link_UnsubscribeStart_Connected"><path d="M1259.8348,990.54 C1275.2548,1000.95 1324.0748,1032.19 1369.8648,1043.1 C1476.5548,1068.51 3234.2448,1068.54 3343.8648,1072.1 C3439.7448,1075.21 3553.0874,1082.4616 3556.7874,1082.7016 " fill="none" id="UnsubscribeStart-to-Connected" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="3562.7748,1083.09,3554.0526,1078.5158,3557.7853,1082.7664,3553.5348,1086.4991,3562.7748,1083.09" style="stroke:#181818;stroke-width:1.0;"/></g><!--SRC=[pLTTRziW57tFhs3EGxffZVO7iYbreobIgrM9gZvCVQ0EJj0ix05kzw7zzm4c633WTDMa-g6gxxtdSkx72SdPkxVW_FmZo6j2KC4damPIZZck2SYq3UqoC5sf1_oU0F4i5WlZ4__B15-NDsjmGUidXi06VMyHu_VwFGdP8BZh0V8j6Nv7CRSEKAz9mBPzO0N5ZQh8uBJr8Osz9Io8DlOH_2LcHMVliRrjyiTkjaxGDJhFTQFFz7GoJ4GOhF0lJFQPShccBcgBo0vSOSQtY3xY0Z50ktCr9Eu7yxd0Rr21y2FoGrXJ4uPqZdICgdrT0jOMmixAjghU0_I3KoXgc-Nh6u180HlMLb2LpTgcgIcV0OOu5uNSQv8htEYEY2ZTl50noJYtg4YeNHmkPNXd0PW1I7oKZlwamkKZw-MqHKVYdn5VLjMISx4TBVSdW2ejXoEqXC9on7vf4EaFkuO4xX7r4f0TBgtweyUvjGV2_BfNUaXw4A2iAPYr35sBCGeUcrhWw4oqPAVC0vwpEH1p3tcoQBDEAJZICKzpmUQaqxiTYiK6TtyaM8dH9-YetVfac4gv6y5dlSUawKrRBZ8SgvL3Amo9zGwyMO0FyLuF-EPLBRRy6UjfaKxkvCX9Rj-ZmS76ZqLR7uCnjb6loyi92789HGn75XY-lYMdSkpcIiqwgydGlJe37rZ7zqpThbDvJBzXqcQEaI-3hV9Lto-LzYOaxgqU5VdlC3ya4CxI-Ojtn0iUgHHc0wCRR2KAr6QjS9onjLpopwsuVoyXXw7r2lhT1VD2WYiMZWcEtU4Ux9P5FyVDPXFZFdHwYhNyOP4E0qwYxCx5ejiI8oQLN42ygrxTLWWM1y3XtYxckL2tr2GwMFifY77PTjzolPj16GrOlVrFvJx90ruYNPFWnTgrCwN5co3z-jMRRjZhb6zyD77zgjNzHm6FOvCAzk2dI3WC6TUm-OdPwRY_w8t3934M_xeVECQFjNwRWkaLtX_uzjlFYwf5n-Ej04F0ilaK0gumYRy0]--></g></svg>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<footer class="container-flex footer col-6" style="text-align:center;">
+    <div class="col"></div>
+    <div class="col-6">
+    Copyright &#169; 2017-2024 <a href="https://www.apache.org/">The Apache Software Foundation.</a> All rights reserved.<br/>
+    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered
+    trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks
+    mentioned may be trademarks or registered trademarks of their respective owners.
+    <br/>
+    </div>
+    <div>Home screen image taken from <a
+        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+        under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+        and blur effect added.
+    </div>
+    <div class="col"></div>
+</footer>
+<script id="site-script" src="../../../../../_/js/site.js" data-ui-root-path="../../../../../_"></script>
+<script async src="../../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../../.." data-snippet-length="100" data-stylesheet="../../../../../_/css/search.css"></script>
+<script async src="../../../../../search-index.js"></script>
+  </body>
+</html>

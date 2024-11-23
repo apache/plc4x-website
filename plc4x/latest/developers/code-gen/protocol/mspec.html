@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>The MSpec format :: PLC4X</title>
+    <meta name="generator" content="Antora 3.1.9">
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<link rel="stylesheet" href="/_/css/site.css">
+<link rel="stylesheet" href="/_/css/header.css">
+<link rel="stylesheet" href="/_/css/vars.css">
+<link rel="stylesheet" href="/_/css/all.min.css" type="text/css"/>
+<script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../../../..">
+          <img src="../../../../../plc4x/latest/_images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+      </a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end justify-content-center">
+        <a class="navbar-item" href="../../../../../">Home</a>
+        <a class="navbar-item" href="../../../../../plc4x/latest/users">Users</a>
+        <a class="navbar-item" href="../../../../../plc4x/latest/developers">Developers</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://www.apache.org">Apache</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="navbar-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="navbar-item" href="https://www.apache.org/security/">Security</a>
+            <a class="navbar-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/policies/conduct">Code of Conduct</a>
+            <a class="navbar-item" href="https://events.apache.org/">Upcoming Events</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="../../../../../plc4x/latest/users/download">Download</a>
+          </span>
+        </div>
+        <a class="acevent" data-format="wide"></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="plc4x" data-version="latest">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../../users/index.html">PLC4X</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/index.html">Users</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/adopters.html">Adopters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/commercial-support.html">Commercial Support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/getting-started/index.html">Getting Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4c.html">Getting Started with C</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4cs.html">Getting Started with C#</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4go.html">Getting Started with Go</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4j.html">Getting Started with Java</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/plc4py.html">Getting Started with Python</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/using-snapshots.html">Using SNAPSHOT versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/general-concepts.html">General Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/protocols/index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/ab-eth.html">AB-ETH</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/ads.html">ADS (Automation Device Specification)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/bacnet.html">BACnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/c-bus.html">C-Bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/canopen.html">CANopen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/ctrlx.html">CtlrX</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/deltav.html">DeltaV</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/df1.html">DF1</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/eip.html">EtherNet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/firmata.html">Firmata</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/genericcan.html">Generic CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/iec-60870.html">IEC-60870</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/knxnetip.html">KNXnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/logix.html">Logix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/modbus.html">Modbus (TCP/UDP/Serial)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/opcua.html">OPC UA</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/plc4x.html">PLC4X (Proxy) (TCP)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/profinet.html">Profinet (In Development)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/s7.html">S7 (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/transports/index.html">Transports</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/tcp.html">TCP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/udp.html">UDP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/socketcan.html">SocketCAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/transports/pcap-replay.html">PCAP Replay</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/integrations/index.html">Integrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-calcite.html">Apache Calcite</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-camel.html">Apache Camel</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-iotdb.html">Apache IotDB</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-kafka.html">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/apache-streampipes.html">Apache StreamPipes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../users/tools/index.html">Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/capture-replay.html">Capture Replay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/connection-cache.html">The Connection Cache concept</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/scraper.html">Scraper</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../users/tools/testing.html">Testing (or using PLC4X without a PLC)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/industry40.html">Industry 4.0 with Apache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../users/security.html">Security Vulnerabilities</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../index.html">Developers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../preparing/index.html">Preparing your Computer</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../preparing/linux.html">Linux</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../preparing/macos.html">Mac OS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../preparing/windows.html">Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../building.html">Building PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../contributing.html">Contributing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../tutorials/index.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tutorials/writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Code Generation</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="mspec.html">The MSpec format</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../language/freemarker.html">Apache Freemarker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="df1.html">Example: DF1 MSpec</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../protocols/index.html">Usage of protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/ads/protocol.html">Beckhoff ADS Protocol</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/eip/protocol.html">EIP Protocol</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../infrastructure/index.html">Infrastructure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/ci.html">Continuous Integration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/sonar.html">Code Analysis</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/wiki.html">WIKI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/vm.html">The PLC4X Project VM</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../infrastructure/website.html">Generating the Website</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../release/index.html">Releasing and Validating Releases</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../release/release.html">Releasing PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../release/validation.html">Validating a staged release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../release/build-tools.html">Releasing PLC4X Build-Tools</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tools.html">Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../team.html">Team</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../decisions.html">Decision Making</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../maturity.html">Apache Maturity Model Assessment for PLC4X</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">plc4x</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../../../0.12/users/index.html">plc4x</a></div>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../../../users/index.html">latest</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../../../../0.12/users/index.html">0.12</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../../users/index.html">PLC4X</a></li>
+    <li><a href="../../index.html">Developers</a></li>
+    <li><a href="../index.html">Code Generation</a></li>
+    <li><a href="mspec.html">The MSpec format</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">latest</button>
+  <div class="version-menu">
+    <a class="version is-current" href="mspec.html">latest</a>
+    <a class="version" href="../../../../0.12/developers/code-gen/protocol/mspec.html">0.12</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/developers/pages/code-gen/protocol/mspec.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">The MSpec format</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>MSpec</code> format (Message Specification) was a result of a brainstorming session after evaluating a lot of other options.</p>
+</div>
+<div class="paragraph">
+<p>We simply sat down and started to write some imaginary format (imaginary was even the initial Name we used Machine-Readable SPEC = <code>mspec</code>).
+After we had an initial format that seemed to do the trick, we then stated creating parses for this and started iteratively fine-tuning both spec and parsers as part of the process of implementing new protocols and language templates.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s a text-based format.</p>
+</div>
+<div class="paragraph">
+<p>At the root level of these specs are a set of <code>type</code>, <code>discriminatedType</code>, <code>dataIo</code> and <code>enum</code> blocks.</p>
+</div>
+<div class="paragraph">
+<p><code>type</code> elements are objects who`s content and structure is independent of the input.</p>
+</div>
+<div class="paragraph">
+<p>An example would be the <code>TPKTPacket</code> of the <code>S7</code> format:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[type TPKTPacket
+    [const    uint 8                 protocolId 0x03]
+    [reserved uint 8                 '0x00']
+    [implicit uint 16                len       'payload.lengthInBytes + 4']
+    [simple   COTPPacket('len - 4') payload]
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>discriminatedType</code> type, in contrast, is an object who`s content and structure is influenced by the input.</p>
+</div>
+<div class="paragraph">
+<p>Every discriminated type can contain an arbitrary number of normal fields but must contain exactly one <code>typeSwitch</code> element.</p>
+</div>
+<div class="paragraph">
+<p>For example part of the spec for the S7 format looks like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[discriminatedType S7Message
+    [const         uint 8  protocolId      0x32]
+    [discriminator uint 8  messageType]
+    [reserved      uint 16 '0x0000']
+    [simple        uint 16 tpduReference]
+    [implicit      uint 16 parameterLength 'parameter != null ? parameter.lengthInBytes : 0']
+    [implicit      uint 16 payloadLength   'payload != null ? payload.lengthInBytes : 0']
+    [typeSwitch messageType
+        ['0x01' S7MessageRequest
+        ]
+        ['0x02' S7MessageResponse
+            [simple uint 8 errorClass]
+            [simple uint 8 errorCode]
+        ]
+        ['0x03' S7MessageResponseData
+            [simple uint 8 errorClass]
+            [simple uint 8 errorCode]
+        ]
+        ['0x07' S7MessageUserData
+        ]
+    ]
+    [optional S7Parameter ('messageType')              parameter 'parameterLength &gt; 0']
+    [optional S7Payload   ('messageType', 'parameter') payload   'payloadLength &gt; 0'  ]
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A type`s start is declared by an opening square bracket <code>[</code> followed by the <code>type</code> or <code>discriminatedType</code> keyword, which is directly followed by a name.
+A Type definition is ended with a closing square bracket <code>]</code>.</p>
+</div>
+<div class="paragraph">
+<p>Every type definition contains a list of so-called fields.</p>
+</div>
+<div class="paragraph">
+<p>The list of available field types are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>abstract: used in the parent type declaration do declare a field that has to be defined with the identical type in all subtypes (reserved for <code>discriminatedType</code>).</p>
+</li>
+<li>
+<p>array: array of simple or complex typed objects.</p>
+</li>
+<li>
+<p>assert: generally similar to <code>constant</code> fields, however do they throw <code>AssertionExceptions</code> instead of hard <code>ParseExceptions</code>. They are used in combination with optional fields.</p>
+</li>
+<li>
+<p>checksum: used for calculating and verifying checksum values.</p>
+</li>
+<li>
+<p>const: expects a given value and causes a hard exception if the value doesn&#8217;t match.</p>
+</li>
+<li>
+<p>discriminator: special type of simple typed field which is used to determine the concrete type of object (reserved for <code>discriminatedType</code>).</p>
+</li>
+<li>
+<p>enum: special form of field, used if an enum types property is to be used instead of it&#8217;s primary value.</p>
+</li>
+<li>
+<p>implicit: a field required for parsing, but is usually defined though other data, so it&#8217;s not stored in the object, but calculated on serialization.</p>
+</li>
+<li>
+<p>manualArray: like an array field, however the logic for serializing, parsing, number of elements and size have to be provided manually.</p>
+</li>
+<li>
+<p>manual: simple field, where the logic for parsing, serializing and size have to be provided manually.</p>
+</li>
+<li>
+<p>optional: simple or complex typed object, that is only present if an optional condition expression evaluates to <code>true</code> and no <code>AssertionException</code> is thrown when parsing the referenced type.</p>
+</li>
+<li>
+<p>padding: field used to add padding data to make datastructures aligned.</p>
+</li>
+<li>
+<p>peek: field that tries to parse a given structure without actually consuming the bytes.</p>
+</li>
+<li>
+<p>reserved: expects a given value, but only warns if condition is not meet.</p>
+</li>
+<li>
+<p>simple: simple or complex typed object.</p>
+</li>
+<li>
+<p>typeSwitch: not a real field, but indicates the existence of subtypes, which are declared inline (reserved for <code>discriminatedType</code>).</p>
+</li>
+<li>
+<p>unknown: field used to declare parts of a message that still has to be defined. Generally used when reverse-engineering a protocol. Messages with <code>unknown</code> fields can only be parsed and not serialized.</p>
+</li>
+<li>
+<p>validation: this field is not actually a real field, it&#8217;s more a condition that is checked during parsing and if the check fails, it throws a validation exception, wich is handled by</p>
+</li>
+<li>
+<p>virtual: generates a field in the message, that is generally only used for simplification. It&#8217;s not used for parsing or serializing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The full syntax and explanations of these type follow in the following chapters.</p>
+</div>
+<div class="paragraph">
+<p>Another thing we have to explain are how types are specified.</p>
+</div>
+<div class="paragraph">
+<p>In general, we distinguish between two types of types used in field definitions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>simple types</p>
+</li>
+<li>
+<p>complex types</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simple_types"><a class="anchor" href="#_simple_types"></a>Simple Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Simple types are usually raw data the format is:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>{base-type} {size}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The base types available are currently:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>bit</strong>: Simple boolean value or bit.</p>
+</li>
+<li>
+<p><strong>byte</strong>: Special value fixed to 8 bit, which defaults to either signed or unsigned depending on the programming language (Java it defaults to signed integer values and in C and Go it defaults to unsigned integers).</p>
+</li>
+<li>
+<p><strong>int</strong>: The input is treated as signed integer value.</p>
+</li>
+<li>
+<p><strong>uint</strong>: The input is treated as unsigned integer value.</p>
+</li>
+<li>
+<p><strong>float</strong>: The input is treated as floating point number.</p>
+</li>
+<li>
+<p><strong>string</strong>: The input is treated as string.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then for <code>dataIo</code> types we have some additional types:
+- <strong>time</strong>: The input is treated as a time representation
+- <strong>date</strong>: The input is treated as a date representation
+- <strong>dateTime</strong>: The input is treated as a date with time</p>
+</div>
+<div class="paragraph">
+<p>All except the <code>bit</code> and <code>byte</code> types take a <code>size</code> value which provides how many <code>bits</code> should be read.
+For the <code>bit</code> field, this obviously defaults to 1 and for the <code>byte</code> the bits default to 8.</p>
+</div>
+<div class="paragraph">
+<p>So reading an unsigned 8-bit integer would be: <code>uint 8</code>.</p>
+</div>
+<div class="paragraph">
+<p>There is currently one special type, reserved for string values, whose length is determined by an expression instead of a fixed number of bits. It is considered a variable length string:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>vstring</strong>: The input is treated as a variable length string and requires an expression tp provide the number of bits to read.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_complex_types"><a class="anchor" href="#_complex_types"></a>Complex Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In contrast to simple types, complex types reference other complex types (Root elements of the spec document).</p>
+</div>
+<div class="paragraph">
+<p>How the parser should interpret them is defined in the referenced types definition.</p>
+</div>
+<div class="paragraph">
+<p>In the example above, for example the <code>S7Parameter</code> is defined in another part of the spec.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_field_types_and_their_syntax"><a class="anchor" href="#_field_types_and_their_syntax"></a>Field Types and their Syntax</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_array_field"><a class="anchor" href="#_array_field"></a>array Field</h3>
+<div class="paragraph">
+<p>An <code>array</code> field is exactly what you expect.
+It generates an field which is not a single-value element but an array or list of elements.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[array {bit|byte}           {name} {count|length|terminated} '{expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[array {simple-type} {size} {name} {count|length|terminated} '{expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[array {complex-type}       {name} {count|length|terminated} '{expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Array types can be both simple and complex typed and have a name.
+An array field must specify the way it&#8217;s length is determined as well as an expression defining it&#8217;s length.
+Possible values are:
+- <code>count</code>: This means that exactly the number of elements are parsed as the <code>expression</code> specifies.
+- <code>length</code>: In this case a given number of bytes are being read. So if an element has been parsed and there are still bytes left, another element is parsed.
+- <code>terminated</code>: In this case the parser will continue reading elements until it encounters a termination sequence.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_assert_field"><a class="anchor" href="#_assert_field"></a>assert Field</h3>
+<div class="paragraph">
+<p>An assert field is pretty much identical to a <code>const</code> field.
+The main difference however it how the case is handled, if the parsed value does not match the expected value.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[assert         {bit|byte}            {name}          '{assert-value}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[assert         {simple-type} {size}  {name}          '{assert-value}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>While a <code>const</code> field would abort parsing in total with an error, an <code>assert</code> field with abort parsing, but the error will only bubble up in the stack till the first <code>optional</code> field is found.</p>
+</div>
+<div class="paragraph">
+<p>In this case the parser will be rewound to the position before starting to parse the <code>optional</code> field and continue parsing with the next field, skipping the <code>optional</code> field.</p>
+</div>
+<div class="paragraph">
+<p>If there is no upstream <code>optional</code> field, then parsing of the message terminates with an error.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- validation field: Similar to an <code>assert</code> field, however no parsing is done, and instead simply a condition is checked.
+- optional field: <code>optional</code> fields are aware of the types of parser errors produced by <code>assert</code> and <code>validation</code> fields</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_checksum_field"><a class="anchor" href="#_checksum_field"></a>checksum Field</h3>
+<div class="paragraph">
+<p>A checksum field can only operate on simple types.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[checksum {bit|byte}           {name} '{checksum-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[checksum {simple-type} {size} {name} '{checksum-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing a given simple type is parsed and then the result is compared to the value the <code>checksum-expression</code> provides.
+If they don&#8217;t match an exception is thrown.</p>
+</div>
+<div class="paragraph">
+<p>When serializing, the <code>checksum-expression</code> is evaluated and the result is then output.</p>
+</div>
+<div class="paragraph">
+<p>Note: As quite often a checksum is calculated based on the byte data of a message read up to the checksum, an artificial variable is available in expressions called <code>checksumRawData</code> of type <code>byte[]</code> which contains an array of all the byte data read in the current message element and it&#8217;s sub types in case of a discriminated type.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- implicit field: A checksum field is similar to an implicit field, however the <code>checksum-expression</code> is evaluated are parsing time and throws an exception if the values don&#8217;t match.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_const_field"><a class="anchor" href="#_const_field"></a>const Field</h3>
+<div class="paragraph">
+<p>A const field simply reads a given simple type and compares to a given reference value.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[const {bit|byte}           {name} {reference}]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[const {simple-type} {size} {name} {reference}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing it makes the parser throws an Exception if the parsed value does not match the expected one.</p>
+</div>
+<div class="paragraph">
+<p>When serializing is simply outputs the expected constant.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- implicit field: A const field is similar to an implicit field, however it compares the parsed input to the reference value and throws an exception if the values don&#8217;t match.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_discriminator_field"><a class="anchor" href="#_discriminator_field"></a>discriminator Field</h3>
+<div class="paragraph">
+<p>Discriminator fields are only used in `discriminatedType`s.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[discriminator {simple-type} {size} {name}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>They are used, in cases where the value of a field determines the concrete type of a discriminated type.
+In this case we don&#8217;t have to waste memory on storing the discriminator value and this can be statically assigned to the type.</p>
+</div>
+<div class="paragraph">
+<p>When parsing a discriminator fields result just in being a locally available variable.</p>
+</div>
+<div class="paragraph">
+<p>When serializing is accesses the discriminated types constants and uses these as output.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- implicit field: A discriminator field is similar to an implicit field, however doesn&#8217;t provide a serialization expression as it uses the discrimination constants of the type it is.
+- discriminated types</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_implicit_field"><a class="anchor" href="#_implicit_field"></a>implicit Field</h3>
+<div class="paragraph">
+<p>Implicit types are fields that get their value implicitly from the data they contain.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[implicit {bit|byte}           {name} '{serialization-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[implicit {simple-type} {size} {name} '{serialization-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing an implicit type is available as a local variable and can be used by other expressions.</p>
+</div>
+<div class="paragraph">
+<p>When serializing the serialization-expression is executed and the resulting value is output.</p>
+</div>
+<div class="paragraph">
+<p>This type of field is generally used for fields that handle numbers of elements or length values as these can be implicitly calculated at serialization time.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manualarray_field"><a class="anchor" href="#_manualarray_field"></a>manualArray Field</h3>
+<div class="literalblock">
+<div class="content">
+<pre>[manualArray {bit|byte}           {name} {count|length|terminated} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[manualArray {simple-type} {size} {name} {count|length|terminated} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[manualArray {complex-type}       {name} {count|length|terminated} '{loop-expression}' '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manual_field"><a class="anchor" href="#_manual_field"></a>manual Field</h3>
+<div class="literalblock">
+<div class="content">
+<pre>[manual {bit|byte}           {name} '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[manual {simple-type} {size} {name} '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[manual {complex-type}       {name} '{serialization-expression}' '{deserialization-expression}' '{length-expression}']</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_optional_field"><a class="anchor" href="#_optional_field"></a>optional Field</h3>
+<div class="paragraph">
+<p>An optional field is a type of field that can also be <code>null</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[optional {bit|byte}           {name} ('{optional-expression}')?]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[optional {simple-type} {size} {name} ('{optional-expression}')?]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[optional {complex-type}       {name} ('{optional-expression}')?]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>optional-expression</code> attribute is optional. If it is provided the <code>optional-expression</code> is evaluated.
+If this results in`false` nothing is parsed, if it evaluates to <code>true</code> it is parsed.</p>
+</div>
+<div class="paragraph">
+<p>In any case, if when parsing the content of an <code>optional</code> field a <code>assert</code> or <code>validation</code> field fails, the parser is rewound to the position before starting to parse the <code>optional</code> field, the optional field is then skipped and the parser continues with the next field.</p>
+</div>
+<div class="paragraph">
+<p>When serializing, if the field is <code>null</code> nothing is output, if it is not <code>null</code> it is serialized normally.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- simple field: In general <code>optional</code> fields are identical to <code>simple</code> fields except the ability to be <code>null</code> or be skipped.
+- <code>assert</code>: Assert fields are similar to <code>const</code> fields, but can abort parsing of an <code>optional</code> filed.
+- <code>validation</code>: If a validation field in any of the subtypes fails, this aborts parsing of the <code>optional</code> field.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_padding_field"><a class="anchor" href="#_padding_field"></a>padding Field</h3>
+<div class="paragraph">
+<p>A padding field allows aligning of data blocks.
+It outputs additional padding data, given amount of times specified by padding expression.
+Padding is added only when result of expression is bigger than zero.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[padding {bit|byte}            {name} '{pading-value}' '{times-padding}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[padding {simple-type} {size}  {name} '{pading-value}' '{times-padding}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing a <code>padding</code> field is being parsed, the <code>times-padding</code> expressions determines how often the <code>padding-value</code> should be read. So it doesn&#8217;t really check if the read values match the <code>padding-value</code>, it just ensures the same amount of bits are being read. The read values are simply discarded.</p>
+</div>
+<div class="paragraph">
+<p>When serializing, the <code>times-padding</code> defines how often the <code>padding-value</code> should be written.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+<div class="sect3">
+<h4 id="_peek_field"><a class="anchor" href="#_peek_field"></a>peek Field</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reserved_field"><a class="anchor" href="#_reserved_field"></a>reserved Field</h3>
+<div class="paragraph">
+<p>Reserved fields are very similar to <code>const</code> fields, however they don&#8217;t throw exceptions, but instead log messages if the values don&#8217;t match.</p>
+</div>
+<div class="paragraph">
+<p>The reason for this is that in general reserved fields have the given value until they start being used.</p>
+</div>
+<div class="paragraph">
+<p>If the field starts to be used this shouldn&#8217;t break existing applications, but it should raise a flag as it might make sense to update the drivers.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[reserved {bit|byte}           {name} '{reference}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[reserved {simple-type} {size} {name} '{reference}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing the values a <code>reserved</code> field is parsed and the result is compared to the reference value and then discarded.</p>
+</div>
+<div class="paragraph">
+<p>If the values don&#8217;t match, a log message is written.</p>
+</div>
+<div class="paragraph">
+<p>This field doesn&#8217;t keep any data in memory.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- <code>const</code> field</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_simple_field"><a class="anchor" href="#_simple_field"></a>simple Field</h3>
+<div class="paragraph">
+<p>Simple fields are the most common types of fields.</p>
+</div>
+<div class="paragraph">
+<p>A <code>simple</code> field directly mapped to a normally typed field of a message type.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[simple {bit|byte}           {name}]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[simple {simple-type} {size} {name}]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[simple {complex-type}       {name}]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When parsing, the given type is parsed (can&#8217;t be <code>null</code>) and saved in the corresponding model instance&#8217;s property field.</p>
+</div>
+<div class="paragraph">
+<p>When serializing it is serialized normally using either a simple type serializer or by delegating serialization to a complex type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_typeswitch_field"><a class="anchor" href="#_typeswitch_field"></a>typeSwitch Field</h3>
+<div class="paragraph">
+<p>These types of fields can only occur in discriminated types.</p>
+</div>
+<div class="paragraph">
+<p>A <code>discriminatedType</code> must contain <strong>exactly one</strong> <code>typeSwitch</code> field, as it defines the sub-types.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[typeSwitch {field-or-attribute-1}(,{field-or-attribute-2}, ...)
+    ['{field-1-value-1}' {subtype-1-name}
+        ... Fields ...
+    ]
+    ['{field-1-value-2}', '{field-2-value-1}' {subtype-2-name}
+        ... Fields ...
+    ]
+    ['{field-1-value-3}', '{field-2-value-2}' {subtype-2-name} [uint 8 'existing-attribute-1', uint 16 'existing-attribute-2']
+        ... Fields ...
+    ]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A type switch element must contain a list of at least one argument expression.
+Only the last option can stay empty, which results in a default type.</p>
+</div>
+<div class="paragraph">
+<p>Each subtype declares a comma-separated list of concrete values.</p>
+</div>
+<div class="paragraph">
+<p>It must contain at most as many elements as arguments are declared for the type switch.</p>
+</div>
+<div class="paragraph">
+<p>The matching type is found during parsing by starting with the first argument.</p>
+</div>
+<div class="paragraph">
+<p>If it matches and there are no more values, the type is found, if more values are provided, they are compared to the other argument values.</p>
+</div>
+<div class="paragraph">
+<p>If no type is found, an exception is thrown.</p>
+</div>
+<div class="paragraph">
+<p>Inside each subtype can declare fields using a subset of the types (<code>discriminator</code> and <code>typeSwitch</code> can&#8217;t be used here)</p>
+</div>
+<div class="paragraph">
+<p>The third case in above code-snippet also passes a named attribute to the subtype.
+The name must be identical to any argument or named field parsed before the switchType.
+These arguments are then available for expressions or passing on in the subtypes.</p>
+</div>
+<div class="paragraph">
+<p>See also:
+- <code>discriminatedType</code></p>
+</div>
+<div class="sect3">
+<h4 id="_unknown_field"><a class="anchor" href="#_unknown_field"></a>unknown Field</h4>
+<div class="paragraph">
+<p>This type of field is mainly used when working on reverse-engineering a new protocol.
+It allows parsing any type of information, storing and using it and serializing it back.</p>
+</div>
+<div class="paragraph">
+<p>In general, it&#8217;s something similar to a <code>simple</code> field, just explicitly states, that we don&#8217;t yet quite know how to handle the content.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_validation_field"><a class="anchor" href="#_validation_field"></a>validation Field</h4>
+<div class="paragraph">
+<p>As mentioned before, a <code>validation</code> field is not really a field, it&#8217;s a check that is added to the type parser.</p>
+</div>
+<div class="paragraph">
+<p>If the expression provided in the <code>validation</code> field fails, the parser aborts parsing and goes up the stack, till it finds the first <code>optional</code> field.
+If it finds one, it rewinds the parser to the position just before starting to parse the <code>optional</code> field, then skips the <code>optional</code> fields and continues with the next field.</p>
+</div>
+<div class="paragraph">
+<p>If there is no <code>optional</code> field up the stack, then parsing fails.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_virtual_field"><a class="anchor" href="#_virtual_field"></a>virtual Field</h3>
+<div class="paragraph">
+<p>Virtual fields have no impact on the input or output.
+They simply result in creating artificial get-methods in the generated model classes.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[virtual {bit|byte}           {name} '{value-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[virtual {simple-type} {size} {name} '{value-expression}']</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[virtual {complex-type}       {name} '{value-expression}']</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Instead of being bound to a property, the return value of a <code>virtual</code> property is created by evaluating the <code>value-expression</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_parameters"><a class="anchor" href="#_parameters"></a>Parameters</h3>
+<div class="paragraph">
+<p>Sometimes it is necessary to pass along additional parameters.</p>
+</div>
+<div class="paragraph">
+<p>If a complex type requires parameters, these are declared in the header of that type.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[discriminatedType S7Payload(uint 8 'messageType', S7Parameter 'parameter')
+    [typeSwitch 'parameter.discriminatorValues[0]', 'messageType'
+        ['0xF0' S7PayloadSetupCommunication]
+        ['0x04','0x01' S7PayloadReadVarRequest]
+        ['0x04','0x03' S7PayloadReadVarResponse
+            [arrayField S7VarPayloadDataItem 'items' count 'CAST(parameter, S7ParameterReadVarResponse).numItems']
+        ]
+        ['0x05','0x01' S7PayloadWriteVarRequest
+            [arrayField S7VarPayloadDataItem 'items' count 'COUNT(CAST(parameter, S7ParameterWriteVarRequest).items)']
+        ]
+        ['0x05','0x03' S7PayloadWriteVarResponse
+            [arrayField S7VarPayloadStatusItem 'items' count 'CAST(parameter, S7ParameterWriteVarResponse).numItems']
+        ]
+        ['0x00','0x07' S7PayloadUserData
+        ]
+    ]
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Therefore, wherever a complex type is referenced an additional list of parameters can be passed to the next type.</p>
+</div>
+<div class="paragraph">
+<p>Here comes an example of this in above snippet:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[field S7Payload   'payload'   ['messageType', 'parameter']]</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_serializer_and_parser_arguments"><a class="anchor" href="#_serializer_and_parser_arguments"></a>Serializer and Parser-Arguments</h3>
+<div class="paragraph">
+<p>Arguments influence the way the parser or serializer operates.</p>
+</div>
+<div class="paragraph">
+<p>Wherever an parser-argument is used, this should also be valid in all subtypes the parser processes.</p>
+</div>
+<div class="sect3">
+<h4 id="_byteorder"><a class="anchor" href="#_byteorder"></a>byteOrder</h4>
+<div class="paragraph">
+<p>A <code>byteOrder</code> argument can set or change the byte-order used by the parser.</p>
+</div>
+<div class="paragraph">
+<p>We currently support two variants:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BIG_ENDIAN</p>
+</li>
+<li>
+<p>LITTLE_ENDIAN</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_encoding"><a class="anchor" href="#_encoding"></a>encoding</h4>
+<div class="paragraph">
+<p>Each simple type has a default encoding, which is ok for a very high percentage of cases.</p>
+</div>
+<div class="paragraph">
+<p>Unsigned integers for example use 2s-complement notation, floating point values are encoded in IEEE 754 single- or double precision encoding. Strings are encoded as UTF-8 per default.</p>
+</div>
+<div class="paragraph">
+<p>However, in some cases an alternate encoding needs to be used. Especially when dealing with Strings, different encodings, such as ASCII, UTF-16 and many more, can be used. But also for numeric values, different encodings might be used. For example does KNX use a 16bit floating point encoding, which is not standard or in S7 drivers a special encoding was used to encode numeric values so they represent the number in hex format.</p>
+</div>
+<div class="paragraph">
+<p>An <code>encoding</code> attribute can be used to select a non-default encoding.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<footer class="container-flex footer col-6" style="text-align:center;">
+    <div class="col"></div>
+    <div class="col-6">
+    Copyright &#169; 2017-2024 <a href="https://www.apache.org/">The Apache Software Foundation.</a> All rights reserved.<br/>
+    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered
+    trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks
+    mentioned may be trademarks or registered trademarks of their respective owners.
+    <br/>
+    </div>
+    <div>Home screen image taken from <a
+        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+        under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+        and blur effect added.
+    </div>
+    <div class="col"></div>
+</footer>
+<script id="site-script" src="../../../../../_/js/site.js" data-ui-root-path="../../../../../_"></script>
+<script async src="../../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../../.." data-snippet-length="100" data-stylesheet="../../../../../_/css/search.css"></script>
+<script async src="../../../../../search-index.js"></script>
+  </body>
+</html>
