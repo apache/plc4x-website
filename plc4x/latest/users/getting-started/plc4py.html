@@ -98,9 +98,6 @@
     <a class="nav-link" href="../adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../protocols/simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../index.html">latest</a>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -456,11 +447,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../../pre-release/users/getting-started/plc4py.html">pre-release</a>
     <a class="version is-current" href="plc4py.html">latest</a>
-    <a class="version" href="../../../0.12.0/users/getting-started/plc4py.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/getting-started/plc4py.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/getting-started/plc4py.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -468,275 +459,7 @@
 </aside>
 <article class="doc">
 <h1 class="page">Getting Started with Python</h1>
-<div class="sect1">
-<h2 id="_using_the_plc4py_api_directly"><a class="anchor" href="#_using_the_plc4py_api_directly"></a>Using the PLC4PY API directly</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Currently, you need to install PLC4Py from the GitHub repository instead of pypi.
-Once we have decided that PLC4Py is in a position to release we will publish to pypi.</p>
-</div>
-<div class="paragraph">
-<p>Navigate to the plc4py directory and run. This will install plc4py in your global repository.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>   pip install .</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You now should be able to use PLC4Py in your application. A minimal example is shown below.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>import asyncio
-from plc4py.PlcDriverManager import PlcDriverManager
 
-connection_string = "modbus://127.0.0.1:5020"
-driver_manager = PlcDriverManager()
-
-async def communicate_with_plc():
-    """
-    Asynchronously communicates with a PLC using a PlcDriverManager.
-
-    This function establishes a connection to the PLC defined by the connection_string.
-    It builds a read request for a specific item ("Random Tag" in this case) using the connection's read request builder.
-    The request is then executed asynchronously, and the response code is printed.
-    """
-    print(f"Connecting to plc: {connection_string}")
-    async with driver_manager.connection(connection_string) as connection:
-        print(f"Connected to {connection_string}")
-        with connection.read_request_builder() as builder:
-            print(f"Building read request")
-            builder.add_item("Random Tag", "4x00001[10]")
-            request = builder.build()
-            print(f"Request built")
-        print(f"Executing request")
-        response = await connection.execute(request)
-        print(f"Request executed")
-        print(f"Response code: {response.response_code}")
-
-asyncio.run(communicate_with_plc())</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>PLC4X generally supports a very limited set of functions, which is not due to the fact, that we didn&#8217;t implement things, but that PLCs generally support a very limited set of functions.</p>
-</div>
-<div class="paragraph">
-<p>The basic functions supported by PLCs and therefore supported by PLC4X are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Discover Devices (Not yet available for PLC4Py)</p>
-</li>
-<li>
-<p>List resources in the PLC</p>
-</li>
-<li>
-<p>Read data</p>
-</li>
-<li>
-<p>Write data</p>
-</li>
-<li>
-<p>Subscribe for data (Not yet available for PLC4Py)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In general, we will try to offer as many features as possible.
-So if a protocol doesn&#8217;t support subscription based communication it is our goal to simulate this by polling in the background,
-so it is transparent for the users (This simulation feature hasn&#8217;t been implemented yet though, but it&#8217;s on our roadmap).</p>
-</div>
-<div class="paragraph">
-<p>But there are some cases in which we can&#8217;t simulate or features are simply disabled intentionally:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>If a PLC and/or protocol don&#8217;t support writing or browsing, we simply can&#8217;t provide this functionality.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Therefore, we use metadata to check programmatically, if a given feature is available.</p>
-</div>
-<div class="sect2">
-<h3 id="_reading_data"><a class="anchor" href="#_reading_data"></a>Reading Data</h3>
-<div class="listingblock">
-<div class="content">
-<pre># Check if this connection support reading of data.
-if not connection.is_read_supported():
-    logger.error("This connection doesn't support reading.")</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As soon as you have ensured that a feature is available, you are ready to build a first request.
-This is done by getting a <code>ReadRequestBuilder</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre># Create a new read request:
-# - Give the single item requested an alias name
-with connection.read_request_builder() as builder:
-    builder.add_item("Random Tag 1", "4x00001[10]")
-    builder.add_item("Random Tag 2", "4x00011")
-    request = builder.build()</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>So, as you can see, you prepare a request, by adding tag addresses to the request and in the end by calling the <code>build</code> method.</p>
-</div>
-<div class="paragraph">
-<p>If you are using the <code>BrowseApi</code> you might also have been provided with <code>Tag</code> objects. In that case simply use <code>add_tag</code> and
-pass in the <code>PlcTag</code> object instead of the address string.</p>
-</div>
-<div class="paragraph">
-<p>The request is sent to the PLC by issuing the <code>execute</code> method on the request object:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>try:
-    response = await connection.execute(request)
-except TimeOutException:
-    # Handle timeout error
-except ...
-    # Handle all your other errors</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In general, all requests are executed asynchronously.
-As soon as the request is fully processed, the callback gets called and will contain a <code>ReadResponse</code>, if everything went right or
-an excception if there were problems.</p>
-</div>
-<div class="paragraph">
-<p>The following example will demonstrate some of the options you have:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>for tag_name in response.tag_names:
-    if response.tags[tag_name].response_code == PlcResponseCode.OK:
-        num_values: int = len(response.tags[tag_name].value)
-        # If it's just one element, output just one single line.
-        if num_values == 1:
-            logger.info("Value[" + tag_name + "]: " + response.tags[tag_name].value)
-        else:
-            # If it's more than one element, output each in a single row.
-            logger.info("Value[" + tag_name + "]:")
-            for i in response.tags[tag_name].value.get_list():
-                logger.info(" - " + str(i))
-    else:
-        # Something went wrong, to output an error message instead.
-        logger.error("Error[" + tag_name + "]: " + response.tags[tag_name].name())</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In the for-loop, we are demonstrating how the user can iterate over the tag aliases in the response.
-In case of an ordinary read request, this will be predefined by the items in the request, however in case of a subscription
-response, the response might only contain some of the items that were subscribed.</p>
-</div>
-<div class="paragraph">
-<p>Before accessing the data, it is advisable to check if an item was correctly returned.
-This is done by the <code>response_code</code> property for a given alias.
-If this is <code>PlcResponseCode.OK</code>, everything is ok, however it could be one of the following:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>NOT_FOUND</p>
-</li>
-<li>
-<p>ACCESS_DENIED</p>
-</li>
-<li>
-<p>INVALID_ADDRESS</p>
-</li>
-<li>
-<p>INVALID_DATATYPE</p>
-</li>
-<li>
-<p>INTERNAL_ERROR</p>
-</li>
-<li>
-<p>RESPONSE_PENDING</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Assuming the return code was <code>OK</code>, we can continue accessing the data.</p>
-</div>
-<div class="paragraph">
-<p>As all PlcValue items support the len property, the user can check how many items of a given type are returned
-by calling len(response.tags[tag_name].value)</p>
-</div>
-<div class="paragraph">
-<p>You can then treat the values in the PlcList as a list using response.tags[tag_name].value.get_list()</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_writing_data"><a class="anchor" href="#_writing_data"></a>Writing Data</h3>
-<div class="paragraph">
-<p>In general the structure of code for writing data is extremely similar to that of reading data.</p>
-</div>
-<div class="paragraph">
-<p>So first it is advisable to check if this connection is even able to write data:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>// Check if this connection support writing of data.
-if not plc_connection.is_write_supported():
-  logger.error("This connection doesn't support writing.")</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As soon as we are sure that we can write, we create a new <code>PlcWriteRequest.Builder</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>// Create a new write request:
-// - Give the single item requested an alias name
-// - Pass in the data you want to write (for arrays, pass in a list of values)
-with connection.write_request_builder() as builder:
-    builder.add_item("Random Tag 1", "4x00001[2]", PlcList([PlcINT(1), PlcINT(2)]))
-    builder.add_item("Random Tag 2", "4x00011", PlcINT(1))
-    request = builder.build()</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The same way read requests are sent to the PLC by issuing the <code>execute</code> method on the request object:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>try:
-    response = await connection.execute(request)
-except TimeOutException:
-    # Handle timeout error
-except ...
-    # Handle all your other errors</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As we don&#8217;t have to process the data itself, for the write request, it&#8217;s enough to simply check the return code for each field.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>for tag_name in response.tag_names:
-    if response.tags[tag_name].response_code == PlcResponseCode.OK:
-        logger.info("Value[" + tag_name + "]: updated");
-    else:
-        # Something went wrong, to output an error message instead.
-        logger.error("Error[" + tag_name + "]: " + response.tags[tag_name].name())</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_subscribing_to_data"><a class="anchor" href="#_subscribing_to_data"></a>Subscribing to Data</h3>
-<div class="paragraph">
-<p>Coming Soon</p>
-</div>
-</div>
-</div>
-</div>
 </article>
   </div>
 </main>

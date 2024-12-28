@@ -98,9 +98,6 @@
     <a class="nav-link" href="../adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../index.html">latest</a>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -456,11 +447,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../../pre-release/users/protocols/opcua.html">pre-release</a>
     <a class="version is-current" href="opcua.html">latest</a>
-    <a class="version" href="../../../0.12.0/users/protocols/opcua.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/protocols/opcua.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/protocols/opcua.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -468,9 +459,8 @@
 </aside>
 <article class="doc">
 <h1 class="page">OPC UA</h1>
-<div class="sect1">
-<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -514,7 +504,7 @@
 <pre>&lt;dependency&gt;
   &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
   &lt;artifactId&gt;plc4j-driver-opcua&lt;/artifactId&gt;
-  &lt;version&gt;0.13.0-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;0.12.0&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 </div>
 </div></div></td>
@@ -575,12 +565,13 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Controls the feature of the discovery endpoint of an OPC UA server which every server<br>
-will propagate over an '&lt;address&gt;/discovery' endpoint. The most common issue here is that most servers are not correctly<br>
-configured and propagate the wrong external IP or URL address. If that is the case you can disable the discovery by<br>
-configuring it with a <code>false</code> value.<br>
-<br>
-The discovery phase is always conducted using <code>NONE</code> security policy.</p>
+<p>Controls the feature of the discovery endpoint of an OPC UA server which every server
+will propagate over an '&lt;address&gt;/discovery' endpoint. The most common issue here is that most servers are not correctly
+configured and propagate the wrong external IP or URL address. If that is the case you can disable the discovery by
+configuring it with a <code>false</code> value.</p>
+</div>
+<div class="paragraph">
+<p>The discovery phase is always conducted using <code>NONE</code> security policy.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -615,7 +606,7 @@ The discovery phase is always conducted using <code>NONE</code> security policy.
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The security policy applied to communication channel between driver and OPC UA server.<br>
+<p>The security policy applied to communication channel between driver and OPC UA server.
 Default value assumes. Possible options are <code>NONE</code>, <code>Basic128Rsa15</code>, <code>Basic256</code>, <code>Basic256Sha256</code>, <code>Aes128_Sha256_RsaOaep</code>, <code>Aes256_Sha256_RsaPss</code>.</p>
 </div></div></td>
 </tr>
@@ -629,8 +620,8 @@ Default value assumes. Possible options are <code>NONE</code>, <code>Basic128Rsa
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The security policy applied to messages exchanged after handshake phase.<br>
-Possible options are <code>NONE</code>, <code>SIGN</code>, <code>SIGN_ENCRYPT</code>.<br>
+<p>The security policy applied to messages exchanged after handshake phase.
+Possible options are <code>NONE</code>, <code>SIGN</code>, <code>SIGN_ENCRYPT</code>.
 This option is effective only when <code>securityPolicy</code> turns encryption (anything beyond <code>NONE</code>).</p>
 </div></div></td>
 </tr>
@@ -655,7 +646,7 @@ This option is effective only when <code>securityPolicy</code> turns encryption 
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Keystore type used to access keystore and private key, defaults to PKCS (for Java 11+).<br>
+<p>Keystore type used to access keystore and private key, defaults to PKCS (for Java 11+).
 Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>dks</code>, <code>jceks</code>.</p>
 </div></div></td>
 </tr>
@@ -702,7 +693,7 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Keystore type used to access keystore and private key, defaults to PKCS (for Java 11+).<br>
+<p>Keystore type used to access keystore and private key, defaults to PKCS (for Java 11+).
 Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>dks</code>, <code>jceks</code>.</p>
 </div></div></td>
 </tr>
@@ -919,10 +910,8 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h3>
 <div class="paragraph">
 <p>The OPC UA drivers uses the connection string</p>
 </div>
@@ -943,10 +932,8 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 <p>Note the transport, port and options fields are optional.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_secure_communication"><a class="anchor" href="#_secure_communication"></a>Secure communication</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_secure_communication"><a class="anchor" href="#_secure_communication"></a>Secure communication</h3>
 <div class="paragraph">
 <p>The secure channel implementation within Apache PLC4X project have been tested against existing open source server implementations.
 This includes Eclipse Milo (all modes) as well as OPC Foundation .NET server (except <code>Basic128Rsa15</code>).
@@ -954,34 +941,30 @@ Manual tests proven that driver is able to communicate with OPC UA server launch
 </div>
 <div class="paragraph">
 <p>Depending on actual configuration of remote end there might be necessity to prepare client certificate.
-Preparation of certificate is beyond driver, however in case when no client certificate is provided, it will be auto-generated to establish a session.
-Please follow our tutorial <a href="../getting-started/opcua-client-certificate.html">on provisioning of client private key and certificate</a>.
-By following it you will be able to create self-signed certificate for use with both hardware and software based OPC-UA servers.
-Please note that there are multiple appearances of certificates within specification.
-There is transport level certificate which can be provided though keystore options, but there is also a X509 Certificate which can be used for authentication (currently unsupported by PLC4X).</p>
+Preparation of certificate is beyond driver, however in case when no client certificate is provided, it will be auto-generated to establish a session.</p>
 </div>
 <div class="paragraph">
 <p>The security modes differ between themselves by strength of applied signature and encryption algorithms.
 Driver is able to communicate with single security mode at the time.
-Additionally, to security policy it is possible to specify <code>message-security</code> option which indicates expected security settings after initial handshake.
+Additionally, to security policy it is possible to specify <code>messageSecurity</code> option which indicates expected security settings after initial handshake.
 By default, this option is set to <code>SIGN_ENCRYPT</code> which imposes high security settings and full encryption of exchanged message payloads.
 In case when additional diagnostics is needed payloads has to be traced through TRACE level log entries.
 The <code>SIGN</code> mode gives possibility o browse packets in tools such wireshark.</p>
 </div>
-<div class="sect2">
-<h3 id="_certificate_verification"><a class="anchor" href="#_certificate_verification"></a>Certificate verification</h3>
+<div class="sect3">
+<h4 id="_certificate_verification"><a class="anchor" href="#_certificate_verification"></a>Certificate verification</h4>
 <div class="paragraph">
 <p>The OPC UA specification defines its own procedures for certificate validation.
 In order to simplify implementation by default server certificate validation is relaxed.
-Unless explicitly disabled through configuration of <code>trust-store-file</code> all server certificates will be accepted without validation.</p>
+Unless explicitly disabled through configuration of <code>trustStoreFile</code> all server certificates will be accepted without validation.</p>
 </div>
 <div class="paragraph">
-<p>In case when secure communication is enabled the <code>trust-store-file</code> option might be used to point certificates which client should accept.
+<p>In case when secure communication is enabled the <code>trustStoreFile</code> option might be used to point certificates which client should accept.
 The acceptance rely on regular TLS checks (expiry date, certificate path etc.), does not validate OPC UA specific parts such as application URI.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_negotiation_procedure"><a class="anchor" href="#_negotiation_procedure"></a>Negotiation procedure</h3>
+<div class="sect3">
+<h4 id="_negotiation_procedure"><a class="anchor" href="#_negotiation_procedure"></a>Negotiation procedure</h4>
 <div class="paragraph">
 <p>Depending on settings driver might or might not attempt to discover endpoints from remote server.
 In case when <code>discovery</code> option is set to <code>true</code> driver will look up server certificate through connection attempt.
@@ -998,7 +981,7 @@ The only one note is that driver takes minimum of local receive and remote send 
 It does same with local send and remote receive buffer.</p>
 </div>
 <div class="paragraph">
-<p>Usual values of <code>encoding.send-buffer-size</code> and <code>encoding.receive-buffer-size</code> PLC devices remain at 8196 bytes.</p>
+<p>Usual values of <code>sendBufferSize</code> and <code>receiveBufferSize</code> PLC devices remain at 8196 bytes.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1014,10 +997,8 @@ Due to lack of complete implementation of negotiation and chunking logic the OPC
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_address_format"><a class="anchor" href="#_address_format"></a>Address Format</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_address_format"><a class="anchor" href="#_address_format"></a>Address Format</h3>
 <div class="paragraph">
 <p>To read, write and subscribe to data, the OPC UA driver uses the variable declaration string of the OPC UA server it is
 connecting to.
@@ -1027,15 +1008,11 @@ is selected based on the datatype of the returned value. For Unsigned data types
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>ns={namespace-index};[s|i|g|b]={Identifier};a=attributeId;{Data Type}</pre>
+<pre>ns={namespace-index};[s|i|g|b]={Identifier};{Data Type}</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>The <code>a</code> parameter which stands for <code>attributeId</code> of an object is optional, and by default it is assumed to be Value 13 (<code>0x0d</code>).
-Value of this parameter can be specified using numeric value or OPC-UA attribute name (case-sensitive).</p>
-</div>
-<div class="sect2">
-<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
+<div class="sect3">
+<h4 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h4>
 <div class="paragraph">
 <p>The following data types are supported</p>
 </div>
@@ -1101,8 +1078,8 @@ Value of this parameter can be specified using numeric value or OPC-UA attribute
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_example_of_a_valid_opc_ua_address"><a class="anchor" href="#_example_of_a_valid_opc_ua_address"></a>Example of a valid OPC UA address:</h3>
+<div class="sect3">
+<h4 id="_example_of_a_valid_opc_ua_address"><a class="anchor" href="#_example_of_a_valid_opc_ua_address"></a>Example of a valid OPC UA address:</h4>
 <div class="paragraph">
 <p>The following are examples of valid addresses</p>
 </div>
@@ -1112,8 +1089,7 @@ Value of this parameter can be specified using numeric value or OPC-UA attribute
 <div class="listingblock">
 <div class="content">
 <pre>ns=2;s=HelloWorld/ScalarTypes/Boolean
-ns=2;s=HelloWorld/ScalarTypes/Boolean;BOOL
-ns=2;s=HelloWorld/ScalarTypes/Boolean;a=Value;BOOL</pre>
+ns=2;s=HelloWorld/ScalarTypes/Boolean;BOOL</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1122,8 +1098,7 @@ ns=2;s=HelloWorld/ScalarTypes/Boolean;a=Value;BOOL</pre>
 <div class="listingblock">
 <div class="content">
 <pre>ns=1;i=1337
-ns=1;i=1337;DINT
-ns=1;i=1337;a=Value;DINT</pre>
+ns=1;i=1337;DINT</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1132,204 +1107,22 @@ ns=1;i=1337;a=Value;DINT</pre>
 <div class="listingblock">
 <div class="content">
 <pre>ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a
-ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;REAL
-ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;a=Value;REAL</pre>
+ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;REAL</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Event Subscription:</p>
+<p>Note the Identifiers <code>s</code>,<code>i</code>,<code>b</code> and <code>g</code> specify the format of the address not the data type of the returned value.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>ns=0;i=2253;a=EventNotifier;BOOL{EventId: '', EventType: '', Severity: '', Time: '', Message: ''}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note the Identifiers <code>s</code>,<code>i</code>,<code>b</code> and <code>g</code> specify the format of the address not the data type of the returned value.
-The <code>a</code> attribute is required only for event subscriptions which additionally makes use of tag config.
-Tag config is a list of key-value pairs which rely on simplified JSON syntax.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_some_useful_tips"><a class="anchor" href="#_some_useful_tips"></a>Some useful tips</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The namespace (e.g. <code>ns=2</code>) within the address is specific to the server you are connecting to.
-Objects appearing in namespaces can, and will vary, as namespaces are used to separate scope of objects.</p>
-</div>
-<div class="paragraph">
-<p>OPC-UA servers support subscriptions which allow to reduce amount of data exchanged between client and server.
-There are three primary subscription modes: Data Change Notification, Status Change Notification and Event Notification.
-Currently, Apache PLC4X client supports Data Change Notification and Event Notification.</p>
-</div>
-<div class="paragraph">
-<p>Under the hood subscriptions still require client to request data though PublishRequest.</p>
-</div>
-<div class="sect2">
-<h3 id="_opc_ua_data_change_notification"><a class="anchor" href="#_opc_ua_data_change_notification"></a>OPC UA Data Change Notification</h3>
-<div class="paragraph">
-<p>Data change notifications are created with list of tags, after which client need to send publish requests.
-Upon each publish request server will send response which will include values of all tag for which subscription was created.
-While OPC-UA specification permits mutation of subscription contents, PLC4X API does not allow that.</p>
-</div>
-<div class="paragraph">
-<p>By default, <code>Cyclic</code> and <code>Change of State</code> subscriptions operations defined in PLC4X client API result in data change notifications.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_opc_ua_event_notification"><a class="anchor" href="#_opc_ua_event_notification"></a>OPC UA Event Notification</h3>
+<h3 id="_some_useful_tips"><a class="anchor" href="#_some_useful_tips"></a>Some useful tips</h3>
 <div class="paragraph">
-<p>Third mode of subscription defined by PLC4X API is <code>Event Subscription</code>.
-This kind of subscription is available since PLC4X 0.13 and have slightly different syntax, which brings more complex data.
-OPC-UA events can be used to receive notifications of various kinds which appear when specific situation happens.
-In other protocols this kind of behavior can function as alarms or alerts.</p>
-</div>
-<div class="paragraph">
-<p>In order to create OPC-UA event subscription you need to:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>define <code>a=EventNotifier</code> or <code>a=12</code></p>
-</li>
-<li>
-<p>specify event fields to retrieve through a tag config</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The tag config key must match OPC-UA event field.
-The tag config value is not used, thus it can not be used to specify filter criteria for field value.
-Fields which are supported are defined in OPC UA <code>BaseEventType</code>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>EventId</code></p>
-</li>
-<li>
-<p><code>EventType</code></p>
-</li>
-<li>
-<p><code>SourceNode</code></p>
-</li>
-<li>
-<p><code>SourceName</code></p>
-</li>
-<li>
-<p><code>Time</code></p>
-</li>
-<li>
-<p><code>ReceiveTime</code></p>
-</li>
-<li>
-<p><code>LocalTime</code></p>
-</li>
-<li>
-<p><code>Message</code></p>
-</li>
-<li>
-<p><code>Severity</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Example syntax: <code>ns=0;i=2253;a=EventNotifier;BOOL{EventId: '', EventType: '', Severity: '', Time: '', Message: ''}</code>.</p>
-</div>
-<div class="paragraph">
-<p>Subscription event generated by client upon receiving notification will contain an object (<code>PlcSTRUCT</code>/<code>Map</code>) which will contain all requested fields.
-Please note that Apache PLC4X does only basic normalization of data, thus your application need to take care of actual processing of event data.</p>
+<p>The namespace (e.g. <code>ns=2</code>) within the address is specific to the server you are connecting to.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tag_metadata"><a class="anchor" href="#_tag_metadata"></a>Tag metadata</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This driver supports tag metadata.
-Beyond standard metadata fields such <code>timestamp</code> and <code>timestamp_source</code> it can provide following keys:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>opcua_quality</code></p>
-</li>
-<li>
-<p><code>opcua_server_timestamp</code></p>
-</li>
-<li>
-<p><code>opcua_source_timestamp</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Appearance of these fields is conditional, they are provided only when it can be sourced from packets exchanged between client and server.
-This means that depending on operation conducted by client (read/write/subscribe) metadata will vary.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_compatibility_with_opc_ua_servers"><a class="anchor" href="#_compatibility_with_opc_ua_servers"></a>Compatibility with OPC-UA Servers</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>There are multiple OPC-UA server implementations.
-Each of it have its own specifics, sometimes showing up more detailed security handling or further edge case buried in specification.
-So far Apache PLC4X OPC-UA client have been confirmed to be working with below servers (order in chronology of passed tests/confirmed compatibility):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>version 0.13</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/node-opcua/node-opcua">node-opcua</a></p>
-</li>
-<li>
-<p>Mitsubishi Electric MX OPC Server UA</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>version 0.12</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://prosysopc.com/products/opc-ua-simulation-server/">Prosys OPC-UA Simulation Server</a></p>
-</li>
-<li>
-<p>Simatic OPC UA S7-1200 Basic</p>
-</li>
-<li>
-<p><a href="https://github.com/OPCFoundation/UA-.NETStandard">OPC Foundation UA-.NET Standard</a></p>
-</li>
-<li>
-<p>Simocode OPC UA server</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>versions prior 0.12</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://eclipse.org/milo">Eclipse Milo</a></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_more_details_on_opc_ua"><a class="anchor" href="#_more_details_on_opc_ua"></a>More details on OPC UA</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_more_details_on_opc_ua"><a class="anchor" href="#_more_details_on_opc_ua"></a>More details on OPC UA</h3>
 <div class="paragraph">
 <p><a href="https://opcfoundation.org/about/opc-technologies/opc-ua/">OPC UA</a>
 The OPC Unified Architecture (UA), released in 2008, is a platform independent service-oriented architecture that integrates all the functionality of the individual OPC Classic specifications into one extensible framework.</p>
@@ -1356,7 +1149,8 @@ The OPC Unified Architecture (UA), released in 2008, is a platform independent s
 </li>
 </ul>
 </div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+</table>
 </div>
 </article>
   </div>

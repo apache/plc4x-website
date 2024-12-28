@@ -98,9 +98,6 @@
     <a class="nav-link" href="../adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../index.html">latest</a>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -456,11 +447,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../../pre-release/users/protocols/firmata.html">pre-release</a>
     <a class="version is-current" href="firmata.html">latest</a>
-    <a class="version" href="../../../0.12.0/users/protocols/firmata.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/protocols/firmata.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/protocols/firmata.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -481,9 +472,8 @@
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -527,7 +517,7 @@
 <pre>&lt;dependency&gt;
   &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
   &lt;artifactId&gt;plc4j-driver-firmata&lt;/artifactId&gt;
-  &lt;version&gt;0.13.0-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;0.12.0&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 </div>
 </div></div></td>
@@ -569,15 +559,15 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Baud-rate the serial port is set to.<br>
-Typical values are:<br>
-- 9600<br>
-- 14400<br>
-- 19200<br>
-- 38400<br>
-- 57600<br>
-- 115200<br>
-- 128000<br>
+<p>Baud-rate the serial port is set to.
+Typical values are:
+- 9600
+- 14400
+- 19200
+- 38400
+- 57600
+- 115200
+- 128000
 But can also be smaller or larger values.</p>
 </div></div></td>
 </tr>
@@ -591,10 +581,10 @@ But can also be smaller or larger values.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Number of data-bits used to send data.<br>
-Typical values are:<br>
-- 7<br>
-- 8<br>
+<p>Number of data-bits used to send data.
+Typical values are:
+- 7
+- 8
 But can also be smaller or larger values.</p>
 </div></div></td>
 </tr>
@@ -608,10 +598,10 @@ But can also be smaller or larger values.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Number of stop-bits used to terminate data.<br>
-Typical values are:<br>
-- 1<br>
-- 2<br>
+<p>Number of stop-bits used to terminate data.
+Typical values are:
+- 1
+- 2
 (The theoretical 1.5 stop-bits setting is not supported)</p>
 </div></div></td>
 </tr>
@@ -625,13 +615,13 @@ Typical values are:<br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Number of bits used to calculate data parity.<br>
-This is used to detect errors in transmission.<br>
-Allowed values are:<br>
-- NO_PARITY<br>
-- ODD_PARITY<br>
-- EVEN_PARITY<br>
-- MARK_PARITY<br>
+<p>Number of bits used to calculate data parity.
+This is used to detect errors in transmission.
+Allowed values are:
+- NO_PARITY
+- ODD_PARITY
+- EVEN_PARITY
+- MARK_PARITY
 - SPACE_PARITY</p>
 </div></div></td>
 </tr>
@@ -689,18 +679,16 @@ When subscribing to pins, these are configured to become read pins. When writing
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h3>
 <div class="paragraph">
 <p>Similar to the Modbus protocol, the Firmata protocol support Boolean and Short values.</p>
 </div>
 <div class="paragraph">
 <p>Booleans are used for the digital IO pins and short values for the analog inputs.</p>
 </div>
-<div class="sect2">
-<h3 id="_binary_addresses"><a class="anchor" href="#_binary_addresses"></a>Binary Addresses</h3>
+<div class="sect3">
+<h4 id="_binary_addresses"><a class="anchor" href="#_binary_addresses"></a>Binary Addresses</h4>
 <div class="paragraph">
 <p>The full format for a digital address has the following format:</p>
 </div>
@@ -742,8 +730,8 @@ However in case of using the serial port (which will always be the case when usi
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_analog_addresses"><a class="anchor" href="#_analog_addresses"></a>Analog Addresses</h3>
+<div class="sect3">
+<h4 id="_analog_addresses"><a class="anchor" href="#_analog_addresses"></a>Analog Addresses</h4>
 <div class="paragraph">
 <p>The full format for an analog address is as follows:</p>
 </div>
@@ -766,7 +754,6 @@ analog:2[3]</pre>
 </div>
 <div class="paragraph">
 <p>A normal <code>Arduino Uno</code> is equipped with 6 analog inputs: 0-5</p>
-</div>
 </div>
 </div>
 </div>

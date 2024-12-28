@@ -98,9 +98,6 @@
     <a class="nav-link" href="adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="protocols/simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../developers/infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="index.html">latest</a>
+        <li class="version">
+          <a href="../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -455,11 +446,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../pre-release/users/industry40.html">pre-release</a>
     <a class="version is-current" href="industry40.html">latest</a>
-    <a class="version" href="../../0.12.0/users/industry40.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/industry40.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/industry40.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -490,9 +481,8 @@ Only a small number of companies today use open source software in their product
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_benefits_of_using_open_source"><a class="anchor" href="#_benefits_of_using_open_source"></a>Benefits of using open source</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_benefits_of_using_open_source"><a class="anchor" href="#_benefits_of_using_open_source"></a>Benefits of using open source</h3>
 <div class="paragraph">
 <p>The benefit of using open source could be huge:</p>
 </div>
@@ -515,8 +505,8 @@ Only a small number of companies today use open source software in their product
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_increased_flexibility"><a class="anchor" href="#_increased_flexibility"></a>Increased Flexibility</h3>
+<div class="sect3">
+<h4 id="_increased_flexibility"><a class="anchor" href="#_increased_flexibility"></a>Increased Flexibility</h4>
 <div class="paragraph">
 <p>If a company had decided to use PLCs and control systems of a certain vendor, it is almost impossible to change this decision.
 This reduces the options available when adding new machinery or replacing existing ones.</p>
@@ -525,8 +515,8 @@ This reduces the options available when adding new machinery or replacing existi
 <p>Technologically speaking, also the company can only use the options and solution it&#8217;s vendor is able to provide.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_increased_stability"><a class="anchor" href="#_increased_stability"></a>Increased Stability</h3>
+<div class="sect3">
+<h4 id="_increased_stability"><a class="anchor" href="#_increased_stability"></a>Increased Stability</h4>
 <div class="paragraph">
 <p>Current control systems are usually based on the concept of "backup systems".
 If the main control system fails, all activity is switched to the standby system.</p>
@@ -535,8 +525,8 @@ If the main control system fails, all activity is switched to the standby system
 <p>When using modern public- or private cloud systems, there is no need for a backup system, because the cluster is designed in a way that it can live with the failure of most of its hosts before loosing the ability to function.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_increased_extendability"><a class="anchor" href="#_increased_extendability"></a>Increased Extendability</h3>
+<div class="sect3">
+<h4 id="_increased_extendability"><a class="anchor" href="#_increased_extendability"></a>Increased Extendability</h4>
 <div class="paragraph">
 <p>From the perspective of designing and scaling the IT infrastructure:
 If a control system was designed to handle the current size of plant, for cost reasons the IT infrastructure isn&#8217;t designed to handle much more than that.
@@ -547,8 +537,8 @@ Now if the plant should be extended in the future, extending it&#8217;s control-
 If the company decided to utilize a public cloud provider, it makes things even simpler, as it would only require booking more resources.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_improved_security"><a class="anchor" href="#_improved_security"></a>Improved Security</h3>
+<div class="sect3">
+<h4 id="_improved_security"><a class="anchor" href="#_improved_security"></a>Improved Security</h4>
 <div class="paragraph">
 <p>This is probably one of the most concerning aspects of modern production control systems.
 Right now, in order to run these systems, a lot of the most popular solutions require companies to run not up to date systems.
@@ -556,8 +546,8 @@ If applying all updates, the company is risking either loss of commercial suppor
 Therefore an attacker can probably be certain to be able to exploit certain vulnerabilities just by knowing the type and version of the used control system.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_cost_reduction"><a class="anchor" href="#_cost_reduction"></a>Cost Reduction</h3>
+<div class="sect3">
+<h4 id="_cost_reduction"><a class="anchor" href="#_cost_reduction"></a>Cost Reduction</h4>
 <div class="paragraph">
 <p>Well the probably biggest and most obvious cost reduction factor is definitely, that if the software you are using is free, you will not have to pay for it.</p>
 </div>
@@ -569,10 +559,8 @@ Therefore an attacker can probably be certain to be able to exploit certain vuln
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_options_to_communicating_with_plcs"><a class="anchor" href="#_options_to_communicating_with_plcs"></a>Options to communicating with PLCs</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_options_to_communicating_with_plcs"><a class="anchor" href="#_options_to_communicating_with_plcs"></a>Options to communicating with PLCs</h3>
 <div class="paragraph">
 <p>In general there are two options for communicating with industrial PLCs:</p>
 </div>
@@ -646,7 +634,6 @@ Either they are licensed with restrictive licenses such as GPL or they are dual 
 <div class="paragraph">
 <p>Hereby <code>PLC4X</code> forms the missing link between the automation and the open source world.
 Making it possible to use the entire stack of open source technologies to create a new generation of open industrial control systems.</p>
-</div>
 </div>
 </div>
 </article>

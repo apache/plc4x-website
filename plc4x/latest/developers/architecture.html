@@ -98,9 +98,6 @@
     <a class="nav-link" href="../users/adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../users/issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../users/commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/protocols/simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../users/integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../users/index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../users/index.html">latest</a>
+        <li class="version">
+          <a href="../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../users/index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -454,11 +445,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../pre-release/developers/architecture.html">pre-release</a>
     <a class="version is-current" href="architecture.html">latest</a>
-    <a class="version" href="../../0.12.0/developers/architecture.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/developers/pages/architecture.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/architecture.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -466,9 +457,8 @@
 </aside>
 <article class="doc">
 <h1 class="page">Architecture of PLC4X Connections</h1>
-<div class="sect1">
-<h2 id="_simple_case"><a class="anchor" href="#_simple_case"></a>Simple case</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_simple_case"><a class="anchor" href="#_simple_case"></a>Simple case</h3>
 <div class="paragraph">
 <p>In this simple case, an application asks the DriverManager to forward a connection creation to the corresponding Driver implementation, which then creates both a Connection and a MessageCodec instance. The Connection is the logical link between the connection state and the MessageCodec.
 A MessageCodec uses a TransportInstance to communicate with the target device.</p>
@@ -484,10 +474,8 @@ A MessageCodec uses a TransportInstance to communicate with the target device.</
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_problems"><a class="anchor" href="#_problems"></a>Problems</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_problems"><a class="anchor" href="#_problems"></a>Problems</h3>
 <div class="paragraph">
 <p>Serial transports based on RS475 and UDP Transports currently don&#8217;t allow sharing. That means only one connection instance can have access to one RS485 or one shared local UDP Port (Multiple UDP transport instances with different local ports however are possible). As soon as one connection is established and a second connection would try to access this, this would result in errors.</p>
 </div>
@@ -495,10 +483,8 @@ A MessageCodec uses a TransportInstance to communicate with the target device.</
 <p>However, multiple devices could be attached to the same RS458 port (Modbus RTU and Modbus ASCII explicitly supports this, however using different devices using different protocols over the same port is not possible) and in BACnet connecting to multiple remote BACnet devices would require one local UDP port to be used by multiple connections.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_protocols_requiring_us_to_use_a_fixed_port_on_a_non_broadcast_address"><a class="anchor" href="#_protocols_requiring_us_to_use_a_fixed_port_on_a_non_broadcast_address"></a>Protocols requiring us to use a fixed port on a non-broadcast address</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_protocols_requiring_us_to_use_a_fixed_port_on_a_non_broadcast_address"><a class="anchor" href="#_protocols_requiring_us_to_use_a_fixed_port_on_a_non_broadcast_address"></a>Protocols requiring us to use a fixed port on a non-broadcast address</h3>
 <div class="paragraph">
 <p>Some protocols, such as BACnet require remotes to send data to a fixed udp port on a non-broadcast address. This causes problems as soon as we want to connect to multiple BACnet devices from the same host as only one instance can get access to that port.</p>
 </div>
@@ -513,12 +499,9 @@ A MessageCodec uses a TransportInstance to communicate with the target device.</
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_protocols_only_allowing_one_connection_at_a_time"><a class="anchor" href="#_protocols_only_allowing_one_connection_at_a_time"></a>Protocols only allowing one connection at a time</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_protocols_only_allowing_one_connection_at_a_time"><a class="anchor" href="#_protocols_only_allowing_one_connection_at_a_time"></a>Protocols only allowing one connection at a time</h3>
 
-</div>
 </div>
 </article>
   </div>

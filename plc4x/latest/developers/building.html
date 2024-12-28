@@ -98,9 +98,6 @@
     <a class="nav-link" href="../users/adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../users/issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../users/commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/protocols/simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../users/integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../users/index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../users/index.html">latest</a>
+        <li class="version">
+          <a href="../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../users/index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -455,11 +446,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../pre-release/developers/building.html">pre-release</a>
     <a class="version is-current" href="building.html">latest</a>
-    <a class="version" href="../../0.12.0/developers/building.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/developers/pages/building.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/building.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -485,9 +476,8 @@ More about these later down in this manual.</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
 <div class="paragraph">
 <p>The only requirements to building PLC4X should be:</p>
 </div>
@@ -505,10 +495,8 @@ More about these later down in this manual.</p>
 </ul>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_using_the_maven_wrapper"><a class="anchor" href="#_using_the_maven_wrapper"></a>Using the Maven-Wrapper</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_using_the_maven_wrapper"><a class="anchor" href="#_using_the_maven_wrapper"></a>Using the Maven-Wrapper</h3>
 <div class="paragraph">
 <p>The so-called <code>Maven-Wrapper</code> is used by calling the Maven-Wrapper scripts <code>mvnw</code> (Mac &amp; Linux) or <code>mvnw.cmd</code> (Windows) instead of the default Maven commands <code>mvn</code> and <code>mvn.cmd</code>.</p>
 </div>
@@ -521,51 +509,58 @@ If no suitable version can be found, it is automatically downloaded and installe
 So simply adding the additional <code>w</code> to each of the Maven commands, there should be no difference to using a pre-installed Maven version.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_using_maven"><a class="anchor" href="#_using_maven"></a>Using Maven</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_using_maven"><a class="anchor" href="#_using_maven"></a>Using Maven</h3>
 <div class="paragraph">
 <p>This document can&#8217;t provide you with all the details needed to get started with <code>Maven</code> itself.
 But there is a lot of good documentation out there.</p>
 </div>
 <div class="paragraph">
-<p>Justin McLean and Christofer Dutz even recorded a not quite 2-hour Maven training Video some time ago for another Apache project.</p>
+<p>Justin McLean and Christofer Dutz even recorded a not quite 2 hour Maven training Video some time ago for another Apache project.</p>
 </div>
 <div class="paragraph">
 <p>It should handle all the details needed to get a general understanding of Maven and how it works.</p>
 </div>
-<div class="paragraph">
+<div class="videoblock">
 <div class="title">Recording of a Maven Training for Apache Flex from 2016</div>
-<p><a href="https://vimeo.com/167857327" class="bare">https://vimeo.com/167857327</a></p>
+<div class="content">
+<iframe width="640" height="420" src="https://player.vimeo.com/video/167857327" frameborder="0" allowfullscreen></iframe>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_building_plc4x_with_maven"><a class="anchor" href="#_building_plc4x_with_maven"></a>Building PLC4X with Maven</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_building_plc4x_with_maven"><a class="anchor" href="#_building_plc4x_with_maven"></a>Building PLC4X with Maven</h3>
+<div class="paragraph">
+<p>In general all modules which are not considered production-ready are located in the <code>sandbox</code> section of the project.</p>
+</div>
+<div class="paragraph">
+<p>They are not built per default and are enabled by enabling the <code>with-sandbox</code> Maven profile.</p>
+</div>
 <div class="paragraph">
 <p>As especially building the C++, and C# drivers requires building of some third party artifacts and increases build-time dramatically and requires setting up some additional third party tools, we have excluded these parts form the default Maven build.</p>
 </div>
 <div class="paragraph">
-<p>The following profiles are available:</p>
+<p>The following profiles are available (<strong>They have to be enabled additionally to the <code>with-sandbox</code> profile</strong>):</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>with-c</code>: Builds all C related modules</p>
+<p><code>with-c</code>: Builds all C related modules, integrations and examples</p>
 </li>
 <li>
-<p><code>with-dotnet</code>: Builds all C# and .Net related modules</p>
+<p><code>with-dotnet</code>: Builds all C# and .Net related modules, integrations and examples</p>
 </li>
 <li>
-<p><code>with-go</code>: Builds all Go related modules</p>
+<p><code>with-go</code>: Builds all Go related modules, integrations and examples</p>
 </li>
 <li>
-<p><code>with-java</code>: Builds all Java related modules</p>
+<p><code>with-java</code>: Builds all Java related modules, integrations and examples</p>
 </li>
 <li>
-<p><code>with-python</code>: Builds all Python related modules</p>
+<p><code>with-python</code>: Builds all Python related modules, integrations and examples (Also requires <code>with-sandbox</code>)</p>
+</li>
+<li>
+<p><code>with-sandbox</code>: Builds the modules which are not yet considered stable enough to become part of the main distribution</p>
 </li>
 </ul>
 </div>
@@ -582,7 +577,36 @@ As these profiles typically require some preparation and setup on your developme
 </table>
 </div>
 <div class="paragraph">
-<p>The minimum Apache PLC4X build will build only basic code-generation modules without support for any language:</p>
+<p>Beyond that there is an additional profile <code>with-proxies</code> which will enable additional modules in each of the activated languages.
+This <code>proxies</code> module, uses <code>Apache Thrift</code> to generate modules for forwarding requests to an <code>interop server</code> which runs somewhere else or on the same machine.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Currently when enabling the <code>with-python</code> module, you are required to also enable the <code>with-proxies</code> profile too as this is currently required there but will probably change in the near future.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>There are 3 more profiles that allow you to activate additional modules or functionality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>with-docker</code> : Some modules also provide the means to build <code>Docker</code> images. By enabling this profile these images are automatically built too</p>
+</li>
+<li>
+<p><code>with-boost</code> : Builds a <code>C</code>/<code>C` Library used by both the `Apache Thrift` build as well as the `C</code> drivers. Unfortunately this is an extremely intense build so we have setup the PLC4X build to only require this profile to be activated once. If the resulting artifacts are installed in your <code>Maven-Local-Repo</code>, these will be re-used.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The minimum Apache PLC4X build will build only the <code>Java</code> modules without any experimental modules:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -590,19 +614,11 @@ As these profiles typically require some preparation and setup on your developme
 </div>
 </div>
 <div class="paragraph">
-<p>So if for example you want to build only the Java related modules, the following command will do that:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>mvn -P with-java install</pre>
-</div>
-</div>
-<div class="paragraph">
 <p>If you want to skip the running of tests (even if this is not encouraged) you can skip them all together.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-java -DskipTests install</pre>
+<pre>mvn install -DskipTests</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -610,7 +626,7 @@ As these profiles typically require some preparation and setup on your developme
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-c,with-dotnet,with-go,with-java,with-python install</pre>
+<pre>mvn -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox install</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -621,17 +637,15 @@ As these profiles typically require some preparation and setup on your developme
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mvn -P with-c,with-dotnet,with-go,with-java,with-python install -DskipTests</pre>
+<pre>mvn -P with-c,with-dotnet,with-go,with-java,with-python,with-sandbox install -DskipTests</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>This will not skip the compilation of tests, however.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_building_the_plc4x_website_with_maven"><a class="anchor" href="#_building_the_plc4x_website_with_maven"></a>Building the PLC4X Website with Maven</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_building_the_plc4x_website_with_maven"><a class="anchor" href="#_building_the_plc4x_website_with_maven"></a>Building the PLC4X Website with Maven</h3>
 <div class="paragraph">
 <p>The PLC4X Website is also part of the same GIT repository that contains the code and it is built by Maven as well.</p>
 </div>
@@ -647,17 +661,15 @@ As these profiles typically require some preparation and setup on your developme
 <p>This is just a quick-start version of the site generation, for a fully detailed documentation please read the <a href="https://plc4x.apache.org/developers/infrastructure/website.html">Website</a> documentation page.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_some_special_maven_profiles"><a class="anchor" href="#_some_special_maven_profiles"></a>Some special Maven profiles</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_some_special_maven_profiles"><a class="anchor" href="#_some_special_maven_profiles"></a>Some special Maven profiles</h3>
 <div class="paragraph">
 <p>Maven supports so-called <code>profiles</code> for customizing the build in special cases.
 We have tried to keep the number of profiles as low as possible.
 So far there is only one profile.</p>
 </div>
-<div class="sect2">
-<h3 id="_apache_release_profile"><a class="anchor" href="#_apache_release_profile"></a><code>apache-release</code> profile</h3>
+<div class="sect3">
+<h4 id="_apache_release_profile"><a class="anchor" href="#_apache_release_profile"></a><code>apache-release</code> profile</h4>
 <div class="paragraph">
 <p>This profile is automatically enabled on a release-build and it automatically creates some additional artifacts:</p>
 </div>
@@ -684,8 +696,8 @@ So far there is only one profile.</p>
 <p>Generally it is not required to enable ths profile unless you are interested in these Artifacts.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_debug_pom_profile"><a class="anchor" href="#_debug_pom_profile"></a><code>debug-pom</code> profile</h3>
+<div class="sect3">
+<h4 id="_debug_pom_profile"><a class="anchor" href="#_debug_pom_profile"></a><code>debug-pom</code> profile</h4>
 <div class="paragraph">
 <p>Especially for Maven beginners, it might be difficult to understand why a module builds the way it does.
 Maven contains a lot of concepts to inherit and override settings.</p>
@@ -700,20 +712,28 @@ All Properties are expanded to the value Maven uses.</p>
 <div class="paragraph">
 <p>So whenever Maven doesn&#8217;t behave the way you expect it to, just enable this profile and it should help you find out, what&#8217;s going on.</p>
 </div>
+</div>
 <div class="sect3">
-<h4 id="_enable_all_checks_profile"><a class="anchor" href="#_enable_all_checks_profile"></a><code>enable-all-checks</code> profile</h4>
+<h4 id="_development_profile"><a class="anchor" href="#_development_profile"></a><code>development</code> profile</h4>
 <div class="paragraph">
-<p>Some tests of the PLC4X project do require quite a bit of time to run.
-Therefore we decided to disable these for a normal build on developer machines.
-If you want to run them locally and not rely on them being run on the CI servers, enable the <code>enable-all-checks</code> profile.</p>
+<p>This profile enables some extra strict enforcer rules. It is encouraged to activate this profile during development.</p>
+</div>
+<div class="paragraph">
+<p>In the <code>CI Build</code> this profile is enabled.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_skip_prerequisite_check_profile"><a class="anchor" href="#_skip_prerequisite_check_profile"></a><code>skip-prerequisite-check</code> profile</h4>
+<div class="paragraph">
+<p>Some times, actually only on the build-server we have encountered random failures of the <code>prerequisite check</code> build step.</p>
+</div>
+<div class="paragraph">
+<p>In order to still be able to build in this case, activating this profile simply disables these checks.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_use_the_compiled_library_with_gradle"><a class="anchor" href="#_use_the_compiled_library_with_gradle"></a>Use the compiled library with Gradle</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_use_the_compiled_library_with_gradle"><a class="anchor" href="#_use_the_compiled_library_with_gradle"></a>Use the compiled library with Gradle</h3>
 <div class="paragraph">
 <p>Compiling the library as explained here add the new version in the local Maven repository (i.e. usually under <code>~/.m2/repository</code> on linux like systems), if you would like to use Gradle as Build Tool for your project you have just to use a local repository in your Gradle <code>build.gradle</code> file.</p>
 </div>
@@ -728,11 +748,10 @@ If you want to run them locally and not rely on them being run on the CI servers
 }
 
 dependencies {
-    implementation group: 'org.apache.plc4x', name: 'plc4j-api', version: '0.13.0-SNAPSHOT'
-    implementation group: 'org.apache.plc4x', name: 'plc4j-driver-s7', version: '0.13.0-SNAPSHOT'
-    implementation group: 'org.apache.plc4x', name: 'plc4j-connection-pool', version: '0.13.0-SNAPSHOT'
+    implementation group: 'org.apache.plc4x', name: 'plc4j-api', version: '0.8.0-SNAPSHOT'
+    implementation group: 'org.apache.plc4x', name: 'plc4j-driver-s7', version: '0.8.0-SNAPSHOT'
+    implementation group: 'org.apache.plc4x', name: 'plc4j-connection-pool', version: '0.8.0-SNAPSHOT'
 }</code></pre>
-</div>
 </div>
 </div>
 </div>

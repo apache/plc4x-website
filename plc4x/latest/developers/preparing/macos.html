@@ -98,9 +98,6 @@
     <a class="nav-link" href="../../users/adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../users/issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../users/commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/protocols/simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../../users/integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../../users/integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="../infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="../infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../users/index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../../users/index.html">latest</a>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../../users/index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -456,11 +447,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../../pre-release/developers/preparing/macos.html">pre-release</a>
     <a class="version is-current" href="macos.html">latest</a>
-    <a class="version" href="../../../0.12.0/developers/preparing/macos.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/developers/pages/preparing/macos.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/preparing/macos.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -471,16 +462,6 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>As tracking down issues which result from missing or outdated third party tools such as compilers are always hard do diagnose, we have extended the build of PLC4X with a <code>prerequisiteCheck</code> that automatically checks if required tools are installed and if a required minimum version is available.</p>
-</div>
-<div class="paragraph">
-<p>If any of the prerequisites are not met, the build fails with an error message that will help finding out what&#8217;s wrong.</p>
-</div>
-<div class="paragraph">
-<p>The number of checks is highly dependent on which profiles are enabled.
-So for example the availability and version of the C compiler is only checked if the <code>with-c</code> profile is enabled.</p>
-</div>
-<div class="paragraph">
 <p>Most libraries on Mac are installed using <code>Homebrew</code>.</p>
 </div>
 <div class="paragraph">
@@ -488,14 +469,13 @@ So for example the availability and version of the C compiler is only checked if
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
+<pre>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</pre>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_git"><a class="anchor" href="#_git"></a>Git</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_git"><a class="anchor" href="#_git"></a>Git</h3>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -508,11 +488,7 @@ So for example the availability and version of the C compiler is only checked if
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>If you are running this command on a really fresh and clean system, it might be that you are asked to finish installing the XCode commandline tools.
-If this happens, just follow the process and re-try after it has finished.</p>
-</div>
-<div class="paragraph">
-<p>If you get a response that indicates that git needs to be installed, please execute the following command:</p>
+<p>In order to install it, please execute the following command:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -520,41 +496,10 @@ If this happens, just follow the process and re-try after it has finished.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_java"><a class="anchor" href="#_java"></a>Java</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Checking:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>java --version</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get successful output indicating at least Java 11, you don&#8217;t need to do anything.</p>
-</div>
-<div class="paragraph">
-<p>Apt based systems:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>brew install openjdk</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_optional_and_other_language_support"><a class="anchor" href="#_optional_and_other_language_support"></a>Optional and other language support</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Git an Java should be all you need for building the Java part of PLC4X.</p>
-</div>
 <div class="sect2">
-<h3 id="_libpcap_for_raw_ethernet_support"><a class="anchor" href="#_libpcap_for_raw_ethernet_support"></a>LibPCAP (For raw-ethernet support)</h3>
+<h3 id="_libpcap"><a class="anchor" href="#_libpcap"></a>LibPCAP</h3>
 <div class="paragraph">
-<p>The libpcap version bundled with macOS is currently 1.9.1.
+<p>The libpcap version bundled with Mac OS is currently 1.9.1.
 This version causes exceptions.
 So it&#8217;s best to update to a newer version using brew:</p>
 </div>
@@ -565,7 +510,7 @@ So it&#8217;s best to update to a newer version using brew:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_gcc_for_plc4c"><a class="anchor" href="#_gcc_for_plc4c"></a>gcc (For PLC4C)</h3>
+<h3 id="_gcc"><a class="anchor" href="#_gcc"></a>gcc</h3>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -578,11 +523,11 @@ So it&#8217;s best to update to a newer version using brew:</p>
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>It seems macOS comes with a version of gcc which is good enough for our use cases.</p>
+<p>It seems macOS comes with a version of gcc which is good enough for our usecases.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_dotnet_for_plc4net"><a class="anchor" href="#_dotnet_for_plc4net"></a>dotnet (For PLC4Net)</h3>
+<h3 id="_dotnet"><a class="anchor" href="#_dotnet"></a>dotnet</h3>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -595,7 +540,7 @@ So it&#8217;s best to update to a newer version using brew:</p>
 <p>If you get any successful output, you probably don&#8217;t need to do anything.</p>
 </div>
 <div class="paragraph">
-<p>Microsoft is offering an installer for macOS which is available from <a href="https://dotnet.microsoft.com/download/dotnet-core/2.2">here</a>.</p>
+<p>Microsoft is offering an installer for MacOS which is available from <a href="https://dotnet.microsoft.com/download/dotnet-core/2.2">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>Alternatively you can also install it via homebrew:</p>
@@ -607,7 +552,7 @@ So it&#8217;s best to update to a newer version using brew:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_python_for_plc4py"><a class="anchor" href="#_python_for_plc4py"></a>python (For PLC4Py)</h3>
+<h3 id="_python"><a class="anchor" href="#_python"></a>python</h3>
 <div class="paragraph">
 <p>Checking:</p>
 </div>
@@ -649,7 +594,7 @@ So it&#8217;s best to update to a newer version using brew:</p>
 <div class="literalblock">
 <div class="content">
 <pre>echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.zshrc
-echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.bash_profile</pre>
+$ echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.bash_profile</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -658,8 +603,6 @@ echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv i
 <div class="literalblock">
 <div class="content">
 <pre>python --version</pre>
-</div>
-</div>
 </div>
 </div>
 </div>

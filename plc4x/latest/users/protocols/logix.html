@@ -98,9 +98,6 @@
     <a class="nav-link" href="../adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../index.html">latest</a>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -456,11 +447,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../../pre-release/users/protocols/logix.html">pre-release</a>
     <a class="version is-current" href="logix.html">latest</a>
-    <a class="version" href="../../../0.12.0/users/protocols/logix.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/protocols/logix.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/protocols/logix.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -468,9 +459,8 @@
 </aside>
 <article class="doc">
 <h1 class="page">Logix</h1>
-<div class="sect1">
-<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -514,7 +504,7 @@
 <pre>&lt;dependency&gt;
   &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
   &lt;artifactId&gt;plc4j-driver-eip&lt;/artifactId&gt;
-  &lt;version&gt;0.13.0-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;0.12.0&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 </div>
 </div></div></td>
@@ -546,8 +536,8 @@
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The communication path allows for connection routing across multiple backplanes. It uses a common format found in Logix controllers.<br>
-It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 (Ethernet), followed by a slot in the case of a backplane address,<br>
+<p>The communication path allows for connection routing across multiple backplanes. It uses a common format found in Logix controllers.
+It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 (Ethernet), followed by a slot in the case of a backplane address,
 or if using Ethernet an ip address. e.g. [1,4,2,192.168.0.1,1,1] - Routes to the 4th slot in the first rack, which is a ethernet module, it then connects to the address 192.168.0.1, then finds the module in slot 1.</p>
 </div></div></td>
 </tr>
@@ -556,9 +546,7 @@ or if using Ethernet an ip address. e.g. [1,4,2,192.168.0.1,1,1] - Routes to the
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>1</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Without using routing information the backplane defaults to 1. This is overridden if communicationPath is provided.</p>
@@ -569,39 +557,21 @@ or if using Ethernet an ip address. e.g. [1,4,2,192.168.0.1,1,1] - Routes to the
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>0</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The slot within the backplane the CPU is located.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>big-endian</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bigEndian</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>true</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Configure if the connection should be set to transport data in Big-Endian format, or not.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>force-unconnected-operation</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>BOOLEAN</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>false</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Forces the driver to use unconnected requests.<br>
-<strong>Since: 0.13.0</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -654,12 +624,10 @@ or if using Ethernet an ip address. e.g. [1,4,2,192.168.0.1,1,1] - Routes to the
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h3>
+<h3 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h3>
+<div class="sect3">
+<h4 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h4>
 <div class="paragraph">
 <p>Logix has the following connection string format:-</p>
 </div>
@@ -680,8 +648,8 @@ or if using Ethernet an ip address. e.g. [1,4,2,192.168.0.1,1,1] - Routes to the
 <p>Note the port and option fields are optional.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="sect3">
+<h4 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h4>
 <div class="paragraph">
 <p>In general all Logix addresses have this format:</p>
 </div>
@@ -696,8 +664,8 @@ If the data-type part is omitted, the data type from the controller is used
 The address format matches that found in the controller.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
+<div class="sect3">
+<h4 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h4>
 <div class="paragraph">
 <p>The following data types are supported</p>
 </div>
@@ -740,7 +708,6 @@ The address format matches that found in the controller.</p>
 <p>REAL (float)</p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>

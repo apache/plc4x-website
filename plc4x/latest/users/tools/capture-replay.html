@@ -98,9 +98,6 @@
     <a class="nav-link" href="../adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../protocols/simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../index.html">latest</a>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -456,11 +447,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../../pre-release/users/tools/capture-replay.html">pre-release</a>
     <a class="version is-current" href="capture-replay.html">latest</a>
-    <a class="version" href="../../../0.12.0/users/tools/capture-replay.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/tools/capture-replay.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/tools/capture-replay.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -471,7 +462,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Sometimes the problem with industry protocols is, that the most interesting protocols live in places that are not very welcoming to IT folks.</p>
+<p>Some times the problem with industry protocols is, that the most interesting protocols live in places that are not very welcoming to IT folks.</p>
 </div>
 <div class="paragraph">
 <p>Either too hot or too cold and usually no good coffee around.</p>
@@ -490,9 +481,8 @@
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_getting_a_capture"><a class="anchor" href="#_getting_a_capture"></a>Getting a Capture</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_getting_a_capture"><a class="anchor" href="#_getting_a_capture"></a>Getting a Capture</h3>
 <div class="paragraph">
 <p>In order to create a capture I usually connect a device running <code>WireShark</code> to the network.</p>
 </div>
@@ -505,10 +495,8 @@ So if for example I wanted to work on a driver for control system <code>X</code>
 If complicance rules prevent ths a third option would be to use a network tap to record the capture.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_replaying_the_capture"><a class="anchor" href="#_replaying_the_capture"></a>Replaying the Capture</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_replaying_the_capture"><a class="anchor" href="#_replaying_the_capture"></a>Replaying the Capture</h3>
 <div class="paragraph">
 <p>Now you need to copy the <code>pcapng</code> file ideally to your development system.</p>
 </div>
@@ -516,11 +504,11 @@ If complicance rules prevent ths a third option would be to use a network tap to
 <p>The capture can be replayed by the tool you find in <code>plc4j/tools/capture-replay</code>.</p>
 </div>
 <div class="paragraph">
-<p>Here simply look for the <code>target/plc4j-capture-replay-0.13.0-SNAPSHOT-uber-jar.jar</code> and run:</p>
+<p>Here simply look for the <code>target/plc4j-capture-replay-0.12.0-uber-jar.jar</code> and run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   java -jar target/plc4j-capture-replay-0.13.0-SNAPSHOT-uber-jar.jar --input-file {path to capture} --output-device {name of the network device} --replay-speed 1 --loop true</pre>
+<pre>   java -jar target/plc4j-capture-replay-0.12.0-uber-jar.jar --input-file {path to capture} --output-device {name of the network device} --replay-speed 1 --loop true</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -553,7 +541,6 @@ The replay-speed is ideal to see how your driver can cope with different volumes
 </td>
 </tr>
 </table>
-</div>
 </div>
 </div>
 </article>

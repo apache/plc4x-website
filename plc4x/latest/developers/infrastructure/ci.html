@@ -98,9 +98,6 @@
     <a class="nav-link" href="../../users/adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../../users/issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../users/commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/protocols/simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../../users/integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../../users/integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../users/index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../../users/index.html">latest</a>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../../users/index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -456,11 +447,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../../pre-release/developers/infrastructure/ci.html">pre-release</a>
     <a class="version is-current" href="ci.html">latest</a>
-    <a class="version" href="../../../0.12.0/developers/infrastructure/ci.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/developers/pages/infrastructure/ci.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/infrastructure/ci.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -471,41 +462,42 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>We are currently using the following CI systems.</p>
+<p>We are currently using Apache&#8217;s <code>Jenkins</code> as single CI system.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>Apache&#8217;s Jenkins at: <a href="https://ci-builds.apache.org/job/PLC4X/" class="bare">https://ci-builds.apache.org/job/PLC4X/</a></p>
 </li>
-<li>
-<p>GitHub Actions at: <a href="https://github.com/apache/plc4x/actions" class="bare">https://github.com/apache/plc4x/actions</a></p>
-</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The build on Jenkins is generally responsible for building and testing the state of the project on the <code>development</code> branch.
-It is currently the only service that is able to build and deploy the <code>SNAPSHOT</code> artifacts and is also responsible for building and updating our website.</p>
+<p>However we might add Travis for automatically building and testing Pull-Requests in the near future.</p>
 </div>
 <div class="paragraph">
-<p>GitHub Actions on the other side responsible for doing the main part of the testing.
-It not only builds and runs the tests on a matrix of operating systems as well as with a number of java versions.
-It also is configured to run the tests on pull-requests.</p>
+<p>Hereby Apache Jenkins' clearly is responsible for running the full testsuite with all integration-tests.
+Also only jobs on Apache Jenkins are allowed to publish SNAPSHOT versions of the Maven artifacts to <code>Apaches Nexus</code> at: <a href="https://repository.apache.org" class="bare">https://repository.apache.org</a>.</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_structure_of_the_jenkins_pipeline_build"><a class="anchor" href="#_structure_of_the_jenkins_pipeline_build"></a>Structure of the Jenkins Pipeline build</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_structure_of_the_jenkins_pipeline_build"><a class="anchor" href="#_structure_of_the_jenkins_pipeline_build"></a>Structure of the Jenkins Pipeline build</h3>
 <div class="paragraph">
 <p>We are using the Jenkins <code>multi-branch pipeline plugin</code> to automatically setup build for branches based upon the build definition in the <code>Jenkinsfile</code> in the root of the project.</p>
 </div>
 <div class="paragraph">
-<p>In general, it builds the <code>develop</code> branch and all branches starting with the prefix <code>feature/</code>.
-However, when building the <code>develop</code> branch some additional steps are performed.</p>
+<p>In general it builds the <code>develop</code> branch and all branches starting with the prefix <code>feature/</code>.
+However when building the <code>develop</code> branch some additional steps are performed.</p>
 </div>
 <div class="paragraph">
 <p>When building <code>develop</code> the build not only builds the project itself and runs all tests, it also runs the <code>sonarcloud</code> analysis, deploys the artifacts built to the <code>Apache Nexus</code> as well as generates and deploys the website.</p>
+</div>
+<div class="paragraph">
+<p>The general structure of the build is as follows:</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/blockdiag/svg/eNptkU1PwzAMhu_8Cqu7gsQJgaZxgGoSR7TjxCFtzRotSqLWQXyI_47z0TbN6Kl-_dR23_fnCuBAYiA4jr2wCDto8CS1NVLT25a7L1qSFEp-C5JGw1GJBhVj1bpRBfhZodDOZlRSUrvH9mwcL2uNMoPvb27v7uuHuroGwk8K8q7a7MMTP3pyUnXZxFBnrRo_UBlbEtBFPW02Hb46vpa-8uNYhSRHrkarTI5EIVt3kIQXu7wYGTbzhAUTNBhnJs4soLR5ofZSy7FfckHdTanMod08lvmwMoXgX5PhK_NZLz19R0FuQGgGods-953heMi_Iy69X7m-Yvw5WQpcpl-ehgVDuFgsnBlfbfNbfv8AVBLfUQ==" alt="developers-ci-pipeline">
 </div>
 </div>
 </div>

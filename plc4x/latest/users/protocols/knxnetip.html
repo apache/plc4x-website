@@ -98,9 +98,6 @@
     <a class="nav-link" href="../adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -130,9 +127,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../getting-started/virtual-modbus.html">Virtual Modbus</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -206,9 +200,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="simulated.html">Simulated</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="umas.html">UMAS (Schneider Electric PLCs)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -249,7 +240,7 @@
     <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
@@ -261,7 +252,7 @@
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../integrations/eclipse-milo.html">Introduction</a>
   </li>
 </ul>
   </li>
@@ -379,7 +370,7 @@
     <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
@@ -427,13 +418,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.12.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../index.html">latest</a>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
         </li>
       </ul>
     </li>
@@ -456,11 +447,11 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
+    <a class="version" href="../../../pre-release/users/protocols/knxnetip.html">pre-release</a>
     <a class="version is-current" href="knxnetip.html">latest</a>
-    <a class="version" href="../../../0.12.0/users/protocols/knxnetip.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/protocols/knxnetip.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/protocols/knxnetip.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -477,9 +468,8 @@
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -523,7 +513,7 @@
 <pre>&lt;dependency&gt;
   &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
   &lt;artifactId&gt;plc4j-driver-knxnetip&lt;/artifactId&gt;
-  &lt;version&gt;0.13.0-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;0.12.0&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 </div>
 </div></div></td>
@@ -585,13 +575,23 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>KNX Addresses can be encoded in multiple ways. Which encoding is used, is too not provided by the protocol itself so it has to be provided externally:<br>
-<br>
-- 3 Levels: {main-group (5 bit)}/{middle-group (3 bit)}/{sub-group (8 bit)}<br>
-- 2 Levels: {main-group (5 bit)}/{sub-group (11 bit)}<br>
-- 1 Level: {sub-group (16 bit)}<br>
-<br>
-The default is 3 levels. If the <code>knxproj-file-path</code> this information is provided by the file.</p>
+<p>KNX Addresses can be encoded in multiple ways. Which encoding is used, is too not provided by the protocol itself so it has to be provided externally:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3 Levels: {main-group (5 bit)}/{middle-group (3 bit)}/{sub-group (8 bit)}</p>
+</li>
+<li>
+<p>2 Levels: {main-group (5 bit)}/{sub-group (11 bit)}</p>
+</li>
+<li>
+<p>1 Level: {sub-group (16 bit)}</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The default is 3 levels. If the <code>knxproj-file-path</code> this information is provided by the file.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -604,11 +604,20 @@ The default is 3 levels. If the <code>knxproj-file-path</code> this information 
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Type of connection used to communicate. Possible values are:<br>
-<br>
-- 'LINK_LAYER' (default): The client becomes a participant of the KNX bus and gets it&#8217;s own individual KNX address.<br>
-- 'RAW': The client gets unmanaged access to the bus (be careful with this)<br>
-- 'BUSMONITOR': The client operates as a busmonitor where he can&#8217;t actively participate on the bus. Only one 'BUSMONITOR' connection is allowed at the same time on a KNXnet/IP gateway.</p>
+<p>Type of connection used to communicate. Possible values are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>'LINK_LAYER' (default): The client becomes a participant of the KNX bus and gets it&#8217;s own individual KNX address.</p>
+</li>
+<li>
+<p>'RAW': The client gets unmanaged access to the bus (be careful with this)</p>
+</li>
+<li>
+<p>'BUSMONITOR': The client operates as a busmonitor where he can&#8217;t actively participate on the bus. Only one 'BUSMONITOR' connection is allowed at the same time on a KNXnet/IP gateway.</p>
+</li>
+</ul>
 </div></div></td>
 </tr>
 <tr>
@@ -629,7 +638,7 @@ The default is 3 levels. If the <code>knxproj-file-path</code> this information 
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Some connections require a UDP listener to listen on a fixed port.<br>
+<p>Some connections require a UDP listener to listen on a fixed port.
 Use this configuration option in order to define the port number of the local port.</p>
 </div></div></td>
 </tr>
@@ -648,10 +657,10 @@ Use this configuration option in order to define the port number of the local po
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Numeric value for changing the replay speed:<br>
-- 1 = Normal speed (default)<br>
-- 0 = Maximum speed<br>
-- 0.5 = Half speed<br>
+<p>Numeric value for changing the replay speed:
+- 1 = Normal speed (default)
+- 0 = Maximum speed
+- 0.5 = Half speed
 - 2 = Double speed</p>
 </div></div></td>
 </tr>
@@ -665,8 +674,8 @@ Use this configuration option in order to define the port number of the local po
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Should the replay start at the beginning of the file as soon as the end is reached?<br>
-- true = Automatically start again<br>
+<p>Should the replay start at the beginning of the file as soon as the end is reached?
+- true = Automatically start again
 - false = Stop at the end (default)</p>
 </div></div></td>
 </tr>
@@ -752,10 +761,8 @@ Use this configuration option in order to define the port number of the local po
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h3>
 <div class="paragraph">
 <p>KNX Addresses usually have one of the following structures:</p>
 </div>
@@ -803,7 +810,6 @@ Don&#8217;t use wildcards when explicitly reading or writing data, this is only 
 </td>
 </tr>
 </table>
-</div>
 </div>
 </div>
 </article>
