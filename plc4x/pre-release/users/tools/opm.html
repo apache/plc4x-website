@@ -484,15 +484,83 @@ This is exactly what the OPM Module is for, to enable PLC communication by simpl
 </div>
 </div>
 <div class="sect1">
-<h2 id="_simple_example"><a class="anchor" href="#_simple_example"></a>Simple Example</h2>
+<h2 id="_defining_an_opm_entity"><a class="anchor" href="#_defining_an_opm_entity"></a>Defining an OPM Entity</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following short code snippet shows how to read one value from a PLC via OPM.
-First, a <em>PlcEntityManager</em> is instantiated, then a <strong>connected</strong> entity is fetched for a given PLC connection address.
-Connected means that all method calls of the entity are intersected and replaced by PLC calls.
-This is then used to print one value to the console.
-In the second snippet one can see how the Entity class looks. The address where to read the variable <em>pressure</em> from is given
-in the <em>@PlcField</em> annotation.</p>
+<p>In order to be handled by the OPM system, you need to create classes, that are decorated with OPM annotations.</p>
+</div>
+<div class="paragraph">
+<p>There annotations are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@PlcEntity</code>: Declared on class-level, declares the class as valid OPM entity.</p>
+</li>
+<li>
+<p><code>@PlcTag</code>: Declared on a property-level, declares the field as a property which is automatically filled in by fetching data from a connected PLC.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PlcEntity
+public class MyEntity {
+
+    @PlcTag("DB01:DW01:REAL")
+    private double pressure;
+
+    @PlcTag(value = "DB01:DW05:BOOL", cacheDurationMillis = 100)
+    private boolean running;
+
+    public void MyEntity() {
+        // For OPM
+    }
+
+    public double getPressure() {
+        return pressure;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Important here, ist that the class has a no-args constructor (if there are no other constructors, the no-args constructor can be omitted. However, if there are constructors present, a no-args version is required)
+Also note, that there is technically no way to actually set the value of the above type, however the OPM interceptor will take care of this, but you can of course also provide setter methods.</p>
+</div>
+<div class="paragraph">
+<p>So the <code>@PlcEntity</code> simply marks the class as OPM entity.</p>
+</div>
+<div class="paragraph">
+<p>The <code>@PlcTag</code> provides the PLC address string to where the value can be read from.
+In the above example there are two flavors being used.
+For the <code>preassure</code> field, no second parameter is provided, so the <code>value</code> prefix can be omitted.</p>
+</div>
+<div class="paragraph">
+<p>This will create a property that is fetched from the PLC with every call to the fields getter method.</p>
+</div>
+<div class="paragraph">
+<p>In the second property: <code>running</code>, we provide a second argument: <code>cacheDurationMillis</code>.
+This will fetch a value when accessing the getter for the first time, but if more calls to the getter are received within 100ms the last read value is returned without calling the PLC.
+The first call received after the cache-duration will then result in a call (which then will be cached for 100ms again).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simple_example_detached"><a class="anchor" href="#_simple_example_detached"></a>Simple Example (Detached)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you simply have a set of fields defined in your entity, and you simply want to read all of them and then disconnect, you can use the entity managers <code>read</code> method.</p>
+</div>
+<div class="paragraph">
+<p>This creates a connection to the database, reads all the values and then disconnects the entity again.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -504,38 +572,75 @@ in the <em>@PlcField</em> annotation.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The class <em>MyEntity</em> is given by</p>
+<p>Calls to the getters of this detached entity will not result in any requests being sent to the PLC.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Please be aware, that in this case you are creating a <code>dead</code> entity.
+Calling <code>read</code> in a loop will have the OPM create new dynamic proxy classes for every call and these classes will pile up in your class-memory, which will cause OutOfMemory errors eventually.
+If you are planning on any repeated read operations, please use connected reads (Next example).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simple_example_connected"><a class="anchor" href="#_simple_example_connected"></a>Simple Example (Connected)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <code>connected</code> entity is the most interesting use-case for an OPM entity.</p>
+</div>
+<div class="paragraph">
+<p>In this case the entity stays <code>alive</code>.</p>
+</div>
+<div class="paragraph">
+<p>As mentioned in the chapter about <code>Defining an OPM Entity</code>, when accessing the getter for a property, which is annotated with <code>@PlcTag</code> will result in a call to the PLC, unless the <code>cacheDurationMillis</code> permits a re-use of the last value.</p>
+</div>
+<div class="paragraph">
+<p>The same applies for any possibly present setters.
+If the setter for a property annotated with <code>@PlcTag</code> is called, this will result in a write request being sent to the PLC.
+Here the cache duration is not used.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PlcEntity
-public class MyEntity {
-
-    @PlcField("DB01:DW01:LONG")
-    private double pressure;
-
-    public void MyEntity() {
-        // For OPM
-    }
-
-    public double getPressure() {
-        return pressure;
-    }
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static void main(String[] args) {
+    PlcEntityManager em = new PlcEntityManager();
+    MyEntity entity = em.connect(MyEntity.class, "s7://...");
+    System.out.println(entity.getPressure());
 }</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_annotations"><a class="anchor" href="#_annotations"></a>Annotations</h2>
+<h2 id="_hidden_secrets"><a class="anchor" href="#_hidden_secrets"></a>Hidden Secrets</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>As reading every property of an entity in a separate request is usually quite sub-ideal, there is also a way to force the reading of all fields in one request (if the protocol supports that).</p>
+</div>
+<div class="paragraph">
+<p>This is done by defining a method that does not start with <code>get{field-name}</code> or <code>is{field-name}</code> (in case of booleans).
+When calling this method the OPM system will update all properties defined in the current entity (respecting the cache time however)</p>
+</div>
+<div class="paragraph">
+<p>So when adding this method to our example entity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public void updateAllTheTags() {
+// Dummy ...
+}</code></pre>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_more_details"><a class="anchor" href="#_more_details"></a>More details</h2>
-<div class="sectionbody">
-
+<div class="paragraph">
+<p>simply calling <code>connectedEntity.updateAllTheTags()</code> will force an update of all tags which have outdated values in the cache.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
