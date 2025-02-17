@@ -566,7 +566,7 @@ The first call received after the cache-duration will then result in a call (whi
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static void main(String[] args) {
     PlcEntityManager em = new PlcEntityManager();
-    MyEntity entity = em.connect(MyEntity.class, "s7://...");
+    MyEntity entity = em.read(MyEntity.class, "s7://...");
     System.out.println(entity.getPressure());
 }</code></pre>
 </div>
