@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Releasing PLC4X Build-Tools :: PLC4X</title>
+    <meta name="generator" content="Antora 3.1.9">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<link rel="stylesheet" href="/_/css/site.css">
+<link rel="stylesheet" href="/_/css/header.css">
+<link rel="stylesheet" href="/_/css/vars.css">
+<link rel="stylesheet" href="/_/css/all.min.css" type="text/css"/>
+<script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../../..">
+          <img src="../../../../plc4x/latest/_images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+      </a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end justify-content-center">
+        <a class="navbar-item" href="../../../../">Home</a>
+        <a class="navbar-item" href="../../../../plc4x/latest/users">Users</a>
+        <a class="navbar-item" href="../../../../plc4x/latest/developers">Developers</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://www.apache.org">Apache</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="navbar-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="navbar-item" href="https://www.apache.org/security/">Security</a>
+            <a class="navbar-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/policies/conduct">Code of Conduct</a>
+            <a class="navbar-item" href="https://events.apache.org/">Upcoming Events</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="../../../../plc4x/latest/users/download">Download</a>
+          </span>
+        </div>
+        <a class="acevent" data-format="wide"></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="plc4x" data-version="latest">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../users/index.html">PLC4X</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../users/index.html">Users</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../users/download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../users/adopters.html">Adopters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../users/commercial-support.html">Commercial Support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../users/getting-started/index.html">Getting Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/getting-started/plc4c.html">Getting Started with C</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/getting-started/plc4cs.html">Getting Started with C#</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/getting-started/plc4go.html">Getting Started with Go</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/getting-started/plc4j.html">Getting Started with Java</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/getting-started/plc4py.html">Getting Started with Python</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/getting-started/using-snapshots.html">Using SNAPSHOT versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/getting-started/general-concepts.html">General Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../users/blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../users/protocols/index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/ab-eth.html">AB-ETH</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/ads.html">ADS (Automation Device Specification)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/bacnet.html">BACnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/c-bus.html">C-Bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/canopen.html">CANopen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/ctrlx.html">CtlrX</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/deltav.html">DeltaV</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/df1.html">DF1</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/eip.html">EtherNet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/firmata.html">Firmata</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/genericcan.html">Generic CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/iec-60870.html">IEC-60870</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/knxnetip.html">KNXnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/logix.html">Logix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/modbus.html">Modbus (TCP/UDP/Serial)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/opcua.html">OPC UA</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/plc4x.html">PLC4X (Proxy) (TCP)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/profinet.html">Profinet (In Development)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/s7.html">S7 (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/protocols/simulated.html">Simulated</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../users/transports/index.html">Transports</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/transports/tcp.html">TCP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/transports/udp.html">UDP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/transports/socketcan.html">SocketCAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/transports/pcap-replay.html">PCAP Replay</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../users/integrations/index.html">Integrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/integrations/apache-calcite.html">Apache Calcite</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/integrations/apache-camel.html">Apache Camel</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/integrations/apache-iotdb.html">Apache IotDB</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/integrations/apache-nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/integrations/apache-streampipes.html">Apache StreamPipes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/integrations/eclipse-milo.html">Introduction</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../users/tools/index.html">Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/tools/capture-replay.html">Capture Replay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/tools/connection-cache.html">The Connection Cache concept</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/tools/scraper.html">Scraper</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/tools/testing.html">Testing (or using PLC4X without a PLC)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../users/industry40.html">Industry 4.0 with Apache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../users/security.html">Security Vulnerabilities</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Developers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../preparing/index.html">Preparing your Computer</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../preparing/linux.html">Linux</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../preparing/macos.html">Mac OS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../preparing/windows.html">Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../building.html">Building PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contributing.html">Contributing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../tutorials/index.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tutorials/writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../code-gen/index.html">Code Generation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../code-gen/protocol/mspec.html">The MSpec format</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../code-gen/language/freemarker.html">Apache Freemarker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../code-gen/protocol/df1.html">Example: DF1 MSpec</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Usage of protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/ads/protocol.html">Beckhoff ADS Protocol</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/eip/protocol.html">EIP Protocol</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../infrastructure/index.html">Infrastructure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../infrastructure/ci.html">Continuous Integration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../infrastructure/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../infrastructure/sonar.html">Code Analysis</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../infrastructure/wiki.html">WIKI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../infrastructure/vm.html">infrastructure/vm.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../infrastructure/website.html">Generating the Website</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Releasing and Validating Releases</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="release.html">Releasing PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="validation.html">Validating a staged release</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="build-tools.html">Releasing PLC4X Build-Tools</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../tools.html">Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../team.html">Team</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../decisions.html">Decision Making</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../maturity.html">Apache Maturity Model Assessment for PLC4X</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">PLC4X</span>
+    <span class="version">latest</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../users/index.html">PLC4X</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../users/index.html">latest</a>
+        </li>
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">pre-release</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../users/index.html">PLC4X</a></li>
+    <li><a href="../index.html">Developers</a></li>
+    <li><a href="index.html">Releasing and Validating Releases</a></li>
+    <li><a href="build-tools.html">Releasing PLC4X Build-Tools</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">latest</button>
+  <div class="version-menu">
+    <a class="version is-current" href="build-tools.html">latest</a>
+    <a class="version" href="../../../pre-release/developers/release/build-tools.html">pre-release</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/release/build-tools.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Releasing PLC4X Build-Tools</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In contrast to the main project, the <code>plc4x-build-tools</code> repository contains a loose collection of sub-projects.</p>
+</div>
+<div class="paragraph">
+<p>The main <code>pom.xml</code> in the root directory is mainly for allowing to import all modules into an IDE and shouldn&#8217;t be used for releases.</p>
+</div>
+<div class="paragraph">
+<p>If you want to release a part of the build-tools, please execute the following release steps in the parts sub-directory.</p>
+</div>
+<div class="paragraph">
+<p>In general the preparation steps for releasing a build-tool is equal to those of the main project.
+So please check <a href="release.html">here</a> (Chapters: <code>Preparing your system for being able to release</code> and <code>Preparing the codebase for a release</code>)</p>
+</div>
+<div class="paragraph">
+<p>The rest of the steps are a lot simpler than those of the main project as there aren&#8217;t any profiles involved.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_a_release_branch_for_the_code_generation_module"><a class="anchor" href="#_creating_a_release_branch_for_the_code_generation_module"></a>Creating a release branch (For the code-generation module)</h3>
+<div class="paragraph">
+<p>According to SemVer, we have: Major, Minor and Bugfix releases.</p>
+</div>
+<div class="paragraph">
+<p>For each new Major and Minor release we create a new branch at the beginning of a code-freeze phase.</p>
+</div>
+<div class="paragraph">
+<p>So if currently the project version in develop is <code>{code-generation-full-version}-SNAPSHOT</code>, we create a branch <code>release/{code-generation-short-version}</code>.</p>
+</div>
+<div class="paragraph">
+<p>When creating the branch is exactly the moment in which the version in <code>develop</code> is incremented to the next minor version.</p>
+</div>
+<div class="paragraph">
+<p>This can and should be automated by the <code>maven-release-plugin</code>.</p>
+</div>
+<div class="paragraph">
+<p>Per default the plugin will ask for the working copy version during the build execution.
+This is the version the <code>develop</code> branch will be changed to.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn release:branch -DbranchName=releases/code-generation/{minor-version}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version.
+So in case of preparing the release branch for <code>{code-generation-full-version}</code> the command would be the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   mvn release:branch -DbranchName=releases/code-generation/{code-generation-short-version}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The plugin will then aks for the version:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   What is the new working copy version for "PLC4X Build Tools: Code Generation"? (org.apache.plc4x.plugins:plc4x-code-generation) {code-generation-bugfix-version}-SNAPSHOT: : {code-generation-development-version}-SNAPSHOT</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where the suggested default is manually overridden.</p>
+</div>
+<div class="paragraph">
+<p>This step now should perform quite quickly as no build and no tests are involved.</p>
+</div>
+<div class="paragraph">
+<p>However in the end the versions of the <code>develop</code> branch are updated and a new <code>releases/code-generation/{code-generation-short-version}</code> branch is created.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_preparing_develop_for_the_next_iteration"><a class="anchor" href="#_preparing_develop_for_the_next_iteration"></a>Preparing <code>develop</code> for the next iteration</h3>
+<div class="paragraph">
+<p>Now is a good time to add a new section to the <code>RELEASE_NOTES</code> document for the new <code>SNAPSHOT</code> version.</p>
+</div>
+<div class="paragraph">
+<p>Here comes a template:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>==============================================================
+(Unreleased) Apache PLC4X {code-generation-development-version}-SNAPSHOT
+==============================================================
+
+New Features
+------------
+
+Incompatible changes
+--------------------
+
+Bug Fixes
+---------
+
+// Rest of the file</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After that please remove the <code>(Unreleased)</code> from the following section, as we are currently working on its release.</p>
+</div>
+<div class="paragraph">
+<p>Also be sure to do a quick full-text-search to check if the version was updated correctly everywhere.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you find anything here, you will need to pay attention during the release.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_release_stabilization_phase"><a class="anchor" href="#_release_stabilization_phase"></a>Release stabilization phase</h3>
+<div class="paragraph">
+<p>Now usually comes a phase in which last tests and checks should be performed.</p>
+</div>
+<div class="paragraph">
+<p>If any problems are found they, have to be fixed in the release branch.</p>
+</div>
+<div class="paragraph">
+<p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems, and we no longer have the same versions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_preparing_a_release"><a class="anchor" href="#_preparing_a_release"></a>Preparing a release</h3>
+<div class="paragraph">
+<p>Before you start preparing the release, it is important to manually make the <code>RELEASE_NOTES</code> reflect the version we are planning on releasing.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Be sure to ensure you have switched to the release branch before continuing.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>So be sure to remove the <code>(Unreleased)</code> and <code>SNAPSHOT</code> from the version.</p>
+</div>
+<div class="paragraph">
+<p>As especially when switching a lot between different branches, it is recommended to do a clean checkout of the repository.
+Otherwise, a lot of directories can be left over, which would be included in the source-release zip.
+In order to prepare a release-candidate, the first step is switching to the corresponding release-branch.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Again, just in case you missed the first warning: Be sure to ensure you have switched to the release branch before continuing.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After that, the following command will to all preparation steps for the release:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn release:prepare</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In general the plugin will now ask you 3 questions:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix, keep it as it is)</p>
+</li>
+<li>
+<p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>releases/code-generation/{release-version}</code> (<code>releases/code-generation/{code-generation-full-version}</code> in our case)</p>
+</li>
+<li>
+<p>The next development version (The version present in the pom after the release) (leave it as it is suggested by the plugin)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Usually for 1 and 3 the defaults are just fine, make sure the tag name is correct as this usually is different.</p>
+</div>
+<div class="paragraph">
+<p>However, it is important to check that nowhere else SNAPSHOT versions are referenced.</p>
+</div>
+<div class="paragraph">
+<p>What the plugin now does, is automatically to execute the following operations:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Check we aren&#8217;t referencing any <code>SNAPSHOT</code> dependencies.</p>
+</li>
+<li>
+<p>Update all pom versions to the release version.</p>
+</li>
+<li>
+<p>Run a build with all tests</p>
+</li>
+<li>
+<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release releases/code-generation/{code-generation-full-version}</code>)</p>
+</li>
+<li>
+<p>Push the commit</p>
+</li>
+<li>
+<p>Tag the commit</p>
+</li>
+<li>
+<p>Update all poms to the next development version.</p>
+</li>
+<li>
+<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare for next development iteration</code>)</p>
+</li>
+<li>
+<p>Push the commit</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>However, this just prepared the git repository for the release, we have to perform the release to produce and stage the release artifacts.</p>
+</div>
+<div class="paragraph">
+<p>Please verify the git repository at: <a href="https://gitbox.apache.org/repos/asf?p=plc4x-build-tools.git" class="bare">https://gitbox.apache.org/repos/asf?p=plc4x-build-tools.git</a>
+is in the correct state. Please select the release branch and verify the commit log looks similar to this</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/release-git-history.png" alt="release git history">
+</div>
+</div>
+<div class="paragraph">
+<p>It is important that the commit with the message "[maven-release-plugin] prepare release releases/code-generation/{code-generation-full-version}" is tagged with the release tag (in this case releases/code-generation/{code-generation-full-version})</p>
+</div>
+<div class="paragraph">
+<p>If you check the commit itself, it should mainly consist of version updates like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/release-git-diff-prepare-release.png" alt="release git diff prepare release">
+</div>
+</div>
+<div class="paragraph">
+<p>The root pom has a few more changes, but in general this should be what you are seeing.</p>
+</div>
+<div class="paragraph">
+<p>After that should come a second commit:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/release-git-diff-next-development-iteration.png" alt="release git diff next development iteration">
+</div>
+</div>
+<div class="paragraph">
+<p>This now updates the versions again, but this time from the release version to the one we selected for the next development iteration (in this case <code>{code-generation-bugfix-version}-SNAPSHOT</code>)</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the commit history doesn&#8217;t look like this, something went wrong.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_if_something_goes_wrong"><a class="anchor" href="#_what_if_something_goes_wrong"></a>What if something goes wrong?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If something goes wrong, you can always execute:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn release:rollback</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And it will change the versions back and commit and push things.</p>
+</div>
+<div class="paragraph">
+<p>However, it will not delete the tag in GIT (locally and remotely). So you have to do that manually or use a different tag next time.</p>
+</div>
+<div class="sect2">
+<h3 id="_performing_a_release"><a class="anchor" href="#_performing_a_release"></a>Performing a release</h3>
+<div class="paragraph">
+<p>This is done by executing another goal of the <code>maven-release-plugin</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn release:perform</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This executes automatically as all information it requires is located in the <code>release.properties</code> file the <code>prepare</code>-goal prepared.</p>
+</div>
+<div class="paragraph">
+<p>The first step is that the <code>perform</code>-goal checks out the previously tagged revision into the root modules <code>target/checkout</code> directory.
+Here it automatically executes a maven build (You don&#8217;t have to do this, it&#8217;s just that you know what&#8217;s happening):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>mvn clean deploy -P apache-release</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As the <code>apache-release</code> profile is activated, this builds and tests the project as well as creates the JavaDocs, Source packages and signs each of these with your PGP key.</p>
+</div>
+<div class="paragraph">
+<p>As this time the build is building with release versions, Maven will automatically choose the release url for deploying artifacts.</p>
+</div>
+<div class="paragraph">
+<p>The way things are set up in the apache parent pom, is that release artifacts are deployed to a so-called <code>staging repository</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can think of a <code>staging repository</code> as a dedicated repository created on the fly as soon as the first artifact comes in.</p>
+</div>
+<div class="paragraph">
+<p>After the build you will have a nice and clean Maven repository at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a> that contains only artifacts from the current build.</p>
+</div>
+<div class="paragraph">
+<p>After the build it is important to log in to <code>Nexus</code> at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a>, select <code>Staging Repositories</code> and find the repository with the name: <code>orgapacheplc4x-{somenumber}</code>.</p>
+</div>
+<div class="paragraph">
+<p>Select that and click on the <code>Close</code> button.</p>
+</div>
+<div class="paragraph">
+<p>Now Nexus will do some checks on the artifacts and check the signatures.</p>
+</div>
+<div class="paragraph">
+<p>As soon as it&#8217;s finished, we are done on the Maven side and ready to continue with the rest of the release process.</p>
+</div>
+<div class="paragraph">
+<p>A release build also produces a so-called <code>source-assembly</code> zip.</p>
+</div>
+<div class="paragraph">
+<p>This contains all sources of the project and will be what&#8217;s actually the release from an Apache point of view and will be the thing we will be voting on.</p>
+</div>
+<div class="paragraph">
+<p>This file will also be signed and <code>SHA512</code> hashes will be created.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_staging_a_release"><a class="anchor" href="#_staging_a_release"></a>Staging a release</h3>
+<div class="paragraph">
+<p>Each new release and release-candidate has to be staged in the Apache SVN under:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://dist.apache.org/repos/dist/dev/plc4x/" class="bare">https://dist.apache.org/repos/dist/dev/plc4x/</a></p>
+</div>
+<div class="paragraph">
+<p>The directory structure of this directory is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   ./KEYS
+   ./build-tools/code-generation/{code-generation-full-version}
+   ./build-tools/code-generation/{code-generation-full-version}/rc1
+   ./build-tools/code-generation/{code-generation-full-version}/rc1/README
+   ./build-tools/code-generation/{code-generation-full-version}/rc1/RELEASE_NOTES
+   ./build-tools/code-generation/{code-generation-full-version}/rc1/apache-plc4x-code-generation-{code-generation-full-version}-source-release.zip
+   ./build-tools/code-generation/{code-generation-full-version}/rc1/apache-plc4x-code-generation-{code-generation-full-version}-source-release.zip.asc
+   ./build-tools/code-generation/{code-generation-full-version}/rc1/apache-plc4x-code-generation-{code-generation-full-version}-source-release.zip.sha512</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I usually prepare exactly the same directory structure, starting with the {code-generation-full-version} locally and then just import everything using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>svn import {code-generation-full-version} https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{code-generation-full-version} -m"Staging of rc1 of PLC4X Build-Tools (Code-Generation) {code-generation-full-version}"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>KEYS</code> file contains the PGP public key which belongs to the private key used to sign the release artifacts.</p>
+</div>
+<div class="paragraph">
+<p>If this is your first release be sure to add your key to this file.
+For the format have a look at the file itself.
+It should contain all the information needed.</p>
+</div>
+<div class="paragraph">
+<p>Be sure to stage exactly the <code>README</code> and <code>RELEASE_NOTES</code> files contained in the root of your project.
+Ideally you just copy them there from there.</p>
+</div>
+<div class="paragraph">
+<p>The three <code><strong>-source-release.zip</strong></code> artifacts should be located in the directory: <code>code-generation/target/checkout/code-generation/target</code></p>
+</div>
+<div class="paragraph">
+<p>So, after committing these files to SVN, you are ready to start the vote.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_starting_a_vote_on_the_mailing_list"><a class="anchor" href="#_starting_a_vote_on_the_mailing_list"></a>Starting a vote on the mailing list</h3>
+<div class="paragraph">
+<p>After staging the release candidate in the Apache SVN, it is time to actually call out the vote.</p>
+</div>
+<div class="paragraph">
+<p>For this we usually send two emails.
+The following would be the one used to do our first TLP release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   E-Mail Topic:
+   [VOTE] Apache PLC4X Build-Tools Code-Generation {code-generation-full-version} RC1
+
+   Message:
+   Apache PLC4X Build-Tools Code-Generation {code-generation-full-version} has been staged under [2]
+   and it’s time to vote on accepting it for release.
+
+   All Maven artifacts are available under [1]. Voting will be open for 72hr.
+
+   A minimum of 3 binding +1 votes and more binding +1 than binding -1
+   are required to pass.
+
+   Repository: https://gitbox.apache.org/repos/asf/plc4x-build-tools.git
+   Release tag: releases/code-generation/{code-generation-full-version}
+   Hash for the release tag: {replacethiswiththerealgitcommittag}
+
+   Per [3] "Before voting +1 PMC members are required to download
+   the signed source code package, compile it as provided, and test
+   the resulting executable on their own platform, along with also
+   verifying that the package meets the requirements of the ASF policy
+   on releases."
+
+   You can achieve the above by following [4].
+
+   [ ]  +1 accept (indicate what you validated - e.g. performed the non-RM items in [4])
+   [ ]  -1 reject (explanation required)
+
+
+   [1] https://repository.apache.org/content/repositories/orgapacheplc4x-{somefourdigitnumber}
+   [2] https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{code-generation-full-version}/rc1/
+   [3] https://www.apache.org/dev/release/validation.html#approving-a-release
+   [4] https://plc4x.apache.org/developers/release/validation.html</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As it is sometimes to do the vote counting, if voting and discussions are going on in the same thread, we send a second email:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   E-Mail Topic:
+   [DISCUSS] Apache PLC4X Build-Tools Code-Generation {code-generation-full-version} RC1
+
+   Message:
+   This is the discussion thread for the corresponding VOTE thread.
+
+   Please keep discussions in this thread to simplify the counting of votes.
+
+   If you have to vote -1 please mention a brief description on why and then take the details to this thread.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we have to wait 72 hours till we can announce the result of the vote.</p>
+</div>
+<div class="paragraph">
+<p>This is an Apache policy to make it possible for anyone to participate in the vote, no matter where that person lives and not matter what weekends or public holidays might currently be.</p>
+</div>
+<div class="paragraph">
+<p>The vote passes, if at least 3 <code>+1</code> votes are received and more <code>+1</code> are received than <code>-1</code>.</p>
+</div>
+<div class="paragraph">
+<p>After the 72-our minimum wait period is over, and we have fulfilled the requirement of at least 3 +1 votes and more +1 than -1, a final reply is sent to the vote thread with a prefix of <code>[RESULT]</code> in the title in which the summary of the vote is presented in an aggregated form.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    E-Mail Topic:
+    [RESULT] [VOTE] Apache PLC4X Build-Tools Code-Generation {code-generation-full-version} RC1
+
+    Message:
+    So, the vote passes with 3 +1 votes by PMC members and one +1 vote by a non PMC member.
+
+    Chris</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_releasing_after_a_successful_vote"><a class="anchor" href="#_releasing_after_a_successful_vote"></a>Releasing after a successful vote</h3>
+<div class="paragraph">
+<p>As soon as the votes are finished, and the results were in favor of a release, the staged artifacts can be released.
+This is done by moving them inside the Apache SVN.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   svn move -m "Release Apache PLC4X {code-generation-full-version}" \
+       https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{code-generation-full-version}/rc1 \
+       https://dist.apache.org/repos/dist/release/plc4x/build-tools/code-generation/{code-generation-full-version}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will make the release artifacts available and will trigger them being copied to mirror sites.</p>
+</div>
+<div class="paragraph">
+<p>This is also the reason why you should wait at least 24 hours before sending out the release notification emails.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cleaning_up_older_release_versions"><a class="anchor" href="#_cleaning_up_older_release_versions"></a>Cleaning up older release versions</h3>
+<div class="paragraph">
+<p>As a lot of mirrors are serving our releases, it is the Apache policy to clean old releases from the repo if newer versions are released.</p>
+</div>
+<div class="paragraph">
+<p>This can be done like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>svn delete https://dist.apache.org/repos/dist/release/plc4x/0.3.0/ -m"deleted version 0.3.0"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After this, <a href="https://dist.apache.org/repos/dist/release/plc4x" class="bare">https://dist.apache.org/repos/dist/release/plc4x</a> should only contain the latest release directory.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_releasing_the_maven_artifacts"><a class="anchor" href="#_releasing_the_maven_artifacts"></a>Releasing the Maven artifacts</h3>
+<div class="paragraph">
+<p>The probably simplest part is releasing the Maven artifacts.</p>
+</div>
+<div class="paragraph">
+<p>In order to do this, the release manager logs into Nexus at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a>, selects the staging repository and clicks on the <code>Release</code> button.</p>
+</div>
+<div class="paragraph">
+<p>This will move all artifacts into the Apache release repository and delete the staging repository after that.</p>
+</div>
+<div class="paragraph">
+<p>All release artifacts released to the Apache release repo, will automatically be synced to Maven central.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_merge_back_release_version_to_release_branch"><a class="anchor" href="#_merge_back_release_version_to_release_branch"></a>Merge back release version to <code>release</code> branch</h3>
+<div class="paragraph">
+<p>The `release branch should always point to the last released version.
+This has to be done with git</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git checkout release
+git merge releases/code-generation/{code-generation-full-version}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When there are conflicts it could help to use the <code>theirs</code> merge strategy, i.e.,</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git merge -X theirs releases/code-generation/{code-generation-full-version}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Possibly a manual conflict resolution has to be done afterwards. After that, changes need to
+be pushed.</p>
+</div>
+<div class="paragraph">
+<p>In contrast to main releases of PLC4X we won&#8217;t do any JIRA version updates, updating of the download page or notifying of the world email to <a href="mailto:announce@apache.org">announce@apache.org</a></p>
+</div>
+<div class="paragraph">
+<p>So now you&#8217;re done. Congrats!</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<footer class="container-flex footer col-6" style="text-align:center;">
+    <div class="col"></div>
+    <div class="col-6">
+    Copyright &#169; 2017-2025 <a href="https://www.apache.org/">The Apache Software Foundation.</a> All rights reserved.<br/>
+    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered
+    trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks
+    mentioned may be trademarks or registered trademarks of their respective owners.
+    <br/>
+    </div>
+    <div>Home screen image taken from <a
+        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+        under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+        and blur effect added.
+    </div>
+    <div class="col"></div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../.." data-snippet-length="100" data-stylesheet="../../../../_/css/search.css"></script>
+<script async src="../../../../search-index.js"></script>
+  </body>
+</html>
