@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Basic Building Blocs of a Driver / Protocol :: PLC4X</title>
+    <title>Strategy for creating a new Driver :: PLC4X</title>
     <meta name="generator" content="Antora 3.1.9">
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
@@ -330,7 +330,7 @@
     <a class="nav-link" href="index.html">Tutorials</a>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+    <a class="nav-link" href="writing-driver.html">Strategy for creating a new Driver</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
@@ -452,7 +452,7 @@
     <li><a href="../../users/index.html">PLC4X</a></li>
     <li><a href="../index.html">Developers</a></li>
     <li><a href="index.html">Tutorials</a></li>
-    <li><a href="writing-driver.html">Basic Building Blocs of a Driver / Protocol</a></li>
+    <li><a href="writing-driver.html">Strategy for creating a new Driver</a></li>
   </ul>
 </nav>
 <div class="page-versions">
@@ -469,17 +469,141 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Basic Building Blocs of a Driver / Protocol</h1>
+<h1 class="page">Strategy for creating a new Driver</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>The general pipeline for a Protocol looks like the following:</p>
+<p>Please inspect other existing modules on how to implement some of this.</p>
 </div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/ditaa/svg/eNrNk9ELwWAUxd_9FeeRlok8eROlFU2kvG5zrbH55rsX0ffHsyRkNKGcx9Pp3vPrdq1qEVklA0xSFk1egjLZoY1hv9Ocoj10cFWrZBWchweZHK-V420L7zh1Ppd0U4mS6EAayNuR5RRz5Md7BCqOvZQJmtYbYuGbfv_GppWoU1_063gik-VGtLYhCuWQVqQ9oVkFA2L2QoLrLygQ_jab-R5b4yVb74J0IclA_b3Q7-72MVtX7VZ3nzRWwZIEc6Xh1NzKO390BHbNuq0=" alt="Diagram">
 </div>
+</div>
+<div class="sect1">
+<h2 id="_prepare_a_new_protocol_module"><a class="anchor" href="#_prepare_a_new_protocol_module"></a>Prepare a new protocol module</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new <code>protocol</code> module for your protocol.</p>
+</li>
+<li>
+<p>Create the <code>pom.xml</code> file for the new module.</p>
+</li>
+<li>
+<p>Create a new <code>mspec</code> file in <code>src/main/release/</code> with just one or two dummy types.</p>
+</li>
+<li>
+<p>Create a new <code>Protocol</code> class in <code>src/main/java</code> which implements <code>org.apache.plc4x.plugins.codegenerator.protocol.Protocol</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The value returned by <code>getName()</code> will be used in the maven driver code generation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Create a new file called <code>src/main/resources/META-INF/services/org.apache.plc4x.plugins.codegenerator.protocol.Protocol</code> and list the new protocol class.</p>
+</li>
+<li>
+<p>Test you can build the new protocol module.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prepare_a_new_driver_module"><a class="anchor" href="#_prepare_a_new_driver_module"></a>Prepare a new driver module</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new <code>driver</code> module under <code>plc4j/drivers</code></p>
+</li>
+<li>
+<p>Create the <code>pom.xml</code> file for the new module.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Be sure to add a maven dependency to your protocol module.</p>
+</li>
+<li>
+<p>Be sure you have the <code>update-generated-code</code> profile in there.</p>
+</li>
+<li>
+<p>Be sure to reference the protocol name used in your protocol module.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Create the <code>Driver</code> class in <code>src/main/java</code> which implements <code>org.apache.plc4x.java.api.PlcDriver</code>.</p>
+</li>
+<li>
+<p>Create a file called <code>src/main/resources/META-INF/services/org.apache.plc4x.java.api.PlcDriver</code> and list the new driver class.</p>
+</li>
+<li>
+<p>Test you can build the new driver module and the code generation works.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_start_implementing_the_protocol_parser_and_serializer"><a class="anchor" href="#_start_implementing_the_protocol_parser_and_serializer"></a>Start implementing the protocol parser and serializer</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a capture of the communication you want to create a driver for.</p>
+</li>
+<li>
+<p>Open the capture in WireShark</p>
+</li>
+<li>
+<p>Start defining the types you see in your mspec file</p>
+</li>
+<li>
+<p>Create a file <code>ParserSerializerTestsuite.xml</code> in the protocol modules <code>src/test/resources</code> directory.</p>
+</li>
+<li>
+<p>Start adding empty test-cases for every packet in your recording, by copying the TCP/UDP/Whatever payload in Wireshark as <code>hex-stream</code> and pasting that in the <code>raw</code> element of a test-case.</p>
+</li>
+<li>
+<p>In the driver module, create a ParserSerializer test that extends <code>org.apache.plc4x.test.parserserializer.ParserSerializerTestsuiteRunner</code> in <code>src/test/java</code> which references the <code>ParserSerializerTestsuite.xml</code> file of your protocol module.</p>
+</li>
+<li>
+<p>Iteratively implement all the <code>mspec</code> types needed to process your captures:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Add/update the types in the <code>mspec</code> file</p>
+</li>
+<li>
+<p>Rebuild the protocol module</p>
+</li>
+<li>
+<p>Rebuild the driver module (with the <code>update-generate-code</code> profile enabled)</p>
+</li>
+<li>
+<p>Run the ParserSerializer test</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_start_implementing_the_driver_logic"><a class="anchor" href="#_start_implementing_the_driver_logic"></a>Start implementing the driver logic</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As soon as you are able to process all captures of your observed communication, you can start implementing a driver protocol logic.</p>
 </div>
 <div class="paragraph">
-<p>A driver has the task to assemble the pipeline for the protocol(s).</p>
+<p>TODO: Continue writing this.</p>
+</div>
+</div>
 </div>
 </article>
   </div>
