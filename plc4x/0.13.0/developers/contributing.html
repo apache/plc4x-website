@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Contributing :: PLC4X</title>
+    <meta name="generator" content="Antora 3.1.9">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<link rel="stylesheet" href="/_/css/site.css">
+<link rel="stylesheet" href="/_/css/header.css">
+<link rel="stylesheet" href="/_/css/vars.css">
+<link rel="stylesheet" href="/_/css/all.min.css" type="text/css"/>
+<script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">
+          <img src="../../../plc4x/0.13.0/_images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+      </a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end justify-content-center">
+        <a class="navbar-item" href="../../../">Home</a>
+        <a class="navbar-item" href="../../../plc4x/0.13.0/users">Users</a>
+        <a class="navbar-item" href="../../../plc4x/0.13.0/developers">Developers</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://www.apache.org">Apache</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="navbar-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="navbar-item" href="https://www.apache.org/security/">Security</a>
+            <a class="navbar-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/policies/conduct">Code of Conduct</a>
+            <a class="navbar-item" href="https://events.apache.org/">Upcoming Events</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="../../../plc4x/0.13.0/users/download">Download</a>
+          </span>
+        </div>
+        <a class="acevent" data-format="wide"></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="plc4x" data-version="0.13.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../users/index.html">PLC4X</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/index.html">Users</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/adopters.html">Adopters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/commercial-support.html">Commercial Support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/getting-started/index.html">Getting Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4c.html">Getting Started with C</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4cs.html">Getting Started with C#</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4go.html">Getting Started with Go</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4j.html">Getting Started with Java</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4py.html">Getting Started with Python</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/using-snapshots.html">Using SNAPSHOT versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/general-concepts.html">General Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/protocols/index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/ab-eth.html">AB-ETH</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/ads.html">ADS (Automation Device Specification)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/bacnet.html">BACnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/c-bus.html">C-Bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/canopen.html">CANopen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/ctrlx.html">CtlrX</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/deltav.html">DeltaV</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/df1.html">DF1</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/eip.html">EtherNet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/firmata.html">Firmata</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/genericcan.html">Generic CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/iec-60870.html">IEC-60870</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/knxnetip.html">KNXnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/logix.html">Logix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/modbus.html">Modbus (TCP/UDP/Serial)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/opcua.html">OPC UA</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/plc4x.html">PLC4X (Proxy) (TCP)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/profinet.html">Profinet (In Development)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/s7.html">S7 (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/s7-light.html">S7-Light (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/transports/index.html">Transports</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/tcp.html">TCP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/udp.html">UDP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/socketcan.html">SocketCAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/pcap-replay.html">PCAP Replay</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/integrations/index.html">Integrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-calcite.html">Apache Calcite</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-camel.html">Apache Camel</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-iotdb.html">Apache IotDB</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-kafka.html">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-streampipes.html">Apache StreamPipes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/tools/index.html">Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/capture-replay.html">Capture Replay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/connection-cache.html">The Connection Cache concept</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/scraper.html">Scraper</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/testing.html">Testing (or using PLC4X without a PLC)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/industry40.html">Industry 4.0 with Apache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/security.html">Security Vulnerabilities</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Developers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="preparing/index.html">Preparing your Computer</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="preparing/linux.html">Linux</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="preparing/macos.html">Mac OS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="preparing/windows.html">Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="building.html">Building PLC4X</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="contributing.html">Contributing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="tutorials/index.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tutorials/writing-driver.html">Strategy for creating a new Driver</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="code-gen/index.html">Code Generation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="code-gen/protocol/mspec.html">The MSpec format</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="code-gen/language/freemarker.html">Apache Freemarker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="code-gen/protocol/df1.html">Example: DF1 MSpec</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="protocols/index.html">Usage of protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/ads/protocol.html">Beckhoff ADS Protocol</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/eip/protocol.html">EIP Protocol</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="infrastructure/index.html">Infrastructure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/ci.html">Continuous Integration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/sonar.html">Code Analysis</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/wiki.html">WIKI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/vm.html">The PLC4X Project VM</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/website.html">Generating the Website</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="release/index.html">Releasing and Validating Releases</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="release/release.html">Releasing PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="release/validation.html">Validating a staged release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="release/build-tools.html">Releasing PLC4X Build-Tools</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tools.html">Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="team.html">Team</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="decisions.html">Decision Making</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="maturity.html">Apache Maturity Model Assessment for PLC4X</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">PLC4X</span>
+    <span class="version">0.13.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../latest/users/index.html">PLC4X</a></div>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../latest/users/index.html">latest</a>
+        </li>
+        <li class="version">
+          <a href="../../pre-release/users/index.html">pre-release</a>
+        </li>
+        <li class="version is-current">
+          <a href="../users/index.html">0.13.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../users/index.html">PLC4X</a></li>
+    <li><a href="index.html">Developers</a></li>
+    <li><a href="contributing.html">Contributing</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">0.13.0</button>
+  <div class="version-menu">
+    <a class="version" href="../../latest/developers/contributing.html">latest</a>
+    <a class="version" href="../../pre-release/developers/contributing.html">pre-release</a>
+    <a class="version is-current" href="contributing.html">0.13.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.13/website/asciidoc/modules/developers/pages/contributing.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Contributing</h1>
+<div class="sect1">
+<h2 id="_forms_of_contribution"><a class="anchor" href="#_forms_of_contribution"></a>Forms of contribution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are multiple forms in which you can become involved with the PLC4X project.</p>
+</div>
+<div class="paragraph">
+<p>These usually are, but are not limited to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Submitting Pull Requests</p>
+</li>
+<li>
+<p>Filing Bug-Reports</p>
+</li>
+<li>
+<p>Active communication on our mailing lists</p>
+</li>
+<li>
+<p>Promoting the project (articles, blog posts, talks at conferences)</p>
+</li>
+<li>
+<p>Documentation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We are a very friendly bunch and don&#8217;t be afraid to step forward.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_commits"><a class="anchor" href="#_commits"></a>Commits</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We make use of <a href="https://www.conventionalcommits.org/en/v1.0.0/">conventional commits</a>.
+As plc4x is a monolithic polyglot repository we usually define the scope as <code>&#8230;&#8203;(plc4[language shortcut here]/subcomponent)</code>
+(e.g. a new feature in Bacnet in the Golang part would have a message of <code>feat(plc4go/bacnet): cool new feature for&#8230;&#8203;</code>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pull_requests"><a class="anchor" href="#_pull_requests"></a>Pull-Requests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The simplest way to submit code changes, is via a GitHub pull-request.</p>
+</div>
+<div class="paragraph">
+<p>In order to do this first create a GitHub account and sign into you account.</p>
+</div>
+<div class="paragraph">
+<p>After that&#8217;s done, please to to our <a href="https://github.com/apache/plc4x">GitHub site</a> and create a so-called <code>Fork</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/contributing-github-fork.png" alt="contributing github fork">
+</div>
+</div>
+<div class="paragraph">
+<p>What happens now, is that GitHub creates a full copy of the PLC4X repo in your account. Only you can commit to this.</p>
+</div>
+<div class="paragraph">
+<p>Now ideally you check-out your cloned repository:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git clone https://github.com/{your-user-id}/plc4x.git</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you have a copy of PLC4X on your computer and you can change whatever you want and as it&#8217;s your copy, you can even commit these changes without any danger of breaking things.</p>
+</div>
+<div class="paragraph">
+<p>As soon as you&#8217;re finished with your changes and want us to have a look, it&#8217;s time to create a so-called <code>Pull-Request</code>.</p>
+</div>
+<div class="paragraph">
+<p>You do that by going to your forked repository page on GitHub.</p>
+</div>
+<div class="paragraph">
+<p>Every forked repository has an additional button called "New Pull Request":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/contributing-github-create-pull-request.png" alt="contributing github create pull request">
+</div>
+</div>
+<div class="paragraph">
+<p>If you click on this, we will receive a notification on your changes and can review them.
+We also can discuss your changes and have you perfect your pull request before we accept and merge it into PLC4X.</p>
+</div>
+<div class="sect2">
+<h3 id="_keeping_your_fork_up_to_date"><a class="anchor" href="#_keeping_your_fork_up_to_date"></a>Keeping your fork up to date</h3>
+<div class="paragraph">
+<p>As we are continuously working on PLC4X and you created a copy of our repo, this will become out-of-date pretty soon.</p>
+</div>
+<div class="paragraph">
+<p>In order get the changes we introduced in the official repo you have to tell git about that.</p>
+</div>
+<div class="paragraph">
+<p>You do this locally by adding a new so-called <code>remote</code>.
+Per default the remote you cloned from is called <code>origin</code>.</p>
+</div>
+<div class="paragraph">
+<p>Usually you will call the second remote <code>upstream</code> but in general you can call it whatever you like.</p>
+</div>
+<div class="paragraph">
+<p>Add the remote on the commandline (or your git gui of choice):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git remote add upstream https://github.com/apache/plc4x.git</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you list all your remotes, with the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git remote -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should output something like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>origin    https://github.com/{your-user-id}/plc4x.git (fetch)
+origin    https://github.com/{your-user-id}/plc4x.git (push)
+upstream    https://github.com/apache/plc4x.git (fetch)
+upstream    https://github.com/apache/plc4x.git (push)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If that&#8217;s so, you&#8217;re fine to continue, if not &#8230;&#8203; well you could ask for assistance on our dev-list.</p>
+</div>
+<div class="paragraph">
+<p>In order to get all changes of our upstream-repository, just execute the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git pull upstream</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will get all changed from upstream and merge them locally. In order to update your GitHub version, you have to push things back to <code>origin</code>.
+You can do this by executing the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>git push</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(If no remote is provided, git will use <code>origin</code> per default)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bug_reports"><a class="anchor" href="#_bug_reports"></a>Bug Reports</h3>
+<div class="paragraph">
+<p>We use <a href="https://github.com/apache/plc4x/issues">GitHub Issues</a> as our Bug &amp; Issue Tracker.</p>
+</div>
+<div class="paragraph">
+<p>Feel free to submit <code>feature requests</code>, <code>bug reports</code>, <code>patches</code>, <code>comment on issues</code>, &#8230;&#8203;</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation"><a class="anchor" href="#_documentation"></a>Documentation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As our documentation and website are generated as a side-product of our build, contributing to this technically the same as contributing to the code.</p>
+</div>
+<div class="paragraph">
+<p>All our content is written in Asciidoctor and is located in <code>src/site/asciidoc</code> directories.
+For a reference of the Asciidoctor syntax please have a look at the <a href="https://asciidoctor.org/docs/user-manual/#introduction-to-asciidoctor">Asciidoctor documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_branching_model"><a class="anchor" href="#_branching_model"></a>Branching model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The PLC4X project uses the following branching model.</p>
+</div>
+<div class="paragraph">
+<p>The same model is used for a wide variety of other projects, so it should be pretty straight forward.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>release</code> contains the latest released state.</p>
+</li>
+<li>
+<p>Development is performed on the <code>develop</code> branch.</p>
+</li>
+<li>
+<p>Features are developed in Feature-Branches with a prefix <code>feature/</code></p>
+</li>
+<li>
+<p>Each minor release has a corresponding release branch <code>rel/0.13.0</code></p>
+</li>
+<li>
+<p>A release branch is spawned from <code>develop</code> only</p>
+</li>
+<li>
+<p>Bugfix releases don&#8217;t have a dedicated release branch, they are just performed on the corresponding minor versions release branch</p>
+</li>
+</ul>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/graphviz/png/eNqdVU2PmzAQvedXWPTKZrGBZKOISnvroWqrbi9VtAfITACtE5Ah7War_vf6A5NAPsoCki3b79lv5o0B8lTEZUbSPxMiHxHvXiAXkfP5u7PUM2UMkTcNzWBXAFZYyonZssWbiQaxKcQaeZwgr6Ja7HE5aYlktclfEar8DfWSq1fUU2VxidE6F2uOLqnqA8cIt2V9cMm64IWU82HhqddxSYZ5mtXqwJa-KXZ1gwPEsno5JHyPEqsWIudR5DEnScGhmdIKHBqUtUOejWyEVOo7O6zE3e8c6izyn08DIatUFPsycgRyjCt0ml22VLUrHf5x0SVmD2-6sDh2AvOmbOpdAvk9EL0ECk5Acr2bSRtP4qn3ROXdR6VBtb49Sw2CYwoainUD4ipDuJqEe0-r-9kIyfbizZ4mKO3mpMGaSJiVnBSvLaGbHTr17p6-PH57-vT1x22e3-ddSJigQQ9FB-4evj_TKnaZVxWR7nzTBUcpehz-P-02QOUSvW4Cu2YCOzeB3QyXnZXosDQxf0BpCxb0a3vg7uGAOyHYrIdiA3efj7CYGYuZsZgZi5lxVsrV3ewoTI_nAw03u21ZG7y5sRfsB_yFvCitKuh8iOzijdiBkVGXDvyRvICMqi8IR_JmI3nzLs8fynsYyVuM5FGPvL94Qdcu6NIFXWugCxd0pYGuVpkB1T7odtGqVCN55rD_BTQfPmq90LeATv7-A016T8E=" alt="plc4x-branching-model">
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<footer class="container-flex footer col-6" style="text-align:center;">
+    <div class="col"></div>
+    <div class="col-6">
+    Copyright &#169; 2017-2025 <a href="https://www.apache.org/">The Apache Software Foundation.</a> All rights reserved.<br/>
+    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered
+    trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks
+    mentioned may be trademarks or registered trademarks of their respective owners.
+    <br/>
+    </div>
+    <div>Home screen image taken from <a
+        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+        under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+        and blur effect added.
+    </div>
+    <div class="col"></div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
