@@ -97,6 +97,9 @@
     <a class="nav-link" href="../adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -126,6 +129,9 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -197,7 +203,13 @@
     <a class="nav-link" href="../protocols/s7.html">S7 (Step7)</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/s7-light.html">S7-Light (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
   </li>
 </ul>
   </li>
@@ -239,7 +251,7 @@
     <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
@@ -251,7 +263,7 @@
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Introduction</a>
+    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
   </li>
 </ul>
   </li>
@@ -318,7 +330,7 @@
     <a class="nav-link" href="../../developers/tutorials/index.html">Tutorials</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/tutorials/writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+    <a class="nav-link" href="../../developers/tutorials/writing-driver.html">Strategy for creating a new Driver</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
@@ -369,7 +381,7 @@
     <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
@@ -417,16 +429,16 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.13.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../index.html">latest</a>
-        </li>
         <li class="version">
           <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.13.0/users/index.html">0.13.0</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
+        </li>
+        <li class="version">
+          <a href="../../../0.12.0/users/index.html">0.12.0</a>
         </li>
       </ul>
     </li>
@@ -449,12 +461,12 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
-    <a class="version is-current" href="testing.html">latest</a>
     <a class="version" href="../../../pre-release/users/tools/testing.html">pre-release</a>
-    <a class="version" href="../../../0.13.0/users/tools/testing.html">0.13.0</a>
+    <a class="version is-current" href="testing.html">latest</a>
+    <a class="version" href="../../../0.12.0/users/tools/testing.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/tools/testing.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.13/website/asciidoc/modules/users/pages/tools/testing.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -462,8 +474,9 @@
 </aside>
 <article class="doc">
 <h1 class="page">Testing (or using PLC4X without a PLC)</h1>
-<div class="sect2">
-<h3 id="_the_mock_driver"><a class="anchor" href="#_the_mock_driver"></a>The Mock Driver</h3>
+<div class="sect1">
+<h2 id="_the_mock_driver"><a class="anchor" href="#_the_mock_driver"></a>The Mock Driver</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>PLC4X has a <em>Mock Driver</em> which was initially implemented to be used for Unit Tests and this still is its main purpose.
 But this driver is also very suitable to play around a bit with the PLC4X API if no <em>Hardware</em> PLC is available.
@@ -473,8 +486,8 @@ The driver can be found in the Maven module</p>
 <div class="content">
 <pre>    &lt;dependency&gt;
       &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
-      &lt;artifactId&gt;plc4j-transport-test&lt;/artifactId&gt;
-      &lt;version&gt;0.12.0&lt;/version&gt;
+      &lt;artifactId&gt;plc4j-driver-mock&lt;/artifactId&gt;
+      &lt;version&gt;0.13.0&lt;/version&gt;
       &lt;scope&gt;test&lt;/scope&gt;
    &lt;/dependency&gt;</pre>
 </div>
@@ -483,7 +496,7 @@ The driver can be found in the Maven module</p>
 <p>The connection string Syntax for the mock driver is <code>mock:{name-of-the-connection}</code>. So you can use multiple Mock Devices at the same time.</p>
 </div>
 <div class="paragraph">
-<p>The Mock Driver does nothing else than forwarding all Requests to a <em>Virtual Device</em> which we can provide to control all responses and also Monitor them, e.g. for unit tests.
+<p>The Mock Driver does nothing else than forwarding all Requests to a `Virtual Device which we can provide to control all responses and also Monitor them, e.g. for unit tests.
 The Interface for the Mock Device is</p>
 </div>
 <div class="listingblock">
@@ -504,8 +517,10 @@ The Interface for the Mock Device is</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_simple_example"><a class="anchor" href="#_simple_example"></a>Simple Example</h3>
+</div>
+<div class="sect1">
+<h2 id="_simple_example"><a class="anchor" href="#_simple_example"></a>Simple Example</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Imagine we have some Code which we cannot control or whose functionality we want to test.
 This can be done with the Mock Driver in the following way.</p>
@@ -515,8 +530,7 @@ This can be done with the Mock Driver in the following way.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">PlcDriverManager driverManager = new PlcDriverManager();
-PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("mock:my-mock-connection");</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -556,8 +570,10 @@ PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("
 <p>This would just return a String Value <code>hello</code> for every request and print all read and write requests to the Console.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_unit_testing_with_the_mock_driver"><a class="anchor" href="#_unit_testing_with_the_mock_driver"></a>Unit Testing with the Mock Driver</h3>
+</div>
+<div class="sect1">
+<h2 id="_unit_testing_with_the_mock_driver"><a class="anchor" href="#_unit_testing_with_the_mock_driver"></a>Unit Testing with the Mock Driver</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>To use the Mock driver in Unit Tests the easiest way is to generate the <code>MockDriver</code> instance as Mockito (or any other Framework) Mock.
 Like in the following Example</p>
@@ -566,8 +582,7 @@ Like in the following Example</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">MockDevice mockDevice = Mockito.mock(MockDevice.class);
 
-PlcDriverManager driverManager = new PlcDriverManager();
-PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("mock:my-mock-connection");
+PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");
 connection.setDevice(mockDevice);
 
 // Populate the Mock to avoid a NPE
@@ -588,15 +603,14 @@ verify(mockDevice).read(eq("MyAdress"));</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>But as the <em>MockDriver</em> uses a static Mock Connection registry the following Code works also</p>
+<p>But as the <code>MockDriver</code> uses a static Mock Connection registry the following Code works also</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">MockDevice mockDevice = Mockito.mock(MockDevice.class);
 
 // Setup
-PlcDriverManager driverManager = new PlcDriverManager();
-PlcMockConnection connection = (PlcMockConnection) driverManager.getConnection("mock:my-mock-connection");
+PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");
 connection.setDevice(mockDevice);
 // Populate the Mock to avoid a NPE
 when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new PlcString("hello")));
@@ -605,7 +619,7 @@ when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new Pl
 // or at least mock:my-mock-connection as connection string
 // Here: send a request to the field "MyAdress"
 // and we build up a new Connection
-try (PlcConnection conn = driverManager.getConnection("mock:my-mock-connection")) {
+try (PlcConnection conn = PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection")) {
     conn
         .readRequestBuilder
         .addItem("station", "MyAdress")
@@ -624,13 +638,15 @@ verify(mockDevice).read(eq("MyAdress"));</code></pre>
 <p>The Snippet above shows that the part under test really has to share nothing with the test code except for the connection string.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h3>
+</div>
+<div class="sect1">
+<h2 id="_conclusion"><a class="anchor" href="#_conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The above examples show that the <code>MockDriver</code> driver can not only be used to play around with the API but is also a powerful tool to
 do unit testing of Code which uses the PLC4X API.
 All that needs to be done is to either pass an instance of the Mocked Connection or just use the same Connection string (e.g. from a test configuration) that was used to Prepare a Mock Device.
-Some Examples of futher (more Complex) use cases can be found in the PLC4X Codebases, e.g. in the following classes</p>
+Some Examples of further (more Complex) use cases can be found in the PLC4X Codebases, e.g. in the following classes</p>
 </div>
 <div class="ulist">
 <ul>
@@ -647,6 +663,7 @@ Some Examples of futher (more Complex) use cases can be found in the PLC4X Codeb
 </div>
 <div class="paragraph">
 <p>and many more Test classes, especially in the OPM and the Scraper Module.</p>
+</div>
 </div>
 </div>
 </article>

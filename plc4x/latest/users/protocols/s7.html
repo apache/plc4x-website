@@ -97,6 +97,9 @@
     <a class="nav-link" href="../adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -126,6 +129,9 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -197,7 +203,13 @@
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="s7-light.html">S7-Light (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="umas.html">UMAS (Schneider Electric PLCs)</a>
   </li>
 </ul>
   </li>
@@ -239,7 +251,7 @@
     <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
@@ -251,7 +263,7 @@
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Introduction</a>
+    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
   </li>
 </ul>
   </li>
@@ -318,7 +330,7 @@
     <a class="nav-link" href="../../developers/tutorials/index.html">Tutorials</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/tutorials/writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+    <a class="nav-link" href="../../developers/tutorials/writing-driver.html">Strategy for creating a new Driver</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
@@ -369,7 +381,7 @@
     <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/infrastructure/vm.html">infrastructure/vm.adoc</a>
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
@@ -417,16 +429,16 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.13.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../index.html">latest</a>
-        </li>
         <li class="version">
           <a href="../../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../../0.13.0/users/index.html">0.13.0</a>
+        <li class="version is-current is-latest">
+          <a href="../index.html">latest</a>
+        </li>
+        <li class="version">
+          <a href="../../../0.12.0/users/index.html">0.12.0</a>
         </li>
       </ul>
     </li>
@@ -449,12 +461,12 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
-    <a class="version is-current" href="s7.html">latest</a>
     <a class="version" href="../../../pre-release/users/protocols/s7.html">pre-release</a>
-    <a class="version" href="../../../0.13.0/users/protocols/s7.html">0.13.0</a>
+    <a class="version is-current" href="s7.html">latest</a>
+    <a class="version" href="../../../0.12.0/users/protocols/s7.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/users/pages/protocols/s7.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.13/website/asciidoc/modules/users/pages/protocols/s7.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -471,8 +483,9 @@
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_executive_summary"><a class="anchor" href="#_executive_summary"></a>Executive Summary</h3>
+<div class="sect1">
+<h2 id="_executive_summary"><a class="anchor" href="#_executive_summary"></a>Executive Summary</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>This version of the S7 driver is aimed at exploiting the advanced features of the S7-300 and S7-400 controllers, as well as basic reading and writing functions for the S7-1200 and S7-1500 devices (PUT/GET functions). We hope in a short period of time to have the S7-Plus version, which should exploit the asynchronous functions of the S7-1500.</p>
 </div>
@@ -526,8 +539,10 @@ When trying to connect to a Siemens <code>LOGO</code> device, it is important to
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_regarding_the_support"><a class="anchor" href="#_regarding_the_support"></a>Regarding the Support</h3>
+</div>
+<div class="sect1">
+<h2 id="_regarding_the_support"><a class="anchor" href="#_regarding_the_support"></a>Regarding the Support</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>It is typical within the decision-making cycle in an automation project to know who and how much the support of the tools that will be used in the control architecture will cost.</p>
 </div>
@@ -538,8 +553,10 @@ When trying to connect to a Siemens <code>LOGO</code> device, it is important to
 <p>If your company requires commercial support, companies that directly or indirectly support the drivers and tools developed in PLC4X are published on our page.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_record_of_revisions_made_to_the_driver"><a class="anchor" href="#_record_of_revisions_made_to_the_driver"></a>Record of revisions made to the driver</h3>
+</div>
+<div class="sect1">
+<h2 id="_record_of_revisions_made_to_the_driver"><a class="anchor" href="#_record_of_revisions_made_to_the_driver"></a>Record of revisions made to the driver</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -569,10 +586,12 @@ When trying to connect to a Siemens <code>LOGO</code> device, it is important to
 </tbody>
 </table>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_connecting_as_easy_as_1_2_3"><a class="anchor" href="#_connecting_as_easy_as_1_2_3"></a>Connecting as easy as 1-2-3.</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_connecting_as_easy_as_1_2_3"><a class="anchor" href="#_connecting_as_easy_as_1_2_3"></a>Connecting as easy as 1-2-3.</h3>
-<div class="sect3">
-<h4 id="_one"><a class="anchor" href="#_one"></a>ONE</h4>
+<h3 id="_one"><a class="anchor" href="#_one"></a>ONE</h3>
 <div class="paragraph">
 <p>In PLC4X the URL philosophy is used as the data source for the connection for the specification of the driver and its connection parameters, this is almost a standard in network applications (pointing to the best practices). It is also possible to create an instance of the driver directly and assign its parameters with the typical "set" methods.</p>
 </div>
@@ -614,8 +633,10 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h3>
+</div>
+<div class="sect1">
+<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -659,7 +680,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 <pre>&lt;dependency&gt;
   &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
   &lt;artifactId&gt;plc4j-driver-s7&lt;/artifactId&gt;
-  &lt;version&gt;0.12.0&lt;/version&gt;
+  &lt;version&gt;latest&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 </div>
 </div></div></td>
@@ -710,6 +731,24 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-device-group</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>OTHERS</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local Device Group. (Defaults to 'OTHERS').<br>
+Allowed values:<br>
+ - PG_OR_PC<br>
+ - OS<br>
+ - OTHERS<br>
+<strong>Since: 0.13.0</strong></p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>local-tsap</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
@@ -719,7 +758,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Local Transport Service Access Point.</p>
+<p>Local Transport Service Access Point. (Overrides settings made in local-rack, local-slot and local-device-group. Be sure to convert into integer representation)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -749,6 +788,37 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-device-group</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PG_OR_PC</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Remote Device Group (Defaults to 'PG_OR_PC').<br>
+Allowed values:<br>
+ - PG_OR_PC<br>
+ - OS<br>
+ - OTHERS<br>
+<strong>Since: 0.13.0</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-tsap</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Remote Transport Service Access Point. (Overrides settings made in remote-rack, remote-slot and remote-device-group. Be sure to convert into integer representation)</p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-rack2</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
@@ -775,16 +845,21 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-tsap</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remote-device-group2</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>INT</p>
+<p>STRING</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>0</p>
+<p>PG_OR_PC</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Remote Transport Service Access Point.</p>
+<p>Remote Device Group. (Defaults to 'PG_OR_PC').<br>
+Allowed values:<br>
+ - PG_OR_PC<br>
+ - OS<br>
+ - OTHERS<br>
+<strong>Since: 0.13.0</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -834,10 +909,10 @@ In the following, reference will be made to the Java-based driver, which impleme
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>As part of the connection process, usually the PLC4X S7 driver would try to identify the remote device. However some devices seem to have problems with this and hang up or cause other problems. In such a case, providing the controller-type will skip the identification process and hereby avoid this type of problem. Possible values are:/n- S7_300
-- S7_400
-- S7_1200
-- S7-1500
+<p>As part of the connection process, usually the PLC4X S7 driver would try to identify the remote device. However some devices seem to have problems with this and hang up or cause other problems. In such a case, providing the controller-type will skip the identification process and hereby avoid this type of problem. Possible values are:/n- S7_300<br>
+- S7_400<br>
+- S7_1200<br>
+- S7-1500<br>
 - LOGO</p>
 </div></div></td>
 </tr>
@@ -864,7 +939,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time for supervision of TCP channels. If the channel is not active, a safe stop of the EventLoop must be performed, to ensure that no additional tasks are created.</p>
+<p>If your application requires sampling times greater than the set "read-timeout" time, it is important that the PING option is activated, this will prevent the TCP channel from being closed unnecessarily.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -877,7 +952,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>If your application requires sampling times greater than the set "read-timeout" time, it is important that the PING option is activated, this will prevent the TCP channel from being closed unnecessarily.</p>
+<p>Time value in seconds at which the execution of the PING will be scheduled. Generally set by developer experience, but generally should be the same as (read-timeout / 2).</p>
 </div></div></td>
 </tr>
 <tr>
@@ -890,7 +965,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time value in seconds at which the execution of the PING will be scheduled. Generally set by developer experience, but generally should be the same as (read-timeout / 2).</p>
+<p>Time for supervision of TCP channels. If the channel is not active, a safe stop of the EventLoop must be performed, to ensure that no additional tasks are created.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -979,8 +1054,8 @@ In the following, reference will be made to the Java-based driver, which impleme
 </tr>
 </tbody>
 </table>
-<div class="sect3">
-<h4 id="_two"><a class="anchor" href="#_two"></a>TWO</h4>
+<div class="sect2">
+<h3 id="_two"><a class="anchor" href="#_two"></a>TWO</h3>
 <div class="paragraph">
 <p>After defining the URL, the connection is made. Driver selection from the URL is done via PLC4X&#8217;s SPI support, so driver instantiation and mapping originating from the URL is done transparently by the Java SPI services.</p>
 </div>
@@ -993,8 +1068,8 @@ In the following, reference will be made to the Java-based driver, which impleme
      .
      .
 try {
-    PlcConnection connection = new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400"); //(2.1)
-    final PlcReadRequest.Builder subscription = connection.readRequestBuilder(); //(2.2)
+    PlcConnection connection  new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400"); //(2.1)
+    final PlcReadRequest.Builder subscription  connection.readRequestBuilder(); //(2.2)
      .
      .
      .
@@ -1008,8 +1083,8 @@ try {
 <p>No problems? Then we are ready to configure and request the data that we require from the PLC. Let&#8217;s go to step "three".</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_three"><a class="anchor" href="#_three"></a>THREE</h4>
+<div class="sect2">
+<h3 id="_three"><a class="anchor" href="#_three"></a>THREE</h3>
 <div class="paragraph">
 <p>By having the connection we can start building and executing our requests.</p>
 </div>
@@ -1020,9 +1095,9 @@ try {
 .
  readrequest.addTagAddress("MySZL", "SZL_ID=16#0091;INDEX=16#0000"); //(3.1)
 
-            final PlcReadRequest rr = readrequest.build(); //(3.2)
-            final PlcReadResponse szlresponse = rr.execute().get(); //(3.3)
-  if (szlresponse.getResponseCode("MySZL") == PlcResponseCode.OK) {//(3.4)
+            final PlcReadRequest rr  readrequest.build(); //(3.2)
+            final PlcReadResponse szlresponse  rr.execute().get(); //(3.3)
+  if (szlresponse.getResponseCode("MySZL") = PlcResponseCode.OK) {//(3.4)
   }
 .
 .
@@ -1040,16 +1115,18 @@ try {
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h3>
+</div>
+<div class="sect1">
+<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>When programming Siemens PLCs, usually the tool used to do that is called TIA Portal.</p>
 </div>
 <div class="paragraph">
 <p>The PLC4X S7 Driver is therefore sticking to the address format defined by this tool as it simplifies exchanging address information.</p>
 </div>
-<div class="sect3">
-<h4 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h4>
+<div class="sect2">
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
 <div class="paragraph">
 <p>In general all S7 addresses have this format:</p>
 </div>
@@ -1120,8 +1197,8 @@ However we also implemented a shorter version, as above version does have some u
 <p>The S7 driver will handle both types of notation equally.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_memory_areas"><a class="anchor" href="#_memory_areas"></a>Memory Areas</h4>
+<div class="sect2">
+<h3 id="_memory_areas"><a class="anchor" href="#_memory_areas"></a>Memory Areas</h3>
 <div class="paragraph">
 <p>The S7 driver currently allows access to the following memory areas.</p>
 </div>
@@ -1222,8 +1299,8 @@ However we also implemented a shorter version, as above version does have some u
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h4>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1463,8 +1540,10 @@ However we also implemented a shorter version, as above version does have some u
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_actors_participating_in_the_communication_process"><a class="anchor" href="#_actors_participating_in_the_communication_process"></a>Actors participating in the communication process</h3>
+</div>
+<div class="sect1">
+<h2 id="_actors_participating_in_the_communication_process"><a class="anchor" href="#_actors_participating_in_the_communication_process"></a>Actors participating in the communication process</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>PLC programming in general is a Pandora&#8217;s box!</p>
 </div>
@@ -1504,16 +1583,16 @@ However we also implemented a shorter version, as above version does have some u
 </li>
 </ol>
 </div>
-<div class="sect3">
-<h4 id="_s7_readwrite"><a class="anchor" href="#_s7_readwrite"></a>S7 Read/Write</h4>
+<div class="sect2">
+<h3 id="_s7_readwrite"><a class="anchor" href="#_s7_readwrite"></a>S7 Read/Write</h3>
 <div class="imageblock text-center kroki">
 <div class="content">
 <img src="https://kroki.io/plantuml/png/eNqN0E9rgzAYBvB7PsVLdtHDXBkDQYrgXBlj7SLGsd1GdJkNqJH4BrZvvzg7W3vqJeTP8_zwVVjUnW1LaYCuy9hbrXxKUGEjIdumd-_AVStQVcBDcO879rBZ35QxcDtURvWodBeQL63RAU-tqCXcEiIq1AaSvie9MK6setHh5JFSfwN1W_AS7lO42qp6j_eNlYss48tqysPFBQ9HXXafjiOTmWb_2qMRP4t0ms1RV4Pr-DBbBIMt5zk8Ok5HfTI9upT7Csbn-PF-RCJgz-daLms1jH8C9xIq3Q22leZAuDUCXrDs73xuzijqYzEIgkag89zmVHlL8t1HvuFFkheXaydA_vpyce8X38ahFg==" alt="s7h_image02">
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_s7_event_subscription"><a class="anchor" href="#_s7_event_subscription"></a>S7 Event Subscription</h4>
+<div class="sect2">
+<h3 id="_s7_event_subscription"><a class="anchor" href="#_s7_event_subscription"></a>S7 Event Subscription</h3>
 <div class="paragraph">
 <p>The S7 driver allows the subscription to asynchronous events generated in the PLC.</p>
 </div>
@@ -1602,12 +1681,12 @@ For a complete list of compatibility between the S7-300,400 and S7-1200 &amp; S7
 <p>In the following sections we will describe in more detail the functionalities of each field.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_scan_events"><a class="anchor" href="#_scan_events"></a>SCAN Events</h4>
+<div class="sect2">
+<h3 id="_scan_events"><a class="anchor" href="#_scan_events"></a>SCAN Events</h3>
 
 </div>
-<div class="sect3">
-<h4 id="_subscription_to_mode_events_s7modeevent"><a class="anchor" href="#_subscription_to_mode_events_s7modeevent"></a>Subscription to MODE events (S7ModeEvent).</h4>
+<div class="sect2">
+<h3 id="_subscription_to_mode_events_s7modeevent"><a class="anchor" href="#_subscription_to_mode_events_s7modeevent"></a>Subscription to MODE events (S7ModeEvent).</h3>
 <div class="paragraph">
 <p>By subscribing to controller status changes or <code>MODE</code> events, the PLC status changes can be tracked.</p>
 </div>
@@ -1694,19 +1773,19 @@ For a complete list of compatibility between the S7-300,400 and S7-1200 &amp; S7
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class PLCEventModeSubscription {
 
    public static void main(String[] args) throws Exception {
-    try (PlcConnection connection = new PlcDriverManager()
+    try (PlcConnection connection  new PlcDriverManager()
 			.getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
 
-      final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder(); <i class="conum" data-value="01"></i><b>(01)</b>
+      final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder(); <i class="conum" data-value="01"></i><b>(01)</b>
 
       subscription.addEventField("myMODE", "MODE");
-      final PlcSubscriptionRequest sub = subscription.build();
+      final PlcSubscriptionRequest sub  subscription.build();
 
       System.out.println("Query: " + sub.toString());
 
-      final PlcSubscriptionResponse subresponse = sub.execute().get();
+      final PlcSubscriptionResponse subresponse  sub.execute().get();
 
-      if (subresponse.getResponseCode("myMODE") == PlcResponseCode.OK) { <i class="conum" data-value="04"></i><b>(04)</b>
+      if (subresponse.getResponseCode("myMODE") = PlcResponseCode.OK) { <i class="conum" data-value="04"></i><b>(04)</b>
 				PlcConsumerRegistration registerMode =
         	subresponse
           	.getSubscriptionHandle("myMODE") <i class="conum" data-value="05"></i><b>(05)</b>
@@ -1732,8 +1811,8 @@ For a complete list of compatibility between the S7-300,400 and S7-1200 &amp; S7
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_subscription_to_sys_events_s7sysevent_and_user_events_s7userevent"><a class="anchor" href="#_subscription_to_sys_events_s7sysevent_and_user_events_s7userevent"></a>Subscription to SYS events (S7SysEvent) and USER events (S7UserEvent).</h4>
+<div class="sect2">
+<h3 id="_subscription_to_sys_events_s7sysevent_and_user_events_s7userevent"><a class="anchor" href="#_subscription_to_sys_events_s7sysevent_and_user_events_s7userevent"></a>Subscription to SYS events (S7SysEvent) and USER events (S7UserEvent).</h3>
 <div class="paragraph">
 <p>System events allow to receive asynchronously any event that affects the operation of the controller, or any of its peripheral equipment that is capable of sending events through a PROFIBUS or Profinet fieldbus.</p>
 </div>
@@ -1901,17 +1980,17 @@ In the case of user-defined messages, it is important to take into account that 
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static void main(String[] args) throws Exception {
- try (PlcConnection connection = new PlcDriverManager().
+ try (PlcConnection connection  new PlcDriverManager().
   getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
 
-   final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder(); <i class="conum" data-value="01"></i><b>(01)</b>
+   final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder(); <i class="conum" data-value="01"></i><b>(01)</b>
 
    subscription.addEventField("mySYS", "SYS");
-   final PlcSubscriptionRequest sub = subscription.build();
+   final PlcSubscriptionRequest sub  subscription.build();
 
    System.out.println("Query: " + sub.toString());
 
-   final PlcSubscriptionResponse subresponse = sub.execute().get();
+   final PlcSubscriptionResponse subresponse  sub.execute().get();
 
    PlcConsumerRegistration registerSys =
     subresponse
@@ -1942,17 +2021,17 @@ In the case of user-defined messages, it is important to take into account that 
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static void main(String[] args) throws Exception {
- try (PlcConnection connection = new PlcDriverManager().
+ try (PlcConnection connection  new PlcDriverManager().
   getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
 
-   final PlcSubscriptionRequest.Builder subscription = connection.subscriptionRequestBuilder();
+   final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder();
 
    subscription.addEventField("myUSR", "USR");
-   final PlcSubscriptionRequest sub = subscription.build();
+   final PlcSubscriptionRequest sub  subscription.build();
 
    System.out.println("Query: " + sub.toString());
 
-   final PlcSubscriptionResponse subresponse = sub.execute().get();
+   final PlcSubscriptionResponse subresponse  sub.execute().get();
 
    PlcConsumerRegistration registerUsr =
     subresponse
@@ -1981,7 +2060,7 @@ In the case of user-defined messages, it is important to take into account that 
 <table>
 <tr>
 <td class="icon">
-<img src="../../images/users/protocols/s7_note.png" alt="Note">
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable amount of diagnostic values, it must be updated according to the new CPUs or firmware versions available.
@@ -1996,8 +2075,8 @@ To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable am
 <p>By having INFO1 and INFO2 in the <strong>S7App</strong> program, the user can transfer data associated with events, such as transitions between phases, events of diagnostic routines such as firts-out or the start or end of a batch process, all asynchronously.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_subscription_to_alm_type_events_s7alarmevent"><a class="anchor" href="#_subscription_to_alm_type_events_s7alarmevent"></a>Subscription to ALM type events (S7AlarmEvent).</h4>
+<div class="sect2">
+<h3 id="_subscription_to_alm_type_events_s7alarmevent"><a class="anchor" href="#_subscription_to_alm_type_events_s7alarmevent"></a>Subscription to ALM type events (S7AlarmEvent).</h3>
 <div class="imageblock text-center kroki">
 <div class="content">
 <img src="https://kroki.io/plantuml/png/eNqVU11L60AQfd9fMcSXFqrmerW1IoUYLnKx2mIQfZNNMq2LTTZmJ6L_3slHa7JVsU8bMuecmTMfsiCdFkmIOTjn4aTnun1HkKIVwnzqHz9AoBJJKoJgBN5K5gn8e8WUgLHe9Pr8MJyAKUyUq4yUTg_EQmtirf-JXCIMhZAR6Ry8LBOZzFlHZZLZlbQI9Rs4_Ak9L-g7sDdVyye6WBXYwc6CLtUPRp0fwahUxzRmOVFr-vO12mUu3ztof76BMg32J43NM7YRbnz0HDbn9EUdYxAXMQs26M__pcYZzK5ssVtcKlM2gp4QIp2aIsFcbKNeCjQEsmys-S4bA6vOP_4Z1O_RoA3l8A2-ERh8-ZL1t2EdN-_Ydd1d-CcNb7hT1lHDOj0QdrdsM9-XObArsLRFuQywvy6oEWYikK66rldYVWcPzq6lRakHVS2VrTzeXXn8O-Uh3BlelhgXKsW43od2Jr4i9SoJm2X_ReLhl1kntQCj7qUiWJSn2cBl9Ly1n55_tY5bs29HuuPnW9i-jhh_cNCq2ZCkwkCRxQzdctZ29AFAX2QG" alt="s7h_image06">
@@ -2175,8 +2254,8 @@ To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable am
 <p>TODO: Example code</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_todo_cyclic_subscription_cyc"><a class="anchor" href="#_todo_cyclic_subscription_cyc"></a>TODO: Cyclic subscription (CYC).</h4>
+<div class="sect2">
+<h3 id="_todo_cyclic_subscription_cyc"><a class="anchor" href="#_todo_cyclic_subscription_cyc"></a>TODO: Cyclic subscription (CYC).</h3>
 <div class="paragraph">
 <p>The cyclical subscription allows the acquisition of data in passive mode, that is, the data is sent from the PLC in a cyclical and synchronous way.</p>
 </div>
@@ -2202,8 +2281,8 @@ To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable am
 </ol>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_szl_system_status_list"><a class="anchor" href="#_szl_system_status_list"></a>SZL System Status List</h4>
+<div class="sect2">
+<h3 id="_szl_system_status_list"><a class="anchor" href="#_szl_system_status_list"></a>SZL System Status List</h3>
 <div class="paragraph">
 <p>The system status list gives access to the operating data of the PLC, such as memory space, operating status, status of the control switches, as well as diagnostic data of expansion cards or decentralized peripherals, PROFIBUS or PROFINET .</p>
 </div>
@@ -2217,7 +2296,7 @@ To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable am
 <table>
 <tr>
 <td class="icon">
-<img src="../../images/users/protocols/s7_note.png" alt="Note">
+<img src="../../images/users/protocols/users/protocols/s7_note.png" alt="Note">
 </td>
 <td class="content">
 Why SZL and not SSL? Well, creative freedom. The translation of the manuals from German to Spanish use SZL and German to English use SSL. Both the source code and the documentation use this reduction to keep the text uniform.
@@ -2235,7 +2314,7 @@ Why SZL and not SSL? Well, creative freedom. The translation of the manuals from
 <table>
 <tr>
 <td class="icon">
-<img src="../../images/users/protocols/s7_tip.png" alt="Note">
+<img src="../../images/users/protocols/users/protocols/s7_tip.png" alt="Note">
 </td>
 <td class="content">
 Make use of the XXX document for a detailed explanation of each SZL, since as indicated, everything will depend on the hardware you have installed.
@@ -2244,8 +2323,8 @@ Make use of the XXX document for a detailed explanation of each SZL, since as in
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_notation_for_szl_request"><a class="anchor" href="#_notation_for_szl_request"></a>Notation for SZL request</h4>
+<div class="sect2">
+<h3 id="_notation_for_szl_request"><a class="anchor" href="#_notation_for_szl_request"></a>Notation for SZL request</h3>
 <div class="paragraph">
 <p>The access to the SZL of the PLC is done as a read request, where the PLCTag is formed by two fields "SZL_ID" and "INDEX".</p>
 </div>
@@ -2322,26 +2401,26 @@ Make use of the XXX document for a detailed explanation of each SZL, since as in
     System.out.println("URL: https://cache.industry.siemens.com/dl/files/604/44240604/att_67003/v1/s7sfc_en-EN.pdf");
     System.out.println("******************************************************************************************");
 
-    try (PlcConnection connection = new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) { //(01)
+    try (PlcConnection connection  new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) { //(01)
 
-        final PlcReadRequest.Builder readrequest = connection.readRequestBuilder(); //(02)
+        final PlcReadRequest.Builder readrequest  connection.readRequestBuilder(); //(02)
 
         readrequest.addTagAddress("MySZL", "SZL_ID=16#0012;INDEX=16#0000"); //(03)
 
-        final PlcReadRequest rr = readrequest.build(); //(04)
-        final PlcReadResponse szlresponse = rr.execute().get(); //(05)
+        final PlcReadRequest rr  readrequest.build(); //(04)
+        final PlcReadResponse szlresponse  rr.execute().get(); //(05)
 
-        if (szlresponse.getResponseCode("MySZL") == PlcResponseCode.OK){ //(06)
+        if (szlresponse.getResponseCode("MySZL") = PlcResponseCode.OK){ //(06)
 
-            Collection&lt;Byte&gt;  data = szlresponse.getAllBytes("MySZL"); //(07)
-            byte[] dbytes = ArrayUtils.toPrimitive(data.toArray(new Byte[data.size()])); //(08)
+            Collection&lt;Byte&gt;  data  szlresponse.getAllBytes("MySZL"); //(07)
+            byte[] dbytes  ArrayUtils.toPrimitive(data.toArray(new Byte[data.size()])); //(08)
 
-            SZL szl = SZL.valueOf(0x0012); //(09)
-            ByteBuf wb = wrappedBuffer(dbytes); //(10)
+            SZL szl  SZL.valueOf(0x0012); //(09)
+            ByteBuf wb  wrappedBuffer(dbytes); //(10)
             StringBuilder sb =  szl.execute(wb); //(11)
             System.out.println(sb.toString());  //(12)
 
-        } else if (szlresponse.getResponseCode("MySZL") == PlcResponseCode.NOT_FOUND){ //(13)
+        } else if (szlresponse.getResponseCode("MySZL") = PlcResponseCode.NOT_FOUND){ //(13)
                 System.out.println("SZL is not supported.");
         }
 
@@ -2519,8 +2598,8 @@ Make use of the XXX document for a detailed explanation of each SZL, since as in
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_some_useful_tips"><a class="anchor" href="#_some_useful_tips"></a>Some useful tips</h4>
+<div class="sect2">
+<h3 id="_some_useful_tips"><a class="anchor" href="#_some_useful_tips"></a>Some useful tips</h3>
 <div class="paragraph">
 <p>Especially when it comes to the input- and output addresses for analog channels, the start addresses are configurable and hereby don&#8217;t always start at the same address.
 In order to find out what addresses these ports have, please go to the <code>device setting</code> of your PLC in <code>TIA Portal</code></p>
@@ -2551,8 +2630,8 @@ In order to find out what addresses these ports have, please go to the <code>dev
 <p>Each digital input and output can be addresses by a single bit-address (start-address and offset) or can be read in a block by reading a full byte starting at the given start address without providing a bit offset.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h4>
+<div class="sect2">
+<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2589,6 +2668,7 @@ In order to find out what addresses these ports have, please go to the <code>dev
 <p><a href="https://support.industry.siemens.com/cs/document/24037531/%C2%BFqu%C3%A9-pasos-de-configuraci%C3%B3n-hay-que-realizar-en-el-simotion-scout-y-el-wincc-flexible-para-que-se-muestren-los-avisos-alarm_s-y-las-alarmas-tecnol%C3%B3gicas-dentro-del-wincc-flexible-runtime-?dti=0&amp;lc=es-ES" class="bare">https://support.industry.siemens.com/cs/document/24037531/%C2%BFqu%C3%A9-pasos-de-configuraci%C3%B3n-hay-que-realizar-en-el-simotion-scout-y-el-wincc-flexible-para-que-se-muestren-los-avisos-alarm_s-y-las-alarmas-tecnol%C3%B3gicas-dentro-del-wincc-flexible-runtime-?dti=0&amp;lc=es-ES</a></p>
 </li>
 </ol>
+</div>
 </div>
 </div>
 </div>

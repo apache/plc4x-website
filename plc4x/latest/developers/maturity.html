@@ -97,6 +97,9 @@
     <a class="nav-link" href="../users/adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../users/commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -126,6 +129,9 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -197,7 +203,13 @@
     <a class="nav-link" href="../users/protocols/s7.html">S7 (Step7)</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/s7-light.html">S7-Light (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
   </li>
 </ul>
   </li>
@@ -239,7 +251,7 @@
     <a class="nav-link" href="../users/integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
+    <a class="nav-link" href="../users/integrations/apache-kafka.html">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/integrations/apache-nifi.html">Apache NiFi</a>
@@ -251,7 +263,7 @@
     <a class="nav-link" href="../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Introduction</a>
+    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
   </li>
 </ul>
   </li>
@@ -318,7 +330,7 @@
     <a class="nav-link" href="tutorials/index.html">Tutorials</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="tutorials/writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+    <a class="nav-link" href="tutorials/writing-driver.html">Strategy for creating a new Driver</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
@@ -369,7 +381,7 @@
     <a class="nav-link" href="infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="infrastructure/vm.html">infrastructure/vm.adoc</a>
+    <a class="nav-link" href="infrastructure/vm.html">The PLC4X Project VM</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="infrastructure/website.html">Generating the Website</a>
@@ -417,16 +429,16 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../0.13.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../users/index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../users/index.html">latest</a>
-        </li>
         <li class="version">
           <a href="../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../0.13.0/users/index.html">0.13.0</a>
+        <li class="version is-current is-latest">
+          <a href="../users/index.html">latest</a>
+        </li>
+        <li class="version">
+          <a href="../../0.12.0/users/index.html">0.12.0</a>
         </li>
       </ul>
     </li>
@@ -448,12 +460,12 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
-    <a class="version is-current" href="maturity.html">latest</a>
     <a class="version" href="../../pre-release/developers/maturity.html">pre-release</a>
-    <a class="version" href="../../0.13.0/developers/maturity.html">0.13.0</a>
+    <a class="version is-current" href="maturity.html">latest</a>
+    <a class="version" href="../../0.12.0/developers/maturity.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/maturity.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.13/website/asciidoc/modules/developers/pages/maturity.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -461,19 +473,22 @@
 </aside>
 <article class="doc">
 <h1 class="page">Apache Maturity Model Assessment for PLC4X</h1>
-<div class="sect2">
-<h3 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h3>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>This is an assessment of the PLC4X podling’s maturity, meant to help inform the decision (of the mentors, community, Incubator PMC and ASF Board of Directors) to graduate it as a top-level Apache project.</p>
+<p>This is an assessment of the PLC4X project&#8217;s maturity, meant to help inform the decision (of the mentors, community, Incubator PMC and ASF Board of Directors) to graduate it as a top-level Apache project.</p>
 </div>
 <div class="paragraph">
 <p>It is based on the ASF project maturity model at <a href="https://community.apache.org/apache-way/apache-project-maturity-model.html" class="bare">https://community.apache.org/apache-way/apache-project-maturity-model.html</a></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_maturity_model_assessment"><a class="anchor" href="#_maturity_model_assessment"></a>Maturity model assessment</h3>
+</div>
+<div class="sect1">
+<h2 id="_maturity_model_assessment"><a class="anchor" href="#_maturity_model_assessment"></a>Maturity model assessment</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Mentors and community members are encouraged to contribute to this page and comment on it, the following table summarizes project’s self-assessment against the Apache Maturity Model.</p>
+<p>Community members are encouraged to contribute to this page and comment on it, the following table summarizes project’s self-assessment against the Apache Maturity Model.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -506,7 +521,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CD30</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The code can be built in a reproducible way using widely available standard tools.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> our <a href="https://maven.apache.org">Maven</a> build has been tested on Linux, MacOS and Windows and build description is available on our <a href="https://plc4x.apache.org/developers/building.html">website</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> our <a href="https://maven.apache.org">Maven</a> build has been tested on Linux, Mac-OS and Windows and build description is available on our <a href="https://plc4x.apache.org/developers/building.html">website</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CD40</p></td>
@@ -583,12 +598,12 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">QU10</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The project is open and honest about the quality of its code. Various levels of quality and maturity for various modules are natural and acceptable as long as they are clearly communicated.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> All issues are documented in our <a href="https://issues.apache.org/jira/projects/PLC4X">JIRA</a> instance, which is our primary bug and issue tracker.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> All issues are documented in our <a href="https://github.com/apache/plc4x/issues">GitHub Issues</a> instance, which is our primary bug and issue tracker.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">QU20</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The project puts a very high priority on producing secure software.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> even if we haven&#8217;t received any security issues targeted at PLC4X yet, we pro-actively monitor our dependencies and if reported would treat them with the highest priority, according to the <a href="https://www.apache.org/security/committers.html">CVE/Security Advisory procedure</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> even if we haven&#8217;t received any security issues targeted at PLC4X yet, we proactively monitor our dependencies and if reported would treat them with the highest priority, according to the <a href="https://www.apache.org/security/committers.html">CVE/Security Advisory procedure</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">QU30</p></td>
@@ -651,7 +666,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CS10</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The project maintains a public list of its contributors who have decision power&#8201;&#8212;&#8201;the project&#8217;s PMC (Project Management Committee) consists of those contributors.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-wrench"></i></span> We&#8217;re currently working on filling the <a href="http://plc4x.apache.org/developers/team.html">team page</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> All members of the team have been added on <a href="http://plc4x.apache.org/developers/team.html">team page</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CS20</p></td>
@@ -661,7 +676,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CS30</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Documented voting rules are used to build consensus when discussion is not sufficient.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> We have documented our decision making rule on our <a href="http://plc4x.apache.org/developers/decisions.html">website</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> We have documented our decision-making rule on our <a href="http://plc4x.apache.org/developers/decisions.html">website</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CS40</p></td>
@@ -679,7 +694,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IN10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The project is independent from any corporate or organizational influence.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project is independent of any corporate or organizational influence.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span> The group of active committers and PPMCs consists of members of more than independent 4 companies.</p></td>
 </tr>
 <tr>
@@ -689,6 +704,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </article>
   </div>

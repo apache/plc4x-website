@@ -97,6 +97,9 @@
     <a class="nav-link" href="../users/adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../users/commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -126,6 +129,9 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -197,7 +203,13 @@
     <a class="nav-link" href="../users/protocols/s7.html">S7 (Step7)</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/s7-light.html">S7-Light (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
   </li>
 </ul>
   </li>
@@ -239,7 +251,7 @@
     <a class="nav-link" href="../users/integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
+    <a class="nav-link" href="../users/integrations/apache-kafka.html">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/integrations/apache-nifi.html">Apache NiFi</a>
@@ -251,7 +263,7 @@
     <a class="nav-link" href="../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Introduction</a>
+    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
   </li>
 </ul>
   </li>
@@ -318,7 +330,7 @@
     <a class="nav-link" href="tutorials/index.html">Tutorials</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="tutorials/writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+    <a class="nav-link" href="tutorials/writing-driver.html">Strategy for creating a new Driver</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
@@ -369,7 +381,7 @@
     <a class="nav-link" href="infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="infrastructure/vm.html">infrastructure/vm.adoc</a>
+    <a class="nav-link" href="infrastructure/vm.html">The PLC4X Project VM</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="infrastructure/website.html">Generating the Website</a>
@@ -417,16 +429,16 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../0.13.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../users/index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../users/index.html">latest</a>
-        </li>
         <li class="version">
           <a href="../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../0.13.0/users/index.html">0.13.0</a>
+        <li class="version is-current is-latest">
+          <a href="../users/index.html">latest</a>
+        </li>
+        <li class="version">
+          <a href="../../0.12.0/users/index.html">0.12.0</a>
         </li>
       </ul>
     </li>
@@ -448,12 +460,12 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
-    <a class="version is-current" href="decisions.html">latest</a>
     <a class="version" href="../../pre-release/developers/decisions.html">pre-release</a>
-    <a class="version" href="../../0.13.0/developers/decisions.html">0.13.0</a>
+    <a class="version is-current" href="decisions.html">latest</a>
+    <a class="version" href="../../0.12.0/developers/decisions.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/decisions.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.13/website/asciidoc/modules/developers/pages/decisions.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -461,8 +473,9 @@
 </aside>
 <article class="doc">
 <h1 class="page">Decision Making</h1>
-<div class="sect2">
-<h3 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h3>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>This document describes the roles and responsibilities of the project, who may vote, how voting works, how conflicts are resolved, etc.</p>
 </div>
@@ -473,26 +486,30 @@
 <p>Apache has a <a href="http://www.apache.org/foundation/policies/conduct.html">code of conduct</a> that it expects its members to follow.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_roles_and_responsibilities"><a class="anchor" href="#_roles_and_responsibilities"></a>Roles and Responsibilities</h3>
+</div>
+<div class="sect1">
+<h2 id="_roles_and_responsibilities"><a class="anchor" href="#_roles_and_responsibilities"></a>Roles and Responsibilities</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Apache projects define a set of <a href="https://www.apache.org/foundation/how-it-works.html#roles">roles</a> with associated rights and responsibilities.</p>
 </div>
-<div class="sect3">
-<h4 id="_project_management_committee"><a class="anchor" href="#_project_management_committee"></a>Project Management Committee</h4>
+<div class="sect2">
+<h3 id="_project_management_committee"><a class="anchor" href="#_project_management_committee"></a>Project Management Committee</h3>
 <div class="paragraph">
 <p>The <a href="http://www.apache.org/dev/pmc.html#what-is-a-pmc">PMC</a> has many <a href="https://www.apache.org/foundation/how-it-works.html#pmc">responsibilities</a> including complying with <a href="http://www.apache.org/dev/pmc.html#policy">ASF policies</a>, <a href="https://www.apache.org/foundation/board/reporting">reporting to the board</a>, <a href="https://www.apache.org/foundation/voting.html">approving releases</a> and adding new <a href="http://www.apache.org/dev/pmc.html#newcommitter">committers</a> and <a href="http://www.apache.org/dev/pmc.html#newpmc">PMC members</a>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_the_chair"><a class="anchor" href="#_the_chair"></a>The Chair</h4>
+<div class="sect2">
+<h3 id="_the_chair"><a class="anchor" href="#_the_chair"></a>The Chair</h3>
 <div class="paragraph">
 <p>The <a href="http://www.apache.org/dev/pmc.html#chair">chair</a> ensures board reports are submitted and that the project&#8217;s roster is up to date.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_decision_making"><a class="anchor" href="#_decision_making"></a>Decision Making</h3>
+</div>
+<div class="sect1">
+<h2 id="_decision_making"><a class="anchor" href="#_decision_making"></a>Decision Making</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Different decisions require different forms of approval but community consensus is always the goal. Voting when needed should be open for <a href="http://www.apache.org/legal/release-policy.html#release-approval">at least 72 hours</a>.</p>
 </div>
@@ -588,6 +605,7 @@
 <p>Need to be <a href="http://www.apache.org/dev/pmc.html#newchair">approved by the board</a> at the next board meeting.</p>
 </li>
 </ol>
+</div>
 </div>
 </div>
 </article>

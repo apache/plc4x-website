@@ -97,6 +97,9 @@
     <a class="nav-link" href="../users/adopters.html">Adopters</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../users/commercial-support.html">Commercial Support</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -126,6 +129,9 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
   </li>
 </ul>
   </li>
@@ -197,7 +203,13 @@
     <a class="nav-link" href="../users/protocols/s7.html">S7 (Step7)</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/s7-light.html">S7-Light (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
   </li>
 </ul>
   </li>
@@ -239,7 +251,7 @@
     <a class="nav-link" href="../users/integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/apache-kafka.html"><a href="https://kafka.apache.org/">Apache Kafka</a>
+    <a class="nav-link" href="../users/integrations/apache-kafka.html">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../users/integrations/apache-nifi.html">Apache NiFi</a>
@@ -251,7 +263,7 @@
     <a class="nav-link" href="../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Introduction</a>
+    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
   </li>
 </ul>
   </li>
@@ -318,7 +330,7 @@
     <a class="nav-link" href="tutorials/index.html">Tutorials</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="tutorials/writing-driver.html">Basic Building Blocs of a Driver / Protocol</a>
+    <a class="nav-link" href="tutorials/writing-driver.html">Strategy for creating a new Driver</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
@@ -369,7 +381,7 @@
     <a class="nav-link" href="infrastructure/wiki.html">WIKI</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="infrastructure/vm.html">infrastructure/vm.adoc</a>
+    <a class="nav-link" href="infrastructure/vm.html">The PLC4X Project VM</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="infrastructure/website.html">Generating the Website</a>
@@ -417,16 +429,16 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../0.13.0/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../users/index.html">PLC4X</a></div>
       <ul class="versions">
-        <li class="version is-current">
-          <a href="../users/index.html">latest</a>
-        </li>
         <li class="version">
           <a href="../../pre-release/users/index.html">pre-release</a>
         </li>
-        <li class="version is-latest">
-          <a href="../../0.13.0/users/index.html">0.13.0</a>
+        <li class="version is-current is-latest">
+          <a href="../users/index.html">latest</a>
+        </li>
+        <li class="version">
+          <a href="../../0.12.0/users/index.html">0.12.0</a>
         </li>
       </ul>
     </li>
@@ -447,12 +459,12 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">latest</button>
   <div class="version-menu">
-    <a class="version is-current" href="index.html">latest</a>
     <a class="version" href="../../pre-release/developers/index.html">pre-release</a>
-    <a class="version" href="../../0.13.0/developers/index.html">0.13.0</a>
+    <a class="version is-current" href="index.html">latest</a>
+    <a class="version" href="../../0.12.0/developers/index.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.12/website/asciidoc/modules/developers/pages/index.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.13/website/asciidoc/modules/developers/pages/index.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -467,8 +479,9 @@
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h3>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting Started</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We have tried to make the PLC4X build experience as smooth as possible and have tried to reduce the number of required third party tools to an absolute minimum.</p>
 </div>
@@ -488,8 +501,10 @@
 <p>For details please have a look at the <a href="preparing/index.html">Preparing your Computer</a> page.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_building_plc4x"><a class="anchor" href="#_building_plc4x"></a>Building PLC4X</h3>
+</div>
+<div class="sect1">
+<h2 id="_building_plc4x"><a class="anchor" href="#_building_plc4x"></a>Building PLC4X</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We have a dedicated page on <a href="building.html">Building PLC4X</a>.</p>
 </div>
@@ -497,14 +512,18 @@
 <p>Please read this page on information about how to build Apache PLC4X.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_contributing"><a class="anchor" href="#_contributing"></a>Contributing</h3>
+</div>
+<div class="sect1">
+<h2 id="_contributing"><a class="anchor" href="#_contributing"></a>Contributing</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>If you want to work on Apache PLC4X in order to <code>fix things</code>, <code>add things</code> and start <code>contributing</code> in general, please have a look at our <a href="contributing.html">Contributing</a> page. It should contain all the information you need.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_getting_help"><a class="anchor" href="#_getting_help"></a>Getting Help</h3>
+</div>
+<div class="sect1">
+<h2 id="_getting_help"><a class="anchor" href="#_getting_help"></a>Getting Help</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The primary source for getting help definitely is our project mailing list <a href="mailto:dev@plc4x.apache.org">dev@plc4x.apache.org</a>.</p>
 </div>
@@ -513,6 +532,7 @@
 </div>
 <div class="paragraph">
 <p>In order to post to the list you first need to subscribe. This can be done by sending an empty Email to <a href="mailto:dev-subscribe@plc4x.apache.org">dev-subscribe@plc4x.apache.org</a>.</p>
+</div>
 </div>
 </div>
 </article>
