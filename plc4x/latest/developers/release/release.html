@@ -1294,7 +1294,7 @@ This is done by moving them inside the Apache SVN.</p>
 <p>Probably the simplest part is releasing the Maven artifacts.</p>
 </div>
 <div class="paragraph">
-<p>In order to do this, the release manager logs into Nexus at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a>, selects the staging repository and clicks on the <code>Release</code> button.</p>
+<p>To do this, the release manager logs into Nexus at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a>, selects the staging repository and clicks on the <code>Release</code> button.</p>
 </div>
 <div class="paragraph">
 <p>This will move all artifacts into the Apache release repository and delete the staging repository after that.</p>
@@ -1336,20 +1336,15 @@ This has to be done with git</p>
 <div class="listingblock">
 <div class="content">
 <pre>git checkout release
-git merge v0.13.0</pre>
+git merge -X theirs v0.13.0</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When there are conflicts it could help to use the <code>theirs</code> merge strategy, i.e.,</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>git merge -X theirs v0.13.0</pre>
-</div>
+<p>When there are conflicts the <code>theirs</code> merge strategy will most probably help resolve them,</p>
 </div>
 <div class="paragraph">
-<p>Possibly a manual conflict resolution has to be done afterwards. After that, changes need to
-be pushed.</p>
+<p>Possibly a manual conflict resolution has to be done afterward.
+After that, changes need to be pushed.</p>
 </div>
 </div>
 </div>
