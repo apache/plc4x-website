@@ -490,7 +490,7 @@ After we had an initial format that seemed to do the trick, we then stated creat
 <p>It&#8217;s a text-based format.</p>
 </div>
 <div class="paragraph">
-<p>At the root level of these specs are a set of <code>type</code>, <code>discriminatedType</code>, <code>dataIo</code> and <code>enum</code> blocks.</p>
+<p>At the root level of these specs are a set of <code>type</code>, <code>discriminatedType</code>, <code>dataIo</code>, <code>enum</code> and 'constants' blocks.</p>
 </div>
 <div class="paragraph">
 <p><code>type</code> elements are objects who`s content and structure is independent of the input.</p>
@@ -546,6 +546,16 @@ After we had an initial format that seemed to do the trick, we then stated creat
 </div>
 </div>
 <div class="paragraph">
+<p>A constants type allows you to define constants for the protocol.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[constants
+    [const          uint 16     adsDiscoveryUdpDefaultPort 48899]
+]</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>A type`s start is declared by an opening square bracket <code>[</code> followed by the <code>type</code> or <code>discriminatedType</code> keyword, which is directly followed by a name.
 A Type definition is ended with a closing square bracket <code>]</code>.</p>
 </div>
@@ -565,6 +575,9 @@ A Type definition is ended with a closing square bracket <code>]</code>.</p>
 </li>
 <li>
 <p>assert: generally similar to <code>constant</code> fields, however do they throw <code>AssertionExceptions</code> instead of hard <code>ParseExceptions</code>. They are used in combination with optional fields.</p>
+</li>
+<li>
+<p>batchSet: this is a psuedo field that allows you to apply additional attributes for a group of fields</p>
 </li>
 <li>
 <p>checksum: used for calculating and verifying checksum values.</p>
@@ -601,6 +614,9 @@ A Type definition is ended with a closing square bracket <code>]</code>.</p>
 </li>
 <li>
 <p>simple: simple or complex typed object.</p>
+</li>
+<li>
+<p>state: Allows you to assign a parameter as a stateful variable in a class.</p>
 </li>
 <li>
 <p>typeSwitch: not a real field, but indicates the existence of subtypes, which are declared inline (reserved for <code>discriminatedType</code>).</p>
@@ -774,6 +790,35 @@ The main difference however it how the case is handled, if the parsed value does
 <p>See also:
 - validation field: Similar to an <code>assert</code> field, however no parsing is done, and instead simply a condition is checked.
 - optional field: <code>optional</code> fields are aware of the types of parser errors produced by <code>assert</code> and <code>validation</code> fields</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_batchset_field"><a class="anchor" href="#_batchset_field"></a>batchSet Field</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A batch set field allows you to define or modify attributes for a group of fields.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[batchSet byteOrder='integerEncoding == IntegerEncoding.BIG_ENDIAN ? BIG_ENDIAN : LITTLE_ENDIAN'</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[simple DceRpc_ObjectUuid        objectUuid                                            ]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[simple DceRpc_InterfaceUuid     interfaceUuid                                         ]</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>        [simple DceRpc_ActivityUuid      activityUuid                                          ]
+]</pre>
 </div>
 </div>
 <div class="sect2">
@@ -1246,6 +1291,30 @@ They simply result in creating artificial get-methods in the generated model cla
 <p>An <code>encoding</code> attribute can be used to select a non-default encoding.</p>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referencing_parent_class_name_of_discriminated_types"><a class="anchor" href="#_referencing_parent_class_name_of_discriminated_types"></a>Referencing parent class name of discriminated types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For discriminated type it is convient sometimes to not have to repeat the parent class name for each case.
+Here you can use the * reference at the start of each case name</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[discriminatedType SuperImportantClass
+    [simple uint 8 testNumber]
+    [typeSwitch testNumber
+        ['0x08' *Status
+            [simple uint 8 testNewNumber]
+        ]
+    ]
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here the child class will inherit the class name SuperImportantClassStatus</p>
 </div>
 </div>
 </div>
