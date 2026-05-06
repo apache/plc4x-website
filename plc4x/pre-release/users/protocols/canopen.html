@@ -837,16 +837,43 @@ Subscriber will be notified with value mapped to type defined in field syntax.</
 <li>
 <p><code>subscribe</code></p>
 </li>
+<li>
+<p><code>write</code></p>
+</li>
 </ul>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>NMT messages are sent using CAN node ID <code>0</code>.
 They have the highest priority on the bus.
-Messages of this kind indicate operating state of an node (booted, operational).</p>
+Messages of this kind indicate operating state of a node (booted, operational).</p>
 </div>
 <div class="paragraph">
 <p>Subscriptions to this service receive structure with two fields: <code>node</code> (USINT) and <code>state</code> (USINT).
-If subscription sets <code>nodeId</code> to 0 it will receive state updates for all bus participants.</p>
+If subscription sets <code>nodeId</code> to 0 it will receive state updates for all bus participants.
+Supported write values (USINT):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>0x01</code> &#8594; START</p>
+</li>
+<li>
+<p><code>0x02</code> &#8594; STOP</p>
+</li>
+<li>
+<p><code>0x80</code> &#8594; PRE_OPERATIONAL</p>
+</li>
+<li>
+<p><code>0x81</code> &#8594; RESET_NODE</p>
+</li>
+<li>
+<p><code>0x82</code> &#8594; RESET_COMMUNICATION</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>On application side, for convenience, you can use <code>NMTStateRequest</code> enumeration instead of plain numbers.
+Be aware that passed number is parsed as an enum, so vendor customization on unused bits are not supported.</p>
 </div></div></td>
 </tr>
 <tr>
