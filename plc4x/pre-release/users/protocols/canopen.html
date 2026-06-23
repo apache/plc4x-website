@@ -529,7 +529,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
 <td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
-<p>CAN open</p>
+<p>CANopen</p>
 </div></div></td>
 </tr>
 <tr>
@@ -553,7 +553,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Default Transport</p></td>
 <td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
-<p><code>socketcan</code></p>
+<p><code>can-socketcan</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -561,7 +561,10 @@
 <td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p><code>socketcan</code></p>
+<p><code>can-socketcan</code></p>
+</li>
+<li>
+<p><code>can-virtualcan</code></p>
 </li>
 </ul>
 </div></div></td>
@@ -578,17 +581,6 @@
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>CAN node identifier. Depending on used CAN version it might be 11 or 29 bit unsigned int.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>heartbeat</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>BOOLEAN</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Forces PLC4X to send CANopen heartbeat (NMT) messages to the bus.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -609,7 +601,12 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
-<h4>socketcan</h4>
+<h4>can-socketcan</h4>
+</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
+<h4>can-virtualcan</h4>
 </p></td>
 </tr>
 </tbody>
