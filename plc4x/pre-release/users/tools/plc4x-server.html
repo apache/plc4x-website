@@ -496,12 +496,9 @@
 <div class="paragraph">
 <p>This is useful when the PLCs are only reachable from the machine running the server (e.g. behind a firewall or on an isolated OT network), while the clients live elsewhere.</p>
 </div>
-<div class="listingblock">
+<div class="imageblock kroki">
 <div class="content">
-<pre> +------------+   plc4x proxy protocol    +--------------+   native protocol   +-------+
- |  client    | ------------------------&gt; | PLC4X Server | ------------------&gt; |  PLC  |
- | (plc4x drv)|        TLS + auth         |              |   (s7, modbus, …)   |       |
- +------------+                           +--------------+                     +-------+</pre>
+<img src="https://kroki.io/graphviz/svg/eNqFUMFOwzAMvfMVVk5DlGodkxBC4bILhx4Q44C0IZQ2po3IkspJpw7Ev-OlTJp6IQdHtp_f87M2Damuhc7Wy-E9IO2R4PsC-JFyn9qQLJ_vU141tbeepIjcCZ0idFGMLec1wia0qkNZ-SGDEA8WJfneadQZfHgXndqhFI9o9xhNrcRYDeYLZVFksFPUGCfFPF8ssnle3Ii3kRt1w9z_MNwxOKFra3gt2FhVoZVildKtmyV_oMmwv8sT9Z_dE_ipXC1fYZ2KJwjPHb8ziJhIXT9MeUatjvxwOMbo-W5b91Ku4QpUH9uJPBNMVJyKvOfZ7Czc8oW8rvqQQZ7nycHPL3k0jQ8=" alt="plc4x-server-architecture">
 </div>
 </div>
 <div class="paragraph">
