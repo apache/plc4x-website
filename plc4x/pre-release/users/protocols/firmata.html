@@ -637,11 +637,11 @@
 <p>STRING</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>NONE</p>
+<p>none</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Parity: NONE, ODD, EVEN, MARK, SPACE</p>
+<p>Parity: none, odd, even, mark, space (case-insensitive)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -650,11 +650,11 @@
 <p>STRING</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>NONE</p>
+<p>none</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Flow control: NONE, RTS_CTS, XON_XOFF, RTS_CTS_XON_XOFF</p>
+<p>Flow control: none, rts-cts, xon-xoff (case-insensitive)</p>
 </div></div></td>
 </tr>
 <tr>
@@ -723,45 +723,6 @@
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.receive-buffer-size</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>INT</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>4096</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Receive buffer size in bytes. 0 uses system default.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.send-buffer-size</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>INT</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>4096</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Send buffer size in bytes. 0 uses system default.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.break-enabled</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>BOOLEAN</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>false</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Enable break signal</p>
-</div></div></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.interframe-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
@@ -771,7 +732,7 @@
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Interframe delay in milliseconds for protocols that need spacing between messages. Only applies when reusePort is true.</p>
+<p>Interframe delay in milliseconds for protocols that need spacing between messages. Applies to shared and dedicated ports; the gap is measured from the last write or received data.</p>
 </div></div></td>
 </tr>
 <tr>
