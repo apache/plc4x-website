@@ -1305,7 +1305,7 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default timeout for all types of requests.</p>
+<p>Default timeout for all types of requests. The timeout covers the full time from submission including queueing; queued requests whose remaining budget falls below a small dispatch margin (at most a quarter of the timeout, capped at 50 ms) fail fast instead of being sent.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1517,7 +1517,7 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Reuse the underlying serial port across multiple transport instances. When true, instances with the same port will share a connection. This is useful for protocols where multiple logical connections share one serial port.</p>
+<p>Reuse the underlying serial port across multiple transport instances. When true, instances with the same port will share a connection. This is useful for protocols where multiple logical connections share one serial port. Connections sharing a port must target distinct unit ids; Modbus RTU responses carry no transaction ids, so same-unit traffic from multiple connections cannot be told apart.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2182,7 +2182,7 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Default timeout for all types of requests.</p>
+<p>Default timeout for all types of requests. The timeout covers the full time from submission including queueing; queued requests whose remaining budget falls below a small dispatch margin (at most a quarter of the timeout, capped at 50 ms) fail fast instead of being sent.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2394,7 +2394,7 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Reuse the underlying serial port across multiple transport instances. When true, instances with the same port will share a connection. This is useful for protocols where multiple logical connections share one serial port.</p>
+<p>Reuse the underlying serial port across multiple transport instances. When true, instances with the same port will share a connection. This is useful for protocols where multiple logical connections share one serial port. Connections sharing a port must target distinct unit ids; Modbus RTU responses carry no transaction ids, so same-unit traffic from multiple connections cannot be told apart.</p>
 </div></div></td>
 </tr>
 <tr>
