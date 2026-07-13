@@ -1581,6 +1581,115 @@ However we also implemented a shorter version, as above version does have some u
 </div>
 </div>
 <div class="sect1">
+<h2 id="_siemens_s7_200_s7_200_smart"><a class="anchor" href="#_siemens_s7_200_s7_200_smart"></a>Siemens S7-200 / S7-200 Smart</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The S7-200 and the newer S7-200 Smart are lower-end controllers that behave a little differently from the S7-300/400/1200/1500 family. They can still be reached with the S7 driver over Ethernet (ISO-on-TCP), but they need a couple of specific connection settings and use a different convention for addressing their variable memory.</p>
+</div>
+<div class="paragraph">
+<p>This section collects what the community has found to work (see PLC4X issues #1925 and #2641).</p>
+</div>
+<div class="sect2">
+<h3 id="_connecting"><a class="anchor" href="#_connecting"></a>Connecting</h3>
+<div class="paragraph">
+<p>Two things are important when connecting to an S7-200 (Smart):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Disable the automatic controller-type detection by passing <code>controller-type=S7_200</code>. The S7-200 does not answer the SZL/SSL identification request the driver normally uses to auto-detect the CPU family, so — as with the <code>LOGO</code> device mentioned above — the type has to be provided explicitly.</p>
+</li>
+<li>
+<p>Provide the TSAP (Transport Service Access Point) values explicitly. The S7-200 (Smart) expects both the local and the remote TSAP to be <code>0x0200</code>, which is <code>512</code> in decimal. Set them with <code>local-tsap=512</code> and <code>remote-tsap=512</code>; a non-zero TSAP overrides the rack/slot based addressing.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>A minimal, working connection string therefore looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>s7://192.168.12.100?local-tsap=512&amp;remote-tsap=512&amp;controller-type=S7_200</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>remote-rack=0</code> and <code>remote-slot=0</code> are the defaults, so they are optional, but may be added for clarity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>s7://192.168.12.100?remote-rack=0&amp;remote-slot=0&amp;local-tsap=512&amp;remote-tsap=512&amp;controller-type=S7_200</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both reading and writing have been confirmed to work against an S7-200 Smart with this configuration.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_addressing_the_v_variable_memory_area"><a class="anchor" href="#_addressing_the_v_variable_memory_area"></a>Addressing the V (variable) memory area</h3>
+<div class="paragraph">
+<p>The S7-200 keeps its user variables in a <code>V</code> (variable) memory area, addressed in the Siemens tooling (STEP 7-Micro/WIN) as, for example, <code>VW310</code>, <code>VD732</code> or <code>V350.0</code>. The S7 driver does not have a dedicated <code>V</code> memory-area code.</p>
+</div>
+<div class="paragraph">
+<p>On the S7-200, however, the <code>V</code> area is simply an alias for <code>Data Block 1</code> (<code>DB1</code>). Any <code>V</code> address can therefore be read and written by addressing <code>DB1</code> instead, using the normal data-block syntax described above:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 37.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">S7-200 notation</th>
+<th class="tableblock halign-left valign-top">PLC4X address</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VB100</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DBB100:BYTE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">single byte at V100</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VW310</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DBW310:INT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-bit word at V310</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VD732</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DBD732:UDINT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit double word at V732</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>V350.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DBX350.0:BOOL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">single bit V350.0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The shorter data-block notation works as well, for example <code>%DB1:732:UDINT</code> for <code>VD732</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>M</code> (flags/markers) memory area is addressed as usual, for example <code>%M10.0:BOOL</code> or <code>%MW20:INT</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_note.png" alt="Note">
+</td>
+<td class="content">
+Native support for a dedicated <code>V</code> memory-area code may be added in a future release. Until then, please use the <code>DB1</code> alias shown above.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_actors_participating_in_the_communication_process"><a class="anchor" href="#_actors_participating_in_the_communication_process"></a>Actors participating in the communication process</h2>
 <div class="sectionbody">
 <div class="paragraph">
