@@ -735,6 +735,22 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>insecure-certificate-verification</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Disables verification of the OPC UA server certificate, trusting any certificate the server presents.<br>
+This is UNSAFE: it leaves the connection open to man-in-the-middle attacks and defeats the integrity/authenticity<br>
+guarantees of a signed secure channel. Only enable it for local testing. In production, establish trust with<br>
+<code>trust-store-file</code> (chain validation) or <code>server-certificate-file</code> (certificate pinning) instead.</p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>channel-lifetime</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>LONG</p>
