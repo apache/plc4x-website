@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Scraper :: PLC4X</title>
+    <title>Event-Pump :: PLC4X</title>
     <meta name="generator" content="Antora 3.1.14">
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
@@ -282,14 +282,14 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="connection-cache.html">The Connection Cache concept</a>
   </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="event-pump.html">Event-Pump</a>
+  </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="opm.html">Object PLC Mapping</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x-server.html">PLC4X Server</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="scraper.html">Scraper</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="testing.html">Testing (or using PLC4X without a PLC)</a>
@@ -469,312 +469,391 @@
     <li><a href="../index.html">PLC4X</a></li>
     <li><a href="../index.html">Users</a></li>
     <li><a href="index.html">Tools</a></li>
-    <li><a href="scraper.html">Scraper</a></li>
+    <li><a href="event-pump.html">Event-Pump</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
-    <a class="version is-current" href="scraper.html">pre-release</a>
-    <a class="version" href="../../../latest/users/tools/scraper.html">latest</a>
-    <a class="version" href="../../../0.12.0/users/tools/scraper.html">0.12.0</a>
+    <a class="version is-current" href="event-pump.html">pre-release</a>
+    <a class="version is-missing" href="../../../latest/users/index.html">latest</a>
+    <a class="version is-missing" href="../../../0.12.0/users/index.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/tools/scraper.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/tools/event-pump.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Scraper</h1>
+<h1 class="page">Event-Pump</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>While the Apache PLC4X API allows simple access to PLC resources, if you want to continuously monitor some values and have them retrieved in a pre-defined interval, the core PLC4X API method is a little bit uncomfortable.</p>
+<p>While the Apache PLC4X API gives you simple access to PLC resources, reading the same set of values over and over again is a job the plain API leaves to you: scheduling the reads, leasing and returning connections, deciding what to do when the PLC stops answering, and making sure a slow response doesn&#8217;t pile up behind the next poll.</p>
 </div>
 <div class="paragraph">
-<p>Especially when you have multiple batches of data you want to have refreshed in different intervals.</p>
+<p>The <code>Event-Pump</code> does that work for you.</p>
 </div>
 <div class="paragraph">
-<p>In this case you need to take care of the scheduling of queries, need to manage the connection state (Check if the connection is still available and to apply countermeasures, if there are problems)</p>
+<p>You describe <strong>what</strong> to read and <strong>when</strong>, and it delivers each response to a listener.</p>
 </div>
 <div class="paragraph">
-<p>As we have encountered exactly the same problem for about every integration module we created, the Apache PLC4X team has created a tool called the <code>Scraper</code>.</p>
-</div>
-<div class="paragraph">
-<p>This tool automatically handles all of the tasks mentioned above.</p>
+<p>The Event-Pump replaces the <code>Scraper</code> from PLC4X 0.13 and earlier.
+If you are migrating, see <a href="#_migrating_from_the_scraper">Migrating from the Scraper</a> at the end of this page.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_getting_started_with_the_scraper"><a class="anchor" href="#_getting_started_with_the_scraper"></a>Getting started with the <code>Scraper</code></h2>
+<h2 id="_getting_started_with_the_event_pump"><a class="anchor" href="#_getting_started_with_the_event_pump"></a>Getting started with the <code>Event-Pump</code></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Scraper can be found in the Maven module:</p>
+<p>The Event-Pump can be found in the Maven module:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>    &lt;dependency&gt;
       &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
-      &lt;artifactId&gt;plc4j-scraper&lt;/artifactId&gt;
-      &lt;version&gt;0.14.0-SNAPSHOT&lt;/version&gt;
+      &lt;artifactId&gt;plc4j-tools-event-pump&lt;/artifactId&gt;
+      &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
     &lt;/dependency&gt;</pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_concepts"><a class="anchor" href="#_concepts"></a>Concepts</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>In general, you need 3 parts to work with the <code>Scraper</code>:</p>
+<p>The Event-Pump is built from three pieces:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>TagBatch</code></dt>
+<dd>
+<p>A set of tags read together from one connection, with one trigger and one listener.
+A batch is the unit of scheduling: every tag in it is read in a single request.</p>
+</dd>
+<dt class="hdlist1"><code>Trigger</code></dt>
+<dd>
+<p>Decides <strong>when</strong> a batch is fetched.
+The <code>TimerTrigger</code> fires at a fixed interval.</p>
+</dd>
+<dt class="hdlist1"><code>TagBatchListener</code></dt>
+<dd>
+<p>Receives each <code>PlcReadResponse</code>, and any errors.</p>
+</dd>
+<dt class="hdlist1"><code>EventPump</code></dt>
+<dd>
+<p>A container that owns a number of batches and starts and stops them together.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_it_from_java"><a class="anchor" href="#_using_it_from_java"></a>Using it from Java</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A batch is assembled with a builder and handed to the pump:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcConnectionManager connectionManager = PlcDriverManager.getDefault();
+
+TagBatch batch = TagBatch.builder()
+    .withBatchId("boiler")
+    .withConnectionManager(connectionManager)
+    .withConnectionString("opcua:tcp://192.168.1.1:4840?request-timeout=10000")
+    .addTagAddress("temperature", "ns=2;i=1001")
+    .addTagAddress("pressure", "ns=2;i=1002")
+    .withTrigger(new TimerTrigger(5, TimeUnit.SECONDS))
+    .withListener((b, response) -&gt; {
+        System.out.println("Temperature: " + response.getInt("temperature"));
+        System.out.println("Pressure: " + response.getInt("pressure"));
+    })
+    .build();
+
+EventPump pump = new EventPump();
+pump.addBatch(batch);
+pump.startAll();
+
+// ... later
+pump.close();</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>1) A <code>Scraper</code> Configuration
-2) A <code>Scraper</code> Implementation
-3) A Handler to handle the results of <code>Scraper</code> jobs</p>
+<p><code>EventPump</code> implements <code>AutoCloseable</code>, and closing it stops and closes every batch it owns, so a try-with-resources block works too.</p>
 </div>
 <div class="paragraph">
-<p>In the <code>Scraper</code> Configuration you define the so-called <code>jobs</code>.</p>
+<p>Individual batches can be controlled by id with <code>startBatch(id)</code>, <code>stopBatch(id)</code> and <code>removeBatch(id)</code>.</p>
+</div>
+<div class="paragraph">
+<p>The tag set of a running batch may be changed at any time with <code>addTag</code>, <code>removeTag</code> and <code>clearTags</code>; the change takes effect on the next fetch cycle.</p>
 </div>
 <div class="sect2">
-<h3 id="_sources"><a class="anchor" href="#_sources"></a>Sources</h3>
+<h3 id="_handling_errors"><a class="anchor" href="#_handling_errors"></a>Handling errors</h3>
 <div class="paragraph">
-<p>Sources define connections to PLCs using PLC4X drivers.</p>
+<p>Passing a lambda as the listener only covers the success case.
+Implement the interface to see failures as well:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">batch.setListener(new TagBatch.TagBatchListener() {
+    @Override
+    public void onTagsFetched(TagBatch batch, PlcReadResponse response) {
+        // process values
+    }
+
+    @Override
+    public void onError(TagBatch batch, Throwable error) {
+        // connection lost, read failed, ...
+    }
+
+    @Override
+    public void onFetchSkipped(TagBatch batch, long lastFetchDurationMs, long consecutiveSkips) {
+        // the PLC is slower than the configured interval
+    }
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_files"><a class="anchor" href="#_configuration_files"></a>Configuration files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rather than assembling batches in code, a whole pump can be described in a YAML, JSON or XML file and loaded with <code>EventPumpFactory</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">connections:
+  - id: plc1
+    url: "opcua:tcp://192.168.1.1:4840?request-timeout=10000"
+
+batches:
+  - id: boiler
+    connectionId: plc1
+    tags:
+      temperature: "ns=2;i=1001"
+      pressure: "ns=2;i=1002"
+    trigger:
+      type: timer
+      intervalSeconds: 5</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">EventPump pump = EventPumpFactory.fromYaml(
+    new File("event-pump.yml"), connectionManager, listener);
+pump.startAll();</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Generally you can think of a <code>Source</code> as a PLC4X connection string, given an alias name.</p>
+<p><code>EventPumpFactory</code> also offers <code>fromJson(&#8230;&#8203;)</code> and <code>fromXml(&#8230;&#8203;)</code>, and every variant accepts an optional <code>ValueTransformerRegistry</code> as a last argument.</p>
+</div>
+<div class="paragraph">
+<p>The listener passed to the factory becomes the default listener for all batches in the file.</p>
+</div>
+<div class="sect2">
+<h3 id="_transformations"><a class="anchor" href="#_transformations"></a>Transformations</h3>
+<div class="paragraph">
+<p>A tag may carry an expression that is applied to its value before the listener sees it.
+Use the extended tag format to declare one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">batches:
+  - id: boiler
+    connectionId: plc1
+    tags:
+      temperature:
+        address: "ns=2;i=1001"
+        transform: "value * 1.8 + 32"
+      pressure:
+        address: "ns=2;i=1002"
+    trigger:
+      type: timer
+      intervalSeconds: 5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In an expression, <code>value</code> refers to the tag&#8217;s own value, and every other tag in the same batch is available under its own name, so cross-tag expressions such as <code>temperature + humidity</code> work.
+All names resolve to the values of the <strong>current</strong> response, before any transformation is applied.</p>
+</div>
+<div class="paragraph">
+<p>The built-in evaluator (registered under the name <code>simple</code>) supports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>arithmetic: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, unary minus and parentheses</p>
+</li>
+<li>
+<p>comparisons: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&#8656;</code>, <code>==</code>, <code>!=</code></p>
+</li>
+<li>
+<p>boolean logic: <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>, and the literals <code>true</code> and <code>false</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If an expression fails to evaluate, the error is logged and the <strong>original</strong> value is passed through, so a broken expression degrades one tag rather than failing the whole batch.</p>
+</div>
+<div class="paragraph">
+<p>Custom transformers can be registered by implementing <code>ValueTransformer</code> and adding it to a <code>ValueTransformerRegistry</code>.</p>
+</div>
+<div class="paragraph">
+<p>The same thing is available from the builder via <code>addTransform(tagName, expression)</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_timeouts_backoff_and_overload"><a class="anchor" href="#_timeouts_backoff_and_overload"></a>Timeouts, backoff and overload</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Getting these right matters more than the API surface does, so it is worth being explicit about which knob does what.</p>
+</div>
+<div class="sect2">
+<h3 id="_request_timeouts_belong_on_the_connection_string"><a class="anchor" href="#_request_timeouts_belong_on_the_connection_string"></a>Request timeouts belong on the connection string</h3>
+<div class="paragraph">
+<p>The Event-Pump does not impose a request timeout of its own.
+How long a read may take is the driver&#8217;s decision, configured as a parameter on the connection URL, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:tcp://192.168.1.1:4840?request-timeout=10000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consult the documentation of the driver you are using for the parameter it supports.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_jobs"><a class="anchor" href="#_jobs"></a>Jobs</h3>
+<h3 id="_the_fetch_watchdog"><a class="anchor" href="#_the_fetch_watchdog"></a>The fetch watchdog</h3>
 <div class="paragraph">
-<p>A <code>Job</code> defines which resources (PLC Addresses) should be collected from which <code>Sources</code> with a given <code>Trigger</code>.</p>
+<p>As a last line of defence against a driver that never completes a read at all, each batch bounds a single fetch cycle.
+The default is 5 minutes.
+This is deliberately far above any sensible request timeout: it is not a way to limit how long a read may take, only a guarantee that a batch cannot be wedged forever by a stalled request.</p>
 </div>
 <div class="paragraph">
-<p>All resources in a job will be collected as a batch.</p>
+<p>Set it with <code>withFetchTimeout(long, TimeUnit)</code> on the builder, or <code>fetchTimeoutMs</code> on a batch in a configuration file; a value of <code>0</code> or less disables it.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Do not use the watchdog as a substitute for the driver&#8217;s request timeout. Setting it <strong>below</strong> the driver&#8217;s timeout makes every slow read look like a stalled one.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_the_plc_is_unreachable"><a class="anchor" href="#_when_the_plc_is_unreachable"></a>When the PLC is unreachable</h3>
+<div class="paragraph">
+<p>After a failed fetch, a batch backs off exponentially before trying again: 1 second, then 2, 4, 8 … capped at 60 seconds.
+The first successful fetch resets it.
+This keeps a batch from hammering a device that is down, and keeps your logs readable during an outage.
+Both ends are configurable with <code>withInitialBackoffMs(&#8230;&#8203;)</code> and <code>withMaxBackoffMs(&#8230;&#8203;)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_the_plc_is_slower_than_the_interval"><a class="anchor" href="#_when_the_plc_is_slower_than_the_interval"></a>When the PLC is slower than the interval</h3>
+<div class="paragraph">
+<p>If a trigger fires while the previous fetch is still running, the new fetch is <strong>skipped</strong> rather than queued, a warning is logged, and <code>onFetchSkipped</code> is called on the listener.
+This is the main signal that a polling interval is set too aggressively for the device.</p>
 </div>
 <div class="paragraph">
-<p>Generally multiple types of triggers could theoretically be supported, but for now only a time triggered job (Aka <code>SCHEDULED</code>) is actually supported.</p>
-</div>
-<div class="paragraph">
-<p>In the near future we&#8217;re hoping that we will be able to support:
-- External triggers
-- Triggering collection based upon PLC-values</p>
-</div>
-<div class="paragraph">
-<p>But, as to now, this has not been implemented yet.</p>
+<p>The <code>TimerTrigger</code> schedules with a fixed delay rather than a fixed rate, so an occasional slow cycle delays the next fetch instead of producing a burst of catch-up reads.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_configuration_using_the_java_api"><a class="anchor" href="#_configuration_using_the_java_api"></a>Configuration using the Java API</h2>
+<h2 id="_threading"><a class="anchor" href="#_threading"></a>Threading</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The core of the Scraper configuration is the <code>ScraperConfigurationTriggeredImplBuilder</code> class.
-Use this to build the configuration objects used to bootstrap the Scraper.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ScraperConfigurationTriggeredImplBuilder builder = new ScraperConfigurationTriggeredImplBuilder();</pre>
-</div>
+<p>Each <code>TimerTrigger</code> owns a timer thread and a dispatch thread; listener code runs on the dispatch thread, never on the timer thread.
+A listener that blocks therefore delays only its own batch.</p>
 </div>
 <div class="paragraph">
-<p>As soon as you have your <code>builder</code> instance, you should add at least one <code>source</code> to it.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>builder.addSource({connectionName}, {plc4xConnectionString});</pre>
-</div>
+<p>Note that this means listener callbacks for a given batch are serialized, but callbacks for <strong>different</strong> batches may run concurrently — a listener shared between batches must be thread-safe.</p>
 </div>
 <div class="paragraph">
-<p>The <code>connectionName</code> will be what we use when configuring the job to reference which source it should use to collect.</p>
-</div>
-<div class="paragraph">
-<p>In order to configure a <code>job</code> we have to get an instance of a <code>JobConfigurationTriggeredImplBuilder</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>JobConfigurationTriggeredImplBuilder jobBuilder = builder.job({jobName}, {triggerCommand});</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This creates a new <code>job</code> with a given name which is executed based on the information in the <code>triggerCommand</code>.</p>
-</div>
-<div class="paragraph">
-<p>As mentioned above, we currently only support a time-scheduled collection.</p>
-</div>
-<div class="paragraph">
-<p>This generally requires just one parameter: The number of <code>milliseconds</code> between each collection.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>(SCHEDULED,1000)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Above would schedule a collection every 1000ms - so once every second.</p>
-</div>
-<div class="paragraph">
-<p>Up to now this job would not be run anywhere, and it would also not collect anything.
-So in order to have the job actually do something, we should assign it a <code>source</code> to collect from.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>jobBuilder.source({connectionName});</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here we could theoretically collect on multiple sources, by simply calling the <code>source()</code> method multiple times.</p>
-</div>
-<div class="paragraph">
-<p>All sources would be collected at the same time, whenever the trigger tells it to.</p>
-</div>
-<div class="paragraph">
-<p>So the last thing we need to configure our first <code>Scraper</code> job, is to add a few fields for it to collect.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>jobBuilder.field({fieldName}, {fieldAddress});</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>field</code> method has to be called for every field we want to add to the current job configuration.
-It gives a PLC4X address string an easy to understand string name, just like when using the core PLC4X API.</p>
-</div>
-<div class="paragraph">
-<p>As soon as we&#8217;re done adding fields, we configure the job by calling the <code>build</code> method.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>jobBuilder.build();</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This configures the finished job and attaches that to the overall <code>Scraper</code> configuration of the scraper configuration.</p>
-</div>
-<div class="paragraph">
-<p>As soon as we&#8217;re done configuring jobs, we need to create the <code>Scraper</code> configuration by calling the <code>build</code> method on the <code>builder</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ScraperConfigurationTriggeredImpl scraperConfig = builder.build();</pre>
-</div>
+<p>A <code>Timer</code> may also be shared between several triggers by passing it to the <code>TimerTrigger</code> constructor, which keeps the thread count down when you have many batches.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_the_scraper"><a class="anchor" href="#_running_the_scraper"></a>Running the <code>Scraper</code></h2>
+<h2 id="_migrating_from_the_scraper"><a class="anchor" href="#_migrating_from_the_scraper"></a>Migrating from the Scraper</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to run the <code>Scraper</code>, the following boilerplate code is needed.</p>
+<p>The Scraper was removed after PLC4X 0.13.
+The concepts map over fairly directly:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>       try {
-            PlcDriverManager plcDriverManager = new PooledPlcDriverManager();
-            TriggerCollector triggerCollector = new TriggerCollectorImpl(plcDriverManager);
-            TriggeredScraperImpl scraper = new TriggeredScraperImpl(scraperConfig, (jobName, sourceName, results) -&gt; {
-
-                ...
-
-            }, triggerCollector);
-            scraper.start();
-            triggerCollector.start();
-        } catch (ScraperException e) {
-            log.error("Error starting the scraper", e);
-        }</pre>
-</div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Scraper</th>
+<th class="tableblock halign-left valign-top">Event-Pump</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ScrapeJob</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TagBatch</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TriggeredScraperImpl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EventPump</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ResultHandler</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TagBatch.TagBatchListener</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrape rate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TimerTrigger</code> interval</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>futureTimeOut</code> constructor argument</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the driver&#8217;s own <code>request-timeout</code> connection string parameter</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>At first a new <code>PooledPlcDriverManager</code> is created (It actually doesn&#8217;t have to be the pooled version, but we strongly suggest you use it as for some protocols the connection process is stressfull for the connected PLC).</p>
-</div>
-<div class="paragraph">
-<p>With this <code>plcDriverManager</code> we can then create a so-called <code>TriggerCollector</code>, which we pass in the driver manager as argument.</p>
-</div>
-<div class="paragraph">
-<p>Next comes the probably most important part: We configure the scraper, by binding a <code>Scraper Configuration</code>, a <code>ResultHandler</code> and a <code>TriggerCollector</code> together.</p>
-</div>
-<div class="paragraph">
-<p>After this, the scraper is ready to start, which is then done by calling <code>start</code> on the <code>scraper</code> as well as the <code>triggerCollector</code>.</p>
-</div>
-<div class="paragraph">
-<p>For the sake of clarity, here comes the definition of the <code>ResultHandler</code> interface:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>@FunctionalInterface
-public interface ResultHandler {
-
-    /**
-     * Callback handler.
-     * @param jobName name of the job (from config)
-     * @param connectionName alias of the connection (&lt;b&gt;not&lt;/b&gt; connection String)
-     * @param results Results in the form alias to result value
-     */
-    void handle(String jobName, String connectionName, Map&lt;String, Object&gt; results);
-
-}</pre>
-</div>
+<p>The last row is the one to pay attention to.
+The Scraper applied a single timeout of its own — 2000 ms unless you passed something else — to every read, regardless of what the connection string said.
+The Event-Pump does not: configure the timeout on the connection URL and the driver will honour it.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_configuration_using_a_json_or_yaml_file"><a class="anchor" href="#_configuration_using_a_json_or_yaml_file"></a>Configuration using a <code>JSON</code> or <code>YAML</code> file</h2>
+<h2 id="_current_limitations"><a class="anchor" href="#_current_limitations"></a>Current limitations</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>As an alternative to using the Java API, the Scraper Configuration can also be read from a <code>JSON</code> or <code>YAML</code> document.</p>
-</div>
-<div class="paragraph">
-<p>Here come some examples:</p>
-</div>
-<div class="paragraph">
-<p>JSON:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>{
-    "sources": {
-        "connectionName": "connectionString"
-    },
-    "jobs": [
-        {
-            "name": "jobName",
-            "triggerConfig": (SCHEDULED,10000)
-            "sources": [
-                "connectionName"
-            ],
-            "fields": {
-                "a": "{address-a}",
-                "b": "{address-b}"
-            }
-        }
-    ]
-}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>YAML:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>---
-sources:
-  connectionName: connectionString
-jobs:
-  - name: jobName
-    triggerConfig: (SCHEDULED,10000)
-    sources:
-      - connectionName
-    fields:
-      a: {address-a}
-      b: {address-b}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In both cases, you can create the <code>ScraperConfiguration</code> with the following code:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ScraperConfiguration conf = ScraperConfiguration.fromFile("{path to the JSON or YAML file}", ScraperConfigurationTriggeredImpl.class);</pre>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SubscriptionTrigger</code> is a placeholder. It can be constructed, and a configuration file may name <code>type: subscription</code>, but starting such a batch throws <code>UnsupportedOperationException</code>. Use a <code>TimerTrigger</code> until subscription support lands.</p>
+</li>
+<li>
+<p>Batches read; there is no write support.</p>
+</li>
+<li>
+<p>Leasing a connection for a fetch is a blocking call made on the batch&#8217;s dispatch thread.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

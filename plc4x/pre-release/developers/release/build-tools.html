@@ -283,13 +283,13 @@
     <a class="nav-link" href="../../users/tools/connection-cache.html">The Connection Cache concept</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../users/tools/event-pump.html">Event-Pump</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/tools/opm.html">Object PLC Mapping</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/tools/plc4x-server.html">PLC4X Server</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/tools/scraper.html">Scraper</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/tools/testing.html">Testing (or using PLC4X without a PLC)</a>
@@ -518,7 +518,7 @@ So please check <a href="release.html">here</a> (Chapters: <code>Preparing your 
 <p>For each new Major and Minor release we create a new branch at the beginning of a code-freeze phase.</p>
 </div>
 <div class="paragraph">
-<p>So if currently the project version in develop is <code>{0.14.0-SNAPSHOT}</code>, we create a branch <code>release/{code-generation-short-version}</code>.</p>
+<p>So if currently the project version in develop is <code>{1.0.0-SNAPSHOT}</code>, we create a branch <code>release/{code-generation-short-version}</code>.</p>
 </div>
 <div class="paragraph">
 <p>When creating the branch is exactly the moment in which the version in <code>develop</code> is incremented to the next minor version.</p>
@@ -537,7 +537,7 @@ This is the version the <code>develop</code> branch will be changed to.</p>
 </div>
 <div class="paragraph">
 <p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version.
-So in case of preparing the release branch for <code>{0.14.0-SNAPSHOT}</code> the command would be the following:</p>
+So in case of preparing the release branch for <code>{1.0.0-SNAPSHOT}</code> the command would be the following:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -679,7 +679,7 @@ Again, just in case you missed the first warning: Be sure to ensure you have swi
 <p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix, keep it as it is)</p>
 </li>
 <li>
-<p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>releases/code-generation/{release-version}</code> (<code>releases/code-generation/{0.14.0-SNAPSHOT}</code> in our case)</p>
+<p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>releases/code-generation/{release-version}</code> (<code>releases/code-generation/{1.0.0-SNAPSHOT}</code> in our case)</p>
 </li>
 <li>
 <p>The next development version (The version present in the pom after the release) (leave it as it is suggested by the plugin)</p>
@@ -707,7 +707,7 @@ Again, just in case you missed the first warning: Be sure to ensure you have swi
 <p>Run a build with all tests</p>
 </li>
 <li>
-<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release releases/code-generation/{0.14.0-SNAPSHOT}</code>)</p>
+<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release releases/code-generation/{1.0.0-SNAPSHOT}</code>)</p>
 </li>
 <li>
 <p>Push the commit</p>
@@ -739,7 +739,7 @@ is in the correct state. Please select the release branch and verify the commit 
 </div>
 </div>
 <div class="paragraph">
-<p>It is important that the commit with the message "[maven-release-plugin] prepare release releases/code-generation/{0.14.0-SNAPSHOT}" is tagged with the release tag (in this case releases/code-generation/{0.14.0-SNAPSHOT})</p>
+<p>It is important that the commit with the message "[maven-release-plugin] prepare release releases/code-generation/{1.0.0-SNAPSHOT}" is tagged with the release tag (in this case releases/code-generation/{1.0.0-SNAPSHOT})</p>
 </div>
 <div class="paragraph">
 <p>If you check the commit itself, it should mainly consist of version updates like this:</p>
@@ -872,21 +872,21 @@ Here it automatically executes a maven build (You don&#8217;t have to do this, i
 <div class="listingblock">
 <div class="content">
 <pre>   ./KEYS
-   ./build-tools/code-generation/{0.14.0-SNAPSHOT}
-   ./build-tools/code-generation/{0.14.0-SNAPSHOT}/rc1
-   ./build-tools/code-generation/{0.14.0-SNAPSHOT}/rc1/README
-   ./build-tools/code-generation/{0.14.0-SNAPSHOT}/rc1/RELEASE_NOTES
-   ./build-tools/code-generation/{0.14.0-SNAPSHOT}/rc1/apache-plc4x-code-generation-{0.14.0-SNAPSHOT}-source-release.zip
-   ./build-tools/code-generation/{0.14.0-SNAPSHOT}/rc1/apache-plc4x-code-generation-{0.14.0-SNAPSHOT}-source-release.zip.asc
-   ./build-tools/code-generation/{0.14.0-SNAPSHOT}/rc1/apache-plc4x-code-generation-{0.14.0-SNAPSHOT}-source-release.zip.sha512</pre>
+   ./build-tools/code-generation/{1.0.0-SNAPSHOT}
+   ./build-tools/code-generation/{1.0.0-SNAPSHOT}/rc1
+   ./build-tools/code-generation/{1.0.0-SNAPSHOT}/rc1/README
+   ./build-tools/code-generation/{1.0.0-SNAPSHOT}/rc1/RELEASE_NOTES
+   ./build-tools/code-generation/{1.0.0-SNAPSHOT}/rc1/apache-plc4x-code-generation-{1.0.0-SNAPSHOT}-source-release.zip
+   ./build-tools/code-generation/{1.0.0-SNAPSHOT}/rc1/apache-plc4x-code-generation-{1.0.0-SNAPSHOT}-source-release.zip.asc
+   ./build-tools/code-generation/{1.0.0-SNAPSHOT}/rc1/apache-plc4x-code-generation-{1.0.0-SNAPSHOT}-source-release.zip.sha512</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>I usually prepare exactly the same directory structure, starting with the {0.14.0-SNAPSHOT} locally and then just import everything using the following command:</p>
+<p>I usually prepare exactly the same directory structure, starting with the {1.0.0-SNAPSHOT} locally and then just import everything using the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>svn import {0.14.0-SNAPSHOT} https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{0.14.0-SNAPSHOT} -m"Staging of rc1 of PLC4X Build-Tools (Code-Generation) {0.14.0-SNAPSHOT}"</pre>
+<pre>svn import {1.0.0-SNAPSHOT} https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{1.0.0-SNAPSHOT} -m"Staging of rc1 of PLC4X Build-Tools (Code-Generation) {1.0.0-SNAPSHOT}"</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -922,10 +922,10 @@ The following would be the one used to do our first TLP release:</p>
 <div class="listingblock">
 <div class="content">
 <pre>E-Mail Topic:
-[VOTE] Apache PLC4X Build-Tools Code-Generation {0.14.0-SNAPSHOT} RC1
+[VOTE] Apache PLC4X Build-Tools Code-Generation {1.0.0-SNAPSHOT} RC1
 
 Message:
-Apache PLC4X Build-Tools Code-Generation {0.14.0-SNAPSHOT} has been staged under [2]
+Apache PLC4X Build-Tools Code-Generation {1.0.0-SNAPSHOT} has been staged under [2]
 and it’s time to vote on accepting it for release.
 
 All Maven artifacts are available under [1]. Voting will be open for 72hr.
@@ -934,7 +934,7 @@ A minimum of 3 binding +1 votes and more binding +1 than binding -1
 are required to pass.
 
 Repository: https://gitbox.apache.org/repos/asf/plc4x-build-tools.git
-Release tag: releases/code-generation/{0.14.0-SNAPSHOT}
+Release tag: releases/code-generation/{1.0.0-SNAPSHOT}
 Hash for the release tag: {replacethiswiththerealgitcommittag}
 
 Per [3] "Before voting +1 PMC members are required to download
@@ -950,7 +950,7 @@ You can achieve the above by following [4].
 
 
 [1] https://repository.apache.org/content/repositories/orgapacheplc4x-{somefourdigitnumber}
-[2] https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{0.14.0-SNAPSHOT}/rc1/
+[2] https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{1.0.0-SNAPSHOT}/rc1/
 [3] https://www.apache.org/legal/release-policy.html#approving-a-release
 [4] https://plc4x.apache.org/plc4x/latest/developers/release/validation.html</pre>
 </div>
@@ -961,7 +961,7 @@ You can achieve the above by following [4].
 <div class="listingblock">
 <div class="content">
 <pre>E-Mail Topic:
-[DISCUSS] Apache PLC4X Build-Tools Code-Generation {0.14.0-SNAPSHOT} RC1
+[DISCUSS] Apache PLC4X Build-Tools Code-Generation {1.0.0-SNAPSHOT} RC1
 
 Message:
 This is the discussion thread for the corresponding VOTE thread.
@@ -986,7 +986,7 @@ If you have to vote -1 please mention a brief description on why and then take t
 <div class="listingblock">
 <div class="content">
 <pre>E-Mail Topic:
-[RESULT] [VOTE] Apache PLC4X Build-Tools Code-Generation {0.14.0-SNAPSHOT} RC1
+[RESULT] [VOTE] Apache PLC4X Build-Tools Code-Generation {1.0.0-SNAPSHOT} RC1
 
 Message:
 So, the vote passes with 3 +1 votes by PMC members and one +1 vote by a non PMC member.</pre>
@@ -1003,9 +1003,9 @@ This is done by moving them inside the Apache SVN.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   svn move -m "Release Apache PLC4X {0.14.0-SNAPSHOT}" \
-       https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{0.14.0-SNAPSHOT}/rc1 \
-       https://dist.apache.org/repos/dist/release/plc4x/build-tools/code-generation/{0.14.0-SNAPSHOT}</pre>
+<pre>   svn move -m "Release Apache PLC4X {1.0.0-SNAPSHOT}" \
+       https://dist.apache.org/repos/dist/dev/plc4x/build-tools/code-generation/{1.0.0-SNAPSHOT}/rc1 \
+       https://dist.apache.org/repos/dist/release/plc4x/build-tools/code-generation/{1.0.0-SNAPSHOT}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1062,7 +1062,7 @@ This has to be done with git</p>
 <div class="listingblock">
 <div class="content">
 <pre>git checkout release
-git merge releases/code-generation/{0.14.0-SNAPSHOT}</pre>
+git merge releases/code-generation/{1.0.0-SNAPSHOT}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1070,7 +1070,7 @@ git merge releases/code-generation/{0.14.0-SNAPSHOT}</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>git merge -X theirs releases/code-generation/{0.14.0-SNAPSHOT}</pre>
+<pre>git merge -X theirs releases/code-generation/{1.0.0-SNAPSHOT}</pre>
 </div>
 </div>
 <div class="paragraph">
