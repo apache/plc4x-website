@@ -658,6 +658,24 @@ pump.startAll();</code></pre>
 <p>The listener passed to the factory becomes the default listener for all batches in the file.</p>
 </div>
 <div class="sect2">
+<h3 id="_trigger_intervals"><a class="anchor" href="#_trigger_intervals"></a>Trigger intervals</h3>
+<div class="paragraph">
+<p>A timer trigger takes its interval either in seconds or - for the sub-second rates that are common in PLC data collection - in milliseconds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    trigger:
+      type: timer
+      intervalMillis: 250
+      initialDelayMillis: 100</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>intervalSeconds</code>/<code>initialDelaySeconds</code> and <code>intervalMillis</code>/<code>initialDelayMillis</code> are mutually exclusive per setting: giving the same setting in both units fails at startup rather than silently picking one, since a reader of the file would otherwise have to guess the actual rate.
+Using seconds for one setting and milliseconds for the other is fine.</p>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_transformations"><a class="anchor" href="#_transformations"></a>Transformations</h3>
 <div class="paragraph">
 <p>A tag may carry an expression that is applied to its value before the listener sees it.
