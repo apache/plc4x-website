@@ -521,9 +521,14 @@ Source <a href="https://infosys.beckhoff.com/english.php?content=../content/1033
 </div>
 </div>
 <div class="paragraph">
-<p>Array indices may appear at any position of the path, not only at the end. Symbolic addresses are
-resolved against the symbol- and data-type-table, so they require
-<code>load-symbol-and-data-type-tables</code> to be enabled (the default).</p>
+<p>Array indices may appear at any position of the path, not only at the end.</p>
+</div>
+<div class="paragraph">
+<p>Symbolic addresses are resolved against the symbol- and data-type-table, so they require
+<code>load-symbol-and-data-type-tables</code> to be enabled (the default). With that option disabled the
+tables are never fetched and a symbolic address is rejected with an error saying so - use a direct
+address instead. Subscriptions are the exception: they resolve symbol handles on the device and
+work either way.</p>
 </div>
 <div class="paragraph">
 <p><strong>Direct addresses</strong> name the index group and index offset explicitly, in decimal or hexadecimal, and
@@ -573,7 +578,8 @@ carry the data type:</p>
 </div>
 <div class="paragraph">
 <p>Unlike symbolic addresses, direct addresses need no symbol table and therefore work regardless of
-the <code>load-symbol-and-data-type-tables</code> setting.</p>
+the <code>load-symbol-and-data-type-tables</code> setting. Browsing does need it, since it lists the symbol
+table; with the option disabled a browse request is answered with <code>UNSUPPORTED</code>.</p>
 </div>
 </div>
 </div>
@@ -722,7 +728,7 @@ the <code>load-symbol-and-data-type-tables</code> setting.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Configures, if when connecting the data-type- and symbol-table should be read. This is an optimization that can help in cases, where the PLC program is pretty large and downloading the full tables is causing problems. When disabled, only direct addresses (<code>{IndexGroup}/{IndexOffset}:{TYPE}</code>) can be used: symbolic addresses are resolved against these tables and will fail with <code>Unknown symbol</code> if they were not loaded. Browsing is unavailable too, as it lists the symbol table.</p>
+<p>Configures, if when connecting the data-type- and symbol-table should be read. This is an optimization that can help in cases, where the PLC program is pretty large and downloading the full tables is causing problems. When disabled, reading and writing is limited to direct addresses (<code>{IndexGroup}/{IndexOffset}:{TYPE}</code>): symbolic addresses cannot be resolved without the tables and are rejected with a corresponding error. Browsing is unavailable for the same reason. Subscriptions are unaffected, as they resolve symbol handles on the device.</p>
 </div></div></td>
 </tr>
 <tr>
