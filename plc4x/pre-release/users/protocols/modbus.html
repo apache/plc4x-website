@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -3041,7 +3029,7 @@ Allowed values are: <br>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>{memory-Area}{start-address}:{data-type}[{array-size}]:{name-value-tag-options}</pre>
+<pre>{memory-Area}{start-address}:{data-type}[{array-size}]{name-value-tag-options}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3058,7 +3046,7 @@ If the name-value-tag-options part is omitted, simply no configuration fine-tuni
 </div>
 </div>
 <div class="paragraph">
-<p>Specifying this value overrides value of <code>default-unit-id</code> parameter specified at the connection string.</p>
+<p>Specifying this value overrides value of <code>default-unit-identifier</code> parameter specified at the connection string.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3066,7 +3054,7 @@ If the name-value-tag-options part is omitted, simply no configuration fine-tuni
 </div>
 </div>
 <div class="paragraph">
-<p>With this, can the default byte-order be overridden on a per-tag basis. If not provided the default-byte-order from the connection string is used, or BIG_ENDIAN, if this is also not provided.</p>
+<p>With this, can the default byte-order be overridden on a per-tag basis. If not provided the <code>default-payload-byte-order</code> from the connection string is used, or BIG_ENDIAN, if this is also not provided.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3173,11 +3161,74 @@ When using the shorter versions there are two formats available  i.e. 30001 and 
 With the shorter format 3XXXX being limited to between 30001 and 39999, while the longer format 3XXXXX being limited to between 300001 and 365535.
 These memory areas all start at address 1.</p>
 </div>
+<div class="sect3">
+<h4 id="_addresses_are_1_based_the_wire_is_0_based"><a class="anchor" href="#_addresses_are_1_based_the_wire_is_0_based"></a>Addresses are 1-based, the wire is 0-based</h4>
+<div class="paragraph">
+<p>This is a Modbus speciality worth spelling out, because it is a frequent source of off-by-one
+confusion: the Modbus specification and virtually all device documentation number the registers and
+coils starting at <strong>1</strong>, but the address actually transmitted in the request is that number <strong>minus
+one</strong>.</p>
+</div>
+<div class="paragraph">
+<p>PLC4X follows the documentation convention - you write the address exactly as the device&#8217;s manual
+lists it, and the driver decrements it on the way to the wire:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tag address</th>
+<th class="tableblock halign-left valign-top">Address on the wire</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>coil:1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the first coil</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>holding-register:1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the first holding register</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>holding-register:100</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">99</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the 100th holding register</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>So a device manual documenting "holding register 40001" is addressed as <code>holding-register:1</code> (or
+<code>4x00001</code>), and the request that leaves PLC4X carries address 0.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The extended register area is the exception - it is genuinely 0-based in the specification, so
+no decrement is applied there and its lowest usable tag address is <code>extended-register:1</code> (which is
+also address 1 on the wire). <code>extended-register:0</code> is rejected.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>For the extended register area the addresses 0-99999 are able to be specified. These registers are mapped to file records with a length of 10000. Address 600000 corresponds to the first address in file record 0.
 Address 610000 is then the first address in the second file record and so on. It is noted that there is generally only 10 file records (600000 thru to 699999) however the spec allows for 65536 file records.
 Using the extended-register: format you are able to reference all of these, if the shorter format is used then it is limited to 699999.
-This memory area starts at address 0.</p>
+Unlike the other memory areas this one is 0-based in the specification, so its addresses are passed
+through unchanged; the lowest usable tag address is nevertheless <code>extended-register:1</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -3238,7 +3289,54 @@ This memory area starts at address 0.</p>
 <li>
 <p>WCHAR (2 byte char)</p>
 </li>
+<li>
+<p>STRING (utf-8)</p>
+</li>
+<li>
+<p>WSTRING (utf-16)</p>
+</li>
+<li>
+<p>TIME (duration, milliseconds)</p>
+</li>
+<li>
+<p>LTIME (duration, nanoseconds)</p>
+</li>
+<li>
+<p>DATE (date)</p>
+</li>
+<li>
+<p>LDATE (date)</p>
+</li>
+<li>
+<p>TIME_OF_DAY (time of day)</p>
+</li>
+<li>
+<p>LTIME_OF_DAY (time of day)</p>
+</li>
+<li>
+<p>DATE_AND_TIME (date and time)</p>
+</li>
+<li>
+<p>LDATE_AND_TIME (date and time)</p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Coils and discrete inputs hold a single bit each and therefore support only <code>BOOL</code>. A coil or
+discrete-input tag declared with any other data type is accepted by the address parser, but the read
+returns the response code <code>UNSUPPORTED</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Reading an array of coils returns all of its elements: <code>coil:1:BOOL[8]</code> yields a list of 8 values.</p>
 </div>
 </div>
 <div class="sect2">

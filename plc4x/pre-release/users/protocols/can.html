@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>CAN Bus Driver Adapter :: PLC4X</title>
+    <title>CAN Bus :: PLC4X</title>
     <meta name="generator" content="Antora 3.1.14">
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -467,7 +455,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">PLC4X</a></li>
-    <li><a href="can.html">CAN Bus Driver Adapter</a></li>
+    <li><a href="can.html">CAN Bus</a></li>
   </ul>
 </nav>
 <div class="page-versions">
@@ -485,7 +473,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">CAN Bus Driver Adapter</h1>
+<h1 class="page">CAN Bus</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="imageblock">
@@ -493,53 +481,95 @@
 <img src="../_images/users/protocols/can_banner.png" alt="banner" width="512" height="167">
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This page describes how the CAN drivers are put together. There is no driver with the
+protocol code <code>can</code> - connect with <a href="#canopen.adoc" class="xref unresolved">CANopen</a> (<code>canopen</code>) or
+<a href="#genericcan.adoc" class="xref unresolved">GenericCAN</a> (<code>genericcan</code>) instead.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>The CAN Bus driver is a special kind of driver which does not bring any logic.
-Its responsibility is to combine <a href="../transports/can.html">CAN transport facade</a> and custom application layer protocols.
-In this way, the protocol can use its own "root frame" type which is not delivered from CAN bus frame.</p>
+<p>CAN differs from the other buses PLC4X supports in that the wire carries short, identifier-tagged
+frames rather than a request/response stream. The transports own the bus access and hand the
+drivers a uniform frame type; each driver then interprets those frames according to its own
+application-layer protocol.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_more_details_on_the_driver"><a class="anchor" href="#_more_details_on_the_driver"></a>More details on the driver</h2>
+<h2 id="_transport_and_frame_model"><a class="anchor" href="#_transport_and_frame_model"></a>Transport and frame model</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>CANDriverAdapter</code> is a full implementation of Apache PLC4X API.
-Under the hood adapter will forward all operations to delegate driver.
-Work which is done by the adapter is to transform data incoming via CAN transport into frame supported by driver.
-In this regard the <code>CANDriverAdapter</code> does not implement any real protocol.
-All it does is transformation of incoming frames into frame desired by real driver.</p>
+<p>The <a href="../transports/can.html">CAN transport facade</a> provides a single frame representation that
+all CAN drivers work against:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>CanFrame</code> (<code>plc4j/transports/can</code>) - an identifier, up to 8 data bytes, and the standard/extended
+and remote-transmission-request flags. Standard identifiers are 11 bit (<code>MAX_STANDARD_ID</code>), extended
+ones 29 bit (<code>MAX_EXTENDED_ID</code>).</p>
+</li>
+<li>
+<p><code>CanFrameBuilder</code> - obtained from <code>CanFrame.builder()</code>, used by the drivers to construct outgoing
+frames.</p>
+</li>
+<li>
+<p><code>CanIdFilter</code> - lets a driver subscribe to a subset of identifiers instead of the whole bus.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Below diagram explains how driver adapter works with CANopen.
-Given that this is currently biggest CAN driver implemented in Apache PLC4X we will use it as a reference.</p>
+<p>Two transports implement this facade: <code>can-socketcan</code> (Linux SocketCAN, the usual choice on real
+hardware) and <code>can-virtualcan</code> (an in-process bus, useful for tests and for running two PLC4X
+components against each other without a physical interface).</p>
 </div>
-<div class="imageblock kroki">
-<div class="content">
-<img src="https://kroki.io/ditaa/svg/eNq9U01PwzAMvfdX-D6h_gGENA0hDgghQNph7SF0AaK1ceQaxiE_nhSaLP0AsWjClzb1y7PfswuQEIuzI2KRpZQAGx9Wy1u4JPUuCZZbYdg9h-AsrcgpdZ5EtZOK2slsBSvUv5syMgiN1N6kOT__2tAdIWOF9aAllh8MRxJk0fAeSejWIM2Q3CMyXJFoZPi0JmHMRMY35lrobT3IzRCMlNzgi6oy2CvqIHkYUjFpJo9nWCQN8Ad65__Xxws3RJKVdHNyb8Ol6XIPWO0kd5759IY7856RmhI8bgONMMAIxmssD_R-GSL6qGrYAxuydnbRgqU29QfuGezIh_NQdU-KZdxJH1DEp9zfmMTBB_YLVvbgiCK-75oxb0-1al-DDzHw_8J-AhoMBVM=" alt="apache-plc4x-can-canopen">
 </div>
+</div>
+<div class="sect1">
+<h2 id="_driver_structure"><a class="anchor" href="#_driver_structure"></a>Driver structure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each CAN driver is a <code>ConnectionBase</code> implementation that owns a message codec translating between
+<code>CanFrame</code> and its own protocol frame:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#canopen.adoc" class="xref unresolved">CANopen</a> - <code>CANOpenConnection</code> with <code>CANOpenMessageCodec</code>, implementing the
+CANopen service model (SDO, PDO, NMT, heartbeat).</p>
+</li>
+<li>
+<p><a href="#genericcan.adoc" class="xref unresolved">GenericCAN</a> - <code>GenericCANConnection</code>, which applies no application-layer
+semantics at all and simply maps identifiers to typed payload slices.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Looking at left most side of diagram we can see a CAN transport.
-The transport knows how to receive and send data to the CAN bus.
-Transport can create its own intermediate representation of CAN data frame.
-In case of <code>SocketCAN</code> there is a dedicated type called <code>SocketCANFrame</code>.</p>
+<p>Incoming frames arrive from the codec and are dispatched to the subscriptions registered for the
+matching node id; outgoing writes are encoded and handed straight back to the codec.</p>
 </div>
-<div class="paragraph">
-<p>Most of other drivers in Apache PLC4X which rely on TCP, UDP or serial transports can unify right above transport.
-Yet due to variety of APIs which are possible to be used with CAN bus such early unification at API level is not possible.</p>
-</div>
-<div class="paragraph">
-<p>Place where <code>CANDriverAdapter</code> jumps in is once transport formed the frame structure.
-Then, adapter asks the transport to turn that structure into a <code>FrameData</code>.
-An instance of <code>FrameData</code> is then passed to an adapter delivered by CANopen Driver.
-This adapter can then create a <code>CANopenFrame</code> which is processed by desired driver logic.</p>
-</div>
-<div class="paragraph">
-<p>The return side, when desired driver wants to publish information is a bit simplified.
-Because <code>FrameData</code> does not be a real type (it is an interface) we can skip it.
-With a help of a <code>CANFrameBuilder</code> provided by CAN transport driver can easily construct a structure which is supported by it.
-While this makes an API asymmetric it also makes it possible to use any third party transport with <code>CANopenDriver</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Earlier releases interposed a separate <code>CANDriverAdapter</code> between the transport and the
+driver, with a <code>FrameData</code> interface and per-transport frame types such as <code>SocketCANFrame</code>. That
+indirection was removed when the drivers were ported to the new SPI: the adapter&#8217;s work is now done
+by the driver&#8217;s own connection class, and every transport produces a <code>CanFrame</code> directly.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

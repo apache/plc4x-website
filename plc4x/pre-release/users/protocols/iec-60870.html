@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -488,6 +476,29 @@
 </aside>
 <article class="doc">
 <h1 class="page">IEC-60870</h1>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This driver supports <strong>subscriptions only</strong> - reading, writing and browsing are not
+implemented and a request for any of them is rejected.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Tag addresses are currently not interpreted: any address string is accepted without error, and the
+subscription receives all incoming ASDUs rather than those matching the address. Consumers have to
+filter the incoming events themselves.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">

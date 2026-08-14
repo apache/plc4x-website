@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -519,6 +507,77 @@ Source <a href="https://infosys.beckhoff.com/english.php?content=../content/1033
 </div>
 </div>
 <div class="sect1">
+<h2 id="_address_format"><a class="anchor" href="#_address_format"></a>Address Format</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The driver accepts three kinds of addresses.</p>
+</div>
+<div class="paragraph">
+<p><strong>Symbolic addresses</strong> use the variable name as it is known in the PLC program:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>MAIN.g_plant.channels[1].setpoints[4]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Array indices may appear at any position of the path, not only at the end. Symbolic addresses are
+resolved against the symbol- and data-type-table, so they require
+<code>load-symbol-and-data-type-tables</code> to be enabled (the default).</p>
+</div>
+<div class="paragraph">
+<p><strong>Direct addresses</strong> name the index group and index offset explicitly, in decimal or hexadecimal, and
+carry the data type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{IndexGroup}/{IndexOffset}:{TYPE}
+{IndexGroup}/{IndexOffset}:{TYPE}[{numberOfElements}]</pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Examples</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Address</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>16448/16448:DINT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">one DINT at index group 16448, offset 16448</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x4040/0x4040:DINT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the same address in hexadecimal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>16448/16448:INT[10]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an array of 10 INTs</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><strong>Direct string addresses</strong> additionally carry the fixed length of the string:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{IndexGroup}/{IndexOffset}:STRING({length})
+{IndexGroup}/{IndexOffset}:WSTRING({length})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Unlike symbolic addresses, direct addresses need no symbol table and therefore work regardless of
+the <code>load-symbol-and-data-type-tables</code> setting.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
@@ -663,7 +722,7 @@ Source <a href="https://infosys.beckhoff.com/english.php?content=../content/1033
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Configures, if when connecting the data-type- and symbol-table should be read. This is an optimization that can help in cases, where the PLC program is pretty large and downloading the full tables is causing problems. When disabled, symbolic addresses will manually be resolved as soon as an address is used.</p>
+<p>Configures, if when connecting the data-type- and symbol-table should be read. This is an optimization that can help in cases, where the PLC program is pretty large and downloading the full tables is causing problems. When disabled, only direct addresses (<code>{IndexGroup}/{IndexOffset}:{TYPE}</code>) can be used: symbolic addresses are resolved against these tables and will fail with <code>Unknown symbol</code> if they were not loaded. Browsing is unavailable too, as it lists the symbol table.</p>
 </div></div></td>
 </tr>
 <tr>

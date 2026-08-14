@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -1082,7 +1070,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 <p><code>read</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>tcp</code> transport.</p>
+<p>Only supported with <code>cotp</code> transport.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1091,7 +1079,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 <p><code>write</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>tcp</code> transport.</p>
+<p>Only supported with <code>cotp</code> transport.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1110,7 +1098,7 @@ In the following, reference will be made to the Java-based driver, which impleme
      .
      .
 try {
-    PlcConnection connection  new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400"); //(2.1)
+    PlcConnection connection  new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400"); //(2.1)
     final PlcReadRequest.Builder subscription  connection.readRequestBuilder(); //(2.2)
      .
      .
@@ -1603,7 +1591,7 @@ However we also implemented a shorter version, as above version does have some u
 <p>Disable the automatic controller-type detection by passing <code>controller-type=S7_200</code>. The S7-200 does not answer the SZL/SSL identification request the driver normally uses to auto-detect the CPU family, so — as with the <code>LOGO</code> device mentioned above — the type has to be provided explicitly.</p>
 </li>
 <li>
-<p>Provide the TSAP (Transport Service Access Point) values explicitly. The S7-200 (Smart) expects both the local and the remote TSAP to be <code>0x0200</code>, which is <code>512</code> in decimal. Set them with <code>local-tsap=512</code> and <code>remote-tsap=512</code>; a non-zero TSAP overrides the rack/slot based addressing.</p>
+<p>Provide the TSAP (Transport Service Access Point) values explicitly. The S7-200 (Smart) expects both the local and the remote TSAP to be <code>0x0200</code>, which is <code>512</code> in decimal. Set them with <code>cotp.local-tsap=512</code> and <code>cotp.remote-tsap=512</code>; a non-zero TSAP overrides the rack/slot based addressing.</p>
 </li>
 </ol>
 </div>
@@ -1612,15 +1600,15 @@ However we also implemented a shorter version, as above version does have some u
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>s7://192.168.12.100?local-tsap=512&amp;remote-tsap=512&amp;controller-type=S7_200</pre>
+<pre>s7://192.168.12.100?cotp.local-tsap=512&amp;cotp.remote-tsap=512&amp;controller-type=S7_200</pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>remote-rack=0</code> and <code>remote-slot=0</code> are the defaults, so they are optional, but may be added for clarity:</p>
+<p><code>cotp.remote-rack=0</code> and <code>cotp.remote-slot=0</code> are the defaults, so they are optional, but may be added for clarity:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>s7://192.168.12.100?remote-rack=0&amp;remote-slot=0&amp;local-tsap=512&amp;remote-tsap=512&amp;controller-type=S7_200</pre>
+<pre>s7://192.168.12.100?cotp.remote-rack=0&amp;cotp.remote-slot=0&amp;cotp.local-tsap=512&amp;cotp.remote-tsap=512&amp;controller-type=S7_200</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1925,7 +1913,7 @@ For a complete list of compatibility between the S7-300,400 and S7-1200 &amp; S7
 
    public static void main(String[] args) throws Exception {
     try (PlcConnection connection  new PlcDriverManager()
-			.getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
+			.getConnection("s7://192.168.1.51?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400")) {
 
       final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder(); <i class="conum" data-value="01"></i><b>(01)</b>
 
@@ -2132,7 +2120,7 @@ In the case of user-defined messages, it is important to take into account that 
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static void main(String[] args) throws Exception {
  try (PlcConnection connection  new PlcDriverManager().
-  getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
+  getConnection("s7://192.168.1.51?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400")) {
 
    final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder(); <i class="conum" data-value="01"></i><b>(01)</b>
 
@@ -2173,7 +2161,7 @@ In the case of user-defined messages, it is important to take into account that 
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static void main(String[] args) throws Exception {
  try (PlcConnection connection  new PlcDriverManager().
-  getConnection("s7://192.168.1.51?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) {
+  getConnection("s7://192.168.1.51?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400")) {
 
    final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder();
 
@@ -2552,7 +2540,7 @@ Make use of the XXX document for a detailed explanation of each SZL, since as in
     System.out.println("URL: https://cache.industry.siemens.com/dl/files/604/44240604/att_67003/v1/s7sfc_en-EN.pdf");
     System.out.println("******************************************************************************************");
 
-    try (PlcConnection connection  new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?remote-rack=0&amp;remote-slot=3&amp;controller-type=S7_400")) { //(01)
+    try (PlcConnection connection  new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400")) { //(01)
 
         final PlcReadRequest.Builder readrequest  connection.readRequestBuilder(); //(02)
 

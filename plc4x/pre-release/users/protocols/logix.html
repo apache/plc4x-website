@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -737,7 +725,7 @@ It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>logix:tcp://127.0.0.1:502?communicationPath=[1,1]</pre>
+<pre>logix:tcp://127.0.0.1:44818?communication-path=[1,1]</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -751,13 +739,33 @@ It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>{address}:{data-type}[{array-size}]</pre>
+<pre>{tagname}
+{tagname}:{DataType}
+{tagname}:{numberOfElements}
+{tagname}[{startIndex}]:{DataType}:{numberOfElements}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the array-size part is omitted, the size-default of <code>1</code> is assumed.
-If the data-type part is omitted, the data type from the controller is used
-The address format matches that found in the controller.</p>
+<p>The tag name matches that found in the controller and may optionally be prefixed with <code>%</code>.
+An array index is appended to the tag name and has to be its last part.</p>
+</div>
+<div class="paragraph">
+<p>If the number-of-elements part is omitted, <code>1</code> is assumed.
+If the data type is omitted it defaults to <code>DINT</code>, so for anything that is not a 32-bit integer it
+has to be given explicitly - also when reading.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The data type comes <strong>before</strong> the number of elements. Reading four DINTs starting at index 0
+is <code>myArray[0]:DINT:4</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -774,28 +782,10 @@ The address format matches that found in the controller.</p>
 <p>SINT (int 8)</p>
 </li>
 <li>
-<p>USINT (uint 8)</p>
-</li>
-<li>
-<p>BYTE (uint 8)</p>
-</li>
-<li>
 <p>INT (int 16)</p>
 </li>
 <li>
-<p>UINT (uint 16)</p>
-</li>
-<li>
-<p>WORD (uint 16)</p>
-</li>
-<li>
 <p>DINT (int 32)</p>
-</li>
-<li>
-<p>UDINT (uint 32)</p>
-</li>
-<li>
-<p>DWORD (uint 32)</p>
 </li>
 <li>
 <p>LINT (int 64)</p>
@@ -803,7 +793,26 @@ The address format matches that found in the controller.</p>
 <li>
 <p>REAL (float)</p>
 </li>
+<li>
+<p>LREAL (double)</p>
+</li>
+<li>
+<p>STRING (character string)</p>
+</li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Other CIP data types are accepted by the address parser but are not encoded or decoded by the
+driver; reading such a tag results in a response code of <code>INTERNAL_ERROR</code> rather than a value.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -467,8 +455,6 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">PLC4X</a></li>
-    <li><a href="../index.html">Users</a></li>
-    <li><a href="index.html">Protocols</a></li>
     <li><a href="df1.html">DF1</a></li>
   </ul>
 </nav>
@@ -488,7 +474,80 @@
 </aside>
 <article class="doc">
 <h1 class="page">DF1</h1>
-
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+There is no DF1 driver you can connect with. DF1 currently exists as a protocol
+specification and a generated read/write model only - there is no <code>df1</code> connection code in any of
+the language ports, so there is nothing to put a connection string into. This page is kept for
+reference and is not linked from the navigation.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Allen-Bradley&#8217;s DF1 is the serial protocol used by the SLC-500 and PLC-5 family, and by the
+MicroLogix controllers over their RS-232 port.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_exists_today"><a class="anchor" href="#_what_exists_today"></a>What exists today</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The protocol is described in <code>protocols/df1/src/main/resources/protocols/df1/df1.mspec</code> and code is
+generated from it for Go, under <code>plc4go/protocols/df1/readwrite</code>. The generated model covers the
+symbol/framing layer and the unprotected read exchange:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DF1Symbol</code> with the <code>DF1SymbolMessageFrame</code>, <code>DF1SymbolMessageFrameACK</code> and
+<code>DF1SymbolMessageFrameNAK</code> variants</p>
+</li>
+<li>
+<p><code>DF1Command</code> with <code>DF1UnprotectedReadRequest</code> and <code>DF1UnprotectedReadResponse</code></p>
+</li>
+<li>
+<p>a CRC helper in <code>StaticHelper.go</code>, exercised by its own unit test</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This model is verified by a ParserSerializer test suite
+(<code>plc4go/assets/testing/protocols/df1/</code>), so the wire format is known to round-trip - but nothing
+builds a connection, transport or tag handler on top of it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_related_ab_eth"><a class="anchor" href="#_related_ab_eth"></a>Related: AB-ETH</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The DF1 <strong>command</strong> layer is reused by the <a href="#ab-eth.adoc" class="xref unresolved">AB-ETH</a> driver, which tunnels DF1
+commands inside CIP encapsulation over Ethernet. That is a working driver in Java, and it is what
+you want if your device is reachable over Ethernet rather than a serial port. The DF1 message types
+it uses are generated into the ab-eth module rather than shared from here.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_contributing"><a class="anchor" href="#_contributing"></a>Contributing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A DF1 driver would need a serial transport binding, the framing/ACK-NAK state machine on top of
+<code>DF1Symbol</code>, and a tag address syntax for the SLC/PLC-5 data-file notation (e.g. <code>N7:0</code>). The
+protocol layer is the part that already exists, so a contribution can start at the driver logic.
+Please raise it on <a href="mailto:dev@plc4x.apache.org">dev@plc4x.apache.org</a> before starting.</p>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>

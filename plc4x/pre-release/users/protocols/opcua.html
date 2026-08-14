@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -1035,13 +1023,39 @@ The <code>SIGN</code> mode gives possibility o browse packets in tools such wire
 <div class="sect2">
 <h3 id="_certificate_verification"><a class="anchor" href="#_certificate_verification"></a>Certificate verification</h3>
 <div class="paragraph">
-<p>The OPC UA specification defines its own procedures for certificate validation.
-In order to simplify implementation by default server certificate validation is relaxed.
-Unless explicitly disabled through configuration of <code>trust-store-file</code> all server certificates will be accepted without validation.</p>
+<p>The OPC UA specification defines its own procedures for certificate validation.</p>
 </div>
 <div class="paragraph">
-<p>In case when secure communication is enabled the <code>trust-store-file</code> option might be used to point certificates which client should accept.
-The acceptance rely on regular TLS checks (expiry date, certificate path etc.), does not validate OPC UA specific parts such as application URI.</p>
+<p>The driver verifies the server certificate by default and fails closed: if no trust anchor is
+configured, the server certificate is rejected and the connection fails. Configure one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>trust-store-file</code> - validate the certificate chain against the given trust store. The acceptance
+relies on regular TLS checks (expiry date, certificate path etc.); it does not validate OPC UA
+specific parts such as the application URI.</p>
+</li>
+<li>
+<p><code>server-certificate-file</code> - pin trust to exactly that certificate. Only the certificate read from
+the configured file is trusted; a certificate learned over the unauthenticated discovery channel is
+never used as a trust anchor.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<code>insecure-certificate-verification=true</code> disables server certificate verification
+altogether. This makes the connection vulnerable to man-in-the-middle attacks and is intended for
+local testing only.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -1124,25 +1138,16 @@ Value of this parameter can be specified using numeric value or OPC-UA attribute
 <p>UINT (uint 16)</p>
 </li>
 <li>
-<p>WORD (uint 16)</p>
-</li>
-<li>
 <p>DINT (int 32)</p>
 </li>
 <li>
 <p>UDINT (uint 32)</p>
 </li>
 <li>
-<p>DWORD (uint 32)</p>
-</li>
-<li>
 <p>LINT (int 64)</p>
 </li>
 <li>
 <p>ULINT (uint 64)</p>
-</li>
-<li>
-<p>LWORD (uint 64)</p>
 </li>
 <li>
 <p>REAL (float)</p>
@@ -1160,7 +1165,28 @@ Value of this parameter can be specified using numeric value or OPC-UA attribute
 <p>STRING (utf-8)</p>
 </li>
 <li>
-<p>WSTRING (utf-16)</p>
+<p>TIME (duration, milliseconds)</p>
+</li>
+<li>
+<p>LTIME (duration, nanoseconds)</p>
+</li>
+<li>
+<p>DATE (date)</p>
+</li>
+<li>
+<p>LDATE (date)</p>
+</li>
+<li>
+<p>TIME_OF_DAY (time of day)</p>
+</li>
+<li>
+<p>LTIME_OF_DAY (time of day)</p>
+</li>
+<li>
+<p>DATE_AND_TIME (date and time)</p>
+</li>
+<li>
+<p>LDATE_AND_TIME (date and time)</p>
 </li>
 </ul>
 </div>
@@ -1205,13 +1231,16 @@ ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;a=Value;REAL</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>ns=0;i=2253;a=EventNotifier;BOOL{EventId: '', EventType: '', Severity: '', Time: '', Message: ''}</pre>
+<pre>ns=0;i=2253;a=EventNotifier;BOOL|EventId=x,EventType=x,Severity=x,Time=x,Message=x</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Note the Identifiers <code>s</code>,<code>i</code>,<code>b</code> and <code>g</code> specify the format of the address not the data type of the returned value.
 The <code>a</code> attribute is required only for event subscriptions which additionally makes use of tag config.
-Tag config is a list of key-value pairs which rely on simplified JSON syntax.</p>
+Tag config is appended after a <code>|</code> as a comma-separated <code>key=value</code> list naming the event
+fields to request. The values are placeholders and are ignored, but they must be non-empty
+and alphanumeric, and a <code>;{Data Type}</code> segment has to precede the <code>|</code> - otherwise the config
+is silently dropped.</p>
 </div>
 </div>
 </div>
@@ -1300,7 +1329,7 @@ Fields which are supported are defined in OPC UA <code>BaseEventType</code>:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Example syntax: <code>ns=0;i=2253;a=EventNotifier;BOOL{EventId: '', EventType: '', Severity: '', Time: '', Message: ''}</code>.</p>
+<p>Example syntax: <code>ns=0;i=2253;a=EventNotifier;BOOL|EventId=x,EventType=x,Severity=x,Time=x,Message=x</code>.</p>
 </div>
 <div class="paragraph">
 <p>Subscription event generated by client upon receiving notification will contain an object (<code>PlcSTRUCT</code>/<code>Map</code>) which will contain all requested fields.

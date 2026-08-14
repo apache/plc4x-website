@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -787,10 +775,10 @@ The default is 3 levels. If the <code>knxproj-file-path</code> this information 
 <div class="ulist">
 <ul>
 <li>
-<p>3-level Address: <code>{main-group(0-15)}</code>/<code>{middle-group(0-15)}</code>/<code>{sub-group(0-255)}</code></p>
+<p>3-level Address: <code>{main-group(0-31)}</code>/<code>{middle-group(0-7)}</code>/<code>{sub-group(0-255)}</code></p>
 </li>
 <li>
-<p>2-level Address: <code>{main-group(0-15)}</code>/<code>{sub-group(0-4095)}</code></p>
+<p>2-level Address: <code>{main-group(0-31)}</code>/<code>{sub-group(0-2047)}</code></p>
 </li>
 <li>
 <p>1-level Address: <code>{sub-group(0-65535)}</code></p>
@@ -798,7 +786,24 @@ The default is 3 levels. If the <code>knxproj-file-path</code> this information 
 </ul>
 </div>
 <div class="paragraph">
-<p>Depending on the <code>group-address-type</code> configured in the connection string or defined in the knxproj-file configured by the <code>knxproj-file-path</code> connection string parameter, the corresponding address pattern has to be used.</p>
+<p>Depending on the <code>group-address-num-levels</code> configured in the connection string or defined in the knxproj-file configured by the <code>knxproj-file-path</code> connection string parameter, the corresponding address pattern has to be used.</p>
+</div>
+<div class="sect2">
+<h3 id="_datapoint_type_suffix"><a class="anchor" href="#_datapoint_type_suffix"></a>Datapoint Type Suffix</h3>
+<div class="paragraph">
+<p>An address may carry an optional datapoint-type suffix <code>:DPT{main}[.{sub}]</code>, which tells the driver
+how to interpret the value on the wire:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>1/2/3:DPT9.001</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The KNX protocol does not transport the datatype of a group address, so the driver has to get it
+from somewhere. If no <code>knxproj-file-path</code> is configured, this suffix is <strong>required</strong> for reading and
+writing - a request for a plain <code>1/2/3</code> fails because the datapoint type cannot be resolved.
+Browsing likewise requires a <code>knxproj-file-path</code>.</p>
 </div>
 <div class="paragraph">
 <p>However, when subscribing for events, each segment allows using of the wildcard character <code>*</code>.
@@ -828,6 +833,7 @@ Don&#8217;t use wildcards when explicitly reading or writing data, this is only 
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 </div>

@@ -163,15 +163,6 @@
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
-  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -504,6 +492,33 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This driver is a <strong>passive listener</strong>. It supports subscriptions only - reading, writing
+and browsing are not implemented and a request for any of them is rejected.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The driver joins the network and reports the change-of-value (COV) notifications it observes. There
+is no handshake with a device and no request/response exchange.</p>
+</div>
+<div class="paragraph">
+<p>Tag addresses are not interpreted yet, so a subscription cannot be narrowed to a single object -
+every registered consumer receives all COV notifications seen on the network, and has to filter
+them itself.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
@@ -730,37 +745,6 @@
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Time-to-live for multicast packets (1-255).</p>
 </div></div></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Data array</th>
-<th class="tableblock halign-left valign-top">Size</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>

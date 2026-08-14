@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>CtlrX :: PLC4X</title>
+    <title>CtrlX :: PLC4X</title>
     <meta name="generator" content="Antora 3.1.14">
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
@@ -162,15 +162,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="canopen.html">CANopen</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
-  </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
   </li>
@@ -200,9 +191,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -467,9 +455,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">PLC4X</a></li>
-    <li><a href="../index.html">Users</a></li>
-    <li><a href="index.html">Protocols</a></li>
-    <li><a href="ctrlx.html">CtlrX</a></li>
+    <li><a href="ctrlx.html">CtrlX</a></li>
   </ul>
 </nav>
 <div class="page-versions">
@@ -487,11 +473,167 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">CtlrX</h1>
-<div class="sect1">
-<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
+<h1 class="page">CtrlX</h1>
+<div id="preamble">
 <div class="sectionbody">
-
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This driver is unfinished and not usable yet. Only browsing and pinging work at all; there
+is no tag address syntax, so reading and writing are not available. This page describes the current
+state for anyone continuing the work - it is not linked from the navigation.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The CtrlX driver talks to Bosch Rexroth ctrlX CORE devices through their REST/Data-Layer API over
+HTTPS, rather than over an industrial fieldbus protocol.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 71.4286%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enumerates the device&#8217;s Data Layer nodes. This is the driver&#8217;s main capability.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ping</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Checks that the device is reachable and the credentials are accepted.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read</code> / <code>write</code> / <code>subscribe</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>Not implemented.</strong> The connection reports these as supported in its metadata, but the
+corresponding request builders return <code>null</code>, so attempting one fails. Use <code>browse</code> for now.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre>ctrlx:https://{host}
+ctrlx://{host}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>https</code> is the only supported transport, and it is also the default - so the transport part can be
+omitted. Any other transport is rejected with
+<code>Only 'https' transport is supported by this driver</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authentication"><a class="anchor" href="#_authentication"></a>Authentication</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+A CtrlX connection <strong>always</strong> requires a username and password. Obtaining a connection
+without authentication throws <code>CtrlX connections require authentication.</code>, and an authentication
+object that is not a username/password pair is rejected as well.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcConnection connection = new DefaultPlcDriverManager()
+    .getConnection("ctrlx://192.168.1.1",
+        new PlcUsernamePasswordAuthentication("boschrexroth", "boschrexroth"));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_browsing"><a class="anchor" href="#_browsing"></a>Browsing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Browse queries are glob patterns matched against the Data Layer node paths, not tag addresses.
+<code>**</code> matches everything and is the simplest way to see what a device exposes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcBrowseResponse response = connection.browseRequestBuilder()
+    .addQuery("all", "**")
+    .build().execute().get();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The driver has no tag address syntax of its own - <code>parseTag</code> is not implemented - which is the
+reason read and write are unavailable.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_discovery"><a class="anchor" href="#_discovery"></a>Discovery</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The driver supports discovery, which locates ctrlX CORE devices on the local network.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maven_dependency"><a class="anchor" href="#_maven_dependency"></a>Maven Dependency</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The driver is not part of the <code>plc4j-driver-all</code> meta package while it is unfinished, so it has to
+be added explicitly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-ctrlx&lt;/artifactId&gt;
+  &lt;version&gt;pre-release&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The driver declares no connection-string parameters of its own, which is why this page has no
+generated options table like the other protocols. Everything it needs comes from the host in the
+connection string plus the credentials.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </article>
