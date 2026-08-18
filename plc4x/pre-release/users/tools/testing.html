@@ -532,7 +532,7 @@ This can be done with the Mock Driver in the following way.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionFactory().getConnection("mock:my-mock-connection");</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -584,7 +584,7 @@ Like in the following Example</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">MockDevice mockDevice = Mockito.mock(MockDevice.class);
 
-PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");
+PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionFactory().getConnection("mock:my-mock-connection");
 connection.setDevice(mockDevice);
 
 // Populate the Mock to avoid a NPE
@@ -612,7 +612,7 @@ verify(mockDevice).read(eq("MyAdress"));</code></pre>
 <pre class="highlightjs highlight"><code class="language-none hljs">MockDevice mockDevice = Mockito.mock(MockDevice.class);
 
 // Setup
-PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection");
+PlcMockConnection connection = (PlcMockConnection) PlcDriverManager.getDefault().getConnectionFactory().getConnection("mock:my-mock-connection");
 connection.setDevice(mockDevice);
 // Populate the Mock to avoid a NPE
 when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new PlcString("hello")));
@@ -621,7 +621,7 @@ when(mockDevice).read(anyString()).thenReturn(Pair.of(PlcResponseCode.OK, new Pl
 // or at least mock:my-mock-connection as connection string
 // Here: send a request to the field "MyAdress"
 // and we build up a new Connection
-try (PlcConnection conn = PlcDriverManager.getDefault().getConnectionManager().getConnection("mock:my-mock-connection")) {
+try (PlcConnection conn = PlcDriverManager.getDefault().getConnectionFactory().getConnection("mock:my-mock-connection")) {
     conn
         .readRequestBuilder
         .addItem("station", "MyAdress")

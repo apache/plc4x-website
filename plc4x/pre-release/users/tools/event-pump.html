@@ -548,11 +548,11 @@ The <code>TimerTrigger</code> fires at a fixed interval.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcConnectionManager connectionManager = PlcDriverManager.getDefault();
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcConnectionFactory connectionFactory = PlcDriverManager.getDefault().getConnectionFactory();
 
 TagBatch batch = TagBatch.builder()
     .withBatchId("boiler")
-    .withConnectionManager(connectionManager)
+    .withConnectionFactory(connectionFactory)
     .withConnectionString("opcua:tcp://192.168.1.1:4840?request-timeout=10000")
     .addTagAddress("temperature", "ns=2;i=1001")
     .addTagAddress("pressure", "ns=2;i=1002")

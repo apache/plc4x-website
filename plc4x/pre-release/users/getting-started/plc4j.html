@@ -511,13 +511,13 @@ However, in order to actually connect to a device using a given protocol, you ne
 </div>
 <div class="paragraph">
 <p>So as soon as your project has the API and a driver implementation available, you first need to get a <code>PlcConnection</code> instance.
-This is done via the <code>PlcConnectionManager</code>, which is provided to you by the <code>PlcDriverManager</code> by asking this to create an instance for a given <code>PLC4X connection string</code>.</p>
+This is done via the <code>PlcConnectionFactory</code>, which is provided to you by the <code>PlcDriverManager</code> by asking this to create an instance for a given <code>PLC4X connection string</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>String connectionString = "s7://10.10.64.20";
 
-try (PlcConnection plcConnection = PlcDriverManager.getDefault().getConnectionManager().getConnection(connectionString)) {
+try (PlcConnection plcConnection = PlcDriverManager.getDefault().getConnectionFactory().getConnection(connectionString)) {
 
   ... do something with the connection here ...
 
