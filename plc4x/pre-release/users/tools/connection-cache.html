@@ -531,7 +531,7 @@
             } catch (CancellationException e){
                 logger.error("Polling Thread canceled", e);
             } catch (IllegalStateException e){
-                logger.error("Error in Netty state machine", e);
+                logger.error("Connection was in an unexpected state", e);
             } catch (ExecutionException e){
                 logger.error("Interrupted Exception fired", e);
             } catch (TimeoutException e) {
@@ -551,7 +551,7 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>To use the Connection Cache you have to add a dependency to the <code>plc4j-connection-cache</code> module.</p>
+<p>To use the Connection Cache you have to add a dependency to the <code>plc4j-tools-connection-cache</code> module.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -578,19 +578,26 @@
 <p>A new <code>PlcConnectionCache</code> is usually created using a builder, that can be accessed via: <code>PlcConnectionCache.getBuilder()</code>. This will be explained in more detail in the next chapter.</p>
 </li>
 <li>
-<p>The <code>try-with-resources</code> statement (i.e. <code>try (PlcConnection connection = connectionCache.getConnection(connectionString))</code>) ensures that a leased connection will be automatically returned to the cache after the use. As said before if the application keeps hold of the connection for too long, after a configurable amount of time will be automatically closed by the cache and the thread can no-longer use it (i.e. the <code>maxLeaseTime</code> parameter defaults to 4 seconds and is configurable - see the next chapter on configuring the connection cache).</p>
+<p>A cache always needs a source for the connections it caches, so <code>withConnectionFactory()</code> is mandatory; <code>build()</code> throws an <code>IllegalStateException</code> without it. Usually this is the driver manager, but any <code>PlcConnectionFactory</code> will do.</p>
 </li>
 <li>
-<p>Before handing out a connection-lease, the connection cache will execute a <code>ping()</code> operation on the corresponding connection to check if it&#8217;s still valid. If this check fails, the cache will terminate this connection, establish a new one and then return a handle for that new connection.</p>
+<p>The <code>try-with-resources</code> statement (i.e. <code>try (PlcConnection connection = connectionCache.getConnection(connectionString))</code>) ensures that a leased connection will be automatically returned to the cache after the use. As said before if the application keeps hold of the connection for too long, after a configurable amount of time will be automatically closed by the cache and the thread can no-longer use it (i.e. the <code>maxLeaseTime</code> parameter defaults to 1 minute and is configurable - see the next chapter on configuring the connection cache).</p>
+</li>
+<li>
+<p>Before handing out a connection-lease of a connection that has been sitting idle for longer than the <code>idlePingThreshold</code>, the connection cache will execute a <code>ping()</code> operation on it to check if it&#8217;s still valid. If this check fails, the cache will terminate this connection, establish a new one and then return a handle for that new connection. Connections that were used recently are handed out without that extra round-trip.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_configuring_the_plcconnectioncache"><a class="anchor" href="#_configuring_the_plcconnectioncache"></a>Configuring the PlcConnectionCache</h3>
+<div class="sect1">
+<h2 id="_configuring_the_plcconnectioncache"><a class="anchor" href="#_configuring_the_plcconnectioncache"></a>Configuring the PlcConnectionCache</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>As mentioned before the <code>PlcConnectionCache</code> is configurable. Mainly this involves configuring the timeouts.</p>
+</div>
+<div class="paragraph">
+<p>All timeouts are set as a <code>long</code> value together with a <code>java.util.concurrent.TimeUnit</code>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -609,29 +616,89 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">maxLeaseTime</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.time.Duration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">connectionFactory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PlcConnectionFactory</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>4 seconds</code></p>
+<p>(mandatory)</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Time that a thread is allowed to keep a connection-lease till the connection-cache terminates the lease.</p>
+<p>The source the cache creates its connections from - usually <code>PlcDriverManager.getDefault().getConnectionFactory()</code>. Without it <code>build()</code> throws an <code>IllegalStateException</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maxIdleTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long + TimeUnit</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>5 minutes</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Time a cached connection may sit unused before the cache closes it and drops it from the pool. The next request for that connection string establishes a fresh connection.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maxLeaseTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long + TimeUnit</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>1 minute</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Time that a thread is allowed to keep a connection-lease till the connection-cache terminates the lease. This is what protects the cache against clients that forget to close a lease. Set to <code>0</code> to disable.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">maxWaitTime</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">java.time.Duration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long + TimeUnit</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>20 seconds</code></p>
+<p><code>30 seconds</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Time that a thread asking for a connection will wait until the connection cache gives up and throws a <code>PlcConnectionException</code>.</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">idlePingThreshold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long + TimeUnit</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>30 seconds</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>How long a connection has to have been idle before the cache validates it with a <code>ping()</code> prior to handing it out. Recently used connections are handed out without that round-trip.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pingTimeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long + TimeUnit</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>5 seconds</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>How long to wait for the answer to such a validation <code>ping()</code> before treating the connection as dead.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">closeTimeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">long + TimeUnit</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>5 seconds</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Upper bound on closing an underlying connection. A wedged socket can otherwise block every operation on that connection; after this time the close is abandoned to a background daemon thread and the cache recovers. Set to <code>0</code> to wait indefinitely.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scheduler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ScheduledExecutorService</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>2 daemon threads</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>The scheduler running the idle / lease / wait / validation timeout tasks. Provide your own to share one across several caches. Note that the cache shuts down whichever scheduler it was given when it is closed.</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The configuration of a <code>PlcConnectionCache</code> is done when creating the instance. For this the builder contains two methods to configure the timeouts.</p>
+<p>The configuration of a <code>PlcConnectionCache</code> is done when creating the instance, using the builder methods matching the names above.</p>
 </div>
 <div class="paragraph">
 <p>Here comes an example:</p>
@@ -641,13 +708,45 @@
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">    public static void main(String[] args) throws Exception {
         PlcConnectionCache connectionCache = PlcConnectionCache.getBuilder()
             .withConnectionFactory(PlcDriverManager.getDefault().getConnectionFactory())
-            .withMaxLeaseTime(Duration.ofSeconds(10))
-            .withMaxWaitTime(Duration.ofMinutes(1))
+            .withMaxLeaseTime(10, TimeUnit.SECONDS)
+            .withMaxWaitTime(1, TimeUnit.MINUTES)
             .build();
 
         ...
 
     }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_shutting_the_cache_down"><a class="anchor" href="#_shutting_the_cache_down"></a>Shutting the cache down</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The cache keeps the connections it hands out, so somebody has to release them again. That is what <code>close()</code> is for: it shuts the scheduler down, closes every cached connection and empties the pool. Afterwards the cache is unusable - any further <code>getConnection()</code> fails with a <code>PlcConnectionCacheClosedException</code> - and closing an already closed cache does nothing.</p>
+</div>
+<div class="paragraph">
+<p><code>PlcConnectionCache</code> implements <code>PlcConnectionManager</code>, which extends <code>AutoCloseable</code>, so it can be used as a try-with-resources resource or wired into whatever disposal callback your framework offers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">    try (PlcConnectionCache connectionCache = PlcConnectionCache.getBuilder()
+            .withConnectionFactory(PlcDriverManager.getDefault().getConnectionFactory())
+            .build()) {
+        ...
+    } // all cached connections are closed here</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A single connection can also be dropped from the pool without closing the whole cache, using <code>removeCachedConnection(connectionString)</code>. For monitoring, <code>getCachedConnectionCount()</code> and <code>getActiveLeaseCount()</code> report how many connections the cache holds and how many of them are currently leased out.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_subscriptions_and_cached_connections"><a class="anchor" href="#_subscriptions_and_cached_connections"></a>Subscriptions and cached connections</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Subscriptions are bound to a connection, so a cache that silently replaces a connection underneath a subscribed client would lose its subscriptions. The connection cache therefore keeps track of the subscriptions and event listeners registered through a leased connection, and re-establishes them on the new connection whenever it has to recreate one - for example after a failed validation ping. From the client&#8217;s point of view its subscription simply keeps delivering events.</p>
 </div>
 </div>
 </div>
