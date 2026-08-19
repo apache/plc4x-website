@@ -588,8 +588,13 @@ Perhaps we&#8217;ll change this in the future, but for now all comes in one bund
 
     // Register the Drivers
 	drivers.RegisterKnxDriver(driverManager)
-	drivers.RegisterModbusDriver(driverManager)</pre>
+	drivers.RegisterModbusTcpDriver(driverManager)</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Each Modbus flavor is registered separately: <code>RegisterModbusTcpDriver</code>, <code>RegisterModbusRtuDriver</code>
+and <code>RegisterModbusAsciiDriver</code>. The two serial flavors speak their own framing and register the
+serial transport themselves, so use the one that matches the device you are talking to.</p>
 </div>
 <div class="paragraph">
 <p>Now that the <code>PlcDriverManager</code> is configured, we can use it to get a new connection.</p>

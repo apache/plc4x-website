@@ -483,10 +483,10 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-This driver is unfinished and not usable yet. Discovery and pinging are the only things
-that work; there is no tag address syntax, so reading and writing are not available, and the browse
-implementation does not work yet either. This page describes the current state for anyone
-continuing the work - it is not linked from the navigation.
+This driver is unfinished and not usable yet. Pinging is the only thing that works;
+discovery is an unimplemented stub, there is no tag address syntax, so reading and writing are not
+available, and the browse implementation does not work yet either. This page describes the current
+state for anyone continuing the work - it is not linked from the navigation.
 </td>
 </tr>
 </table>
@@ -521,7 +521,9 @@ HTTPS, rather than over an industrial fieldbus protocol.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>discover</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Locates ctrlX CORE devices on the local network.</p>
+<p><strong>Not implemented.</strong> The driver hands out a discovery request builder, but
+<code>CtrlXPlcDiscoverer.discoverWithHandler</code> is a TODO that returns <code>null</code> instead of a future, so
+executing a discovery request fails instead of finding devices.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -541,9 +543,9 @@ not produce usable results.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The connection reports all four of these as unsupported in its metadata, so a caller that checks
-<code>getMetadata()</code> before deciding what to do gets an honest answer rather than being sent into a
-request that cannot succeed.</p>
+<p>The connection reports read, write, subscribe and browse as unsupported in its metadata, so a
+caller that checks <code>getMetadata()</code> before deciding what to do gets an honest answer rather than
+being sent into a request that cannot succeed.</p>
 </div>
 </div>
 </div>
@@ -625,8 +627,19 @@ reason read and write are unavailable.</p>
 <div class="sect1">
 <h2 id="_discovery"><a class="anchor" href="#_discovery"></a>Discovery</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The driver supports discovery, which locates ctrlX CORE devices on the local network.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Discovery does not work yet. <code>CtrlXDriver.discoveryRequestBuilder()</code> returns a builder backed
+by <code>CtrlXPlcDiscoverer</code>, whose <code>discoverWithHandler</code> is still an empty TODO returning <code>null</code>, so no
+ctrlX CORE device is ever located.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

@@ -711,7 +711,11 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <p><strong>CBus</strong> (Java) is a skeleton that connects but implements no operations. The Go driver is the complete one.</p>
 </li>
 <li>
-<p><strong>ctrlX</strong> (Java) discovers devices and answers pings. Its read, write and subscribe builders are not implemented, and although the connection carries browse code, browsing does not work yet.</p>
+<p><strong>ctrlX</strong> (Java) answers pings; that is the only operation it completes. Discovery is offered by
+the driver, but <code>CtrlXPlcDiscoverer.discoverWithHandler</code> is an unimplemented TODO that returns
+<code>null</code> instead of a future, so a discovery request fails rather than finding anything. Its read,
+write and subscribe builders are not implemented either, and although the connection carries
+browse code, browsing does not work yet.</p>
 </li>
 <li>
 <p><strong>Firmata</strong> (Java) writes and subscribes; there is no read support.</p>
@@ -723,7 +727,15 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <p><strong>Open-Protocol</strong> (Java) is a skeleton that connects but implements no operations.</p>
 </li>
 <li>
-<p><strong>Profinet</strong> (Java) browses, discovers and subscribes to cyclic data; it has no read or write support. Both the <code>profinet</code> and the newer <code>profinet-ng</code> driver behave this way.</p>
+<p><strong>Profinet</strong> (Java) discovers devices and browses the submodules of a connected device; neither of
+the two Java drivers has read or write support. Only the newer <code>profinet-ng</code> driver is part of
+<code>plc4j-driver-all</code>; the older <code>profinet</code> driver is still in the code base but is not bundled. In
+<code>profinet-ng</code> a subscription request completes the PROFINET connect handshake, but the subscription
+response future is deliberately left incomplete and <code>onRegisterConsumer</code> throws
+<code>UnsupportedOperationException</code>, so no cyclic data ever reaches an application. The unbundled
+<code>profinet</code> driver does implement that path - it completes the subscription response, registers
+consumers per subscription handle and dispatches a <code>PlcSubscriptionEvent</code> for every incoming cyclic
+frame - so the subscribe entry below, which describes what ships, does not apply to it.</p>
 </li>
 </ul>
 </div>
@@ -822,7 +834,7 @@ metadata inconsistently, so this table follows the code rather than the metadata
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ctrlX</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
@@ -875,8 +887,17 @@ metadata inconsistently, so this table follows the code rather than the metadata
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Modbus (TCP/RTU/ASCII)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modbus TCP</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-exclamation"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modbus RTU / ASCII</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
@@ -911,12 +932,12 @@ metadata inconsistently, so this table follows the code rather than the metadata
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Profinet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Profinet (<code>profinet-ng</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
 <tr>
@@ -980,8 +1001,10 @@ this way.</p>
 </div>
 <div class="paragraph">
 <p>The Logix driver reuses the EtherNet/IP connection, so it supports the same operations, but it does
-not expose device discovery. S7 discovery uses PROFINET DCP and needs the optional pcap4j runtime
-(and libpcap on the host) to be installed.</p>
+not expose device discovery. Modbus discovery is likewise a TCP-only feature: only <code>ModbusTcpDriver</code>
+offers a discovery request builder, so the serial RTU and ASCII flavors cannot discover devices.
+S7 discovery uses PROFINET DCP and needs the optional pcap4j runtime (and libpcap on the host) to be
+installed.</p>
 </div>
 <div class="paragraph">
 <p>A read or write request always carries a set of tags, so there is no separate "single value" and
