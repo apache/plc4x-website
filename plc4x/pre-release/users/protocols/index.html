@@ -506,7 +506,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <td class="tableblock halign-left valign-top"><p class="tableblock">AB-Ethernet</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-exclamation"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-exclamation"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
@@ -586,7 +586,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <td class="tableblock halign-left valign-top"><p class="tableblock">Firmata</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-exclamation"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-exclamation"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
@@ -594,7 +594,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <td class="tableblock halign-left valign-top"><p class="tableblock">IEC-60870</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
@@ -666,7 +666,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <td class="tableblock halign-left valign-top"><p class="tableblock">SLMP (MELSEC)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
@@ -674,7 +674,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <td class="tableblock halign-left valign-top"><p class="tableblock">UMAS</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 </tr>
@@ -699,7 +699,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <div class="ulist">
 <ul>
 <li>
-<p><strong>AB-Ethernet</strong> (Java) reads and offers polled subscriptions; there is no write support.</p>
+<p><strong>AB-Ethernet</strong> reads and offers polled subscriptions in both Java and Go; neither writes.</p>
 </li>
 <li>
 <p><strong>BACnet/IP</strong> passively receives broadcast traffic and exposes it as subscriptions. It does not read or write properties.</p>
@@ -718,7 +718,14 @@ write and subscribe builders are not implemented either, and although the connec
 browse code, browsing does not work yet.</p>
 </li>
 <li>
-<p><strong>Firmata</strong> (Java) writes and subscribes; there is no read support.</p>
+<p><strong>Firmata</strong> writes and subscribes in both Java and Go; neither reads. A board is driven and
+monitored, never polled.</p>
+</li>
+<li>
+<p><strong>IEC 60870-5-104</strong> subscribes only, in both Java and Go, because the protocol is push driven: the
+RTU sends unsolicited ASDUs once the session is started, so there is nothing to read or write. The Go
+driver keeps the IEC quality descriptors alongside each value, so a reading the RTU marked invalid,
+blocked, substituted or not-topical does not arrive looking like a good one.</p>
 </li>
 <li>
 <p><strong>KNXnet/IP</strong> (C#) is the only driver in plc4net and has not kept pace with the other implementations.</p>
@@ -736,6 +743,17 @@ response future is deliberately left incomplete and <code>onRegisterConsumer</co
 <code>profinet</code> driver does implement that path - it completes the subscription response, registers
 consumers per subscription handle and dispatches a <code>PlcSubscriptionEvent</code> for every incoming cyclic
 frame - so the subscribe entry below, which describes what ships, does not apply to it.</p>
+</li>
+<li>
+<p><strong>SLMP</strong> addresses the word devices <code>D</code>, <code>W</code> and <code>R</code> only, in both Java and Go. That is the scope
+the driver was written to rather than a port gap - the bit devices and the wider MELSEC command set
+are not implemented in either language.</p>
+</li>
+<li>
+<p><strong>UMAS</strong> (Go) refuses <code>DATE</code> and <code>TIME_OF_DAY</code> tags rather than answering them: the Go data item
+parser has no case for those field names yet, so the bytes would parse to no value. Every other data
+type reads and writes. Note also that UMAS ships no test data in any language, so both drivers are
+verified against each other rather than against a captured exchange.</p>
 </li>
 </ul>
 </div>

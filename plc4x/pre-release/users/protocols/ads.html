@@ -719,6 +719,19 @@ table; with the option disabled a browse request is answered with <code>UNSUPPOR
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>max-data-type-table-depth</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>20</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Maximum nesting depth accepted when parsing the data-type table uploaded from the device. An entry may contain further entries, so without a limit the depth of the tree is dictated by the device rather than by the driver, and a table of well under a megabyte can nest deeply enough to exhaust the parser&#8217;s stack. Real type hierarchies are only a handful of levels deep, so the default is already generous; raise it for a device that is known to need more. Note that the JVM&#8217;s own stack imposes a practical ceiling of a few thousand levels regardless of what is configured here.</p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>load-symbol-and-data-type-tables</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
