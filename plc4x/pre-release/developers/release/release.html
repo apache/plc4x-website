@@ -34,7 +34,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="../../../..">
-          <img src="../../../../plc4x/pre-release/_images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+          <img src="../../../../plc4x/1.0.0/_images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
       </a>
       <div class="navbar-item search hide-for-print">
         <div id="search-field" class="field">
@@ -50,8 +50,8 @@
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end justify-content-center">
         <a class="navbar-item" href="../../../../">Home</a>
-        <a class="navbar-item" href="../../../../plc4x/pre-release/users">Users</a>
-        <a class="navbar-item" href="../../../../plc4x/pre-release/developers">Developers</a>
+        <a class="navbar-item" href="../../../../plc4x/1.0.0/users">Users</a>
+        <a class="navbar-item" href="../../../../plc4x/1.0.0/developers">Developers</a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="https://www.apache.org">Apache</a>
           <div class="navbar-dropdown">
@@ -72,7 +72,7 @@
         </div>
         <div class="navbar-item">
           <span class="control">
-            <a class="button is-primary" href="../../../../plc4x/pre-release/users/download.html">Download</a>
+            <a class="button is-primary" href="../../../../plc4x/1.0.0/users/download.html">Download</a>
           </span>
         </div>
         <a class="acevent" data-format="wide"></a>
@@ -81,7 +81,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="plc4x" data-version="pre-release">
+<div class="nav-container" data-component="plc4x" data-version="1.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -103,6 +103,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../users/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../users/contact.html">Getting in Contact</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../users/commercial-support.html">Commercial Support</a>
@@ -353,18 +356,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../protocols/index.html">Usage of protocols</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../protocols/ads/protocol.html">Beckhoff ADS Protocol</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../protocols/eip/protocol.html">EIP Protocol</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../infrastructure/index.html">Infrastructure</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
@@ -430,17 +421,17 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">PLC4X</span>
-    <span class="version">pre-release</span>
+    <span class="version">1.0.0</span>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
-          <a href="../../users/index.html">pre-release</a>
+          <a href="../../users/index.html">1.0.0</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../0.13.1/users/index.html">0.13.1</a>
+          <a href="../../../latest/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -464,10 +455,10 @@
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
+  <button class="version-menu-toggle" title="Show other versions of page">1.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="release.html">pre-release</a>
-    <a class="version" href="../../../0.13.1/developers/release/release.html">0.13.1</a>
+    <a class="version is-current" href="release.html">1.0.0</a>
+    <a class="version" href="../../../latest/developers/release/release.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/developers/release/release.html">0.12.0</a>
   </div>
 </div>
@@ -482,97 +473,37 @@
 <div class="sect1">
 <h2 id="_tldr"><a class="anchor" href="#_tldr"></a>TL/DR</h2>
 <div class="sectionbody">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Please be sure to execute the release with a Java version 11 or the Karaf feature tests will not run.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>We&#8217;ve mostly automated most of the steps and checks in the project&#8217;s <code>tools</code> directory.
+The only prerequisite for this is generally having <code>Docker</code> installed as we&#8217;re using a <code>reference machine</code> to ensure reproducible builds.</p>
 </div>
-<div class="ulist checklist">
-<ul class="checklist">
+<div class="paragraph">
+<p>In regular intervals and especially before starting the release process run:</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p><input type="checkbox" data-item-complete="0"> Update the <code>RELEASE_NOTES</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Check year in <code>NOTICE</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Create release branch:</p>
+<p><code>release-0-update-generated-code.sh</code>: Deletes all generated code and then re-generates it (Gets rid of no longer valid types), refreshes the generated driver documentation and updates the NOTICE year.</p>
 </li>
 </ul>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>   mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks -DbranchName=rel/{current-short-version}</pre>
+<div class="paragraph">
+<p>When starting the release process, create the release branch:</p>
 </div>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
+<div class="ulist">
+<ul>
 <li>
-<p><input type="checkbox" data-item-complete="0"> Add a new section to the <code>RELEASE_NOTES</code> on <code>develop</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Prepare the release:</p>
+<p><code>release-1-create-branch.sh</code>: Finalizes the RELEASE_NOTES for the version being released and adds a new section for the next one, checks git is configured correctly and then runs the create-branch build in docker with all modules enabled.</p>
 </li>
 </ul>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>   mvn release:prepare -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</pre>
+<div class="paragraph">
+<p>Now usually comes a code stabilization time. As soon as that period is over or we&#8217;re not doing such a stabilization phase, prepare the actual release.</p>
 </div>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
+<div class="ulist">
+<ul>
 <li>
-<p><input type="checkbox" data-item-complete="0"> Perform the release:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>   mvn clean release:perform</pre>
-</div>
-</div>
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><input type="checkbox" data-item-complete="0"> Close the staging repo on <code>Nexus</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Stage the release artifacts in <code>SVN</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Vote on the mailing list</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Move RC to the release section of <code>SVN</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Remove old releases in <code>SVN</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Release staging repo on <code>Nexus</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Add the version to the DOAP file on <code>develop</code></p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Update Download site</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Update GitHub Issues</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Merge back release version to <code>release</code> branch</p>
-</li>
-<li>
-<p><input type="checkbox" data-item-complete="0"> Send announce email</p>
+<p><code>release-2-prepare-release.sh</code>: Executes the actual release process using maven inside Docker. Signs the locally staged artifacts. Deploys them to Nexus and stages them in SVN. It also checks if the current RMs GPG key is contained in the KEYS file as well as the SHA512. As a last step it drafts an email for starting the vote containing all necessary information.</p>
 </li>
 </ul>
 </div>
@@ -694,10 +625,18 @@ However, in contrast to that documentation, upload your key to the following ser
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-On some systems (mainly Mac) gpg signing can result in errors like:
-    <code><code>[INFO] --- maven-gpg-plugin:3.0.1:sign (sign-release-artifacts) @ plc4x-parent ---
-    gpg: signing failed: Inappropriate ioctl for device</code></code>
-    In this case adding the following helps: <code>export GPG_TTY=$(tty)</code>
+<div class="paragraph">
+<p>On some systems (mainly Mac) gpg signing can result in errors like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[INFO] --- maven-gpg-plugin:3.0.1:sign (sign-release-artifacts) @ plc4x-parent ---
+gpg: signing failed: Inappropriate ioctl for device</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case adding the following helps: <code>export GPG_TTY=$(tty)</code></p>
+</div>
 </td>
 </tr>
 </table>
@@ -705,16 +644,139 @@ On some systems (mainly Mac) gpg signing can result in errors like:
 </div>
 </div>
 <div class="sect1">
+<h2 id="_the_release_scripts"><a class="anchor" href="#_the_release_scripts"></a>The release scripts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>From here on, the release is driven by the numbered scripts in the project&#8217;s <code>tools</code> directory.
+They are meant to be run in order, and each one prints which script to run next when it finishes.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Script</th>
+<th class="tableblock halign-left valign-top">What it covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>release-0-update-generated-code.sh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Throws away and re-generates all generated code, refreshes the driver documentation and the <code>NOTICE</code> year.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>release-1-create-branch.sh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finalizes the <code>RELEASE_NOTES</code>, creates the <code>rel/&lt;major&gt;.&lt;minor&gt;</code> branch and moves <code>develop</code> on to the next minor version.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>release-2-prepare-release.sh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags and builds the release, signs and stages the artifacts in Nexus and SVN and drafts the <code>[VOTE]</code> and <code>[DISCUSS]</code> mails.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>release-3-finish-release.sh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Everything after a successful vote: publishes the documentation of the release branch as the
+current release, adds the branch to the website build, records the release in the DOAP file and on
+the download page of both branches, drafts the <code>[RESULT]</code> and <code>[ANNOUNCE]</code> mails, moves the release
+candidate to the release part of SVN, releases the Nexus staging repository, and clears away the
+attempts that did not make it as well as the release it supersedes.
+See <a href="#after-a-successful-vote">After a successful vote</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>release-abort.sh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Helps unwinding a failed attempt.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>validate-release.sh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verifies a staged release candidate builds reproducibly. Mainly for the people voting.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>All Maven builds these scripts run happen inside the Docker container described by <code>tools/docker-compose.yaml</code>, which bind-mounts the project at <code>/ws</code> and uses <code>out/.repository</code> as its local Maven repository.
+That is what makes the build reproducible, and it is why the outcome does not depend on what is installed on your machine.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Docker needs at least <code>12 GB</code> of memory. <code>release-0-update-generated-code.sh</code> and <code>validate-release.sh</code> check this up front and abort if less is configured.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Every script aborts immediately if <code>git status</code> reports uncommitted or untracked files, because they all commit with <code>git add --all</code> and would otherwise sweep up unrelated changes.
+Start each step from a clean checkout.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note that the signing in <code>release-2-prepare-release.sh</code> and all <code>git</code> and <code>svn</code> operations run on your machine, not inside the container.
+So GPG, your git credentials and your Apache SVN credentials all have to work on the host.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_preparing_the_codebase_for_a_release"><a class="anchor" href="#_preparing_the_codebase_for_a_release"></a>Preparing the codebase for a release</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Usually you will have to update the RELEASE_NOTES document to the new version.
-I would suggest doing this prior to the branch as otherwise you will definitely have to port it back to <code>develop</code>.
-So remove the <code>SNAPSHOT</code> and <code>(Unreleased)</code> markers from the file and add missing parts.</p>
+<p>Run this in regular intervals during development, and definitely before starting a release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./tools/release-0-update-generated-code.sh</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Also, if you are doing the first release in a new year, it is advisable to search for the old year and check if any occurrences are ok the way they are.
-Usually the <code>NOTICE</code> file has to be adjusted.</p>
+<p>It performs the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deletes the <code>out</code> directory, which holds the Maven local repository and the artifacts of previous deployments.</p>
+</li>
+<li>
+<p>Deletes all generated code, and then re-generates it by running a full build with all profiles and <code>update-generated-code</code> enabled.
+This is the point of the script: types that are no longer produced by the code generation would otherwise stay behind and silently become part of the release.
+Hand-written files that live next to the generated ones are kept (<code>StaticHelper.go</code>, <code>StaticHelper_test.go</code>, <code>StaticHelper.py</code>, <code><em>init</em>.py</code>).</p>
+</li>
+<li>
+<p>Sets the second line of the <code>NOTICE</code> file to <code>Copyright 2017-&lt;current year&gt; The Apache Software Foundation</code>, which takes care of the yearly update.</p>
+</li>
+<li>
+<p>Re-generates the driver documentation by running <code>mvn site -pl :plc4j-driver-all</code>.</p>
+</li>
+<li>
+<p>Commits everything that changed as <code>chore: updated generated code</code> and pushes it.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The build in step 2 runs with tests skipped, so a green run of this script says the project still compiles and generates - not that it still works.</p>
+</div>
+<div class="sect2">
+<h3 id="_updating_the_release_notes"><a class="anchor" href="#_updating_the_release_notes"></a>Updating the RELEASE_NOTES</h3>
+<div class="paragraph">
+<p>This part is not automated and has to be done before creating the branch, because otherwise you will have to port it back to <code>develop</code> afterwards.</p>
+</div>
+<div class="paragraph">
+<p>Fill in the section for the version you are about to release: go through what has been merged since the last release and complete the <code>New Features</code>, <code>Incompatible changes</code> and <code>Bug Fixes</code> blocks.</p>
+</div>
+<div class="paragraph">
+<p>You do not have to touch the <code>(Unreleased) Apache PLC4X &lt;version&gt;-SNAPSHOT</code> header or add a section for the next version - <code>release-1-create-branch.sh</code> does both.</p>
+</div>
 </div>
 </div>
 </div>
@@ -722,90 +784,94 @@ Usually the <code>NOTICE</code> file has to be adjusted.</p>
 <h2 id="_creating_a_release_branch"><a class="anchor" href="#_creating_a_release_branch"></a>Creating a release branch</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>According to SemVer, we have: Major, Minor and Bugfix releases.</p>
-</div>
-<div class="paragraph">
-<p>For each new Major and Minor release we create a new branch at the beginning of a code-freeze phase.</p>
-</div>
-<div class="paragraph">
-<p>So if currently the project version in develop is <code>1.0.0-SNAPSHOT</code>, we create a branch <code>rel/{current-short-version}</code>.</p>
-</div>
-<div class="paragraph">
-<p>When creating the branch is exactly the moment in which the version in <code>develop</code> is incremented to the next minor version.</p>
-</div>
-<div class="paragraph">
-<p>This can and should be automated by the <code>maven-release-plugin</code>.</p>
-</div>
-<div class="paragraph">
-<p>Per default the plugin will ask for the working copy version during the build execution.
-This is the version the <code>develop</code> branch will be changed to.</p>
-</div>
-<div class="paragraph">
-<p>In contrast to normal builds, it is important to enable all profiles when creating the branch as only this way will all modules versions be updated.
-Otherwise, the non-default modules on develop will reference the old version which will cause problems when building.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks -DbranchName=rel/{minor-version}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Per default the plugin suggests the next bugfix version as working version, however we want it to use the next minor version.
-So in case of preparing the release branch for <code>1.0.0-SNAPSHOT</code> the command would be the following:</p>
+<p>According to SemVer, we have Major, Minor and Bugfix releases.
+For each new Major and Minor release we create a branch at the beginning of the code-freeze phase, and that is also the moment the version on <code>develop</code> is incremented.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   mvn release:branch -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks -DbranchName=rel/{current-short-version}</pre>
+<pre>./tools/release-1-create-branch.sh</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The plugin will then aks for the version:</p>
+<p>The script derives every version it needs from the current project version, so there is nothing to type in except one confirmation.
+For a <code>develop</code> sitting at <code>1.0.0-SNAPSHOT</code> that gives:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>   What is the new working copy version for "PLC4X"? (org.apache.plc4x:plc4x-parent) {current-next-incremental-version}-SNAPSHOT: : {current-next-minor-version}-SNAPSHOT</pre>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 16.6666%;">
+<col style="width: 50.0001%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Example</th>
+<th class="tableblock halign-left valign-top">Derived as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.0.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">project version without <code>-SNAPSHOT</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Branch name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rel/1.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">release version without a trailing <code>.0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New <code>develop</code> version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.1.0-SNAPSHOT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">release version with the minor segment incremented</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>It then:</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Asks <code>Have the RELEASE_NOTES been updated for this version?</code>.
+Anything other than <code>yes</code> aborts.</p>
+</li>
+<li>
+<p>Rewrites the <code>(Unreleased) Apache PLC4X 1.0.0-SNAPSHOT</code> header in the <code>RELEASE_NOTES</code> to <code>Apache PLC4X 1.0.0</code> and commits that.</p>
+</li>
+<li>
+<p>Checks that <code>user.name</code> and <code>user.email</code> are configured in git, and prints the commands to fix it if they are not.
+The commit is created inside the container, so it needs these values passed in explicitly.</p>
+</li>
+<li>
+<p>Runs <code>mvn release:branch</code> inside the container with <code>-DpushChanges=false</code>, with all profiles enabled.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Enabling all profiles is what makes the plugin update the versions of the non-default modules too.
+Without that, those modules on <code>develop</code> would keep referencing the old version and the build would break.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Prepends a fresh <code>(Unreleased) Apache PLC4X 1.1.0-SNAPSHOT</code> section to the <code>RELEASE_NOTES</code> and commits it.</p>
+</li>
+<li>
+<p>Pushes <code>develop</code>, checks out <code>rel/1.0</code> and pushes that with <code>--set-upstream</code>.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Here the suggested default has to be manually overridden.</p>
+<p>When this is done, your local checkout is on the release branch and <code>develop</code> has moved on to the next minor version.</p>
 </div>
 <div class="paragraph">
-<p>This step now should perform quite quickly as no build and no tests are involved.</p>
-</div>
-<div class="paragraph">
-<p>However, in the end the versions of the <code>develop</code> branch are updated and a new <code>rel/{current-short-version}</code> branch is created.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_preparing_develop_for_the_next_iteration"><a class="anchor" href="#_preparing_develop_for_the_next_iteration"></a>Preparing <code>develop</code> for the next iteration</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now is a good time to add a new section to the <code>RELEASE_NOTES</code> document for the new <code>SNAPSHOT</code> version.</p>
-</div>
-<div class="paragraph">
-<p>Here comes a template:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>==============================================================
-(Unreleased) Apache PLC4X {current-next-minor-version}-SNAPSHOT
-==============================================================
-
-New Features
-------------
-
-Incompatible changes
---------------------
-
-Bug Fixes
----------
-
-// Rest of the file</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Also be sure to do a quick full-text-search to check if the version was updated correctly everywhere.</p>
+<p>Afterwards do a quick full-text search for the old version to check it was updated everywhere.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -819,103 +885,224 @@ If you find anything here, you will need to pay attention during the release.
 </tr>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_how_the_documentation_version_is_maintained"><a class="anchor" href="#_how_the_documentation_version_is_maintained"></a>How the documentation version is maintained</h3>
+<div class="paragraph">
+<p>You do not have to do anything here - <code>release-1-create-branch.sh</code> takes care of it - but it is
+worth understanding, because it is the part that decides which version the website serves as
+the current one.</p>
+</div>
+<div class="paragraph">
+<p>Every branch names the concrete version it documents in its own <code>website/asciidoc/antora.yml</code>,
+and marks whether that version is released yet:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Branch</th>
+<th class="tableblock halign-left valign-top"><code>version:</code></th>
+<th class="tableblock halign-left valign-top"><code>prerelease:</code></th>
+<th class="tableblock halign-left valign-top">Published as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>develop</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.1.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>True</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/plc4x/pre-release/&#8230;&#8203;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rel/1.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.0.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>False</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/plc4x/latest/&#8230;&#8203;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rel/0.13</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.13.1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>False</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/plc4x/0.13.1/&#8230;&#8203;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rel/0.12</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0.12.0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>False</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/plc4x/0.12.0/&#8230;&#8203;</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A release branch does not start out like that, though.
+<code>release-1-create-branch.sh</code> creates it with <code>prerelease: True</code>, because at that point nothing has been voted on yet.</p>
+</div>
+<div class="paragraph">
+<p>While the code freeze and the vote are running, none of it is published at all: Antora only reads
+the branches listed in <code>content.sources</code> in <code>website/antora-playbook.yml</code>, and the new branch is
+only added there by <code>release-3-finish-release.sh</code>, after the vote.
+<code>/plc4x/latest/</code> therefore keeps serving the <strong>previous</strong> release throughout.</p>
+</div>
+<div class="paragraph">
+<p>The <code>prerelease</code> flag matters at the moment the branch is added.
+Antora skips prereleases when it picks the latest version, so a branch added while still flagged
+would appear under its own version number instead of taking over <code>/plc4x/latest/</code>.
+<code>release-3-finish-release.sh</code> adds the branch and clears the flag in the same run, and that is what
+promotes the new release to <code>/plc4x/latest/</code> and moves the previous one to its own version number.</p>
+</div>
+<div class="paragraph">
+<p>No branch names itself <code>latest</code> or <code>pre-release</code>.
+Those two segments come from the playbook instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>urls:
+  latest_version_segment: latest
+  latest_prerelease_version_segment: pre-release</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Antora picks the latest version of a component by version sorting and skips prereleases while
+doing so, then publishes that one under the symbolic segment.
+<code>develop</code> can therefore never become <code>latest</code>, and creating a newer release branch demotes the
+previous one to its own version number without anything on that older branch having to change.</p>
+</div>
+<div class="paragraph">
+<p><code>release-1-create-branch.sh</code> moves <code>develop</code> on to the next version and sets the new release branch to the version it is going to release, both still flagged as prereleases.
+<code>release-3-finish-release.sh</code> takes the version from the tag <code>release-2-prepare-release.sh</code> created and clears the prerelease flag, so it also does the right thing for a bugfix release, where <code>release-1-create-branch.sh</code> never runs.</p>
+</div>
+<div class="paragraph">
+<p>The two <code>current-*-version</code> attributes further down in the same file are kept in sync by the
+build and should not be edited by hand either.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_release_stabilization_phase"><a class="anchor" href="#_release_stabilization_phase"></a>Release stabilization phase</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now usually comes a phase in which last tests and checks should be performed.</p>
+<p>Now usually comes a phase in which last tests and checks are performed.</p>
 </div>
 <div class="paragraph">
 <p>If any problems are found, they have to be fixed in the release branch.</p>
 </div>
 <div class="paragraph">
-<p>Changes should either be re applied in <code>develop</code> or <code>cherry-picked</code>, however merging things back can cause a lot of problems, and we no longer have the same versions.</p>
+<p>Changes should either be re-applied in <code>develop</code> or <code>cherry-picked</code>.
+Merging things back causes a lot of problems, as the branches no longer share the same versions.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_preparing_a_release"><a class="anchor" href="#_preparing_a_release"></a>Preparing a release</h2>
+<h2 id="_preparing_and_staging_a_release_candidate"><a class="anchor" href="#_preparing_and_staging_a_release_candidate"></a>Preparing and staging a release candidate</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Same as with creating the branch it is important to enable all profiles when creating the branch as only this way will all modules versions be updated.
-Otherwise, the non-default modules on develop will reference the old version which will cause problems when building.
-For people building with some additional profiles from the source release will be impossible.</p>
-</div>
-<div class="paragraph">
 <p>As especially when switching a lot between different branches, it is recommended to do a clean checkout of the repository.
-Otherwise, a lot of directories can be left over, which would be included in the source-release zip.
-In order to prepare a release-candidate, the first step is switching to the corresponding release-branch.</p>
+Otherwise, a lot of directories can be left over, which would be included in the source-release zip.</p>
 </div>
 <div class="paragraph">
-<p>After that, the following command will to all preparation steps for the release:</p>
+<p>Make sure you are on the release branch, then run:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>mvn release:prepare -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</pre>
+<pre>./tools/release-2-prepare-release.sh</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(The <code>-P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</code> tells maven to activate the all profiles that partition the build and makes sure the versions of all modules are updated as part of the release)
-In general the plugin will now ask you 3 questions:</p>
+<p>This is the long one - it takes the release from a tagged commit all the way to a staged release candidate and a drafted vote mail.
+The only thing it asks for is the release-candidate number.</p>
+</div>
+<div class="paragraph">
+<p>Before it does anything, it derives the release version (<code>1.0.0</code>), the tag name (<code>v1.0.0</code>) and the next development version (<code>1.0.1-SNAPSHOT</code> - note this is a <strong>bugfix</strong> bump, unlike in <code>release-1</code>), and it refuses to continue if the tag already exists locally or on <code>origin</code>, telling you exactly how to remove it.
+This is the usual outcome of an earlier failed attempt.</p>
+</div>
+<div class="paragraph">
+<p>It then works through these steps:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The version we want to release as (It will suggest the version you get by omitting the <code>-SNAPSHOT</code> suffix)</p>
+<p>Runs <code>mvn release:prepare</code> in the container with all profiles enabled and the versions and tag passed in explicitly, so the plugin asks no questions.
+This checks that no <code>SNAPSHOT</code> dependencies are referenced, updates all poms, runs a full build with tests, commits, tags and prepares the next development version.</p>
 </li>
 <li>
-<p>The name of the tag the release commit will be tagged with in the SCM (Name it <code>v{release-version}</code> (<code>v1.0.0</code> in our case)</p>
+<p>Pushes the result and records the commit hash the tag points at, for the vote mail.</p>
 </li>
 <li>
-<p>The next development version (The version present in the pom after the release) (<code>{current-next-bugfix-version}</code> in our case)</p>
+<p>Runs <code>mvn release:perform</code> in the container, deploying into <code>out/.local-artifacts-dir</code> rather than straight to Nexus.
+Nothing leaves your machine yet.</p>
+</li>
+<li>
+<p>Signs every artifact in that directory with <code>gpg -ab</code> - poms, jars, kars, nars, feature and site descriptors, the CycloneDX SBOMs and the source-release zip.
+This runs on the host, using your GPG setup.</p>
+</li>
+<li>
+<p>Uploads the signed repository to Nexus with <code>nexus-staging:deploy-staged-repository</code> and closes it, then prints the URL of the closed staging repository.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If this fails with a <code>404</code>, the staging profile id hard-coded in the script is out of date.
+Log in to <a href="https://repository.apache.org" class="bare">https://repository.apache.org</a>, open <code>Staging Profiles</code>, select <code>org.apache.plc4x</code> and take the id out of the browser URL after <code>#stagingProfiles;</code>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Asks for the release-candidate number and assembles <code>out/stage/&lt;version&gt;/rc&lt;n&gt;/</code> containing the <code>README</code>, the <code>RELEASE_NOTES</code>, the source-release zip with its <code>.asc</code> and <code>.sha512</code>, and the CycloneDX SBOMs with their signatures.</p>
+</li>
+<li>
+<p>Downloads the official <a href="https://dist.apache.org/repos/dist/release/plc4x/KEYS">KEYS</a> file, imports it into a throw-away keyring, verifies the signature against it, and checks that the key which made the signature carries an <code>apache.org</code> address.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+These are the checks that catch the classic first-time-release-manager mistakes.
+If the first fails, your key is not in the <code>KEYS</code> file yet - add it, following the format documented in the file itself.
+If the second fails, you signed with a key that is not registered to your <code>{apache-id}@apache.org</code> address; the script prints the user ids the key does carry.
+A key may have several user ids and only one of them has to be the Apache one.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Re-computes the SHA-512 of the source-release zip and compares it against the <code>.sha512</code> file.</p>
+</li>
+<li>
+<p>Imports the release-candidate directory into the Apache dev SVN with <code>svn import</code>, which gives the layout the vote mail refers to:</p>
+<div class="listingblock">
+<div class="content">
+<pre>   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/README
+   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/RELEASE_NOTES
+   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip
+   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip.asc
+   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip.sha512</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Writes <code>out/stage/vote-email.eml</code> and <code>out/stage/discuss-email.eml</code>, already filled in with the release version, the RC number, the tag commit hash, the staging repository URL and the SVN URL.</p>
 </li>
 </ol>
 </div>
+<div class="sect2">
+<h3 id="_verifying_the_git_history"><a class="anchor" href="#_verifying_the_git_history"></a>Verifying the git history</h3>
 <div class="paragraph">
-<p>Usually for 1 and 3 the defaults are just fine, make sure the tag name is correct as this usually is different.</p>
-</div>
-<div class="paragraph">
-<p>What the plugin now does, is automatically execute the following operations:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Check we aren&#8217;t referencing any <code>SNAPSHOT</code> dependencies.</p>
-</li>
-<li>
-<p>Update all pom versions to the release version.</p>
-</li>
-<li>
-<p>Run a build with all tests</p>
-</li>
-<li>
-<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare release v1.0.0</code>)</p>
-</li>
-<li>
-<p>Push the commit</p>
-</li>
-<li>
-<p>Tag the commit</p>
-</li>
-<li>
-<p>Update all poms to the next development version.</p>
-</li>
-<li>
-<p>Commit the changes (commit message: <code>[maven-release-plugin] prepare for next development iteration</code>)</p>
-</li>
-<li>
-<p>Push the commit</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>However, this just prepared the git repository for the release, we have to perform the release to produce and stage the release artifacts.</p>
-</div>
-<div class="paragraph">
-<p>Please verify the git repository at: <a href="https://gitbox.apache.org/repos/asf?p=plc4x.git" class="bare">https://gitbox.apache.org/repos/asf?p=plc4x.git</a>
-is in the correct state. Please select the release branch and verify the commit log looks similar to this</p>
+<p>Even though this is now scripted, it is worth checking that the repository at <a href="https://gitbox.apache.org/repos/asf?p=plc4x.git" class="bare">https://gitbox.apache.org/repos/asf?p=plc4x.git</a> ended up in the right state.
+Select the release branch and verify the commit log looks like this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -923,29 +1110,8 @@ is in the correct state. Please select the release branch and verify the commit 
 </div>
 </div>
 <div class="paragraph">
-<p>It is important that the commit with the message "[maven-release-plugin] prepare release v{release-version}" is tagged with the release tag (in this case v1.0.0)</p>
-</div>
-<div class="paragraph">
-<p>If you check the commit itself, it should mainly consist of version updates like this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/release-git-diff-prepare-release.png" alt="release git diff prepare release">
-</div>
-</div>
-<div class="paragraph">
-<p>The root pom has a few more changes, but in general this should be what you are seeing.</p>
-</div>
-<div class="paragraph">
-<p>After that should come a second commit:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/release-git-diff-next-development-iteration.png" alt="release git diff next development iteration">
-</div>
-</div>
-<div class="paragraph">
-<p>This now updates the versions again, but this time from the release version to the one we selected for the next development iteration (in this case 0.3.1-SNAPSHOT)</p>
+<p>The commit with the message <code>[maven-release-plugin] prepare release v1.0.0</code> has to carry the release tag, and it should consist of nothing but version updates.
+It is followed by a <code>[maven-release-plugin] prepare for next development iteration</code> commit that moves the branch on to the next bugfix version.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -961,38 +1127,285 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_starting_a_vote_on_the_mailing_list"><a class="anchor" href="#_starting_a_vote_on_the_mailing_list"></a>Starting a vote on the mailing list</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The two mails were drafted for you in <code>out/stage/</code>.
+Read them once, then send them - the <code>[VOTE]</code> mail from <code>vote-email.eml</code> and the <code>[DISCUSS]</code> mail from <code>discuss-email.eml</code>, both to <a href="mailto:dev@plc4x.apache.org">dev@plc4x.apache.org</a>.</p>
+</div>
+<div class="paragraph">
+<p>The reason for the second mail is that counting votes gets hard if the voting and the discussion happen in the same thread.</p>
+</div>
+<div class="paragraph">
+<p>Now we have to wait 72 hours before the result can be announced.
+This is an Apache policy, so that anyone can participate no matter where they live or what weekends and public holidays are currently happening.</p>
+</div>
+<div class="paragraph">
+<p>The vote passes if at least 3 binding <code>+1</code> votes are received and more <code>+1</code> than <code>-1</code>.</p>
+</div>
+<div class="paragraph">
+<p>After the 72 hours are over and that requirement is met, the vote is closed with a reply to the
+vote thread, prefixed <code>[RESULT]</code>.
+<code>release-3-finish-release.sh</code> drafts that mail for you - it asks for the two vote counts and writes
+<code>out/stage/result-email.eml</code>, before it publishes anything, so you get it even if you stop the
+script at the confirmation.</p>
+</div>
+<div class="sect2">
+<h3 id="_validating_a_release_candidate"><a class="anchor" href="#_validating_a_release_candidate"></a>Validating a release candidate</h3>
+<div class="paragraph">
+<p>Anyone voting can check that the staged artifacts really are reproducible from the staged sources:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./tools/validate-release.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It builds the project in the same container and then uses <code>artifact:compare</code> against the staging
+repository to compare the result byte for byte.</p>
+</div>
+<div class="paragraph">
+<p>Run it inside an unpacked <code>apache-plc4x-&lt;version&gt;-source-release.zip</code>, or in a checkout of the
+release tag - it refuses to run on a <code>SNAPSHOT</code> version, because comparing a development build
+against a release repository says nothing about the release candidate.
+Only the Java artifacts are compared; the C, .Net and Python ones are either platform specific or
+not published to Maven at all.</p>
+</div>
+<div class="paragraph">
+<p>The full list of things a voter is expected to check is documented on the <a href="validation.html" class="xref page">validating a release</a> page.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_what_if_something_goes_wrong"><a class="anchor" href="#_what_if_something_goes_wrong"></a>What if something goes wrong?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If something goes wrong, you can always execute:</p>
+<p><code>tools/release-abort.sh</code> helps with unwinding an attempt:</p>
 </div>
-<div class="literalblock">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sets the versions in all modules back to the development version.
+Which version that is cannot be derived - after <code>release:branch</code> the poms hold the next minor version, after <code>release:prepare</code> the next bugfix version - so pass it as an argument or answer the prompt:</p>
+<div class="listingblock">
 <div class="content">
-<pre>mvn release:rollback -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</pre>
+<pre>   ./tools/release-abort.sh 1.0.0-SNAPSHOT</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>It will change the versions back and commit and push things.</p>
+</li>
+<li>
+<p>Deletes the left-over <code>release.properties</code>, <code>pom.xml.versionsBackup</code> and <code>pom.xml.releaseBackup</code> files.</p>
+</li>
+<li>
+<p>Offers to delete the release tag and the release branch, locally and on the remote, asking separately for each and skipping the ones that do not exist.</p>
+</li>
+</ol>
 </div>
-<div class="paragraph">
-<p>Also, should you check if you have any uncommitted changes (as our code-generation can make git think they are "dirty")</p>
-</div>
-<div class="paragraph">
-<p>However, it will not delete the tag in GIT (locally and remotely). So you have to do that manually or use a different tag next time.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+It does not undo everything. Commits <code>release-1-create-branch.sh</code> already pushed to
+<code>develop</code> - the finalized <code>RELEASE_NOTES</code>, the section for the next version and the documentation
+version in <code>website/asciidoc/antora.yml</code> - stay, as does a release candidate staged in SVN and a
+Nexus staging repository. The script lists those at the end so they are not forgotten; the next
+section covers removing them.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_performing_a_release"><a class="anchor" href="#_performing_a_release"></a>Performing a release</h2>
+<h2 id="_going_back_for_a_new_release_candidate"><a class="anchor" href="#_going_back_for_a_new_release_candidate"></a>Going back for a new release candidate</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is done by executing another goal of the <code>maven-release-plugin</code>:</p>
+<p>If a vote fails and a new RC is needed:</p>
 </div>
-<div class="literalblock">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run <code>tools/release-abort.sh</code> to reset the versions and clean up the left-over files.</p>
+</li>
+<li>
+<p>Delete the tag locally and remotely:</p>
+<div class="listingblock">
 <div class="content">
-<pre>mvn clean release:perform</pre>
+<pre>   git tag -d v1.0.0
+   git push --delete origin v1.0.0</pre>
 </div>
+</div>
+</li>
+<li>
+<p>Commit and push the version changes.</p>
+</li>
+<li>
+<p>Drop the staging repository at <a href="https://repository.apache.org" class="bare">https://repository.apache.org</a>.</p>
+</li>
+<li>
+<p>Remove the previous RC from SVN:</p>
+<div class="listingblock">
+<div class="content">
+<pre>   svn rm https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1 -m"Removed rc1 of PLC4X 1.0.0"</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Reply to the <code>VOTE</code> and <code>DISCUSS</code> threads announcing that the vote has been cancelled, explaining why and that a new RC will follow.
+Prefix the subject with <code>[CANCELLED]</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After this you can run <code>release-2-prepare-release.sh</code> again and give it the next RC number.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="after-a-successful-vote"><a class="anchor" href="#after-a-successful-vote"></a>After a successful vote</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>tools/release-3-finish-release.sh</code> covers this part.</p>
+</div>
+<div class="paragraph">
+<p>Run it on the release branch once the vote has passed - it refuses to run anywhere else, because
+everything it does writes to that branch.</p>
+</div>
+<div class="paragraph">
+<p>It asks for confirmation, then takes the released version from the release tag and does five things:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On the release branch: points the Antora descriptor at that version and clears the <code>prerelease</code> flag, which is what publishes the new release as <code>/plc4x/latest/</code>, and adds the release to that branch&#8217;s download page.</p>
+</li>
+<li>
+<p>On <code>develop</code>: adds the release branch to the <code>content.sources</code> list in <code>website/antora-playbook.yml</code>, which is what makes Antora read the branch at all.</p>
+</li>
+<li>
+<p>On <code>develop</code>: adds the released version to <code>website/resources/plc4x-doap.rdf</code>, at the top of the list and named <code>Latest</code>, demoting the entry that held that title to <code>Legacy</code>, and adds the release to `develop&#8217;s copy of the download page.
+The release date is the day the script runs.</p>
+</li>
+<li>
+<p>Drafts the <code>[RESULT]</code> and <code>[ANNOUNCE]</code> mails into <code>out/stage/</code>, the same way <code>release-2-prepare-release.sh</code> drafts the <code>[VOTE]</code> and <code>[DISCUSS]</code> ones.
+Nothing is sent - you read them and send them yourself.</p>
+</li>
+<li>
+<p>Publishes the artifacts and clears away what the earlier attempts left behind - see <a href="#_releasing_the_artifacts">Releasing the artifacts</a>.
+This asks for a second confirmation, because it cannot be undone.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The two changes to <code>develop</code> are made in a throw-away worktree and pushed straight to it, so your
+checkout stays on the release branch - your local <code>develop</code> will be one commit behind afterwards.</p>
+</div>
+<div class="paragraph">
+<p>The documentation steps are skipped if they have already been done, so re-running the script is
+harmless up to the point where it starts publishing - and that part asks first.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Everything else in this section still has to be done by hand.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_releasing_the_artifacts"><a class="anchor" href="#_releasing_the_artifacts"></a>Releasing the artifacts</h3>
+<div class="paragraph">
+<p><code>release-3-finish-release.sh</code> does this, and it is the point of no return - neither half can be
+undone, which is why it asks once more before going ahead, showing exactly what it is about to do.</p>
+</div>
+<div class="paragraph">
+<p>It works out which release candidate to publish by taking the highest numbered <code>rc</code> still staged
+under <code><a href="https://dist.apache.org/repos/dist/dev/plc4x/" class="bare">https://dist.apache.org/repos/dist/dev/plc4x/</a></code>, then:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Moves that release candidate to <code><a href="https://dist.apache.org/repos/dist/release/plc4x/" class="bare">https://dist.apache.org/repos/dist/release/plc4x/</a></code>, which is what starts the artifacts being copied to the mirrors.
+This is why you have to wait at least 24 hours before announcing.</p>
+</li>
+<li>
+<p>Releases the Nexus staging repository with <code>nexus-staging:rc-release</code>, moving the Maven artifacts into the Apache release repository, from where they are synced to Maven Central.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The staging repository id is read from the file <code>release-2-prepare-release.sh</code> left in
+<code>out/.local-artifacts-dir</code>.
+That directory does not survive <code>release-0-update-generated-code.sh</code> and is not there at all if
+you finish the release on a different machine, in which case the script asks for the id - it is the
+last part of the URL in <code>[1]</code> of the <code>VOTE</code> email, e.g. <code>orgapacheplc4x-1234</code>.</p>
+</div>
+<div class="paragraph">
+<p>The SVN move is skipped if the version is already published.
+Nexus has no equally cheap way of being asked, so if the release is already out in SVN the script
+assumes the staging repository went with it and asks before trying again - which is also how you
+recover from a run where the move succeeded but the Nexus release did not.</p>
+</div>
+<div class="sect3">
+<h4 id="_cleaning_up_afterwards"><a class="anchor" href="#_cleaning_up_afterwards"></a>Cleaning up afterwards</h4>
+<div class="paragraph">
+<p>Only the winning release candidate was moved, a vote that had to be repeated leaves a closed
+staging repository behind for each attempt, and Apache policy is that the mirrors carry only the
+current release.
+The script offers to clear all three away, asking before it deletes anything:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>It lists what is left under <code><a href="https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/" class="bare">https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/</a></code> and offers to remove that whole directory.</p>
+</li>
+<li>
+<p>It lists the older releases still under <code><a href="https://dist.apache.org/repos/dist/release/plc4x/" class="bare">https://dist.apache.org/repos/dist/release/plc4x/</a></code> and offers to remove them.
+Only directories that look like a version are considered - <code>KEYS</code>, <code>build-tools</code> and <code>plc4x-extras</code> live in the same place and are left alone.</p>
+</li>
+<li>
+<p>It runs <code>nexus-staging:rc-list</code> and prints the staging repositories that exist, then asks which ids to drop.
+Nexus gives us nothing we could reliably use to tell which repository belonged to which attempt, so this one is left as a decision rather than guessed at - leave the answer empty to keep them all.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Removing an older release does not make it unavailable: it stays on
+<a href="https://archive.apache.org/dist/plc4x/" class="bare">https://archive.apache.org/dist/plc4x/</a>, and <a href="https://downloads.apache.org" class="bare">https://downloads.apache.org</a> redirects there for
+anything it no longer carries, so the links on the download page keep working.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_updating_the_website"><a class="anchor" href="#_updating_the_website"></a>Updating the website</h3>
+<div class="paragraph">
+<p><code>release-3-finish-release.sh</code> does all of this.
+Old releases are not dropped from the Antora playbook automatically, though - decide for yourself
+how many <strong>versions of the documentation</strong> the website should keep building. That is separate from
+the mirrors, which only ever carry the current release.</p>
+</div>
+<div class="paragraph">
+<p>The download page is worth a word, because it exists once per branch that publishes documentation
+and every copy has to list the release: <code>/plc4x/latest/users/download.html</code> is served from the
+release branch, <code>/plc4x/pre-release/&#8230;&#8203;</code> from <code>develop</code>.
+The script updates both, identically.</p>
+</div>
+<div class="paragraph">
+<p>For each copy it moves the entry that was current down into <em>Previous Releases</em>, pointing its
+source-release link at the archive, and puts the new release at the top of <em>Current Releases</em> with
+an anchor for the ToC.
+The release notes are taken from the <code>RELEASE_NOTES</code> of the release branch and converted to
+AsciiDoc.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1001,342 +1414,19 @@ If the commit history doesn&#8217;t look like this, something went wrong.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The clean is only for making sure there is no artifacts in <code>target</code> directly, but only in <code>target/checkout/target</code>.
+A bullet that is wrapped over several lines in the <code>RELEASE_NOTES</code> becomes a single line on
+the download page. That is deliberate: a continuation line starting with something like
+<code>18446744073709551615.</code> would otherwise be read as an ordered list item by AsciiDoc. It renders the
+same either way.
 </td>
 </tr>
 </table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_merging_back_to_the_release_branch"><a class="anchor" href="#_merging_back_to_the_release_branch"></a>Merging back to the <code>release</code> branch</h3>
 <div class="paragraph">
-<p>This executes automatically as all information it requires is located in the <code>release.properties</code> file the <code>prepare</code>-goal prepared.</p>
-</div>
-<div class="paragraph">
-<p>The first step is that the <code>perform</code>-goal checks out the previously tagged revision into the root modules <code>target/checkout</code> directory.
-Here it automatically executes a maven build (You don&#8217;t have to do this, it&#8217;s just that you know what&#8217;s happening):</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>mvn deploy -P apache-release</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As the <code>apache-release</code> profile is also activated, this builds and tests the project as well as creates the JavaDocs, Source packages and signs each of these with your PGP key.</p>
-</div>
-<div class="paragraph">
-<p>We are intentionally not adding the other profiles, as these either produce binary artifacts that usually only work on the system they were compiled on (C++, .Net) or we haven&#8217;t found a good way to distribute them via Maven yet (Python).</p>
-</div>
-<div class="paragraph">
-<p>As this time the build is building with release versions, Maven will automatically choose the release url for deploying artifacts.</p>
-</div>
-<div class="paragraph">
-<p>The way things are set up in the apache parent pom, is that release artifacts are deployed to a so-called <code>staging repository</code>.</p>
-</div>
-<div class="paragraph">
-<p>You can think of a <code>staging repository</code> as a dedicated repository created on the fly as soon as the first artifact comes in.</p>
-</div>
-<div class="paragraph">
-<p>After the build you will have a nice and clean Maven repository at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a> that contains only artifacts from the current build.</p>
-</div>
-<div class="paragraph">
-<p>After the build it is important to log in to <code>Nexus</code> at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a>, select <code>Staging Repositories</code> and find the repository with the name: <code>orgapacheplc4x-{somenumber}</code>.</p>
-</div>
-<div class="paragraph">
-<p>Select that and click on the <code>Close</code> button.</p>
-</div>
-<div class="paragraph">
-<p>Now Nexus will do some checks on the artifacts and check the signatures.</p>
-</div>
-<div class="paragraph">
-<p>As soon as it&#8217;s finished, we are done on the Maven side and ready to continue with the rest of the release process.</p>
-</div>
-<div class="paragraph">
-<p>A release build also produces a so-called <code>source-assembly</code> zip.</p>
-</div>
-<div class="paragraph">
-<p>This contains all sources of the project and will be what&#8217;s actually the release from an Apache point of view and will be the thing we will be voting on.</p>
-</div>
-<div class="paragraph">
-<p>This file will also be signed and <code>SHA512</code> hashes will be created.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_staging_a_release"><a class="anchor" href="#_staging_a_release"></a>Staging a release</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Each new release and release-candidate has to be staged in the Apache SVN under:</p>
-</div>
-<div class="paragraph">
-<p><a href="https://dist.apache.org/repos/dist/dev/plc4x/" class="bare">https://dist.apache.org/repos/dist/dev/plc4x/</a></p>
-</div>
-<div class="paragraph">
-<p>The directory structure of this directory is as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>   ./KEYS
-   ./1.0.0/
-   ./1.0.0/rc1
-   ./1.0.0/rc1/README
-   ./1.0.0/rc1/RELEASE_NOTES
-   ./1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip
-   ./1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip.asc
-   ./1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip.sha512</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can generally import the stuff, by preparing a directory structure like above locally and then using <code>svn import</code> to do the importing:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>cd ./{current-full-version}
-svn import rc1 https://dist.apache.org/repos/dist/dev/plc4x/{current-full-version}/rc1 -m"Staging of rc1 of PLC4X {current-full-version}"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>KEYS</code> file contains the PGP public key which belongs to the private key used to sign the release artifacts.</p>
-</div>
-<div class="paragraph">
-<p>If this is your first release be sure to add your key to this file.
-For the format have a look at the file itself.
-It should contain all the information needed.</p>
-</div>
-<div class="paragraph">
-<p>Be sure to stage exactly the <code>README</code> and <code>RELEASE_NOTES</code> files contained in the root of your project.
-Ideally you just copy them there from there.</p>
-</div>
-<div class="paragraph">
-<p>All three <code><strong>-source-relese.zip</strong></code> artifacts should be located in the directory: <code>target/checkout/target</code></p>
-</div>
-<div class="paragraph">
-<p>After committing these files to SVN you are ready to start the vote.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_starting_a_vote_on_the_mailing_list"><a class="anchor" href="#_starting_a_vote_on_the_mailing_list"></a>Starting a vote on the mailing list</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>After staging the release candidate in the Apache SVN, it is time to actually call out the vote.</p>
-</div>
-<div class="paragraph">
-<p>For this we usually send two emails.
-The following would be the one used to do our first TLP release:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>E-Mail Topic:
-[VOTE] Apache PLC4X 1.0.0 RC1
-
-Message:
-Apache PLC4X 1.0.0 has been staged under [2] and it’s time to vote
-on accepting it for release. All Maven artifacts are available under [1].
-Voting will be open for 72hr.
-
-A minimum of 3 binding +1 votes and more binding +1 than binding -1
-are required to pass.
-
-Release tag: v1.0.0
-Hash for the release tag: {replacethiswiththerealgitcommittag}
-
-Per [3] "Before voting +1 PMC members are required to download
-the signed source code package, compile it as provided, and test
-the resulting executable on their own platform, along with also
-verifying that the package meets the requirements of the ASF policy
-on releases."
-
-You can achieve the above by following [4].
-
-[ ]  +1 accept (indicate what you validated - e.g. performed the non-RM items in [4])
-[ ]  -1 reject (explanation required)
-
-
-[1] https://repository.apache.org/content/repositories/orgapacheplc4x-{somefourdigitnumber}
-[2] https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1
-[3] https://www.apache.org/legal/release-policy.html#approving-a-release
-[4] https://cwiki.apache.org/confluence/display/PLC4X/Validating+a+staged+Release</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As it is sometimes to do the vote counting, if voting and discussions are going on in the same thread, we send a second email:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>E-Mail Topic:
-[DISCUSS] Apache PLC4X 1.0.0 RC1
-
-Message:
-This is the discussion thread for the corresponding VOTE thread.
-
-Please keep discussions in this thread to simplify the counting of votes.
-
-If you have to vote -1 please mention a brief description on why and then take the details to this thread.</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now we have to wait 72 hours till we can announce the result of the vote.</p>
-</div>
-<div class="paragraph">
-<p>This is an Apache policy to make it possible for anyone to participate in the vote, no matter where that person lives and not matter what weekends or public holidays might currently be.</p>
-</div>
-<div class="paragraph">
-<p>The vote passes, if at least 3 <code>+1</code> votes are received and more <code>+1</code> are received than <code>-1</code>.</p>
-</div>
-<div class="paragraph">
-<p>After the 72-hour minimum wait period is over and we have fulfilled the requirement of at least 3 +1 votes and more +1 than -1, a final reply is sent to the vote thread with a prefix of <code>[RESULT]</code> in the title in which the summary of the vote is presented in an aggregated form.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>E-Mail Topic:
-[RESULT] [VOTE] Apache PLC4X 1.0.0 RC1
-
-Message:
-So, the vote passes with {number of +1 votes} +1 votes by PMC members {number of +1 votes from non-pmc members} +1 vote by a non PMC member.</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_releasing_after_a_successful_vote"><a class="anchor" href="#_releasing_after_a_successful_vote"></a>Releasing after a successful vote</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>As soon as the votes are finished, and the results were in favor of a release, the staged artifacts can be released.
-This is done by moving them inside the Apache SVN.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>   svn move -m "Release Apache PLC4X 1.0.0" \
-       https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1 \
-       https://dist.apache.org/repos/dist/release/plc4x/1.0.0</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will make the release artifacts available and will trigger them being copied to mirror sites.</p>
-</div>
-<div class="paragraph">
-<p>This is also the reason why you should wait at least 24 hours before sending out the release notification emails.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_going_back_for_a_new_release_candidate"><a class="anchor" href="#_going_back_for_a_new_release_candidate"></a>Going back for a new release candidate</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If however for some reason it is needed to prepare a new RC for the release. Please follow these steps:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Set the versions of the release branch to the previous version by using the <code>versions:set</code> plugin:</p>
-<div class="literalblock">
-<div class="content">
-<pre>mvn versions:set -DprocessAllModules=true -P with-c,with-dotnet,with-go,with-java,with-python,enable-all-checks</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Delete the tag locally:</p>
-<div class="literalblock">
-<div class="content">
-<pre>git tag -d v{current-full-version}</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Delete the tag remotely:</p>
-<div class="literalblock">
-<div class="content">
-<pre>git push --delete origin v{current-full-version}</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Commit all changes</p>
-</li>
-<li>
-<p>Drop the staging repo at <a href="https://repository.apache.org" class="bare">https://repository.apache.org</a></p>
-</li>
-<li>
-<p>Delete the previous RC in SVN</p>
-<div class="literalblock">
-<div class="content">
-<pre>svn rm https://dist.apache.org/repos/dist/dev/plc4x/0.9.0/rc1 -m"Removed rc1 of PLC4x 0.9.0"</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Reply to the <code>VOTE</code> and the <code>DISCUSS</code> announcing the vote has been cancelled and explain why and that you&#8217;re going to start a new RC soon. Ideally prefix the title of the Emails with <code>[CANCELLED]</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>After this you should be ready to start a new RC.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_cleaning_up_older_release_versions"><a class="anchor" href="#_cleaning_up_older_release_versions"></a>Cleaning up older release versions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>As a lot of mirrors are serving our releases, it is the Apache policy to clean old releases from the repo if newer versions are released.</p>
-</div>
-<div class="paragraph">
-<p>This can be done like this:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>svn delete https://dist.apache.org/repos/dist/release/plc4x/{current-full-version}/ -m"deleted version {current-full-version}"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>After this <a href="https://dist.apache.org/repos/dist/release/plc4x" class="bare">https://dist.apache.org/repos/dist/release/plc4x</a> should only contain the latest release directory.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_releasing_the_maven_artifacts"><a class="anchor" href="#_releasing_the_maven_artifacts"></a>Releasing the Maven artifacts</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Probably the simplest part is releasing the Maven artifacts.</p>
-</div>
-<div class="paragraph">
-<p>To do this, the release manager logs into Nexus at <a href="https://repository.apache.org/" class="bare">https://repository.apache.org/</a>, selects the staging repository and clicks on the <code>Release</code> button.</p>
-</div>
-<div class="paragraph">
-<p>This will move all artifacts into the Apache release repository and delete the staging repository after that.</p>
-</div>
-<div class="paragraph">
-<p>All release artifacts released to the Apache release repo, will automatically be synced to Maven central.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_add_the_version_to_the_doap_file"><a class="anchor" href="#_add_the_version_to_the_doap_file"></a>Add the version to the DOAP file</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now that the release is out, in the <code>develop</code> branch, update the <code>DOAP</code> file for plc4x.</p>
-</div>
-<div class="paragraph">
-<p>This is found at:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>src/site/resources-filtered/plc4x-doap.rdf</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Please add the just released version to the top of the versions.</p>
-</div>
-<div class="paragraph">
-<p>This file is needed for Apache&#8217;s tooling to automatically keep track of project release activity, and we use this internally too to automatically update the documentation to always reference the latest released version automatically.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_merge_back_release_version_to_release_branch"><a class="anchor" href="#_merge_back_release_version_to_release_branch"></a>Merge back release version to <code>release</code> branch</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The <code>release</code> branch should always point to the last released version.
-This has to be done with git</p>
+<p>The <code>release</code> branch should always point at the last released version:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1345,54 +1435,22 @@ git merge -X theirs v1.0.0</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When there are conflicts the <code>theirs</code> merge strategy will most probably help resolve them,</p>
-</div>
-<div class="paragraph">
-<p>Possibly a manual conflict resolution has to be done afterward.
-After that, changes need to be pushed.</p>
+<p>The <code>theirs</code> strategy resolves most conflicts, but a manual resolution may still be needed.
+Push afterwards.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_updating_github_issues"><a class="anchor" href="#_updating_github_issues"></a>Updating GitHub Issues</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_updating_github_issues"><a class="anchor" href="#_updating_github_issues"></a>Updating GitHub Issues</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Set the released version to "released" and set the "release-date"</p>
+<p>Set the released version to "released" and set the "release-date".</p>
 </li>
 <li>
 <p>Add the next version to the versions.</p>
 </li>
 </ol>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_update_the_download_site"><a class="anchor" href="#_update_the_download_site"></a>Update the download site</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The URL <a href="http://plc4x.apache.org/users/download.html" class="bare">http://plc4x.apache.org/users/download.html</a> has to be changed, and the current release has to be listed there.
-This is done by changing the <code>download.adoc</code> under <code>src/site/users/</code> (<strong>in the develop branch, as this is where the site is generated from!</strong>)</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Copy the last release down to <em>Previous Releases</em></p>
-</li>
-<li>
-<p>Point the download links of the last release to archive, e.g. <code><a href="http://archive.apache.org/dist/plc4x/1.0.0/apache-plc4x-1.0.0-source-release.zip" class="bare">http://archive.apache.org/dist/plc4x/1.0.0/apache-plc4x-1.0.0-source-release.zip</a></code></p>
-</li>
-<li>
-<p>Add the new Release under <em>Current Releases</em> and change all links.
-<em>Note: Please add an anchor for the toc</em></p>
-</li>
-<li>
-<p>Update the sections for the changes according to the <em>RELEASE_NOTES</em> from the release
-<em>Note: Transfer all to ascii-doc notation to ensure correct rendering of the site</em>
-<em>Also remove the JIRA TICKET ids in Front</em></p>
-</li>
-</ol>
 </div>
 </div>
 </div>
@@ -1403,59 +1461,21 @@ This is done by changing the <code>download.adoc</code> under <code>src/site/use
 <p>Make sure you have given the Apache mirrors time to fetch the release files by waiting at least 24 hours after moving the release candidate to the release part of the SVN.</p>
 </div>
 <div class="paragraph">
-<p>After that it is time to announce your release to the world:</p>
+<p><code>release-3-finish-release.sh</code> has already drafted the announcement to <code>out/stage/announce-email.eml</code>,
+addressed to <a href="mailto:announce@apache.org">announce@apache.org</a> with <a href="mailto:dev@plc4x.apache.org">dev@plc4x.apache.org</a> in copy.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>From:
-your apache email address
-To:
-announce@apache.org
-
-CC:
-dev@plc4x.apache.org
-
-E-Mail Topic:
-[ANNOUNCE] Apache PLC4X 1.0.0 released
-
-Message:
-The Apache PLC4X team is pleased to announce the release of Apache PLC4X 1.0.0
-
-PLC4X is a set of libraries for communicating with industrial programmable
-logic controllers (PLCs) using a variety of protocols but with a shared API.
-
-The current release contains drivers able to communicate with industrial PLCs using one of the following protocols:
-
-  *   AB-ETH
-  *   Beckhoff ADS
-  *   CanOpen
-  *   EtherNet/IP / EIP
-  *   Firmata
-  *   KNXNet/IP
-  *   Modbus
-  *   OPC UA
-  *   Siemens S7 (0x32)
-
-Beyond that we also provide integration modules for the following Apache projects and frameworks:
-
-  *   Apache Calcite
-  *   Apache Camel
-  *   Apache Edgent (Incubating / Retired)
-  *   Apache Kafka (Kafka Connect)
-  *   Apache NiFi
-  *   Logstash
-
-It also provides an `OPC UA Server` which can act as a bridge between legacy systems and OPC UA.
-
-Visit the Apache PLC4X website [1] for general information or
-the downloads page [2] for release notes and download information.
-
-Regards,
-The Apache PLC4X team
-
-[1] http://plc4x.apache.org
-[2] http://plc4x.apache.org/users/download.html</pre>
-</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The lists of drivers and integrations in that mail are a fixed text in the script, not
+generated from the build - read them before sending and correct them if they have drifted.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>It is important to note that you have to send this email from your apache email address, or it will be rejected.
@@ -1465,9 +1485,6 @@ A general description can be found here:
 Here&#8217;s what I did in Google Mail to allow sending of emails:
 <a href="https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html" class="bare">https://gmail.googleblog.com/2009/07/send-mail-from-another-address-without.html</a>
 Note &#8230;&#8203; you will be able to select the alternate sending address if you click into the recipients line of a new email (Not very intuitive).</p>
-</div>
-<div class="paragraph">
-<p>After that email is out the door, you&#8217;re done. Congrats!</p>
 </div>
 </div>
 </div>

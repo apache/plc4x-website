@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Decision Making :: PLC4X</title>
+    <meta name="generator" content="Antora 3.1.14">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<link rel="stylesheet" href="/_/css/site.css">
+<link rel="stylesheet" href="/_/css/header.css">
+<link rel="stylesheet" href="/_/css/vars.css">
+<link rel="stylesheet" href="/_/css/all.min.css" type="text/css"/>
+<script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">
+          <img src="../../../plc4x/0.13.1/_images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+      </a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end justify-content-center">
+        <a class="navbar-item" href="../../../">Home</a>
+        <a class="navbar-item" href="../../../plc4x/0.13.1/users">Users</a>
+        <a class="navbar-item" href="../../../plc4x/0.13.1/developers">Developers</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://www.apache.org">Apache</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="navbar-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="navbar-item" href="https://www.apache.org/security/">Security</a>
+            <a class="navbar-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/policies/conduct">Code of Conduct</a>
+            <a class="navbar-item" href="https://events.apache.org/">Upcoming Events</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="fa-brands fa-github" href="https://github.com/apache/plc4x"></a>
+          </span>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="../../../plc4x/0.13.1/users/download.html">Download</a>
+          </span>
+        </div>
+        <a class="acevent" data-format="wide"></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="plc4x" data-version="0.13.1">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../users/index.html">PLC4X</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/index.html">Users</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/adopters.html">Adopters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/commercial-support.html">Commercial Support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/getting-started/index.html">Getting Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4c.html">Getting Started with C</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4cs.html">Getting Started with C#</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4go.html">Getting Started with Go</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4j.html">Getting Started with Java</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/plc4py.html">Getting Started with Python</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/using-snapshots.html">Using SNAPSHOT versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/general-concepts.html">General Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/protocols/index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/ab-eth.html">AB-ETH</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/ads.html">ADS (Automation Device Specification)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/bacnet.html">BACnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/c-bus.html">C-Bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/canopen.html">CANopen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/ctrlx.html">CtlrX</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/deltav.html">DeltaV</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/df1.html">DF1</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/eip.html">EtherNet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/firmata.html">Firmata</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/genericcan.html">Generic CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/iec-60870.html">IEC-60870</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/knxnetip.html">KNXnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/logix.html">Logix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/modbus.html">Modbus (TCP/UDP/Serial)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/opcua.html">OPC UA</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/plc4x.html">PLC4X (Proxy) (TCP)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/profinet.html">Profinet (In Development)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/s7.html">S7 (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/s7-light.html">S7-Light (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/transports/index.html">Transports</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/tcp.html">TCP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/udp.html">UDP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/socketcan.html">SocketCAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/transports/pcap-replay.html">PCAP Replay</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/integrations/index.html">Integrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-calcite.html">Apache Calcite</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-camel.html">Apache Camel</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-iotdb.html">Apache IotDB</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-kafka.html">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/apache-streampipes.html">Apache StreamPipes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/eclipse-ditto.html">Eclipse Ditto</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../users/tools/index.html">Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/capture-replay.html">Capture Replay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/connection-cache.html">The Connection Cache concept</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/scraper.html">Scraper</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../users/tools/testing.html">Testing (or using PLC4X without a PLC)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/industry40.html">Industry 4.0 with Apache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../users/security.html">Security Vulnerabilities</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Developers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="preparing/index.html">Preparing your Computer</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="preparing/linux.html">Linux</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="preparing/macos.html">Mac OS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="preparing/windows.html">Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="building.html">Building PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="contributing.html">Contributing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="tutorials/index.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tutorials/writing-driver.html">Strategy for creating a new Driver</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="code-gen/index.html">Code Generation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="code-gen/protocol/mspec.html">The MSpec format</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="code-gen/language/freemarker.html">Apache Freemarker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="code-gen/protocol/df1.html">Example: DF1 MSpec</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="protocols/index.html">Usage of protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/ads/protocol.html">Beckhoff ADS Protocol</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/eip/protocol.html">EIP Protocol</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="infrastructure/index.html">Infrastructure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/ci.html">Continuous Integration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/sonar.html">Code Analysis</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/wiki.html">WIKI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/vm.html">The PLC4X Project VM</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="infrastructure/website.html">Generating the Website</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="release/index.html">Releasing and Validating Releases</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="release/release.html">Releasing PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="release/validation.html">Validating a staged release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="release/build-tools.html">Releasing PLC4X Build-Tools</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tools.html">Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="team.html">Team</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="decisions.html">Decision Making</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="maturity.html">Apache Maturity Model Assessment for PLC4X</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">PLC4X</span>
+    <span class="version">0.13.1</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../users/index.html">PLC4X</a></div>
+      <ul class="versions">
+        <li class="version">
+          <a href="../../pre-release/users/index.html">1.0.0</a>
+        </li>
+        <li class="version is-current is-latest">
+          <a href="../users/index.html">0.13.1</a>
+        </li>
+        <li class="version">
+          <a href="../../0.12.0/users/index.html">0.12.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../users/index.html">PLC4X</a></li>
+    <li><a href="index.html">Developers</a></li>
+    <li><a href="decisions.html">Decision Making</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">0.13.1</button>
+  <div class="version-menu">
+    <a class="version" href="../../pre-release/developers/decisions.html">1.0.0</a>
+    <a class="version is-current" href="decisions.html">0.13.1</a>
+    <a class="version" href="../../0.12.0/developers/decisions.html">0.12.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.13/website/asciidoc/modules/developers/pages/decisions.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Decision Making</h1>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document describes the roles and responsibilities of the project, who may vote, how voting works, how conflicts are resolved, etc.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://www.apache.org/foundation/faq">Apache Foundation FAQ</a> and <a href="http://www.apache.org/foundation/faq.html">How-It-Works</a> explain the operation and background of the foundation. Terms used are defined in the <a href="https://www.apache.org/foundation/glossary">ASF glossary</a>.</p>
+</div>
+<div class="paragraph">
+<p>Apache has a <a href="http://www.apache.org/foundation/policies/conduct.html">code of conduct</a> that it expects its members to follow.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_roles_and_responsibilities"><a class="anchor" href="#_roles_and_responsibilities"></a>Roles and Responsibilities</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache projects define a set of <a href="https://www.apache.org/foundation/how-it-works.html#roles">roles</a> with associated rights and responsibilities.</p>
+</div>
+<div class="sect2">
+<h3 id="_project_management_committee"><a class="anchor" href="#_project_management_committee"></a>Project Management Committee</h3>
+<div class="paragraph">
+<p>The <a href="http://www.apache.org/dev/pmc.html#what-is-a-pmc">PMC</a> has many <a href="https://www.apache.org/foundation/how-it-works.html#pmc">responsibilities</a> including complying with <a href="http://www.apache.org/dev/pmc.html#policy">ASF policies</a>, <a href="https://www.apache.org/foundation/board/reporting">reporting to the board</a>, <a href="https://www.apache.org/foundation/voting.html">approving releases</a> and adding new <a href="http://www.apache.org/dev/pmc.html#newcommitter">committers</a> and <a href="http://www.apache.org/dev/pmc.html#newpmc">PMC members</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_chair"><a class="anchor" href="#_the_chair"></a>The Chair</h3>
+<div class="paragraph">
+<p>The <a href="http://www.apache.org/dev/pmc.html#chair">chair</a> ensures board reports are submitted and that the project&#8217;s roster is up to date.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_making"><a class="anchor" href="#_decision_making"></a>Decision Making</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Different decisions require different forms of approval but community consensus is always the goal. Voting when needed should be open for <a href="http://www.apache.org/legal/release-policy.html#release-approval">at least 72 hours</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.apache.org/foundation/glossary.html#ConsensusApproval">Consensus Approval</a> – Consensus approval requires 3 <a href="https://www.apache.org/foundation/voting.html#binding-votes">binding</a> +1 votes and no -1 votes (<a href="https://www.apache.org/foundation/glossary.html#Veto">vetoes</a>).</p>
+</li>
+<li>
+<p><a href="https://www.apache.org/foundation/glossary.html#MajorityApproval">Majority Approval</a> – requires at least 3 <a href="https://www.apache.org/foundation/voting.html#binding-votes">binding</a> +1 votes more +1 votes than -1 votes.</p>
+</li>
+<li>
+<p><a href="https://www.apache.org/foundation/glossary.html#LazyConsensus">Lazy Consensus</a> – consensus no objections (‘silence gives assent’).</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Who can vote</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Approval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where to vote</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Board approval required</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code change</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Committer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lazy Consensus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">public dev or commit list</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Majority Approval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">public dev list</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New committer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consensus Approval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">private list</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New PMC member</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consensus Approval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">private list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes 1)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Existing committer removal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consensus Approval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">private list</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Existing PMC removal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consensus Approval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">private list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes 2)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Change chair</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consensus Approval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">private list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes 3)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="http://www.apache.org/dev/pmc.html#notice_period">Notice</a> must be given to board.</p>
+</li>
+<li>
+<p>Except PMC member in question. Only the board can <a href="http://www.apache.org/dev/pmc.html#pmc-removal">remove PMC members</a>.</p>
+</li>
+<li>
+<p>Need to be <a href="http://www.apache.org/dev/pmc.html#newchair">approved by the board</a> at the next board meeting.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<footer class="container-flex footer col-6" style="text-align:center;">
+    <div class="col"></div>
+    <div class="col-6">
+    Copyright &#169; 2017-2026 <a href="https://www.apache.org/">The Apache Software Foundation.</a> All rights reserved.<br/>
+    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered
+    trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks
+    mentioned may be trademarks or registered trademarks of their respective owners.
+    <br/>
+    </div>
+    <div>Home screen image taken from <a
+        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+        under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+        and blur effect added.
+    </div>
+    <div class="col"></div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>
