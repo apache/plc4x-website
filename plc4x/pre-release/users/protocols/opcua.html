@@ -144,6 +144,9 @@
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -431,13 +434,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
           <a href="../index.html">pre-release</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../latest/users/index.html">latest</a>
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -464,7 +467,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
     <a class="version is-current" href="opcua.html">pre-release</a>
-    <a class="version" href="../../../latest/users/protocols/opcua.html">latest</a>
+    <a class="version" href="../../../0.13.1/users/protocols/opcua.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/users/protocols/opcua.html">0.12.0</a>
   </div>
 </div>
@@ -479,6 +482,22 @@
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Array selection uses the shared notation - a single index, an inclusive range, and
+optionally the array&#8217;s declared lower bound, placed before the type. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -619,12 +638,16 @@ The discovery phase is always conducted using <code>NONE</code> security policy.
 <p>STRING</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>NONE</p>
+<p>Basic256Sha256</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The security policy applied to communication channel between driver and OPC UA server.<br>
-Default value assumes. Possible options are <code>NONE</code>, <code>Basic128Rsa15</code>, <code>Basic256</code>, <code>Basic256Sha256</code>, <code>Aes128_Sha256_RsaOaep</code>, <code>Aes256_Sha256_RsaPss</code>.</p>
+Possible options are <code>NONE</code>, <code>Basic128Rsa15</code>, <code>Basic256</code>, <code>Basic256Sha256</code>, <code>Aes128_Sha256_RsaOaep</code>, <code>Aes256_Sha256_RsaPss</code>.<br>
+<code>NONE</code> means the channel is neither signed nor encrypted, so anything on the path can read and<br>
+change what is exchanged; it also leaves the server unauthenticated. A policy that signs and<br>
+encrypts needs a trust anchor for the server&#8217;s certificate - see <code>tls.trust-store</code> and<br>
+<code>server-certificate-file</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -643,7 +666,7 @@ This option is effective only when <code>securityPolicy</code> turns encryption 
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key-store-file</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.keystore</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -654,7 +677,7 @@ This option is effective only when <code>securityPolicy</code> turns encryption 
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.keystore-type</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -668,7 +691,7 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.keystore-password</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -688,7 +711,7 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Size in bits of the RSA key of the certificate the driver generates when no <code>key-store-file</code> is configured. It is ignored when a key store is supplied, as the key then comes from that store. Some servers require a minimum size; 4096 is a common requirement.</p>
+<p>Size in bits of the RSA key of the certificate the driver generates when no <code>tls.keystore</code> is configured. It is ignored when a key store is supplied, as the key then comes from that store. Some servers require a minimum size; 4096 is a common requirement.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -703,7 +726,7 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trust-store-file</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -714,7 +737,7 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trust-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-type</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -728,7 +751,7 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>trust-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-password</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -739,7 +762,7 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>insecure-certificate-verification</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allow-insecure-credentials</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -748,14 +771,78 @@ Possible values are between others <code>jks</code>, <code>pkcs11</code>, <code>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Disables verification of the OPC UA server certificate, trusting any certificate the server presents.<br>
-This is UNSAFE: it leaves the connection open to man-in-the-middle attacks and defeats the integrity/authenticity<br>
-guarantees of a signed secure channel. Only enable it for local testing. In production, establish trust with<br>
-<code>trust-store-file</code> (chain validation) or <code>server-certificate-file</code> (certificate pinning) instead.</p>
+<p>Allows a username and password to be sent over a channel that neither signs nor encrypts.<br>
+Without this, a connection configured with credentials over an unprotected channel fails rather<br>
+than putting the password on the wire where anything on the path can read it. Setting it warns.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>channel-lifetime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse-max-references-per-node</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>65536</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Largest number of references the driver will collect for a single node while browsing.<br>
+A Browse is answered in batches, each batch handing back a continuation point for the next, and<br>
+the driver follows them until the server stops. A server that never stops would otherwise grow<br>
+the collected list without limit. The same number is asked of the server as its per-node maximum,<br>
+so it can stop before the driver has to. Set to 0 for no limit.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse-max-total-nodes</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1000000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Largest number of nodes a single browse will expand. A browse walks whatever tree the<br>
+server describes, and the driver has no way to know how large that is before walking it, so this<br>
+bounds a tree that turns out to be unreasonable - or endless, if the server keeps naming nodes it<br>
+has not named before. Set to 0 for no limit.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse-max-depth</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>64</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>How deep a browse will recurse into the node tree. Already-visited nodes are never<br>
+expanded twice, so a reference cycle terminates on its own, but a server naming a fresh node at<br>
+every level describes a tree with no bottom. Set to 0 for no limit.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.verify</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>true</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Verifies the OPC UA server&#8217;s certificate. Set to false to trust any certificate the server presents.<br>
+Turning it off is UNSAFE: it leaves the connection open to man-in-the-middle attacks and defeats the<br>
+integrity/authenticity guarantees of a signed secure channel. Only do so for local testing. In production,<br>
+establish trust with <code>tls.trust-store</code> (chain validation) or <code>server-certificate-file</code> (certificate<br>
+pinning) instead.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>channel-lifetime-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>LONG</p>
 </div></div></td>
@@ -768,7 +855,7 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>min-channel-lifetime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>min-channel-lifetime-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>LONG</p>
 </div></div></td>
@@ -777,11 +864,11 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Shortest secure-channel lifetime this client will work with, in milliseconds. A server may revise the requested channel-lifetime downwards, and the renewal schedule is derived from whatever it returns - so a very short lifetime means very frequent renewals, on an executor shared by every OPC UA connection in this JVM. A server-supplied lifetime below this value is raised to it and a warning is logged. If a server genuinely needs faster renewal, lower this value to accept it; the default is far below any lifetime a conforming server negotiates.</p>
+<p>Shortest secure-channel lifetime this client will work with, in milliseconds. A server may revise the requested channel-lifetime-ms downwards, and the renewal schedule is derived from whatever it returns - so a very short lifetime means very frequent renewals, on an executor shared by every OPC UA connection in this JVM. A server-supplied lifetime below this value is raised to it and a warning is logged. If a server genuinely needs faster renewal, lower this value to accept it; the default is far below any lifetime a conforming server negotiates.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>session-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>session-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>LONG</p>
 </div></div></td>
@@ -794,7 +881,7 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>negotiation-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>handshake-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>LONG</p>
 </div></div></td>
@@ -807,7 +894,7 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>LONG</p>
 </div></div></td>
@@ -842,6 +929,21 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>subscription-queue-size</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>LONG</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Server-side queue depth per monitored item for subscriptions. 1 (default) keeps only<br>
+the latest value between publishes; higher values retain intermediate changes for fast<br>
+change-of-state tags, whose sampling rate can exceed the publishing (cycle) interval.</p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Transport config options:</p></td>
 </tr>
 <tr>
@@ -850,7 +952,7 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -861,7 +963,7 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -872,7 +974,7 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -883,7 +985,7 @@ guarantees of a signed secure channel. Only enable it for local testing. In prod
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -1058,7 +1160,7 @@ configured, the server certificate is rejected and the connection fails. Configu
 <div class="ulist">
 <ul>
 <li>
-<p><code>trust-store-file</code> - validate the certificate chain against the given trust store. The acceptance
+<p><code>tls.trust-store</code> - validate the certificate chain against the given trust store. The acceptance
 relies on regular TLS checks (expiry date, certificate path etc.); it does not validate OPC UA
 specific parts such as the application URI.</p>
 </li>
@@ -1076,7 +1178,7 @@ never used as a trust anchor.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-<code>insecure-certificate-verification=true</code> disables server certificate verification
+<code>tls.verify=false</code> disables server certificate verification
 altogether. This makes the connection vulnerable to man-in-the-middle attacks and is intended for
 local testing only.
 </td>
@@ -1087,7 +1189,7 @@ local testing only.
 <div class="sect2">
 <h3 id="_client_certificate"><a class="anchor" href="#_client_certificate"></a>Client certificate</h3>
 <div class="paragraph">
-<p>If no <code>key-store-file</code> is configured, the driver generates a self-signed application instance
+<p>If no <code>tls.keystore</code> is configured, the driver generates a self-signed application instance
 certificate for the session. It is a 2048 bit RSA key signed with SHA-256; use <code>generated-key-size</code>
 to ask for a larger key when the server demands one:</p>
 </div>
@@ -1099,7 +1201,7 @@ to ask for a larger key when the server demands one:</p>
 <div class="paragraph">
 <p>A generated certificate is fresh for every connection, so a server that keeps a trust list will
 reject it until it is trusted there. For anything beyond a first connection attempt, supply your own
-certificate through <code>key-store-file</code> instead - see
+certificate through <code>tls.keystore</code> instead - see
 <a href="../getting-started/opcua-client-certificate.html">the client certificate tutorial</a>.</p>
 </div>
 </div>
@@ -1173,7 +1275,7 @@ certificates.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This is not the same certificate as the one configured through <code>key-store-file</code>. That one is
+This is not the same certificate as the one configured through <code>tls.keystore</code>. That one is
 the application instance certificate: it secures the channel and says which installation is
 talking, whereas the user certificate says who is talking. Nothing stops you from using the same
 certificate for both, provided the server trusts it for both purposes.

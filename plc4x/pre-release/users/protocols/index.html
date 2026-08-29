@@ -143,6 +143,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
@@ -431,13 +434,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
           <a href="../index.html">pre-release</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../latest/users/index.html">latest</a>
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -463,7 +466,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
     <a class="version is-current" href="index.html">pre-release</a>
-    <a class="version" href="../../../latest/users/protocols/index.html">latest</a>
+    <a class="version" href="../../../0.13.1/users/protocols/index.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/users/protocols/index.html">0.12.0</a>
   </div>
 </div>
@@ -522,7 +525,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <td class="tableblock halign-left valign-top"><p class="tableblock">BACnet/IP</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-exclamation"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-exclamation"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
@@ -578,7 +581,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <td class="tableblock halign-left valign-top"><p class="tableblock">EtherNet/IP - Logix</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
@@ -618,7 +621,7 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <td class="tableblock halign-left valign-top"><p class="tableblock">OPC-UA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon yellow"><i class="fa fa-exclamation"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon green"><i class="fa fa-check"></i></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="icon red"><i class="fa fa-times"></i></span></p></td>
 </tr>
@@ -702,7 +705,9 @@ implementation&#8217;s driver manager - a protocol specification on its own is n
 <p><strong>AB-Ethernet</strong> reads and offers polled subscriptions in both Java and Go; neither writes.</p>
 </li>
 <li>
-<p><strong>BACnet/IP</strong> passively receives broadcast traffic and exposes it as subscriptions. It does not read or write properties.</p>
+<p><strong>BACnet/IP</strong> (Java) passively receives broadcast traffic and exposes it as subscriptions; it does
+not read or write properties. The Go driver is the complete one: it reads and writes properties,
+discovers devices and subscribes to COV notifications.</p>
 </li>
 <li>
 <p><strong>CAN (raw)</strong> (Java) writes and subscribes; there is no read support.</p>
@@ -729,6 +734,12 @@ blocked, substituted or not-topical does not arrive looking like a good one.</p>
 </li>
 <li>
 <p><strong>KNXnet/IP</strong> (C#) is the only driver in plc4net and has not kept pace with the other implementations.</p>
+</li>
+<li>
+<p><strong>OPC-UA</strong> (Go) reads, writes and subscribes over an unencrypted channel, but that is where it ends:
+only <code>securityPolicy=None</code> actually works, browsing is not implemented, and messages are not
+chunked, so a request or response larger than a single chunk fails. The Java driver implements the
+six security policies, browsing and chunking.</p>
 </li>
 <li>
 <p><strong>Open-Protocol</strong> (Java) is a skeleton that connects but implements no operations.</p>

@@ -144,6 +144,9 @@
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -431,13 +434,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
           <a href="../index.html">pre-release</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../latest/users/index.html">latest</a>
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -462,7 +465,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
     <a class="version is-current" href="profinet.html">pre-release</a>
-    <a class="version" href="../../../latest/users/protocols/profinet.html">latest</a>
+    <a class="version" href="../../../0.13.1/users/protocols/profinet.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/users/protocols/profinet.html">0.12.0</a>
   </div>
 </div>
@@ -501,6 +504,22 @@ on the same network segment.</p>
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Array selection uses the shared notation - a single index, an inclusive range, and
+optionally the array&#8217;s declared lower bound, placed before the type. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>On linux as the Java executable won&#8217;t have permission to capture raw packets, this needs to be enabled via:-</p>
 </div>
@@ -719,6 +738,19 @@ on the same network segment.</p>
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>raw-socket.receive-queue-size</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1048576</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Bytes of captured frames that may wait for a consumer before frames are dropped.</p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>raw-socket.vlan-id</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
@@ -782,7 +814,7 @@ on the same network segment.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>raw-socket.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>raw-socket.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>

@@ -144,6 +144,9 @@
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -431,13 +434,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
           <a href="../index.html">pre-release</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../latest/users/index.html">latest</a>
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -464,7 +467,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
     <a class="version is-current" href="eip.html">pre-release</a>
-    <a class="version" href="../../../latest/users/protocols/eip.html">latest</a>
+    <a class="version" href="../../../0.13.1/users/protocols/eip.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/users/protocols/eip.html">0.12.0</a>
   </div>
 </div>
@@ -479,6 +482,22 @@
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Array selection uses the shared notation - a single index, an inclusive range, and
+optionally the array&#8217;s declared lower bound, placed before the type. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -588,7 +607,7 @@
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -621,7 +640,7 @@ It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 
 </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -632,7 +651,7 @@ It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -643,7 +662,7 @@ It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -654,7 +673,7 @@ It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -754,16 +773,12 @@ It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 
 <td class="tableblock halign-left valign-top"><p class="tableblock">symbolic name of the data. May optionally be prefixed with <code>%</code>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Start Index (optional)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">if the data is an array, we can specify a starting index from where we want to read. It is appended to the tag name and has to be the last part of it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selection (optional)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">which elements of an array to read - a single index or an inclusive range. It follows the tag name, before the data type. See <a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DataType (optional)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">the data type of the value. Defaults to <code>DINT</code> when omitted, so for anything that is not a 32-bit integer it should be given explicitly - also when reading.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number of elements (optional)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">if the data is an array, we can specify the number of elements we want to read. Defaults to <code>1</code>. Use this in combination with the starting index to get the exact scope you want.</p></td>
 </tr>
 </tbody>
 </table>
@@ -774,8 +789,8 @@ It consists of pairs of values, each pair begins with either 1 (Backplane) or 2 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The data type comes <strong>before</strong> the number of elements. Reading four DINTs starting at index 0
- is <code>myArray[0]:DINT:4</code>.
+The selection comes <strong>before</strong> the data type, and a range says how many elements are read.
+ Reading four DINTs starting at index 0 is <code>myArray[0..3]:DINT</code>.
 </td>
 </tr>
 </table>
@@ -802,7 +817,7 @@ The data type comes <strong>before</strong> the number of elements. Reading four
 <td class="tableblock halign-left valign-top"><p class="tableblock">a single element of <code>myTag</code>, decoded as <code>REAL</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myTag:4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myTag[0..3]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">four elements of <code>myTag</code>, decoded as <code>DINT</code></p></td>
 </tr>
 <tr>
@@ -810,11 +825,16 @@ The data type comes <strong>before</strong> the number of elements. Reading four
 <td class="tableblock halign-left valign-top"><p class="tableblock">element 3 of <code>myArray</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myArray[0]:DINT:4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myArray[0..3]:DINT</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">elements 0 to 3 of <code>myArray</code>, returned as a list</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>A CIP array index travels in a <code>MemberID</code>, whose instance field is a <code>uint 8</code>, so a selection
+cannot start past index 255. A range may run beyond it - the request carries a start and a
+count - but it cannot begin there.</p>
+</div>
 <div class="sect2">
 <h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
 <div class="paragraph">
@@ -837,6 +857,22 @@ The data type comes <strong>before</strong> the number of elements. Reading four
 <td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8-bit bit string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BYTE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-bit bit string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WORD</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit bit string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DWORD</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit bit string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LWORD</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">8-bit integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SINT</p></td>
 </tr>
@@ -853,6 +889,22 @@ The data type comes <strong>before</strong> the number of elements. Reading four
 <td class="tableblock halign-left valign-top"><p class="tableblock">LINT</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8-bit unsigned integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-bit unsigned integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit unsigned integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UDINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit unsigned integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ULINT</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">32-bit float</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 </tr>
@@ -866,6 +918,20 @@ The data type comes <strong>before</strong> the number of elements. Reading four
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The unsigned and bit string types cover their full range, so a <code>UDINT</code> or <code>DWORD</code> is returned
+ in the range 0 to 4294967295 and a <code>ULINT</code> or <code>LWORD</code> in the range 0 to 18446744073709551615. Their
+ signed counterparts are unchanged: a <code>DINT</code> of <code>0xFFFFFFFF</code> still reads as -1.
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>

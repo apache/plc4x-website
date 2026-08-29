@@ -144,6 +144,9 @@
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -431,13 +434,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
           <a href="../index.html">pre-release</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../latest/users/index.html">latest</a>
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -462,7 +465,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
     <a class="version is-current" href="ctrlx.html">pre-release</a>
-    <a class="version" href="../../../latest/users/protocols/ctrlx.html">latest</a>
+    <a class="version" href="../../../0.13.1/users/protocols/ctrlx.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/users/protocols/ctrlx.html">0.12.0</a>
   </div>
 </div>
@@ -588,6 +591,118 @@ object that is not a username/password pair is rejected as well.
     .getConnection("ctrlx://192.168.1.1",
         new PlcUsernamePasswordAuthentication("boschrexroth", "boschrexroth"));</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_options"><a class="anchor" href="#_connection_options"></a>Connection Options</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 27.2727%;">
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 45.4546%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Key store of certificates to trust, instead of the JVM&#8217;s public authorities.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Password of the trust store named by <code>tls.trust-store</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PKCS12</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type of the trust store named by <code>tls.trust-store</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>server-certificate-file</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PEM certificate of the device to trust, for a device carrying its own certificate rather than one
+issued by an authority the JVM already knows.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allow-factory-default-certificate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Trust the factory default certificate that ships inside this driver&#8217;s jar, for any host. See the
+warning below. Setting it logs a warning.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ignore-common-name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept a device certificate issued for a different host than the one connected to.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse-max-total-nodes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1000000</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Largest number of nodes a single browse will read; <code>0</code> for no limit.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse-max-depth</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>64</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>How deep a browse will follow children; <code>0</code> for no limit.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The driver used to trust the Bosch factory default certificate bundled in its own jar, and
+to trust it <strong>instead of</strong> the platform&#8217;s authorities rather than in addition to them. That
+certificate identifies nobody - anything holding it and its key was trusted, for any host - and the
+username and password travel over that channel. Because it was also the only trust anchor, a device
+with a properly issued certificate could not be reached at all. A device still on its factory
+certificate now needs <code>allow-factory-default-certificate=true</code>, and the better answer is to give the
+device a certificate of its own and name it with <code>server-certificate-file</code> or a trust store.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A browse walks whatever tree the device describes, and nothing in the answer says how large that
+tree is or that it ends, so <code>browse-max-total-nodes</code> and <code>browse-max-depth</code> bound it. Reaching
+either one warns and returns what was found rather than failing.</p>
 </div>
 </div>
 </div>

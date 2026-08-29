@@ -144,6 +144,9 @@
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../protocols/index.html">Protocols</a>
 <ul class="nav-list">
@@ -431,13 +434,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
           <a href="../index.html">pre-release</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../latest/users/index.html">latest</a>
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -464,7 +467,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
     <a class="version is-current" href="plc4x-server.html">pre-release</a>
-    <a class="version is-missing" href="../../../latest/users/index.html">latest</a>
+    <a class="version is-missing" href="../../../0.13.1/users/index.html">0.13.1</a>
     <a class="version is-missing" href="../../../0.12.0/users/index.html">0.12.0</a>
   </div>
 </div>
@@ -678,7 +681,7 @@ Configured credentials are <strong>never</strong> logged — only generated ones
 <h3 id="_connection_string_format"><a class="anchor" href="#_connection_string_format"></a>Connection string format</h3>
 <div class="listingblock">
 <div class="content">
-<pre>plc4x:&lt;transport&gt;://&lt;server-host&gt;:&lt;server-port&gt;?remote-connection-string=&lt;url-encoded-plc-url&gt;&amp;username=&lt;user&gt;&amp;password=&lt;pass&gt;[&amp;tls.verify-ssl=false]</pre>
+<pre>plc4x:&lt;transport&gt;://&lt;server-host&gt;:&lt;server-port&gt;?remote-connection-string=&lt;url-encoded-plc-url&gt;&amp;username=&lt;user&gt;&amp;password=&lt;pass&gt;[&amp;tls.verify=false]</pre>
 </div>
 </div>
 <div class="ulist">
@@ -693,7 +696,7 @@ Configured credentials are <strong>never</strong> logged — only generated ones
 <p><code>username</code> / <code>password</code> are mandatory.</p>
 </li>
 <li>
-<p><code>tls.verify-ssl=false</code> disables certificate validation — needed when the server uses an auto-generated self-signed certificate. With a properly trusted (CA-signed) certificate, leave it at its default (<code>true</code>).</p>
+<p><code>tls.verify=false</code> disables certificate validation — needed when the server uses an auto-generated self-signed certificate. With a properly trusted (CA-signed) certificate, leave it at its default (<code>true</code>).</p>
 </li>
 </ul>
 </div>
@@ -709,7 +712,7 @@ Configured credentials are <strong>never</strong> logged — only generated ones
     + "?remote-connection-string=s7%3A%2F%2F10.10.1.5"
     + "&amp;username=operator"
     + "&amp;password=s3cr3t!"
-    + "&amp;tls.verify-ssl=false"; // self-signed server cert
+    + "&amp;tls.verify=false"; // self-signed server cert
 
 try (PlcConnection connection = new DefaultPlcDriverManager().getConnection(url)) {
     PlcReadRequest request = connection.readRequestBuilder()
@@ -750,7 +753,7 @@ try (PlcConnection connection = new DefaultPlcDriverManager().getConnection(url)
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Server certificate not trusted … PKIX path building failed</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TLS cert not trusted by the client. Add <code>tls.verify-ssl=false</code>, or trust/pin the server cert.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TLS cert not trusted by the client. Add <code>tls.verify=false</code>, or trust/pin the server cert.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Connect fails with <code>ACCESS_DENIED</code> / authentication error</p></td>

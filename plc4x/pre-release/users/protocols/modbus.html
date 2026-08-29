@@ -144,6 +144,9 @@
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -431,13 +434,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
           <a href="../index.html">pre-release</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../latest/users/index.html">latest</a>
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -464,7 +467,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
     <a class="version is-current" href="modbus.html">pre-release</a>
-    <a class="version" href="../../../latest/users/protocols/modbus.html">latest</a>
+    <a class="version" href="../../../0.13.1/users/protocols/modbus.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/users/protocols/modbus.html">0.12.0</a>
   </div>
 </div>
@@ -558,7 +561,7 @@
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -653,7 +656,7 @@ Allowed values are: <br>
 </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -664,7 +667,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -675,7 +678,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -686,7 +689,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -755,7 +758,7 @@ Allowed values are: <br>
 </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.verify-ssl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.verify</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -775,11 +778,46 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Tells the target to not validate the common name</p>
+<p>Accept a server certificate issued for a different host than the one connected to</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.tls-version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Key store of certificates to trust, instead of the JVM&#8217;s public authorities</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Password of the trust store named by tls.trust-store</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PKCS12</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type of the trust store named by tls.trust-store</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.version</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -836,7 +874,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -847,7 +885,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -858,7 +896,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -869,7 +907,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -973,7 +1011,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -984,7 +1022,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -995,7 +1033,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1006,7 +1044,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -1099,7 +1137,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>udp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>udp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1287,7 +1325,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1447,7 +1485,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1460,7 +1498,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1530,7 +1568,7 @@ Allowed values are: <br>
 </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1541,7 +1579,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1552,7 +1590,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1563,7 +1601,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -1632,7 +1670,7 @@ Allowed values are: <br>
 </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.verify-ssl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.verify</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -1652,11 +1690,46 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Tells the target to not validate the common name</p>
+<p>Accept a server certificate issued for a different host than the one connected to</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.tls-version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Key store of certificates to trust, instead of the JVM&#8217;s public authorities</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Password of the trust store named by tls.trust-store</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PKCS12</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type of the trust store named by tls.trust-store</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.version</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -1713,7 +1786,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1724,7 +1797,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1735,7 +1808,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1746,7 +1819,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -1850,7 +1923,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1861,7 +1934,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1872,7 +1945,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -1883,7 +1956,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -1976,7 +2049,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>udp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>udp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2164,7 +2237,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>request-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2324,7 +2397,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2337,7 +2410,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2407,7 +2480,7 @@ Allowed values are: <br>
 </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2418,7 +2491,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2429,7 +2502,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2440,7 +2513,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -2509,7 +2582,7 @@ Allowed values are: <br>
 </p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.verify-ssl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.verify</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -2529,11 +2602,46 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Tells the target to not validate the common name</p>
+<p>Accept a server certificate issued for a different host than the one connected to</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.tls-version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Key store of certificates to trust, instead of the JVM&#8217;s public authorities</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Password of the trust store named by tls.trust-store</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PKCS12</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type of the trust store named by tls.trust-store</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.version</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>STRING</p>
 </div></div></td>
@@ -2590,7 +2698,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2601,7 +2709,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2612,7 +2720,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2623,7 +2731,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -2727,7 +2835,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2738,7 +2846,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2749,7 +2857,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -2760,7 +2868,7 @@ Allowed values are: <br>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -2853,7 +2961,7 @@ Allowed values are: <br>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>udp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>udp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -3029,12 +3137,18 @@ Allowed values are: <br>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>{memory-Area}{start-address}:{data-type}[{array-size}]{name-value-tag-options}</pre>
+<pre>{memory-Area}{start-address}[{selection}]:{data-type}{name-value-tag-options}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the array-size part is omitted, the size-default of <code>1</code> is assumed.
-If the data-type part is omitted, it defaults to BOOL for Coils and Discrete Inputs and INT for input, holding and extended registers.
+<p>If the selection is omitted, a single element is read.
+The selection in brackets is the shared array notation - a single index, an inclusive
+range, and optionally the array&#8217;s declared lower bound. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a> for the full set of forms and what this
+driver can express.</p>
+</div>
+<div class="paragraph">
+<p>If the data-type part is omitted, it defaults to BOOL for Coils and Discrete Inputs and INT for input, holding and extended registers.
 If the name-value-tag-options part is omitted, simply no configuration fine-tuning is applied.</p>
 </div>
 <div class="paragraph">
@@ -3336,7 +3450,7 @@ returns the response code <code>UNSUPPORTED</code>.
 </table>
 </div>
 <div class="paragraph">
-<p>Reading an array of coils returns all of its elements: <code>coil:1:BOOL[8]</code> yields a list of 8 values.</p>
+<p>Reading an array of coils returns all of its elements: <code>coil:1[0..7]:BOOL</code> yields a list of 8 values.</p>
 </div>
 </div>
 <div class="sect2">

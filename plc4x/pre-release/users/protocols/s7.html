@@ -144,6 +144,9 @@
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -431,13 +434,13 @@
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="../../../latest/users/index.html">PLC4X</a></div>
+      <div class="title"><a href="../../../0.13.1/users/index.html">PLC4X</a></div>
       <ul class="versions">
         <li class="version is-current">
           <a href="../index.html">pre-release</a>
         </li>
         <li class="version is-latest">
-          <a href="../../../latest/users/index.html">latest</a>
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -464,7 +467,7 @@
   <button class="version-menu-toggle" title="Show other versions of page">pre-release</button>
   <div class="version-menu">
     <a class="version is-current" href="s7.html">pre-release</a>
-    <a class="version" href="../../../latest/users/protocols/s7.html">latest</a>
+    <a class="version" href="../../../0.13.1/users/protocols/s7.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/users/protocols/s7.html">0.12.0</a>
   </div>
 </div>
@@ -759,7 +762,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -772,7 +775,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ha-heartbeat-interval</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ha-heartbeat-interval-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -781,11 +784,11 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>S7H dual-path only: interval between heartbeat ticks (in milliseconds). Each tick pings each inner connection so a standby disruption is detected within interval + ha-failover-timeout. Lower values detect faster but generate more background traffic. Default 4000 (4s).</p>
+<p>S7H dual-path only: interval between heartbeat ticks (in milliseconds). Each tick pings each inner connection so a standby disruption is detected within interval + ha-failover-timeout-ms. Lower values detect faster but generate more background traffic. Default 4000 (4s).</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ha-failover-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ha-failover-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -910,7 +913,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.cotp-tpdu-size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.tpdu-size</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -923,7 +926,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.cotp-connection-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.handshake-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -949,7 +952,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.connect-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.connect-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -960,7 +963,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.read-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -971,7 +974,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.write-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.write-timeout-ms</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>INT</p>
 </div></div></td>
@@ -982,7 +985,7 @@ In the following, reference will be made to the Java-based driver, which impleme
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.tcp-no-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cotp.no-delay</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>BOOLEAN</p>
 </div></div></td>
@@ -1162,11 +1165,15 @@ try {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>. %{Memory-Area}{start-address}:{Data-Type}[{array-size}]</pre>
+<pre>. %{Memory-Area}{start-address}[{selection}]:{Data-Type}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the array-part is omitted, the size-default of <code>1</code> is assumed.</p>
+<p>If the selection is omitted, a single element is read.
+The selection in brackets is the shared array notation - a single index, an inclusive
+range, and optionally the array&#8217;s declared lower bound. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a> for the full set of forms and what this
+driver can express.</p>
 </div>
 <div class="paragraph">
 <p>Generally there are two types of addresses:</p>
