@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -480,32 +483,79 @@ is used by Mitsubishi Electric MELSEC PLCs such as the iQ-R, iQ-F, Q and L serie
 <p>The driver communicates using binary 3E frames over TCP.</p>
 </div>
 <div class="paragraph">
-<p>This initial version is <strong>read-only</strong> and supports reading word devices (D, W and R).</p>
+<p>Both the Go and Java drivers address the word devices D, W and R only. This is the
+driver&#8217;s deliberate scope, not an unfinished port: the bit devices (M, X, Y, B) and the
+wider MELSEC command set are not implemented in either language.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>subscribe</code> (polling-emulated only - SLMP has no native push mechanism, so a
+subscription is really a periodic read under the hood)</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SLMP has the following connection string format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>slmp:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>(Supported by Plc4J Only)</p>
+<p>An example connection string would look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>slmp:tcp://192.168.0.10:5007</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the transport, port and option fields are optional.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Array selection uses the shared notation - a single index, an inclusive range, and
-optionally the array&#8217;s declared lower bound, placed before the type. See
-<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -709,92 +759,42 @@ optionally the array&#8217;s declared lower bound, placed before the type. See
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>read</code></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h3>
 <div class="paragraph">
-<p>SLMP has the following connection string format:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>slmp:{transport}://{ip-address}:{port}?{options}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>An example connection string would look like:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>slmp:tcp://192.168.0.10:5007</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note the transport, port and option fields are optional.</p>
-</div>
+<p>Addressing is implemented in Go and Java. Both address the word devices D, W and R
+only. See the <a href="index.html" class="xref page">protocol support matrix</a> for what each
+implementation does.</p>
 </div>
 <div class="sect2">
 <h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Array selection uses the shared notation - a single index, an inclusive range, and
+optionally the array&#8217;s declared lower bound, placed before the type. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>In general all SLMP addresses have this format:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>{device}{address}:{data-type}[{quantity}]</pre>
+<pre>{device}{address}[selection]:{data-type}</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>If the data-type part is omitted, it defaults to <code>WORD</code>.
-If the quantity part is omitted, the default of <code>1</code> is assumed.</p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>D350</code> (one word from data register 350)</p>
-</li>
-<li>
-<p><code>D350:DINT</code> (one 32-bit integer, occupying two words)</p>
-</li>
-<li>
-<p><code>R200:REAL[4]</code> (four floats from file register 200)</p>
-</li>
-<li>
-<p><code>W0x1A:WORD[10]</code> (ten words from link register 0x1A)</p>
-</li>
-</ul>
+If no selection is given, a single element is assumed.</p>
 </div>
 </div>
 <div class="sect2">
@@ -816,11 +816,11 @@ If the quantity part is omitted, the default of <code>1</code> is assumed.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>0x</code> prefix is only valid for hexadecimally addressed devices.</p>
+<p>The <code>0x</code> prefix is only valid for hexadecimally addressed devices (W).</p>
 </div>
 <div class="paragraph">
-<p>A single read request may cover at most 960 words (a conservative single-frame ceiling);
-larger requests are rejected instead of being split.</p>
+<p>A single read or write request may cover at most 960 words (a conservative
+single-frame ceiling); larger requests are rejected instead of being split.</p>
 </div>
 </div>
 <div class="sect2">
@@ -853,6 +853,28 @@ larger requests are rejected instead of being split.</p>
 <div class="paragraph">
 <p>Multi-word types (DINT, UDINT, REAL) are decoded from consecutive words in
 little-endian (low-word-first) order, as transmitted by the PLC.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>D350</code> (one word from data register 350, default WORD type)</p>
+</li>
+<li>
+<p><code>D350:DINT</code> (one 32-bit integer, occupying two words, from data register 350)</p>
+</li>
+<li>
+<p><code>R200[0..3]:REAL</code> (four floats from file register 200)</p>
+</li>
+<li>
+<p><code>W1A[0..9]:WORD</code> (ten words from link register 0x1A)</p>
+</li>
+<li>
+<p><code>W0x1A</code> (link register 0x1A, using the explicit <code>0x</code> prefix form)</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

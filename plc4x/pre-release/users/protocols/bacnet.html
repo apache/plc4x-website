@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -477,38 +480,96 @@
 <img src="../_images/users/protocols/bacnet_banner.png" alt="banner" width="512" height="167">
 </div>
 </div>
+<div class="paragraph">
+<p>BACnet (Building Automation and Control Networks) is a data communication protocol for
+building automation and control - HVAC, lighting, access control and similar building
+services. BACnet/IP carries BACnet traffic over UDP/IP, typically on the well-known port
+<code>47808</code>.</p>
 </div>
+<div class="paragraph">
+<p>The Go driver is the complete implementation: it reads and writes object properties,
+discovers devices on the network, and subscribes to change-of-value (COV) notifications.
+The Java driver is a <strong>passive listener</strong>: it joins the network and reports the COV
+notifications it observes, but has no working tag address syntax, so a subscription
+cannot be narrowed to a single object - every registered consumer receives all COV
+notifications seen on the network and has to filter them itself.</p>
 </div>
-<div class="sect1">
-<h2 id="_bacnet_building_automation_and_control_networks"><a class="anchor" href="#_bacnet_building_automation_and_control_networks"></a>BACnet (Building Automation and Control Networks)</h2>
-<div class="sectionbody">
-
 </div>
 </div>
 <div class="sect1">
 <h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
 <div class="sectionbody">
-<div class="admonitionblock important">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-This driver is a <strong>passive listener</strong>. It supports subscriptions only - reading, writing
-and browsing are not implemented and a request for any of them is rejected.
-</td>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Go only. Reads one or more object properties via a tag address.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Go only. Writes one or more object properties, optionally at a given priority.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Go and Java. Go subscribes to COV notifications for an object; Java receives all COV
+traffic broadcast on the network and cannot narrow it to a single object, since it has no
+working tag address syntax.</p>
+</div></div></td>
+</tr>
+</tbody>
 </table>
+<div class="paragraph">
+<p>Neither driver supports <code>browse</code>. The Go driver does support device <strong>discovery</strong>
+(<code>WhoIs</code>/<code>IAm</code>, <code>Discoverer.go</code>) - a separate PLC4X operation, reached through the
+discovery API rather than a browse request, that finds devices on the network rather
+than enumerating objects on one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>BACnet/IP has the following connection string format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>bacnet-ip:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The driver joins the network and reports the change-of-value (COV) notifications it observes. There
-is no handshake with a device and no request/response exchange.</p>
+<p>The only supported transport is <code>udp</code>:</p>
 </div>
-<div class="paragraph">
-<p>Tag addresses are not interpreted yet, so a subscription cannot be narrowed to a single object -
-every registered consumer receives all COV notifications seen on the network, and has to filter
-them itself.</p>
+<div class="listingblock">
+<div class="content">
+<pre>bacnet-ip:udp://192.168.178.101:47808</pre>
+</div>
 </div>
 </div>
 </div>
@@ -745,10 +806,102 @@ them itself.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_more_details_on"><a class="anchor" href="#_more_details_on"></a>More details on</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="http://www.bacnet.org/">BACnet - A Data Communication Protocol for Building Automation and Control Networks</a></p>
+<p>Addressing is implemented in Go only. The Java driver receives broadcast traffic as
+subscriptions and has no working tag address syntax. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
+</div>
+<div class="sect2">
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;objectType&gt;,&lt;objectInstance&gt;/&lt;propertyIdentifier&gt;[&lt;arrayIndex&gt;]{&lt;writePriority&gt;}[&amp;&lt;propertyIdentifier&gt;[&lt;arrayIndex&gt;]{&lt;writePriority&gt;}]*</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>objectType</code></dt>
+<dd>
+<p>A BACnet object type, either by name (<code>ANALOG_INPUT</code>, <code>ANALOG_VALUE</code>, <code>ANALOG_OUTPUT</code>,
+&#8230;&#8203;) or as a numeric proprietary type identifier.</p>
+</dd>
+<dt class="hdlist1"><code>objectInstance</code></dt>
+<dd>
+<p>The object&#8217;s numeric instance number.</p>
+</dd>
+<dt class="hdlist1"><code>propertyIdentifier</code></dt>
+<dd>
+<p>One or more property identifiers, joined by <code>&amp;</code>, each by name (<code>PRESENT_VALUE</code>,
+<code>OBJECT_NAME</code>, <code>DESCRIPTION</code>, <code>UNITS</code>, <code>PRIORITY_ARRAY</code>, &#8230;&#8203;) or as a numeric proprietary
+property identifier.</p>
+</dd>
+<dt class="hdlist1"><code>[arrayIndex]</code></dt>
+<dd>
+<p>Optional. Selects a single element of an array-valued property. This is not the unified
+<a href="../array-notation.html" class="xref page">array notation</a> - it addresses one scalar element of a BACnet
+array property, not a run of consecutive values.</p>
+</dd>
+<dt class="hdlist1"><code>{writePriority}</code></dt>
+<dd>
+<p>Optional, write only. The BACnet priority (1-16) at which the write is issued.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
+<div class="paragraph">
+<p>BACnet tags carry no <code>:{data-type}</code> suffix. The value&#8217;s type is determined from the
+object and property being read or written, not selected on the address.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Examples</caption>
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Address</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ANALOG_INPUT,1/PRESENT_VALUE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">present value of analog input <code>1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>12345,7/4242</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">proprietary property <code>4242</code> of proprietary object type <code>12345</code>, instance <code>7</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ANALOG_VALUE,2/PRESENT_VALUE[3]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element <code>3</code> of analog value `2&#8217;s present-value array</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ANALOG_OUTPUT,1/PRESENT_VALUE{8}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">write the present value of analog output <code>1</code> at priority <code>8</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ANALOG_OUTPUT,5/PRESENT_VALUE[2]{16}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">write element <code>2</code> of analog output <code>5&#8217;s present-value array, at priority `16</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ANALOG_INPUT,1/PRESENT_VALUE&amp;OBJECT_NAME&amp;UNITS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">present value, object name and units of analog input <code>1</code> in one read</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ANALOG_VALUE,5/PRESENT_VALUE[1]&amp;PRIORITY_ARRAY[16]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">element <code>1</code> of the present-value array and element <code>16</code> of the priority array of analog value <code>5</code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

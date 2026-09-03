@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -477,50 +480,126 @@
 <img src="../_images/users/protocols/s7_banner.png" alt="banner" width="512" height="167">
 </div>
 </div>
+<div class="paragraph">
+<p>The S7 driver talks to Siemens Simatic S7 controllers over the S7comm protocol carried on
+ISO-on-TCP (COTP). It exploits the advanced features of the S7-300 and S7-400 families -
+device status (RUN/STOP) events, system/user diagnostic events, alarms, cyclic (CYC) push
+subscriptions and SZL/SSL diagnostics - and provides basic PUT/GET read and write access to
+the S7-1200 and S7-1500 families, whose firmware does not expose the same event and
+diagnostics services. S7-200 and S7-200 Smart controllers are reachable too, through a small
+set of connection and addressing conventions documented below. The driver is also reported to
+work against VIPA hardware, a Siemens-compatible clone of the S7-300 with extended memory.</p>
+</div>
+<div class="paragraph">
+<p>Most closed-source S7 stacks, and even the best-known open source one, Snap7, are built
+around a simple request/response pattern. PLC4X&#8217;s S7 driver goes further by giving open,
+non-Siemens applications access to the asynchronous, timestamped data that would otherwise
+require the Siemens ecosystem itself - SOFTNET OPC-DA/OPC-UA, the low-level SAPI-S7 library,
+or a DCS/SCADA product such as PCS7, Braumat or WinCC.</p>
+</div>
+<div class="paragraph">
+<p>The current stable release of the driver is 0.10.0 (2022-10-04). Community support is
+available on the PLC4X development list (<a href="mailto:dev@plc4x.apache.org">dev@plc4x.apache.org</a>); companies offering
+commercial support for PLC4X drivers are listed on the project website.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_executive_summary"><a class="anchor" href="#_executive_summary"></a>Executive Summary</h2>
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>C, Go and Java.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>C, Go and Java.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Go and Java. Two independent flavors: cyclic (<code>CYC</code>) push of ordinary tags at a
+requested interval, and alarm subscriptions (<code>ALM</code> for a live push feed, <code>QUERY:ALARM_S</code> /
+<code>QUERY:ALARM_8</code> for a one-shot fetch of what is currently buffered). Both ride the S7Comm
+"UserData" services that the driver probes for at connect time; a device that does not answer
+that probe - and S7-1200/S7-1500 controllers, which do not implement the alarm/event
+subsystem the S7-300/S7-400 family does - rejects a subscription with <code>UNSUPPORTED</code>. The C
+driver does not subscribe.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>browse</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Go and Java, under the same UserData-service condition as <code>subscribe</code>. Enumerates the
+static memory areas plus the data blocks (<code>DB</code>) currently present on the connected device -
+this is a live inventory of what can be addressed, not a network scan.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>discover</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java only, and only when the optional <code>pcap4j</code> runtime and a system <code>libpcap</code> are
+installed. Sends a PROFINET DCP broadcast and collects device announcements - this is the
+network-discovery API, not <code>browse</code>; it finds devices, it does not enumerate tags on one.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This version of the S7 driver is aimed at exploiting the advanced features of the S7-300 and S7-400 controllers, as well as basic reading and writing functions for the S7-1200 and S7-1500 devices (PUT/GET functions). We hope in a short period of time to have the S7-Plus version, which should exploit the asynchronous functions of the S7-1500.</p>
+<p>The connection string has the layout</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>s7://{ip-address}?{options}</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Most of the closed source solutions are based on request/response patterns, generally with a high level of optimization. Even the best open source implementations, such as “Snap7” [1], base their usage on this same pattern. Is there another way to do things?, yes!, but this should be enough for 95% of automation applications, if your system works and you are happy with it, apply the maxim of automation, “Is it working?, no touch it, production first!”</p>
+<p><code>SCHEMA</code> is always <code>s7</code>; <code>cotp</code> is the only transport and is therefore omitted. The <code>ip
+address</code> names the PLC or the CP that fronts it, and <code>options</code> is an ampersand-separated list
+of key/value parameters, documented in full below.</p>
 </div>
-<div class="paragraph">
-<p>If the solution you need to develop must strictly revolve around the Siemens platform, you will probably opt for a solution based on SOFTNET OPC-DA or OPC-UA which is the recommendation given by Siemens, if you want to go to a lower level, you should use the libraries SAPI-S7 [2] (generally supplied with SOFTNET), which is the lowest access layer to access the internal Siemens communications architecture, which gives access to any CP and/or any protocol (S7-TCP, MPI, DP, etc.) that is being used. The configuration of the communication links is carried out from the STEP7 environment (TIA or Simatic Manager) in a static way, so creating communication links falls within a development cycle configure/compile/transfer to each of the interlocutors.</p>
+<div class="listingblock">
+<div class="content">
+<pre>s7://10.10.1.33?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400</pre>
 </div>
-<div class="paragraph">
-<p>Now, what options are there for those applications that want to make use of the asynchronous nature of S7 PLCs, including alarms, events, or time-stamped data? Outside of the Siemens ecosystem, very few. In general they are tied to a specific platform, for example PCS7 (Siemens DCS), Braumat (Platform for brewing processes) or WinCC (SCADA system).</p>
-</div>
-<div class="paragraph">
-<p>This is where the open source nature of the S7 driver developed by the PLC4X team becomes a differentiating factor. The driver data structures are clearly defined in "mspec", the cornerstone for the development of our drivers in different languages and platforms, as well as a well-defined API, allow a lingua franca for managing the driver development cycle.</p>
-</div>
-<div class="paragraph">
-<p>Our added value is having the advanced functionalities of the Simatic S7-300/S7-400 such as:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Device status management (RUN/STOP).</p>
-</li>
-<li>
-<p>System events (Alarms/User messages).</p>
-</li>
-<li>
-<p>Cyclic Subscription (CYC).</p>
-</li>
-<li>
-<p>SZL(SSL) diagnostics.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>These functionalities normally available on the Siemens platform (STEP7/TIA/WinCC) are now available for use in open IoT-type applications, which guarantees the correct handling of the "quality" of the data, as well as its time stamp.</p>
-</div>
-<div class="paragraph">
-<p>Although this driver is developed using Siemens Hardware, it should be functional with VIPA brand equipment, which is a version (clone) of the S7-300, with more memory and functionalities. If you have one of these devices and you are in your best disposition to carry out communication tests, we would be very grateful if you collaborate with the results in the development list and placing the model and firmware version that you have used.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -529,104 +608,14 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When trying to connect to a Siemens <code>LOGO</code> device, it is important to add one connection option, as Siemens seems to have only partially implemented the protocol, the device simply terminates the connection as soon as our driver tried to read the SZL table in order to find out which type of S7 device it is talking to. This can be disabled by passing in the type of PLC. For a Siemens LOGO device therefore please add <code>?controller-type=LOGO</code> to the connection string.
+When connecting to a Siemens <code>LOGO</code> device, add <code>?controller-type=LOGO</code> to the
+connection string. Siemens seems to have only partially implemented the protocol on these
+devices: without pinning the type, the device terminates the connection as soon as the driver
+tries to read the SZL table it normally uses to auto-detect which S7 device family it is
+talking to.
 </td>
 </tr>
 </table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_regarding_the_support"><a class="anchor" href="#_regarding_the_support"></a>Regarding the Support</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>It is typical within the decision-making cycle in an automation project to know who and how much the support of the tools that will be used in the control architecture will cost.</p>
-</div>
-<div class="paragraph">
-<p>PLC4X support is on our development list (<a href="mailto:dev@plc4x.apache.org">dev@plc4x.apache.org</a>) where we will gladly answer your questions about the S7 driver.</p>
-</div>
-<div class="paragraph">
-<p>If your company requires commercial support, companies that directly or indirectly support the drivers and tools developed in PLC4X are published on our page.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_record_of_revisions_made_to_the_driver"><a class="anchor" href="#_record_of_revisions_made_to_the_driver"></a>Record of revisions made to the driver</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Rev</th>
-<th class="tableblock halign-left valign-top">Release</th>
-<th class="tableblock halign-left valign-top">Date</th>
-<th class="tableblock halign-left valign-top">Description of the change</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0.10.0</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>2022/10/04</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Stable release.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_connecting_as_easy_as_1_2_3"><a class="anchor" href="#_connecting_as_easy_as_1_2_3"></a>Connecting as easy as 1-2-3.</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_one"><a class="anchor" href="#_one"></a>ONE</h3>
-<div class="paragraph">
-<p>In PLC4X the URL philosophy is used as the data source for the connection for the specification of the driver and its connection parameters, this is almost a standard in network applications (pointing to the best practices). It is also possible to create an instance of the driver directly and assign its parameters with the typical "set" methods.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="../../images/users/protocols/s7_note.png" alt="Note">
-</td>
-<td class="content">
-In the following, reference will be made to the Java-based driver, which implements all the functionalities indicated in this manual.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The specified URL has the structure</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../_images/users/protocols/s7_url.png" alt="s7_url">
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SCHEMA: Defines the protocol to be used, in our particular case S7</p>
-</li>
-<li>
-<p>DOMAINE NAME: Physical address of the PLC or CP&#8217;s.</p>
-</li>
-<li>
-<p>PARAMETERS: List of key/value values separated by ampersand "&amp;". They define the behavior of the driver.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The SCHEMA and DOMAINE NAME are almost standard for any URL and do not require further explanation. The PARAMETERS that define the behavior of the driver are defined in the following table.</p>
-</div>
 </div>
 </div>
 </div>
@@ -1041,122 +1030,27 @@ In the following, reference will be made to the Java-based driver, which impleme
 </tr>
 </tbody>
 </table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>read</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>cotp</code> transport.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Only supported with <code>cotp</code> transport.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="_two"><a class="anchor" href="#_two"></a>TWO</h3>
-<div class="paragraph">
-<p>After defining the URL, the connection is made. Driver selection from the URL is done via PLC4X&#8217;s SPI support, so driver instantiation and mapping originating from the URL is done transparently by the Java SPI services.</p>
-</div>
-<div class="paragraph">
-<p>Any inconsistency in the URL definition will generate an exception that must be handled by the user program.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">     .
-     .
-     .
-try {
-    PlcConnection connection  new DefaultPlcDriverManager().getConnection("s7://10.10.1.33?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400"); //(2.1)
-    final PlcReadRequest.Builder subscription  connection.readRequestBuilder(); //(2.2)
-     .
-     .
-     .
-     }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In (2.1) the driver instance is created, you only have to ensure that the required driver is in the CLASSPATH of your Java environment. Already in (2.2) it defines the type of service required (read/write or a subscription), here a read request is indicated.</p>
-</div>
-<div class="paragraph">
-<p>No problems? Then we are ready to configure and request the data that we require from the PLC. Let&#8217;s go to step "three".</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_three"><a class="anchor" href="#_three"></a>THREE</h3>
-<div class="paragraph">
-<p>By having the connection we can start building and executing our requests.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">.
-.
-.
- readrequest.addTagAddress("MySZL", "SZL_ID=16#0091;INDEX=16#0000"); //(3.1)
-
-            final PlcReadRequest rr  readrequest.build(); //(3.2)
-            final PlcReadResponse szlresponse  rr.execute().get(); //(3.3)
-  if (szlresponse.getResponseCode("MySZL") = PlcResponseCode.OK) {//(3.4)
-  }
-.
-.
-.</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In (3.1) the request for a PLCTag is constructed, in this particular case a list of controller system status. In step (3.2) we build the request and in (3.3) we execute the request using the futures pattern in Java. We verify in (3.4) that everything is fine and that our data was acquired.</p>
-</div>
-<div class="paragraph">
-<p>These steps are shown separately for ease of analysis, but can be simplified into one statement to avoid excessive code.</p>
-</div>
-<div class="paragraph">
-<p>A detailed explanation of the format for addressing PLCTags in the S7 driver will be given in the following sections.</p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When programming Siemens PLCs, usually the tool used to do that is called TIA Portal.</p>
-</div>
-<div class="paragraph">
-<p>The PLC4X S7 Driver is therefore sticking to the address format defined by this tool as it simplifies exchanging address information.</p>
+<p>Addressing is implemented in C, Go and Java. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
 </div>
 <div class="sect2">
 <h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="paragraph">
+<p>The PLC4X S7 driver addresses TIA Portal&#8217;s own address notation, so addresses can generally
+be copied directly out of TIA Portal.</p>
+</div>
 <div class="paragraph">
 <p>In general all S7 addresses have this format:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>. %{Memory-Area}{start-address}[{selection}]:{Data-Type}</pre>
+<pre>%{Memory-Area}{start-address}[{selection}]:{Data-Type}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1171,58 +1065,45 @@ driver can express.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>. Bit-Addresses {Memory-Area-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
-. Byte-Addresses {Memory-Area-Code}{Start-Byte-Address}:{Data-Type-Code}[{count}]</pre>
+<pre>Bit-Addresses  {Memory-Area-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
+Byte-Addresses {Memory-Area-Code}{Start-Byte-Address}:{Data-Type-Code}[{count}]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Bit addresses are only used if the datatype: <code>BOOL</code> is used.</p>
+<p>Bit addresses are only used if the datatype <code>BOOL</code> is used. The array notation of these can
+be omitted, in which case a <code>Count</code> of 1 is used by default. <code>Start-Byte-Address</code> and
+<code>Bit-Offset</code> both represent unsigned integer values.</p>
 </div>
 <div class="paragraph">
-<p>The array notation of these can be omitted. In this case a <code>Count</code> of 1 is used per default.</p>
-</div>
-<div class="paragraph">
-<p><code>Start-Byte-Address</code> and <code>Bit-Offset</code> in above list both represent unsigned integer values.</p>
-</div>
-<div class="paragraph">
-<p>In case of accessing data in the <code>data block</code> memory area, the syntax is quite a bit more complex:</p>
+<p>In case of accessing data in the <code>data block</code> memory area, the syntax is a bit more complex:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>. DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
-. DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:{Data-Type-Code}[{Count}]</pre>
+<pre>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
+DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:{Data-Type-Code}[{Count}]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When reading a <code>STRING</code> datatype, currently 254 characters would automatically be fetched from the PLC.</p>
-</div>
-<div class="paragraph">
-<p>In order to limit the amount of data, we extended the <code>STRING</code> type declaration syntax to allow limiting this.</p>
-</div>
-<div class="paragraph">
-<p>With the following format less than 254 characters can be read:</p>
+<p>When reading a <code>STRING</code> datatype, currently 254 characters are automatically fetched from the
+PLC. To limit the amount of data transferred, the <code>STRING</code> type declaration syntax was
+extended to allow declaring a shorter length:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>. DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:STRING({string-length})[{Count}]</pre>
+<pre>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:STRING({string-length})[{Count}]</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>These addresses can usually be copied directly out of TIA portal.
-However we also implemented a shorter version, as above version does have some unnecesary boilerplate parts (The <code>.DB</code> in the middle as well as the <code>Short-Data-Type-Code</code>)</p>
-</div>
-<div class="paragraph">
-<p>The shorter syntax looks like this:</p>
+<p>The data-block forms above carry some unnecessary boilerplate (the <code>.DB</code> in the middle, as
+well as the <code>Short-Data-Type-Code</code>), so a shorter syntax is also accepted, and handled
+identically to the long form:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>. DB{Data-Block-Number}:{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
-. DB{Data-Block-Number}:{Start-Byte-Address}:{Data-Type-Code}[{Count}]
-. DB{Data-Block-Number}:{Start-Byte-Address}:STRING({string-length})[{Count}]</pre>
+<pre>DB{Data-Block-Number}:{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
+DB{Data-Block-Number}:{Start-Byte-Address}:{Data-Type-Code}[{Count}]
+DB{Data-Block-Number}:{Start-Byte-Address}:STRING({string-length})[{Count}]</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>The S7 driver will handle both types of notation equally.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1304,7 +1185,7 @@ However we also implemented a shorter version, as above version does have some u
 <td class="tableblock halign-left valign-top"><p class="tableblock">DB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATA_BLOCKS</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Memory areas containing user-defined data structures usually accessed by the integer data block number. antease note that data block addresses have a little more complex address format.</p>
+<p>Memory areas containing user-defined data structures usually accessed by the integer data block number. Please note that data block addresses have a little more complex address format.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
 </tr>
@@ -1447,7 +1328,7 @@ However we also implemented a shorter version, as above version does have some u
 <td class="tableblock halign-left valign-top"><p class="tableblock">LINT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Long integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">64 bit integer (signed)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bit integer (signed)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">S7_1500</p></td>
 </tr>
@@ -1501,7 +1382,7 @@ However we also implemented a shorter version, as above version does have some u
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String 2 + n bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String 2 + n bytes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
 </tr>
@@ -1509,7 +1390,7 @@ However we also implemented a shorter version, as above version does have some u
 <td class="tableblock halign-left valign-top"><p class="tableblock">WSTRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Double byte String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String of 16 bit characters 2 + n bytes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String of 16 bit characters 2 + n bytes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">S7_1200, S7_1500</p></td>
 </tr>
@@ -1567,19 +1448,120 @@ However we also implemented a shorter version, as above version does have some u
 </tbody>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Examples</caption>
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Address</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DBX0.0:BOOL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the single bit at data block 1, byte 0, bit 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB10.DBW20:INT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a 16-bit signed integer at data block 10, byte 20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%I0.0:BOOL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the single bit at input byte 0, bit 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%MD100:DINT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a 32-bit signed integer at flag/marker byte 100</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DBB0[0..9]:BYTE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10 bytes starting at data block 1, byte 0, returned as a list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB5:10:INT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a 16-bit signed integer at data block 5, byte 10, using the shorter data-block syntax</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DBB0[0..15]:RAW_BYTE_ARRAY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 raw bytes starting at data block 1, byte 0, decoded as <code>BYTE</code> - <code>RAW_BYTE_ARRAY</code> is accepted as an alias for <code>BYTE</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DB0:STRING(80)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an <code>STRING</code> of up to 80 characters at data block 1, byte 0 - fewer than the 254-character default</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%DB1.DB0:STRING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a <code>STRING</code> at data block 1, byte 0, read at its default maximum length</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ALM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">subscribes to the live alarm push feed (see Protocol Details)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>QUERY:ALARM_S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">one-shot read of the alarms currently buffered on the PLC, <code>ALARM_S</code> layout</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_siemens_s7_200_s7_200_smart"><a class="anchor" href="#_siemens_s7_200_s7_200_smart"></a>Siemens S7-200 / S7-200 Smart</h2>
+<h2 id="_notes_and_tips"><a class="anchor" href="#_notes_and_tips"></a>Notes and Tips</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Especially when it comes to the input- and output addresses for analog channels, the start
+addresses are configurable and hereby don&#8217;t always start at the same address.
+In order to find out what addresses these ports have, please go to the <code>device setting</code> of
+your PLC in <code>TIA Portal</code>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../_images/users/protocols/s7-tia-device-settings.png" alt="devsettings" width="640" height="480">
+</div>
+</div>
+<div class="paragraph">
+<p>Especially pay attention to this part:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../_images/users/protocols/s7-tia-io-settings.png" alt="iosettings" width="600" height="144">
+</div>
+</div>
+<div class="paragraph">
+<p>In above image you can see that this device has 8 digital inputs (<code>DI 8</code>) and 2 analog inputs
+(<code>AI 2_1</code>) as well as 6 digital outputs (<code>DQ 6</code>).</p>
+</div>
+<div class="paragraph">
+<p>The start addresses of the digital inputs and outputs start directly at <code>0</code>. The analog
+inputs however start at address <code>64</code>.</p>
+</div>
+<div class="paragraph">
+<p>Each digital input and output can be addressed by a single bit-address (start-address and
+offset) or can be read in a block by reading a full byte starting at the given start address
+without providing a bit offset.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_protocol_details"><a class="anchor" href="#_protocol_details"></a>Protocol Details</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_siemens_s7_200_s7_200_smart"><a class="anchor" href="#_siemens_s7_200_s7_200_smart"></a>Siemens S7-200 / S7-200 Smart</h3>
 <div class="paragraph">
 <p>The S7-200 and the newer S7-200 Smart are lower-end controllers that behave a little differently from the S7-300/400/1200/1500 family. They can still be reached with the S7 driver over Ethernet (ISO-on-TCP), but they need a couple of specific connection settings and use a different convention for addressing their variable memory.</p>
 </div>
 <div class="paragraph">
 <p>This section collects what the community has found to work (see PLC4X issues #1925 and #2641).</p>
 </div>
-<div class="sect2">
-<h3 id="_connecting"><a class="anchor" href="#_connecting"></a>Connecting</h3>
+<div class="sect3">
+<h4 id="_connecting"><a class="anchor" href="#_connecting"></a>Connecting</h4>
 <div class="paragraph">
 <p>Two things are important when connecting to an S7-200 (Smart):</p>
 </div>
@@ -1613,8 +1595,8 @@ However we also implemented a shorter version, as above version does have some u
 <p>Both reading and writing have been confirmed to work against an S7-200 Smart with this configuration.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_addressing_the_v_variable_memory_area"><a class="anchor" href="#_addressing_the_v_variable_memory_area"></a>Addressing the V (variable) memory area</h3>
+<div class="sect3">
+<h4 id="_addressing_the_v_variable_memory_area"><a class="anchor" href="#_addressing_the_v_variable_memory_area"></a>Addressing the V (variable) memory area</h4>
 <div class="paragraph">
 <p>The S7-200 keeps its user variables in a <code>V</code> (variable) memory area, addressed in the Siemens tooling (STEP 7-Micro/WIN) as, for example, <code>VW310</code>, <code>VD732</code> or <code>V350.0</code>. The S7 driver does not have a dedicated <code>V</code> memory-area code.</p>
 </div>
@@ -1677,10 +1659,8 @@ Native support for a dedicated <code>V</code> memory-area code may be added in a
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_actors_participating_in_the_communication_process"><a class="anchor" href="#_actors_participating_in_the_communication_process"></a>Actors participating in the communication process</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_actors_participating_in_the_communication_process"><a class="anchor" href="#_actors_participating_in_the_communication_process"></a>Actors participating in the communication process</h3>
 <div class="paragraph">
 <p>PLC programming in general is a Pandora&#8217;s box!</p>
 </div>
@@ -1720,16 +1700,34 @@ Native support for a dedicated <code>V</code> memory-area code may be added in a
 </li>
 </ol>
 </div>
-<div class="sect2">
-<h3 id="_s7_readwrite"><a class="anchor" href="#_s7_readwrite"></a>S7 Read/Write</h3>
+<div class="sect3">
+<h4 id="_s7_readwrite"><a class="anchor" href="#_s7_readwrite"></a>S7 Read/Write</h4>
 <div class="imageblock text-center kroki">
 <div class="content">
 <img src="https://kroki.io/plantuml/png/eNqN0E9rgzAYBvB7PsVLdtHDXBkDQYrgXBlj7SLGsd1GdJkNqJH4BrZvvzg7W3vqJeTP8_zwVVjUnW1LaYCuy9hbrXxKUGEjIdumd-_AVStQVcBDcO879rBZ35QxcDtURvWodBeQL63RAU-tqCXcEiIq1AaSvie9MK6setHh5JFSfwN1W_AS7lO42qp6j_eNlYss48tqysPFBQ9HXXafjiOTmWb_2qMRP4t0ms1RV4Pr-DBbBIMt5zk8Ok5HfTI9upT7Csbn-PF-RCJgz-daLms1jH8C9xIq3Q22leZAuDUCXrDs73xuzijqYzEIgkag89zmVHlL8t1HvuFFkheXaydA_vpyce8X38ahFg==" alt="s7h_image02">
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_s7_event_subscription"><a class="anchor" href="#_s7_event_subscription"></a>S7 Event Subscription</h3>
+<div class="sect3">
+<h4 id="_s7_event_subscription"><a class="anchor" href="#_s7_event_subscription"></a>S7 Event Subscription</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_note.png" alt="Note">
+</td>
+<td class="content">
+<code>onSubscribe</code> accepts exactly two kinds of tag: an <code>S7AlarmTag</code> (<code>ALM</code>, <code>QUERY:ALARM_S</code>
+or <code>QUERY:ALARM_8</code>) subscribed as an <code>EVENT</code>, or an ordinary <code>S7Tag</code> subscribed as
+<code>CYCLIC</code>; anything else is rejected with <code>INVALID_ADDRESS</code>. The <code>MODE</code>, <code>SYS</code> and <code>USR</code>
+subscriptions this section once documented were built on an <code>addEventField()</code> /
+<code>S7ModeEvent</code> / <code>S7SysEvent</code> / <code>S7UserEvent</code> API that is no longer present in the source
+tree; those subsections have been commented out in this page&#8217;s source rather than deleted.
+<code>ALM</code> and cyclic (<code>CYC</code>) subscriptions are what actually works today.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The S7 driver allows the subscription to asynchronous events generated in the PLC.</p>
 </div>
@@ -1818,402 +1816,49 @@ For a complete list of compatibility between the S7-300,400 and S7-1200 &amp; S7
 <p>In the following sections we will describe in more detail the functionalities of each field.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_scan_events"><a class="anchor" href="#_scan_events"></a>SCAN Events</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_subscription_to_mode_events_s7modeevent"><a class="anchor" href="#_subscription_to_mode_events_s7modeevent"></a>Subscription to MODE events (S7ModeEvent).</h3>
-<div class="paragraph">
-<p>By subscribing to controller status changes or <code>MODE</code> events, the PLC status changes can be tracked.</p>
-</div>
-<div class="paragraph">
-<p>Depending on the CPU model, these state changes are followed in the user application (PLC program), OB100 and OB101, allowing these applications to be brought to a safe state.</p>
-</div>
-<div class="paragraph">
-<p>Now, how do these state changes affect external applications, for example HMI or custom user applications?</p>
-</div>
-<div class="paragraph">
-<p>In the use of a unified Siemens architecture, the operator panels (HMI) and WinCC (Scada) detect the status of the CPU and pass the quality of the points in the database in real time to poor quality.</p>
-</div>
-<div class="paragraph">
-<p>In the case of an application developed with PLC4X, the use of MODE events will allow your application to indicate to users the quality of the points used, and that by design the quality is not updated in the controller.</p>
-</div>
-<div class="imageblock text-center kroki">
-<div class="content">
-<img src="https://kroki.io/plantuml/png/eNqN0E9rgzAYBvB7PsVLdtHDXGEDQYrgXBlj7SLGsd1GdJkNqJH4BrZvvzg7W3vqJeTP8_zwVVjUnW1LaYCuy9hbrXxKUGEjIdumd-_AVStQVcBDcO879rBZ35QxcDtURvWodBeQL63RAU-tqCXcEiIq1AaSvie9MK6setHh5JFSfwN1W_AS7lO42qp6j_eNlYss48tqysPFBQ9HXXafjiOTmWb_2qMRP4t0ms1R4npwHR-Gi2Cw5TyIR8fxqE-mR5dyn8H4HD_ej0gE7Plcy2WthvFX4F5CpbvBttIcCLdGwAuW_Z3PzRlFfSwGQdAIdJ7bnCpvSb77yDe8SPLicu0EyF9fLu79AjuOoSE=" alt="s7h_image03">
-</div>
-</div>
-<div class="paragraph">
-<p>From image 2, we can describe the sequence of actions that can be followed for subscription. In the first place, the subscription process occurs from the <strong>App</strong> of the user (1)(2)(3)(4), having a positive response the application is ready to receive the events asynchronously from the <strong>PLC (AS)</strong>.</p>
-</div>
-<div class="paragraph">
-<p>Suppose that the manager for a reason passes the controller to <strong>STOP</strong> (06) through the front switch or from the engineering station, then <strong>OS</strong> proceeds to send a notification (07)(08) to all consoles that are registered to receive this event.</p>
-</div>
-<div class="paragraph">
-<p>Subsequently, the manager decides to switch the controller to execution mode, through the front switch or the engineering console, at this time the <strong>OS</strong> is in charge of generating the startup events, initially it indicates the hot start <strong>WARN_RESTART</strong> (09)(10)(11) and if the startup is successful, indicate that the controller is in execution mode or <strong>RUN</strong> (12)(13)(14).</p>
-</div>
-<div class="paragraph">
-<p>The information received in (08)(11)(14) is included in the attached table.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Field</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TYPE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fixed value.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Instant</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Instant.now () value assigned when receiving the event from the PLC.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MAP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HashMap</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The HashMap with all fields.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">METHOD</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Value of "method" as defined in S7Parameter.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">FUNCTION</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Value of "function" as defined in S7Parameter.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CURRENT_MODE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">short</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status value reported in the event. Check the ModeTransitionType enum.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>With the sequence diagram and the data structures that will be received by the application, we can analyze the Java code for this specific function. We think this should serve as a pseudocode for the other languages.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public class PLCEventModeSubscription {
-
-   public static void main(String[] args) throws Exception {
-    try (PlcConnection connection  new PlcDriverManager()
-			.getConnection("s7://192.168.1.51?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400")) {
-
-      final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder(); <i class="conum" data-value="01"></i><b>(01)</b>
-
-      subscription.addEventField("myMODE", "MODE");
-      final PlcSubscriptionRequest sub  subscription.build();
-
-      System.out.println("Query: " + sub.toString());
-
-      final PlcSubscriptionResponse subresponse  sub.execute().get();
-
-      if (subresponse.getResponseCode("myMODE") = PlcResponseCode.OK) { <i class="conum" data-value="04"></i><b>(04)</b>
-				PlcConsumerRegistration registerMode =
-        	subresponse
-          	.getSubscriptionHandle("myMODE") <i class="conum" data-value="05"></i><b>(05)</b>
-          	.register(msg -&gt; { <i class="conum" data-value="08"></i><b>(08)</b><i class="conum" data-value="11"></i><b>(11)</b><i class="conum" data-value="14"></i><b>(14)</b>
-           		System.out.println("******** S7ModeEvent ********");
-            	Map&lt;String, Object&gt; map = ((S7ModeEvent) msg).getMap();
-            	map.forEach((x, y) -&gt; {
-              	System.out.println(x + " : " + y);
-            	});
-            	short currentmode = (short)
-              map.get(S7ModeEvent.Fields.CURRENT_MODE.name());
-            	System.out.println("CURRENT_MODE MSG: " + ModeTransitionType.enumForValue(currentmode).name());
-            	System.out.println("****************************");
-          	});
-			}
-          System.out.println("Waiting for the messages.");
-          Thread.sleep(120000);
-          connection.close();
-          System.out.println("Ending the connection.");
-        }
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_subscription_to_sys_events_s7sysevent_and_user_events_s7userevent"><a class="anchor" href="#_subscription_to_sys_events_s7sysevent_and_user_events_s7userevent"></a>Subscription to SYS events (S7SysEvent) and USER events (S7UserEvent).</h3>
-<div class="paragraph">
-<p>System events allow to receive asynchronously any event that affects the operation of the controller, or any of its peripheral equipment that is capable of sending events through a PROFIBUS or Profinet fieldbus.</p>
-</div>
-<div class="imageblock text-center kroki">
-<div class="content">
-<img src="https://kroki.io/plantuml/png/eNpdkD1rwzAQhnf9ikNd7KFthoAhBEPqhFKaYtPL0IySKzuCWDLSqTT_vnKdujibOD3vcx8ikDWhk8oBX8s8WSxSzkjTWUG1L5YfgLoTpGvADPDiSXWw-1KGIMJ4xPWjzMEH6Wune9LWPLDGWoq2l060CpaMiZqsg03fs164aNK9iPFfOZP2G3h8QrLBlMPdXrcnejoHNWNLnEcLzGYFzAa7Mp9Rx0ZnUf3Znp24zOiimtAYg_v8uuhqtkfC38rtjqds_IxUnKLECf-vD5IVlK-3tnfVaj9cgk4Kamt86JRjrKhGWSTwUFZX51g4WNhq0Rrrh4vL0DQxMQC3Xae2ZCf1D1EFjH8=" alt="s7h_image04">
-</div>
-</div>
-<div class="paragraph">
-<p>A first example of its use is the change of state of a CP, IM or FM within the architecture of the controller. This will allow the application to indicate that there is an effect on the system that may affect the quality of the signals used, allowing preventive or corrective actions to be taken as required.</p>
-</div>
-<div class="imageblock text-center kroki">
-<div class="content">
-<img src="https://kroki.io/plantuml/png/eNplkFFLwzAQx9_zKY740j6oe1AGYxRmEREHK4sDX5M27QJtUpKL6Lf32s5K51u4-90v_zsZ0dnYKe2Bb1WWrFYpZ2iw1VDs84cPOAVqPX9qi0D9kzhu71UGIapQetOjcfaO1c4hUa-dbDQ8MiZLdB52fc966dGUppc0PvqYcl_A6QnJTqQcbvamOeNTG_WCPYjlaC7Wi4JYD3ZtK9KxyZkXv7YXL78XdF7MKI3BbXbZbbPYI-G0HU_Z1COIQhzETP_VB8cGDm_XsqNuTBgOgWcNpbMhdtozNmadfAS9O6iMbKwLFA9UrGti_iH-otLVKHKtHqNcZ5nDoJs__AHMxJDV" alt="s7h_image05">
-</div>
-</div>
-<div class="paragraph">
-<p>In general, system and user events are part of the same group of events, but they are differentiated to facilitate their processing.</p>
-</div>
-<div class="paragraph">
-<p>From the sequence diagrams after subscribing to the required event type (01)(02)(03)(04), the consumer (05) is registered to start receiving the events either from the <strong>SYS</strong> system or from the user <strong>USR</strong>.</p>
-</div>
-<div class="paragraph">
-<p>When the event is generated, it is sent to the diagnostic buffer (06) and an image of it is sent to all consoles registered to receive this type of event (07) distributed by the OS (08).</p>
-</div>
-<div class="paragraph">
-<p>Since at the protocol level the events are not differentiated, the PLC4X driver (08) is in charge of classifying the events in <strong>SYS</strong> or <strong>USR</strong> and transferring them to the registered consumer (09).</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<img src="../../images/users/protocols/s7_tip.png" alt="Tip">
-</td>
-<td class="content">
-For didactic purposes, a step-by-step explanation has been carried out, but in general the <strong>App</strong> application can be subscribed to the four types of events simultaneously.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following table shows the fields available for each message.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Field</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TYPE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fixed value.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Instant</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Instant.now () value assigned when receiving the event from the PLC.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">EVENT_ID</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">short</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OS generated event ID.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PRIORITY_CLASS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Value of "method" as defined in S7Parameter.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OB_NUMBER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">byte</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Value of "function" as defined in S7Parameter.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DAT_ID</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">short</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status value reported in the event. Check the ModeTransitionType enum.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INFO1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">WORD</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">System information 1 word long.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INFO2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DWORD</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">System information 2 words l ng.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>For SYS events, the EVENT_ID is generated automatically by the <strong>OS</strong>, and basically they are constant in the different families of controllers.</p>
-</div>
-<div class="paragraph">
-<p>For the USER or User-defined events follow the same pattern as system events. They have the particularity that the value of EVENT_ID must be between the values 0xAXXX and 0xBYYY.</p>
-</div>
-<div class="paragraph">
-<p>This programming of the user-defined events is carried out at the level of the <strong>PLC(AS)</strong> controller, so we recommend the technical note [3] of the Siemens portal.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<img src="../../images/users/protocols/s7_tip.png" alt="Tip">
-</td>
-<td class="content">
-In the case of user-defined messages, it is important to take into account that these are reported to the diagnostic buffer, which has a limited capacity depending on the CPU model used. Also take into account that the diagnostic buffer works like a circular buffer, so the oldest messages will be lost.
-</td>
-</tr>
-</table>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>   +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-   |15|14|13|12|11|10| 9| 8| 7| 6| 5| 4| 3| 2| 1|
-   +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-   \__________/\__________/\____________________/
-    Event class     IDs         Event number
-
-    Event Class:
-       1   Standard OB Events
-       2   Synchronous errors
-       3   Asynchronous errors
-       4   Mode transition
-       5   Run-time events
-       6   Communications events
-       7   Events for fail-safe and fault tolerant systems
-       8   Standardized diagnostic data on modules
-       9   Predefined user events
-     A,B   Freely definable events
-   C,D,E   Reserved
-       F   Events for modules other than CPUs (for example, CPs, FMs)
-
-   IDs (Bit)
-       8   0:Event leaving state, 1:Event entering state
-       9   1:Entry in diagnostic buffer
-      10   1:Internal error
-      11   1:External error</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In the previous table we can see how the event classes are coded, and how they are classified. If you require detailed information on each event, the user&#8217;s <strong>App</strong> must interpret the indicated bits.</p>
-</div>
-<div class="paragraph">
-<p>In the INFO1 and INFO2 fields, specific diagnostic information associated with the event is generally attached, or some information that needs to be recorded in the case of user events.</p>
-</div>
-<div class="paragraph">
-<p>The INFO1 field contains information that can be stored in a word, namely, WORD, INT of ARRAY [0..1] OF CHAR.</p>
-</div>
-<div class="paragraph">
-<p>The INFO2 field contains information that can be stored in a double word, namely, DWORD, DINT, REAL, TIME, ARRAY [0..3] OF CHAR.</p>
-</div>
-<div class="paragraph">
-<p>Below is an example code for the subscription of events type <strong>SYS</strong>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static void main(String[] args) throws Exception {
- try (PlcConnection connection  new PlcDriverManager().
-  getConnection("s7://192.168.1.51?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400")) {
-
-   final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder(); <i class="conum" data-value="01"></i><b>(01)</b>
-
-   subscription.addEventField("mySYS", "SYS");
-   final PlcSubscriptionRequest sub  subscription.build();
-
-   System.out.println("Query: " + sub.toString());
-
-   final PlcSubscriptionResponse subresponse  sub.execute().get();
-
-   PlcConsumerRegistration registerSys =
-    subresponse
-     .getSubscriptionHandle("mySYS") <i class="conum" data-value="05"></i><b>(05)</b>
-     .register(msg -&gt; { <i class="conum" data-value="09"></i><b>(09)</b>
-      System.out.println("******** S7SysEvent ********");
-      Map&lt;String, Object&gt; map = ((S7SysEvent) msg).getMap();
-      map.forEach((x, y) -&gt; {
-       System.out.println(x + " : " + y);
-      });
-      Integer eventid = (Integer) map.get(S7SysEvent.Fields.EVENT_ID.name());
-      System.out.println("DIAGNOSTIC: " + S7DiagnosticEventId.
-      valueOf(eventid.shortValue()).getDescription()); <i class="conum" data-value="10"></i><b>(10)</b>
-      System.out.println("****************************");
-     });
-
-   System.out.println("Waiting for the messages.");
-   Thread.sleep(120000);
-   connection.close();
-   System.out.println("Ending the connection.");
-  }
- }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And below is an example code for the subscription of events type <strong>USR</strong>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static void main(String[] args) throws Exception {
- try (PlcConnection connection  new PlcDriverManager().
-  getConnection("s7://192.168.1.51?cotp.remote-rack=0&amp;cotp.remote-slot=3&amp;controller-type=S7_400")) {
-
-   final PlcSubscriptionRequest.Builder subscription  connection.subscriptionRequestBuilder();
-
-   subscription.addEventField("myUSR", "USR");
-   final PlcSubscriptionRequest sub  subscription.build();
-
-   System.out.println("Query: " + sub.toString());
-
-   final PlcSubscriptionResponse subresponse  sub.execute().get();
-
-   PlcConsumerRegistration registerUsr =
-    subresponse
-    .getSubscriptionHandle("myUSR") <i class="conum" data-value="05"></i><b>(05)</b>
-    .register(msg -&gt; {
-     System.out.println("******** S7UserEvent *******");
-     Map&lt;String, Object&gt; map = ((S7UserEvent) msg).getMap();
-     map.forEach((x, y) -&gt; { <i class="conum" data-value="09"></i><b>(09)</b>
-      System.out.println(x + " : " + y);
-     });
-     System.out.println("****************************");
-    });
-
-   System.out.println("Waiting for the messages.");
-   Thread.sleep(120000);
-   connection.close();
-   System.out.println("Ending the connection.");
-  }
- }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The Java code shows how to detect the type of event in an event type <strong>SYS</strong>. In the S7 driver, there is an enum object <em>S7DiagnosticEventId</em>(10) that allows us to identify which internal event of the <strong>PLC(AS)</strong> generated it and thus, through the interpretation of the INFO1 and INFO2 fields, determine the root cause of the event.</p>
-</div>
+<div class="sect3">
+<h4 id="_scan_events"><a class="anchor" href="#_scan_events"></a>SCAN Events</h4>
 <div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<img src="../../images/users/protocols/s7_note.png" alt="Note">
 </td>
 <td class="content">
-To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable amount of diagnostic values, it must be updated according to the new CPUs or firmware versions available.
+The <code>MODE</code>, <code>SYS</code> and <code>USR</code> subscriptions that this section used to describe are not
+available in the current driver: the <code>S7ModeEvent</code>, <code>S7SysEvent</code>, <code>S7UserEvent</code> and
+<code>addEventField()</code> API they were written against no longer exists in the source tree. Those
+subsections are retained in this page&#8217;s source as a comment block rather than deleted, so
+the protocol-level description can be restored if the API returns or rewritten against the
+current one. What the driver implements today is the <code>ALM</code> subscription described below,
+and cyclic (<code>CYC</code>) subscriptions covered further on.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Unlike <strong>SYS</strong> events, <strong>USR</strong> events must be interpreted directly by the <strong>App</strong> application, so they are generally scheduled during the development phase of the <strong>S7App</strong> application.</p>
 </div>
-<div class="paragraph">
-<p>By having INFO1 and INFO2 in the <strong>S7App</strong> program, the user can transfer data associated with events, such as transitions between phases, events of diagnostic routines such as firts-out or the start or end of a batch process, all asynchronously.</p>
+<div class="sect3">
+<h4 id="_alarm_events"><a class="anchor" href="#_alarm_events"></a>ALARM Events</h4>
+<div class="sect4">
+<h5 id="_subscription_to_alm_type_events"><a class="anchor" href="#_subscription_to_alm_type_events"></a>Subscription to ALM type events</h5>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/s7_note.png" alt="Note">
+</td>
+<td class="content">
+This is the one event class of the four originally described in this section that the
+current driver actually implements, as a real <code>PlcSubscriptionRequest</code> on an <code>S7AlarmTag</code>
+(<code>ALM</code> for the live push feed shown here; <code>QUERY:ALARM_S</code> / <code>QUERY:ALARM_8</code> for a one-shot
+fetch of what is currently buffered - see <code>S7CotpConnection.onSubscribe</code>). The diagram
+below illustrates the message flow at the protocol level. Note that the older
+<code>S7AlarmEvent</code> class is not part of the current API - a subscription delivers a standard
+<code>PlcSubscriptionEvent</code>.
+</td>
+</tr>
+</table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_subscription_to_alm_type_events_s7alarmevent"><a class="anchor" href="#_subscription_to_alm_type_events_s7alarmevent"></a>Subscription to ALM type events (S7AlarmEvent).</h3>
 <div class="imageblock text-center kroki">
 <div class="content">
 <img src="https://kroki.io/plantuml/png/eNqVU11L60AQfd9fMcSXFqrmerW1IoUYLnKx2mIQfZNNMq2LTTZmJ6L_3slHa7JVsU8bMuecmTMfsiCdFkmIOTjn4aTnun1HkKIVwnzqHz9AoBJJKoJgBN5K5gn8e8WUgLHe9Pr8MJyAKUyUq4yUTg_EQmtirf-JXCIMhZAR6Ry8LBOZzFlHZZLZlbQI9Rs4_Ak9L-g7sDdVyye6WBXYwc6CLtUPRp0fwahUxzRmOVFr-vO12mUu3ztof76BMg32J43NM7YRbnz0HDbn9EUdYxAXMQs26M__pcYZzK5ssVtcKlM2gp4QIp2aIsFcbKNeCjQEsmys-S4bA6vOP_4Z1O_RoA3l8A2-ERh8-ZL1t2EdN-_Ydd1d-CcNb7hT1lHDOj0QdrdsM9-XObArsLRFuQywvy6oEWYikK66rldYVWcPzq6lRakHVS2VrTzeXXn8O-Uh3BlelhgXKsW43od2Jr4i9SoJm2X_ReLhl1kntQCj7qUiWJSn2cBl9Ly1n55_tY5bs29HuuPnW9i-jhh_cNCq2ZCkwkCRxQzdctZ29AFAX2QG" alt="s7h_image06">
@@ -2391,10 +2036,15 @@ To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable am
 <p>TODO: Example code</p>
 </div>
 </div>
+</div>
+</div>
 <div class="sect2">
-<h3 id="_todo_cyclic_subscription_cyc"><a class="anchor" href="#_todo_cyclic_subscription_cyc"></a>TODO: Cyclic subscription (CYC).</h3>
+<h3 id="_cyclic_subscription_cyc"><a class="anchor" href="#_cyclic_subscription_cyc"></a>Cyclic subscription (CYC)</h3>
 <div class="paragraph">
-<p>The cyclical subscription allows the acquisition of data in passive mode, that is, the data is sent from the PLC in a cyclical and synchronous way.</p>
+<p>The cyclical subscription allows the acquisition of data in passive mode, that is, the data is sent from the PLC in a cyclical and synchronous way. Unlike the <code>MODE</code>/<code>SYS</code>/<code>USR</code> event
+classes above, this one <strong>is</strong> implemented by the current driver: subscribe an ordinary
+<code>S7Tag</code> with subscription type <code>CYCLIC</code> and a requested <code>Duration</code>, and the driver picks a
+matching hardware time base and factor for you.</p>
 </div>
 <div class="imageblock text-center kroki">
 <div class="content">
@@ -2410,12 +2060,19 @@ To date, the enum object <em>S7DiagnosticEventId</em> contains a considerable am
 <p><strong>B01SEC</strong>: Time base 0.1 Sec. (100 mSec.).</p>
 </li>
 <li>
-<p><strong>B0SEC</strong>: Time base 1.0 Sec.</p>
+<p><strong>B1SEC</strong>: Time base 1.0 Sec.</p>
 </li>
 <li>
 <p><strong>B10SEC</strong>: Time base 10 Sec.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The driver prefers the coarsest base whose factor still fits in a byte, because S7-300
+firmware from V3.2 onward rejects <code>B01SEC</code> (100 ms) subscription requests outright
+(<code>errCode=0xD804</code>), honoring only <code>B1SEC</code> and <code>B10SEC</code>; sub-second requests still fall back to
+<code>B01SEC</code> since it is the only base able to express them, and will be rejected by that
+firmware.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2455,6 +2112,25 @@ Why SZL and not SSL? Well, creative freedom. The translation of the manuals from
 </td>
 <td class="content">
 Make use of the XXX document for a detailed explanation of each SZL, since as indicated, everything will depend on the hardware you have installed.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="../../images/users/protocols/users/protocols/s7_note.png" alt="Note">
+</td>
+<td class="content">
+The driver itself reads SZLs internally - to auto-detect the controller type at connect
+time, and to back <code>browse</code> - through <code>S7SzlService</code>/<code>S7CotpConnection</code>, not through a
+user-addressable <code>PlcTag</code>. The <code>SZL_ID=&#8230;&#8203;;INDEX=&#8230;&#8203;</code> tag address used in the walkthrough
+below does not match any pattern <code>S7PlcTagHandler</code> accepts today (it does not start with the
+<code>%</code> every other S7 address requires), so <code>addTagAddress</code> with that string throws
+<code>PlcInvalidTagException</code> against the current driver. The SZL_ID/INDEX encoding itself and the
+JSON shape of a response remain accurate and are kept for reference; only the specific
+"read it as a normal PlcTag" mechanism shown here is out of date.
 </td>
 </tr>
 </table>
@@ -2735,40 +2411,11 @@ Make use of the XXX document for a detailed explanation of each SZL, since as in
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_some_useful_tips"><a class="anchor" href="#_some_useful_tips"></a>Some useful tips</h3>
-<div class="paragraph">
-<p>Especially when it comes to the input- and output addresses for analog channels, the start addresses are configurable and hereby don&#8217;t always start at the same address.
-In order to find out what addresses these ports have, please go to the <code>device setting</code> of your PLC in <code>TIA Portal</code></p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../_images/users/protocols/s7-tia-device-settings.png" alt="devsettings" width="640" height="480">
 </div>
 </div>
-<div class="paragraph">
-<p>Especially pay attention to this part:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../_images/users/protocols/s7-tia-io-settings.png" alt="iosettings" width="600" height="144">
-</div>
-</div>
-<div class="paragraph">
-<p>In above image you can see that this device has 8 digital inputs (<code>DI 8</code>) and 2 analog inputs (<code>AI 2_1</code>) as well as 6 digital outputs (<code>DQ 6</code>).</p>
-</div>
-<div class="paragraph">
-<p>The start addresses of the digital inputs and outputs start directly at <code>0</code>.</p>
-</div>
-<div class="paragraph">
-<p>The analog inputs however start at address <code>64</code>.</p>
-</div>
-<div class="paragraph">
-<p>Each digital input and output can be addresses by a single bit-address (start-address and offset) or can be read in a block by reading a full byte starting at the given start address without providing a bit offset.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_resources"><a class="anchor" href="#_resources"></a>Resources</h3>
+<div class="sect1">
+<h2 id="_more_information"><a class="anchor" href="#_more_information"></a>More Information</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2805,7 +2452,6 @@ In order to find out what addresses these ports have, please go to the <code>dev
 <p><a href="https://support.industry.siemens.com/cs/document/24037531/%C2%BFqu%C3%A9-pasos-de-configuraci%C3%B3n-hay-que-realizar-en-el-simotion-scout-y-el-wincc-flexible-para-que-se-muestren-los-avisos-alarm_s-y-las-alarmas-tecnol%C3%B3gicas-dentro-del-wincc-flexible-runtime-?dti=0&amp;lc=es-ES" class="bare">https://support.industry.siemens.com/cs/document/24037531/%C2%BFqu%C3%A9-pasos-de-configuraci%C3%B3n-hay-que-realizar-en-el-simotion-scout-y-el-wincc-flexible-para-que-se-muestren-los-avisos-alarm_s-y-las-alarmas-tecnol%C3%B3gicas-dentro-del-wincc-flexible-runtime-?dti=0&amp;lc=es-ES</a></p>
 </li>
 </ol>
-</div>
 </div>
 </div>
 </div>

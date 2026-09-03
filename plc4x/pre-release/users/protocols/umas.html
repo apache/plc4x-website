@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -497,24 +500,87 @@ between the two; where that is the case it is called out below.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Array selection uses the shared notation - a single index, an inclusive range, and
-optionally the array&#8217;s declared lower bound, placed before the type. See
-<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
-</div>
-</td>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>browse</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>ping</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java, polling-emulated. Go, native - the Go driver&#8217;s subscriptions are not built on
+top of polling reads.</p>
+</div></div></td>
+</tr>
+</tbody>
 </table>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>UMAS has the following connection string format:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>umas:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example connection string would look like:-</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>umas:tcp://127.0.0.1:502</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the transport, port and option fields are optional.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -744,77 +810,11 @@ optionally the array&#8217;s declared lower bound, placed before the type. See
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>read</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>write</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>browse</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>ping</code></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h3>
 <div class="paragraph">
-<p>UMAS has the following connection string format:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>umas:{transport}://{ip-address}:{port}?{options}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>An example connection string would look like:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>umas:tcp://127.0.0.1:502</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note the transport, port and option fields are optional.</p>
-</div>
+<p>Addressing is implemented in Go, Java and Python. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
 </div>
 <div class="sect2">
 <h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
@@ -836,37 +836,22 @@ e.g. A tag with a BOOL data type could be <code>TESTING_BOOL_1</code>, whereas i
 followed by the child <code>TESTING_UDT_1.START</code>, which in itself could be a BOOL.
 An index in square brackets selects a single element and may appear at any position of the path.</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Examples</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
+<div class="admonitionblock note">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Address</th>
-<th class="tableblock halign-left valign-top">Meaning</th>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Array selection uses the shared notation - a single index, an inclusive range, and
+optionally the array&#8217;s declared lower bound, placed before the type. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
+</div>
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>g_r32</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a simple global variable</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>g_plant.meta.r32</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a nested struct member</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>g_arrInt[3]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the fourth element of an array</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>g_plant.items[2].value</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">mixed struct and array access</p></td>
-</tr>
-</tbody>
 </table>
+</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -965,6 +950,60 @@ accepts symbolic names only and rejects addresses starting with <code>%</code>.
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Address</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>g_r32</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a simple global variable</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>g_plant.meta.r32</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a nested struct member</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>g_arrInt[3]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the fourth element of an array</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>g_plant.items[2].value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mixed struct and array access</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes_and_tips"><a class="anchor" href="#_notes_and_tips"></a>Notes and Tips</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Go driver&#8217;s generated <code>DataItem</code> parser has no case for <code>DATE</code>, <code>TIME_OF_DAY</code> (<code>TOD</code>) or
+<code>DATE_AND_TIME</code> - by itself it would fall through to "unsupported type" for those three.
+The driver works around that gap: <code>decodeReadResponse</code> and <code>encodeWriteValue</code> in
+<code>plc4go/internal/umas/Values.go</code> hand-decode and hand-encode all three temporal types (plus
+<code>STRING</code>), the same way plc4j&#8217;s <code>UmasConnection</code> does, so reads and writes of <code>DATE</code> and
+<code>TIME_OF_DAY</code> tags succeed rather than being refused. Every data type listed above reads and
+writes in both languages.</p>
+</div>
+<div class="paragraph">
+<p>UMAS ships no captured test data in any language - there is no packet capture or golden byte
+sequence for either driver to compare against. The Java and Go drivers are instead verified
+against each other: their symbolic-address pattern is byte-for-byte identical, and the Go
+temporal/string decoding above is a deliberate port of plc4j&#8217;s hand-decoding. Treat this driver&#8217;s
+correctness as validated by cross-implementation agreement, not by a real captured exchange.</p>
 </div>
 </div>
 </div>

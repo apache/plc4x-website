@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -477,13 +480,86 @@
 <img src="../_images/users/protocols/can_banner.png" alt="banner" width="512" height="167">
 </div>
 </div>
+<div class="paragraph">
+<p>CANopen is a specific protocol built on top of CAN bus, widely used to coordinate
+simple field devices - drives, I/O modules, sensors - that share a single bus.
+The CANopen specification defines an Object Dictionary (OD), and this driver
+honors that structure through index and sub-index addressing of fields. It does
+not ship an Electronic Data Sheet (EDS) parser, leaving that to applications that
+wish to utilize one.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_can_in_automation"><a class="anchor" href="#_can_in_automation"></a>CAN in Automation</h2>
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CANopen SDO</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code> / <code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>SDO are request/response conversations. Both read and write path is supported.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CANopen PDO</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PDO messages are broadcasted to the bus and have to be mapped at application layer.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Receiving PDO messages requires construction of valid subscription.</p>
+</li>
+<li>
+<p>It is possible to subscribe to CANopen NMT and HEARTBEAT messages.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>CANopen is a specific protocol built on top of CAN bus.</p>
+<p>The connection string layout is <code>canopen:&lt;transport-code&gt;://&lt;transport-address&gt;</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>canopen:can-socketcan://can0</code></p>
+</li>
+<li>
+<p><code>canopen:can-virtualcan://test</code></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -599,298 +675,49 @@
 </tr>
 </tbody>
 </table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Value</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CANopen PDO</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>read</code> / <code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>PDO messages are broadcasted to the bus and have to be mapped at application layer.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CANopen SDO</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>read</code> / <code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>SDO are request/response conversations. Both read and write path is supported.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>subscribe</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p>Receiving PDO messages requires construction of valid subscription.</p>
-</li>
-<li>
-<p>It is possible to subscribe to CANopen NMT messages.</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_more_details_on_the_driver"><a class="anchor" href="#_more_details_on_the_driver"></a>More details on the driver</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>CAN, despite (or due) to its popularity has ambiguous meaning.
-There are multiple articles and sources which attempts to give introduction, yet very few of them is consistent between each other.</p>
+<p>Addressing is implemented in Java. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
 </div>
-<div class="paragraph">
-<p>There are two dominant formats of frames - CAN 2.0A and 2.0B:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>CAN 2.0A uses 11 bit identifier and up to 8 bytes of data.</p>
-</li>
-<li>
-<p>CAN 2.0B uses 29 bit identifier and up to 8 bytes of data.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>To make things worse with introduction of CAN FD amount of combinations increased even more.
-Double check frame format as this integration supports CANopen and does not support CANopen FD nor CAN 2.0B.</p>
-</div>
-<div class="paragraph">
-<p>Further reading on CAN flavors:
-<a href="https://en.wikipedia.org/wiki/CAN_bus">https://en.wikipedia.org/wiki/CAN_bus</a></p>
-</div>
-<div class="paragraph">
-<p>Default transport used with this protocol is socketcan.
-Currently, only 2.0A format (up to 8 bytes of data) is supported.</p>
-</div>
-<div class="paragraph">
-<p>Implemented driver supports currently socketcan transport.
-Change of transport requires code modifications and injection of new "transport" type which will encode CANopen payloads to specific frame format.</p>
-</div>
-<div class="paragraph">
-<p>Socketcan seems to be most widespread way to access CAN bus.
-It also masks different hardware variants which might come with their own drivers.</p>
-</div>
-<div class="paragraph">
-<p>The CANopen specification defines Object Dictionary (OD).
-This driver does honor OD structure through usage of index and sub index for addressing fields.
-It does not ship Electronic Data Sheet (EDS) parser leaving it for applications who wish to utilize it.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_address_format"><a class="anchor" href="#_address_format"></a>Address Format</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
 <div class="paragraph">
 <p>CANopen specification defines several groups of addresses dedicated to certain kind of operations.
 Critical services and message exchanges related with them have lower identifiers making them wining eventual bus access.</p>
 </div>
 <div class="paragraph">
-<p>The array size block is necessary only if application expect same value several times.
-If SDO returns for example 4 values of UNSIGNED8 it can be declared as <code>&lt;service&gt;:&lt;nodeId&gt;:UNSIGNED8[4]</code> for PDO.
-Equivalent for SDO is <code>&lt;service&gt;:&lt;nodeId&gt;:&lt;index&gt;/&lt;subindex&gt;:UNSIGNED8[4]</code>.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Service</th>
-<th class="tableblock halign-left valign-top">Format</th>
-<th class="tableblock halign-left valign-top">Supported operations</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SDO</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>SDO:nodeId:index/subindex:type[arraySize]</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><code>read</code></p>
-</li>
-<li>
-<p><code>write</code></p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>SDO is for request/response communication.
-Both expedited and segmented modes are supported.
-No support for block transfer.</p>
+<p>SDO addresses request/response reads and writes against a single Object Dictionary entry: <code>SDO:nodeId:index/subindex:type[arraySize]</code>.
+Both expedited and segmented transfer modes are supported, chosen automatically based on payload length; block transfer is not supported.
+All numeric values - nodeId, index, subindex - can be specified using hexadecimal notation (ie. <code>0xA</code>). An optional <code>/answerNodeId</code> after the
+node ID lets the response be expected from a different node than the request was sent to.</p>
 </div>
 <div class="paragraph">
-<p>Transfer kind is automatically determined based on payload length.
-All numeric values - ndodeId, index, subindex can be specified using hexadecimal notation (ie. <code>0xA</code>).</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PDO</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p>TRANSMIT_PDO_1:nodeId:type[arraySize]</p>
-</li>
-<li>
-<p>RECEIVE_PDO_1:nodeId:type[arraySize]</p>
-</li>
-<li>
-<p>TRANSMIT_PDO_2:nodeId:type[arraySize]</p>
-</li>
-<li>
-<p>RECEIVE_PDO_2:nodeId:type[arraySize]</p>
-</li>
-<li>
-<p>TRANSMIT_PDO_3:nodeId:type[arraySize]</p>
-</li>
-<li>
-<p>RECEIVE_PDO_3:nodeId:type[arraySize]</p>
-</li>
-<li>
-<p>TRANSMIT_PDO_4:nodeId:type[arraySize]</p>
-</li>
-<li>
-<p>RECEIVE_PDO_4:nodeId:type[arraySize]</p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><code>subscribe</code></p>
-</li>
-<li>
-<p><code>write</code></p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>PDO is an asynchronous operation hence receiving of it requires subscription.
-Check Apache PLC4X API documentation for more detailed example of how to use subscriptions API.
-Subscriber will be notified with value mapped to type defined in field syntax.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NMT</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p>NMT</p>
-</li>
-<li>
-<p>NMT:nodeId</p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><code>subscribe</code></p>
-</li>
-<li>
-<p><code>write</code></p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>NMT messages are sent using CAN node ID <code>0</code>.
-They have the highest priority on the bus.
-Messages of this kind indicate operating state of a node (booted, operational).</p>
+<p>PDO addresses identify one of the four transmit or receive PDO channels of a node: <code>TRANSMIT_PDO_1:nodeId:type[arraySize]</code> through
+<code>RECEIVE_PDO_4:nodeId:type[arraySize]</code>. PDO is an asynchronous broadcast, so receiving it requires a subscription; a subscriber is notified
+with the value mapped to the type given in the address.</p>
 </div>
 <div class="paragraph">
-<p>Subscriptions to this service receive structure with two fields: <code>node</code> (USINT) and <code>state</code> (USINT).
-If subscription sets <code>nodeId</code> to 0 it will receive state updates for all bus participants.
-Supported write values (USINT):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>0x01</code> &#8594; START</p>
-</li>
-<li>
-<p><code>0x02</code> &#8594; STOP</p>
-</li>
-<li>
-<p><code>0x80</code> &#8594; PRE_OPERATIONAL</p>
-</li>
-<li>
-<p><code>0x81</code> &#8594; RESET_NODE</p>
-</li>
-<li>
-<p><code>0x82</code> &#8594; RESET_COMMUNICATION</p>
-</li>
-</ul>
+<p>NMT addresses target the Network Management service, which is broadcast using CAN node ID <code>0</code> and carries the highest priority on the bus.
+The syntax is <code>NMT</code> or <code>NMT:nodeId</code>; omitting the node ID (or using <code>0</code>) is a wildcard that subscribes to state updates for all bus
+participants. A subscription receives a structure with two fields, <code>node</code> (USINT) and <code>state</code> (USINT). Writable values indicate the
+requested NMT state and are supplied as USINT: <code>0x01</code> START, <code>0x02</code> STOP, <code>0x80</code> PRE_OPERATIONAL, <code>0x81</code> RESET_NODE, <code>0x82</code>
+RESET_COMMUNICATION. The <code>NMTStateRequest</code> enumeration can be used on the application side instead of the plain numbers.</p>
 </div>
 <div class="paragraph">
-<p>On application side, for convenience, you can use <code>NMTStateRequest</code> enumeration instead of plain numbers.
-Be aware that passed number is parsed as an enum, so vendor customization on unused bits are not supported.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HEARTBEAT</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p>HEARTBEAT</p>
-</li>
-<li>
-<p>HEARTBEAT:nodeId</p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><code>subscribe</code></p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>HEARTBEAT messages have the lowest priority on the bus.
-They have the highest priority on the bus.
-Messages of this kind indicate operating state of an node (booted, operational).</p>
+<p>Heartbeat addresses subscribe to the lowest-priority service on the bus, which still indicates a node&#8217;s operating state (booted,
+operational). The syntax is <code>HEARTBEAT</code> or <code>HEARTBEAT:nodeId</code>; as with NMT, omitting the node ID (or using <code>0</code>) subscribes to all bus
+participants. A subscription receives the same two-field structure as NMT: <code>node</code> (USINT) and <code>state</code> (USINT).</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
 <div class="paragraph">
-<p>Subscriptions to this service receive structure with two fields: <code>node</code> (USINT) and <code>state</code> (USINT).
-If subscription sets <code>nodeId</code> to 0 it will receive state updates for all bus participants.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Below table contains type mapping defined in CANopen specification.</p>
+<p>CANopen defines its own set of data types, which this driver maps onto PLC4X types as follows:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1031,13 +858,83 @@ If subscription sets <code>nodeId</code> to 0 it will receive state updates for 
 </table>
 <div class="paragraph">
 <p>All string types are decoded using UTF-8 encoding regardless of their kind (octet, visible, unicode).
-In case if device returns text using different encoding it is recommended to use <code>RECORD</code> type and construct text manually above PLC4X.</p>
+In case a device returns text using a different encoding, it is recommended to use the <code>RECORD</code> type and construct the text manually above PLC4X.</p>
 </div>
 <div class="paragraph">
-<p>The size in case of variable length structures is automatically assumed to full length of SDO answer.
-In case of writing length of field can be ommited.
-For example request <code>write(SDO:1:2/3:RECORD, payload)</code> will try to write whole payload to specified address.
-Same applies to responses sent by devies as requester often might not know full length of reply payload.</p>
+<p>The size of variable-length structures is automatically assumed to be the full length of the SDO answer.
+When writing, the length of the field can be omitted; for example <code>write(SDO:1:2/3:RECORD, payload)</code> will try to write the whole payload to the specified address.
+The same applies to responses sent by devices, as the requester often does not know the full length of the reply payload beforehand.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SDO:20:0x10/0xAA:RECORD</code> - read/write the object at index <code>0x10</code>, sub-index <code>0xAA</code> on node 20 as a <code>RECORD</code>.</p>
+</li>
+<li>
+<p><code>SDO:20/22:0x10/0xAA:RECORD</code> - same object, but the response is expected from node 22 instead of node 20.</p>
+</li>
+<li>
+<p><code>SDO:20:0x30/40:BOOLEAN</code> - object at index <code>0x30</code>, sub-index <code>40</code> (decimal) on node 20, as a <code>BOOLEAN</code>.</p>
+</li>
+<li>
+<p><code>RECEIVE_PDO_2:20:RECORD</code> - the second receive PDO of node 20, mapped as a <code>RECORD</code>.</p>
+</li>
+<li>
+<p><code>NMT:20</code> - subscribe to or write NMT state changes of node 20.</p>
+</li>
+<li>
+<p><code>NMT</code> - subscribe to NMT state changes of every node on the bus (wildcard).</p>
+</li>
+<li>
+<p><code>HEARTBEAT</code> - subscribe to heartbeat messages of every node on the bus (wildcard).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_protocol_details"><a class="anchor" href="#_protocol_details"></a>Protocol Details</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>CAN, despite (or due) to its popularity has ambiguous meaning.
+There are multiple articles and sources which attempts to give introduction, yet very few of them is consistent between each other.</p>
+</div>
+<div class="paragraph">
+<p>There are two dominant formats of frames - CAN 2.0A and 2.0B:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CAN 2.0A uses 11 bit identifier and up to 8 bytes of data.</p>
+</li>
+<li>
+<p>CAN 2.0B uses 29 bit identifier and up to 8 bytes of data.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To make things worse with introduction of CAN FD amount of combinations increased even more.
+Double check frame format as this integration supports CANopen and does not support CANopen FD nor CAN 2.0B.</p>
+</div>
+<div class="paragraph">
+<p>Further reading on CAN flavors:
+<a href="https://en.wikipedia.org/wiki/CAN_bus">https://en.wikipedia.org/wiki/CAN_bus</a></p>
+</div>
+<div class="paragraph">
+<p>Default transport used with this protocol is socketcan.
+Currently, only 2.0A format (up to 8 bytes of data) is supported.</p>
+</div>
+<div class="paragraph">
+<p>Implemented driver supports currently socketcan transport.
+Change of transport requires code modifications and injection of new "transport" type which will encode CANopen payloads to specific frame format.</p>
+</div>
+<div class="paragraph">
+<p>Socketcan seems to be most widespread way to access CAN bus.
+It also masks different hardware variants which might come with their own drivers.</p>
 </div>
 </div>
 </div>

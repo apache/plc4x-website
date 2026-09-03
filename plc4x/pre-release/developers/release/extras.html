@@ -150,6 +150,9 @@
     <a class="nav-link" href="../../users/array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../users/driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../../users/protocols/index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="../../users/protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../users/protocols/plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="../../users/protocols/plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../users/protocols/s7.html">S7 (Step7)</a>
@@ -500,44 +503,66 @@ Please be sure to execute the release with a Java version 11 or the Karaf featur
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>   ./mvnw -P with-c,with-go,with-java -DbranchName=rel/{current-short-version} release:branch
---
-[%interactive]
-* [ ] Add a new section to the `RELEASE_NOTES` on `develop`
-* [ ] Switch to the release branch and prepare the `RELEASE_NOTES`
-* [ ] Prepare the release:
-[subs="verbatim,attributes"]</pre>
+<pre>   ./mvnw -P with-c,with-go,with-java -DbranchName=rel/{current-short-version} release:branch</pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>./mvnw -P with-c,with-go,with-java release:prepare</pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>[%interactive]
-* [ ] Perform the release:
-[subs="verbatim,attributes"]</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>./mvnw release:perform</pre>
-</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"> Add a new section to the <code>RELEASE_NOTES</code> on <code>develop</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Switch to the release branch and prepare the <code>RELEASE_NOTES</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Prepare the release:</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>[%interactive]
-* [ ] Close the staging repo on `Nexus`
-* [ ] Stage the release artifacts in `SVN`
-* [ ] Vote on the mailing list
-* [ ] Move RC to the release section of `SVN`
-* [ ] Remove old releases in `SVN`
-* [ ] Release staging repo on `Nexus`
-* [ ] Merge back release version to `release` branch
-* [ ] Send announce email</pre>
+<pre>   ./mvnw -P with-c,with-go,with-java release:prepare</pre>
 </div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"> Perform the release:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   ./mvnw release:perform</pre>
+</div>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><input type="checkbox" data-item-complete="0"> Close the staging repo on <code>Nexus</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Stage the release artifacts in <code>SVN</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Vote on the mailing list</p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Move RC to the release section of <code>SVN</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Remove old releases in <code>SVN</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Release staging repo on <code>Nexus</code></p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Merge back release version to <code>release</code> branch</p>
+</li>
+<li>
+<p><input type="checkbox" data-item-complete="0"> Send announce email</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

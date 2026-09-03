@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -470,6 +473,100 @@
 </aside>
 <article class="doc">
 <h1 class="page">C-Bus</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>C-Bus is Clipsal&#8217;s proprietary home and building automation bus, used to control lighting,
+HVAC, security and similar building services over a low-speed serial network of C-Bus units
+(relays, dimmers, sensors, panels). A network is reached through a PC Interface (PCI) unit,
+which the driver talks to over TCP.</p>
+</div>
+<div class="paragraph">
+<p>The Go driver is functional: it reads status, issues SAL commands, monitors SAL and MMI
+traffic, and browses installed units. The Java driver only opens a connection; it has no
+tag handler and implements none of the four operations below.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Reads a unit&#8217;s status via a <code>status/</code> tag.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Sends a SAL command via a <code>sal/</code> tag.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Monitors SAL or MMI traffic via a <code>salmonitor/</code> or <code>mmimonitor/</code> tag.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>browse</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Discovers installed units and their attributes via an <code>info/</code> query.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>C-Bus has the following connection string format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>c-bus:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The only supported transport is <code>tcp</code>, and it connects to the PCI&#8217;s default port <code>10001</code>
+when no port is given:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>c-bus:tcp://192.168.42.11</pre>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
@@ -660,6 +757,185 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Addressing is implemented in Go only. The Java driver connects but implements no operations
+and has no tag handler. See the <a href="index.html" class="xref page">protocol support matrix</a> for what
+each implementation does.</p>
+</div>
+<div class="sect2">
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="paragraph">
+<p>A tag address is one of five prefixed forms. Each may carry an optional bridge chain
+(<code>b&lt;address&gt;[-b&lt;address&gt;]{0,5}</code>, up to 6 bridges) to route the command across bridged
+networks.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>status/</code></dt>
+<dd>
+<p><code>status/[&lt;bridges&gt;/]binary|level=0xNN/&lt;application&gt;</code> - reads the binary or level status of
+an application&#8217;s group addresses.</p>
+</dd>
+<dt class="hdlist1"><code>cal/</code></dt>
+<dd>
+<p><code>cal/[&lt;bridges&gt;-]&lt;unit&gt;/recall=[&lt;param&gt;, &lt;count&gt;]|identify=&lt;attr&gt;|getStatus=&lt;param&gt;, &lt;count&gt;</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>device/network management ("CAL") commands addressed to a unit. Only <code>recall=</code>,
+<code>identify=</code> and <code>getStatus=</code> are implemented; see below.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><code>sal/</code></dt>
+<dd>
+<p><code>sal/[&lt;bridges&gt;/]&lt;application&gt;/&lt;salCommand&gt;</code> - sends a SAL command to an application.</p>
+</dd>
+<dt class="hdlist1"><code>salmonitor/</code></dt>
+<dd>
+<p><code>salmonitor/&lt;unit&gt;|<strong>/&lt;application&gt;|</strong></code> - a subscription tag that monitors SAL traffic for a
+unit and/or application, or <code>*</code> for either.</p>
+</dd>
+<dt class="hdlist1"><code>mmimonitor/</code></dt>
+<dd>
+<p><code>mmimonitor/&lt;unit&gt;|<strong>/&lt;application&gt;|</strong></code> - a subscription tag that monitors MMI traffic, with
+the same unit/application/<code>*</code> shape as <code>salmonitor/</code>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The parser also accepts <code>cal/</code> forms it does not implement: <code>reset</code>, <code>write=[&lt;param&gt;,
+0xNN]</code>, <code>identifyReply=&lt;attr&gt;</code>, <code>reply=&lt;param&gt;</code>, <code>status=&lt;app&gt;</code> and
+<code>statusExtended=&lt;app&gt;</code> all parse without error but are marked <code>TODO: implement me</code> in the
+driver and return <code>Not implemented</code> when used.</p>
+</div>
+<div class="paragraph">
+<p>Applications for <code>sal/</code> and <code>status/</code> come from the driver&#8217;s application table; most are
+implemented (<code>LIGHTING</code>, <code>TEMPERATURE_BROADCAST</code>, <code>VENTILATION</code>, <code>IRRIGATION_CONTROL</code>,
+<code>POOLS_SPAS_PONDS_FOUNTAINS_CONTROL</code>, <code>HEATING</code>, <code>AIR_CONDITIONING</code>, <code>TRIGGER_CONTROL</code>,
+<code>ENABLE_CONTROL</code>, <code>AUDIO_AND_VIDEO</code>, <code>SECURITY</code>, <code>METERING</code>, <code>ACCESS_CONTROL</code>,
+<code>CLOCK_AND_TIMEKEEPING</code>, <code>TELEPHONY_STATUS_AND_CONTROL</code>, <code>MEASUREMENT</code>,
+<code>MEDIA_TRANSPORT_CONTROL</code>, <code>ERROR_REPORTING</code>, <code>HVAC_ACTUATOR</code>), but <code>RESERVED</code>,
+<code>FREE_USAGE</code>, <code>ROOM_CONTROL_SYSTEM</code> and <code>TESTING</code> are accepted by the address parser and
+likewise not yet implemented.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_browsing"><a class="anchor" href="#_browsing"></a>Browsing</h3>
+<div class="paragraph">
+<p><code>info/</code> is not a tag address - it is a browse query, parsed separately by <code>ParseQuery</code>
+rather than <code>ParseTag</code>, and used only with the <code>browse</code> operation:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>info/</code></dt>
+<dd>
+<p><code>info/&lt;unit&gt;|<strong>/&lt;identifyAttribute&gt;|</strong></code> - lists installed units, optionally filtered to one
+unit and/or one identify attribute.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
+<div class="paragraph">
+<p>C-Bus tags are commands and status requests, not typed memory addresses, so no
+<code>:{data-type}</code> suffix is used or accepted. Values are decoded from the C-Bus response as a
+<code>Struct</code> (or <code>NULL</code> for <code>status/</code>); there is no data type to select on the address itself.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Examples</caption>
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Address</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status/binary/LIGHTING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">binary status of all LIGHTING group addresses</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status/b1/binary/LIGHTING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the same, routed across one bridge</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status/b1-b2-b3-b4-b5-b6/binary/LIGHTING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the same, routed across six bridges</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cal/2/getStatus=1,2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">get status of parameter <code>1</code>, count <code>2</code>, from unit <code>2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cal/b1-u2/getStatus=1,2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the same <code>getStatus</code>, routed across one bridge to unit <code>2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cal/0/recall=[0x20, 4]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">recall 4 values of parameter <code>0x20</code> from unit <code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sal/LIGHTING/ON</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">send the <code>ON</code> SAL command to the LIGHTING application</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sal/b1/LIGHTING/ON</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the same, routed across one bridge</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>salmonitor/2/LIGHTING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">monitor SAL traffic for unit <code>2</code>, application LIGHTING</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>salmonitor/<strong>/</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">monitor all SAL traffic</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mmimonitor/2/LIGHTING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">monitor MMI traffic for unit <code>2</code>, application LIGHTING</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mmimonitor/<strong>/</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">monitor all MMI traffic</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>info/0x13/DSIStatus</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">browse query for unit <code>0x13&#8217;s `DSIStatus</code> attribute</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>info/<strong>/</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">browse query for every installed unit and every attribute</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes_and_tips"><a class="anchor" href="#_notes_and_tips"></a>Notes and Tips</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Array notation does not apply to C-Bus addresses: the brackets in a <code>cal/</code> command such as
+<code>recall=[0x20, 4]</code> hold that command&#8217;s own parameters (a parameter number and a count), not
+a selection appended to an address. A command that reads several values still reports that
+through the tag&#8217;s array info, exactly like any other list - there is simply no separate
+selection syntax layered on top.</p>
+</div>
 </div>
 </div>
 </article>

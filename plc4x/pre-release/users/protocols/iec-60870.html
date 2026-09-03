@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -470,129 +473,51 @@
 </aside>
 <article class="doc">
 <h1 class="page">IEC-60870</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>IEC 60870-5-104 is a telecontrol protocol used to monitor and control geographically
+distributed process equipment - substations, RTUs and similar equipment in electric
+power systems. It runs over TCP/IP, typically on the well-known port <code>2404</code>.</p>
+</div>
+<div class="paragraph">
+<p>The protocol is push driven: once a session is established, the remote station (RTU)
+sends unsolicited application service data units (ASDUs) for the information objects it
+holds. There is nothing for a client to actively read or write - it only subscribes and
+receives what the station reports.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
 <div class="sectionbody">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-This driver supports <strong>subscriptions only</strong> - reading, writing and browsing are not
-implemented and a request for any of them is rejected.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A tag address names one information object of one station and is written as <code>&lt;asdu&gt;/&lt;ioa&gt;</code>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>&lt;asdu&gt;</code> is the 2 octet <strong>common address of ASDU</strong> (the station address). Write it either as one
-decimal number <code>0..65535</code> or octet by octet as <code>&lt;low&gt;/&lt;high&gt;</code>, each <code>0..255</code>.</p>
-</li>
-<li>
-<p><code>&lt;ioa&gt;</code> is the 3 octet <strong>information object address</strong>. Write it either as one decimal number
-<code>0..16777215</code> or octet by octet as <code>&lt;low&gt;.&lt;middle&gt;.&lt;high&gt;</code>, each <code>0..255</code>.</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The octet-wise forms are written <strong>least significant octet first</strong>, the order the octets appear in on
-the wire. So <code>1/2</code> as an ASDU address means <code>1 + 2 * 256 = 513</code>, not 258.</p>
-</div>
-<div class="paragraph">
-<p>This is the <strong>opposite</strong> order of the identically shaped <code>a/b/c</code> address of the KNX driver, where the
-most significant part (main group) comes first. A KNX-style reading of an IEC-60870 address is
-silently a valid address of a different station, so double-check the order when porting addresses or
-copying examples between the two drivers.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>A <code>*</code> may take the place of any number and makes that position a wildcard, so that one subscription
-can cover a whole station, a whole octet range, or everything the connection reports.</p>
-</div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Examples</caption>
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Address</th>
-<th class="tableblock halign-left valign-top">Meaning</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ASDU 1, information object 2</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>65535/16777215</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the widest address both fields can carry</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2/3</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ASDU 513 (low octet 1, high octet 2), information object 3</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2.3.4</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ASDU 1, information object 262914 (low 2, middle 3, high 4)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2/3.4.5</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ASDU 513, information object 328707</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*/*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">every information object of every station</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">every information object of ASDU 1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*/3.4.5</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">information object 328707 of every station</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2/3.*.5</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">low and high octet pinned, middle octet wildcarded</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Go and Java. The only supported operation. A subscription&#8217;s tag address selects which
+information objects of which station(s) are delivered to it; the station itself decides
+what and when to send.</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>Surrounding whitespace is trimmed and leading zeros are accepted, up to the number of digits the
-maximum of that component has (3 for an octet, 5 for a whole ASDU address, 8 for a whole information
-object address). So <code>007/002.03.004</code> is accepted while <code>000007/2</code> is not. Whitespace <strong>inside</strong> an
-address is not accepted.</p>
-</div>
-<div class="paragraph">
-<p>Every incoming information object is matched against the address of each subscription and only
-delivered to the subscriptions that cover it - the station itself reports everything it has, the
-filtering happens in the driver.</p>
-</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -600,19 +525,32 @@ filtering happens in the driver.</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Malformed and out-of-range addresses are rejected when the request is built, with a
-<code>PlcInvalidTagException</code>.</p>
-</div>
-<div class="paragraph">
-<p>Earlier versions of this driver ignored the address entirely: any string was accepted and every
-subscription received every incoming ASDU, leaving the filtering to the consumer. Existing code
-therefore needs its addresses reviewed - in particular a bare <code>*</code> is no longer an address, the
-"everything" address is <code>*/*</code> - and consumer-side filtering can now be dropped.</p>
-</div>
+Reading, writing and browsing are not implemented and a request for any of
+them is rejected.
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>IEC 60870-5-104 has the following connection string format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>iec-60870-5-104:tcp://{ip-address}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The only supported transport is <code>tcp</code>, defaulting to port <code>2404</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>iec-60870-5-104:tcp://192.168.178.101:2404</pre>
+</div>
 </div>
 </div>
 </div>
@@ -806,6 +744,160 @@ therefore needs its addresses reviewed - in particular a bare <code>*</code> is 
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Addressing is implemented in Go and Java. The protocol is push driven, so tags are used
+with subscriptions only. See the <a href="index.html" class="xref page">protocol support matrix</a> for
+what each implementation does.</p>
+</div>
+<div class="sect2">
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="paragraph">
+<p>A tag address names one information object of one station and is written as <code>&lt;asdu&gt;/&lt;ioa&gt;</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;asdu&gt;</code> is the 2 octet <strong>common address of ASDU</strong> (the station address). Write it either as one
+decimal number <code>0..65535</code> or octet by octet as <code>&lt;low&gt;/&lt;high&gt;</code>, each <code>0..255</code>.</p>
+</li>
+<li>
+<p><code>&lt;ioa&gt;</code> is the 3 octet <strong>information object address</strong>. Write it either as one decimal number
+<code>0..16777215</code> or octet by octet as <code>&lt;low&gt;.&lt;middle&gt;.&lt;high&gt;</code>, each <code>0..255</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The octet-wise forms are written <strong>least significant octet first</strong>, the order the octets appear in on
+the wire. So <code>1/2</code> as an ASDU address means <code>1 + 2 * 256 = 513</code>, not 258.</p>
+</div>
+<div class="paragraph">
+<p>This is the <strong>opposite</strong> order of the identically shaped <code>a/b/c</code> address of the KNX driver, where the
+most significant part (main group) comes first. A KNX-style reading of an IEC-60870 address is
+silently a valid address of a different station, so double-check the order when porting addresses or
+copying examples between the two drivers.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A <code>*</code> may take the place of any number and makes that position a wildcard, so that one subscription
+can cover a whole station, a whole octet range, or everything the connection reports.</p>
+</div>
+<div class="paragraph">
+<p>Surrounding whitespace is trimmed and leading zeros are accepted, up to the number of digits the
+maximum of that component has (3 for an octet, 5 for a whole ASDU address, 8 for a whole information
+object address). So <code>007/002.03.004</code> is accepted while <code>000007/2</code> is not. Whitespace <strong>inside</strong> an
+address is not accepted.</p>
+</div>
+<div class="paragraph">
+<p>Every incoming information object is matched against the address of each subscription and only
+delivered to the subscriptions that cover it - the station itself reports everything it has, the
+filtering happens in the driver.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Malformed and out-of-range addresses are rejected when the request is built, with a
+<code>PlcInvalidTagException</code>.</p>
+</div>
+<div class="paragraph">
+<p>Earlier versions of this driver ignored the address entirely: any string was accepted and every
+subscription received every incoming ASDU, leaving the filtering to the consumer. Existing code
+therefore needs its addresses reviewed - in particular a bare <code>*</code> is no longer an address, the
+"everything" address is <code>*/*</code> - and consumer-side filtering can now be dropped.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
+<div class="paragraph">
+<p>A tag address carries no type information: the datatype of an information object follows from the
+type identification of the ASDU that delivers it, which is only known at runtime, not from the
+address itself.</p>
+</div>
+<div class="paragraph">
+<p>Both drivers attach the information object&#8217;s <strong>quality descriptor</strong> to the delivered value as
+metadata alongside it, rather than silently folding it into the value: <code>invalid</code>, <code>notTopical</code>,
+<code>substituted</code>, <code>blocked</code> and, where the ASDU carries it, <code>overflow</code>. A reading the station marked
+invalid, blocked, substituted or not topical therefore does not arrive looking like a good one -
+check this metadata before trusting a value.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Examples</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Address</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ASDU 1, information object 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>65535/16777215</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the widest address both fields can carry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2/3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ASDU 513 (low octet 1, high octet 2), information object 3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2.3.4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ASDU 1, information object 262914 (low 2, middle 3, high 4)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2/3.4.5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ASDU 513, information object 328707</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*/*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">every information object of every station</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">every information object of ASDU 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*/3.4.5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">information object 328707 of every station</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/2/3.*.5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">low and high octet pinned, middle octet wildcarded</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </article>

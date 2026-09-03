@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -484,25 +487,78 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Writing is only supported to digital addresses.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Subscribing is supported for both digital and analog addresses. See <code>note</code> below.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Neither the Go nor the Java driver reads; a board is driven and monitored, never polled.</p>
+</div>
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Firmata addresses carry no type, so the brackets did not move when the notation was
-unified - and their meaning changed with nothing to reject. <code>3[4]</code> used to mean four pins
-starting at pin 3; it now means one pin, the fifth. Rewrite these as <code>3[0..3]</code>.
-See <a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
-</div>
+When subscribing to pins, these are configured to become read pins. When writing to digital pins, these are configured to become output pins. However, writing to pins for which a subscription exists, an exception will be thrown. In order to write to previously subscribed pins, all subscriptions for this have to be cancelled first.
 </td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">firmata:serial://{comm-port}[?{options}]
+firmata:tcp://{ip-address}[?{options}]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>serial</code> is the default transport - the classic Firmata-over-UART path. <code>tcp</code> targets
+StandardFirmataWiFi / StandardFirmataEthernet style boards, and is also used as a fallback when the
+serial transport can&#8217;t open a socat-bridged PTY (as on macOS).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -841,72 +897,52 @@ See <a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p
 </tr>
 </tbody>
 </table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Value</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Writing is only supported to digital addresses.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>subscribe</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Reading is supported for both digital and analog addresses. See <code>note</code> after this table however.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-When subscribing to pins, these are configured to become read pins. When writing to digital pins, these are configured to become output pins. However, writing to pins for which a subscription exists, an exception will be thrown. In order to write to previously subscribed pins, all subscriptions for this have to be cancelled first.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Similar to the Modbus protocol, the Firmata protocol support Boolean and Short values.</p>
+<p>Addressing is implemented in Go and Java. Neither driver reads; a board is driven and monitored,
+never polled. See the <a href="index.html" class="xref page">protocol support matrix</a> for what each
+implementation does.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Firmata addresses carry no type, so the brackets did not move when the notation was
+unified - and their meaning changed with nothing to reject. <code>3[4]</code> used to mean four pins
+starting at pin 3; it now means one pin, the fifth. Rewrite these as <code>3[0..3]</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="paragraph">
+<p>A Firmata address always begins with a <code>digital:</code> or <code>analog:</code> prefix, naming which of the two
+address forms below applies. See <a href="../array-notation.html" class="xref page">Addressing arrays</a> for the
+<code>[{selection}]</code> part shared by both.</p>
 </div>
 <div class="paragraph">
-<p>Booleans are used for the digital IO pins and short values for the analog inputs.</p>
+<p>The Java driver caps the pin number itself at 3 digits (0-999, <code>FirmataTag.ADDRESS_PATTERN</code>,
+<code>\d{1,3}</code>), and separately caps the address plus selection at the 256 pins the protocol can name
+on the wire (<code>FirmataTag.PIN_COUNT</code>). The Go driver&#8217;s ported pattern uses an unbounded <code>\d+</code> for
+the pin number itself (<code>plc4go/internal/firmata/TagHandler.go:38</code>), so <code>digital:1234</code> parses on
+the Go side and is rejected by Java - see the firmata entry in the Java/Go address divergence
+report for this restructure.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_binary_addresses"><a class="anchor" href="#_binary_addresses"></a>Binary Addresses</h3>
 <div class="paragraph">
-<p>The full format for a digital address has the following format:</p>
+<p>The full format for a digital address is:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -914,24 +950,15 @@ When subscribing to pins, these are configured to become read pins. When writing
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>start-address</code> and <code>array-size</code> are simple integer values.
-<code>special-config</code> can be used to configure the digital input pin to something else than <code>INPUT</code>.</p>
+<p>The <code>start-address</code> is a plain integer. <code>special-config</code> can be used to configure the digital
+input pin to something else than <code>INPUT</code>; currently the only supported option is <code>PULLUP</code>, which
+configures the Arduino&#8217;s digital input pin to use its built-in pullup-resistor.</p>
 </div>
 <div class="paragraph">
-<p>Currently the only supported option is <code>PULLUP</code> which configured the Arduino&#8217;s digital input pin to use it&#8217;s built in pullup-resistor.</p>
+<p>Both the <code>[{selection}]</code> and the <code>:{special-config}</code> parts are optional.</p>
 </div>
 <div class="paragraph">
-<p>Both the <code>array-size</code> as well as the <code>special-config</code> parts are optional. So the following example addresses are valid:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>digital:4
-digital:4[5]
-digital:4:PULLUP</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>A normal <code>Arduino Uno</code> is equipped with 14 digital inputs: 0-13</p>
+<p>A normal <code>Arduino Uno</code> is equipped with 14 digital inputs: 0-13.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -949,7 +976,7 @@ However in case of using the serial port (which will always be the case when usi
 <div class="sect2">
 <h3 id="_analog_addresses"><a class="anchor" href="#_analog_addresses"></a>Analog Addresses</h3>
 <div class="paragraph">
-<p>The full format for an analog address is as follows:</p>
+<p>The full format for an analog address is:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -957,20 +984,45 @@ However in case of using the serial port (which will always be the case when usi
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>start-address</code> and <code>array-size</code> are simple integer values.</p>
+<p>The <code>start-address</code> is a plain integer, and <code>[{selection}]</code> is optional.</p>
 </div>
 <div class="paragraph">
-<p>Both the <code>array-size</code> is optional. So the following example addresses are valid:</p>
+<p>A normal <code>Arduino Uno</code> is equipped with 6 analog inputs: 0-5.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
+<div class="paragraph">
+<p>Firmata addresses carry no type suffix; the type is implied by which prefix is used. Digital
+addresses are always <code>BOOL</code> (<code>FirmataTagDigital.getPlcValueType()</code>); analog addresses are always
+<code>INT</code> (<code>FirmataTagAnalog.getPlcValueType()</code>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
 <div class="listingblock">
 <div class="content">
-<pre>analog:1
-analog:2[3]</pre>
+<pre>digital:2
+digital:5
+digital:8[0..3]:PULLUP
+digital:0[0..255]
+analog:0
+analog:3
+analog:0[0..2]</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>A normal <code>Arduino Uno</code> is equipped with 6 analog inputs: 0-5</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_more_information"><a class="anchor" href="#_more_information"></a>More Information</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../array-notation.html" class="xref page">Addressing arrays</a> - the shared <code>[{selection}]</code> syntax.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

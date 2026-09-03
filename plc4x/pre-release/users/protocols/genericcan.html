@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -470,15 +473,75 @@
 </aside>
 <article class="doc">
 <h1 class="page">Generic CAN</h1>
-<div class="sect1">
-<h2 id="_can_bus_semantics"><a class="anchor" href="#_can_bus_semantics"></a>CAN Bus semantics</h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This driver is a generic purpose driver.
-It allows implementing a basic CAN bus listening or writing scenarios.</p>
+<p>Generic CAN is a transport-agnostic driver for raw <a href="can.html" class="xref page">CAN Bus</a> traffic. It
+applies no application-layer protocol of its own: every field is addressed as a raw node id plus a
+data type, and the values written or received for a single node id are packed into a single CAN
+frame in field order. It is a good fit where the devices on the bus speak a proprietary or
+undocumented protocol built directly on raw CAN frames - anything that follows a specific
+higher-level protocol on top of CAN bus, such as CANopen, is better served by
+<a href="canopen.html" class="xref page">CANopen</a>.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">publish</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Publishes a CAN frame via the CAN transport.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">receive</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Listens for incoming CAN frames matching a subscribed node id.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>CAN bus open is a specific protocol built on top of CAN bus.</p>
+<p>There is no read support; the driver only writes and subscribes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">genericcan:can-socketcan://{interface}[?{options}]
+genericcan:can-virtualcan://{bus-name}[?{options}]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">genericcan:can-socketcan://can0
+genericcan:can-virtualcan://test</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -594,108 +657,42 @@ It allows implementing a basic CAN bus listening or writing scenarios.</p>
 </tr>
 </tbody>
 </table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">publish</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Allows to publish a CAN frame via CAN transport.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">receive</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>subscribe</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>This operation allows listening for incoming data or requests.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_more_details_on_the_driver"><a class="anchor" href="#_more_details_on_the_driver"></a>More details on the driver</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Given popularity of CAN in multiple market segments there is variety of protocols which can&#8217;t be published.
-Also, for many cases which are data acquisition oriented it is necessary to tap only parts of communications.</p>
-</div>
-<div class="paragraph">
-<p>This driver allows to model incoming and outgoing communication using plain Apache PLC4X api.
-The written CAN data is constructed from fields submitted via write request builder.
-The receiving data is transformed in similar fashion, based on subscribed fields.</p>
+<p>Addressing is implemented in Java. There is no read support; the driver writes and subscribes. See
+the <a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
 </div>
 <div class="sect2">
-<h3 id="_address_format"><a class="anchor" href="#_address_format"></a>Address format</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Service</th>
-<th class="tableblock halign-left valign-top">Format</th>
-<th class="tableblock halign-left valign-top">Supported operations</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">n/a</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>nodeId:type[arraySize]</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p><code>write</code></p>
-</li>
-<li>
-<p><code>subscribe</code></p>
-</li>
-</ul>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>There is only one syntax which is currently supported by this driver.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Pay attention.
-You can use multiple fields to write and subscribe actual data.
-All fields must sum to up to 64 bits.
-If you subscribe less, then remaining data is discarded and not available via PLC4X api.</p>
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="listingblock">
+<div class="content">
+<pre>nodeId:type[arraySize]</pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The data will be sent in the same order as fields.</p>
+<p><code>nodeId</code> is a plain (non-hexadecimal) integer CAN node/frame identifier. <code>type</code> is one of the data
+types listed below. <code>arraySize</code> is optional; see <a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
 </div>
 <div class="paragraph">
-<p>Below table contains type mapping defined in Generic CAN driver.</p>
+<p>The underlying pattern (<code>GenericCANTag.java:36-37</code>) is
+<code>(?&lt;nodeId&gt;\d+):(?&lt;dataType&gt;\w+)(?:\[(?&lt;arraySize&gt;\d+)\])?</code>. It is not anchored with <code>^</code>/<code>$</code>, but
+<code>GenericCANTag.matches()</code> (<code>GenericCANTag.java:83</code>) applies it with <code>Matcher.matches()</code>, which
+requires the whole input string to match. Trailing text after a valid address is therefore
+rejected, not silently ignored.</p>
 </div>
+<div class="paragraph">
+<p>You can use multiple fields to write and subscribe actual data. All fields together must sum up to
+64 bits. If you subscribe to less than the frame contains, the remaining data is discarded and not
+available via the PLC4X API. Written and received data is ordered the same as the fields in the
+request.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -704,7 +701,7 @@ If you subscribe less, then remaining data is discarded and not available via PL
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CANopen Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Address Type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Length (in bits)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PLC4X Type</p></td>
 </tr>
@@ -806,9 +803,34 @@ If you subscribe less, then remaining data is discarded and not available via PL
 </tbody>
 </table>
 <div class="paragraph">
-<p>The type table is similar to CANopen.
-Main difference is lack of support for string types.</p>
+<p>This type table is similar to CANopen&#8217;s. The main difference is the lack of support for string
+types.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<div class="listingblock">
+<div class="content">
+<pre>200:BYTE
+200:BYTE[8]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_more_information"><a class="anchor" href="#_more_information"></a>More Information</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="can.html" class="xref page">CAN Bus</a> - the shared transport and frame model used by this driver.</p>
+</li>
+<li>
+<p><a href="canopen.html" class="xref page">CANopen</a> - the driver to use for devices that follow the CANopen
+application layer instead of raw frames.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>PLC4X (Proxy) (TCP) :: PLC4X</title>
+    <title>PLC4X (Proxy) :: PLC4X</title>
     <meta name="generator" content="Antora 3.1.14">
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -451,7 +454,7 @@
     <li><a href="../index.html">PLC4X</a></li>
     <li><a href="../index.html">Users</a></li>
     <li><a href="index.html">Protocols</a></li>
-    <li><a href="plc4x.html">PLC4X (Proxy) (TCP)</a></li>
+    <li><a href="plc4x.html">PLC4X (Proxy)</a></li>
   </ul>
 </nav>
 <div class="page-versions">
@@ -469,7 +472,82 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">PLC4X (Proxy) (TCP)</h1>
+<h1 class="page">PLC4X (Proxy)</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>plc4x</code> protocol is PLC4X&#8217;s own proxy protocol: one PLC4X instance (typically the
+<a href="../tools/plc4x-server.html" class="xref page">PLC4X Server</a>) accepts connections from a <code>plc4x</code> client
+and relays reads and writes on to a real PLC using any other PLC4X driver (<code>s7</code>,
+<code>modbus</code>, <code>ads</code>, <code>opcua</code>, <code>simulated</code>, &#8230;&#8203;). It is useful when a PLC is
+only reachable from the machine running the server - for example behind a firewall or
+on an isolated OT network - while clients live elsewhere. Authentication is mandatory
+and the default transport is TLS.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">What it does here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reads a tag from the remote PLC via the proxy.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>write</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Writes a tag on the remote PLC via the proxy.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Subscribing and browsing are not supported: the driver only overrides read and write.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>plc4x</code> protocol connection has the following format:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>plc4x:{transport}://{host}:{port}?remote-connection-string={url-encoded-connection-string}&amp;username={user}&amp;password={pass}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>{transport}</code> is <code>tls</code> (the default, and used when no transport is given) or <code>tcp</code>
+(plaintext, an explicit opt-in for trusted networks or testing). <code>remote-connection-string</code>
+is the URL-encoded connection string the proxy should open against the actual PLC.
+<code>username</code> and <code>password</code> are mandatory.</p>
+</div>
+<div class="paragraph">
+<p>Example connection strings, TLS (default) and plaintext TCP:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>plc4x:tls://host:59837?remote-connection-string=s7&amp;username=op&amp;password=hunter2&amp;tls.verify=false</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>plc4x://host?remote-connection-string=s7%3A%2F%2Foperator%3Ahunter2%40plc%3A102</pre>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
@@ -917,78 +995,63 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_connection_string_options_2"><a class="anchor" href="#_connection_string_options_2"></a>Connection String Options</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations:</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>read</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>write</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>subscribe</code></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h3>
 <div class="paragraph">
-<p>The <code>plc4x</code> protocol connection has the following connection string format:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>plc4x:{transport}://{ip-address/hostname}:{port}?remote-connection-string={url-encoded-connection-string}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>An example connection string would look like:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>plc4x://127.0.0.1?remote-connection-string=simulated%3A%2F%2Flocalhost</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note the transport, port and option fields are optional.
-The remote connection string: <code>simulated://localhost</code> is encoded as <code>simulated%3A%2F%2Flocalhost</code></p>
-</div>
+<p>Addressing is implemented in C and Java. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
 </div>
 <div class="sect2">
 <h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
 <div class="paragraph">
-<p>The address format is simply the address format of the used remote connection.
-So if you specify a remote connection as <code>simulated</code>, please follow the address format of that driver.</p>
+<p>A <code>plc4x</code> tag address names a tag on the <strong>remote</strong> connection that the proxy opened -
+not a tag on the proxy connection itself. The driver does not parse or validate the
+address; it splits off the trailing <code>:{type}</code> suffix and passes the remainder straight
+through to the remote connection, so the address must follow the tag syntax of
+whichever driver the <code>remote-connection-string</code> points at:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{remote-tag-address}:{data-type}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, with a remote connection to a <code>simulated</code> PLC, a tag address is a
+<code>simulated</code>-driver address followed by the PLC4X value type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>RANDOM/foo:BOOL
+STDOUT/foo:INT</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
+<div class="paragraph">
+<p>The trailing <code>:{data-type}</code> suffix is one of the standard PLC4X value types, for
+example <code>BOOL</code>, <code>BYTE</code>, <code>WORD</code>, <code>DWORD</code>, <code>USINT</code>, <code>UINT</code>, <code>UDINT</code>, <code>ULINT</code>, <code>SINT</code>,
+<code>INT</code>, <code>DINT</code>, <code>LINT</code>, <code>REAL</code>, <code>LREAL</code>, <code>CHAR</code> or <code>WCHAR</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<div class="paragraph">
+<p>Reading from and writing to a remote <code>simulated</code> connection:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>RANDOM/foo:BOOL
+RANDOM/foo:DWORD
+RANDOM/foo:LREAL</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>STDOUT/foo:BOOL
+STDOUT/foo:UDINT
+STDOUT/foo:WCHAR</pre>
+</div>
 </div>
 </div>
 </div>

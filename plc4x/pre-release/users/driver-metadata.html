@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Addressing arrays :: PLC4X</title>
+    <title>Discovering Drivers and their Configuration :: PLC4X</title>
     <meta name="generator" content="Antora 3.1.14">
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
@@ -146,10 +146,10 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="array-notation.html">Addressing arrays</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="driver-metadata.html">Discovering Drivers and their Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -453,368 +453,530 @@
   <ul>
     <li><a href="index.html">PLC4X</a></li>
     <li><a href="index.html">Users</a></li>
-    <li><a href="array-notation.html">Addressing arrays</a></li>
+    <li><a href="driver-metadata.html">Discovering Drivers and their Configuration</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">1.0.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="array-notation.html">1.0.0</a>
+    <a class="version is-current" href="driver-metadata.html">1.0.0</a>
     <a class="version is-missing" href="../../latest/users/index.html">0.13.1</a>
     <a class="version is-missing" href="../../0.12.0/users/index.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/array-notation.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/driver-metadata.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Addressing arrays</h1>
+<h1 class="page">Discovering Drivers and their Configuration</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Every PLC4X driver selects array elements the same way, in PLC4J and in PLC4Go alike. The address
-itself differs per protocol - an S7 data block, a Modbus register, an OPC UA node - but what comes
-after it does not:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">&lt;driver-specific address&gt;[&lt;selection&gt;]:&lt;TYPE&gt;</code></pre>
-</div>
+<p>This page is for people <strong>integrating PLC4X into another tool</strong>: a connection dialog, a config
+form, a validation step in a pipeline, a node in a flow-based editor.</p>
 </div>
 <div class="paragraph">
-<p>The selection sits <strong>before</strong> the type. Where a driver&#8217;s address carries no type, it ends the
-address.</p>
+<p>You do not have to hard-code any of it. Every driver ships a description of itself, and PLC4X
+can hand you that description at runtime: which drivers are on the classpath, which transports
+each one speaks, and every configuration parameter each combination accepts - with its type,
+whether it is mandatory, and its default.</p>
 </div>
 <div class="paragraph">
-<p>The same address means the same thing in either language: one address, written once, used from
-Java or Go.</p>
+<p>This is the same metadata the <a href="protocols/index.html" class="xref page">protocol pages</a> on this site are
+generated from, so what your tool shows and what the documentation says can never drift apart.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_the_forms"><a class="anchor" href="#_the_forms"></a>The forms</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 42.8571%;">
-<col style="width: 28.5715%;">
-</colgroup>
-<thead>
+<div class="admonitionblock note">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Written</th>
-<th class="tableblock halign-left valign-top">Means</th>
-<th class="tableblock halign-left valign-top">Example</th>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This API is part of <strong>PLC4J</strong> (Java). PLC4Go, PLC4Py and PLC4C do not expose an equivalent
+yet - PLC4Go&#8217;s <code>GetMetadata()</code> describes a <strong>connection</strong>, not a driver.
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(omitted)</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the whole value - a scalar, or every element of an array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myTag</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[n]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>one element</strong>, the one at index <code>n</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myTag[4]</code> - the fifth element</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[lo..hi]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">an <strong>array</strong> of the elements <code>lo</code> through <code>hi</code>, both included</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myTag[0..7]</code> - eight elements</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[n;base]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">one element, in an array the PLC declares as starting at <code>base</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myTag[1;1]</code> - the first element</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[lo..hi;base]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a range, in an array declared as starting at <code>base</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myTag[4..7;1]</code> - four elements, starting at the fourth</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[…][…]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">one bracket per dimension</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>myTag[1..2][0..5]</code></p></td>
-</tr>
-</tbody>
 </table>
-<div class="sect2">
-<h3 id="_a_single_index_is_not_an_array"><a class="anchor" href="#_a_single_index_is_not_an_array"></a>A single index is not an array</h3>
-<div class="paragraph">
-<p><code>myTag[4]</code> selects one element and gives you a scalar. <code>myTag[4..4]</code> selects a range that happens
-to hold one element and gives you a list of one. The difference is deliberate: it is how a tool
-reading <code>getArrayInfo()</code> decides whether to render a value or a list.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_arrays_that_do_not_start_at_zero"><a class="anchor" href="#_arrays_that_do_not_start_at_zero"></a>Arrays that do not start at zero</h3>
+</div>
+<div class="sect1">
+<h2 id="_where_it_starts"><a class="anchor" href="#_where_it_starts"></a>Where it starts</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>IEC 61131 lets an array be declared <code>ARRAY[1..10] OF BYTE</code>, and the indices the PLC program shows
-you then start at 1. Write those indices, and add <code>;base</code> so the driver knows where the data
-really begins:</p>
+<p>Everything hangs off <code>PlcDriverManager</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">%DB42:28.0[4..7;1]:BYTE</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.plc4x.java.api.PlcDriverManager;
+
+PlcDriverManager driverManager = PlcDriverManager.getDefault();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>That reads four bytes, starting three elements past the address - because element 4 of an array
-declared from 1 is the fourth.</p>
-</div>
-<div class="paragraph">
-<p>Some drivers already know the declared bounds from the device: <strong>ADS</strong>, <strong>UMAS</strong> and <strong>OPC-UA</strong>
-learn them from the symbol table or the address space. There you can simply write the declared
-indices, and <code>;base</code> becomes a statement of intent the driver checks against what the device says.
-A base that disagrees is reported, because it means the address was written against a different
-layout than the PLC has.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_multi_dimensional_arrays"><a class="anchor" href="#_multi_dimensional_arrays"></a>Multi-dimensional arrays</h3>
-<div class="paragraph">
-<p>Two spellings are accepted and mean the same thing - the second is what Allen-Bradley and others
-use:</p>
+<p>Drivers are found with Java&#8217;s <code>ServiceLoader</code>, so "which drivers do I have" literally means
+"which driver jars are on the classpath". If your tool loads plugins into their own classloader,
+hand it over explicitly:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">g_matI16_2x3[1..2][3..4]
-g_matI16_2x3[1..2,3..4]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>getAddressString()</code> always produces the first, so an address you read back from a tag is in one
-canonical spelling regardless of how it was written.</p>
-</div>
-<div class="paragraph">
-<p>A range may only be the <strong>last</strong> dimension. <code>a[1].b[2..5]</code> is fine - one path to one structure,
-then a run of its elements. <code>a[1..3].b</code> is not: member <code>b</code> of three separate elements is not one
-contiguous read, and no protocol here fetches that in a single request. The same goes for
-<code>a[1..3][2]</code>, a strided slice.</p>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.plc4x.java.DefaultPlcDriverManager;
+
+PlcDriverManager driverManager = new DefaultPlcDriverManager(myPluginClassLoader);</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_each_driver_can_express"><a class="anchor" href="#_what_each_driver_can_express"></a>What each driver can express</h2>
+<h2 id="_which_drivers_do_i_have"><a class="anchor" href="#_which_drivers_do_i_have"></a>Which drivers do I have?</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The notation is the same everywhere; what a protocol can carry is not.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 42.8572%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Driver</th>
-<th class="tableblock halign-left valign-top">Dimensions</th>
-<th class="tableblock halign-left valign-top">Whole array</th>
-<th class="tableblock halign-left valign-top">Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OPC-UA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">many</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Omitting the selection asks for the whole node</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ADS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">many</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Declared bounds come from the symbol table</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">UMAS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">many</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selecting elements is not implemented yet and is reported</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">EtherNet/IP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A CIP index is a <code>uint 8</code>, so it cannot start past 255</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">S7, Modbus, SLMP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Memory offsets; the base is resolved into the address</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Simulated, Profinet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Can only select from the first element</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Firmata</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No type suffix, so the selection ends the address</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">KNXnet/IP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Device addresses only; a property selection moves the start index</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Where a protocol cannot express what you wrote, the driver says so. It will not quietly read
-something else.</p>
-</div>
-<div class="paragraph">
-<p>The two bindings do not carry the same set of drivers, and a driver present in both is not always
-at the same depth. Where a driver in both accepts a selection, the notation and its meaning are
-identical; what differs is which drivers accept one at all:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>PLC4Go has no Profinet driver.</p>
-</li>
-<li>
-<p>PLC4Go&#8217;s OPC-UA driver takes no selection - its addresses are a NodeId and a type. PLC4J&#8217;s,
-which is where this notation came from, takes the full grammar.</p>
-</li>
-<li>
-<p>PLC4Go&#8217;s UMAS driver accepts a bare index inside a symbolic path (<code>myVar[1].member[2]</code>) but not
-a range; PLC4J&#8217;s parses ranges and reports selecting elements as unsupported.</p>
-</li>
-<li>
-<p>PLC4Go&#8217;s KNXnet/IP driver has the device address forms in the table above. PLC4J&#8217;s has no
-equivalent.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_brackets_that_are_not_array_selections"><a class="anchor" href="#_brackets_that_are_not_array_selections"></a>Brackets that are not array selections</h3>
-<div class="paragraph">
-<p>Three address forms use square brackets for something else entirely. They are unchanged by this
-notation, and the notation&#8217;s own spellings are not accepted there:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>C-Bus</strong> writes the arguments of a CAL command in brackets - <code>recall=[param, count]</code>. The
-count is an argument of the command, not a selection appended to an address.</p>
-</li>
-<li>
-<p><strong>KNXnet/IP group addresses</strong> write a set of group addresses to match - <code>1/[2-3]/4</code>, and
-<code>[1,3]/2/[4-6]</code>. That is a filter over addresses, not a selection within one value.</p>
-</li>
-<li>
-<p><strong>BACnet/IP</strong> writes a property&#8217;s array index - <code>ANALOG_VALUE,2/PRESENT_VALUE[3]</code>. This is an
-index, and already means what an index means here, so nothing about it changed.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_why_and_not_something_else"><a class="anchor" href="#_why_and_not_something_else"></a>Why <code>;</code> and not something else</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The <code>;</code> before a declared base is the one separator the notation adds. It is kept as <code>;</code> for
-three reasons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>OPC UA addresses already use <code>;</code> as the separator of the standard NodeId string form
-(<code>ns=2;i=MyInt</code>, from OPC UA Part 6). That is not PLC4X&#8217;s to redefine - people copy those
-strings out of their tooling - so <code>;</code> was already part of the vocabulary.</p>
-</li>
-<li>
-<p>It stays visually distinct from <code>:</code>, which separates the type. <code>%DB42:28.0[4..7;1]:BYTE</code> is
-readable; the same address with four colons doing three different jobs is not.</p>
-</li>
-<li>
-<p><code>:</code> is structural in S7, Modbus, SLMP, EtherNet/IP and ADS addresses, whereas <code>;</code> is structural
-in only one driver. Reusing the less overloaded character inside brackets keeps the grammar
-unambiguous.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_upgrading"><a class="anchor" href="#_upgrading"></a>Upgrading</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The brackets used to come <strong>after</strong> the type on several drivers, where they meant a <strong>count</strong>:</p>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">holding-register:1:INT[4]      <i class="conum" data-value="1"></i><b>(1)</b>
-holding-register:1[0..3]:INT   <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Set&lt;String&gt; protocolCodes = driverManager.getProtocolCodes();      <i class="conum" data-value="1"></i><b>(1)</b>
+PlcDriver driver = driverManager.getDriver("s7");                  <i class="conum" data-value="2"></i><b>(2)</b>
+String humanReadable = driver.getProtocolName();                   <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>before - four registers</td>
+<td>The short codes - the <code>s7</code> in <code>s7://10.0.0.1</code>.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>now</td>
+<td>Throws <code>PlcConnectionException</code> if no driver with that code is on the classpath.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>A display name, e.g. <code>Siemens S7 (Basic)</code>. Use the code for wiring, the name for humans.</td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>An address in the old form no longer parses, and the error tells you what to write instead. That
-is deliberate: <code>[4]</code> used to mean "four elements" and now means "the fifth", so an address that
-still parsed would quietly return different data.</p>
-</div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-<strong>Firmata is the exception.</strong> Its addresses carry no type (<code>3[4]</code>), so its brackets did
-not move and there is nothing to reject. <code>3[4]</code> used to mean four pins from pin 3 and now means
-one pin, the fifth. Rewrite these as <code>3[0..3]</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<strong>PLC4Go&#8217;s ADS driver is a second exception.</strong> Its <code>[n]</code> used to be a <strong>count</strong> of <code>n</code>
-elements, unlike PLC4J&#8217;s, so <code>MAIN.g_arr[3]</code> read three elements and now reads one - the element
-at index 3. Rewrite these as <code>MAIN.g_arr[0..2]</code>. Its <code>[a:b]</code> start-and-count form, which PLC4J
-never had, is gone: write <code>[a..a+b-1]</code>. These two changes are also what makes the same ADS
-address mean the same thing in both languages, which it did not before.
+<code>getProtocolCodes()</code> returns an unordered <code>Set</code>. Sort it before showing it to anyone,
+or your dropdown will shuffle itself between runs.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>A count of zero no longer has a spelling anywhere. Several drivers used to accept <code>[0]</code> and
-reject it as "quantity must be greater than zero"; a range is written with the indices it covers,
-so there is no way to ask for no elements at all, and <code>[0]</code> now selects the first one.</p>
+<p>If you already have a connection string and just want the driver behind it, use
+<code>driverManager.getDriverForUrl(url)</code> instead of parsing the scheme yourself.</p>
+</div>
+<div class="paragraph">
+<p>With the <code>plc4j-driver-all</code> dependency, the above yields 18 drivers:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ab-eth</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ads</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>canopen</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>eip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>firmata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>genericcan</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>iec-60870-5-104</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>knxnet-ip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>logix</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modbus-ascii</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modbus-rtu</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modbus-tcp</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>opcua</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4x</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s7</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>simulated</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>slmp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>umas</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_which_transports_does_a_driver_support"><a class="anchor" href="#_which_transports_does_a_driver_support"></a>Which transports does a driver support?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Everything else lives on <code>PlcDriverMetadata</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.plc4x.java.api.metadata.PlcDriverMetadata;
+
+PlcDriverMetadata metadata = driver.getMetadata();
+
+List&lt;String&gt; transports = metadata.getSupportedTransportCodes();   <i class="conum" data-value="1"></i><b>(1)</b>
+Optional&lt;String&gt; preferred = metadata.getDefaultTransportCode();   <i class="conum" data-value="2"></i><b>(2)</b>
+boolean canDiscover = metadata.isDiscoverySupported();             <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>e.g. <code>[tcp, tls, tls-psk, udp, test]</code> for <code>modbus-tcp</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>What the driver uses when the connection string names no transport. Pre-select this.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Whether the driver can search the network for devices - use it to enable a "Scan" button.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Two things to handle:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Filter out <code>test</code>.</strong> It is an in-memory transport used by PLC4X&#8217;s own unit tests. It shows up
+in the list, but it is not something a user can pick. The protocol pages on this site filter it
+out for exactly this reason.</p>
+</li>
+<li>
+<p><strong>The list can be empty.</strong> <code>simulated</code> reports no transports at all, because it never talks to
+anything. Do not assume at least one.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">List&lt;String&gt; selectable = metadata.getSupportedTransportCodes().stream()
+    .filter(code -&gt; !"test".equals(code))
+    .toList();</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_the_configuration_for_a_driver"><a class="anchor" href="#_what_is_the_configuration_for_a_driver"></a>What is the configuration for a driver?</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.plc4x.java.api.metadata.OptionMetadata;
+
+Optional&lt;OptionMetadata&gt; protocolOptions =
+    metadata.getProtocolConfigurationOptionMetadata();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is an <code>Optional</code> because a driver may declare no options of its own - <code>simulated</code> has none.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_the_configuration_for_a_transport_of_that_driver"><a class="anchor" href="#_what_is_the_configuration_for_a_transport_of_that_driver"></a>What is the configuration for a transport of that driver?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ask for the <strong>pair</strong>, never for the transport alone:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Optional&lt;OptionMetadata&gt; transportOptions =
+    metadata.getTransportConfigurationOptionMetadata("tcp");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A driver&#8217;s transport configuration is exposed per driver-and-transport combination, so always
+query it through the driver you are configuring rather than caching one table per transport code.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_parameters_does_a_configuration_define"><a class="anchor" href="#_what_parameters_does_a_configuration_define"></a>What parameters does a configuration define?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>OptionMetadata</code> gives you the list, and <code>Option</code> describes each entry:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.plc4x.java.api.metadata.Option;
+
+List&lt;Option&gt; all = protocolOptions.get().getOptions();
+List&lt;Option&gt; mandatory = protocolOptions.get().getRequiredOptions();   // convenience filter</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Returns</th>
+<th class="tableblock halign-left valign-top">What to do with it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getKey()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The parameter name as it appears in a connection string.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getType()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OptionType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pick the right widget and validate input. See below.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isRequired()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mark the field mandatory and block submission while it is empty.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getDefaultValue()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Optional&lt;Object&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pre-fill the field. Empty means there is no default.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getDescription()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tooltip or help text.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isSecret()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Render as a password field and keep it out of logs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getSince()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Optional&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PLC4X version that introduced the option, e.g. <code>0.13.0</code>. Only some options carry it.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>OptionType</code> is a small enum - <code>BOOLEAN</code>, <code>INT</code>, <code>LONG</code>, <code>FLOAT</code>, <code>DOUBLE</code>, <code>STRING</code>, <code>FILE</code>,
+<code>STRUCT</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>FILE</code> is a path - offer a file picker (used for keystores and certificates).</p>
+</li>
+<li>
+<p><code>STRUCT</code> is a composite value the driver parses from its string form, such as the ADS
+<code>target-ams-net-id</code>. Treat it as free text and let the driver validate it; the syntax is
+documented on the driver&#8217;s own protocol page.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Most options are optional and defaulted. <code>ads</code> is the one driver in the default set that really
+demands input - four mandatory parameters, two of them <code>STRUCT</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">target-ams-net-id    STRUCT   required
+target-ams-port      INT      required
+source-ams-net-id    STRUCT   required
+source-ams-port      INT      required</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_turning_options_back_into_a_connection_string"><a class="anchor" href="#_turning_options_back_into_a_connection_string"></a>Turning options back into a connection string</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys are used verbatim as query parameters, with one rule: <strong>transport options are namespaced
+with their transport code, protocol options are not</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">s7://10.0.0.1?pdu-size=2048&amp;cotp.local-rack=1&amp;cotp.remote-slot=2
+     ^                      ^                 ^
+     |                      |                 └── transport option, prefixed with "cotp."
+     |                      └── transport option
+     └── protocol option, no prefix</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So when you build the string, prefix exactly the values that came from
+<code>getTransportConfigurationOptionMetadata(&#8230;&#8203;)</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">String key = (transportCode == null) ? option.getKey()
+                                     : transportCode + "." + option.getKey();</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Anything marked <code>isSecret()</code> ends up in that same string. PLC4X redacts those parameters in
+its own log output - do the same before you log, display or persist a connection string.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_complete_example"><a class="anchor" href="#_a_complete_example"></a>A complete example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This program prints the full catalogue - every driver, its transports, and every option with its
+type, whether it is mandatory, and its default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.plc4x.java.api.PlcDriver;
+import org.apache.plc4x.java.api.PlcDriverManager;
+import org.apache.plc4x.java.api.metadata.Option;
+import org.apache.plc4x.java.api.metadata.OptionMetadata;
+import org.apache.plc4x.java.api.metadata.PlcDriverMetadata;
+
+import java.util.List;
+import java.util.TreeSet;
+
+public class DriverCatalog {
+
+    public static void main(String[] args) throws Exception {
+        PlcDriverManager driverManager = PlcDriverManager.getDefault();
+
+        for (String protocolCode : new TreeSet&lt;&gt;(driverManager.getProtocolCodes())) {
+            PlcDriver driver = driverManager.getDriver(protocolCode);
+            PlcDriverMetadata metadata = driver.getMetadata();
+
+            System.out.println("== " + protocolCode + " (" + driver.getProtocolName() + ")");
+            System.out.println("   discovery supported : " + metadata.isDiscoverySupported());
+            System.out.println("   default transport   : "
+                + metadata.getDefaultTransportCode().orElse("&lt;none&gt;"));
+
+            // "test" is an in-memory transport used by PLC4X's own unit tests.
+            List&lt;String&gt; transports = metadata.getSupportedTransportCodes().stream()
+                .filter(code -&gt; !"test".equals(code))
+                .toList();
+            System.out.println("   transports          : " + transports);
+
+            metadata.getProtocolConfigurationOptionMetadata()
+                .ifPresent(options -&gt; print("   protocol options", options, null));
+
+            for (String transportCode : transports) {
+                metadata.getTransportConfigurationOptionMetadata(transportCode)
+                    .ifPresent(options -&gt;
+                        print("   transport options (" + transportCode + ")", options, transportCode));
+            }
+            System.out.println();
+        }
+    }
+
+    private static void print(String heading, OptionMetadata metadata, String prefix) {
+        System.out.println(heading + ":");
+        for (Option option : metadata.getOptions()) {
+            // In a connection string, transport options are namespaced with the transport code.
+            String key = (prefix == null) ? option.getKey() : prefix + "." + option.getKey();
+            System.out.printf("     %-34s %-8s %-9s %-7s %s%n",
+                key,
+                option.getType(),
+                option.isRequired() ? "required" : "optional",
+                option.isSecret() ? "secret" : "",
+                option.getDefaultValue().map(v -&gt; "default=" + v).orElse(""));
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Its output for the ADS driver:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">== ads (Beckhoff TwinCat ADS)
+   discovery supported : true
+   default transport   : tcp
+   transports          : [tcp]
+   protocol options:
+     target-ams-net-id                  STRUCT   required
+     target-ams-port                    INT      required
+     source-ams-net-id                  STRUCT   required
+     source-ams-port                    INT      required
+     request-timeout-ms                 INT      optional          default=4000
+     max-data-type-table-depth          INT      optional          default=20
+     load-symbol-and-data-type-tables   BOOLEAN  optional          default=true
+   transport options (tcp):
+     tcp.connect-timeout-ms             INT      optional          default=5000
+     tcp.read-timeout-ms                INT      optional          default=0
+     tcp.write-timeout-ms               INT      optional          default=0
+     tcp.no-delay                       BOOLEAN  optional          default=true
+     tcp.keep-alive                     BOOLEAN  optional          default=false
+     tcp.send-buffer-size               INT      optional          default=81920
+     tcp.receive-buffer-size            INT      optional          default=81920
+     tcp.local-address                  STRING   optional
+     tcp.local-port                     INT      optional          default=0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To run it, you need a driver on the classpath. <code>plc4j-driver-all</code> gives you every one of them:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-all&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_things_to_watch_out_for"><a class="anchor" href="#_things_to_watch_out_for"></a>Things to watch out for</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>getProtocolCodes()</code> is an unordered <code>Set</code> - sort before displaying.</p>
+</li>
+<li>
+<p>Filter the <code>test</code> transport out of anything a user sees.</p>
+</li>
+<li>
+<p>A driver may report no transports (<code>simulated</code>) and no options (<code>simulated</code> again). Every
+metadata accessor that can be absent returns an <code>Optional</code> or an empty list - none of them
+return <code>null</code>, but none of them promise content either.</p>
+</li>
+<li>
+<p>Ask for transport options per driver-and-transport pair, not per transport code.</p>
+</li>
+<li>
+<p>Treat <code>isSecret()</code> options as credentials everywhere: masked in the UI, redacted in logs.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

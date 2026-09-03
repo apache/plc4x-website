@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -489,107 +492,84 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_structure_amstcp_packet"><a class="anchor" href="#_structure_amstcp_packet"></a>Structure AMS/TCP Packet</h2>
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Array selection uses the shared notation - a single index, an inclusive range, and
-optionally the array&#8217;s declared lower bound, placed before the type. See
-<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>ADS (Automation Device Specification) is the TwinCAT communication protocol that specifies the interaction between two ADS devices. For example, it defines what operations can be executed on another ADS device, what parameters are necessary for that and what return value is sent after execution.</p>
-</div>
-<div class="paragraph">
-<p>AMS (Automation Message Specification) specifies the exchange of the ADS data. A major component of the communication protocol is the AmsNetId. This is specified in the AMS/ADS package for the source and target device. An ADS device can be explicitly addressed using the AmsNetId.
-Source <a href="https://infosys.beckhoff.com/english.php?content=../content/1033/ams_nat/4275563275.html&amp;id=" class="bare">https://infosys.beckhoff.com/english.php?content=../content/1033/ams_nat/4275563275.html&amp;id=</a> (accessed 7 August 2022)</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_address_format"><a class="anchor" href="#_address_format"></a>Address Format</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The driver accepts three kinds of addresses.</p>
-</div>
-<div class="paragraph">
-<p><strong>Symbolic addresses</strong> use the variable name as it is known in the PLC program:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>MAIN.g_plant.channels[1].setpoints[4]</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Array indices may appear at any position of the path, not only at the end.</p>
-</div>
-<div class="paragraph">
-<p>Symbolic addresses are resolved against the symbol- and data-type-table, so they require
-<code>load-symbol-and-data-type-tables</code> to be enabled (the default). With that option disabled the
-tables are never fetched and a symbolic address is rejected with an error saying so - use a direct
-address instead. Subscriptions are the exception: they resolve symbol handles on the device and
-work either way.</p>
-</div>
-<div class="paragraph">
-<p><strong>Direct addresses</strong> name the index group and index offset explicitly, in decimal or hexadecimal, and
-carry the data type:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>{IndexGroup}/{IndexOffset}:{TYPE}
-{IndexGroup}/{IndexOffset}:{TYPE}[{numberOfElements}]</pre>
-</div>
-</div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Examples</caption>
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Address</th>
-<th class="tableblock halign-left valign-top">Meaning</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>16448/16448:DINT</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">one DINT at index group 16448, offset 16448</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Reads one or more tags, addressed directly, as a string, or symbolically.</p>
+</div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x4040/0x4040:DINT</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the same address in hexadecimal</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Writes one or more tags, addressed directly, as a string, or symbolically.</p>
+</div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>16448/16448:INT[10]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">an array of 10 INTs</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Subscribes to a symbolic handle resolved on the device. Works whether or not
+<code>load-symbol-and-data-type-tables</code> is enabled.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>browse</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Lists the symbol table. Requires <code>load-symbol-and-data-type-tables</code>; with it disabled a
+browse request is answered with <code>UNSUPPORTED</code>.</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><strong>Direct string addresses</strong> additionally carry the fixed length of the string:</p>
+<p>The ADS connection string has the following format:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>{IndexGroup}/{IndexOffset}:STRING({length})
-{IndexGroup}/{IndexOffset}:WSTRING({length})</pre>
+<pre>ads:tcp://{ip-address}[:{port}]?{options}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Unlike symbolic addresses, direct addresses need no symbol table and therefore work regardless of
-the <code>load-symbol-and-data-type-tables</code> setting. Browsing does need it, since it lists the symbol
-table; with the option disabled a browse request is answered with <code>UNSUPPORTED</code>.</p>
+<p><code>tcp</code> is the only supported transport. The port defaults to the ADS TCP port and normally
+does not need to be given. <code>target-ams-net-id</code>, <code>target-ams-port</code>, <code>source-ams-net-id</code> and
+<code>source-ams-port</code> are required options:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ads:tcp://192.168.23.20:48898?target-ams-port=851&amp;source-ams-port=65534&amp;source-ams-net-id=192.168.23.220.1.1&amp;target-ams-net-id=192.168.23.20.1.1</pre>
+</div>
 </div>
 </div>
 </div>
@@ -861,6 +841,274 @@ table; with the option disabled a browse request is answered with <code>UNSUPPOR
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Addressing is implemented in Go and Java. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
+</div>
+<div class="sect2">
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
+<div class="paragraph">
+<p>The driver accepts three kinds of addresses.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Array selection uses the shared notation - a single index, an inclusive range, and
+optionally the array&#8217;s declared lower bound, placed before the type. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Direct addresses</strong> name the index group and index offset explicitly, in decimal or
+hexadecimal, and carry the data type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{IndexGroup}/{IndexOffset}:{TYPE}
+{IndexGroup}/{IndexOffset}[{selection}]:{TYPE}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Direct addresses need no symbol table and therefore work regardless of the
+<code>load-symbol-and-data-type-tables</code> setting.</p>
+</div>
+<div class="paragraph">
+<p><strong>Direct string addresses</strong> are a direct address whose type is <code>STRING</code> or <code>WSTRING</code>, and
+additionally carry the fixed length of the string:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{IndexGroup}/{IndexOffset}:STRING({length})
+{IndexGroup}/{IndexOffset}:WSTRING({length})
+{IndexGroup}/{IndexOffset}[{selection}]:STRING({length})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Symbolic addresses</strong> use the variable name as it is known in the PLC program, with array
+indices appearing at any position of the path, not only at the end:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{symbol}
+{symbol}[{selection}]
+{symbol}.{member}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Symbolic addresses are resolved against the symbol- and data-type-table, so they require
+<code>load-symbol-and-data-type-tables</code> to be enabled (the default). With that option disabled the
+tables are never fetched and a symbolic address is rejected with an error saying so - use a
+direct address instead. Subscriptions are the exception: they resolve symbol handles on the
+device and work either way. Only the last dimension of a selection may be a range; an
+interior segment may only carry a bare index, since a range there would name several
+disjoint elements at once rather than one contiguous read.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Java caps a direct address&#8217;s index group and index offset at 8 hex digits or 10
+decimal digits; Go&#8217;s port dropped that cap, so an address with more digits than a 32-bit
+value could ever need still matches the Go pattern and is rejected only later, if at all -
+for example <code>0x123456789/0:BOOL</code> is accepted by Go but rejected by Java. Separately, Java
+requires a symbolic address&#8217;s path to be a dotted run of identifier segments
+(<code>[a-zA-Z_]\w*</code>, each optionally followed by bracketed indices); Go&#8217;s pattern accepts
+anything containing no <code>[</code> as the symbol name - punctuation, spaces, a leading digit,
+anything - so for example <code>foo-bar</code> is accepted by Go but rejected by Java. This page
+documents the Java syntax; consult the Go driver&#8217;s own source for what it accepts.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
+<div class="paragraph">
+<p>The ADS type name given in a direct address maps to a <code>PlcValueType</code> as follows:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ADS type</th>
+<th class="tableblock halign-left valign-top">PlcValueType</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BYTE, BIT8, BITARR8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BYTE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WORD, BITARR16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WORD</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DWORD, BITARR32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DWORD</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SINT, INT8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USINT, UINT8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">USINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT, INT16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UINT, UINT16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DINT, INT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UDINT, UINT32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UDINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LINT, INT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ULINT, UINT64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ULINT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REAL, FLOAT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LREAL, DOUBLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LREAL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHAR</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WCHAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WCHAR</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WSTRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WSTRING</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LTIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LTIME</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME_OF_DAY, TOD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME_OF_DAY</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE_AND_TIME, DT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE_AND_TIME</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A symbolic address carries no type in the address itself; its type is resolved from the
+device&#8217;s data-type table, so a symbolic address is not restricted to this list.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Examples</caption>
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Address</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>16448/1234:DINT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a single DINT at index group 16448, offset 1234</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x4040/0xFF[0..4]:LREAL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">five LREALs in hexadecimal, starting at offset 0xFF</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>100/200:STRING(80)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">an 80-character STRING at index group 100, offset 200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x10/0x20[0..2]:WSTRING(40)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">three 40-character WSTRINGs in hexadecimal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Main.value</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a symbolic address</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MAIN.g_arr[1..8]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">elements 1 to 8 of a symbolic array</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_protocol_details"><a class="anchor" href="#_protocol_details"></a>Protocol Details</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_structure_amstcp_packet"><a class="anchor" href="#_structure_amstcp_packet"></a>Structure AMS/TCP Packet</h3>
+<div class="paragraph">
+<p>ADS (Automation Device Specification) is the TwinCAT communication protocol that specifies the interaction between two ADS devices. For example, it defines what operations can be executed on another ADS device, what parameters are necessary for that and what return value is sent after execution.</p>
+</div>
+<div class="paragraph">
+<p>AMS (Automation Message Specification) specifies the exchange of the ADS data. A major component of the communication protocol is the AmsNetId. This is specified in the AMS/ADS package for the source and target device. An ADS device can be explicitly addressed using the AmsNetId.
+Source <a href="https://infosys.beckhoff.com/english.php?content=../content/1033/ams_nat/4275563275.html&amp;id=" class="bare">https://infosys.beckhoff.com/english.php?content=../content/1033/ams_nat/4275563275.html&amp;id=</a> (accessed 7 August 2022)</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -894,8 +1142,9 @@ table; with the option disabled a browse request is answered with <code>UNSUPPOR
 </table>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_more_details_on"><a class="anchor" href="#_more_details_on"></a>More details on</h2>
+<h2 id="_more_information"><a class="anchor" href="#_more_information"></a>More Information</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>For details about the protocol look here: <a href="http://www.beckhoff.com/" class="bare">http://www.beckhoff.com/</a>

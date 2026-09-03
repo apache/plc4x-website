@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -470,25 +473,108 @@
 </aside>
 <article class="doc">
 <h1 class="page">OPC UA</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://opcfoundation.org/about/opc-technologies/opc-ua/">OPC UA</a> (OPC Unified Architecture) is a
+platform independent, service-oriented protocol for industrial communication, released in 2008 as
+the successor to the COM-based OPC Classic specifications. It is spoken by a wide range of
+industrial automation devices, PLCs and SCADA systems - see
+<a href="#_compatibility_with_opc_ua_servers">Compatibility with OPC-UA Servers</a> for the server implementations this driver has been tested
+against.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java only. Reads the full range of supported PLC4X data types, in single and bulk requests.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java only. Writes the full range of supported PLC4X data types, in single and bulk requests.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java only. Subscriptions are possible on both an event and a cyclic basis - see
+<a href="#_opc_ua_data_change_notification">OPC UA Data Change Notification</a> and <a href="#_opc_ua_event_notification">OPC UA Event Notification</a>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>browse</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java only. Browses the nodes exposed by the connected server, starting from the standard
+<code>Objects</code> folder.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The Go driver works over an unencrypted channel only (<code>security-policy=None</code>), does not browse,
+and does not chunk messages - a request or response that exceeds one chunk fails.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The OPC UA driver uses the connection string</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:{transport}://{ip-address}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example of this connection string would be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:tcp://127.0.0.1:12686?discovery=true&amp;username=admin&amp;password=password</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the transport, port and options fields are optional.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Array selection uses the shared notation - a single index, an inclusive range, and
-optionally the array&#8217;s declared lower bound, placed before the type. See
-<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -1041,290 +1127,23 @@ change-of-state tags, whose sampling rate can exceed the publishing (cycle) inte
 </tr>
 </tbody>
 </table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Value</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Description</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>read</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The read interface allows for reading the full range of supported PLC4X data types in single and bulk requests</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The write interface allows for writing the full range of supported PLC4X data types in single and bulk requests</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>subscribe</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Subscriptions are possible with events on event- and cyclic-basis</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The OPC UA drivers uses the connection string</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>opcua:{transport}://{ip-address}:{port}?{options}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>An example of this connection string would be:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>opcua:tcp://127.0.0.1:12686?discovery=true&amp;username=admin&amp;password=password</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note the transport, port and options fields are optional.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_secure_communication"><a class="anchor" href="#_secure_communication"></a>Secure communication</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The secure channel implementation within Apache PLC4X project have been tested against existing open source server implementations.
-This includes Eclipse Milo (all modes) as well as OPC Foundation .NET server (except <code>Basic128Rsa15</code>).
-Manual tests proven that driver is able to communicate with OPC UA server launched on PLCs as well as commercial simulators.</p>
-</div>
-<div class="paragraph">
-<p>Depending on actual configuration of remote end there might be necessity to prepare client certificate.
-Preparation of certificate is beyond driver, however in case when no client certificate is provided, it will be auto-generated to establish a session.
-Please follow our tutorial <a href="../getting-started/opcua-client-certificate.html" class="xref page">on provisioning of client private key and certificate</a>.
-By following it you will be able to create self-signed certificate for use with both hardware and software based OPC-UA servers.
-Please note that there are multiple appearances of certificates within specification.
-There is the application instance certificate securing the communication channel, which is provided through the keystore options described below, and there is a X509 certificate identifying the <strong>user</strong>, which is supplied separately - see <a href="#_user_authentication">User authentication</a>.</p>
-</div>
-<div class="paragraph">
-<p>The security modes differ between themselves by strength of applied signature and encryption algorithms.
-Driver is able to communicate with single security mode at the time.
-Additionally, to security policy it is possible to specify <code>message-security</code> option which indicates expected security settings after initial handshake.
-By default, this option is set to <code>SIGN_ENCRYPT</code> which imposes high security settings and full encryption of exchanged message payloads.
-In case when additional diagnostics is needed payloads has to be traced through TRACE level log entries.
-The <code>SIGN</code> mode gives possibility o browse packets in tools such wireshark.</p>
+<p>Addressing is implemented in Java. The Go driver works over an unencrypted channel only and does
+not browse. See the <a href="index.html" class="xref page">protocol support matrix</a> for what each
+implementation does.</p>
 </div>
 <div class="sect2">
-<h3 id="_certificate_verification"><a class="anchor" href="#_certificate_verification"></a>Certificate verification</h3>
+<h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
 <div class="paragraph">
-<p>The OPC UA specification defines its own procedures for certificate validation.</p>
-</div>
-<div class="paragraph">
-<p>The driver verifies the server certificate by default and fails closed: if no trust anchor is
-configured, the server certificate is rejected and the connection fails. Configure one of:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>tls.trust-store</code> - validate the certificate chain against the given trust store. The acceptance
-relies on regular TLS checks (expiry date, certificate path etc.); it does not validate OPC UA
-specific parts such as the application URI.</p>
-</li>
-<li>
-<p><code>server-certificate-file</code> - pin trust to exactly that certificate. Only the certificate read from
-the configured file is trusted; a certificate learned over the unauthenticated discovery channel is
-never used as a trust anchor.</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<code>tls.verify=false</code> disables server certificate verification
-altogether. This makes the connection vulnerable to man-in-the-middle attacks and is intended for
-local testing only.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_client_certificate"><a class="anchor" href="#_client_certificate"></a>Client certificate</h3>
-<div class="paragraph">
-<p>If no <code>tls.keystore</code> is configured, the driver generates a self-signed application instance
-certificate for the session. It is a 2048 bit RSA key signed with SHA-256; use <code>generated-key-size</code>
-to ask for a larger key when the server demands one:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>opcua:tcp://127.0.0.1:12686?security-policy=Basic256Sha256&amp;message-security=SIGN_ENCRYPT&amp;generated-key-size=4096</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>A generated certificate is fresh for every connection, so a server that keeps a trust list will
-reject it until it is trusted there. For anything beyond a first connection attempt, supply your own
-certificate through <code>tls.keystore</code> instead - see
-<a href="../getting-started/opcua-client-certificate.html" class="xref page">the client certificate tutorial</a>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_user_authentication"><a class="anchor" href="#_user_authentication"></a>User authentication</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Beside securing the channel, OPC UA authenticates the user of a session. The driver supports all
-three token types the specification defines: anonymous, username/password and a X509 user
-certificate.</p>
-</div>
-<div class="paragraph">
-<p>Anonymous access is what you get when no credentials are supplied. A username and password can come
-from the connection string:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>opcua:tcp://127.0.0.1:12686?username=admin&amp;password=password</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>or, together with the certificate variant, from a <code>PlcAuthentication</code> handed to the driver manager.
-The object passed to <code>getConnection</code> decides which token type the driver asks the server for, and
-credentials given this way take precedence over those in the connection string:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcConnection connection = driverManager.getConnection(
-    "opcua:tcp://127.0.0.1:12686?security-policy=Basic256Sha256",
-    new PlcUsernamePasswordAuthentication("admin", "password"));</code></pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_user_certificate"><a class="anchor" href="#_user_certificate"></a>User certificate</h3>
-<div class="paragraph">
-<p>To authenticate as a user with a X509 certificate, pass a <code>PlcCertificateAuthentication</code> carrying
-the key store that holds the user certificate and its private key:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">KeyStore keyStore = KeyStore.getInstance("PKCS12");
-try (InputStream in = new FileInputStream("user.p12")) {
-    keyStore.load(in, "changeit".toCharArray());
-}
-
-PlcConnection connection = driverManager.getConnection(
-    "opcua:tcp://127.0.0.1:12686?security-policy=Basic256Sha256",
-    new PlcCertificateAuthentication(keyStore, "changeit".toCharArray()));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The driver takes the first key store entry holding a private key. When the store holds more than one
-identity, name the one to use:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">new PlcCertificateAuthentication(keyStore, "changeit".toCharArray(), "operator");</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The certificate has to use an RSA key, and the server has to trust it - servers usually keep a
-separate trust list for user certificates, distinct from the one for application instance
-certificates.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This is not the same certificate as the one configured through <code>tls.keystore</code>. That one is
-the application instance certificate: it secures the channel and says which installation is
-talking, whereas the user certificate says who is talking. Nothing stops you from using the same
-certificate for both, provided the server trusts it for both purposes.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The driver proves possession of the private key by signing the server certificate and server nonce,
-using the security policy the server declares for its certificate user token policy. A server that
-offers certificate authentication with a security policy of <code>None</code> leaves no algorithm to sign
-with; the driver refuses such an endpoint rather than sending an unverifiable token.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_negotiation_procedure"><a class="anchor" href="#_negotiation_procedure"></a>Negotiation procedure</h3>
-<div class="paragraph">
-<p>Depending on settings driver might or might not attempt to discover endpoints from remote server.
-In case when <code>discovery</code> option is set to <code>true</code> driver will look up server certificate through connection attempt.
-The discovery option also enables checks of server endpoints for matching security settings.</p>
-</div>
-<div class="paragraph">
-<p>Once initial discovery is completed and driver finds endpoint matching its security settings it will launch second connection attempt which will switch to configured security mode.</p>
-</div>
-<div class="paragraph">
-<p>Each connection attempt made by driver attempt to use limits described in table above.
-Role of these options is declaration of values accepted and expected by client.
-Once server returns its limits (<code>Acknowledge</code> for supplied <code>Hello</code> call) driver picks values from these.
-The only one note is that driver takes minimum of local receive and remote send buffer size.
-It does same with local send and remote receive buffer.</p>
-</div>
-<div class="paragraph">
-<p>Usual values of <code>encoding.send-buffer-size</code> and <code>encoding.receive-buffer-size</code> PLC devices remain at 8196 bytes.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Due to lack of complete implementation of negotiation and chunking logic the OPC UA driver prior Apache PLC4X 0.11 release could supply calls exceeding server limits.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_address_format"><a class="anchor" href="#_address_format"></a>Address Format</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To read, write and subscribe to data, the OPC UA driver uses the variable declaration string of the OPC UA server it is
-connecting to.
-It includes the namespace(<code>ns</code>) of the hierarchy tree followed by the type of identifier string(<code>s</code>), numeric(<code>i</code>),
-binary(<code>b</code>) or guid(<code>g</code>) and its address. The Data Type is an optional field, if it is not included a default data type
-is selected based on the datatype of the returned value. For Unsigned data types it needs to be included otherwise.</p>
+<p>To read, write and subscribe to data, the OPC UA driver uses the variable declaration string of
+the OPC UA server it is connecting to. It includes the namespace (<code>ns</code>) of the hierarchy tree,
+followed by the type of identifier - string (<code>s</code>), numeric (<code>i</code>), binary (<code>b</code>) or guid (<code>g</code>) - and
+its address.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1332,13 +1151,28 @@ is selected based on the datatype of the returned value. For Unsigned data types
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>a</code> parameter which stands for <code>attributeId</code> of an object is optional, and by default it is assumed to be Value 13 (<code>0x0d</code>).
-Value of this parameter can be specified using numeric value or OPC-UA attribute name (case-sensitive).</p>
+<p>The <code>a</code> parameter, standing for the <code>attributeId</code> of an object, is optional and defaults to
+<code>Value</code> (<code>0x0d</code>, i.e. <code>13</code>). Its value can be given as either the numeric id or the OPC-UA
+attribute name (case-sensitive).</p>
+</div>
+<div class="paragraph">
+<p>The Data Type is also optional; when omitted, a default data type is selected based on the
+datatype of the returned value. For unsigned data types it needs to be given explicitly.</p>
+</div>
+<div class="paragraph">
+<p>An address may end with a selection of an array&#8217;s elements - a single index, an inclusive range,
+and optionally the array&#8217;s declared lower bound, placed before the type. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
+</div>
+<div class="paragraph">
+<p>Note the identifiers <code>s</code>, <code>i</code>, <code>b</code> and <code>g</code> specify the format of the address, not the data type of
+the returned value.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_data_types"><a class="anchor" href="#_data_types"></a>Data Types</h3>
 <div class="paragraph">
-<p>The following data types are supported</p>
+<p>The following data types are supported:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1415,10 +1249,7 @@ Value of this parameter can be specified using numeric value or OPC-UA attribute
 </div>
 </div>
 <div class="sect2">
-<h3 id="_example_of_a_valid_opc_ua_address"><a class="anchor" href="#_example_of_a_valid_opc_ua_address"></a>Example of a valid OPC UA address:</h3>
-<div class="paragraph">
-<p>The following are examples of valid addresses</p>
-</div>
+<h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
 <div class="paragraph">
 <p>String address:</p>
 </div>
@@ -1430,7 +1261,7 @@ ns=2;s=HelloWorld/ScalarTypes/Boolean;a=Value;BOOL</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Numeric address</p>
+<p>Numeric address:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1450,7 +1281,7 @@ ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;a=Value;REAL</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Event Subscription:</p>
+<p>Event subscription:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1458,52 +1289,279 @@ ns=2;g=09087e75-8e5e-499b-954f-f2a8624db28a;a=Value;REAL</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Note the Identifiers <code>s</code>,<code>i</code>,<code>b</code> and <code>g</code> specify the format of the address not the data type of the returned value.
-The <code>a</code> attribute is required only for event subscriptions which additionally makes use of tag config.
-Tag config is appended after a <code>|</code> as a comma-separated <code>key=value</code> list naming the event
-fields to request. The values are placeholders and are ignored, but they must be non-empty
-and alphanumeric, and a <code>;{Data Type}</code> segment has to precede the <code>|</code> - otherwise the config
-is silently dropped.</p>
+<p>The <code>a</code> attribute is required only for event subscriptions, which additionally make use of tag
+config. Tag config is appended after a <code>|</code> as a comma-separated <code>key=value</code> list naming the event
+fields to request. The values are placeholders and are ignored, but they must be non-empty and
+alphanumeric, and a <code>;{Data Type}</code> segment has to precede the <code>|</code> - otherwise the config is
+silently dropped. See <a href="#_opc_ua_event_notification">OPC UA Event Notification</a> for the supported event fields.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The <code>;a=&lt;attributeId&gt;</code> suffix is Java-only - the Go driver&#8217;s address pattern has no
+<code>;a=</code> group (and no trailing <code>|key=val,&#8230;&#8203;</code> tag-config group at all), so an address such as
+<code>ns=2;s=Foo;a=13</code> is accepted by Java but rejected by Go. This page documents the Java syntax;
+consult the Go driver&#8217;s own source for what it accepts.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_some_useful_tips"><a class="anchor" href="#_some_useful_tips"></a>Some useful tips</h2>
+<h2 id="_notes_and_tips"><a class="anchor" href="#_notes_and_tips"></a>Notes and Tips</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The namespace (e.g. <code>ns=2</code>) within the address is specific to the server you are connecting to.
-Objects appearing in namespaces can, and will vary, as namespaces are used to separate scope of objects.</p>
+Objects appearing in namespaces can, and will, vary, as namespaces are used to separate the scope
+of objects.</p>
 </div>
 <div class="paragraph">
-<p>OPC-UA servers support subscriptions which allow to reduce amount of data exchanged between client and server.
-There are three primary subscription modes: Data Change Notification, Status Change Notification and Event Notification.
-Currently, Apache PLC4X client supports Data Change Notification and Event Notification.</p>
+<p>OPC-UA servers support subscriptions, which allow the amount of data exchanged between client and
+server to be reduced. There are three primary subscription modes: Data Change Notification, Status
+Change Notification and Event Notification. Apache PLC4X currently supports Data Change
+Notification and Event Notification. Under the hood, subscriptions still require the client to
+request data through a <code>PublishRequest</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_protocol_details"><a class="anchor" href="#_protocol_details"></a>Protocol Details</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_secure_communication"><a class="anchor" href="#_secure_communication"></a>Secure communication</h3>
+<div class="paragraph">
+<p>The secure channel implementation within the Apache PLC4X project has been tested against
+existing open source server implementations. This includes Eclipse Milo (all modes) as well as
+the OPC Foundation .NET server (except <code>Basic128Rsa15</code>). Manual tests have proven that the driver
+is able to communicate with OPC UA servers launched on PLCs as well as commercial simulators.</p>
 </div>
 <div class="paragraph">
-<p>Under the hood subscriptions still require client to request data though PublishRequest.</p>
+<p>Depending on the configuration of the remote end, it may be necessary to prepare a client
+certificate. Preparation of a certificate is beyond the driver; however, when no client
+certificate is provided, one is auto-generated to establish a session. Please follow our tutorial
+<a href="../getting-started/opcua-client-certificate.html" class="xref page">on provisioning of client private key and
+certificate</a>. By following it you will be able to create a self-signed certificate for use with
+both hardware and software based OPC-UA servers. Note that there are multiple appearances of
+certificates within the specification: there is the application instance certificate securing the
+communication channel, which is provided through the keystore options described below, and there
+is a X509 certificate identifying the <strong>user</strong>, which is supplied separately - see
+<a href="#_user_authentication">User authentication</a>.</p>
+</div>
+<div class="paragraph">
+<p>The security modes differ from each other by the strength of the applied signature and encryption
+algorithms. The driver is able to communicate with a single security mode at a time. In addition
+to the security policy, it is possible to specify the <code>message-security</code> option, which indicates
+the expected security settings after the initial handshake. By default, this option is set to
+<code>SIGN_ENCRYPT</code>, which imposes high security settings and full encryption of exchanged message
+payloads. When additional diagnostics are needed, payloads have to be traced through TRACE level
+log entries. The <code>SIGN</code> mode makes it possible to browse packets in tools such as Wireshark.</p>
+</div>
+<div class="sect3">
+<h4 id="_certificate_verification"><a class="anchor" href="#_certificate_verification"></a>Certificate verification</h4>
+<div class="paragraph">
+<p>The OPC UA specification defines its own procedures for certificate validation.</p>
+</div>
+<div class="paragraph">
+<p>The driver verifies the server certificate by default and fails closed: if no trust anchor is
+configured, the server certificate is rejected and the connection fails. Configure one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tls.trust-store</code> - validate the certificate chain against the given trust store. The acceptance
+relies on regular TLS checks (expiry date, certificate path etc.); it does not validate OPC UA
+specific parts such as the application URI.</p>
+</li>
+<li>
+<p><code>server-certificate-file</code> - pin trust to exactly that certificate. Only the certificate read
+from the configured file is trusted; a certificate learned over the unauthenticated discovery
+channel is never used as a trust anchor.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<code>tls.verify=false</code> disables server certificate verification altogether. This makes the
+connection vulnerable to man-in-the-middle attacks and is intended for local testing only.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_client_certificate"><a class="anchor" href="#_client_certificate"></a>Client certificate</h4>
+<div class="paragraph">
+<p>If no <code>tls.keystore</code> is configured, the driver generates a self-signed application instance
+certificate for the session. It is a 2048 bit RSA key signed with SHA-256; use
+<code>generated-key-size</code> to ask for a larger key when the server demands one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:tcp://127.0.0.1:12686?security-policy=Basic256Sha256&amp;message-security=SIGN_ENCRYPT&amp;generated-key-size=4096</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A generated certificate is fresh for every connection, so a server that keeps a trust list will
+reject it until it is trusted there. For anything beyond a first connection attempt, supply your
+own certificate through <code>tls.keystore</code> instead - see
+<a href="../getting-started/opcua-client-certificate.html" class="xref page">the client certificate tutorial</a>.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_opc_ua_data_change_notification"><a class="anchor" href="#_opc_ua_data_change_notification"></a>OPC UA Data Change Notification</h3>
+<h3 id="_user_authentication"><a class="anchor" href="#_user_authentication"></a>User authentication</h3>
 <div class="paragraph">
-<p>Data change notifications are created with list of tags, after which client need to send publish requests.
-Upon each publish request server will send response which will include values of all tag for which subscription was created.
-While OPC-UA specification permits mutation of subscription contents, PLC4X API does not allow that.</p>
+<p>Besides securing the channel, OPC UA authenticates the user of a session. The driver supports all
+three token types the specification defines: anonymous, username/password and a X509 user
+certificate.</p>
 </div>
 <div class="paragraph">
-<p>By default, <code>Cyclic</code> and <code>Change of State</code> subscriptions operations defined in PLC4X client API result in data change notifications.</p>
+<p>Anonymous access is what you get when no credentials are supplied. A username and password can
+come from the connection string:</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:tcp://127.0.0.1:12686?username=admin&amp;password=password</pre>
 </div>
-<div class="sect2">
-<h3 id="_opc_ua_event_notification"><a class="anchor" href="#_opc_ua_event_notification"></a>OPC UA Event Notification</h3>
-<div class="paragraph">
-<p>Third mode of subscription defined by PLC4X API is <code>Event Subscription</code>.
-This kind of subscription is available since PLC4X 0.13 and have slightly different syntax, which brings more complex data.
-OPC-UA events can be used to receive notifications of various kinds which appear when specific situation happens.
-In other protocols this kind of behavior can function as alarms or alerts.</p>
 </div>
 <div class="paragraph">
-<p>In order to create OPC-UA event subscription you need to:</p>
+<p>or, together with the certificate variant, from a <code>PlcAuthentication</code> handed to the driver
+manager. The object passed to <code>getConnection</code> decides which token type the driver asks the server
+for, and credentials given this way take precedence over those in the connection string:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcConnection connection = driverManager.getConnection(
+    "opcua:tcp://127.0.0.1:12686?security-policy=Basic256Sha256",
+    new PlcUsernamePasswordAuthentication("admin", "password"));</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_user_certificate"><a class="anchor" href="#_user_certificate"></a>User certificate</h4>
+<div class="paragraph">
+<p>To authenticate as a user with a X509 certificate, pass a <code>PlcCertificateAuthentication</code> carrying
+the key store that holds the user certificate and its private key:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">KeyStore keyStore = KeyStore.getInstance("PKCS12");
+try (InputStream in = new FileInputStream("user.p12")) {
+    keyStore.load(in, "changeit".toCharArray());
+}
+
+PlcConnection connection = driverManager.getConnection(
+    "opcua:tcp://127.0.0.1:12686?security-policy=Basic256Sha256",
+    new PlcCertificateAuthentication(keyStore, "changeit".toCharArray()));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The driver takes the first key store entry holding a private key. When the store holds more than
+one identity, name the one to use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">new PlcCertificateAuthentication(keyStore, "changeit".toCharArray(), "operator");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The certificate has to use an RSA key, and the server has to trust it - servers usually keep a
+separate trust list for user certificates, distinct from the one for application instance
+certificates.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This is not the same certificate as the one configured through <code>tls.keystore</code>. That one is
+the application instance certificate: it secures the channel and says which installation is
+talking, whereas the user certificate says who is talking. Nothing stops you from using the same
+certificate for both, provided the server trusts it for both purposes.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The driver proves possession of the private key by signing the server certificate and server
+nonce, using the security policy the server declares for its certificate user token policy. A
+server that offers certificate authentication with a security policy of <code>None</code> leaves no algorithm
+to sign with; the driver refuses such an endpoint rather than sending an unverifiable token.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_negotiation_procedure"><a class="anchor" href="#_negotiation_procedure"></a>Negotiation procedure</h4>
+<div class="paragraph">
+<p>Depending on the settings, the driver might or might not attempt to discover endpoints from the
+remote server. When the <code>discovery</code> option is set to <code>true</code>, the driver looks up the server
+certificate through a connection attempt. The discovery option also enables checks of server
+endpoints for matching security settings.</p>
+</div>
+<div class="paragraph">
+<p>Once initial discovery is completed and the driver finds an endpoint matching its security
+settings, it launches a second connection attempt which switches to the configured security mode.</p>
+</div>
+<div class="paragraph">
+<p>Each connection attempt made by the driver uses the limits described in the connection string
+options above; these declare the values accepted and expected by the client. Once the server
+returns its own limits (<code>Acknowledge</code> for the supplied <code>Hello</code> call), the driver picks values from
+these - taking the minimum of the local receive and remote send buffer sizes, and likewise the
+minimum of the local send and remote receive buffer sizes.</p>
+</div>
+<div class="paragraph">
+<p>Usual values for <code>encoding.send-buffer-size</code> and <code>encoding.receive-buffer-size</code> on PLC devices
+remain at 8196 bytes.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Due to a lack of complete implementation of negotiation and chunking logic, the OPC UA
+driver prior to the Apache PLC4X 0.11 release could supply calls exceeding server limits.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_opc_ua_data_change_notification"><a class="anchor" href="#_opc_ua_data_change_notification"></a>OPC UA Data Change Notification</h4>
+<div class="paragraph">
+<p>Data change notifications are created with a list of tags, after which the client needs to send
+publish requests. Upon each publish request, the server sends a response which includes the values
+of all tags for which a subscription was created. While the OPC-UA specification permits mutation
+of subscription contents, the PLC4X API does not allow that.</p>
+</div>
+<div class="paragraph">
+<p>By default, <code>Cyclic</code> and <code>Change of State</code> subscription operations defined in the PLC4X client API
+result in data change notifications.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_opc_ua_event_notification"><a class="anchor" href="#_opc_ua_event_notification"></a>OPC UA Event Notification</h4>
+<div class="paragraph">
+<p>The third mode of subscription defined by the PLC4X API is <code>Event Subscription</code>. This kind of
+subscription is available since PLC4X 0.13 and has a slightly different syntax, which brings more
+complex data. OPC-UA events can be used to receive notifications of various kinds, which appear
+when a specific situation happens. In other protocols this kind of behavior can function as alarms
+or alerts.</p>
+</div>
+<div class="paragraph">
+<p>In order to create an OPC-UA event subscription you need to:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1516,9 +1574,9 @@ In other protocols this kind of behavior can function as alarms or alerts.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>The tag config key must match OPC-UA event field.
-The tag config value is not used, thus it can not be used to specify filter criteria for field value.
-Fields which are supported are defined in OPC UA <code>BaseEventType</code>:</p>
+<p>The tag config key must match an OPC-UA event field. The tag config value is not used, so it
+cannot be used to specify filter criteria for a field value. The fields that are supported are
+defined in the OPC UA <code>BaseEventType</code>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1555,18 +1613,18 @@ Fields which are supported are defined in OPC UA <code>BaseEventType</code>:</p>
 <p>Example syntax: <code>ns=0;i=2253;a=EventNotifier;BOOL|EventId=x,EventType=x,Severity=x,Time=x,Message=x</code>.</p>
 </div>
 <div class="paragraph">
-<p>Subscription event generated by client upon receiving notification will contain an object (<code>PlcSTRUCT</code>/<code>Map</code>) which will contain all requested fields.
-Please note that Apache PLC4X does only basic normalization of data, thus your application need to take care of actual processing of event data.</p>
+<p>A subscription event generated by the client upon receiving a notification contains an object
+(<code>PlcSTRUCT</code>/<code>Map</code>) holding all requested fields. Note that Apache PLC4X only does basic
+normalization of the data, so your application needs to take care of the actual processing of
+event data.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_tag_metadata"><a class="anchor" href="#_tag_metadata"></a>Tag metadata</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_tag_metadata"><a class="anchor" href="#_tag_metadata"></a>Tag metadata</h3>
 <div class="paragraph">
-<p>This driver supports tag metadata.
-Beyond standard metadata fields such <code>timestamp</code> and <code>timestamp_source</code> it can provide following keys:</p>
+<p>This driver supports tag metadata. Beyond standard metadata fields such as <code>timestamp</code> and
+<code>timestamp_source</code>, it can provide the following keys:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1582,18 +1640,18 @@ Beyond standard metadata fields such <code>timestamp</code> and <code>timestamp_
 </ul>
 </div>
 <div class="paragraph">
-<p>Appearance of these fields is conditional, they are provided only when it can be sourced from packets exchanged between client and server.
-This means that depending on operation conducted by client (read/write/subscribe) metadata will vary.</p>
+<p>The appearance of these fields is conditional; they are provided only when they can be sourced
+from packets exchanged between client and server. This means that, depending on the operation
+conducted by the client (read/write/subscribe), the metadata will vary.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_compatibility_with_opc_ua_servers"><a class="anchor" href="#_compatibility_with_opc_ua_servers"></a>Compatibility with OPC-UA Servers</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_compatibility_with_opc_ua_servers"><a class="anchor" href="#_compatibility_with_opc_ua_servers"></a>Compatibility with OPC-UA Servers</h3>
 <div class="paragraph">
-<p>There are multiple OPC-UA server implementations.
-Each of it have its own specifics, sometimes showing up more detailed security handling or further edge case buried in specification.
-So far Apache PLC4X OPC-UA client have been confirmed to be working with below servers (order in chronology of passed tests/confirmed compatibility):</p>
+<p>There are multiple OPC-UA server implementations, each with its own specifics, sometimes showing
+more detailed security handling or other edge cases buried in the specification. So far the
+Apache PLC4X OPC-UA client has been confirmed to work with the servers below (in chronological
+order of passed tests/confirmed compatibility):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1630,7 +1688,7 @@ So far Apache PLC4X OPC-UA client have been confirmed to be working with below s
 </div>
 </li>
 <li>
-<p>versions prior 0.12</p>
+<p>versions prior to 0.12</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1643,13 +1701,10 @@ So far Apache PLC4X OPC-UA client have been confirmed to be working with below s
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_more_details_on_opc_ua"><a class="anchor" href="#_more_details_on_opc_ua"></a>More details on OPC UA</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><a href="https://opcfoundation.org/about/opc-technologies/opc-ua/">OPC UA</a>
-The OPC Unified Architecture (UA), released in 2008, is a platform independent service-oriented architecture that integrates all the functionality of the individual OPC Classic specifications into one extensible framework.</p>
 </div>
+<div class="sect1">
+<h2 id="_more_information"><a class="anchor" href="#_more_information"></a>More Information</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>This multi-layered approach accomplishes the original design specification goals of:</p>
 </div>
@@ -1671,6 +1726,10 @@ The OPC Unified Architecture (UA), released in 2008, is a platform independent s
 <p>Comprehensive information modeling: for defining complex information</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="https://opcfoundation.org/about/opc-technologies/opc-ua/">OPC UA</a> page at the OPC
+Foundation for more details.</p>
 </div>
 </div>
 </div>

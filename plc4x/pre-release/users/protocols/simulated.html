@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -470,25 +473,94 @@
 </aside>
 <article class="doc">
 <h1 class="page">Simulated</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The simulated driver holds its state in the client process and speaks to no real device.
+It exists so PLC4X functionality can be exercised and demonstrated without a PLC to
+connect to, and it is the driver most people reach for first when learning PLC4X.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Supports all standard IEC 61131 data types outlined below.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Supports all standard IEC 61131 data types outlined below.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java only, and a real implementation rather than polling-emulated: it supports
+CYCLIC, CHANGE_OF_STATE and EVENT subscriptions directly. The Go driver&#8217;s subscriber
+is a stub and does not subscribe.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The simulated driver runs entirely in-process and never opens a transport. The connection
+string names an in-memory device rather than an address:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>simulated:{device-name}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example connection string would look like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>simulated:foobar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each call creates a fresh in-memory device; values written through one connection do not
+survive its close, and devices are not shared between connections.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Array selection uses the shared notation - a single index, an inclusive range, and
-optionally the array&#8217;s declared lower bound, placed before the type. See
-<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 16.6666%;">
@@ -546,69 +618,14 @@ optionally the array&#8217;s declared lower bound, placed before the type. See
 </tr>
 </tbody>
 </table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>read</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Supports all standard IEC 61131 data types outlined below.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>write</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Supports all standard IEC 61131 data types outlined below.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h3>
 <div class="paragraph">
-<p>The simulated driver has the following connection string format:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>simulated:{transport}://{ip-address}:{port}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>An example connection string would look like:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>simulated://127.0.0.1</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note the transport and port fields are optional.</p>
-</div>
+<p>Addressing is implemented in C, Go and Java. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
 </div>
 <div class="sect2">
 <h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
@@ -623,6 +640,22 @@ optionally the array&#8217;s declared lower bound, placed before the type. See
 <div class="paragraph">
 <p>If the array-size part is omitted, the default size of <code>1</code> is assumed.
 If the data-type part is omitted, it defaults to STRING.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Array selection uses the shared notation - a single index, an inclusive range, and
+optionally the array&#8217;s declared lower bound, placed before the type. See
+<a href="../array-notation.html" class="xref page">Addressing arrays</a>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -718,13 +751,6 @@ For readability and language specific technical purposes they should be less tha
 </div>
 </div>
 <div class="sect2">
-<h3 id="_some_useful_tips"><a class="anchor" href="#_some_useful_tips"></a>Some useful tips</h3>
-<div class="paragraph">
-<p>The simulation driver uses a lot of the same logic templates that is used for the other drivers. It is a good way to test PLC4X
-functionality without having a device to connect to.</p>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
 <div class="paragraph">
 <p>All of these address formats are valid:-</p>
@@ -738,19 +764,31 @@ functionality without having a device to connect to.</p>
 <p>RANDOM/foo:UDINT</p>
 </li>
 <li>
-<p>RANDOM/device1.machineA.sensor1:UINT</p>
+<p>RANDOM/foo[0..7]:INT</p>
 </li>
 <li>
-<p>RANDOM/device1.machineA.sensor1:STRING</p>
+<p>RANDOM/test[0..1]:DINT</p>
 </li>
 <li>
-<p>STATE/device1.machineA.sensor1:INT</p>
+<p>STATE/bar:DINT</p>
 </li>
 <li>
-<p>STDOUT/device1.machineA.sensor1:INT</p>
+<p>STATE/foo:String</p>
+</li>
+<li>
+<p>STDOUT/foo:BOOL</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes_and_tips"><a class="anchor" href="#_notes_and_tips"></a>Notes and Tips</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The simulation driver uses a lot of the same logic templates that is used for the other drivers. It is a good way to test PLC4X
+functionality without having a device to connect to.</p>
 </div>
 </div>
 </div>

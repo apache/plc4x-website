@@ -150,6 +150,9 @@
     <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="index.html">Protocols</a>
 <ul class="nav-list">
@@ -196,7 +199,7 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
@@ -470,6 +473,102 @@
 </aside>
 <article class="doc">
 <h1 class="page">Modbus (TCP/UDP/Serial)</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Modbus is a request/response protocol originally published by Modicon in 1979 and now a de
+facto standard for industrial devices of every kind, from PLCs to sensors and energy meters.
+PLC4X speaks it in three variants: Modbus TCP (<code>modbus-tcp</code>), Modbus RTU (<code>modbus-rtu</code>) and
+Modbus ASCII (<code>modbus-ascii</code>) - RTU and ASCII being the two wire formats of "Modbus Serial",
+which despite the name can also be run over TCP or UDP.</p>
+</div>
+<div class="paragraph">
+<p>Modbus is the most widely used driver in PLC4X, with implementations in C, Go, Java and Python.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>read</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
+<p><code>write</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>subscribe</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java only, polling-emulated. Modbus has no push mechanism, so a subscription is a
+periodic read underneath, not a device-initiated notification. The Go driver does not
+subscribe.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each Modbus variant has its own connection string, sharing the same layout:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{modbus-tcp|modbus-rtu|modbus-ascii}:{transport}://{ip-address-or-device}:{port}?{options}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The transport, port and option fields are optional.</p>
+</div>
+<div class="paragraph">
+<p>Modbus TCP defaults to the <code>tcp</code> transport:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>modbus-tcp:tcp://127.0.0.1:502</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Modbus RTU and Modbus ASCII default to the <code>serial</code> transport, addressing a serial device
+instead of a host and port:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>modbus-rtu:serial:///dev/ttyUSB0</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All three variants can also be run over <code>tcp</code> or <code>udp</code> - useful for talking to a serial-to-IP
+gateway or a simulator - by naming that transport explicitly, for example
+<code>modbus-rtu:tcp://127.0.0.1:5020</code>.</p>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
 <div class="sectionbody">
@@ -3061,65 +3160,11 @@ Allowed values are: <br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<h2 id="_tag_addresses"><a class="anchor" href="#_tag_addresses"></a>Tag Addresses</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock">Supported Operations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>read</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>write</code></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_individual_resource_address_format"><a class="anchor" href="#_individual_resource_address_format"></a>Individual Resource Address Format</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h3>
 <div class="paragraph">
-<p>Modbus has the following connection string format:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>modbus-tcp:{transport}://{ip-address}:{port}?{options}</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>An example connection string would look like:-</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>modbus-tcp:tcp://127.0.0.1:502</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note the transport, port and option fields are optional.</p>
-</div>
+<p>Addressing is implemented in C, Go, Java and Python. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation does.</p>
 </div>
 <div class="sect2">
 <h3 id="_general_format"><a class="anchor" href="#_general_format"></a>General Format</h3>
@@ -3160,6 +3205,22 @@ If the name-value-tag-options part is omitted, simply no configuration fine-tuni
 </div>
 <div class="paragraph">
 <p>With this, can the default byte-order be overridden on a per-tag basis. If not provided the <code>default-payload-byte-order</code> from the connection string is used, or BIG_ENDIAN, if this is also not provided.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Java caps the plc4x-style address (<code>coil:</code>, <code>discrete-input:</code>, <code>input-register:</code>,
+<code>holding-register:</code>, <code>extended-register:</code>) at 9 digits; Go&#8217;s pattern is unbounded, so for
+example <code>coil:1234567890</code> is accepted by Go and rejected by Java. This page documents the
+Java syntax - see the modbus entry in the Java/Go address divergence report for this
+restructure.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -3445,52 +3506,6 @@ returns the response code <code>UNSUPPORTED</code>.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_some_useful_tips"><a class="anchor" href="#_some_useful_tips"></a>Some useful tips</h3>
-<div class="paragraph">
-<p>Most memory areas start at address 1, except for the extended register area which starts at 0. These are both mapped to 0x0000 when it is sent in the Modbus protocol.</p>
-</div>
-<div class="paragraph">
-<p>The input, holding and extended registers consist of 16-bit registers while the discrete input and coil areas consist of bits.</p>
-</div>
-<div class="paragraph">
-<p>The following Modbus function codes are supported:-</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>0x01 (Read Coils)</p>
-</li>
-<li>
-<p>0x02 (Read Discrete Inputs)</p>
-</li>
-<li>
-<p>0x03 (Read Holding Registers)</p>
-</li>
-<li>
-<p>0x04 (Read Input Registers)</p>
-</li>
-<li>
-<p>0x05 (Write Single Coil)</p>
-</li>
-<li>
-<p>0x06 (Write Single Register)</p>
-</li>
-<li>
-<p>0x0F (Write Multiple Coils)</p>
-</li>
-<li>
-<p>0x10 (Write Multiple Registers)</p>
-</li>
-<li>
-<p>0x14 (Read File Record)(Extended Register Read)</p>
-</li>
-<li>
-<p>0x15 (Write File Record)(Extended Register Write)</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h3>
 <div class="paragraph">
 <p>To read 10 holding registers starting at address 20 and parse as Unsigned Integers the following examples are all valid.</p>
@@ -3498,19 +3513,19 @@ returns the response code <code>UNSUPPORTED</code>.
 <div class="ulist">
 <ul>
 <li>
-<p>holding-register:20:UINT[10]</p>
+<p>holding-register:20[0..9]:UINT</p>
 </li>
 <li>
-<p>400020:UINT[10]</p>
+<p>400020[0..9]:UINT</p>
 </li>
 <li>
-<p>4x00020:UINT[10]</p>
+<p>4x00020[0..9]:UINT</p>
 </li>
 <li>
-<p>40020:UINT[10]</p>
+<p>40020[0..9]:UINT</p>
 </li>
 <li>
-<p>4x0020:UINT[10]</p>
+<p>4x0020[0..9]:UINT</p>
 </li>
 </ul>
 </div>
@@ -3564,19 +3579,19 @@ returns the response code <code>UNSUPPORTED</code>.
 <div class="ulist">
 <ul>
 <li>
-<p>extended-register:50[10]</p>
+<p>extended-register:50[0..9]</p>
 </li>
 <li>
-<p>600050[10]</p>
+<p>600050[0..9]</p>
 </li>
 <li>
-<p>6x00050[10]</p>
+<p>6x00050[0..9]</p>
 </li>
 <li>
-<p>60050[10]</p>
+<p>60050[0..9]</p>
 </li>
 <li>
-<p>6x0050[10]</p>
+<p>6x0050[0..9]</p>
 </li>
 </ul>
 </div>
@@ -3589,19 +3604,19 @@ returns the response code <code>UNSUPPORTED</code>.
 <div class="ulist">
 <ul>
 <li>
-<p>extended-register:9995[10]</p>
+<p>extended-register:9995[0..9]</p>
 </li>
 <li>
-<p>609995[10]</p>
+<p>609995[0..9]</p>
 </li>
 <li>
-<p>6x09995[10]</p>
+<p>6x09995[0..9]</p>
 </li>
 <li>
-<p>69995[10]</p>
+<p>69995[0..9]</p>
 </li>
 <li>
-<p>6x9995[10]</p>
+<p>6x9995[0..9]</p>
 </li>
 </ul>
 </div>
@@ -3609,6 +3624,54 @@ returns the response code <code>UNSUPPORTED</code>.
 <p>This corresponds to addresses 9995-9999 in file record 1 and addresses 0-5 in file record 2.
 Note that this request is split into 2 sub requests in the Modbus protocol.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes_and_tips"><a class="anchor" href="#_notes_and_tips"></a>Notes and Tips</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most memory areas start at address 1, except for the extended register area which starts at 0. These are both mapped to 0x0000 when it is sent in the Modbus protocol.</p>
+</div>
+<div class="paragraph">
+<p>The input, holding and extended registers consist of 16-bit registers while the discrete input and coil areas consist of bits.</p>
+</div>
+<div class="paragraph">
+<p>The following Modbus function codes are supported:-</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>0x01 (Read Coils)</p>
+</li>
+<li>
+<p>0x02 (Read Discrete Inputs)</p>
+</li>
+<li>
+<p>0x03 (Read Holding Registers)</p>
+</li>
+<li>
+<p>0x04 (Read Input Registers)</p>
+</li>
+<li>
+<p>0x05 (Write Single Coil)</p>
+</li>
+<li>
+<p>0x06 (Write Single Register)</p>
+</li>
+<li>
+<p>0x0F (Write Multiple Coils)</p>
+</li>
+<li>
+<p>0x10 (Write Multiple Registers)</p>
+</li>
+<li>
+<p>0x14 (Read File Record)(Extended Register Read)</p>
+</li>
+<li>
+<p>0x15 (Write File Record)(Extended Register Write)</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
