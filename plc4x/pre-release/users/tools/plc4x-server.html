@@ -486,7 +486,47 @@
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/graphviz/svg/eNqFUMFOwzAMvfMVVk5DlGodkxBC4bILhx4Q44C0IZQ2po3IkspJpw7Ev-OlTJp6IQdHtp_f87M2Damuhc7Wy-E9IO2R4PsC-JFyn9qQLJ_vU141tbeepIjcCZ0idFGMLec1wia0qkNZ-SGDEA8WJfneadQZfHgXndqhFI9o9xhNrcRYDeYLZVFksFPUGCfFPF8ssnle3Ii3kRt1w9z_MNwxOKFra3gt2FhVoZVildKtmyV_oMmwv8sT9Z_dE_ipXC1fYZ2KJwjPHb8ziJhIXT9MeUatjvxwOMbo-W5b91Ku4QpUH9uJPBNMVJyKvOfZ7Czc8oW8rvqQQZ7nycHPL3k0jQ8=" alt="plc4x-server-architecture">
+<svg width="515pt" height="54pt"
+ viewBox="0.00 0.00 515.00 54.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 49.72)">
+<title>plc4x_server</title>
+<!-- client -->
+<g id="node1" class="node">
+<title>client</title>
+<path fill="none" stroke="black" d="M93.93,-45.72C93.93,-45.72 12,-45.72 12,-45.72 6,-45.72 0,-39.72 0,-33.72 0,-33.72 0,-12 0,-12 0,-6 6,0 12,0 12,0 93.93,0 93.93,0 99.93,0 105.93,-6 105.93,-12 105.93,-12 105.93,-33.72 105.93,-33.72 105.93,-39.72 99.93,-45.72 93.93,-45.72"/>
+<text xml:space="preserve" text-anchor="middle" x="52.97" y="-25.91" font-family="Helvetica,sans-Serif" font-size="11.00">Client</text>
+<text xml:space="preserve" text-anchor="middle" x="52.97" y="-12.41" font-family="Helvetica,sans-Serif" font-size="11.00">(plc4x driver)</text>
+</g>
+<!-- server -->
+<g id="node2" class="node">
+<title>server</title>
+<path fill="none" stroke="black" d="M328.86,-40.86C328.86,-40.86 246.93,-40.86 246.93,-40.86 240.93,-40.86 234.93,-34.86 234.93,-28.86 234.93,-28.86 234.93,-16.86 234.93,-16.86 234.93,-10.86 240.93,-4.86 246.93,-4.86 246.93,-4.86 328.86,-4.86 328.86,-4.86 334.86,-4.86 340.86,-10.86 340.86,-16.86 340.86,-16.86 340.86,-28.86 340.86,-28.86 340.86,-34.86 334.86,-40.86 328.86,-40.86"/>
+<text xml:space="preserve" text-anchor="middle" x="287.89" y="-19.16" font-family="Helvetica,sans-Serif" font-size="11.00">PLC4X Server</text>
+</g>
+<!-- client&#45;&gt;server -->
+<g id="edge1" class="edge">
+<title>client&#45;&gt;server</title>
+<path fill="none" stroke="black" d="M106.24,-22.86C141,-22.86 186.87,-22.86 223.68,-22.86"/>
+<polygon fill="black" stroke="black" points="223.28,-26.36 233.28,-22.86 223.28,-19.36 223.28,-26.36"/>
+<text xml:space="preserve" text-anchor="middle" x="170.43" y="-36.81" font-family="Helvetica,sans-Serif" font-size="9.00">plc4x proxy protocol</text>
+<text xml:space="preserve" text-anchor="middle" x="170.43" y="-25.56" font-family="Helvetica,sans-Serif" font-size="9.00">TLS + auth</text>
+</g>
+<!-- plc -->
+<g id="node3" class="node">
+<title>plc</title>
+<path fill="none" stroke="black" d="M494.61,-40.86C494.61,-40.86 464.61,-40.86 464.61,-40.86 458.61,-40.86 452.61,-34.86 452.61,-28.86 452.61,-28.86 452.61,-16.86 452.61,-16.86 452.61,-10.86 458.61,-4.86 464.61,-4.86 464.61,-4.86 494.61,-4.86 494.61,-4.86 500.61,-4.86 506.61,-10.86 506.61,-16.86 506.61,-16.86 506.61,-28.86 506.61,-28.86 506.61,-34.86 500.61,-40.86 494.61,-40.86"/>
+<text xml:space="preserve" text-anchor="middle" x="479.61" y="-19.16" font-family="Helvetica,sans-Serif" font-size="11.00">PLC</text>
+</g>
+<!-- server&#45;&gt;plc -->
+<g id="edge2" class="edge">
+<title>server&#45;&gt;plc</title>
+<path fill="none" stroke="black" d="M341.24,-22.86C372.81,-22.86 412.31,-22.86 440.84,-22.86"/>
+<polygon fill="black" stroke="black" points="440.82,-26.36 450.82,-22.86 440.82,-19.36 440.82,-26.36"/>
+<text xml:space="preserve" text-anchor="middle" x="396.74" y="-36.81" font-family="Helvetica,sans-Serif" font-size="9.00">native protocol</text>
+<text xml:space="preserve" text-anchor="middle" x="396.74" y="-25.56" font-family="Helvetica,sans-Serif" font-size="9.00">(s7, modbus, ...)</text>
+</g>
+</g>
+</svg>
 </div>
 </div>
 <div class="paragraph">
