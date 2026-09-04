@@ -955,6 +955,104 @@ public class DriverCatalog {
 </div>
 </div>
 <div class="sect1">
+<h2 id="_what_can_a_connection_actually_do"><a class="anchor" href="#_what_can_a_connection_actually_do"></a>What can a connection actually do?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Everything above describes a <strong>driver</strong> and needs no device, which is what makes it useful while a
+user is still filling in a connection dialog. Which operations you may actually <strong>call</strong> is a
+different question, and it can only be answered once you are connected:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.plc4x.java.api.PlcConnection;
+import org.apache.plc4x.java.api.metadata.PlcConnectionMetadata;
+
+try (PlcConnection connection =
+         driverManager.getConnectionFactory().getConnection("s7://10.0.0.1")) {
+
+    PlcConnectionMetadata metadata = connection.getMetadata();
+
+    boolean canRead      = metadata.isReadSupported();       <i class="conum" data-value="1"></i><b>(1)</b>
+    boolean canWrite     = metadata.isWriteSupported();
+    boolean canSubscribe = metadata.isSubscribeSupported();
+    boolean canBrowse    = metadata.isBrowseSupported();
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Four booleans, one per operation. Gate your buttons, menu entries and pipeline steps on them.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>getConnection(&#8230;&#8203;)</code> connects before it returns, so by the time you hold a <code>PlcConnection</code> the
+answer is available. There is no earlier moment to ask: <code>PlcConnectionMetadata</code> hangs off the
+connection, not off the driver, and a connection that never connected cannot tell you what the
+device at the other end offers.</p>
+</div>
+<div class="paragraph">
+<p>That split is the whole point, because "unsupported" has two quite different causes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>The driver does not implement the operation.</strong> This is a property of the driver, and the
+default answer is derived from it - <code>ConnectionBase</code> reports an operation as supported exactly
+if the connection class implements the corresponding hook. <code>ctrlx</code>, for instance, reports all
+four as <code>false</code>, because its read, write and subscribe builders are not implemented and its
+browse implementation does not work yet.</p>
+</li>
+<li>
+<p><strong>The device does not offer it.</strong> Only the driver can know this, and only after talking to the
+device. <code>s7</code> is the example: reading and writing are always supported, while browsing and
+subscribing ride S7Comm UserData services, so the driver probes for them during connect and
+reports <code>false</code> for a device - a LOGO, typically - that does not answer. The same driver and
+the same connection string therefore give different answers for different controllers, which is
+precisely why this cannot be a static property of the driver.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Check the metadata before building a request, not after. A driver that does not support
+an operation is not obliged to fail politely - <code>ctrlx</code> returns <code>null</code> from its request builders,
+so an unchecked call gets you a <code>NullPointerException</code> rather than a helpful exception.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you hand out connections through the <a href="tools/connection-cache.html" class="xref page">connection cache</a>, the
+leased connection delegates <code>getMetadata()</code> to the connection it borrowed, so you get the same
+answers. Ask while you hold the lease: once it is returned, every method on it - this one
+included - throws a <code>PlcRuntimeException</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+PLC4Go has the same concept under different names: <code>connection.GetMetadata()</code> returns a
+<code>PlcConnectionMetadata</code> whose methods are called <code>CanRead()</code>, <code>CanWrite()</code>, <code>CanSubscribe()</code> and
+<code>CanBrowse()</code>, plus a <code>GetConnectionAttributes()</code> map. It is the one piece of metadata that is
+<strong>not</strong> Java-only - what PLC4Go has no equivalent for is everything else on this page.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_things_to_watch_out_for"><a class="anchor" href="#_things_to_watch_out_for"></a>Things to watch out for</h2>
 <div class="sectionbody">
 <div class="ulist">
@@ -975,6 +1073,11 @@ return <code>null</code>, but none of them promise content either.</p>
 </li>
 <li>
 <p>Treat <code>isSecret()</code> options as credentials everywhere: masked in the UI, redacted in logs.</p>
+</li>
+<li>
+<p>Driver metadata and connection metadata are different things: <code>PlcDriverMetadata</code> describes what
+a driver can be configured with and needs no device, <code>PlcConnectionMetadata</code> describes what an
+established connection supports and exists only after a successful connect.</p>
 </li>
 </ul>
 </div>

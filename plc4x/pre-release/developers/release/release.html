@@ -481,6 +481,16 @@
 The only prerequisite for this is generally having <code>Docker</code> installed as we&#8217;re using a <code>reference machine</code> to ensure reproducible builds.</p>
 </div>
 <div class="paragraph">
+<p>Before anything else, check that your machine is actually able to do a release:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>release-preflight.sh</code>: Verifies the things a release needs - the tools, your git identity, a signing key that is usable and published in the <code>KEYS</code> file, the Nexus and SVN credentials and enough disk space. It changes nothing, takes a minute, and saves finding out about an expired password an hour into the release.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p>In regular intervals and especially before starting the release process run:</p>
 </div>
 <div class="ulist">
@@ -610,16 +620,15 @@ However, in contrast to that documentation, upload your key to the following ser
 </div>
 </div>
 <div class="paragraph">
-<p>Currently, there is a Java-Version sweet-spot for being able to release all modules and that is Java 11.</p>
+<p>The Java version the release is built with is not yours to pick: every Maven build the release scripts run happens inside the container described by <code>tools/docker-compose.yaml</code>, and its image (<code>azul/zulu-openjdk:21</code>) pins it to <code>Java 21</code>.
+That is the whole point of the reference machine - the artifacts must not depend on what you happen to have installed.</p>
 </div>
 <div class="paragraph">
-<p>So be sure to set <code>Java 11</code> as the java version used to do the release.</p>
+<p>On the host you still need a <code>Java 21</code> JDK, because the prerequisite check of the build requires at least that version, and the scripts run Maven on the host for the steps that do not belong in the container.</p>
 </div>
 <div class="paragraph">
-<p>Also, at least <code>Maven 3.6</code> is required for CMake.</p>
-</div>
-<div class="paragraph">
-<p>Ideally use the Maven-Wrapper to ensure the Maven version fits the build.</p>
+<p>The minimum Maven version is <code>4.0.0-rc-5</code>, which the root <code>pom.xml</code> enforces.
+Ideally use the Maven-Wrapper, which pins exactly that version, so the question does not come up.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -665,6 +674,11 @@ They are meant to be run in order, and each one prints which script to run next 
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>release-preflight.sh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checks the preconditions of a release without changing anything. Run it first.
+See <a href="#checking-your-system-is-ready">Checking your system is ready</a>.</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>release-0-update-generated-code.sh</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Throws away and re-generates all generated code, refreshes the driver documentation and the <code>NOTICE</code> year.</p></td>
@@ -728,6 +742,85 @@ Start each step from a clean checkout.
 <div class="paragraph">
 <p>Note that the signing in <code>release-2-prepare-release.sh</code> and all <code>git</code> and <code>svn</code> operations run on your machine, not inside the container.
 So GPG, your git credentials and your Apache SVN credentials all have to work on the host.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="checking-your-system-is-ready"><a class="anchor" href="#checking-your-system-is-ready"></a>Checking your system is ready</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Almost everything that has gone wrong with a release so far was a precondition that could have been checked in seconds: a Nexus password that had expired, a signing key that is not in the <code>KEYS</code> file, a <code>gpg</code> agent that cannot sign without asking for a passphrase.
+A release runs for the better part of an hour, so those are expensive minutes to lose.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./tools/release-preflight.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The script only reads: it creates no commit, no tag, no staging repository and no SVN directory, so it is safe to run at any time - while setting your system up for the first time, or right before starting a release.
+None of the other scripts call it, so running it is up to you.</p>
+</div>
+<div class="paragraph">
+<p>It checks:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Area</th>
+<th class="tableblock halign-left valign-top">What it checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tools</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>git</code>, <code>docker</code>, <code>gpg</code>, <code>svn</code>, <code>curl</code>, <code>java</code> and <code>shasum</code> are installed, and the Docker daemon is actually running.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Git</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.name</code> and <code>user.email</code> are configured, the working tree is clean, and <code>origin</code> accepts your credentials for pushing (a <code>git push --dry-run</code>, which authenticates without changing anything).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A secret key is available (<code>user.signingkey</code>, or the first one <code>gpg</code> lists), it carries an <code>@apache.org</code> address, it can sign a throwaway file without asking for input, and its fingerprint is present in the published <code>KEYS</code> file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nexus</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>apache.releases.https</code> credentials from your <code>settings.xml</code> are accepted, by making the read-only <code>nexus-staging:rc-list</code> call the staging deployment would make.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>dist/dev</code> directory the release candidate gets imported into is readable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resources</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">At least <code>20 GB</code> are free on the volume holding the checkout.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Checks do not stop at the first problem - the point is to see everything that needs fixing in one go, so the script always runs to the end and prints a summary.
+Findings come in two flavours: a <code>⚠️</code> warning is something to be aware of, a <code>❌</code> failure is something that will stop the release, and only the latter makes the script exit non-zero.</p>
+</div>
+<div class="paragraph">
+<p>Pass <code>--offline</code> to skip everything that needs the network (the push, <code>KEYS</code>, Nexus and SVN checks).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A green run means the preconditions hold, not that the release will succeed.
+Read access to SVN does not prove you may commit, and an accepted <code>git push --dry-run</code> does not prove the branch protection rules in <code>.asf.yaml</code> will let the real push through.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1088,11 +1181,11 @@ A key may have several user ids and only one of them has to be the Apache one.
 <p>Imports the release-candidate directory into the Apache dev SVN with <code>svn import</code>, which gives the layout the vote mail refers to:</p>
 <div class="listingblock">
 <div class="content">
-<pre>   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/README
-   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/RELEASE_NOTES
-   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip
-   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip.asc
-   https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1/apache-plc4x-1.0.0-source-release.zip.sha512</pre>
+<pre>   https://dist.apache.org/repos/dist/dev/plc4x/1.1.0/rc1/README
+   https://dist.apache.org/repos/dist/dev/plc4x/1.1.0/rc1/RELEASE_NOTES
+   https://dist.apache.org/repos/dist/dev/plc4x/1.1.0/rc1/apache-plc4x-1.1.0-source-release.zip
+   https://dist.apache.org/repos/dist/dev/plc4x/1.1.0/rc1/apache-plc4x-1.1.0-source-release.zip.asc
+   https://dist.apache.org/repos/dist/dev/plc4x/1.1.0/rc1/apache-plc4x-1.1.0-source-release.zip.sha512</pre>
 </div>
 </div>
 </li>
@@ -1113,7 +1206,7 @@ Select the release branch and verify the commit log looks like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The commit with the message <code>[maven-release-plugin] prepare release v1.0.0</code> has to carry the release tag, and it should consist of nothing but version updates.
+<p>The commit with the message <code>[maven-release-plugin] prepare release v1.1.0</code> has to carry the release tag, and it should consist of nothing but version updates.
 It is followed by a <code>[maven-release-plugin] prepare for next development iteration</code> commit that moves the branch on to the next bugfix version.</p>
 </div>
 <div class="admonitionblock note">
@@ -1240,8 +1333,8 @@ section covers removing them.
 <p>Delete the tag locally and remotely:</p>
 <div class="listingblock">
 <div class="content">
-<pre>   git tag -d v1.0.0
-   git push --delete origin v1.0.0</pre>
+<pre>   git tag -d v1.1.0
+   git push --delete origin v1.1.0</pre>
 </div>
 </div>
 </li>
@@ -1255,7 +1348,7 @@ section covers removing them.
 <p>Remove the previous RC from SVN:</p>
 <div class="listingblock">
 <div class="content">
-<pre>   svn rm https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/rc1 -m"Removed rc1 of PLC4X 1.0.0"</pre>
+<pre>   svn rm https://dist.apache.org/repos/dist/dev/plc4x/1.1.0/rc1 -m"Removed rc1 of PLC4X 1.1.0"</pre>
 </div>
 </div>
 </li>
@@ -1370,7 +1463,7 @@ The script offers to clear all three away, asking before it deletes anything:</p
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>It lists what is left under <code><a href="https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/" class="bare">https://dist.apache.org/repos/dist/dev/plc4x/1.0.0/</a></code> and offers to remove that whole directory.</p>
+<p>It lists what is left under <code><a href="https://dist.apache.org/repos/dist/dev/plc4x/1.1.0/" class="bare">https://dist.apache.org/repos/dist/dev/plc4x/1.1.0/</a></code> and offers to remove that whole directory.</p>
 </li>
 <li>
 <p>It lists the older releases still under <code><a href="https://dist.apache.org/repos/dist/release/plc4x/" class="bare">https://dist.apache.org/repos/dist/release/plc4x/</a></code> and offers to remove them.
@@ -1434,7 +1527,7 @@ same either way.
 <div class="listingblock">
 <div class="content">
 <pre>git checkout release
-git merge -X theirs v1.0.0</pre>
+git merge -X theirs v1.1.0</pre>
 </div>
 </div>
 <div class="paragraph">
