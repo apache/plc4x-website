@@ -144,6 +144,33 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -151,6 +178,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -225,14 +255,29 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="udp.html">UDP</a>
   </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="raw-socket.html">Raw Socket</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="pcap-replay.html">PCAP Replay</a>
@@ -264,9 +309,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -283,7 +325,16 @@
     <a class="nav-link" href="../tools/event-pump.html">Event-Pump</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/plc4x-browser.html">PLC4X Browser</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/plc4x-server.html">PLC4X Server</a>
@@ -473,73 +524,247 @@
 </aside>
 <article class="doc">
 <h1 class="page">Serial Port</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Communication over a serial port (RS-232, RS-485, or a USB adapter presenting itself as one).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transport_syntax"><a class="anchor" href="#_transport_syntax"></a>Transport syntax</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre>{name of the serial port}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The name depends on the operating system:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Windows: <code>COM1</code></p>
+</li>
+<li>
+<p>Linux: <code>/dev/ttyS0</code>, <code>/dev/ttyUSB0</code></p>
+</li>
+<li>
+<p>macOS: <code>/dev/tty.usbserial-XXXX</code></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">modbus-rtu://COM1?serial.baud-rate=19200
+modbus-rtu:serial:///dev/ttyUSB0?serial.baud-rate=9600&amp;serial.parity=even</code></pre>
+</div>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 22.2222%;">
-<col style="width: 55.5556%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 33.3336%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Value</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><code>serial</code></p>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Default Value</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Required</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Description</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p>UDP Socket Communication</p>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p>Serial</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="paragraph">
+<p><code>serial</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Maven Dependency</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="listingblock">
+<td class="tableblock halign-left valign-top" colspan="4"><div class="content"><div class="listingblock">
 <div class="content">
 <pre>&lt;dependency&gt;
   &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
   &lt;artifactId&gt;plc4j-transports-serial&lt;/artifactId&gt;
-  &lt;version&gt;1.1.0-SNAPSHOT&lt;/version&gt;
+  &lt;version&gt;1.1.0&lt;/version&gt;
 &lt;/dependency&gt;</pre>
 </div>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transport Syntax:</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre>{name of the serial port}</pre>
-</div>
+<td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">Config options:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.baud-rate</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Can differ depending on the OS:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Windows: "Com 1"</p>
-</li>
-<li>
-<p>Mac &amp; Linux: "/dev/ttyS0"</p>
-</li>
-</ul>
+<p>9600</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Baud rate (bits per second)</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Options:</p></td>
-<td class="tableblock halign-left valign-top" colspan="2"><div class="content"><div class="paragraph">
-<p><strong>none</strong></p>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.data-bits</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>8</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Number of data bits (5, 6, 7, or 8)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.stop-bits</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Number of stop bits (1 or 2)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.parity</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>none</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Parity: none, odd, even, mark, space (case-insensitive)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.flow-control</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>STRING</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>none</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Flow control: none, rts-cts, xon-xoff (case-insensitive)</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.read-timeout-ms</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Read timeout in milliseconds. 0 means blocking read.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.write-timeout-ms</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>1000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Write timeout in milliseconds.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.dtr</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable DTR (Data Terminal Ready) signal</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.rts</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable RTS (Request To Send) signal</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.reuse-port</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>BOOLEAN</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>false</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Reuse the underlying serial port across multiple transport instances. When true, instances with the same port will share a connection. This is useful for protocols where multiple logical connections share one serial port. Connections sharing a port must target distinct unit ids; Modbus RTU responses carry no transaction ids, so same-unit traffic from multiple connections cannot be told apart.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>serial.interframe-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>INT</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>0</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Interframe delay in milliseconds for protocols that need spacing between messages. Applies to shared and dedicated ports; the gap is measured from the last write or received data.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>On an RS-485 bus several devices share one physical port. <code>serial.reuse-port=true</code> lets several
+PLC4X connections share a single open port for that case - read the warning on that option before
+using it.</p>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>

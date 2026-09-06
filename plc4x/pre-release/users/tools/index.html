@@ -144,6 +144,33 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -151,6 +178,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -226,13 +256,28 @@
     <a class="nav-link" href="../transports/udp.html">UDP</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="../transports/can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/pcap-replay.html">PCAP Replay</a>
@@ -264,9 +309,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
@@ -283,7 +325,16 @@
     <a class="nav-link" href="event-pump.html">Event-Pump</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="plc4x-browser.html">PLC4X Browser</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="plc4x-server.html">PLC4X Server</a>
@@ -472,7 +523,112 @@
 </aside>
 <article class="doc">
 <h1 class="page">Tools</h1>
-
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next to the drivers and the API, PLC4X ships a number of tools that solve recurring tasks around PLC communication.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_application_building_blocks"><a class="anchor" href="#_application_building_blocks"></a>Application building blocks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Libraries you add to your own application.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tool</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="event-pump.html" class="xref page">Event-Pump</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Polls a set of tags on a schedule and hands every response to a listener. Replaces the <code>Scraper</code> of PLC4X 0.13 and earlier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="connection-cache.html" class="xref page">Connection Cache</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shares a limited number of PLC connections between multiple parts of an application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="opm.html" class="xref page">Object PLC Mapping (OPM)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maps PLC tags onto annotated POJOs, in the spirit of JPA.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_servers"><a class="anchor" href="#_servers"></a>Servers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Standalone applications that make PLCs reachable for other clients.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tool</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="plc4x-server.html" class="xref page">PLC4X Server</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A relay server speaking the PLC4X proxy protocol, so clients using the <code>plc4x</code> driver can reach PLCs they have no direct network access to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="opcua-server.html" class="xref page">OPC UA Server</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An OPC UA gateway that exposes the tags of arbitrary PLC4X connections as an OPC UA address space.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_development_and_analysis"><a class="anchor" href="#_development_and_analysis"></a>Development and analysis</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tool</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="plc4x-browser.html" class="xref page">PLC4X Browser</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A terminal application for connecting to a PLC and browsing, reading, writing and subscribing to its tags.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pcap-analyzer.html" class="xref page">PCAP Analyzer</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs captured protocol traffic back through the PLC4X codecs and reports what fails to parse or reserialize.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="capture-replay.html" class="xref page">Capture Replay</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replays recorded network traffic onto a network device, mainly to develop and test passive-mode drivers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="testing.html" class="xref page">Testing without a PLC</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The mock and simulated drivers, for unit tests and for trying out the API without hardware.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </article>
   </div>
 </main>

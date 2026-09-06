@@ -144,6 +144,33 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -151,6 +178,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -226,13 +256,28 @@
     <a class="nav-link" href="../transports/udp.html">UDP</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="../transports/can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/pcap-replay.html">PCAP Replay</a>
@@ -264,9 +309,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eclipse-ditto.html">Eclipse Ditto</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -283,7 +325,16 @@
     <a class="nav-link" href="../tools/event-pump.html">Event-Pump</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/plc4x-browser.html">PLC4X Browser</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/plc4x-server.html">PLC4X Server</a>
@@ -473,10 +524,118 @@
 </aside>
 <article class="doc">
 <h1 class="page">Apache Calcite</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://calcite.apache.org/">Apache Calcite</a>
-Standard SQL
-Industry-standard SQL parser, validator and JDBC driver.</p>
+<p><a href="https://calcite.apache.org/">Apache Calcite</a> is an industry-standard SQL parser, validator and JDBC driver, which can
+put a SQL front-end in front of practically any data source.</p>
+</div>
+<div class="paragraph">
+<p>The PLC4X Calcite integration is such a data source: it turns the tag-batches of an <a href="../tools/event-pump.html" class="xref page">Event-Pump</a>
+configuration into SQL tables, so PLC data can be queried with plain SQL over JDBC.</p>
+</div>
+<div class="paragraph">
+<p>The module lives in the <a href="https://github.com/apache/plc4x-extras/tree/develop/plc4j/integrations/apache-calcite">plc4x-extras</a> repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4j-apache-calcite&lt;/artifactId&gt;
+      &lt;version&gt;1.1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_it_maps_to_sql"><a class="anchor" href="#_how_it_maps_to_sql"></a>How it maps to SQL</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The integration is configured with an ordinary Event-Pump configuration file.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Every <strong>batch</strong> in that file becomes one <strong>table</strong>, named after the batch <code>id</code>.</p>
+</li>
+<li>
+<p>Every <strong>tag</strong> of the batch becomes a <strong>column</strong>, named after the tag.</p>
+</li>
+<li>
+<p>Two columns are prepended to each table: <code>timestamp</code> (when the values were read) and <code>source</code> (the id of the
+connection they came from).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Column types are inferred from the first record that arrives, so a query blocks until the pump has delivered its first
+response for that batch.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_the_schema"><a class="anchor" href="#_configuring_the_schema"></a>Configuring the schema</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Calcite is pointed at the integration with a <code>model.json</code>, using <code>Plc4xSchemaFactory</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "version": "1.0",
+  "defaultSchema": "PLC4X",
+  "schemas": [
+    {
+      "name": "PLC4X",
+      "type": "custom",
+      "factory": "org.apache.plc4x.Plc4xSchemaFactory",
+      "operand": {
+        "config": "/path/to/event-pump.yml",
+        "limit": 100
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>config</code></dt>
+<dd>
+<p>Path to the Event-Pump configuration file. <code>.json</code> and <code>.xml</code> files are loaded as JSON and XML respectively, anything
+else as YAML.</p>
+</dd>
+<dt class="hdlist1"><code>limit</code></dt>
+<dd>
+<p>The number of rows a table keeps. A positive value gives a bounded table holding the last <code>limit</code> records - the usual
+choice for ad-hoc queries. A value of <code>0</code> or less gives a <strong>streaming</strong> table instead, which never terminates and is meant
+to be used with Calcite&#8217;s streaming SQL.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_querying"><a class="anchor" href="#_querying"></a>Querying</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With the model in place, any JDBC client can be pointed at it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Properties properties = new Properties();
+properties.put("model", "/path/to/model.json");
+try (Connection connection = DriverManager.getConnection("jdbc:calcite:", properties)) {
+    ResultSet rs = connection.createStatement().executeQuery(
+        "SELECT timestamp, temperature, pressure FROM boiler");
+    while (rs.next()) {
+        // ...
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </article>
   </div>

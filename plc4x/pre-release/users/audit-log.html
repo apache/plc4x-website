@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Recording an Audit-Log :: PLC4X</title>
+    <meta name="generator" content="Antora 3.1.14">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<link rel="stylesheet" href="/_/css/site.css">
+<link rel="stylesheet" href="/_/css/header.css">
+<link rel="stylesheet" href="/_/css/vars.css">
+<link rel="stylesheet" href="/_/css/all.min.css" type="text/css"/>
+<script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../..">
+          <img src="../../../images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+      </a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end justify-content-center">
+        <a class="navbar-item" href="../../../">Home</a>
+        <a class="navbar-item" href="index.html">Users</a>
+        <a class="navbar-item" href="../developers/index.html">Developers</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://www.apache.org">Apache</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="navbar-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="navbar-item" href="https://www.apache.org/security/">Security</a>
+            <a class="navbar-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/policies/conduct">Code of Conduct</a>
+            <a class="navbar-item" href="https://events.apache.org/">Upcoming Events</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="fa-brands fa-github" href="https://github.com/apache/plc4x"></a>
+          </span>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="download.html">Download</a>
+          </span>
+        </div>
+        <a class="acevent" data-format="wide"></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="plc4x" data-version="1.1.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">PLC4X</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Users</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="adopters.html">Adopters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="contact.html">Getting in Contact</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="commercial-support.html">Commercial Support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="getting-started/index.html">Getting Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/plc4c.html">Getting Started with C</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/plc4cs.html">Getting Started with C#</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/plc4go.html">Getting Started with Go</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/plc4j.html">Getting Started with Java</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/plc4py.html">Getting Started with Python</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/using-snapshots.html">Using SNAPSHOT versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/general-concepts.html">General Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="audit-log.html">Recording an Audit-Log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="protocols/index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/ab-eth.html">AB-ETH</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/ads.html">ADS (Automation Device Specification)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/bacnet.html">BACnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/c-bus.html">C-Bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/canopen.html">CANopen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/eip.html">EtherNet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/firmata.html">Firmata</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/genericcan.html">Generic CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/iec-60870.html">IEC-60870</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/knxnetip.html">KNXnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/logix.html">Logix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/modbus.html">Modbus (TCP/UDP/Serial)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/opcua.html">OPC UA</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/plc4x.html">PLC4X (Proxy)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/s7.html">S7 (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/slmp.html">SLMP (Mitsubishi MELSEC)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="transports/index.html">Transports</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/tcp.html">TCP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/udp.html">UDP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/can.html">CAN bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/socketcan.html">SocketCAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/can-virtualcan.html">Virtual CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="transports/pcap-replay.html">PCAP Replay</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="integrations/index.html">Integrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="integrations/apache-calcite.html">Apache Calcite</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="integrations/apache-camel.html">Apache Camel</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="integrations/apache-iotdb.html">Apache IotDB</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="integrations/apache-kafka.html">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="integrations/apache-nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="integrations/apache-streampipes.html">Apache StreamPipes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="integrations/eclipse-ditto.html">Eclipse Ditto</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="tools/index.html">Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/capture-replay.html">Capture Replay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/connection-cache.html">The Connection Cache concept</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/event-pump.html">Event-Pump</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/plc4x-browser.html">PLC4X Browser</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/plc4x-server.html">PLC4X Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tools/testing.html">Testing (or using PLC4X without a PLC)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="industry40.html">Industry 4.0 with Apache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="security.html">Security Vulnerabilities</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../developers/index.html">Developers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../developers/preparing/index.html">Preparing your Computer</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/preparing/linux.html">Linux</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/preparing/macos.html">Mac OS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/preparing/windows.html">Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../developers/building.html">Building PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../developers/contributing.html">Contributing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../developers/tutorials/index.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/tutorials/writing-driver.html">Strategy for creating a new Driver</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../developers/code-gen/index.html">Code Generation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/code-gen/protocol/mspec.html">The MSpec format</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/code-gen/language/freemarker.html">Apache Freemarker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/code-gen/protocol/df1.html">Example: DF1 MSpec</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../developers/infrastructure/index.html">Infrastructure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/infrastructure/ci.html">Continuous Integration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/infrastructure/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/infrastructure/sonar.html">Code Analysis</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/infrastructure/wiki.html">WIKI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/infrastructure/website.html">Generating the Website</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../developers/release/index.html">Releasing and Validating Releases</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/release/release.html">Releasing PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/release/extras.html">Releasing PLC4X-Extras</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/release/validation.html">Validating a staged release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../developers/release/build-tools.html">Releasing PLC4X Build-Tools</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../developers/testing/index.html">Setup for testing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../developers/tools.html">Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../developers/team.html">Team</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../developers/decisions.html">Decision Making</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../developers/maturity.html">Apache Maturity Model Assessment for PLC4X</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">PLC4X</span>
+    <span class="version">1.1.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../latest/users/index.html">PLC4X</a></div>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">1.1.0</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../../latest/users/index.html">0.13.1</a>
+        </li>
+        <li class="version">
+          <a href="../../0.12.0/users/index.html">0.12.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">PLC4X</a></li>
+    <li><a href="index.html">Users</a></li>
+    <li><a href="audit-log.html">Recording an Audit-Log</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">1.1.0</button>
+  <div class="version-menu">
+    <a class="version is-current" href="audit-log.html">1.1.0</a>
+    <a class="version is-missing" href="../../latest/users/index.html">0.13.1</a>
+    <a class="version is-missing" href="../../0.12.0/users/index.html">0.12.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/audit-log.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Recording an Audit-Log</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>When something goes wrong between your application and a PLC, the interesting question is almost
+never "what did my code do?" - it is "what actually went over the wire, and what came back?".</p>
+</div>
+<div class="paragraph">
+<p>The audit-log answers that. Switch it on and PLC4X writes a complete, ordered trace of one
+connection to a file: the API calls you made, the protocol messages the driver built from them,
+the raw bytes it put on the wire, the bytes that came back, and every state change in between.</p>
+</div>
+<div class="paragraph">
+<p>You do not change a line of code to get it. It is a connection-string parameter.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The audit-log is part of <strong>PLC4J</strong> (Java). PLC4Go, PLC4Py and PLC4C have no equivalent.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_switching_it_on"><a class="anchor" href="#_switching_it_on"></a>Switching it on</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Add <code>log.audit-log-file</code> to your connection string, pointing at the file you want written:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">modbus-tcp://192.168.1.100?log.audit-log-file=/tmp/modbus-debug.log</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That is the whole configuration. The parameter works on every driver and every transport, and it
+combines with all the other connection-string options as usual:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">s7://10.0.0.1?remote-rack=0&amp;remote-slot=1&amp;log.audit-log-file=/var/log/plc4x/s7-line-3.log</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Parent directories are created for you if they do not exist yet.</p>
+</div>
+<div class="paragraph">
+<p>If the parameter is missing or empty, audit logging is off and costs nothing at all - the driver
+holds a no-op implementation that does not even format the messages it is not writing.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_you_need_on_the_classpath"><a class="anchor" href="#_what_you_need_on_the_classpath"></a>What you need on the classpath</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The audit-log is split into an API and an implementation, so that ordinary deployments never
+carry the file-writing machinery. Drivers compile against the API; the implementation is picked
+up reflectively at runtime <strong>if it is there</strong>.</p>
+</div>
+<div class="paragraph">
+<p>To actually get a file, add the implementation at runtime scope:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-utils-audit-log-impl&lt;/artifactId&gt;
+  &lt;version&gt;1.1.0&lt;/version&gt;
+  &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The implementation writes through Logback, which PLC4X declares as <code>provided</code> - so
+<code>logback-classic</code> has to be on your runtime classpath too. If your application already uses
+Logback as its SLF4J binding (most do), you have it. If you use a different binding, add
+<code>ch.qos.logback:logback-classic</code> alongside it for as long as you need the audit-log.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+This is the one thing that fails quietly. Without the implementation module, PLC4X logs
+<code>Audit log implementation not found on classpath. Audit logging will be disabled.</code> at INFO level
+through your normal logger and carries on with no audit file. If you configured a path and got no
+file, check that message first.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When it <strong>has</strong> found everything, you will see this instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">INFO org.apache.plc4x.java.utils.auditlog.api.AuditLog -- Audit log implementation found on classpath. Audit logging enabled.
+INFO org.apache.plc4x.java.utils.auditlog.api.AuditLog -- Audit log initialized for file: /tmp/modbus-debug.log</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_the_log_looks_like"><a class="anchor" href="#_what_the_log_looks_like"></a>What the log looks like</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every line has the same shape:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">[timestamp] [eventType] [source] message</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>source</code> is the protocol code of the driver that produced the entry - <code>modbus-tcp</code>, <code>s7</code>, <code>ads</code>.
+It is what lets you tell two connections apart if you ever point them at the same file.</p>
+</div>
+<div class="paragraph">
+<p>Here is a complete trace of one connection that opens, reads a single holding register and
+closes again:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">[2026-09-05 18:33:37.883] [SYSTEM] [modbus-tcp] Creating Transport with config: {"connectTimeout":5000,"readTimeout":0,"writeTimeout":0,"tcpNoDelay":true,"keepAlive":false,"sendBufferSize":81920,"receiveBufferSize":81920,"localAddress":null,"localPort":0,"defaultPort":502}
+[2026-09-05 18:33:37.895] [CONNECT] [modbus-tcp] Connected to: localhost:61188 with local address: localhost:61189
+[2026-09-05 18:33:37.900] [CONFIG] [modbus-tcp] Starting connection using configuration: ModbusTcpConfiguration{requestTimeout=5000, unitIdentifier=1, pingAddress=4x00001:BOOL, defaultPayloadByteOrder=BIG_ENDIAN, maxCoilsPerRequest=2000, maxRegistersPerRequest=125}
+[2026-09-05 18:33:37.907] [SYSTEM] [modbus-tcp] Started async event-driven receive mode
+[2026-09-05 18:33:37.907] [CONNECT] [modbus-tcp] Modbus TCP connection established
+[2026-09-05 18:33:37.907] [SYSTEM] [modbus-tcp] Connection state changed: CONNECTED
+[2026-09-05 18:33:37.912] [API_REQUEST] [modbus-tcp] Read request: [temperature]
+[2026-09-05 18:33:37.921] [OUTGOING_MESSAGE] [modbus-tcp] Sending Modbus TCP request, txId=1
+[2026-09-05 18:33:37.932] [OUTGOING_BYTES] [modbus-tcp] Write: 000100000006010300000001
+[2026-09-05 18:33:37.932] [INCOMING_BYTES] [modbus-tcp] 00010000000701030412345678
+[2026-09-05 18:33:37.943] [INCOMING_MESSAGE] [modbus-tcp] Received Modbus TCP response, txId=1
+[2026-09-05 18:33:37.945] [API_RESPONSE] [modbus-tcp] Block read response: 4 bytes for 1 tags
+[2026-09-05 18:33:37.954] [CLOSE] [modbus-tcp] Connection closed
+[2026-09-05 18:33:37.954] [SYSTEM] [modbus-tcp] Connection state changed: DISCONNECTED</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Read top to bottom, that is the entire life of the request: your <code>read()</code> call
+(<code>API_REQUEST</code>), the Modbus PDU the driver built (<code>OUTGOING_MESSAGE</code>), the twelve bytes it sent
+(<code>OUTGOING_BYTES</code>), the thirteen that came back (<code>INCOMING_BYTES</code>), the parsed response
+(<code>INCOMING_MESSAGE</code>) and finally the values handed back to you (<code>API_RESPONSE</code>).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>OUTGOING_BYTES</code> and <code>INCOMING_BYTES</code> lines are plain hex. Paste one into Wireshark&#8217;s
+"Import from Hex Dump" and you get the same dissection you would have got from a capture - without
+having to be on the machine when it went wrong.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_event_types"><a class="anchor" href="#_event_types"></a>Event types</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Event type</th>
+<th class="tableblock halign-left valign-top">What produced it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CONFIG</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The configuration the connection was started with.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SYSTEM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transport setup, receive-mode selection, connection state changes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CONNECT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transport-level and protocol-level connection establishment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>API_REQUEST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A call you made: read, write, subscribe, browse, ping.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>API_RESPONSE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The result handed back to your code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OUTGOING_MESSAGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A parsed protocol message on its way out.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OUTGOING_BYTES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The raw bytes written to the wire, as hex.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INCOMING_BYTES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The raw bytes read from the wire, as hex.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>INCOMING_MESSAGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A parsed protocol message that came in.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>API_EVENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Asynchronous events such as subscription notifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CLOSE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection teardown.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ERROR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anything that failed - unexpected disconnects, protocol errors, timeouts.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>How much detail you get per event type depends on the driver. The framework contributes the
+<code>API_*</code>, <code>CONFIG</code>, <code>CLOSE</code> and connection-state entries for every driver alike; the byte-level and
+message-level entries come from the transport and the driver, and the more mature drivers say more.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rolling_and_file_size"><a class="anchor" href="#_rolling_and_file_size"></a>Rolling and file size</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A byte-level trace of a busy connection grows fast, so the file rolls itself:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a new file is started when the current one reaches <strong>10 MB</strong>, and once per day</p>
+</li>
+<li>
+<p>archives are named <code>{filename}.{date}.{index}.gz</code> - e.g. <code>modbus-debug.log.2026-09-05.0.gz</code></p>
+</li>
+<li>
+<p><strong>30 days</strong> of history are kept, capped at <strong>1 GB</strong> total</p>
+</li>
+<li>
+<p>archives are GZIP-compressed</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>None of this is configurable. The audit-log is a debugging instrument you switch on for a
+while, not a permanent logging pipeline - if you want to keep traces indefinitely, copy them
+somewhere else.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reading_and_writing_the_log_from_code"><a class="anchor" href="#_reading_and_writing_the_log_from_code"></a>Reading and writing the log from code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every connection that PLC4X builds implements <code>AuditLogProvider</code>, so if you need it, the same log
+object is reachable from your own code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.apache.plc4x.java.utils.auditlog.api.AuditLog;
+import org.apache.plc4x.java.utils.auditlog.api.AuditLogEventType;
+import org.apache.plc4x.java.utils.auditlog.api.AuditLogProvider;
+
+try (PlcConnection connection = PlcDriverManager.getDefault().getConnectionFactory()
+        .getConnection("modbus-tcp://192.168.1.100?log.audit-log-file=/tmp/modbus-debug.log")) {
+
+    if (connection instanceof AuditLogProvider auditLogProvider) {
+        AuditLog auditLog = auditLogProvider.getAuditLog();
+
+        if (auditLog.isEnabled()) {                                          <i class="conum" data-value="1"></i><b>(1)</b>
+            auditLog.write(AuditLogEventType.SYSTEM, "Starting batch 47");   <i class="conum" data-value="2"></i><b>(2)</b>
+            auditLog.write(AuditLogEventType.SYSTEM, "Recipe", recipe);      <i class="conum" data-value="3"></i><b>(3)</b>
+        }
+    }
+
+    // ... your reads and writes, which land in the same file, in order ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Cheap, and worth checking before you build a message you may not need.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Your entry appears in the trace with the same <code>[timestamp] [type] [source]</code> prefix.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The three-argument form serialises the object to JSON with Jackson, falling back to
+<code>toString()</code> if it cannot.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This is the useful trick for correlating a trace with your own application: mark the beginning of
+a batch, a recipe change, a shift, and you can find that point again in a 10 MB trace of hex.</p>
+</div>
+<div class="paragraph">
+<p>If you want an audit-log that is not tied to a connection - in a tool of your own, say - build one
+directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">AuditLog auditLog = AuditLog.builder()
+    .withSource("line-3-supervisor")
+    .withAuditLogFile("/var/log/plc4x/supervisor.log")
+    .build();
+
+auditLog.write(AuditLogEventType.SYSTEM, "Supervisor started");
+// ...
+auditLog.close();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The builder applies the same rules as the connection string: no file path, or no implementation on
+the classpath, and you get the no-op instance back rather than an exception.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_turning_a_trace_into_a_test"><a class="anchor" href="#_turning_a_trace_into_a_test"></a>Turning a trace into a test</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The audit-log was built with a second purpose in mind. A trace that contains both the raw bytes
+and the parsed messages of a real conversation is most of what is needed to reproduce that
+conversation as a driver test - which is how a bug you saw once on a machine you cannot reach
+becomes a regression test that runs on every build.</p>
+</div>
+<div class="paragraph">
+<p>If you hit a driver bug, an audit-log attached to the issue is by far the most useful thing you
+can send. See <a href="preparing-issues.html" class="xref page">Preparing Issues &amp; Bug Reports</a> for what else helps.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_before_you_share_the_file"><a class="anchor" href="#_before_you_share_the_file"></a>Before you share the file</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An audit-log is a recording of everything your application said to the PLC and everything the PLC
+said back. Treat it accordingly:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Payloads are in there in full.</strong> Every value you read and, more to the point, every value you
+wrote, as hex and usually as a parsed message too.</p>
+</li>
+<li>
+<p><strong>The <code>CONFIG</code> line contains the connection configuration.</strong> Drivers mask the parameters they
+declare as secret - an OPC UA password shows up as <code><strong><strong></strong></strong></code> - but the file was never designed
+as a redaction boundary. Read the first few lines before you attach it to a public issue.</p>
+</li>
+<li>
+<p><strong>TLS session keys, if you asked for them.</strong> The <code>tls-psk.log-session-keys</code> transport option
+writes session keys into the audit-log in <code>SSLKEYLOGFILE</code> format, so Wireshark can decrypt a
+capture of the connection. That is exactly as sensitive as it sounds; use it on a test system.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_known_gaps"><a class="anchor" href="#_known_gaps"></a>Known gaps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>simulated</code> driver takes a shortcut past the standard connection setup and produces no
+audit-log, even with the parameter set. It talks to no network, so there is nothing to trace.</p>
+</li>
+<li>
+<p>The <code>ctrlx</code> driver has no audit-log support.</p>
+</li>
+<li>
+<p><code>API_EVENT</code> is defined but not yet emitted by any driver.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<footer class="container-flex footer col-6" style="text-align:center;">
+    <div class="col"></div>
+    <div class="col-6">
+    Copyright &#169; 2017-2026 <a href="https://www.apache.org/">The Apache Software Foundation.</a> All rights reserved.<br/>
+    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered
+    trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks
+    mentioned may be trademarks or registered trademarks of their respective owners.
+    <br/>
+    </div>
+    <div>Home screen image taken from <a
+        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+        under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+        and blur effect added.
+    </div>
+    <div class="col"></div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/vendor/lunr.js"></script>
+<script src="../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../.." data-snippet-length="100" data-stylesheet="../../../_/css/search.css"></script>
+<script async src="../../../search-index.js"></script>
+  </body>
+</html>

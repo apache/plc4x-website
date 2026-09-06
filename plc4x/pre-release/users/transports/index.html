@@ -144,6 +144,33 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -151,6 +178,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -226,13 +256,28 @@
     <a class="nav-link" href="udp.html">UDP</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="pcap-replay.html">PCAP Replay</a>
@@ -264,9 +309,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -283,7 +325,16 @@
     <a class="nav-link" href="../tools/event-pump.html">Event-Pump</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/plc4x-browser.html">PLC4X Browser</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/plc4x-server.html">PLC4X Server</a>
@@ -472,30 +523,100 @@
 </aside>
 <article class="doc">
 <h1 class="page">Transports</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A driver speaks a protocol; a transport carries it. Which transports a driver supports is part of
+its metadata, and the connection string names the one you want between the protocol code and the
+<code>://</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">modbus-tcp:tls://192.168.1.100:802
+        ^^^ ^^^
+    protocol transport</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Leave it out and the driver&#8217;s default transport is used. Every option a transport accepts is
+prefixed with its code, so <code>tcp.connect-timeout-ms</code> and <code>cotp.tpdu-size</code> stay apart in one
+connection string. The tables on the pages below are generated from the transports themselves.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_network"><a class="anchor" href="#_network"></a>Network</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="tcp.html" class="xref page">TCP</a></p>
+<p><a href="tcp.html" class="xref page">TCP</a> - plain TCP client socket</p>
 </li>
 <li>
-<p><a href="udp.html" class="xref page">UDP</a></p>
+<p><a href="udp.html" class="xref page">UDP</a> - connectionless datagrams, including broadcast</p>
 </li>
 <li>
-<p><a href="raw-socket.html" class="xref page">Raw Socket</a></p>
+<p><a href="tls.html" class="xref page">TLS</a> - TCP secured with certificates</p>
 </li>
 <li>
-<p><a href="serial.html" class="xref page">Serial Port</a></p>
+<p><a href="tls-psk.html" class="xref page">TLS-PSK</a> - TCP secured with a pre-shared key</p>
 </li>
 <li>
-<p><a href="can.html" class="xref page">CAN bus</a></p>
+<p><a href="cotp.html" class="xref page">COTP</a> - ISO-on-TCP, as used by Siemens S7</p>
 </li>
 <li>
-<p><a href="socketcan.html" class="xref page">SocketCAN</a></p>
-</li>
-<li>
-<p><a href="pcap-replay.html" class="xref page">PCAP replay</a></p>
+<p><a href="raw-socket.html" class="xref page">Raw Socket</a> - Ethernet frames below IP</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_serial_and_fieldbus"><a class="anchor" href="#_serial_and_fieldbus"></a>Serial and fieldbus</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="serial.html" class="xref page">Serial Port</a> - RS-232, RS-485 and USB adapters</p>
+</li>
+<li>
+<p><a href="can.html" class="xref page">CAN bus</a> - the shared API the CAN transports implement</p>
+</li>
+<li>
+<p><a href="socketcan.html" class="xref page">SocketCAN</a> - a real CAN bus through the Linux kernel</p>
+</li>
+<li>
+<p><a href="can-virtualcan.html" class="xref page">Virtual CAN</a> - an in-memory CAN bus</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_offline"><a class="anchor" href="#_offline"></a>Offline</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="pcap-replay.html" class="xref page">PCAP Replay</a> - replays a recorded capture instead of a device</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A <code>test</code> transport is also registered. It is an in-memory stand-in used by PLC4X&#8217;s own unit
+tests, it is not usable from an application, and it is deliberately left out of the supported
+transport lists on the protocol pages. If you see it in driver metadata, filter it out.
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </article>
   </div>

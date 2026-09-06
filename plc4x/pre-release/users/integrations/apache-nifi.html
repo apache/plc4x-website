@@ -144,6 +144,33 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -151,6 +178,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -226,13 +256,28 @@
     <a class="nav-link" href="../transports/udp.html">UDP</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="../transports/can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/pcap-replay.html">PCAP Replay</a>
@@ -264,9 +309,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eclipse-ditto.html">Eclipse Ditto</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -283,7 +325,16 @@
     <a class="nav-link" href="../tools/event-pump.html">Event-Pump</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/plc4x-browser.html">PLC4X Browser</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/plc4x-server.html">PLC4X Server</a>
@@ -481,22 +532,43 @@
 <div class="paragraph">
 <p>Apache PLC4X provides both <code>Source</code> as well as <code>Sink</code> processors for accessing data in PLCs or writing data to them.</p>
 </div>
+<div class="paragraph">
+<p>PLC4X supports both NiFi generations, in two separate sets of modules:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">NiFi generation</th>
+<th class="tableblock halign-left valign-top">Module</th>
+<th class="tableblock halign-left valign-top"><code>nar</code> artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NiFi 1.x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j/integrations/apache-nifi/nifi-1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-nifi-plc4x-nar</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NiFi 2.x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j/integrations/apache-nifi/nifi-2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-nifi-2-plc4x-nar</code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_setting_up_nifi"><a class="anchor" href="#_setting_up_nifi"></a>Setting Up NiFi</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Even if the documentation of NiFi states it works with any Java version above 1.8, this is not quite true.</p>
-</div>
-<div class="paragraph">
-<p>I have found that NiFi only works with Java versions below 11. With <code>Java 1.8</code> you are definitely on the safe-side.</p>
-</div>
-<div class="paragraph">
-<p>When starting with newer versions the start script just terminates after logging a statement that NiFi is now starting.</p>
-</div>
-<div class="paragraph">
-<p>Other than that, I haven&#8217;t encountered any other requirements.</p>
+<p>Use the Java version the NiFi release you are running requires - NiFi 1.x runs on Java 8, 11, 17 or 21, NiFi 2.x
+requires Java 21 or newer.</p>
 </div>
 <div class="paragraph">
 <p>As soon as you have started NiFi using the <code>nifi.sh run</code> or <code>run-nifi.bat</code> the Web-UI of NiFi should be available at: <a href="http://localhost:8080/nifi/" class="bare">http://localhost:8080/nifi/</a></p>
@@ -524,10 +596,20 @@
 <p>In order to enable <code>Apache PLC4X</code> support in <code>Apache NiFi</code> all you need to do, is to copy our <code>nar</code> archive into the Nifi installations <code>lib</code> directory.</p>
 </div>
 <div class="paragraph">
-<p>You can either build the <code>nar</code> by building PLC4X and using the version in the <code>plc4j/integrations/apache-nifi/nifi-plc4x-nar/target</code> directory.</p>
+<p>You can either build the <code>nar</code> yourself from the <a href="https://github.com/apache/plc4x-extras/tree/develop/plc4j/integrations/apache-nifi">plc4x-extras</a> repository, and pick it up from the <code>target</code> directory of the matching <code>nar</code> module:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>NiFi 1.x: <code>plc4j/integrations/apache-nifi/nifi-1/nifi-plc4x-nar/target</code></p>
+</li>
+<li>
+<p>NiFi 2.x: <code>plc4j/integrations/apache-nifi/nifi-2/nifi-2-plc4x-nar/target</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Or you can download a released version from Maven central: <a href="https://search.maven.org/search?q=plc4j-nifi-plc4x-nar" class="bare">https://search.maven.org/search?q=plc4j-nifi-plc4x-nar</a></p>
+<p>Or you can download a released version from Maven central: <a href="https://central.sonatype.com/search?q=plc4j-nifi-plc4x-nar">plc4j-nifi-plc4x-nar</a> / <a href="https://central.sonatype.com/search?q=plc4j-nifi-2-plc4x-nar">plc4j-nifi-2-plc4x-nar</a></p>
 </div>
 <div class="imageblock">
 <div class="content">

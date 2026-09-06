@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Migrating PLC4J from 0.13.1 to 1.0.0 :: PLC4X</title>
+    <meta name="generator" content="Antora 3.1.14">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<link rel="stylesheet" href="/_/css/site.css">
+<link rel="stylesheet" href="/_/css/header.css">
+<link rel="stylesheet" href="/_/css/vars.css">
+<link rel="stylesheet" href="/_/css/all.min.css" type="text/css"/>
+<script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../../../..">
+          <img src="../../../../../images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+      </a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end justify-content-center">
+        <a class="navbar-item" href="../../../../../">Home</a>
+        <a class="navbar-item" href="../../index.html">Users</a>
+        <a class="navbar-item" href="../../../developers/index.html">Developers</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://www.apache.org">Apache</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="navbar-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="navbar-item" href="https://www.apache.org/security/">Security</a>
+            <a class="navbar-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/policies/conduct">Code of Conduct</a>
+            <a class="navbar-item" href="https://events.apache.org/">Upcoming Events</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="fa-brands fa-github" href="https://github.com/apache/plc4x"></a>
+          </span>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="../../download.html">Download</a>
+          </span>
+        </div>
+        <a class="acevent" data-format="wide"></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="plc4x" data-version="1.1.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../../index.html">PLC4X</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../index.html">Users</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../adopters.html">Adopters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../contact.html">Getting in Contact</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../commercial-support.html">Commercial Support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../getting-started/index.html">Getting Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/plc4c.html">Getting Started with C</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/plc4cs.html">Getting Started with C#</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/plc4go.html">Getting Started with Go</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/plc4j.html">Getting Started with Java</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/plc4py.html">Getting Started with Python</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/using-snapshots.html">Using SNAPSHOT versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/general-concepts.html">General Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="4">
+    <a class="nav-link" href="plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../audit-log.html">Recording an Audit-Log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../protocols/index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/ab-eth.html">AB-ETH</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/ads.html">ADS (Automation Device Specification)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/bacnet.html">BACnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/c-bus.html">C-Bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/canopen.html">CANopen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/eip.html">EtherNet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/firmata.html">Firmata</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/genericcan.html">Generic CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/iec-60870.html">IEC-60870</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/knxnetip.html">KNXnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/logix.html">Logix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/modbus.html">Modbus (TCP/UDP/Serial)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/opcua.html">OPC UA</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/plc4x.html">PLC4X (Proxy)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/s7.html">S7 (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/slmp.html">SLMP (Mitsubishi MELSEC)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../transports/index.html">Transports</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/tcp.html">TCP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/udp.html">UDP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/can.html">CAN bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/socketcan.html">SocketCAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/can-virtualcan.html">Virtual CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../transports/pcap-replay.html">PCAP Replay</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../integrations/index.html">Integrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../integrations/apache-calcite.html">Apache Calcite</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../integrations/apache-camel.html">Apache Camel</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../integrations/apache-iotdb.html">Apache IotDB</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../integrations/apache-kafka.html">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../integrations/apache-nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../integrations/apache-streampipes.html">Apache StreamPipes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../integrations/eclipse-ditto.html">Eclipse Ditto</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../tools/index.html">Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/capture-replay.html">Capture Replay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/connection-cache.html">The Connection Cache concept</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/event-pump.html">Event-Pump</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/plc4x-browser.html">PLC4X Browser</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/plc4x-server.html">PLC4X Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tools/testing.html">Testing (or using PLC4X without a PLC)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../industry40.html">Industry 4.0 with Apache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../security.html">Security Vulnerabilities</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../developers/index.html">Developers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../developers/preparing/index.html">Preparing your Computer</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/preparing/linux.html">Linux</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/preparing/macos.html">Mac OS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/preparing/windows.html">Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../developers/building.html">Building PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../developers/contributing.html">Contributing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../developers/tutorials/index.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/tutorials/writing-driver.html">Strategy for creating a new Driver</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../developers/code-gen/index.html">Code Generation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/code-gen/protocol/mspec.html">The MSpec format</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/code-gen/language/freemarker.html">Apache Freemarker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/code-gen/protocol/df1.html">Example: DF1 MSpec</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../developers/infrastructure/index.html">Infrastructure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/infrastructure/ci.html">Continuous Integration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/infrastructure/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/infrastructure/sonar.html">Code Analysis</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/infrastructure/wiki.html">WIKI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/infrastructure/website.html">Generating the Website</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../../developers/release/index.html">Releasing and Validating Releases</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/release/release.html">Releasing PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/release/extras.html">Releasing PLC4X-Extras</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/release/validation.html">Validating a staged release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../../developers/release/build-tools.html">Releasing PLC4X Build-Tools</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../developers/testing/index.html">Setup for testing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../developers/tools.html">Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../developers/team.html">Team</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../developers/decisions.html">Decision Making</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../../developers/maturity.html">Apache Maturity Model Assessment for PLC4X</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">PLC4X</span>
+    <span class="version">1.1.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../../../../latest/users/index.html">PLC4X</a></div>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="../../index.html">1.1.0</a>
+        </li>
+        <li class="version is-latest">
+          <a href="../../../../latest/users/index.html">0.13.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../../0.12.0/users/index.html">0.12.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">PLC4X</a></li>
+    <li><a href="../../index.html">Users</a></li>
+    <li><a href="../index.html">Migrations</a></li>
+    <li><a href="index.html">0.13.1 to 1.0.0</a></li>
+    <li><a href="plc4j.html">Java</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">1.1.0</button>
+  <div class="version-menu">
+    <a class="version is-current" href="plc4j.html">1.1.0</a>
+    <a class="version is-missing" href="../../../../latest/users/index.html">0.13.1</a>
+    <a class="version is-missing" href="../../../../0.12.0/users/index.html">0.12.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/migrations/0.13.1-to-1.0.0/plc4j.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Migrating PLC4J from 0.13.1 to 1.0.0</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This page covers the <strong>Java</strong> API and build changes. The changes to connection strings, tag
+addresses and defaults apply to every language and are described on the
+<a href="index.html" class="xref page">overview page</a> - read that one first.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checklist"><a class="anchor" href="#_checklist"></a>Checklist</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Move the build to Java 21 and, if you build PLC4X yourself, to Maven 4.</p>
+</li>
+<li>
+<p>Update the Maven artifactIds that were renamed.</p>
+</li>
+<li>
+<p>Replace <code>getConnectionManager()</code> with <code>getConnectionFactory()</code>.</p>
+</li>
+<li>
+<p>Replace <code>CachedPlcConnectionManager</code> with <code>PlcConnectionCache</code>.</p>
+</li>
+<li>
+<p>Replace the <code>Scraper</code> with the <code>Event-Pump</code>.</p>
+</li>
+<li>
+<p>Update any <code>ConnectionStateListener</code> you implement.</p>
+</li>
+<li>
+<p>Update any <code>PlcBrowseItem</code>, <code>PlcBrowseRequestInterceptor</code> or <code>ArrayInfo</code> you implement.</p>
+</li>
+<li>
+<p>Rewrite EtherNet/IP <code>EipTag</code> construction, which is now immutable.</p>
+</li>
+<li>
+<p>Re-check code that branches on <code>PlcConnectionMetadata</code>, which now tells the truth.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_build"><a class="anchor" href="#_build"></a>Build</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_java_21"><a class="anchor" href="#_java_21"></a>Java 21</h3>
+<div class="paragraph">
+<p>Java 11 support is dropped; the new baseline is <strong>Java 21</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>plc4j-api</code> module is intentionally held at <strong>Java 17</strong>, so an alternate driver implementation
+can still target 17. Everything else - the SPI, the drivers, the tools - needs 21.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maven_4"><a class="anchor" href="#_maven_4"></a>Maven 4</h3>
+<div class="paragraph">
+<p>The PLC4X build itself migrated to Apache Maven 4. This only concerns you if you build PLC4X from
+source; consuming the released artifacts works with Maven 3 as before.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_changed_maven_coordinates"><a class="anchor" href="#_changed_maven_coordinates"></a>Changed Maven coordinates</h3>
+<div class="paragraph">
+<p>The <code>groupId</code> is unchanged (<code>org.apache.plc4x</code>). These artifactIds changed and must be updated in
+your <code>pom.xml</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Tools modules renamed to the <code>plc4j-tools-*</code> pattern</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">0.13.1</th>
+<th class="tableblock halign-left valign-top">1.0.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-capture-replay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-tools-capture-replay</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-connection-cache</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-tools-connection-cache</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-opm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-tools-opm</code></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Transport modules renamed from singular to plural</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">0.13.1</th>
+<th class="tableblock halign-left valign-top">1.0.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-can</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-can</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-pcap-replay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-pcap-replay</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-raw-socket</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-raw-socket</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-serial</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-serial</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-tcp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-tcp</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-test</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-test</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-udp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-udp</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-socketcan</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-can-socketcan</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-virtualcan</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transports-can-virtualcan</code></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Replaced and removed modules</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">0.13.1</th>
+<th class="tableblock halign-left valign-top">1.0.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-scraper</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-tools-event-pump</code> (a rewrite, not a rename - see <a href="#_the_scraper_is_replaced_by_the_event_pump">The Scraper is replaced by the Event-Pump</a>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-scraper-ng</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">removed (experimental)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plc4j-transport-pcap-shared</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">removed (obsolete)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+1.0.0 also <strong>adds</strong> modules - the <code>plc4j-spi-<strong></code> buffers/config/drivers/values split, the
+<code>plc4j-transports-api</code>/<code>-cotp</code>/<code>-tls</code> transports, <code>plc4j-utils-audit-log</strong></code> and
+<code>plc4j-utils-subscription-emulation</code>. These are new artifacts, not renames, and you only need them
+if you use what they provide.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_a_connection"><a class="anchor" href="#_getting_a_connection"></a>Getting a connection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The connection-creating methods moved from <code>PlcConnectionManager</code> to a new <code>PlcConnectionFactory</code>
+interface, and <code>PlcDriverManager</code> hands that out under a new name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// 0.13.1
+PlcConnection connection = PlcDriverManager.getDefault()
+    .getConnectionManager()
+    .getConnection("s7://192.168.1.192");
+
+// 1.0.0
+PlcConnection connection = PlcDriverManager.getDefault()
+    .getConnectionFactory()
+    .getConnection("s7://192.168.1.192");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>PlcConnectionManager</code> still exists. It now <strong>extends</strong> <code>PlcConnectionFactory</code> and adds <code>close()</code>,
+and is implemented only by managers that keep the connections they hand out - the connection cache
+being the one in the box. The distinction is the point of the split: a factory makes connections
+and owns nothing, a manager owns what it made and therefore has to be closed.</p>
+</div>
+<div class="paragraph">
+<p>If you accept a connection source as a parameter, <code>PlcConnectionFactory</code> is almost always the type
+you want:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// works with the driver manager and with the cache
+public MyService(PlcConnectionFactory connectionFactory) { ... }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_connection_cache"><a class="anchor" href="#_the_connection_cache"></a>The connection cache</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>CachedPlcConnectionManager</code> is renamed to <code>PlcConnectionCache</code>, matching the name the concept
+already has in PLC4Go. The Maven artifactId (<code>plc4j-tools-connection-cache</code>) and the package
+(<code>org.apache.plc4x.java.utils.cache</code>) are unchanged.</p>
+</div>
+<div class="paragraph">
+<p>The implementation was rewritten for more reliable resource handling, and it now re-subscribes
+transparently after a connection was lost and re-established.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">0.13.1</th>
+<th class="tableblock halign-left valign-top">1.0.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CachedPlcConnectionManager</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PlcConnectionCache</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PlcConnectionManagerClosedException</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PlcConnectionCacheClosedException</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getBuilder(PlcConnectionManager)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getBuilder()</code> + <code>withConnectionFactory(&#8230;&#8203;)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>withMaxLeaseTime(Duration)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>withMaxLeaseTime(long, TimeUnit)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>withMaxWaitTime(Duration)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>withMaxWaitTime(long, TimeUnit)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>withMaxIdleTime(Duration)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>withMaxIdleTime(long, TimeUnit)</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// 0.13.1
+CachedPlcConnectionManager cache = CachedPlcConnectionManager
+    .getBuilder(PlcDriverManager.getDefault().getConnectionManager())
+    .withMaxLeaseTime(Duration.ofSeconds(30))
+    .build();
+
+// 1.0.0
+PlcConnectionCache cache = PlcConnectionCache.getBuilder()
+    .withConnectionFactory(PlcDriverManager.getDefault().getConnectionFactory())
+    .withMaxLeaseTime(30, TimeUnit.SECONDS)
+    .build();</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<code>withConnectionFactory(&#8230;&#8203;)</code> is not optional. <code>build()</code> throws an
+<code>IllegalStateException</code> without it, where the old builder defaulted to a fresh
+<code>DefaultPlcDriverManager</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The builder gained <code>withScheduler(&#8230;&#8203;)</code>, <code>withPingTimeout(&#8230;&#8203;)</code>, <code>withIdlePingThreshold(&#8230;&#8203;)</code> and
+<code>withCloseTimeout(&#8230;&#8203;)</code>; the cache gained <code>getCachedConnectionCount()</code> and
+<code>getActiveLeaseCount()</code>. <code>removeCachedConnection(String)</code> now returns a <code>boolean</code> saying whether
+anything was removed, and <code>close()</code> no longer declares a checked exception.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="../../tools/connection-cache.html" class="xref page">Connection Cache</a> page for the full set of options.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_scraper_is_replaced_by_the_event_pump"><a class="anchor" href="#_the_scraper_is_replaced_by_the_event_pump"></a>The Scraper is replaced by the Event-Pump</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>Scraper</code> (<code>plc4j-scraper</code>) is gone, together with the experimental <code>plc4j-scraper-ng</code>. Its
+replacement is the <strong>Event-Pump</strong> (<code>plc4j-tools-event-pump</code>), which does the same job - poll a set of
+tags on a schedule and hand every response to a listener - with a smaller API and proper handling
+of a PLC that answers more slowly than the configured interval.</p>
+</div>
+<div class="paragraph">
+<p>This is a rewrite, not a rename: there is no drop-in class mapping. The
+<a href="../../tools/event-pump.html" class="xref page">Event-Pump</a> page has a <strong>Migrating from the Scraper</strong> section that walks
+through it.</p>
+</div>
+<div class="paragraph">
+<p>One thing worth knowing before you start: the trigger interval can now be given in milliseconds
+(<code>intervalMillis</code> / <code>initialDelayMillis</code>) as well as in whole seconds. Giving the same setting in
+both units fails at startup rather than silently picking one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_api_interfaces_you_may_implement"><a class="anchor" href="#_api_interfaces_you_may_implement"></a>API interfaces you may implement</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_connectionstatelistener"><a class="anchor" href="#_connectionstatelistener"></a><code>ConnectionStateListener</code></h3>
+<div class="paragraph">
+<p>The two-method form is replaced by a single method taking an event, because "connected" and
+"disconnected" were never the only things worth reporting.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// 0.13.1
+public class MyListener implements ConnectionStateListener {
+    @Override public void connected() { ... }
+    @Override public void disconnected() { ... }
+}
+
+// 1.0.0
+public class MyListener implements ConnectionStateListener {
+    @Override
+    public void onConnectionStateChanged(PlcConnectionStateChangedEvent event) {
+        switch (event.getChangeType()) {
+            case CONNECTED       -&gt; ...;
+            case DISCONNECTED    -&gt; ...;   // graceful, close() was called
+            case CONNECTION_LOST -&gt; ...;   // unexpected: network error, timeout
+            case TAGS_CHANGED    -&gt; ...;   // available tags changed, re-browse
+            case MODE_RUN,
+                 MODE_STOP,
+                 MODE_CONFIG    -&gt; ...;   // the PLC changed operating mode
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>PlcConnectionStateChangedEvent</code> also carries <code>getDetails()</code>, a human-readable string describing
+what happened.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The old <code>disconnected()</code> covered both a graceful close and a lost connection. If your
+listener reconnected on <code>disconnected()</code>, it should now do that on <code>CONNECTION_LOST</code> only -
+reconnecting on <code>DISCONNECTED</code> would fight your own <code>close()</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_plcbrowseitem"><a class="anchor" href="#_plcbrowseitem"></a><code>PlcBrowseItem</code></h3>
+<div class="paragraph">
+<p><code>isSubscribable()</code> returned a <code>boolean</code> that could not say <strong>how</strong> an item may be subscribed. It is
+replaced by <code>getSupportedSubscriptionTypes()</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// 1.0.0
+default Set&lt;PlcSubscriptionType&gt; getSupportedSubscriptionTypes() {
+    return Collections.emptySet();
+}
+
+default boolean isSubscribable() {
+    return !getSupportedSubscriptionTypes().isEmpty();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both are default methods, so a custom implementation keeps compiling - but it will report
+"not subscribable" until it overrides <code>getSupportedSubscriptionTypes()</code>. <strong>Callers</strong> need no change:
+<code>isSubscribable()</code> still answers the same question.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_plcbrowserequestinterceptor"><a class="anchor" href="#_plcbrowserequestinterceptor"></a><code>PlcBrowseRequestInterceptor</code></h3>
+<div class="paragraph">
+<p>The signature gained the query the item came from, so an interceptor can tell which of several
+queries produced a result:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// 0.13.1
+boolean intercept(PlcBrowseItem item);
+
+// 1.0.0
+boolean intercept(String queryName, PlcQuery query, PlcBrowseItem item);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arrayinfo"><a class="anchor" href="#_arrayinfo"></a><code>ArrayInfo</code></h3>
+<div class="paragraph">
+<p><code>ArrayInfo</code> gained <code>getBase()</code> and <code>isRange()</code>, both as default methods, so existing
+implementations keep compiling.</p>
+</div>
+<div class="paragraph">
+<p>More important is what the existing methods mean. The javadoc used to describe <code>[6]</code> as a
+six-element array, which was never what the drivers did. <code>getLowerBound()</code> and <code>getUpperBound()</code>
+are the indices <strong>as the address wrote them</strong>, both inclusive: for <code>[6]</code> both are 6, and for <code>[0..7]</code>
+<code>getSize()</code> is 8.</p>
+</div>
+<div class="paragraph">
+<p><code>isRange()</code> exists because equal bounds alone cannot tell <code>myTag[4]</code> (one element, a scalar) from
+<code>myTag[4..4]</code> (a list of one). <code>PlcTag.getArrayInfo()</code> reports the shape of the value received -
+empty for a scalar, one entry per dimension for an array - so a consumer can tell the two apart
+without knowing the protocol.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_option"><a class="anchor" href="#_option"></a><code>Option</code></h3>
+<div class="paragraph">
+<p><code>Option</code> gained <code>isSecret()</code>, reporting whether a configuration option carries a secret. It is a
+default method returning <code>false</code>, so existing implementations keep compiling.</p>
+</div>
+<div class="paragraph">
+<p>This is what redaction now asks, instead of guessing from the parameter&#8217;s name. If you declare
+configuration parameters of your own, mark the sensitive ones with <code>@Secret</code> - a name-based check
+remains as a backstop, but it can only ever be one parameter behind.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_behaviour_changes_in_existing_api"><a class="anchor" href="#_behaviour_changes_in_existing_api"></a>Behaviour changes in existing API</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_a_connection_reports_what_its_driver_actually_implements"><a class="anchor" href="#_a_connection_reports_what_its_driver_actually_implements"></a>A connection reports what its driver actually implements</h3>
+<div class="paragraph">
+<p><code>ConnectionBase</code> answered <code>true</code> to <code>isReadSupported()</code>, <code>isWriteSupported()</code>,
+<code>isSubscribeSupported()</code> and <code>isBrowseSupported()</code> for every driver built on it, whatever that
+driver implemented. The metadata a tool used to decide what to offer was therefore not worth
+reading.</p>
+</div>
+<div class="paragraph">
+<p>Every connection now states what it supports, so code branching on these flags will see
+different - and correct - answers. If your application built a UI from them, expect fewer options
+to be offered, and expect that to be right.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ethernetip_eiptag_is_immutable"><a class="anchor" href="#_ethernetip_eiptag_is_immutable"></a>EtherNet/IP <code>EipTag</code> is immutable</h3>
+<div class="paragraph">
+<p><code>EipTag</code> was the only tag class in PLC4J that exposed setters. <code>setType(&#8230;&#8203;)</code> and
+<code>setElementNb(&#8230;&#8203;)</code> are gone; give the type and the element count to the constructor instead.</p>
+</div>
+<div class="paragraph">
+<p>An element count below one is normalised to one rather than kept, so a tag built as <code>":INT:0"</code>, or
+through the <code>(tag, type)</code> constructor which used to leave the count at zero, now reads one element
+instead of none.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_value_serialization"><a class="anchor" href="#_value_serialization"></a>Value serialization</h3>
+<div class="paragraph">
+<p>If you parse the XML or JSON rendering of a <code>PlcValue</code>, these change:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>WORD</code>, <code>DWORD</code> and <code>LWORD</code> serialize as <code>dataType="uint"</code> rather than through the signed
+writers.</p>
+</li>
+<li>
+<p><code>PlcBYTE</code> serializes as a bit string.</p>
+</li>
+<li>
+<p><code>PlcTIME</code> renders as an ISO-8601 string, like <code>PlcLTIME</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These align the Java and Go renderings of the same value.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tag_address_errors_are_per_tag"><a class="anchor" href="#_tag_address_errors_are_per_tag"></a>Tag address errors are per tag</h3>
+<div class="paragraph">
+<p>An address that cannot be parsed is now reported for that tag rather than failing the whole
+request, in the EtherNet/IP, Modbus, OPC UA, S7 and simulated drivers - which is what the API
+always promised. A request mixing a bad address with good ones now returns results for the good
+ones and an error code for the bad one.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_if_you_wrote_your_own_driver"><a class="anchor" href="#_if_you_wrote_your_own_driver"></a>If you wrote your own driver</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All drivers were migrated to a new shared SPI, <strong>SPI3</strong>: dependency-free read/write buffers, an
+updated code-generation framework, a pluggable-transport system and a layered protocol-driver
+model. A driver written against the 0.13 SPI does not compile against 1.0.0.</p>
+</div>
+<div class="paragraph">
+<p>There is no mechanical migration for this. The most useful reference is a driver of comparable
+shape in the 1.0.0 source tree; the <code>plc4j-driver-modbus</code> and <code>plc4j-driver-s7</code> modules cover a
+simple request/response protocol and a connection-oriented one respectively.</p>
+</div>
+<div class="paragraph">
+<p>Two things are worth knowing before you start:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>A driver declares the transports it supports.</strong>
+<code>getMetadata().getSupportedTransportCodes()</code> is checked at connect time, and a connection naming
+a transport outside that set is refused.</p>
+</li>
+<li>
+<p><strong>Connection metadata is derived, not asserted.</strong> <code>ConnectionBase</code> used to answer <code>true</code> to
+<code>isReadSupported()</code>, <code>isWriteSupported()</code>, <code>isSubscribeSupported()</code> and <code>isBrowseSupported()</code>
+regardless of what the driver implemented. It now derives each flag from whether your connection
+class overrides the corresponding hook - <code>onRead</code>, <code>onWrite</code>, <code>onSubscribe</code>, and <code>onBrowse</code> or
+<code>onBrowseWithInterceptor</code>. You do not declare anything; implement the hook and the metadata
+follows.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If your protocol has no subscriptions, you can get them from
+<code>plc4j-utils-subscription-emulation</code>, the polling-based emulation layer that Modbus, EtherNet/IP,
+AB-ETH, SLMP and UMAS now use for <code>CYCLIC</code> and <code>CHANGE_OF_STATE</code> subscriptions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_new_in_1_0_0"><a class="anchor" href="#_new_in_1_0_0"></a>New in 1.0.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Not migration work, but worth knowing about once you are on 1.0.0:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../../audit-log.html" class="xref page">Audit-Log</a> - a complete trace of one connection to a file, switched on with a
+connection-string parameter and no code change at all. The single most useful thing to reach for
+when a migrated connection behaves differently from the old one.</p>
+</li>
+<li>
+<p><code>PlcCertificateAuthentication</code> - X.509 user authentication, currently used by the OPC UA driver.</p>
+</li>
+<li>
+<p>OPC UA gained structured values (<code>PlcStruct</code>), browse support, and tag data types derived from
+the server&#8217;s type model rather than guessed from the input data.</p>
+</li>
+<li>
+<p>The Object-PLC-Mapping (<a href="../../tools/opm.html" class="xref page">OPM</a>) module was ported to SPI3.</p>
+</li>
+<li>
+<p>A new TCP transport using per-connection virtual-thread blocking I/O, which is what Java 21
+bought.</p>
+</li>
+<li>
+<p>S7 connections can report what the device says about itself, via <code>readDeviceIdentification()</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<footer class="container-flex footer col-6" style="text-align:center;">
+    <div class="col"></div>
+    <div class="col-6">
+    Copyright &#169; 2017-2026 <a href="https://www.apache.org/">The Apache Software Foundation.</a> All rights reserved.<br/>
+    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered
+    trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks
+    mentioned may be trademarks or registered trademarks of their respective owners.
+    <br/>
+    </div>
+    <div>Home screen image taken from <a
+        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+        under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+        and blur effect added.
+    </div>
+    <div class="col"></div>
+</footer>
+<script id="site-script" src="../../../../../_/js/site.js" data-ui-root-path="../../../../../_"></script>
+<script async src="../../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../../.." data-snippet-length="100" data-stylesheet="../../../../../_/css/search.css"></script>
+<script async src="../../../../../search-index.js"></script>
+  </body>
+</html>

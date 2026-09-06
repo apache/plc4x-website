@@ -144,6 +144,33 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -151,6 +178,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -226,13 +256,28 @@
     <a class="nav-link" href="../transports/udp.html">UDP</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="../transports/can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/pcap-replay.html">PCAP Replay</a>
@@ -264,9 +309,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eclipse-ditto.html">Eclipse Ditto</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -283,7 +325,16 @@
     <a class="nav-link" href="../tools/event-pump.html">Event-Pump</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/plc4x-browser.html">PLC4X Browser</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/plc4x-server.html">PLC4X Server</a>
@@ -487,7 +538,7 @@ mission-critical applications.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The PLC4X connectors have the ability to pass data between Kafka and devices using industrial protocols.
-They can be built from source from the latest <a href="https://github.com/apache/plc4x-extras/tree/main/plc4j/integrations/apache-kafka">plc4x extras - kafka integration</a> and plc4x <a href="../download.html" class="xref page">release</a> of
+They can be built from source from the latest <a href="https://github.com/apache/plc4x-extras/tree/develop/plc4j/integrations/apache-kafka">plc4x extras - kafka integration</a> and plc4x <a href="../download.html" class="xref page">release</a> of
 PLC4X or from the latest snapshot from <a href="https://github.com/apache/plc4x">github</a>.</p>
 </div>
 </div>
@@ -530,7 +581,7 @@ brokers. It allows the worker to be distrubuted across the Kafka brokers to prov
 <p>2) Unpack the archive.</p>
 </div>
 <div class="paragraph">
-<p>3) Copy the <code>target/plc4j-apache-kafka-0.8.0-uber-jar.jar</code> to the Kafka <code>libs</code> or plugin directory specified
+<p>3) Copy the <code>target/plc4j-apache-kafka-1.1.0-SNAPSHOT-uber-jar.jar</code> to the Kafka <code>libs</code> or plugin directory specified
 in the config/connect-distributed.properties file.</p>
 </div>
 <div class="paragraph">
@@ -593,7 +644,7 @@ This includes comments as well as meaningful properties that can be used with th
 </div>
 <div class="paragraph">
 <p>The configuration of the connectors via the REST interface expects the same properties as are specified within the
-example <a href="https://github.com/apache/plc4x-extras/blob/main/plc4j/integrations/apache-kafka/config/plc4x-source.properties">config/plc4x-source.properties</a> file. These will need to be in JSON format and included with a couple of headers.
+example <a href="https://github.com/apache/plc4x-extras/blob/develop/plc4j/integrations/apache-kafka/config/plc4x-source.properties">config/plc4x-source.properties</a> file. These will need to be in JSON format and included with a couple of headers.
 An example below shows the format it expects:-</p>
 </div>
 <div class="literalblock">
@@ -671,7 +722,7 @@ bin/kafka-topics --create --zookeeper localhost:2181 --topic connect-status --re
 <h2 id="_sink_connector"><a class="anchor" href="#_sink_connector"></a>Sink Connector</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>See <a href="https://github.com/apache/plc4x-extras/blob/main/plc4j/integrations/apache-kafka/config/plc4x-sink.properties">config/sink.properties</a> for an example configuration.</p>
+<p>See <a href="https://github.com/apache/plc4x-extras/blob/develop/plc4j/integrations/apache-kafka/config/plc4x-sink.properties">config/sink.properties</a> for an example configuration.</p>
 </div>
 <div class="sect2">
 <h3 id="_start_a_kafka_connect_sink_worker_standalone"><a class="anchor" href="#_start_a_kafka_connect_sink_worker_standalone"></a>Start a Kafka Connect Sink Worker (Standalone)</h3>

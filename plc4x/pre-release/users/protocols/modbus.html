@@ -144,6 +144,33 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -151,6 +178,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -226,13 +256,28 @@
     <a class="nav-link" href="../transports/udp.html">UDP</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="../transports/can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/pcap-replay.html">PCAP Replay</a>
@@ -264,9 +309,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -283,7 +325,16 @@
     <a class="nav-link" href="../tools/event-pump.html">Event-Pump</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/plc4x-browser.html">PLC4X Browser</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/plc4x-server.html">PLC4X Server</a>
@@ -754,7 +805,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout-ms</code></p></td>
@@ -765,7 +818,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout-ms</code></p></td>
@@ -776,7 +831,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
@@ -787,7 +844,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.keep-alive</code></p></td>
@@ -798,7 +857,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.send-buffer-size</code></p></td>
@@ -809,7 +870,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.receive-buffer-size</code></p></td>
@@ -820,7 +883,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.local-address</code></p></td>
@@ -829,7 +894,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.local-port</code></p></td>
@@ -840,7 +907,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
@@ -972,7 +1041,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout-ms</code></p></td>
@@ -983,7 +1054,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout-ms</code></p></td>
@@ -994,7 +1067,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.no-delay</code></p></td>
@@ -1005,7 +1080,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.keep-alive</code></p></td>
@@ -1016,7 +1093,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.send-buffer-size</code></p></td>
@@ -1027,7 +1106,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.receive-buffer-size</code></p></td>
@@ -1038,7 +1119,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.local-address</code></p></td>
@@ -1047,7 +1130,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.local-port</code></p></td>
@@ -1058,7 +1143,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
@@ -1109,7 +1196,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout-ms</code></p></td>
@@ -1120,7 +1209,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout-ms</code></p></td>
@@ -1131,7 +1222,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.no-delay</code></p></td>
@@ -1142,7 +1235,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.keep-alive</code></p></td>
@@ -1153,7 +1248,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.send-buffer-size</code></p></td>
@@ -1164,7 +1261,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.receive-buffer-size</code></p></td>
@@ -1175,7 +1274,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.local-address</code></p></td>
@@ -1184,7 +1285,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.local-port</code></p></td>
@@ -1195,7 +1298,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
@@ -1666,7 +1771,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout-ms</code></p></td>
@@ -1677,7 +1784,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout-ms</code></p></td>
@@ -1688,7 +1797,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
@@ -1699,7 +1810,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.keep-alive</code></p></td>
@@ -1710,7 +1823,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.send-buffer-size</code></p></td>
@@ -1721,7 +1836,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.receive-buffer-size</code></p></td>
@@ -1732,7 +1849,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.local-address</code></p></td>
@@ -1741,7 +1860,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.local-port</code></p></td>
@@ -1752,7 +1873,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
@@ -1884,7 +2007,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout-ms</code></p></td>
@@ -1895,7 +2020,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout-ms</code></p></td>
@@ -1906,7 +2033,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.no-delay</code></p></td>
@@ -1917,7 +2046,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.keep-alive</code></p></td>
@@ -1928,7 +2059,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.send-buffer-size</code></p></td>
@@ -1939,7 +2072,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.receive-buffer-size</code></p></td>
@@ -1950,7 +2085,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.local-address</code></p></td>
@@ -1959,7 +2096,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.local-port</code></p></td>
@@ -1970,7 +2109,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
@@ -2021,7 +2162,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout-ms</code></p></td>
@@ -2032,7 +2175,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout-ms</code></p></td>
@@ -2043,7 +2188,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.no-delay</code></p></td>
@@ -2054,7 +2201,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.keep-alive</code></p></td>
@@ -2065,7 +2214,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.send-buffer-size</code></p></td>
@@ -2076,7 +2227,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.receive-buffer-size</code></p></td>
@@ -2087,7 +2240,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.local-address</code></p></td>
@@ -2096,7 +2251,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.local-port</code></p></td>
@@ -2107,7 +2264,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
@@ -2578,7 +2737,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.read-timeout-ms</code></p></td>
@@ -2589,7 +2750,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.write-timeout-ms</code></p></td>
@@ -2600,7 +2763,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.no-delay</code></p></td>
@@ -2611,7 +2776,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.keep-alive</code></p></td>
@@ -2622,7 +2789,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.send-buffer-size</code></p></td>
@@ -2633,7 +2802,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.receive-buffer-size</code></p></td>
@@ -2644,7 +2815,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.local-address</code></p></td>
@@ -2653,7 +2826,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tcp.local-port</code></p></td>
@@ -2664,7 +2839,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
@@ -2796,7 +2973,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.read-timeout-ms</code></p></td>
@@ -2807,7 +2986,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.write-timeout-ms</code></p></td>
@@ -2818,7 +2999,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.no-delay</code></p></td>
@@ -2829,7 +3012,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.keep-alive</code></p></td>
@@ -2840,7 +3025,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.send-buffer-size</code></p></td>
@@ -2851,7 +3038,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.receive-buffer-size</code></p></td>
@@ -2862,7 +3051,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.local-address</code></p></td>
@@ -2871,7 +3062,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.local-port</code></p></td>
@@ -2882,7 +3075,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">
@@ -2933,7 +3128,9 @@ Allowed values are: <br>
 <p>5000</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Connection timeout in milliseconds.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.read-timeout-ms</code></p></td>
@@ -2944,7 +3141,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket read timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.write-timeout-ms</code></p></td>
@@ -2955,7 +3154,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Socket write timeout in milliseconds. 0 means no timeout.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.no-delay</code></p></td>
@@ -2966,7 +3167,9 @@ Allowed values are: <br>
 <p>true</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable TCP_NODELAY (disable Nagle&#8217;s algorithm).</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.keep-alive</code></p></td>
@@ -2977,7 +3180,9 @@ Allowed values are: <br>
 <p>false</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Enable SO_KEEPALIVE.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.send-buffer-size</code></p></td>
@@ -2988,7 +3193,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Send buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.receive-buffer-size</code></p></td>
@@ -2999,7 +3206,9 @@ Allowed values are: <br>
 <p>81920</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Receive buffer size in bytes. 0 uses system default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.local-address</code></p></td>
@@ -3008,7 +3217,9 @@ Allowed values are: <br>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local address to bind to (optional). If not set, uses default.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls-psk.local-port</code></p></td>
@@ -3019,7 +3230,9 @@ Allowed values are: <br>
 <p>0</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Local port to bind to (optional). 0 uses ephemeral port.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="5"><p class="tableblock">

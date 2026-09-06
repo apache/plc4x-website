@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Apache Edgent (Retired) :: PLC4X</title>
+    <title>PCAP Analyzer :: PLC4X</title>
     <meta name="generator" content="Antora 3.1.14">
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
@@ -144,6 +144,33 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -151,6 +178,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -226,13 +256,28 @@
     <a class="nav-link" href="../transports/udp.html">UDP</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="../transports/can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/pcap-replay.html">PCAP Replay</a>
@@ -241,55 +286,61 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Integrations</a>
+    <a class="nav-link" href="../integrations/index.html">Integrations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="apache-calcite.html">Apache Calcite</a>
+    <a class="nav-link" href="../integrations/apache-calcite.html">Apache Calcite</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="apache-camel.html">Apache Camel</a>
+    <a class="nav-link" href="../integrations/apache-camel.html">Apache Camel</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="apache-iotdb.html">Apache IotDB</a>
+    <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="apache-kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="apache-nifi.html">Apache NiFi</a>
+    <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="apache-streampipes.html">Apache StreamPipes</a>
+    <a class="nav-link" href="../integrations/apache-streampipes.html">Apache StreamPipes</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="eclipse-ditto.html">Eclipse Ditto</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
+    <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../tools/index.html">Tools</a>
+    <a class="nav-link" href="index.html">Tools</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../tools/capture-replay.html">Capture Replay</a>
+    <a class="nav-link" href="capture-replay.html">Capture Replay</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../tools/connection-cache.html">The Connection Cache concept</a>
+    <a class="nav-link" href="connection-cache.html">The Connection Cache concept</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../tools/event-pump.html">Event-Pump</a>
+    <a class="nav-link" href="event-pump.html">Event-Pump</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../tools/opm.html">Object PLC Mapping</a>
+    <a class="nav-link" href="opcua-server.html">OPC UA Server</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../tools/plc4x-server.html">PLC4X Server</a>
+    <a class="nav-link" href="opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="pcap-analyzer.html">PCAP Analyzer</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../tools/testing.html">Testing (or using PLC4X without a PLC)</a>
+    <a class="nav-link" href="plc4x-browser.html">PLC4X Browser</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="plc4x-server.html">PLC4X Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="testing.html">Testing (or using PLC4X without a PLC)</a>
   </li>
 </ul>
   </li>
@@ -452,26 +503,132 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">PLC4X</a></li>
-    <li><a href="apache-edgent.html">Apache Edgent (Retired)</a></li>
+    <li><a href="../index.html">Users</a></li>
+    <li><a href="index.html">Tools</a></li>
+    <li><a href="pcap-analyzer.html">PCAP Analyzer</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">1.1.0</button>
   <div class="version-menu">
-    <a class="version is-current" href="apache-edgent.html">1.1.0</a>
-    <a class="version" href="../../../latest/users/integrations/apache-edgent.html">0.13.1</a>
-    <a class="version" href="../../../0.12.0/users/integrations/apache-edgent.html">0.12.0</a>
+    <a class="version is-current" href="pcap-analyzer.html">1.1.0</a>
+    <a class="version is-missing" href="../../../latest/users/index.html">0.13.1</a>
+    <a class="version is-missing" href="../../../0.12.0/users/index.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/integrations/apache-edgent.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/develop/website/asciidoc/modules/users/pages/tools/pcap-analyzer.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Apache Edgent (Retired)</h1>
-
+<h1 class="page">PCAP Analyzer</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>PCAP Analyzer</code> replays captured protocol traffic through the PLC4X codecs and reports what goes wrong.</p>
+</div>
+<div class="paragraph">
+<p>For every packet it feeds the application payload into a real PLC4X codec, re-serializes the parsed message and
+compares the result against the original bytes.
+A mismatch means the reader and the writer of that message disagree, which makes the tool a regression harness for the
+codecs themselves - and a good way to find out why a driver fails on a particular device.</p>
+</div>
+<div class="paragraph">
+<p>It is written in Go and lives in the <a href="https://github.com/apache/plc4x-extras/tree/develop/plc4go/tools/plc4xpcapanalyzer">plc4x-extras</a> repository.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you want to feed a capture back into a running driver instead of into the codecs, have a look at
+<a href="capture-replay.html" class="xref page">Capture Replay</a> and at the <a href="../transports/pcap-replay.html" class="xref page">PCAP Replay transport</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_and_running"><a class="anchor" href="#_building_and_running"></a>Building and running</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd plc4go
+go run ./tools/plc4xpcapanalyzer ui --demo</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or build a standalone binary:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">go build -o plc4xpcapanalyzer ./tools/plc4xpcapanalyzer</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The analyzer reads captures through <code>gopacket/pcap</code> and therefore <strong>requires cgo and libpcap</strong>.
+Building with <code>CGO_ENABLED=0</code> fails.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_commands"><a class="anchor" href="#_commands"></a>Commands</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre>plc4xpcapanalyzer analyze &lt;protocol&gt; &lt;capture&gt;   # parse, reserialize and compare
+plc4xpcapanalyzer extract &lt;protocol&gt; &lt;capture&gt;   # dump the application payloads
+plc4xpcapanalyzer ui [capture]                   # the interactive terminal interface</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The supported protocols are <code>bacnetip</code> and <code>c-bus</code>; <code>bacnet</code> and <code>cbus</code> are accepted as aliases.</p>
+</div>
+<div class="paragraph">
+<p><code>extract</code> only prints payloads at verbosity 2 and above, so pass <code>-vv</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Settings come from three places, in the usual order: a built-in default is overridden by the persisted session
+configuration, which is in turn overridden by a flag on the command line.
+<code>conf set</code> writes to the persisted layer, so a stored setting survives a restart without ever overriding a flag that was
+passed explicitly.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A flag passed with exactly its default value cannot be distinguished from an unset one, so for that field the
+persisted value wins.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>
