@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Event-Pump :: PLC4X</title>
+    <meta name="generator" content="Antora 3.1.14">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<link rel="stylesheet" href="/_/css/site.css">
+<link rel="stylesheet" href="/_/css/header.css">
+<link rel="stylesheet" href="/_/css/vars.css">
+<link rel="stylesheet" href="/_/css/all.min.css" type="text/css"/>
+<script src="https://www.apachecon.com/event-images/snippet.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../../../..">
+          <img src="../../../../images/apache_plc4x_logo_small.png" alt="Apache PLC4X">
+      </a>
+      <div class="navbar-item search hide-for-print">
+        <div id="search-field" class="field">
+          <input id="search-input" type="text" placeholder="Search the docs">
+        </div>
+      </div>
+      <button class="navbar-burger" aria-controls="topbar-nav" aria-expanded="false" aria-label="Toggle main menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end justify-content-center">
+        <a class="navbar-item" href="../../../../">Home</a>
+        <a class="navbar-item" href="../index.html">Users</a>
+        <a class="navbar-item" href="../../developers/index.html">Developers</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="https://www.apache.org">Apache</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.apache.org">Apache Homepage</a>
+            <a class="navbar-item" href="https://www.apache.org/licenses/">License</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/sponsorship.html">Sponsorship</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/thanks.html">Thanks</a>
+            <a class="navbar-item" href="https://www.apache.org/security/">Security</a>
+            <a class="navbar-item" href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy</a>
+            <a class="navbar-item" href="https://www.apache.org/foundation/policies/conduct">Code of Conduct</a>
+            <a class="navbar-item" href="https://events.apache.org/">Upcoming Events</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="fa-brands fa-github" href="https://github.com/apache/plc4x"></a>
+          </span>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="../download.html">Download</a>
+          </span>
+        </div>
+        <a class="acevent" data-format="wide"></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="plc4x" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="../index.html">PLC4X</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Users</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../download.html">Download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../adopters.html">Adopters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contact.html">Getting in Contact</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../getting-started/index.html">Getting Started</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/plc4c.html">Getting Started with C</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/plc4cs.html">Getting Started with C#</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/plc4go.html">Getting Started with Go</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/plc4j.html">Getting Started with Java</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/plc4py.html">Getting Started with Python</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/using-snapshots.html">Using SNAPSHOT versions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/general-concepts.html">General Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/virtual-modbus.html">Virtual Modbus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../getting-started/opcua-client-certificate.html">OPC UA : Client certificate creation</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../protocols/index.html">Protocols</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/ab-eth.html">AB-ETH</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/ads.html">ADS (Automation Device Specification)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/bacnet.html">BACnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/c-bus.html">C-Bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/canopen.html">CANopen</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/eip.html">EtherNet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/firmata.html">Firmata</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/genericcan.html">Generic CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/iec-60870.html">IEC-60870</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/knxnetip.html">KNXnet/IP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/logix.html">Logix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/modbus.html">Modbus (TCP/UDP/Serial)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/opcua.html">OPC UA</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/open-protocol.html">Open-Protocol (Torque-Tools)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/plc4x.html">PLC4X (Proxy)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/s7.html">S7 (Step7)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/simulated.html">Simulated</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/slmp.html">SLMP (Mitsubishi MELSEC)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../protocols/umas.html">UMAS (Schneider Electric PLCs)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../transports/index.html">Transports</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tcp.html">TCP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/udp.html">UDP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can.html">CAN bus</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/socketcan.html">SocketCAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can-virtualcan.html">Virtual CAN</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/pcap-replay.html">PCAP Replay</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../integrations/index.html">Integrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../integrations/apache-calcite.html">Apache Calcite</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../integrations/apache-camel.html">Apache Camel</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../integrations/apache-iotdb.html">Apache IotDB</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../integrations/apache-kafka.html">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../integrations/apache-nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../integrations/apache-streampipes.html">Apache StreamPipes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Tools</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="capture-replay.html">Capture Replay</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="connection-cache.html">The Connection Cache concept</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="event-pump.html">Event-Pump</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="opm.html">Object PLC Mapping</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="plc4x-browser.html">PLC4X Browser</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="plc4x-server.html">PLC4X Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="testing.html">Testing (or using PLC4X without a PLC)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../industry40.html">Industry 4.0 with Apache</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../security.html">Security Vulnerabilities</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../developers/index.html">Developers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../developers/preparing/index.html">Preparing your Computer</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/preparing/linux.html">Linux</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/preparing/macos.html">Mac OS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/preparing/windows.html">Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../developers/building.html">Building PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../developers/contributing.html">Contributing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../developers/tutorials/index.html">Tutorials</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/tutorials/writing-driver.html">Strategy for creating a new Driver</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/tutorials/testing-serializers-and-parsers.html">Testing Serializers and Parsers</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../developers/code-gen/index.html">Code Generation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/code-gen/protocol/mspec.html">The MSpec format</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/code-gen/language/freemarker.html">Apache Freemarker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/code-gen/protocol/df1.html">Example: DF1 MSpec</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../developers/infrastructure/index.html">Infrastructure</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/infrastructure/ci.html">Continuous Integration</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/infrastructure/issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/infrastructure/sonar.html">Code Analysis</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/infrastructure/wiki.html">WIKI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/infrastructure/vm.html">The PLC4X Project VM</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/infrastructure/website.html">Generating the Website</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../developers/release/index.html">Releasing and Validating Releases</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/release/release.html">Releasing PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/release/extras.html">Releasing PLC4X-Extras</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/release/validation.html">Validating a staged release</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/release/build-tools.html">Releasing PLC4X Build-Tools</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../developers/testing/index.html">Setup for testing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../developers/tools.html">Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../developers/team.html">Team</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../developers/decisions.html">Decision Making</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../developers/maturity.html">Apache Maturity Model Assessment for PLC4X</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">PLC4X</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="../index.html">PLC4X</a></div>
+      <ul class="versions">
+        <li class="version">
+          <a href="../../../pre-release/users/index.html">1.1.0</a>
+        </li>
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
+        </li>
+        <li class="version">
+          <a href="../../../0.12.0/users/index.html">0.12.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">PLC4X</a></li>
+    <li><a href="../index.html">Users</a></li>
+    <li><a href="index.html">Tools</a></li>
+    <li><a href="event-pump.html">Event-Pump</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">1.0.0</button>
+  <div class="version-menu">
+    <a class="version" href="../../../pre-release/users/tools/event-pump.html">1.1.0</a>
+    <a class="version is-current" href="event-pump.html">1.0.0</a>
+    <a class="version is-missing" href="../../../0.13.1/users/index.html">0.13.1</a>
+    <a class="version is-missing" href="../../../0.12.0/users/index.html">0.12.0</a>
+  </div>
+</div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/1.0/website/asciidoc/modules/users/pages/tools/event-pump.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Event-Pump</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>While the Apache PLC4X API gives you simple access to PLC resources, reading the same set of values over and over again is a job the plain API leaves to you: scheduling the reads, leasing and returning connections, deciding what to do when the PLC stops answering, and making sure a slow response doesn&#8217;t pile up behind the next poll.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Event-Pump</code> does that work for you.</p>
+</div>
+<div class="paragraph">
+<p>You describe <strong>what</strong> to read and <strong>when</strong>, and it delivers each response to a listener.</p>
+</div>
+<div class="paragraph">
+<p>The Event-Pump replaces the <code>Scraper</code> from PLC4X 0.13 and earlier.
+If you are migrating, see <a href="#_migrating_from_the_scraper">Migrating from the Scraper</a> at the end of this page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started_with_the_event_pump"><a class="anchor" href="#_getting_started_with_the_event_pump"></a>Getting started with the <code>Event-Pump</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Event-Pump can be found in the Maven module:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+      &lt;artifactId&gt;plc4j-tools-event-pump&lt;/artifactId&gt;
+      &lt;version&gt;1.0.0&lt;/version&gt;
+    &lt;/dependency&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_concepts"><a class="anchor" href="#_concepts"></a>Concepts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Event-Pump is built from three pieces:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>TagBatch</code></dt>
+<dd>
+<p>A set of tags read together from one connection, with one trigger and one listener.
+A batch is the unit of scheduling: every tag in it is read in a single request.</p>
+</dd>
+<dt class="hdlist1"><code>Trigger</code></dt>
+<dd>
+<p>Decides <strong>when</strong> a batch is fetched.
+The <code>TimerTrigger</code> fires at a fixed interval.</p>
+</dd>
+<dt class="hdlist1"><code>TagBatchListener</code></dt>
+<dd>
+<p>Receives each <code>PlcReadResponse</code>, and any errors.</p>
+</dd>
+<dt class="hdlist1"><code>EventPump</code></dt>
+<dd>
+<p>A container that owns a number of batches and starts and stops them together.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_it_from_java"><a class="anchor" href="#_using_it_from_java"></a>Using it from Java</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A batch is assembled with a builder and handed to the pump:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcConnectionFactory connectionFactory = PlcDriverManager.getDefault().getConnectionFactory();
+
+TagBatch batch = TagBatch.builder()
+    .withBatchId("boiler")
+    .withConnectionFactory(connectionFactory)
+    .withConnectionString("opcua:tcp://192.168.1.1:4840?request-timeout-ms=10000")
+    .addTagAddress("temperature", "ns=2;i=1001")
+    .addTagAddress("pressure", "ns=2;i=1002")
+    .withTrigger(new TimerTrigger(5, TimeUnit.SECONDS))
+    .withListener((b, response) -&gt; {
+        System.out.println("Temperature: " + response.getInt("temperature"));
+        System.out.println("Pressure: " + response.getInt("pressure"));
+    })
+    .build();
+
+EventPump pump = new EventPump();
+pump.addBatch(batch);
+pump.startAll();
+
+// ... later
+pump.close();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>EventPump</code> implements <code>AutoCloseable</code>, and closing it stops and closes every batch it owns, so a try-with-resources block works too.</p>
+</div>
+<div class="paragraph">
+<p>Individual batches can be controlled by id with <code>startBatch(id)</code>, <code>stopBatch(id)</code> and <code>removeBatch(id)</code>.</p>
+</div>
+<div class="paragraph">
+<p>The tag set of a running batch may be changed at any time with <code>addTag</code>, <code>removeTag</code> and <code>clearTags</code>; the change takes effect on the next fetch cycle.</p>
+</div>
+<div class="sect2">
+<h3 id="_handling_errors"><a class="anchor" href="#_handling_errors"></a>Handling errors</h3>
+<div class="paragraph">
+<p>Passing a lambda as the listener only covers the success case.
+Implement the interface to see failures as well:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">batch.setListener(new TagBatch.TagBatchListener() {
+    @Override
+    public void onTagsFetched(TagBatch batch, PlcReadResponse response) {
+        // process values
+    }
+
+    @Override
+    public void onError(TagBatch batch, Throwable error) {
+        // connection lost, read failed, ...
+    }
+
+    @Override
+    public void onFetchSkipped(TagBatch batch, long lastFetchDurationMs, long consecutiveSkips) {
+        // the PLC is slower than the configured interval
+    }
+});</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_files"><a class="anchor" href="#_configuration_files"></a>Configuration files</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rather than assembling batches in code, a whole pump can be described in a YAML, JSON or XML file and loaded with <code>EventPumpFactory</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">connections:
+  - id: plc1
+    url: "opcua:tcp://192.168.1.1:4840?request-timeout-ms=10000"
+
+batches:
+  - id: boiler
+    connectionId: plc1
+    tags:
+      temperature: "ns=2;i=1001"
+      pressure: "ns=2;i=1002"
+    trigger:
+      type: timer
+      intervalSeconds: 5</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">EventPump pump = EventPumpFactory.fromYaml(
+    new File("event-pump.yml"), connectionManager, listener);
+pump.startAll();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>EventPumpFactory</code> also offers <code>fromJson(&#8230;&#8203;)</code> and <code>fromXml(&#8230;&#8203;)</code>, and every variant accepts an optional <code>ValueTransformerRegistry</code> as a last argument.</p>
+</div>
+<div class="paragraph">
+<p>The listener passed to the factory becomes the default listener for all batches in the file.</p>
+</div>
+<div class="sect2">
+<h3 id="_trigger_intervals"><a class="anchor" href="#_trigger_intervals"></a>Trigger intervals</h3>
+<div class="paragraph">
+<p>A timer trigger takes its interval either in seconds or - for the sub-second rates that are common in PLC data collection - in milliseconds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">    trigger:
+      type: timer
+      intervalMillis: 250
+      initialDelayMillis: 100</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>intervalSeconds</code>/<code>initialDelaySeconds</code> and <code>intervalMillis</code>/<code>initialDelayMillis</code> are mutually exclusive per setting: giving the same setting in both units fails at startup rather than silently picking one, since a reader of the file would otherwise have to guess the actual rate.
+Using seconds for one setting and milliseconds for the other is fine.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_transformations"><a class="anchor" href="#_transformations"></a>Transformations</h3>
+<div class="paragraph">
+<p>A tag may carry an expression that is applied to its value before the listener sees it.
+Use the extended tag format to declare one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">batches:
+  - id: boiler
+    connectionId: plc1
+    tags:
+      temperature:
+        address: "ns=2;i=1001"
+        transform: "value * 1.8 + 32"
+      pressure:
+        address: "ns=2;i=1002"
+    trigger:
+      type: timer
+      intervalSeconds: 5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In an expression, <code>value</code> refers to the tag&#8217;s own value, and every other tag in the same batch is available under its own name, so cross-tag expressions such as <code>temperature + humidity</code> work.
+All names resolve to the values of the <strong>current</strong> response, before any transformation is applied.</p>
+</div>
+<div class="paragraph">
+<p>The built-in evaluator (registered under the name <code>simple</code>) supports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>arithmetic: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, unary minus and parentheses</p>
+</li>
+<li>
+<p>comparisons: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&#8656;</code>, <code>==</code>, <code>!=</code></p>
+</li>
+<li>
+<p>boolean logic: <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>, and the literals <code>true</code> and <code>false</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If an expression fails to evaluate, the error is logged and the <strong>original</strong> value is passed through, so a broken expression degrades one tag rather than failing the whole batch.</p>
+</div>
+<div class="paragraph">
+<p>Custom transformers can be registered by implementing <code>ValueTransformer</code> and adding it to a <code>ValueTransformerRegistry</code>.</p>
+</div>
+<div class="paragraph">
+<p>The same thing is available from the builder via <code>addTransform(tagName, expression)</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_timeouts_backoff_and_overload"><a class="anchor" href="#_timeouts_backoff_and_overload"></a>Timeouts, backoff and overload</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Getting these right matters more than the API surface does, so it is worth being explicit about which knob does what.</p>
+</div>
+<div class="sect2">
+<h3 id="_request_timeouts_belong_on_the_connection_string"><a class="anchor" href="#_request_timeouts_belong_on_the_connection_string"></a>Request timeouts belong on the connection string</h3>
+<div class="paragraph">
+<p>The Event-Pump does not impose a request timeout of its own.
+How long a read may take is the driver&#8217;s decision, configured as a parameter on the connection URL, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>opcua:tcp://192.168.1.1:4840?request-timeout-ms=10000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consult the documentation of the driver you are using for the parameter it supports.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_fetch_watchdog"><a class="anchor" href="#_the_fetch_watchdog"></a>The fetch watchdog</h3>
+<div class="paragraph">
+<p>As a last line of defence against a driver that never completes a read at all, each batch bounds a single fetch cycle.
+The default is 5 minutes.
+This is deliberately far above any sensible request timeout: it is not a way to limit how long a read may take, only a guarantee that a batch cannot be wedged forever by a stalled request.</p>
+</div>
+<div class="paragraph">
+<p>Set it with <code>withFetchTimeout(long, TimeUnit)</code> on the builder, or <code>fetchTimeoutMs</code> on a batch in a configuration file; a value of <code>0</code> or less disables it.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Do not use the watchdog as a substitute for the driver&#8217;s request timeout. Setting it <strong>below</strong> the driver&#8217;s timeout makes every slow read look like a stalled one.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_the_plc_is_unreachable"><a class="anchor" href="#_when_the_plc_is_unreachable"></a>When the PLC is unreachable</h3>
+<div class="paragraph">
+<p>After a failed fetch, a batch backs off exponentially before trying again: 1 second, then 2, 4, 8 … capped at 60 seconds.
+The first successful fetch resets it.
+This keeps a batch from hammering a device that is down, and keeps your logs readable during an outage.
+Both ends are configurable with <code>withInitialBackoffMs(&#8230;&#8203;)</code> and <code>withMaxBackoffMs(&#8230;&#8203;)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_the_plc_is_slower_than_the_interval"><a class="anchor" href="#_when_the_plc_is_slower_than_the_interval"></a>When the PLC is slower than the interval</h3>
+<div class="paragraph">
+<p>If a trigger fires while the previous fetch is still running, the new fetch is <strong>skipped</strong> rather than queued, a warning is logged, and <code>onFetchSkipped</code> is called on the listener.
+This is the main signal that a polling interval is set too aggressively for the device.</p>
+</div>
+<div class="paragraph">
+<p>The <code>TimerTrigger</code> schedules with a fixed delay rather than a fixed rate, so an occasional slow cycle delays the next fetch instead of producing a burst of catch-up reads.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_threading"><a class="anchor" href="#_threading"></a>Threading</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each <code>TimerTrigger</code> owns a timer thread and a dispatch thread; listener code runs on the dispatch thread, never on the timer thread.
+A listener that blocks therefore delays only its own batch.</p>
+</div>
+<div class="paragraph">
+<p>Note that this means listener callbacks for a given batch are serialized, but callbacks for <strong>different</strong> batches may run concurrently — a listener shared between batches must be thread-safe.</p>
+</div>
+<div class="paragraph">
+<p>A <code>Timer</code> may also be shared between several triggers by passing it to the <code>TimerTrigger</code> constructor, which keeps the thread count down when you have many batches.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_migrating_from_the_scraper"><a class="anchor" href="#_migrating_from_the_scraper"></a>Migrating from the Scraper</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Scraper was removed after PLC4X 0.13.
+The concepts map over fairly directly:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Scraper</th>
+<th class="tableblock halign-left valign-top">Event-Pump</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ScrapeJob</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TagBatch</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TriggeredScraperImpl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EventPump</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ResultHandler</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TagBatch.TagBatchListener</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrape rate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TimerTrigger</code> interval</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>futureTimeOut</code> constructor argument</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the driver&#8217;s own <code>request-timeout-ms</code> connection string parameter</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The last row is the one to pay attention to.
+The Scraper applied a single timeout of its own — 2000 ms unless you passed something else — to every read, regardless of what the connection string said.
+The Event-Pump does not: configure the timeout on the connection URL and the driver will honour it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_current_limitations"><a class="anchor" href="#_current_limitations"></a>Current limitations</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>SubscriptionTrigger</code> is a placeholder. It can be constructed, and a configuration file may name <code>type: subscription</code>, but starting such a batch throws <code>UnsupportedOperationException</code>. Use a <code>TimerTrigger</code> until subscription support lands.</p>
+</li>
+<li>
+<p>Batches read; there is no write support.</p>
+</li>
+<li>
+<p>Leasing a connection for a fetch is a blocking call made on the batch&#8217;s dispatch thread.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+<footer class="container-flex footer col-6" style="text-align:center;">
+    <div class="col"></div>
+    <div class="col-6">
+    Copyright &#169; 2017-2026 <a href="https://www.apache.org/">The Apache Software Foundation.</a> All rights reserved.<br/>
+    Apache PLC4X, PLC4X, Apache, the Apache feather logo, and the Apache PLC4X project logo are either registered
+    trademarks or trademarks of The Apache Software Foundation in the United States and other countries. All other marks
+    mentioned may be trademarks or registered trademarks of their respective owners.
+    <br/>
+    </div>
+    <div>Home screen image taken from <a
+        href="https://flic.kr/p/chEftd">Flickr</a>, "Tesla Robot Dance" by Steve Jurvetson, licensed
+        under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0 Generic</a>, image cropped
+        and blur effect added.
+    </div>
+    <div class="col"></div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+<script src="../../../../_/js/vendor/lunr.js"></script>
+<script src="../../../../_/js/search-ui.js" id="search-ui-script" data-site-root-path="../../../.." data-snippet-length="100" data-stylesheet="../../../../_/css/search.css"></script>
+<script async src="../../../../search-index.js"></script>
+  </body>
+</html>

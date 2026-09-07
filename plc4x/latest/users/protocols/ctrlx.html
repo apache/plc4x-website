@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>CtlrX :: PLC4X</title>
+    <title>CtrlX :: PLC4X</title>
     <meta name="generator" content="Antora 3.1.14">
 <!--
   Licensed to the Apache Software Foundation (ASF) under one
@@ -81,7 +81,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="plc4x" data-version="0.13.1">
+<div class="nav-container" data-component="plc4x" data-version="1.0.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -103,6 +103,9 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../issues.html">Bug &amp; Issue Tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../contact.html">Getting in Contact</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../commercial-support.html">Commercial Support</a>
@@ -141,7 +144,43 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/index.html">Migrations</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/index.html">0.13.1 to 1.0.0</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4j.html">Java</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4go.html">Go</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4c.html">C</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4cs.html">C#</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../migrations/0.13.1-to-1.0.0/plc4py.html">Python</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../blogs-videos-and-slides.html">Blogs, Videos and Slides on Apache PLC4X</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../array-notation.html">Addressing arrays</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../driver-metadata.html">Discovering Drivers and their Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../audit-log.html">Recording an Audit-Log</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -161,15 +200,6 @@
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="canopen.html">CANopen</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="ctrlx.html">CtlrX</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="deltav.html">DeltaV</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="df1.html">DF1</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="eip.html">EtherNet/IP</a>
@@ -199,19 +229,16 @@
     <a class="nav-link" href="open-protocol.html">Open-Protocol (Torque-Tools)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="plc4x.html">PLC4X (Proxy) (TCP)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="profinet.html">Profinet (In Development)</a>
+    <a class="nav-link" href="plc4x.html">PLC4X (Proxy)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="s7.html">S7 (Step7)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="s7-light.html">S7-Light (Step7)</a>
+    <a class="nav-link" href="simulated.html">Simulated</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="simulated.html">Simulated</a>
+    <a class="nav-link" href="slmp.html">SLMP (Mitsubishi MELSEC)</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="umas.html">UMAS (Schneider Electric PLCs)</a>
@@ -229,13 +256,28 @@
     <a class="nav-link" href="../transports/udp.html">UDP</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/tls-psk.html">TLS-PSK</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/cotp.html">COTP</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/serial.html">Serial Port</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../transports/can.html">CAN bus</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/socketcan.html">SocketCAN</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../transports/raw-socket.html">Raw Socket</a>
+    <a class="nav-link" href="../transports/can-virtualcan.html">Virtual CAN</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../transports/pcap-replay.html">PCAP Replay</a>
@@ -267,9 +309,6 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../integrations/eclipse-ditto.html">Eclipse Ditto</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../integrations/eclipse-milo.html">Eclipse Milo (OPC UA Server)</a>
-  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
@@ -283,10 +322,22 @@
     <a class="nav-link" href="../tools/connection-cache.html">The Connection Cache concept</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/event-pump.html">Event-Pump</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/opcua-server.html">OPC UA Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/opm.html">Object PLC Mapping</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../tools/scraper.html">Scraper</a>
+    <a class="nav-link" href="../tools/pcap-analyzer.html">PCAP Analyzer</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/plc4x-browser.html">PLC4X Browser</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../tools/plc4x-server.html">PLC4X Server</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../tools/testing.html">Testing (or using PLC4X without a PLC)</a>
@@ -359,18 +410,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../../developers/protocols/index.html">Usage of protocols</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/protocols/ads/protocol.html">Beckhoff ADS Protocol</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../developers/protocols/eip/protocol.html">EIP Protocol</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="../../developers/infrastructure/index.html">Infrastructure</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
@@ -401,12 +440,18 @@
     <a class="nav-link" href="../../developers/release/release.html">Releasing PLC4X</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../developers/release/extras.html">Releasing PLC4X-Extras</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/release/validation.html">Validating a staged release</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../developers/release/build-tools.html">Releasing PLC4X Build-Tools</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../developers/testing/index.html">Setup for testing</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../../developers/tools.html">Tools</a>
@@ -430,7 +475,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">PLC4X</span>
-    <span class="version">0.13.1</span>
+    <span class="version">1.0.0</span>
   </div>
   <ul class="components">
     <li class="component is-current">
@@ -440,7 +485,10 @@
           <a href="../../../pre-release/users/index.html">1.1.0</a>
         </li>
         <li class="version is-current is-latest">
-          <a href="../index.html">0.13.1</a>
+          <a href="../index.html">1.0.0</a>
+        </li>
+        <li class="version">
+          <a href="../../../0.13.1/users/index.html">0.13.1</a>
         </li>
         <li class="version">
           <a href="../../../0.12.0/users/index.html">0.12.0</a>
@@ -458,31 +506,351 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">PLC4X</a></li>
-    <li><a href="../index.html">Users</a></li>
-    <li><a href="index.html">Protocols</a></li>
-    <li><a href="ctrlx.html">CtlrX</a></li>
+    <li><a href="ctrlx.html">CtrlX</a></li>
   </ul>
 </nav>
 <div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">0.13.1</button>
+  <button class="version-menu-toggle" title="Show other versions of page">1.0.0</button>
   <div class="version-menu">
     <a class="version" href="../../../pre-release/users/protocols/ctrlx.html">1.1.0</a>
-    <a class="version is-current" href="ctrlx.html">0.13.1</a>
+    <a class="version is-current" href="ctrlx.html">1.0.0</a>
+    <a class="version" href="../../../0.13.1/users/protocols/ctrlx.html">0.13.1</a>
     <a class="version" href="../../../0.12.0/users/protocols/ctrlx.html">0.12.0</a>
   </div>
 </div>
-<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/0.13/website/asciidoc/modules/users/pages/protocols/ctrlx.adoc">Edit this Page</a></div>
+<div class="edit-this-page"><a href="https://github.com/apache/plc4x/edit/rel/1.0/website/asciidoc/modules/users/pages/protocols/ctrlx.adoc">Edit this Page</a></div>
 </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">CtlrX</h1>
-<div class="sect1">
-<h2 id="_connection_string_options"><a class="anchor" href="#_connection_string_options"></a>Connection String Options</h2>
+<h1 class="page">CtrlX</h1>
+<div id="preamble">
 <div class="sectionbody">
-
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+No language implementation of this driver is usable yet. See the
+<a href="index.html" class="xref page">protocol support matrix</a> for what each implementation
+currently does.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This driver is unfinished and not usable yet. Pinging is the only thing that works;
+discovery is an unimplemented stub, there is no tag address syntax, so reading and writing are not
+available, and the browse implementation does not work yet either. This page describes the current
+state for anyone continuing the work - it is not linked from the navigation.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The CtrlX driver talks to Bosch Rexroth ctrlX CORE devices through their REST/Data-Layer API over
+HTTPS, rather than over an industrial fieldbus protocol.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_operations"><a class="anchor" href="#_supported_operations"></a>Supported Operations</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 71.4286%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ping</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Checks that the device is reachable and the credentials are accepted.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>discover</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>Not implemented.</strong> The driver hands out a discovery request builder, but
+<code>CtrlXPlcDiscoverer.discoverWithHandler</code> is a TODO that returns <code>null</code> instead of a future, so
+executing a discovery request fails instead of finding devices.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>Does not work yet.</strong> The connection carries an implementation that is meant to enumerate the
+device&#8217;s Data Layer nodes, and it is the furthest along of the unfinished operations, but it does
+not produce usable results.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read</code> / <code>write</code> / <code>subscribe</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><strong>Not implemented.</strong> The corresponding request builders return <code>null</code>, so attempting one fails.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The connection reports read, write, subscribe and browse as unsupported in its metadata, so a
+caller that checks <code>getMetadata()</code> before deciding what to do gets an honest answer rather than
+being sent into a request that cannot succeed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_string"><a class="anchor" href="#_connection_string"></a>Connection String</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre>ctrlx:https://{host}
+ctrlx://{host}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>https</code> is the only supported transport, and it is also the default - so the transport part can be
+omitted. Any other transport is rejected with
+<code>Only 'https' transport is supported by this driver</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authentication"><a class="anchor" href="#_authentication"></a>Authentication</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+A CtrlX connection <strong>always</strong> requires a username and password. Obtaining a connection
+without authentication throws <code>CtrlX connections require authentication.</code>, and an authentication
+object that is not a username/password pair is rejected as well.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcConnection connection = new DefaultPlcDriverManager()
+    .getConnection("ctrlx://192.168.1.1",
+        new PlcUsernamePasswordAuthentication("boschrexroth", "boschrexroth"));</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connection_options"><a class="anchor" href="#_connection_options"></a>Connection Options</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 27.2727%;">
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 45.4546%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Key store of certificates to trust, instead of the JVM&#8217;s public authorities.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Password of the trust store named by <code>tls.trust-store</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tls.trust-store-type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PKCS12</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Type of the trust store named by <code>tls.trust-store</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>server-certificate-file</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>PEM certificate of the device to trust, for a device carrying its own certificate rather than one
+issued by an authority the JVM already knows.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allow-factory-default-certificate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Trust the factory default certificate that ships inside this driver&#8217;s jar, for any host. See the
+warning below. Setting it logs a warning.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ignore-common-name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Accept a device certificate issued for a different host than the one connected to.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse-max-total-nodes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1000000</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Largest number of nodes a single browse will read; <code>0</code> for no limit.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>browse-max-depth</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>64</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>How deep a browse will follow children; <code>0</code> for no limit.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The driver used to trust the Bosch factory default certificate bundled in its own jar, and
+to trust it <strong>instead of</strong> the platform&#8217;s authorities rather than in addition to them. That
+certificate identifies nobody - anything holding it and its key was trusted, for any host - and the
+username and password travel over that channel. Because it was also the only trust anchor, a device
+with a properly issued certificate could not be reached at all. A device still on its factory
+certificate now needs <code>allow-factory-default-certificate=true</code>, and the better answer is to give the
+device a certificate of its own and name it with <code>server-certificate-file</code> or a trust store.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A browse walks whatever tree the device describes, and nothing in the answer says how large that
+tree is or that it ends, so <code>browse-max-total-nodes</code> and <code>browse-max-depth</code> bound it. Reaching
+either one warns and returns what was found rather than failing.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_browsing"><a class="anchor" href="#_browsing"></a>Browsing</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Browsing does not work yet. What follows describes how the existing implementation is meant
+to be used, for whoever picks the work up.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Browse queries are glob patterns matched against the Data Layer node paths, not tag addresses.
+<code>**</code> matches everything and is intended as the simplest way to see what a device exposes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PlcBrowseResponse response = connection.browseRequestBuilder()
+    .addQuery("all", "**")
+    .build().execute().get();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The driver has no tag address syntax of its own - <code>parseTag</code> is not implemented - which is the
+reason read and write are unavailable.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_discovery"><a class="anchor" href="#_discovery"></a>Discovery</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Discovery does not work yet. <code>CtrlXDriver.discoveryRequestBuilder()</code> returns a builder backed
+by <code>CtrlXPlcDiscoverer</code>, whose <code>discoverWithHandler</code> is still an empty TODO returning <code>null</code>, so no
+ctrlX CORE device is ever located.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maven_dependency"><a class="anchor" href="#_maven_dependency"></a>Maven Dependency</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The driver is not part of the <code>plc4j-driver-all</code> meta package while it is unfinished, so it has to
+be added explicitly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.plc4x&lt;/groupId&gt;
+  &lt;artifactId&gt;plc4j-driver-ctrlx&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The driver declares no connection-string parameters of its own, which is why this page has no
+generated options table like the other protocols. Everything it needs comes from the host in the
+connection string plus the credentials.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </article>
