@@ -798,6 +798,53 @@ Start each step from a clean checkout.
 <p>Note that the signing in <code>release-2-prepare-release.sh</code> and all <code>git</code> and <code>svn</code> operations run on your machine, not inside the container.
 So GPG, your git credentials and your Apache SVN credentials all have to work on the host.</p>
 </div>
+<div class="sect2">
+<h3 id="which-remote"><a class="anchor" href="#which-remote"></a>Which remote the release is pushed to</h3>
+<div class="paragraph">
+<p>The release branch, the release tag and the updated <code>develop</code> and <code>release</code> branches all have to end up in the Apache repository, and that repository is not necessarily the remote called <code>origin</code>.
+Anybody who followed the <a href="../contributing.html" class="xref page">contributing</a> guide has their own fork as <code>origin</code> and the Apache repository under a second name, usually <code>upstream</code>.</p>
+</div>
+<div class="paragraph">
+<p>So the scripts do not go by the name: they look through the remotes of your checkout for the URL of the Apache repository - <code>gitbox.apache.org/repos/asf/plc4x</code> or the GitHub mirror <code>github.com/apache/plc4x</code>, over ssh or over https - and use the one that matches.
+If none of them matches, or if more than one does, every script that touches the remote stops before doing anything and prints the remotes it found.</p>
+</div>
+<div class="paragraph">
+<p>To settle it yourself - for a mirror, or when several remotes point at the Apache repository - name the remote explicitly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>export PLC4X_REMOTE=upstream</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ssh-keys"><a class="anchor" href="#ssh-keys"></a>The remote has to use ssh</h3>
+<div class="paragraph">
+<p>Everything a release pushes - the release branch, the release commits, the release tag, the merges back into <code>develop</code> and <code>release</code> - goes out through these scripts, spread over a run that takes the better part of an hour.
+Over <code>https</code> every single one of those needs a password or a credential helper, in the middle of the release; with an <code>ssh</code> key the agent already holds, none of them needs anything.
+The release container itself has no credentials at all, which is why <code>release:prepare</code> is run with <code>-DpushChanges=false</code> and the pushing is left to the host.</p>
+</div>
+<div class="paragraph">
+<p>So the remote has to be an <code>ssh</code> one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>git remote set-url origin git@github.com:apache/plc4x.git</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and the key it uses has to be one the agent can offer without asking, which usually means adding it before starting a release:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ssh-add ~/.ssh/id_ed25519</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>release-preflight.sh</code> checks both: that the Apache remote is an <code>ssh</code> URL, and that the host actually accepts the key, reporting the account it greets you as.
+That last part matters - it is the account the release ends up being pushed as.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -833,11 +880,11 @@ None of the other scripts call it, so running it is up to you.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Tools</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>git</code>, <code>docker</code>, <code>gpg</code>, <code>svn</code>, <code>curl</code>, <code>java</code> and <code>shasum</code> are installed, and the Docker daemon is actually running.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>git</code>, <code>docker</code>, <code>gpg</code>, <code>ssh</code>, <code>svn</code>, <code>curl</code>, <code>java</code> and <code>shasum</code> are installed, and the Docker daemon is actually running.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Git</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.name</code> and <code>user.email</code> are configured, the working tree is clean, and <code>origin</code> accepts your credentials for pushing (a <code>git push --dry-run</code>, which authenticates without changing anything).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.name</code> and <code>user.email</code> are configured, the working tree is clean, exactly one remote of the checkout points at the Apache repository, that remote uses <code>ssh</code> and your key is accepted by the host without a prompt, and the remote accepts your credentials for pushing (a <code>git push --dry-run</code>, which authenticates without changing anything).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Signing</p></td>
@@ -1169,7 +1216,7 @@ Otherwise, a lot of directories can be left over, which would be included in the
 The only thing it asks for is the release-candidate number.</p>
 </div>
 <div class="paragraph">
-<p>Before it does anything, it derives the release version (<code>1.0.0</code>), the tag name (<code>v1.0.0</code>) and the next development version (<code>1.0.1-SNAPSHOT</code> - note this is a <strong>bugfix</strong> bump, unlike in <code>release-1</code>), and it refuses to continue if the tag already exists locally or on <code>origin</code>, telling you exactly how to remove it.
+<p>Before it does anything, it derives the release version (<code>1.0.0</code>), the tag name (<code>v1.0.0</code>) and the next development version (<code>1.0.1-SNAPSHOT</code> - note this is a <strong>bugfix</strong> bump, unlike in <code>release-1</code>), and it refuses to continue if the tag already exists locally or on the Apache remote, telling you exactly how to remove it.
 This is the usual outcome of an earlier failed attempt.</p>
 </div>
 <div class="paragraph">
@@ -1179,10 +1226,12 @@ This is the usual outcome of an earlier failed attempt.</p>
 <ol class="arabic">
 <li>
 <p>Runs <code>mvn release:prepare</code> in the container with all profiles enabled and the versions and tag passed in explicitly, so the plugin asks no questions.
-This checks that no <code>SNAPSHOT</code> dependencies are referenced, updates all poms, runs a full build with tests, commits, tags and prepares the next development version.</p>
+This checks that no <code>SNAPSHOT</code> dependencies are referenced, updates all poms, runs a full build with tests, commits, tags and prepares the next development version.
+It runs with <code>-DpushChanges=false</code>: the container has no credentials, so the commits and the tag stay local for now.</p>
 </li>
 <li>
-<p>Pushes the result and records the commit hash the tag points at, for the vote mail.</p>
+<p>Pushes the release commits and then the release tag, and records the commit hash the tag points at, for the vote mail.
+The tag has to be pushed before the next step, which checks it out from the remote rather than from your working copy.</p>
 </li>
 <li>
 <p>Runs <code>mvn release:perform</code> in the container, deploying into <code>out/.local-artifacts-dir</code> rather than straight to Nexus.
