@@ -847,39 +847,6 @@ because their subscription state lives on the connection.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_logging_package"><a class="anchor" href="#_the_logging_package"></a>The <code>logging</code> package</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>pkg/api/logging</code> no longer sets or resets the global zerolog level. <code>ErrorLevel()</code>, <code>WarnLevel()</code>,
-<code>InfoLevel()</code>, <code>DebugLevel()</code>, <code>TraceLevel()</code> and <code>ResetLogging()</code> are gone, together with the
-<code>init()</code> that used to force the global logger to error level the moment the package was imported.</p>
-</div>
-<div class="paragraph">
-<p>That <code>init()</code> was the real problem: importing a PLC4X package changed the logging of the whole
-process.</p>
-</div>
-<div class="paragraph">
-<p>Pass a logger to PLC4X instead, which is explicit and scoped to the connection:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">// 1.0.0
-logger := zerolog.New(os.Stderr).Level(zerolog.DebugLevel)
-connection, err := driverManager.GetConnection(ctx, connectionString,
-    options.WithCustomLogger(logger))</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you relied on PLC4X quietening zerolog for you, set the level yourself:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">zerolog.SetGlobalLevel(zerolog.ErrorLevel)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_connection_string_options_need_their_transport_prefix"><a class="anchor" href="#_connection_string_options_need_their_transport_prefix"></a>Connection-string options need their transport prefix</h2>
 <div class="sectionbody">
 <div class="paragraph">
