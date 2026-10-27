@@ -1138,22 +1138,32 @@ driver can express.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Bit-Addresses  {Memory-Area-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
-Byte-Addresses {Memory-Area-Code}{Start-Byte-Address}:{Data-Type-Code}[{count}]</pre>
+<pre>Bit-Addresses  {Memory-Area-Code}{Start-Byte-Address}.{Bit-Offset}[{selection}]:BOOL
+Byte-Addresses {Memory-Area-Code}{Start-Byte-Address}[{selection}]:{Data-Type-Code}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Bit addresses are only used if the datatype <code>BOOL</code> is used. The array notation of these can
-be omitted, in which case a <code>Count</code> of 1 is used by default. <code>Start-Byte-Address</code> and
-<code>Bit-Offset</code> both represent unsigned integer values.</p>
+<p>Bit addresses are only used if the datatype <code>BOOL</code> is used. <code>Start-Byte-Address</code> and
+<code>Bit-Offset</code> both represent unsigned integer values. BOOLs are packed eight to a byte, so the
+elements of a <code>BOOL</code> array are consecutive bits, and the start of a selection counts bits from
+the written bit offset: <code>%DB1:16.0[4..7]:BOOL</code> is the four bits 16.4 to 16.7, and
+<code>%DB1:16.6[0..3]:BOOL</code> is 16.6, 16.7, 17.0 and 17.1. For every other type the start counts
+elements of that type&#8217;s size in bytes.</p>
+</div>
+<div class="paragraph">
+<p>Writing a <code>BOOL</code> array changes only its own bits: the bytes it covers completely are written
+whole, and each bit it shares a byte with something else is written as an item of its own. An
+array that does not start and end on a byte boundary therefore takes more protocol items than
+its size suggests, and the Java driver spreads them over several requests if one PDU cannot hold
+them all - such a write is then not applied in one step.</p>
 </div>
 <div class="paragraph">
 <p>In case of accessing data in the <code>data block</code> memory area, the syntax is a bit more complex:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
-DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:{Data-Type-Code}[{Count}]</pre>
+<pre>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}.{Bit-Offset}[{selection}]:BOOL
+DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}[{selection}]:{Data-Type-Code}</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1163,7 +1173,7 @@ extended to allow declaring a shorter length:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}:STRING({string-length})[{Count}]</pre>
+<pre>DB{Data-Block-Number}.DB{Short-Data-Type-Code}{Start-Byte-Address}[{selection}]:STRING({string-length})</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1173,9 +1183,9 @@ identically to the long form:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>DB{Data-Block-Number}:{Start-Byte-Address}.{Bit-Offset}:BOOL[{Count}]
-DB{Data-Block-Number}:{Start-Byte-Address}:{Data-Type-Code}[{Count}]
-DB{Data-Block-Number}:{Start-Byte-Address}:STRING({string-length})[{Count}]</pre>
+<pre>DB{Data-Block-Number}:{Start-Byte-Address}.{Bit-Offset}[{selection}]:BOOL
+DB{Data-Block-Number}:{Start-Byte-Address}[{selection}]:{Data-Type-Code}
+DB{Data-Block-Number}:{Start-Byte-Address}[{selection}]:STRING({string-length})</pre>
 </div>
 </div>
 </div>
