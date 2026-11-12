@@ -836,8 +836,8 @@ try (PlcConnection connection = PlcDriverManager.getDefault().getConnectionFacto
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The three-argument form serialises the object to JSON with Jackson, falling back to
-<code>toString()</code> if it cannot.</td>
+<td>The three-argument form serialises the object to JSON (records by their components, other
+objects by their public getters), falling back to <code>toString()</code> if it cannot.</td>
 </tr>
 </table>
 </div>
