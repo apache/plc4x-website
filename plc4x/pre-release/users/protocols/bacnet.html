@@ -858,34 +858,6 @@ than enumerating objects on one.</p>
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="_foreign_device_registration_go"><a class="anchor" href="#_foreign_device_registration_go"></a>Foreign-Device Registration (Go)</h3>
-<div class="paragraph">
-<p>The Go driver can register a connection as a BACnet/IP foreign device with a BBMD, so the
-BBMD forwards the broadcasts of other IP subnets to it:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>bacnet-ip:udp://10.1.2.3:47808?ForeignDeviceBBMD=10.0.0.5:47808&amp;ForeignDeviceTTL=300</pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>ForeignDeviceBBMD</code></dt>
-<dd>
-<p>The BBMD as <code>host</code> or <code>host:port</code> (port <code>47808</code> by default). When set, the connection sends a
-BVLC Register-Foreign-Device to it right after connecting, from the same UDP socket it talks to
-the device on, and renews the registration at half the TTL until the connection is closed. A
-rejected or unanswered registration is logged and retried with the next renewal. That socket is
-left unconnected, so it receives datagrams from any sender, not only from the device.</p>
-</dd>
-<dt class="hdlist1"><code>ForeignDeviceTTL</code></dt>
-<dd>
-<p>The registration&#8217;s time-to-live in seconds. Default <code>300</code>.</p>
-</dd>
-</dl>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
